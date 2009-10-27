@@ -23,6 +23,8 @@ install -m 644 icons/salix-live-installer-128.png \
 $DESTDIR/usr/share/icons/hicolor/128x128/apps/salix-live-installer.png
 install -m 644 icons/salix-live-installer.svg \
 $DESTDIR/usr/share/icons/hicolor/scalable/apps/
+install -m 644 pixmaps/salix-live-installer.png \
+$DESTDIR/usr/share/salix-live-installer/
 
 for i in `ls locale/*.mo|sed "s|locale/\(.*\).mo|\1|"`; do
 	install -d -m 755 $DESTDIR/usr/share/locale/${i}/LC_MESSAGES
