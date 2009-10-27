@@ -1,0 +1,14 @@
+
+[Desktop Entry]
+Categories=Application;System;Settings;
+Exec=gksu /usr/sbin/salix-gui-installer
+Icon=salix-gui-installer
+StartupNotify=true
+Terminal=false
+Type=Application
+Name=Salix Installer
+Name[fr]=Installateur Salix
+GenericName=Salix Installer
+GenericName[fr]=Installateur Salix
+Comment=Install Salix on your computer from a SalixLive cession
+Comment[fr]=Installer Salix sur son ordinateur à partir d'une cession SalixLive
