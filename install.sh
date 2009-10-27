@@ -9,6 +9,8 @@ install -d -m 755 $DESTDIR/usr/share/icons/hicolor/scalable/apps
 install -d -m 755 $DESTDIR/usr/share/salix-live-installer
 
 install -m 755 src/salix-live-installer $DESTDIR/usr/sbin/salix-live-installer
+install -m 644 src/salix-live-installer.glade \
+$DESTDIR/usr/share/salix-live-installer
 install -m 644 src/salix-live-installer.desktop \
 $DESTDIR/usr/share/applications/
 install -m 644 salix-live-installer-kde.desktop \
