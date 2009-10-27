@@ -39,11 +39,13 @@ class SalixGuiInstaller:
     def __init__(self):
 
 		builder = gtk.Builder()
-		try :
-			builder.add_from_file("../share/salix-live-installer/salix-live-installer.glade")
-		except :
+		if os.path.exists("/share/salix-live-installer/salix-live-installer.glade") :
 			builder.add_from_file("/share/salix-live-installer/salix-live-installer.glade")
-		
+		elif os.path.exists("../share/salix-live-installer/salix-live-installer.glade") :
+			builder.add_from_file("../share/salix-live-installer/salix-live-installer.glade") 
+		else :
+			builder.add_from_file("salix-live-installer.glade")
+
 		# Get a handle on the glade file widgets we want to interact with
 		self.Window = builder.get_object("main_window")
 		self.AboutDialog = builder.get_object("about_dialog")
@@ -190,6 +192,14 @@ class SalixGuiInstaller:
 				keyb_feedline = (keyb_item, type)
 				# And populate the GUI keymap list view
 				self.KeyboardListStore.append(keyb_feedline)
+			# Determine if qwertz is the type of keyboard
+			elif os.path.exists('/usr/share/kbd/keymaps/i386/qwertz/'+keyb_item+'.map.gz'):
+				type = 'qwertz'
+				# If so, make a set of the keyboard & its corresponding type
+				keyb_feedline = (keyb_item, type)
+				# And populate the GUI keymap list view
+				self.KeyboardListStore.append(keyb_feedline)
+
 			# Close the opened files
 			UsedKeymapFile.close()	  
 		SalixKeymapList.close()
@@ -271,7 +281,8 @@ class SalixGuiInstaller:
 					part_size = line.split() [3]
 					part_system = line.split() [5]				
 					# No need to include removable usb devices.
-					check_if_usb = 'mount | grep \/media\/ | grep ' + part_name + ' | cut -f1 -d "" '
+					usb_dev = ''
+					check_if_usb = 'mount | grep uhelper=hal | grep ' + part_name
 					usb_dev = commands.getoutput(check_if_usb)	
 					if usb_dev != '' :
 						pass
