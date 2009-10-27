@@ -282,7 +282,7 @@ class SalixGuiInstaller:
 					part_system = line.split() [5]				
 					# No need to include removable usb devices.
 					usb_dev = ''
-					check_if_usb = 'mount | grep uhelper=hal | grep ' + part_name
+					check_if_usb = 'lsusb | grep ' + disk_name
 					usb_dev = commands.getoutput(check_if_usb)	
 					if usb_dev != '' :
 						pass
