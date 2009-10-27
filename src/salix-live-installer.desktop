@@ -1,8 +1,8 @@
 
 [Desktop Entry]
 Categories=Application;System;Settings;
-Exec=gksu /usr/sbin/salix-gui-installer
-Icon=salix-gui-installer
+Exec=gksu /usr/sbin/salix-live-installer
+Icon=salix-live-installer
 StartupNotify=true
 Terminal=false
 Type=Application
