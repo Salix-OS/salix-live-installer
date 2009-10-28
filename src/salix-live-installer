@@ -114,6 +114,7 @@ class SalixGuiInstaller:
 		self.UserLoginEntry = builder.get_object("user_login_entry")
 		self.UserVisibleCheckButton = builder.get_object("user_visible_checkbutton")
 		self.RootVisibleCheckButton = builder.get_object("root_visible_checkbutton")
+		self.ExternalDeviceCheckButton = builder.get_object("external_device_checkbutton")
 		self.RootPassCreated = builder.get_object("root_pass_created")
 		self.NewUserLogin = builder.get_object("new_user_login")
 		self.UsersApplyButton = builder.get_object("users_apply")
@@ -142,6 +143,10 @@ class SalixGuiInstaller:
 		# Initialize the lock system preventing the Install button to be activated prematurely
 		global ConfigurationSet
 		ConfigurationSet = ['no'] * 6
+		# Initialise the external device checkbutton value
+		global show_external_device
+		show_external_device = 'no'
+		
 		
 		# Initialize the passwords entry box to not display characters
 		self.UserPass1Entry.set_visibility(False)
@@ -241,7 +246,7 @@ class SalixGuiInstaller:
 			self.LocaleListStore.append(locale_set)
 
 		# Initialize the main partitions list. 
-		# This is a def since we may have to do this again if undo button is clicked.
+		# This is a def since it may have to be done a few times depending on the user's choices.
 		global partition_list_initialization
 		def partition_list_initialization() :
 			global part_feedline_list
@@ -280,17 +285,24 @@ class SalixGuiInstaller:
 					part_name = disk_device.replace(':', '') + line.split() [0]
 					part_size = line.split() [3]
 					part_system = line.split() [5]				
-					# No need to include removable usb devices.
-					usb_dev = ''
-					check_if_usb = 'lsusb | grep ' + disk_name
-					usb_dev = commands.getoutput(check_if_usb)	
-					if usb_dev != '' :
-						pass
-					else:
+					# Check if removable devices should be displayed.
+					if show_external_device == 'yes' :
 						# Put all needed variables in one set per line
 						part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system] 
 						# Put each set in a list
-						part_feedline_list.append(part_feedline)
+						part_feedline_list.append(part_feedline)						
+						
+					else :						
+						usb_dev = ''
+						check_if_usb =  "lshal | grep -A20 " + part_name + " | grep -i /usb"
+						usb_dev = commands.getoutput(check_if_usb)	
+						if usb_dev != '' :
+							pass
+						else:
+							# Put all needed variables in one set per line
+							part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system] 
+							# Put each set in a list
+							part_feedline_list.append(part_feedline)
 			# Sort the list for the partitions who do not follow the hard drive order
 			part_feedline_list.sort()
 			# Populate GUI partition list view rows
@@ -854,7 +866,7 @@ class SalixGuiInstaller:
 			self.UserPass1Entry.set_visibility(False)
 			self.UserPass2Entry.set_visibility(False)
 		
-	# What to do when root's password visible checkbutton is toggled		
+	# What to do when the root's password visible checkbutton is toggled		
     def on_root_visible_checkbutton_toggled(self, widget, data=None):
 		if self.RootVisibleCheckButton.get_active() == True :
 			self.RootPass1Entry.set_visibility(True)
@@ -862,6 +874,16 @@ class SalixGuiInstaller:
 		if self.RootVisibleCheckButton.get_active() == False :	
 			self.RootPass1Entry.set_visibility(False)
 			self.RootPass2Entry.set_visibility(False)
+			
+	# What to do when the external device checkbutton is toggled		
+    def	on_external_device_checkbutton_toggled (self, widget, data=None):
+		global show_external_device
+		if self.ExternalDeviceCheckButton.get_active() == True :			
+			show_external_device = 'yes'
+		else :
+			show_external_device = 'no'
+		partition_list_initialization ()
+			
 		
 ### CONFIGURATION TABS ###
 				
