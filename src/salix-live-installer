@@ -290,11 +290,11 @@ class SalixGuiInstaller:
 						# Put all needed variables in one set per line
 						part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system] 
 						# Put each set in a list
-						part_feedline_list.append(part_feedline)						
-						
+						part_feedline_list.append(part_feedline)							
 					else :						
 						usb_dev = ''
-						check_if_usb =  "lshal | grep -A20 " + part_name + " | grep -i /usb"
+						dev_root = part_name[5:-1]
+						check_if_usb = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /usb'
 						usb_dev = commands.getoutput(check_if_usb)	
 						if usb_dev != '' :
 							pass
