@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091027-build	First version
+# Version='0.1'		- 20091030-build	First version
 
 import commands
 import os
@@ -33,6 +33,19 @@ import pygtk
 pygtk.require('2.0')
 
 # To do => Internationalization
+# To do => Change duplications into functions with args
+# To do => refine login + passwords filters
+# To do => Unsquash/install modules/kernel on the chosen partitions
+# To do => Create /etc/fstab with chosen partitions records
+# To do => Set the keyboard on the chrooted install
+# To do => Set the Locale on the chrooted install
+# To do => Set the new user/passwords on the chrooted install
+# To do => Ensure no LiveCD environment elements have migrated 
+# (This shouldn't be a problem if LiveCD packages are in a separate module)
+# To do => Progress bar
+# To do => Final success/failure window
+# To do => Install log
+# To do => Invoke LiloFix if needed before exiting
 
 class SalixGuiInstaller:
 			
@@ -85,8 +98,8 @@ class SalixGuiInstaller:
 		self.WindowsPartitionListStore = builder.get_object("win_partition_list_store")
 		self.RecapPartitionList = builder.get_object("recap_partition_list")
 		self.RecapPartitionListStore = builder.get_object("recap_partition_list_store")		
-		self.ConfirmPartitionDialog = builder.get_object("confirm_partition_dialog")
-		self.ConfirmPartitionLabel = builder.get_object("confirm_partition_label")
+		self.YesNoDialog = builder.get_object("yes_no_dialog")
+		self.YesNoLabel = builder.get_object("yes_no_label")
 		self.LinuxNewSysComboCell = builder.get_object("linux_newsys_renderer_combo")
 		self.LinuxNewSysColumn = builder.get_object("linux_newsys_column")
 		self.LinuxFormatListStore = builder.get_object("linux_format_list_store")
@@ -146,7 +159,6 @@ class SalixGuiInstaller:
 		# Initialise the external device checkbutton value
 		global show_external_device
 		show_external_device = 'no'
-		
 		
 		# Initialize the passwords entry box to not display characters
 		self.UserPass1Entry.set_visibility(False)
@@ -460,6 +472,8 @@ class SalixGuiInstaller:
 		LinuxPartitionConfirmation = False
 		global WindowsPartitionConfirmation
 		WindowsPartitionConfirmation = False
+		global InstallButtonConfirmation
+		InstallButtonConfirmation = False
 		# Retrieve the selected main partition row iter
 		mainpartitionselection = self.MainPartitionList.get_selection()
 		self.MainPartitionListStore, iter = mainpartitionselection.get_selected()
@@ -467,12 +481,13 @@ class SalixGuiInstaller:
 		global Selected_Main_Partition
 		Selected_Main_Partition = self.MainPartitionListStore.get_value(iter, 1)
 		# Retrieve the format selection
+		global Selected_Main_Format
 		Selected_Main_Format = self.MainFormatCombobox.get_active_text()
 		# Ask the user to confirm or undo his choice
 		global MainPartConfirmLabel
 		MainPartConfirmLabel = Selected_Main_Partition + " will be formatted with " + Selected_Main_Format + " and will be mounted as /. \n"
-		self.ConfirmPartitionLabel.set_text(MainPartConfirmLabel)
-		self.ConfirmPartitionDialog.show()
+		self.YesNoLabel.set_text(MainPartConfirmLabel)
+		self.YesNoDialog.show()
 					
 	# What to do when the Linux partition Apply settings button is clicked
     def on_linux_partition_apply_clicked(self, widget, data=None):
@@ -483,6 +498,8 @@ class SalixGuiInstaller:
 		WindowsPartitionConfirmation = False
 		global LinuxPartitionConfirmation
 		LinuxPartitionConfirmation = True
+		global InstallButtonConfirmation
+		InstallButtonConfirmation = False
 		# Retrieve all the Linux partition rows data
 		NewLinValues = []
 		x = 0
@@ -495,15 +512,26 @@ class SalixGuiInstaller:
 				break
 		LinPartitionLabel = []
 		UnsetValues = ('Select...', 'Do not format!', 'Do not mount!')
+		global LinFullSets
+		LinFullSets = []
+		global LinFormatSets
+		LinFormatSets = []
+		global LinMountSets
+		LinMountSets = []
 		for set in NewLinValues :
 			if set[1] not in UnsetValues :
 				if set[2] not in UnsetValues :
-					LinPartitionLabel.append(set[0] + " will be formatted with " + set[1] + " and will be mounted as " + set[2] + ". \n")
+					LinPartitionLabel.append(set[0] + " will be formatted with " + set[1] + 
+					" and will be mounted as " + set[2] + ". \n")
+					LinFullSets.append(set)
 				else :
-					LinPartitionLabel.append(set[0] + " will be formatted with " + set[1] + " and will not be mounted. \n")
+					LinPartitionLabel.append(set[0] + " will be formatted with " + set[1] + 
+					" and will not be mounted. \n")
+					LinFormatSets.append(set)
 			else :
 				if set[2] not in UnsetValues :
 					LinPartitionLabel.append(set[0] + " will not be formatted and will be mounted as " + set[2] + ". \n")
+					LinMountSets.append(set)
 				else :
 					LinPartitionLabel.append(set[0] + " will not be formatted and will not be mounted. \n")
 		FullConfirmationText = ''
@@ -511,8 +539,8 @@ class SalixGuiInstaller:
 			FullConfirmationText += i
 		global LinPartConfirmLabel
 		LinPartConfirmLabel = FullConfirmationText 
-		self.ConfirmPartitionLabel.set_text(FullConfirmationText)
-		self.ConfirmPartitionDialog.show()
+		self.YesNoLabel.set_text(FullConfirmationText)
+		self.YesNoDialog.show()
 		
 	# What to do when the Windows partition Apply settings button is clicked
     def on_windows_partition_apply_clicked(self, widget, data=None):
@@ -522,7 +550,9 @@ class SalixGuiInstaller:
 		global LinuxPartitionConfirmation
 		LinuxPartitionConfirmation = False
 		global WindowsPartitionConfirmation
-		WindowsPartitionConfirmation = True		
+		WindowsPartitionConfirmation = True	
+		global InstallButtonConfirmation
+		InstallButtonConfirmation = False	
 		# Retrieve all the Windows partition rows data
 		NewWinValues = []		
 		x = 0
@@ -535,34 +565,46 @@ class SalixGuiInstaller:
 				break
 		WinPartitionLabel = []
 		UnsetValues = ('Select...', 'Do not mount!')
+		global WinMountSets
+		WinMountSets = []
 		for set in NewWinValues :
 			if set[1] in UnsetValues :
 				WinPartitionLabel.append(set[0] + " will not be formatted and will not be mounted. \n")
+
 			else :
-				WinPartitionLabel.append(set[0] + " will not be formatted and will be mounted as " + set[1] + ". \n")
+				WinPartitionLabel.append(set[0] + " will not be formatted and will be mounted as " 
+				+ set[1] + ". \n")
+				WinMountSets.append(set)
 		FullConfirmationText = ''
 		for i in WinPartitionLabel:
 			FullConfirmationText += i
 		global WinPartConfirmLabel
 		WinPartConfirmLabel = FullConfirmationText 
-		self.ConfirmPartitionLabel.set_text(FullConfirmationText)
-		self.ConfirmPartitionDialog.show()
+		self.YesNoLabel.set_text(FullConfirmationText)
+		self.YesNoDialog.show()
 		
 	# What to do when the user's settings apply button is clicked
     def on_users_apply_clicked(self, widget, data=None):
 		# Pass some basic sanity checks
+		# To do => Check if alphanumerical is necessary + prevent the use of caps for login
 		if self.UserLoginEntry.get_text() == '' :
-			error_dialog("\nYour login entry is empty. Please verify and correct! \n")	
+			error_dialog("\nYour login entry is empty. \n\nPlease verify and correct! \n")	
 		elif self.UserPass1Entry.get_text() == '' :
-			error_dialog("\nYour password entry is empty. Please verify and correct! \n")
+			error_dialog("\nYour password entry is empty. \n\nPlease verify and correct! \n")
 		elif self.UserPass1Entry.get_text().replace(' ', '').isalnum() == False :
-			error_dialog("\nYour password should only contain alphanumeric characters. Please verify and correct! \n")				
+			error_dialog("""\nYour password should only contain alphanumeric characters. 
+\nPlease verify and correct! \n""")				
 		elif len(self.UserPass1Entry.get_text()) < 5 :
-			error_dialog("\nYour password is too short. It should have at least 5 characters. Please verify and correct! \n")			
+			error_dialog("""\nYour password is too short. It should have at least 5 characters. 
+\nPlease verify and correct! \n""")			
 		elif self.UserPass1Entry.get_text() != self.UserPass2Entry.get_text() :
-			error_dialog("\nYour 2 password entries do not match. Please verify and correct! \n") 
+			error_dialog("\nYour 2 password entries do not match. \n\nPlease verify and correct! \n") 
 		else :
-			self.NewUserLogin.set_text(self.UserLoginEntry.get_text())
+			global NewUser
+			NewUser = self.UserLoginEntry.get_text()
+			global NewUserPW
+			NewUserPW = self.UserPass1Entry.get_text()
+			self.NewUserLogin.set_text(NewUser)
 			if self.RootPassCreated.get_text() != "None" :
 				self.UsersCheck.show()
 				self.UsersCheckMarker.hide()
@@ -582,14 +624,17 @@ class SalixGuiInstaller:
 	# What to do when the root password settings apply button is clicked
     def on_rootpass_apply_clicked(self, widget, data=None):
 		# Pass some basic sanity checks
+		# To do => Check if alphanumerical is necessary + prevent the use of caps for login
 		if self.RootPass1Entry.get_text() == '' :
-			error_dialog("\nYour password entry is empty. Please verify and correct! \n")				
+			error_dialog("\nYour password entry is empty. \n\nPlease verify and correct! \n")				
 		elif self.RootPass1Entry.get_text().replace(' ', '').isalnum() == False :
-			error_dialog("\nYour password should only contain alphanumeric characters. Please verify and correct! \n")	
+			error_dialog("""\nYour password should only contain alphanumeric characters. 
+\nPlease verify and correct! \n""")	
 		elif len(self.RootPass1Entry.get_text()) < 5 :
-			error_dialog("\nYour password is too short. It should have at least 5 characters. Please verify and correct! \n")			
+			error_dialog("""\nYour password is too short. It should have at least 5 characters. 
+\nPlease verify and correct! \n""")			
 		elif self.RootPass1Entry.get_text() != self.RootPass2Entry.get_text() :
-			error_dialog("\nYour 2 password entries do not match. Please verify and correct! \n") 
+			error_dialog("\nYour 2 password entries do not match. \n\nPlease verify and correct! \n") 
 		else:
 			self.RootPassCreated.set_text('Yes')
 			if self.NewUserLogin.get_text() != "None" :
@@ -609,6 +654,18 @@ class SalixGuiInstaller:
 
 	# What to do when the package selection apply button is clicked
     def on_packages_apply_clicked(self, widget, data=None):
+		global Selected_Install_Mode
+		if self.CoreRadioButton.get_active() == True :
+			Selected_Install_Mode = 'core'
+		elif self.BasicRadioButton.get_active() == True :
+			Selected_Install_Mode = 'basic'			
+		elif self.FullRadioButton.get_active() == True :
+			Selected_Install_Mode = 'full'
+		global Selected_Kernel
+		if self.SalixKernelRadioButton.get_active() == True :
+			Selected_Kernel = 'standard'
+		elif self.LiveKernelRadioButton.get_active() == True :
+			Selected_Kernel = 'live'							
 		self.CoreRadioButton.set_sensitive(False)
 		self.BasicRadioButton.set_sensitive(False)
 		self.FullRadioButton.set_sensitive(False)
@@ -622,6 +679,45 @@ class SalixGuiInstaller:
 		if 'no' not in ConfigurationSet :
 			self.InstallButton.set_sensitive(True)
 			
+	# What to do when the Install Salix button is clicked
+    def on_install_button_clicked(self, widget, data=None):
+		# Tell the confirmation dialog what it is dealing with
+		global MainPartitionConfirmation
+		MainPartitionConfirmation = False
+		global LinuxPartitionConfirmation
+		LinuxPartitionConfirmation = False
+		global WindowsPartitionConfirmation
+		WindowsPartitionConfirmation = False		
+		global InstallButtonConfirmation
+		InstallButtonConfirmation = True
+		# Prepare the install recap text
+		LastRecapFullText = ''
+		LastRecapFullText += "\n<b>You are about to install Salix with the following settings:</b> \n"
+		LastRecapFullText += "\n<b>Keyboard layout:</b> \n" + Selected_Keyboard + "\n"
+		LastRecapFullText += "\n<b>System language:</b> \n" + Selected_Locale + "\n"
+		LastRecapFullText += "\n<b>Partitions:</b> \n"
+		LastRecapFullText += Selected_Main_Partition + " will be formatted with " + Selected_Main_Format + " and will be mounted as / \n"
+		if LinFullSets != [] :
+			for i in LinFullSets :
+				LastRecapFullText += i[0] + " will be formatted with " + i[1] + " and will be mounted as " + i[2] + "\n"
+		if LinFormatSets != [] :
+			for i in LinFormatSets :
+				LastRecapFullText += i[0] + " will be formatted with " + i[1] + " but will not be mounted \n"
+		if LinMountSets != [] :
+			for i in LinMountSets :
+				LastRecapFullText += i[0] + " will not be formatted and will be mounted as " + i[2] + "\n"	
+		if WinMountSets != [] :
+			for i in WinMountSets :
+				LastRecapFullText += i[0] + " will not be formatted and will be mounted as " + i[1] + "\n"	
+		# To do: a global variable holding a list of partitions formating command based on the above info	
+		# To do: a global variable holding a list of partitions fstab lines based on the above info	
+		LastRecapFullText += "\n<b>Standard User:</b> \n" + NewUser + "\n"
+		LastRecapFullText += "\n<b>Packages:</b> \n"
+		LastRecapFullText += " You have chosen the " + Selected_Install_Mode + " installation mode with the " + Selected_Kernel + " kernel \n"
+		
+		self.YesNoLabel.set_markup(LastRecapFullText)
+		self.YesNoDialog.show()
+					
 ### CONFIGURATION UNDO BUTTONS ###
 
 	# What to do when the keyboard undo button is clicked
@@ -710,9 +806,9 @@ class SalixGuiInstaller:
 		ConfigurationSet[5] = 'no'
 		self.InstallButton.set_sensitive(False)
 
-### PARTITION CONFIRMATION WINDOW ###
+### YESNO CONFIRMATION NEEDED DIALOG ###
 						
-	# What to do when the yes button of the partition confirmation dialog is clicked
+	# What to do when the yes button of the YesNo Confirmation Needed dialog is clicked
     def on_confirm_button_clicked(self, widget, data=None):
 		global partition_done_lock
 		partition_done_lock = ''
@@ -780,12 +876,12 @@ class SalixGuiInstaller:
 						
 			# Display the extra Linux partitions configuration if appropriate
 			if 'linux' in extra_part_toset :
-				self.ConfirmPartitionDialog.hide()
+				self.YesNoDialog.hide()
 				self.MainPartitionBox.hide()
 				self.LinuxPartitionBox.show()
 			# Else display the Windows partitions configuration if appropriate
 			elif 'windows' in extra_part_toset :
-				self.ConfirmPartitionDialog.hide()
+				self.YesNoDialog.hide()
 				self.MainPartitionBox.hide()
 				self.WindowsPartitionBox.show() 
 			else :
@@ -795,7 +891,7 @@ class SalixGuiInstaller:
 				self.MainPartRecapLabel.set_text(MainPartConfirmLabel)
 				self.LinPartRecapLabel.set_text('None \n') 
 				self.WinPartRecapLabel.set_text('None \n')
-				self.ConfirmPartitionDialog.hide()
+				self.YesNoDialog.hide()
 				self.MainPartitionBox.hide()
 				self.RecapPartitionBox.show()
 				self.PartitionCheck.show()
@@ -808,7 +904,7 @@ class SalixGuiInstaller:
 		if LinuxPartitionConfirmation == True :
 			# Display Windows partitions configuration if appropriate
 			if 'windows' in extra_part_toset :
-				self.ConfirmPartitionDialog.hide() 
+				self.YesNoDialog.hide() 
 				self.LinuxPartitionBox.hide() 
 				self.WindowsPartitionBox.show() 
 			else :
@@ -818,7 +914,7 @@ class SalixGuiInstaller:
 				self.MainPartRecapLabel.set_text(MainPartConfirmLabel)
 				self.LinPartRecapLabel.set_text(LinPartConfirmLabel) 
 				self.WinPartRecapLabel.set_text('None \n')
-				self.ConfirmPartitionDialog.hide()
+				self.YesNoDialog.hide()
 				self.LinuxPartitionBox.hide()
 				self.RecapPartitionBox.show()
 				self.PartitionCheck.show()
@@ -834,7 +930,7 @@ class SalixGuiInstaller:
 			self.MainPartRecapLabel.set_text(MainPartConfirmLabel)
 			self.LinPartRecapLabel.set_text(LinPartConfirmLabel) 
 			self.WinPartRecapLabel.set_text(WinPartConfirmLabel)			
-			self.ConfirmPartitionDialog.hide()
+			self.YesNoDialog.hide()
 			self.WindowsPartitionBox.hide()
 			self.RecapPartitionBox.show() 
 			self.PartitionCheck.show()
@@ -842,18 +938,22 @@ class SalixGuiInstaller:
 			ConfigurationSet[2] = 'yes'
 			if 'no' not in ConfigurationSet :
 				self.InstallButton.set_sensitive(True)
+				
+		if InstallButtonConfirmation == True :
+			# Verify we are in a LiveCD environment 
+			if os.path.exists("/mnt/live/memory/images") == False :
+				self.YesNoDialog.hide()
+				error_dialog("""<b>Sorry!</b>
+\nSalix Live Installer is only meant to be used in a LiveCD environment. 
+\nYou cannot proceed any further! """)					
 
-	# What to do when the no button of the partition confirmation dialog is clicked	
+	# What to do when the no button of the YesNo dialog is clicked	
     def on_do_not_confirm_button_clicked(self, widget, data=None):
-		# Check what is being cancelled & act accordingly
+		# Check what is being cancelled & act accordingly if necessary
 		if MainPartitionConfirmation == True :
 			global Selected_Main_Partition
 			Selected_Main_Partition = ''
-		if LinuxPartitionConfirmation == True :
-			pass	
-		if WindowsPartitionConfirmation == True :
-			pass	
-		self.ConfirmPartitionDialog.hide()
+		self.YesNoDialog.hide()
 		
 ### CHECKBUTTONS ###
 						

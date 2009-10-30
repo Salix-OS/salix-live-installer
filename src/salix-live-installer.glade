@@ -2431,6 +2431,22 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                 <property name="border_width">9</property>
                 <property name="layout_style">edge</property>
                 <child>
+                  <object class="GtkButton" id="button_quit">
+                    <property name="label" translatable="yes">gtk-quit</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Exit Salix Installer</property>
+                    <property name="use_stock">True</property>
+                    <signal name="clicked" handler="on_button_quit_clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkButton" id="install_button">
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
@@ -2438,6 +2454,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Launch Salix installation.
 This button will not be active until all settings are configured correctly.</property>
+                    <signal name="clicked" handler="on_install_button_clicked"/>
                     <child>
                       <object class="GtkHBox" id="hbox13">
                         <property name="visible">True</property>
@@ -2463,22 +2480,6 @@ This button will not be active until all settings are configured correctly.</pro
                         </child>
                       </object>
                     </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="button_quit">
-                    <property name="label" translatable="yes">gtk-quit</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Exit Salix Installer</property>
-                    <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_button_quit_clicked"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2552,7 +2553,7 @@ MA 02110-1301, USA.</property>
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="confirm_partition_dialog">
+  <object class="GtkDialog" id="yes_no_dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Confirmation needed</property>
     <property name="modal">True</property>
@@ -2570,10 +2571,11 @@ MA 02110-1301, USA.</property>
           <object class="GtkVBox" id="vbox5">
             <property name="visible">True</property>
             <child>
-              <object class="GtkLabel" id="confirm_partition_label">
+              <object class="GtkLabel" id="yes_no_label">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Message about the chosen partition</property>
+                <property name="label" translatable="yes">&lt;b&gt;Message about the particular choice: &lt;/b&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2585,7 +2587,8 @@ MA 02110-1301, USA.</property>
               <object class="GtkLabel" id="label26">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Do you want to proceed with this?</property>
+                <property name="label" translatable="yes">&lt;b&gt;Do you want to proceed with this?&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="position">1</property>
