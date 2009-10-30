@@ -1,4 +1,3 @@
-
 [Desktop Entry]
 Categories=Application;System;Settings;
 Exec=gksu /usr/sbin/salix-live-installer
@@ -8,7 +7,10 @@ Terminal=false
 Type=Application
 Name=Salix Installer
 Name[fr]=Installateur Salix
+Name[el]=Εγκατάσταση του Salix
 GenericName=Salix Installer
 GenericName[fr]=Installateur Salix
-Comment=Install Salix on your computer from a SalixLive cession
+GenericName[el]=Εγκατάσταση του Salix
+Comment=Install Salix on your computer from a SalixLive session
 Comment[fr]=Installer Salix sur son ordinateur à partir d'une cession SalixLive
+Comment[el]=Εγκατάσταση του Salix στον υπολογιστή σας μέσω του περιβάλλοντος SalixLive
