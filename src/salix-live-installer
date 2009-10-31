@@ -53,8 +53,8 @@ class SalixGuiInstaller:
     def __init__(self):
 
 		builder = gtk.Builder()
-		if os.path.exists("/share/salix-live-installer/salix-live-installer.glade") :
-			builder.add_from_file("/share/salix-live-installer/salix-live-installer.glade")
+		if os.path.exists("/usr/share/salix-live-installer/salix-live-installer.glade") :
+			builder.add_from_file("/usr/share/salix-live-installer/salix-live-installer.glade")
 		elif os.path.exists("../share/salix-live-installer/salix-live-installer.glade") :
 			builder.add_from_file("../share/salix-live-installer/salix-live-installer.glade") 
 		else :
