@@ -2671,17 +2671,18 @@ MA 02110-1301, USA.</property>
             <property name="xalign">0</property>
             <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
 
-Before executing Salix Installer, you should already have 
-the necessary partitions available on your system.
+Before executing the Salix Installer, you should already 
+have the necessary partitions available on your system.
 
 Salix needs, at the very minimum, one swap partition and  
 one Linux  partition to hold its main directory tree. 
 
-If possible, it is recommended to also have another Linux 
-partition to hold your /home directory.
+If possible, it is recommended to also have at least
+another Linux partition to hold your /home directory.
 
-If you do not already have these needed partitions, please
-exit Salix Installer and use Gparted to create them first.</property>
+If you do not already have these needed partitions ready,
+please exit the Salix Installer and use Gparted to create
+them first.</property>
             <property name="use_markup">True</property>
           </object>
           <packing>
