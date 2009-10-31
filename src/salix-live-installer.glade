@@ -292,9 +292,9 @@
                 <child>
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Salix Installer will perform a standard installation of  Salix 
+                    <property name="label" translatable="yes">Salix Installer will perform a standard installation of Salix 
 Operating System on your computer from the comfort of 
-SalixLive's graphic environment.  </property>
+SalixLive's graphic environment.</property>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -1177,7 +1177,7 @@ the 'Select partition' button.</property>
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">From the above partitions found on your system, please select the 
-one where Salix main directory tree (/) should be installed.
+one where the Salix main directory tree (/) should be installed.
 
 &lt;b&gt;Warning!&lt;/b&gt; This partition will be reformatted and its data will be erased.</property>
                                         <property name="use_markup">True</property>
@@ -2340,7 +2340,7 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process.
-You may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The live tools will also be installed if you select this kernel). </property>
+You may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The live tools will also be installed if you select this kernel).</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">salix_kernel_radiobutton</property>
