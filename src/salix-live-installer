@@ -53,12 +53,12 @@ class SalixGuiInstaller:
     def __init__(self):
 
 		builder = gtk.Builder()
-		if os.path.exists("/usr/share/salix-live-installer/salix-live-installer.glade") :
+		if os.path.exists("salix-live-installer.glade") :
+			builder.add_from_file("salix-live-installer.glade")
+		elif os.path.exists("/usr/share/salix-live-installer/salix-live-installer.glade") :
 			builder.add_from_file("/usr/share/salix-live-installer/salix-live-installer.glade")
 		elif os.path.exists("../share/salix-live-installer/salix-live-installer.glade") :
 			builder.add_from_file("../share/salix-live-installer/salix-live-installer.glade") 
-		else :
-			builder.add_from_file("salix-live-installer.glade")
 
 		# Get a handle on the glade file widgets we want to interact with
 		self.Window = builder.get_object("main_window")
