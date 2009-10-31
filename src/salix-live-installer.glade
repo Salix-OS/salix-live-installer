@@ -90,6 +90,9 @@
       <row>
         <col id="0" translatable="yes">xfs</col>
       </row>
+      <row>
+        <col id="0" translatable="yes">jfs</col>
+      </row>
     </data>
   </object>
   <object class="GtkListStore" id="linux_format_list_store">
@@ -115,6 +118,9 @@
       </row>
       <row>
         <col id="0" translatable="yes">xfs</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">jfs</col>
       </row>
     </data>
   </object>

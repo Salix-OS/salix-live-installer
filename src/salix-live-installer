@@ -46,7 +46,6 @@ pygtk.require('2.0')
 # To do => Final success/failure window
 # To do => Install log
 # To do => Invoke LiloFix if needed before exiting
-# To do => Add jfs as a possible file system?
 
 class SalixGuiInstaller:
 			
