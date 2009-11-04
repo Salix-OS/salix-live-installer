@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091101-build	First version
+# Version='0.1'		- 20091104-build	First version
 
 import commands
 import subprocess
@@ -62,8 +62,11 @@ class SalixGuiInstaller:
 		# Get a handle on the glade file widgets we want to interact with
 		self.Window = builder.get_object("main_window")
 		self.AboutDialog = builder.get_object("about_dialog")
-		self.InfoDialog = builder.get_object("info_dialog")
-		self.InfoLabel = builder.get_object("info_label")
+		self.KeyboardTab = builder.get_object("keyboard_tab")
+		self.LocaleTab = builder.get_object("locale_tab")
+		self.PartitionTab = builder.get_object("partition_tab")
+		self.UsersTab = builder.get_object("users_tab")
+		self.PackagesTab = builder.get_object("packages_tab")
 		self.KeyboardCheck = builder.get_object("keyboard_check")
 		self.LocaleCheck = builder.get_object("locale_check")
 		self.PartitionCheck = builder.get_object("partition_check")
@@ -74,6 +77,7 @@ class SalixGuiInstaller:
 		self.PartitionCheckMarker = builder.get_object("partition_check_marker")
 		self.UsersCheckMarker = builder.get_object("users_check_marker")
 		self.PackagesCheckMarker = builder.get_object("packages_check_marker")
+		self.IntroBox = builder.get_object("intro_box")
 		self.KeyboardBox = builder.get_object("keyboard_box")
 		self.LocaleBox = builder.get_object("locale_box")
 		self.MainPartitionBox = builder.get_object("main_partition_box")
@@ -139,9 +143,6 @@ class SalixGuiInstaller:
 		
 		
 ### INITIALIZATION ###
-
-		# Shows the Intro widow while lists are initialized
-		self.InfoDialog.show()
 		
 		### Initialise some global variables ###
 		# Prevent switching to another tab until the current configuration is completed or cancelled
@@ -258,7 +259,6 @@ class SalixGuiInstaller:
 			self.LocaleListStore.append(locale_set)
 
 		# Initialize the main partitions list. 
-		# This is a def since it may have to be done a few times depending on the user's choices.
 		global partition_list_initialization
 		def partition_list_initialization() :
 			global part_feedline_list
@@ -305,10 +305,15 @@ class SalixGuiInstaller:
 						part_feedline_list.append(part_feedline)							
 					else :						
 						usb_dev = ''
+						firewire_dev = ''
 						dev_root = part_name[5:-1]
 						check_if_usb = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /usb'
 						usb_dev = commands.getoutput(check_if_usb)	
+						check_if_firewire = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /fw-host'
+						firewire_dev = commands.getoutput(check_if_firewire)
 						if usb_dev != '' :
+							pass
+						elif firewire_dev != '' :
 							pass
 						else:
 							# Put all needed variables in one set per line
@@ -322,10 +327,7 @@ class SalixGuiInstaller:
 				self.MainPartitionListStore.append(line)
 			# Set the cursor on the first row
 			self.MainPartitionList.set_cursor(0)
-	
-		partition_list_initialization()			
-
-  
+	  
 	### Callback signals waiting in a constant loop: ###	
 	
 ### WINDOWS MAIN SIGNALS ###	
@@ -346,17 +348,14 @@ class SalixGuiInstaller:
     def on_about_dialog_close(self, widget, data=None):
 		self.AboutDialog.hide()
 
-    # What to do when the Info dialog quit button is clicked
-    def on_info_button_clicked(self, widget, data=None):
-		self.InfoDialog.hide()
-
 # LISTS ROWS ###
 
 	# What to do when a keymap list row is added
     def on_keymap_list_store_row_inserted(self, widget, value, treeiter):
 		# Check if it is the path of the used keymap to set the cursor on it 
 		if keyb_item == UsedKeyMap:
-			self.KeyboardList.set_cursor(value)
+			global UsedKeybRow
+			UsedKeybRow = value
 
 	# What to do when a locale list row is added			
     def on_locale_list_store_row_inserted(self, widget, value, treeiter):
@@ -1069,18 +1068,26 @@ class SalixGuiInstaller:
 			pass
 		else :		
 			# Show the keyboard setting area & hide all the others
+			self.IntroBox.hide()
 			self.KeyboardBox.show()
+			self.KeyboardList.set_cursor(UsedKeybRow)
 			self.LocaleBox.hide()
 			self.MainPartitionBox.hide()
 			self.RecapPartitionBox.hide()
 			self.UsersBox.hide()
 			self.PackagesBox.hide()
-		
+			self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
+			self.LocaleTab.set_relief(gtk.RELIEF_NONE)
+			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
+			self.UsersTab.set_relief(gtk.RELIEF_NONE)
+			self.PackagesTab.set_relief(gtk.RELIEF_NONE)
+			
 	# What to do when the language tab is clicked
     def on_locale_tab_clicked(self, widget, data=None):
 		if switch_tab_lock == 'on' :
 			pass
 		else :		
+			self.IntroBox.hide()
 			self.KeyboardBox.hide()
 			self.LocaleBox.show()
 			self.LocaleList.set_cursor(UsedLocaleRow)
@@ -1088,12 +1095,19 @@ class SalixGuiInstaller:
 			self.RecapPartitionBox.hide()
 			self.UsersBox.hide()
 			self.PackagesBox.hide()
+			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
+			self.LocaleTab.set_relief(gtk.RELIEF_HALF)
+			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
+			self.UsersTab.set_relief(gtk.RELIEF_NONE)
+			self.PackagesTab.set_relief(gtk.RELIEF_NONE)
 			
 	# What to do when the partitions tab is clicked
     def on_partition_tab_clicked(self, widget, data=None):
 		if switch_tab_lock == 'on' :
 			pass
-		else :		
+		else :
+			partition_list_initialization()	
+			self.IntroBox.hide()	
 			self.KeyboardBox.hide()
 			self.LocaleBox.hide()
 			self.UsersBox.hide()
@@ -1104,30 +1118,47 @@ class SalixGuiInstaller:
 			else :
 				self.RecapPartitionBox.hide()
 				self.MainPartitionBox.show()				
+			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
+			self.LocaleTab.set_relief(gtk.RELIEF_NONE)
+			self.PartitionTab.set_relief(gtk.RELIEF_HALF)
+			self.UsersTab.set_relief(gtk.RELIEF_NONE)
+			self.PackagesTab.set_relief(gtk.RELIEF_NONE)
 
 	# What to do when the users tab is clicked
     def on_users_tab_clicked(self, widget, data=None):
 		if switch_tab_lock == 'on' :
 			pass
-		else :		
+		else :	
+			self.IntroBox.hide()	
 			self.KeyboardBox.hide()
 			self.LocaleBox.hide()
 			self.MainPartitionBox.hide()
 			self.RecapPartitionBox.hide()
 			self.UsersBox.show()
 			self.PackagesBox.hide()
+			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
+			self.LocaleTab.set_relief(gtk.RELIEF_NONE)
+			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
+			self.UsersTab.set_relief(gtk.RELIEF_HALF)
+			self.PackagesTab.set_relief(gtk.RELIEF_NONE)
 
 	# What to do when the packages tab is clicked
     def on_packages_tab_clicked(self, widget, data=None):
 		if switch_tab_lock == 'on' :
 			pass
 		else :		
+			self.IntroBox.hide()
 			self.KeyboardBox.hide()
 			self.LocaleBox.hide()
 			self.MainPartitionBox.hide()
 			self.RecapPartitionBox.hide()
 			self.UsersBox.hide()
 			self.PackagesBox.show()
+			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
+			self.LocaleTab.set_relief(gtk.RELIEF_NONE)
+			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
+			self.UsersTab.set_relief(gtk.RELIEF_NONE)
+			self.PackagesTab.set_relief(gtk.RELIEF_HALF)
 
 # Error window skeleton:
 def error_dialog(message, parent = None):

@@ -255,7 +255,7 @@
   <object class="GtkWindow" id="main_window">
     <property name="visible">True</property>
     <property name="border_width">10</property>
-    <property name="title" translatable="yes">Salix Installer</property>
+    <property name="title" translatable="yes">SalixLive Installer</property>
     <property name="window_position">center-always</property>
     <property name="icon">salix-live-installer.png</property>
     <signal name="destroy" handler="gtk_main_quit"/>
@@ -292,7 +292,7 @@
                 <child>
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Salix Installer will perform a standard installation of Salix 
+                    <property name="label" translatable="yes">SalixLive Installer will perform a standard installation of Salix 
 Operating System on your computer from the comfort of 
 SalixLive's graphic environment.</property>
                   </object>
@@ -720,8 +720,40 @@ SalixLive's graphic environment.</property>
                                 <property name="height_request">280</property>
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkVBox" id="keyboard_box">
+                                  <object class="GtkVBox" id="intro_box">
                                     <property name="visible">True</property>
+                                    <property name="border_width">1</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label38">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
+
+Before executing SalixLive's installer, you should already 
+have the necessary partitions available on your system.
+
+Salix needs, at the very minimum, one swap partition and  
+one Linux  partition to hold its main directory tree. 
+
+If possible, it is recommended to also have at least
+another Linux partition to hold your /home directory.
+
+If you do not already have these needed partitions ready,
+please exit SalixLive's installer and use Gparted to create
+them first.</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="padding">5</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkVBox" id="keyboard_box">
                                     <property name="border_width">1</property>
                                     <child>
                                       <object class="GtkLabel" id="label8">
@@ -893,7 +925,7 @@ highlighting the keyboard layout. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">0</property>
+                                    <property name="position">1</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1068,7 +1100,7 @@ highlighting the system language</property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">1</property>
+                                    <property name="position">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1177,7 +1209,7 @@ the 'Select partition' button.</property>
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">From the above partitions found on your system, please select the 
-one where the Salix main directory tree (/) should be installed.
+one where Salix' main directory tree (/) should be installed.
 
 &lt;b&gt;Warning!&lt;/b&gt; This partition will be reformatted and its data will be erased.</property>
                                         <property name="use_markup">True</property>
@@ -1278,7 +1310,7 @@ highlighting the partition. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">2</property>
+                                    <property name="position">3</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1481,7 +1513,7 @@ settings from the list above. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">3</property>
+                                    <property name="position">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1666,7 +1698,7 @@ settings from the list above. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">4</property>
+                                    <property name="position">5</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1777,7 +1809,7 @@ settings from the list above. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">5</property>
+                                    <property name="position">6</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -2150,7 +2182,7 @@ settings from the list above. </property>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">6</property>
+                                    <property name="position">7</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -2408,7 +2440,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="position">7</property>
+                                    <property name="position">8</property>
                                   </packing>
                                 </child>
                               </object>
@@ -2649,78 +2681,6 @@ MA 02110-1301, USA.</property>
     <action-widgets>
       <action-widget response="0">do_not_confirm_button</action-widget>
       <action-widget response="0">confirm_button</action-widget>
-    </action-widgets>
-  </object>
-  <object class="GtkDialog" id="info_dialog">
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Information</property>
-    <property name="modal">True</property>
-    <property name="icon_name">dialog-information</property>
-    <property name="type_hint">normal</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="deletable">False</property>
-    <property name="transient_for">main_window</property>
-    <property name="has_separator">False</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox3">
-        <property name="visible">True</property>
-        <property name="spacing">2</property>
-        <child>
-          <object class="GtkLabel" id="info_label">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
-
-Before executing the Salix Installer, you should already 
-have the necessary partitions available on your system.
-
-Salix needs, at the very minimum, one swap partition and  
-one Linux  partition to hold its main directory tree. 
-
-If possible, it is recommended to also have at least
-another Linux partition to hold your /home directory.
-
-If you do not already have these needed partitions ready,
-please exit the Salix Installer and use Gparted to create
-them first.</property>
-            <property name="use_markup">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="padding">7</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area3">
-            <property name="visible">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="info_button">
-                <property name="label" translatable="yes">gtk-close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_info_button_clicked"/>
-              </object>
-              <packing>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="0">info_button</action-widget>
     </action-widgets>
   </object>
 </interface>
