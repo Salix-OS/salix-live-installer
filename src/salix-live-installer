@@ -296,7 +296,10 @@ class SalixGuiInstaller:
 				elif line.startswith(' '):
 					part_name = disk_device.replace(':', '') + line.split() [0]
 					part_size = line.split() [3]
-					part_system = line.split() [5]				
+					try :
+						part_system = line.split() [5]
+					except : 	
+						part_system = 'None'
 					# Check if removable devices should be displayed.
 					if show_external_device == 'yes' :
 						# Put all needed variables in one set per line
@@ -946,81 +949,82 @@ class SalixGuiInstaller:
 				error_dialog("""<b>Sorry!</b>
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
 \nYou cannot proceed any further! """)
-			# Format and remount the main partition
-			Main_MountPoint = Selected_Main_Partition.replace('dev', 'mnt')
-			if os.path.exists(Main_MountPoint) == False :
-				os.mkdir(Main_MountPoint)
-			subprocess.call("umount -l " + Selected_Main_Partition, shell=True)
-			if 'ext' in Selected_Main_Format :
-				subprocess.call("mkfs -t " + Selected_Main_Format + " " + Selected_Main_Partition, shell=True)
 			else :
-				subprocess.call("mkfs -t " + Selected_Main_Format + " -f " + Selected_Main_Partition, shell=True)
-			subprocess.call("mount -t " + Selected_Main_Format + " " + Selected_Main_Partition + " " + Main_MountPoint , shell=True)
-			# Format and/or remount the other Linux partitions (Windows partitions will be managed later while generating /etc/fstab)
-			if LinFullSets != [] :
-				for i in LinFullSets :
-					os.mkdir(Main_MountPoint + i[2])
-					subprocess.call("umount -l " + i[0], shell=True)
-					if 'ext' in i[1] :
-						subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
-					else :
-						subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
-					subprocess.call("mount -t " + i[1] + " " + i[0] + " " + Main_MountPoint + i[2], shell=True)
-			if LinFormatSets != [] :
-				for i in LinFormatSets :
-					subprocess.call("umount -l " + i[0], shell=True)
-					if 'ext' in i[1] :
-						subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
-					else :
-						subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)				
-			if LinMountSets != [] :
-				for i in LinMountSets :
-					os.mkdir(Main_MountPoint + i[2])
-					subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
-			# Unsquashfs the live modules on the mounted installation partition(s)
-			# (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
-			os.mkdir(Main_MountPoint + "/temp_mount")
-			Temp_Mount = Main_MountPoint + "/temp_mount"
-			if Selected_Install_Mode == 'core' :
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-			elif Selected_Install_Mode == 'basic' :
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-			elif Selected_Install_Mode == 'full' :
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-				subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
-				subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-				subprocess.call("umount " + Temp_Mount, shell=True)
-			os.rmdir(Temp_Mount)
+				# Format and remount the main partition
+				Main_MountPoint = Selected_Main_Partition.replace('dev', 'mnt')
+				if os.path.exists(Main_MountPoint) == False :
+					os.mkdir(Main_MountPoint)
+				subprocess.call("umount -l " + Selected_Main_Partition, shell=True)
+				if 'ext' in Selected_Main_Format :
+					subprocess.call("mkfs -t " + Selected_Main_Format + " " + Selected_Main_Partition, shell=True)
+				else :
+					subprocess.call("mkfs -t " + Selected_Main_Format + " -f " + Selected_Main_Partition, shell=True)
+				subprocess.call("mount -t " + Selected_Main_Format + " " + Selected_Main_Partition + " " + Main_MountPoint , shell=True)
+				# Format and/or remount the other Linux partitions (Windows partitions will be managed later while generating /etc/fstab)
+				if LinFullSets != [] :
+					for i in LinFullSets :
+						os.mkdir(Main_MountPoint + i[2])
+						subprocess.call("umount -l " + i[0], shell=True)
+						if 'ext' in i[1] :
+							subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
+						else :
+							subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
+						subprocess.call("mount -t " + i[1] + " " + i[0] + " " + Main_MountPoint + i[2], shell=True)
+				if LinFormatSets != [] :
+					for i in LinFormatSets :
+						subprocess.call("umount -l " + i[0], shell=True)
+						if 'ext' in i[1] :
+							subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
+						else :
+							subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)				
+				if LinMountSets != [] :
+					for i in LinMountSets :
+						os.mkdir(Main_MountPoint + i[2])
+						subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
+				# Unsquashfs the live modules on the mounted installation partition(s)
+				# (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
+				os.mkdir(Main_MountPoint + "/temp_mount")
+				Temp_Mount = Main_MountPoint + "/temp_mount"
+				if Selected_Install_Mode == 'core' :
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+				elif Selected_Install_Mode == 'basic' :
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+				elif Selected_Install_Mode == 'full' :
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
+					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+					subprocess.call("umount " + Temp_Mount, shell=True)
+				os.rmdir(Temp_Mount)
 			
 	# What to do when the no button of the YesNo dialog is clicked	
     def on_do_not_confirm_button_clicked(self, widget, data=None):
