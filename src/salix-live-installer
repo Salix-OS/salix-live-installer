@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091104-build	First version
+# Version='0.1'		- 20091105-build	First version
 
 import commands
 import subprocess
@@ -36,16 +36,10 @@ pygtk.require('2.0')
 # To do => Internationalization
 # To do => Change duplications into functions with args
 # To do => refine login + passwords filters
-# To do => Create /etc/fstab with chosen partitions records
-# To do => Set the keyboard on the chrooted install
-# To do => Set the Locale on the chrooted install
-# To do => Set the new user/passwords on the chrooted install
-# To do => Ensure no LiveCD environment elements have migrated 
-# (This shouldn't be a problem if LiveCD packages are in a separate module)
 # To do => Progress bar
-# To do => Final success/failure window
+# To do => Final success/failure window => Invoke LiloFix if needed before exiting
 # To do => Install log
-# To do => Invoke LiloFix if needed before exiting
+# To do => More Error checking with subprocess.check_call() and try/except
 
 class SalixGuiInstaller:
 			
@@ -645,6 +639,8 @@ class SalixGuiInstaller:
 				self.UsersCheckMarker.hide()
 			global ConfigurationSet
 			ConfigurationSet[4] = 'yes'
+			global NewRootPW
+			NewRootPW = self.RootPass1Entry.get_text()
 			if 'no' not in ConfigurationSet :
 				self.InstallButton.set_sensitive(True)
 			self.RootPass1Entry.set_sensitive(False)
@@ -712,8 +708,6 @@ class SalixGuiInstaller:
 		if WinMountSets != [] :
 			for i in WinMountSets :
 				LastRecapFullText += i[0] + " will not be formatted and will be mounted as " + i[1] + "\n"	
-		# To do: a global variable holding a list of partitions formating command based on the above info	
-		# To do: a global variable holding a list of partitions fstab lines based on the above info	
 		LastRecapFullText += "\n<b>Standard User:</b> \n" + NewUser + "\n"
 		LastRecapFullText += "\n<b>Packages:</b> \n"
 		LastRecapFullText += " You have chosen the " + Selected_Install_Mode + " installation mode with the " + Selected_Kernel + " kernel \n"
@@ -950,6 +944,7 @@ class SalixGuiInstaller:
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
 \nYou cannot proceed any further! """)
 			else :
+				self.YesNoDialog.hide()
 				# Format and remount the main partition
 				Main_MountPoint = Selected_Main_Partition.replace('dev', 'mnt')
 				if os.path.exists(Main_MountPoint) == False :
@@ -963,7 +958,7 @@ class SalixGuiInstaller:
 				# Format and/or remount the other Linux partitions (Windows partitions will be managed later while generating /etc/fstab)
 				if LinFullSets != [] :
 					for i in LinFullSets :
-						os.mkdir(Main_MountPoint + i[2])
+						os.makedirs(Main_MountPoint + i[2])
 						subprocess.call("umount -l " + i[0], shell=True)
 						if 'ext' in i[1] :
 							subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
@@ -979,7 +974,7 @@ class SalixGuiInstaller:
 							subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)				
 				if LinMountSets != [] :
 					for i in LinMountSets :
-						os.mkdir(Main_MountPoint + i[2])
+						os.makedirs(Main_MountPoint + i[2])
 						subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
 				# Unsquashfs the live modules on the mounted installation partition(s)
 				# (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
@@ -989,23 +984,11 @@ class SalixGuiInstaller:
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
-					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-					subprocess.call("umount " + Temp_Mount, shell=True)
-					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
-					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-					subprocess.call("umount " + Temp_Mount, shell=True)
 				elif Selected_Install_Mode == 'basic' :
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
-					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-					subprocess.call("umount " + Temp_Mount, shell=True)
-					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-					subprocess.call("umount " + Temp_Mount, shell=True)
-					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
 				elif Selected_Install_Mode == 'full' :
@@ -1018,21 +1001,102 @@ class SalixGuiInstaller:
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
+				if Selected_Kernel == 'live' :
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
-					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*live.lzm " + Temp_Mount + " -o loop", shell=True)
-					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-					subprocess.call("umount " + Temp_Mount, shell=True)
+					#~ subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/live/*", shell=True)
+				#~ elif Selected_Kernel == 'standard' :
+					#~ subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/kernel/*", shell=True)	
 				os.rmdir(Temp_Mount)
-			
+				# In any case, install settings packages
+				subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/settings/*", shell=True)
+
+				# Create /etc/fstab
+				fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
+				Swap_Partition = commands.getoutput(fdisk_swap_output)
+				Fstab_File = open(Main_MountPoint + '/etc/fstab', 'w')
+				Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('devpts', '/dev/pts', 'devpts', 'gid=5,mode=620', '0', '0'))
+				Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('proc', '/proc', 'proc', 'defaults', '0', '0'))
+				Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('tmpfs', '/dev/shm', 'tmpfs', 'defaults', '0', '0'))
+				Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (Swap_Partition, 'swap', 'swap', 'defaults', '0', '0'))
+				Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (Selected_Main_Partition, '/', Selected_Main_Format, 'noatime,defaults', '1', '1'))
+				LinSets = LinFullSets + LinFormatSets
+				if LinSets != [] :
+					for i in LinSets :
+						Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[2], i[1] , 'noatime,defaults', '1', '2'))	
+				if LinMountSets != [] :
+					for i in LinMountSets :
+						lshal_fstype_output = "lshal | grep -A10 hda5 | grep 'volume.fstype =' "
+						Lin_Filesys_String = commands.getoutput(lshal_fstype_output)
+						Lin_Filesys = Lin_Filesys_String.split("'")[1]
+						Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[2], Lin_Filesys , 'noatime,defaults', '1', '2'))			
+				if WinMountSets != [] :
+					os.environ['LANG'] = 'en_US'
+					for i in WinMountSets :
+						fdisk_win_output = 'fdisk -l | grep ' + i[0]
+						Win_Filesys = commands.getoutput(fdisk_win_output)
+						os.makedirs(Main_MountPoint + i[1])
+						if 'NTFS' in Win_Filesys :
+							Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'ntfs-3g' , 'umask=022', '1', '0'))	
+						if 'FAT32' in Win_Filesys :
+							Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'vfat' , 'defaults', '1', '0'))
+				Fstab_File.close()	
+				# Set up keyboard, locale & users
+				def chroot_settings() :
+					os.listdir(Main_MountPoint)
+					os.chroot(Main_MountPoint)
+					# We have to deactivate some stuff in keyboardsetup first
+					subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
+					subprocess.call('sed -i "s/\/etc\/rc.d\/rc.hald restart/# \/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
+					try :
+						subprocess.check_call('keyboardsetup ' + Selected_Keyboard, shell=True)
+					except :
+						error_dialog("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. ")
+					subprocess.call('sed -i "s/# cd $backtohome/cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
+					subprocess.call('sed -i "s/# \/etc\/rc.d\/rc.hald restart/\/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
+					try :
+						subprocess.check_call('localesetup ' + Selected_Locale, shell=True)
+					except :
+						error_dialog("<b>Sorry!</b> \n\nUnable to set the new language selection on the installation target. ")
+					try :
+						subprocess.check_call('useradd -m -s /bin/bash -G floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
+					except :
+						error_dialog("<b>Sorry!</b> \n\nUnable to create the new user on the installation target. ")
+					try :
+						subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | chpasswd', shell=True)
+					except :
+						error_dialog("<b>Sorry!</b> \n\nUnable to create the new user's password on the installation target. ")	
+					try :
+						subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
+					except :
+						error_dialog("<b>Sorry!</b> \n\nUnable to create root's new password on the installation target. ")			
+
+				chroot_settings()
+
+				# Prevents a new install launching
+				self.InstallButton.set_sensitive(False)
+				
+				print 'Done!'				
+						
 	# What to do when the no button of the YesNo dialog is clicked	
     def on_do_not_confirm_button_clicked(self, widget, data=None):
 		# Check what is being cancelled & act accordingly if necessary
 		if MainPartitionConfirmation == True :
 			global Selected_Main_Partition
 			Selected_Main_Partition = ''
+		if LinuxPartitionConfirmation == True :
+			global LinFullSets
+			LinFullSets = []
+			global LinFormatSets
+			LinFormatSets = []
+			global LinMountSets
+			LinMountSets = []
+		if WindowsPartitionConfirmation == True :
+			global WinMountSets
+			WinMountSets = []		
 		self.YesNoDialog.hide()
+		
 		
 ### CHECKBUTTONS ###
 						
@@ -1110,7 +1174,6 @@ class SalixGuiInstaller:
 		if switch_tab_lock == 'on' :
 			pass
 		else :
-			partition_list_initialization()	
 			self.IntroBox.hide()	
 			self.KeyboardBox.hide()
 			self.LocaleBox.hide()
@@ -1120,6 +1183,7 @@ class SalixGuiInstaller:
 				self.RecapPartitionBox.show()
 				self.MainPartitionBox.hide()
 			else :
+				partition_list_initialization()	
 				self.RecapPartitionBox.hide()
 				self.MainPartitionBox.show()				
 			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
