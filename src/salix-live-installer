@@ -23,23 +23,28 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091105-build	First version
+# Version='0.1'		- 20091106-build	First version
 
+import time
 import commands
 import subprocess
 import os
 import gtk
 import sys
+import gobject
 import pygtk
 pygtk.require('2.0')
 
 # To do => Internationalization
 # To do => Change duplications into functions with args
-# To do => refine login + passwords filters
-# To do => Progress bar
-# To do => Final success/failure window => Invoke LiloFix if needed before exiting
+# To do => Refine fstab lines
+# To do => Test & refine all formatting options
 # To do => Install log
 # To do => More Error checking with subprocess.check_call() and try/except
+# To do => Use lshal instead of parted (faster & more precise)
+# To do => Finalize the standard kernel & packages location (depends on LiveCD architecture)
+# To do => Fix progressbar
+# To do => Exit chroot in the end
 
 class SalixGuiInstaller:
 			
@@ -55,6 +60,8 @@ class SalixGuiInstaller:
 
 		# Get a handle on the glade file widgets we want to interact with
 		self.Window = builder.get_object("main_window")
+		self.ProgressWindow = builder.get_object("progress_window")
+		self.InstallProgressBar = builder.get_object("install_progressbar")
 		self.AboutDialog = builder.get_object("about_dialog")
 		self.KeyboardTab = builder.get_object("keyboard_tab")
 		self.LocaleTab = builder.get_object("locale_tab")
@@ -126,6 +133,7 @@ class SalixGuiInstaller:
 		self.UserVisibleCheckButton = builder.get_object("user_visible_checkbutton")
 		self.RootVisibleCheckButton = builder.get_object("root_visible_checkbutton")
 		self.ExternalDeviceCheckButton = builder.get_object("external_device_checkbutton")
+		self.NumLockCheckButton = builder.get_object("numlock_checkbutton")
 		self.RootPassCreated = builder.get_object("root_pass_created")
 		self.NewUserLogin = builder.get_object("new_user_login")
 		self.UsersApplyButton = builder.get_object("users_apply")
@@ -154,6 +162,17 @@ class SalixGuiInstaller:
 		# Initialise the external device checkbutton value
 		global show_external_device
 		show_external_device = 'no'
+		global LaunchLiloFix
+		LaunchLiloFix = False
+				
+		# Initialize pulsation in the progress bar
+		def progress_timeout(self):
+		    self.InstallProgressBar.pulse()
+		    # As this is a timeout function, return TRUE so that it continues to get called
+		    return True
+				
+		# Add a timer callback to update the value of the progress bar
+		self.timer = gobject.timeout_add (100, progress_timeout, self)
 		
 		# Initialize the passwords entry box to not display characters
 		self.UserPass1Entry.set_visibility(False)
@@ -479,6 +498,7 @@ class SalixGuiInstaller:
 		WindowsPartitionConfirmation = False
 		global InstallButtonConfirmation
 		InstallButtonConfirmation = False
+
 		# Retrieve the selected main partition row iter
 		mainpartitionselection = self.MainPartitionList.get_selection()
 		self.MainPartitionListStore, iter = mainpartitionselection.get_selected()
@@ -583,14 +603,18 @@ class SalixGuiInstaller:
 	# What to do when the user's settings apply button is clicked
     def on_users_apply_clicked(self, widget, data=None):
 		# Pass some basic sanity checks
-		# To do => Check if alphanumerical is necessary + prevent the use of caps for login
+		# To do => prevent the use of caps for login
 		if self.UserLoginEntry.get_text() == '' :
-			error_dialog("\nYour login entry is empty. \n\nPlease verify and correct! \n")	
+			error_dialog("\nYour user's name is empty. \n\nPlease verify and correct! \n")
+		elif self.UserLoginEntry.get_text().replace(' ', '').isalnum() == False :
+			error_dialog("""\nYour user's name should only contain alphanumeric characters. 
+\nPlease verify and correct! \n""")	
+		elif ' ' in self.UserLoginEntry.get_text() :
+			error_dialog("\nYour user's name should not contain any space. \n\nPlease verify and correct! \n")
+		elif self.UserLoginEntry.get_text().islower() != True :
+			error_dialog("\nYour user's name should not contain any upper case letter. \n\nPlease verify and correct! \n")
 		elif self.UserPass1Entry.get_text() == '' :
-			error_dialog("\nYour password entry is empty. \n\nPlease verify and correct! \n")
-		elif self.UserPass1Entry.get_text().replace(' ', '').isalnum() == False :
-			error_dialog("""\nYour password should only contain alphanumeric characters. 
-\nPlease verify and correct! \n""")				
+			error_dialog("\nYour password entry is empty. \n\nPlease verify and correct! \n")			
 		elif len(self.UserPass1Entry.get_text()) < 5 :
 			error_dialog("""\nYour password is too short. It should have at least 5 characters. 
 \nPlease verify and correct! \n""")			
@@ -620,16 +644,11 @@ class SalixGuiInstaller:
 				
 	# What to do when the root password settings apply button is clicked
     def on_rootpass_apply_clicked(self, widget, data=None):
-		# Pass some basic sanity checks
-		# To do => Check if alphanumerical is necessary + prevent the use of caps for login
 		if self.RootPass1Entry.get_text() == '' :
 			error_dialog("\nYour password entry is empty. \n\nPlease verify and correct! \n")				
-		elif self.RootPass1Entry.get_text().replace(' ', '').isalnum() == False :
-			error_dialog("""\nYour password should only contain alphanumeric characters. 
-\nPlease verify and correct! \n""")	
 		elif len(self.RootPass1Entry.get_text()) < 5 :
 			error_dialog("""\nYour password is too short. It should have at least 5 characters. 
-\nPlease verify and correct! \n""")			
+\nPlease verify and correct! \n""")	
 		elif self.RootPass1Entry.get_text() != self.RootPass2Entry.get_text() :
 			error_dialog("\nYour 2 password entries do not match. \n\nPlease verify and correct! \n") 
 		else:
@@ -936,20 +955,38 @@ class SalixGuiInstaller:
 			if 'no' not in ConfigurationSet :
 				self.InstallButton.set_sensitive(True)
 				
+		if LaunchLiloFix == True :
+			try :
+				subprocess.check_call('lilofix', shell=True)
+			except :
+				error_dialog("<b>Sorry!</b> \n\nUnable to lauch LiloFix, you must set lilo 'manually'. ")
+				gtk.main_quit()
+
+	# What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
+    def on_confirm_button_released(self, widget, data=None):				
 		if InstallButtonConfirmation == True :
 			# Verify we are in a LiveCD environment 
-			if os.path.exists("/mnt/live/memory/images") == False :
+			if os.path.exists("/mnt/live/memory/images/01-core.lzm") == False :
+				self.YesNoDialog.hide()
+				error_dialog("""<b>Sorry!</b>
+\nSalix Live Installer is only meant to be used in a LiveCD environment. 
+\nYou cannot proceed any further! """)
+			elif os.path.exists("/mnt/live/memory/changes/home/one") == False :
 				self.YesNoDialog.hide()
 				error_dialog("""<b>Sorry!</b>
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
 \nYou cannot proceed any further! """)
 			else :
-				self.YesNoDialog.hide()
+				self.ProgressWindow.show()
+				self.YesNoDialog.set_sensitive(False)
+				self.Window.set_sensitive(False)
+				self.InstallProgressBar.set_text("Starting installation process...")
 				# Format and remount the main partition
 				Main_MountPoint = Selected_Main_Partition.replace('dev', 'mnt')
 				if os.path.exists(Main_MountPoint) == False :
 					os.mkdir(Main_MountPoint)
 				subprocess.call("umount -l " + Selected_Main_Partition, shell=True)
+				self.InstallProgressBar.set_text("Formatting the main partition...")
 				if 'ext' in Selected_Main_Format :
 					subprocess.call("mkfs -t " + Selected_Main_Format + " " + Selected_Main_Partition, shell=True)
 				else :
@@ -957,6 +994,7 @@ class SalixGuiInstaller:
 				subprocess.call("mount -t " + Selected_Main_Format + " " + Selected_Main_Partition + " " + Main_MountPoint , shell=True)
 				# Format and/or remount the other Linux partitions (Windows partitions will be managed later while generating /etc/fstab)
 				if LinFullSets != [] :
+					self.InstallProgressBar.set_text("Formatting and mounting your Linux partition(s)...")
 					for i in LinFullSets :
 						os.makedirs(Main_MountPoint + i[2])
 						subprocess.call("umount -l " + i[0], shell=True)
@@ -966,6 +1004,7 @@ class SalixGuiInstaller:
 							subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
 						subprocess.call("mount -t " + i[1] + " " + i[0] + " " + Main_MountPoint + i[2], shell=True)
 				if LinFormatSets != [] :
+					self.InstallProgressBar.set_text("Formatting your Linux partition(s)...")
 					for i in LinFormatSets :
 						subprocess.call("umount -l " + i[0], shell=True)
 						if 'ext' in i[1] :
@@ -973,6 +1012,7 @@ class SalixGuiInstaller:
 						else :
 							subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)				
 				if LinMountSets != [] :
+					self.InstallProgressBar.set_text("Mounting your Linux partition(s)...")
 					for i in LinMountSets :
 						os.makedirs(Main_MountPoint + i[2])
 						subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
@@ -981,38 +1021,48 @@ class SalixGuiInstaller:
 				os.mkdir(Main_MountPoint + "/temp_mount")
 				Temp_Mount = Main_MountPoint + "/temp_mount"
 				if Selected_Install_Mode == 'core' :
+					self.InstallProgressBar.set_text("Installing the core packages...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
 				elif Selected_Install_Mode == 'basic' :
+					self.InstallProgressBar.set_text("Installing the core packages...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
+					self.InstallProgressBar.set_text("Installing the basic packages")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
 				elif Selected_Install_Mode == 'full' :
+					self.InstallProgressBar.set_text("Installing the core packages...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
+					self.InstallProgressBar.set_text("Installing the basic packages...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
+					self.InstallProgressBar.set_text("Installing the full packages...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
 				if Selected_Kernel == 'live' :
+					self.InstallProgressBar.set_text("Installing the live kernel...")
 					subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
 					subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 					subprocess.call("umount " + Temp_Mount, shell=True)
-					#~ subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/live/*", shell=True)
-				#~ elif Selected_Kernel == 'standard' :
-					#~ subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/kernel/*", shell=True)	
+#					subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/live/*", shell=True)
+#				elif Selected_Kernel == 'standard' :
+#					self.InstallProgressBar.set_text("Installing the standard kernel...")
+#					subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/kernel/*", shell=True)	
 				os.rmdir(Temp_Mount)
 				# In any case, install settings packages
+				self.InstallProgressBar.set_text("Installing the settings packages...")
 				subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/settings/*", shell=True)
 
 				# Create /etc/fstab
+				self.InstallProgressBar.set_text("Creating /etc/fstab...")
 				fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
 				Swap_Partition = commands.getoutput(fdisk_swap_output)
 				Fstab_File = open(Main_MountPoint + '/etc/fstab', 'w')
@@ -1049,16 +1099,25 @@ class SalixGuiInstaller:
 					# We have to deactivate some stuff in keyboardsetup first
 					subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
 					subprocess.call('sed -i "s/\/etc\/rc.d\/rc.hald restart/# \/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
-					try :
-						subprocess.check_call('keyboardsetup ' + Selected_Keyboard, shell=True)
-					except :
-						error_dialog("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. ")
+					self.InstallProgressBar.set_text("Setting the keyboard...")
+					if set_numlock == 'yes' :
+						try :
+							subprocess.check_call('keyboardsetup ' + Selected_Keyboard + ' on', shell=True)
+						except :
+							error_dialog("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. ")
+					else :
+						try :
+							subprocess.check_call('keyboardsetup ' + Selected_Keyboard + ' off', shell=True)
+						except :
+							error_dialog("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. ")
 					subprocess.call('sed -i "s/# cd $backtohome/cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
 					subprocess.call('sed -i "s/# \/etc\/rc.d\/rc.hald restart/\/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
+					self.InstallProgressBar.set_text("Setting the language...")
 					try :
 						subprocess.check_call('localesetup ' + Selected_Locale, shell=True)
 					except :
 						error_dialog("<b>Sorry!</b> \n\nUnable to set the new language selection on the installation target. ")
+					self.InstallProgressBar.set_text("Creating the new user...")
 					try :
 						subprocess.check_call('useradd -m -s /bin/bash -G floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
 					except :
@@ -1066,18 +1125,26 @@ class SalixGuiInstaller:
 					try :
 						subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | chpasswd', shell=True)
 					except :
-						error_dialog("<b>Sorry!</b> \n\nUnable to create the new user's password on the installation target. ")	
+						error_dialog("<b>Sorry!</b> \n\nUnable to set the new user's password on the installation target. ")	
+					self.InstallProgressBar.set_text("Setting root password...")
 					try :
 						subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
 					except :
-						error_dialog("<b>Sorry!</b> \n\nUnable to create root's new password on the installation target. ")			
-
+						error_dialog("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. ")	
 				chroot_settings()
-
-				# Prevents a new install launching
-				self.InstallButton.set_sensitive(False)
+				# Close install confirmation + progress dialog
+				self.ProgressWindow.hide()
+				self.YesNoDialog.set_sensitive(True)
+				# Call Success dialog & offer to launch LiloFix
+				self.YesNoLabel.set_markup("""<b>Salix installation was executed with success!</b>
+\nLiloFix will now be launched to enable you to add Salix to your bootloader.
+(If you prefer to use another bootloader utility, click on the no button
+and use the application of your choice before rebooting your machine.)\n""")
+				global LaunchLiloFix
+				LaunchLiloFix = True
+				self.YesNoDialog.show() 
 				
-				print 'Done!'				
+			
 						
 	# What to do when the no button of the YesNo dialog is clicked	
     def on_do_not_confirm_button_clicked(self, widget, data=None):
@@ -1096,9 +1163,18 @@ class SalixGuiInstaller:
 			global WinMountSets
 			WinMountSets = []		
 		self.YesNoDialog.hide()
-		
+		if LaunchLiloFix == True :
+			gtk.main_quit()
 		
 ### CHECKBUTTONS ###
+
+	# What to do when the user's password visible checkbutton is toggled		
+    def on_numlock_checkbutton_toggled(self, widget, data=None):
+		global set_numlock
+		if self.NumLockCheckButton.get_active() == True :			
+			set_numlock = 'yes'
+		else :
+			set_numlock = 'no'
 						
 	# What to do when the user's password visible checkbutton is toggled		
     def on_user_visible_checkbutton_toggled(self, widget, data=None):		
