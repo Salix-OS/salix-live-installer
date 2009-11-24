@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091109-build	First version
+# Version='0.1'		- 20091125-build	First version
 
 import commands
 import subprocess
@@ -159,8 +159,8 @@ class SalixLiveInstaller:
 		# Initialise the external device checkbutton value
 		global show_external_device
 		show_external_device = 'no'
-		global LaunchLiloFix
-		LaunchLiloFix = False
+		global LaunchLiloSetup
+		LaunchLiloSetup = False
 		global LinPartConfirmLabel
 		LinPartConfirmLabel = ''
 
@@ -414,16 +414,6 @@ class SalixLiveInstaller:
 		partition_list_initialization ()
 			
 ### COMBO LINES ###
-
-	# What to do when a combo line is switched in the Linux New system column
-    def on_linux_newsys_renderer_combo_changed(self, widget, row_number, combo_iter):
-		# Retrieve the selected Linux partition combo row new text value
-		new_text = self.LinuxFormatListStore.get_value(combo_iter, 0)
-		linuxformatchoice = self.LinuxPartitionList.get_selection()
-		self.LinuxPartitionListStore, iter = linuxformatchoice.get_selected()
-		# Set the new partition row value on the fifth column (4)
-		self.LinuxPartitionListStore.set_value(iter, 4, new_text)
-		# It throws a gtk warning but still does the job & do not seem to be a problem (for the moment)
 		
 	# What to do when a combo line is edited in the Linux New system column
     def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
@@ -433,16 +423,6 @@ class SalixLiveInstaller:
 		# Set the new partition row value on the fifth column (4)
 		self.LinuxPartitionListStore.set_value(iter, 4, new_text)
 
-	# What to do when a combo line is switched in the Linux mountpoint column
-    def on_linux_newmount_renderer_combo_changed(self, widget, row_number, combo_iter):
-		# Retrieve the selected Linux partition combo row new text value
-		new_text = self.LinuxMountListStore.get_value(combo_iter, 0)
-		linuxmountchoice = self.LinuxPartitionList.get_selection()
-		self.LinuxPartitionListStore, iter = linuxmountchoice.get_selected()
-		# Set the new partition row value on the fifth column (5)
-		self.LinuxPartitionListStore.set_value(iter, 5, new_text)
-		# Probably the same as above (but there is only one global warning)
-
 	# What to do when a combo line is edited in the Linux mountpoint column
     def on_linux_newmount_renderer_combo_edited(self, widget, row_number, new_text):
 		# Retrieve the selected Linux partition row iter
@@ -450,17 +430,7 @@ class SalixLiveInstaller:
 		self.LinuxPartitionListStore, iter = linuxnewmountchoice.get_selected()
 		# Set the new partition row value on the sixth column (5)
 		self.LinuxPartitionListStore.set_value(iter, 5, new_text)
-		
-	# What to do when a combo line is switched in the Windows mountpoint column		
-    def on_win_newmount_renderer_combo_changed(self, widget, row_number, combo_iter):
-		# Retrieve the selected Windows partition combo row new text value
-		new_text = self.WinMountListStore.get_value(combo_iter, 0)
-		# Retrieve the selected Windows partition row iter
-		windowsnewmountchoice = self.WindowsPartitionList.get_selection()
-		self.WindowsPartitionListStore, iter = windowsnewmountchoice.get_selected()
-		# Set the new mountpoint row value on the fifth column (4)
-		self.WindowsPartitionListStore.set_value(iter, 4, new_text)
-		
+				
 	# What to do when a combo line is edited in the Windows mountpoint column		
     def on_win_newmount_renderer_combo_edited(self, widget, row_number, new_text,):
 		# Retrieve the selected Windows partition row iter
@@ -994,11 +964,11 @@ class SalixLiveInstaller:
 			if 'no' not in ConfigurationSet :
 				self.InstallButton.set_sensitive(True)
 				
-		if LaunchLiloFix == True :
+		if LaunchLiloSetup == True :
 			try :
-				subprocess.check_call('lilofix', shell=True)
+				subprocess.check_call('lilosetup', shell=True)
 			except :
-				error_dialog("<b>Sorry!</b> \n\nUnable to lauch LiloFix, you must set lilo 'manually'. ")
+				error_dialog("<b>Sorry!</b> \n\nUnable to launch LiloSetup, you must set lilo 'manually'. ")
 				gtk.main_quit()
 
 	# What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
@@ -1091,6 +1061,13 @@ class SalixLiveInstaller:
 			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
 			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 			subprocess.call("umount " + Temp_Mount, shell=True)
+			self.InstallProgressBar.set_text("Installing the common packages...")
+			self.InstallProgressBar.set_fraction(0.50)
+			# there's more work, yield True
+			yield True
+			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+			subprocess.call("umount " + Temp_Mount, shell=True)
 		elif Selected_Install_Mode == 'basic' :
 			self.InstallProgressBar.set_text("Installing the core packages...")
 			self.InstallProgressBar.set_fraction(0.25)
@@ -1104,6 +1081,13 @@ class SalixLiveInstaller:
 			# there's more work, yield True
 			yield True
 			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+			subprocess.call("umount " + Temp_Mount, shell=True)
+			self.InstallProgressBar.set_text("Installing the common packages...")
+			self.InstallProgressBar.set_fraction(0.60)
+			# there's more work, yield True
+			yield True
+			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
 			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 			subprocess.call("umount " + Temp_Mount, shell=True)
 		elif Selected_Install_Mode == 'full' :
@@ -1128,6 +1112,13 @@ class SalixLiveInstaller:
 			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
 			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 			subprocess.call("umount " + Temp_Mount, shell=True)
+			self.InstallProgressBar.set_text("Installing the common packages...")
+			self.InstallProgressBar.set_fraction(0.60)
+			# there's more work, yield True
+			yield True
+			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+			subprocess.call("umount " + Temp_Mount, shell=True)
 		if Selected_Kernel == 'live' :
 			self.InstallProgressBar.set_text("Installing the live kernel...")
 			self.InstallProgressBar.set_fraction(0.65)
@@ -1136,20 +1127,21 @@ class SalixLiveInstaller:
 			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
 			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
 			subprocess.call("umount " + Temp_Mount, shell=True)
-			subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/live/*", shell=True)
-		elif Selected_Kernel == 'standard' :
-			self.InstallProgressBar.set_text("Installing the standard kernel...")
-			self.InstallProgressBar.set_fraction(0.65)
+			self.InstallProgressBar.set_text("Installing the livetools...")
+			self.InstallProgressBar.set_fraction(0.75)
 			# there's more work, yield True
 			yield True
-			subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/kernel/*", shell=True)	
+			subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*livetools.lzm " + Temp_Mount + " -o loop", shell=True)
+			subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+			subprocess.call("umount " + Temp_Mount, shell=True)
+
+		elif Selected_Kernel == 'standard' :
+			self.InstallProgressBar.set_text("Installing the standard kernel...")
+			self.InstallProgressBar.set_fraction(0.70)
+			# there's more work, yield True
+			yield True
+			subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)	
 		os.rmdir(Temp_Mount)
-		# In any case, install settings packages
-		self.InstallProgressBar.set_text("Installing the settings packages...")
-		self.InstallProgressBar.set_fraction(0.70)
-		# there's more work, yield True
-		yield True
-		subprocess.call("spkg --root=" + Main_MountPoint + " /root/packages/standard/settings/*", shell=True)
 
 		# Create /etc/fstab
 		self.InstallProgressBar.set_text("Creating /etc/fstab...")
@@ -1200,13 +1192,13 @@ class SalixLiveInstaller:
 			yield True
 			# Close install confirmation + progress dialog
 			self.ProgressWindow.hide()
-			# Call Success dialog & offer to launch LiloFix
+			# Call Success dialog & offer to launch LiloSetup
 			self.YesNoLabel.set_markup("""<b>Salix installation was executed with success!</b>
-\nLiloFix will now be launched to enable you to add Salix to your bootloader.
+\nLiloSetup will now be launched to enable you to add Salix to your bootloader.
 (If you prefer to use another bootloader utility, click on the no button
 and use the application of your choice before rebooting your machine.)\n""")
-			global LaunchLiloFix
-			LaunchLiloFix = True
+			global LaunchLiloSetup
+			LaunchLiloSetup = True
 			self.YesNoDialog.show()
 			self.YesNoDialog.resize(1, 1)		
 			# there's no more work, yield False
@@ -1269,7 +1261,7 @@ and use the application of your choice before rebooting your machine.)\n""")
 			global WinMountSets
 			WinMountSets = []		
 		self.YesNoDialog.hide()
-		if LaunchLiloFix == True :
+		if LaunchLiloSetup == True :
 			gtk.main_quit()
 		
 ### CONFIGURATION TABS ###

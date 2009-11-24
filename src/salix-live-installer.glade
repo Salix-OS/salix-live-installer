@@ -1429,7 +1429,6 @@ Any unset option will count as a 'Do not format! or a
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
-                                                    <signal name="changed" handler="on_linux_newsys_renderer_combo_changed"/>
                                                     <signal name="edited" handler="on_linux_newsys_renderer_combo_edited"/>
                                                   </object>
                                                   <attributes>
@@ -1444,7 +1443,6 @@ Any unset option will count as a 'Do not format! or a
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
-                                                    <signal name="changed" handler="on_linux_newmount_renderer_combo_changed"/>
                                                     <signal name="edited" handler="on_linux_newmount_renderer_combo_edited"/>
                                                   </object>
                                                   <attributes>
@@ -1630,7 +1628,6 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">
-                                                    <signal name="changed" handler="on_win_newmount_renderer_combo_changed"/>
                                                     <signal name="edited" handler="on_win_newmount_renderer_combo_edited"/>
                                                   </object>
                                                   <attributes>
