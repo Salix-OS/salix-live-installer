@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091125-build	First version
+# Version='0.1'		- 20091206-build	First version
 
 import commands
 import subprocess
@@ -41,7 +41,6 @@ pygtk.require('2.0')
 # To do => Install log
 # To do => More Error checking with subprocess.check_call() and try/except
 # To do => Use lshal instead of parted (faster & more precise)
-# To do => Finalize the standard kernel & packages location (depends on LiveCD architecture)
 
 class SalixLiveInstaller:
 			
@@ -1053,6 +1052,11 @@ class SalixLiveInstaller:
 		# (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
 		os.mkdir(Main_MountPoint + "/temp_mount")
 		Temp_Mount = Main_MountPoint + "/temp_mount"
+		# We also need to ensure a loop device is available for mounting our modules
+		try : 
+			subprocess.call("mknod /dev/loop44 b 7 44 ", shell=True)
+		except :
+			pass
 		if Selected_Install_Mode == 'core' :
 			self.InstallProgressBar.set_text("Installing the core packages...")
 			self.InstallProgressBar.set_fraction(0.40)
@@ -1273,13 +1277,16 @@ and use the application of your choice before rebooting your machine.)\n""")
 		else :		
 			# Show the keyboard setting area & hide all the others
 			self.IntroBox.hide()
-			self.KeyboardBox.show()
-			self.KeyboardList.set_cursor(UsedKeybRow)
 			self.LocaleBox.hide()
 			self.MainPartitionBox.hide()
 			self.RecapPartitionBox.hide()
 			self.UsersBox.hide()
 			self.PackagesBox.hide()
+			self.KeyboardBox.show()
+			try :
+				self.KeyboardList.set_cursor(UsedKeybRow)
+			except : 
+				pass
 			self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
 			self.LocaleTab.set_relief(gtk.RELIEF_NONE)
 			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
@@ -1293,12 +1300,15 @@ and use the application of your choice before rebooting your machine.)\n""")
 		else :		
 			self.IntroBox.hide()
 			self.KeyboardBox.hide()
-			self.LocaleBox.show()
-			self.LocaleList.set_cursor(UsedLocaleRow)
 			self.MainPartitionBox.hide()
 			self.RecapPartitionBox.hide()
 			self.UsersBox.hide()
 			self.PackagesBox.hide()
+			self.LocaleBox.show()
+			try :
+				self.LocaleList.set_cursor(UsedLocaleRow)
+			except : 
+				pass
 			self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
 			self.LocaleTab.set_relief(gtk.RELIEF_HALF)
 			self.PartitionTab.set_relief(gtk.RELIEF_NONE)
