@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091206-build	First version
+# Version='0.1'		- 20091208-build	First version
 
 import commands
 import subprocess
@@ -969,6 +969,7 @@ class SalixLiveInstaller:
 			except :
 				error_dialog("<b>Sorry!</b> \n\nUnable to launch LiloSetup, you must set lilo 'manually'. ")
 				gtk.main_quit()
+			gtk.main_quit()
 
 	# What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
     def on_confirm_button_released(self, widget, data=None):
@@ -1053,10 +1054,8 @@ class SalixLiveInstaller:
 		os.mkdir(Main_MountPoint + "/temp_mount")
 		Temp_Mount = Main_MountPoint + "/temp_mount"
 		# We also need to ensure a loop device is available for mounting our modules
-		try : 
-			subprocess.call("mknod /dev/loop44 b 7 44 ", shell=True)
-		except :
-			pass
+		if os.path.exists("/dev/loop77") == False : 
+			subprocess.call("mknod /dev/loop77 b 7 77 ", shell=True)
 		if Selected_Install_Mode == 'core' :
 			self.InstallProgressBar.set_text("Installing the core packages...")
 			self.InstallProgressBar.set_fraction(0.40)
