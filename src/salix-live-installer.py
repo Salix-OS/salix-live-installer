@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Version='0.1'		- 20091208-build	First version
+# version = '0.1' - 20091228 build -  First version
 
 import commands
 import subprocess
@@ -965,7 +965,7 @@ class SalixLiveInstaller:
 				
 		if LaunchLiloSetup == True :
 			try :
-				subprocess.check_call('lilosetup', shell=True)
+				subprocess.check_call('lilosetup.py', shell=True)
 			except :
 				error_dialog("<b>Sorry!</b> \n\nUnable to launch LiloSetup, you must set lilo 'manually'. ")
 				gtk.main_quit()
