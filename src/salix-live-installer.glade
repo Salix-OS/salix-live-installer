@@ -2590,12 +2590,12 @@ This button will not be active until all settings are configured correctly.</pro
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
-    <property name="program_name">Salix Installer</property>
+    <property name="program_name">SalixLive Installer</property>
     <property name="version">0.1</property>
-    <property name="copyright" translatable="yes">Copyright &#xA9; 2009 Pierrick Le Brun</property>
+    <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
-    <property name="website">http://salixos.org</property>
-    <property name="website_label" translatable="yes">salixos.org</property>
+    <property name="website">http://www.salixos.org</property>
+    <property name="website_label">salixos.org</property>
     <property name="license" translatable="yes">This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
