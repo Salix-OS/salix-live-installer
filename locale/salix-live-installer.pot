@@ -1,0 +1,852 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-19 20:33+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: salix-live-installer.py:521 salix-live-installer.py:552
+#: salix-live-installer.py:556 salix-live-installer.py:733
+#: salix-live-installer.py:737 salix-live-installer.py:741
+msgid "will be formatted with"
+msgstr ""
+
+#: salix-live-installer.py:522 salix-live-installer.py:553
+#: salix-live-installer.py:562 salix-live-installer.py:606
+#: salix-live-installer.py:734 salix-live-installer.py:738
+#: salix-live-installer.py:746 salix-live-installer.py:750
+msgid "and will be mounted as"
+msgstr ""
+
+#: salix-live-installer.py:548 salix-live-installer.py:598
+#: salix-live-installer.py:879 salix-live-installer.py:885
+#: salix-live-installer.py:910
+msgid "Select..."
+msgstr ""
+
+#: salix-live-installer.py:557 salix-live-installer.py:566
+#: salix-live-installer.py:602
+msgid "and will not be mounted"
+msgstr ""
+
+#: salix-live-installer.py:561 salix-live-installer.py:565
+#: salix-live-installer.py:601 salix-live-installer.py:605
+#: salix-live-installer.py:745 salix-live-installer.py:749
+msgid "will not be formatted"
+msgstr ""
+
+#: salix-live-installer.py:622
+msgid "Your user's name is empty"
+msgstr ""
+
+#: salix-live-installer.py:622 salix-live-installer.py:625
+#: salix-live-installer.py:628 salix-live-installer.py:631
+#: salix-live-installer.py:633 salix-live-installer.py:636
+#: salix-live-installer.py:638 salix-live-installer.py:664
+#: salix-live-installer.py:667 salix-live-installer.py:669
+msgid "Please verify and correct"
+msgstr ""
+
+#: salix-live-installer.py:624
+msgid "Your user's name should only contain alphanumeric characters"
+msgstr ""
+
+#: salix-live-installer.py:627
+msgid "Your user's name should not contain any space"
+msgstr ""
+
+#: salix-live-installer.py:630
+msgid "Your user's name should not contain any upper case letter"
+msgstr ""
+
+#: salix-live-installer.py:633 salix-live-installer.py:664
+msgid "Your password entry is empty"
+msgstr ""
+
+#: salix-live-installer.py:635 salix-live-installer.py:666
+msgid "Your password is too short. It should have at least 5 characters"
+msgstr ""
+
+#: salix-live-installer.py:638 salix-live-installer.py:669
+msgid "Your 2 password entries do not match"
+msgstr ""
+
+#: salix-live-installer.py:645 salix-live-installer.py:672
+#: salix-live-installer.py:768 salix-live-installer.py:781
+#: salix-live-installer.py:814 salix-live-installer.py:829
+#: salix-live-installer.py:931 salix-live-installer.py:932
+#: salix-live-installer.py:955 salix-live-installer.py:973
+#: salix-live-installer.glade:860 salix-live-installer.glade:1035
+#: salix-live-installer.glade:1965 salix-live-installer.glade:2141
+msgid "None"
+msgstr ""
+
+#: salix-live-installer.py:671
+msgid "Yes"
+msgstr ""
+
+#: salix-live-installer.py:693 salix-live-installer.py:1076
+#: salix-live-installer.py:1094 salix-live-installer.py:1118
+msgid "core"
+msgstr ""
+
+#. TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+#: salix-live-installer.py:695 salix-live-installer.py:1092
+#: salix-live-installer.py:1126
+msgid "basic"
+msgstr ""
+
+#: salix-live-installer.py:697 salix-live-installer.py:1116
+msgid "full"
+msgstr ""
+
+#: salix-live-installer.py:700 salix-live-installer.py:1165
+msgid "standard"
+msgstr ""
+
+#: salix-live-installer.py:702 salix-live-installer.py:1148
+msgid "live"
+msgstr ""
+
+#: salix-live-installer.py:729
+msgid "You are about to install Salix with the following settings"
+msgstr ""
+
+#: salix-live-installer.py:730
+msgid "Keyboard layout"
+msgstr ""
+
+#: salix-live-installer.py:731
+msgid "System language"
+msgstr ""
+
+#: salix-live-installer.py:732
+msgid "Partitions"
+msgstr ""
+
+#: salix-live-installer.py:742
+msgid "but will not be mounted"
+msgstr ""
+
+#: salix-live-installer.py:751
+msgid "Standard User"
+msgstr ""
+
+#: salix-live-installer.py:752
+msgid "Packages"
+msgstr ""
+
+#. TRANSLATORS: Please just reposition the 2 '%(...)s' variables as required by your grammar.
+#: salix-live-installer.py:754
+#, python-format
+msgid ""
+"You have chosen the %(mode)s installation mode with the %(type)s kernel.\n"
+msgstr ""
+
+#: salix-live-installer.py:988
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to launch LiloSetup, you must set LILO 'manually'. "
+msgstr ""
+
+#: salix-live-installer.py:998 salix-live-installer.py:1003
+msgid ""
+"<b>Sorry!</b>\n"
+"\n"
+"Salix Live Installer is only meant to be used in a LiveCD environment. \n"
+"\n"
+"You cannot proceed any further! "
+msgstr ""
+
+#: salix-live-installer.py:1014
+msgid "Starting installation process..."
+msgstr ""
+
+#: salix-live-installer.py:1027
+msgid "Formatting the main partition..."
+msgstr ""
+
+#: salix-live-installer.py:1038
+msgid "Formatting and mounting your Linux partition(s)..."
+msgstr ""
+
+#: salix-live-installer.py:1051
+msgid "Formatting your Linux partition(s)..."
+msgstr ""
+
+#: salix-live-installer.py:1062
+msgid "Mounting your Linux partition(s)..."
+msgstr ""
+
+#. TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+#: salix-live-installer.py:1078 salix-live-installer.py:1094
+#: salix-live-installer.py:1102 salix-live-installer.py:1118
+#: salix-live-installer.py:1134
+#, python-format
+msgid "Installing the %(mode)s mode packages..."
+msgstr ""
+
+#: salix-live-installer.py:1085 salix-live-installer.py:1109
+#: salix-live-installer.py:1141
+msgid "Installing the common packages..."
+msgstr ""
+
+#. TRANSLATORS: Simply reposition the '%(type)s' variable as required by your grammar. The value of '%(type)s' will be 'standard' or 'live'.
+#: salix-live-installer.py:1150 salix-live-installer.py:1167
+#, python-format
+msgid "Installing the %(type)s kernel..."
+msgstr ""
+
+#: salix-live-installer.py:1157
+msgid "Installing the livetools..."
+msgstr ""
+
+#: salix-live-installer.py:1175
+msgid "Creating /etc/fstab..."
+msgstr ""
+
+#: salix-live-installer.py:1208
+msgid "Setting the keyboard, locale & login..."
+msgstr ""
+
+#: salix-live-installer.py:1217
+msgid "Installation process completed successfully ..."
+msgstr ""
+
+#: salix-live-installer.py:1224
+msgid ""
+"<b>Salix installation was executed with success!</b>\n"
+"\n"
+"LiloSetup will now be launched to enable you to add Salix to your "
+"bootloader.\n"
+"(If you prefer to use another bootloader utility, click on the no button\n"
+"and use the application of your choice before rebooting your machine.)\n"
+msgstr ""
+
+#: salix-live-installer.py:1246 salix-live-installer.py:1251
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new keyboard selection on the installation target. "
+msgstr ""
+
+#: salix-live-installer.py:1257
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new language selection on the installation target. "
+msgstr ""
+
+#: salix-live-installer.py:1261
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to create the new user on the installation target. "
+msgstr ""
+
+#: salix-live-installer.py:1265
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new user's password on the installation target. "
+msgstr ""
+
+#: salix-live-installer.py:1269
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set root's password on the installation target. "
+msgstr ""
+
+#: salix-live-installer.py:1415
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Root privileges are required to run this program. "
+msgstr ""
+
+#: salix-live-installer.glade:258
+msgid "SalixLive Installer"
+msgstr ""
+
+#: salix-live-installer.glade:277
+msgid "About Salix Installer..."
+msgstr ""
+
+#: salix-live-installer.glade:295
+msgid ""
+"SalixLive Installer will perform a standard installation of Salix \n"
+"Operating System on your computer from the comfort of \n"
+"SalixLive's graphic environment."
+msgstr ""
+
+#: salix-live-installer.glade:340
+msgid "Access the keyboard settings "
+msgstr ""
+
+#: salix-live-installer.glade:363
+msgid "Key_board"
+msgstr ""
+
+#: salix-live-installer.glade:384
+msgid "Access the language settings "
+msgstr ""
+
+#: salix-live-installer.glade:406
+msgid "Lo_cale"
+msgstr ""
+
+#: salix-live-installer.glade:427
+msgid "Acces the partitions settings "
+msgstr ""
+
+#: salix-live-installer.glade:449
+msgid "_Partitions"
+msgstr ""
+
+#: salix-live-installer.glade:470
+msgid "Access the users and passwords settings"
+msgstr ""
+
+#: salix-live-installer.glade:492
+msgid "U_sers"
+msgstr ""
+
+#: salix-live-installer.glade:513
+msgid "Access the packages selection"
+msgstr ""
+
+#: salix-live-installer.glade:535
+msgid "P_ackages"
+msgstr ""
+
+#: salix-live-installer.glade:729
+msgid ""
+"<b>Important!</b>\n"
+"\n"
+"Before executing SalixLive's installer, you should already \n"
+"have the necessary partitions available on your system.\n"
+"\n"
+"Salix needs, at the very minimum, one swap partition and  \n"
+"one Linux  partition to hold its main directory tree. \n"
+"\n"
+"If possible, it is recommended to also have at least\n"
+"another Linux partition to hold your /home directory.\n"
+"\n"
+"If you do not already have these needed partitions ready,\n"
+"please exit SalixLive's installer and use Gparted to create\n"
+"them first."
+msgstr ""
+
+#: salix-live-installer.glade:762
+msgid "<b>Please select your keyboard layout:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:776
+msgid ""
+"Highlight your favorite keyboard layout from this list before clicking on "
+"the 'Select keyboard' button."
+msgstr ""
+
+#: salix-live-installer.glade:790
+msgid "Layout"
+msgstr ""
+
+#: salix-live-installer.glade:802
+msgid "Type"
+msgstr ""
+
+#: salix-live-installer.glade:820
+msgid "Activate numlock"
+msgstr ""
+
+#: salix-live-installer.glade:824
+msgid ""
+"Check this box if you want your numeric keypad to be activated during the "
+"boot process."
+msgstr ""
+
+#: salix-live-installer.glade:840 salix-live-installer.glade:856
+msgid ""
+"This is the keyboard layout you have selected. \n"
+"\n"
+"'None' will be displayed until you have confirmed that selection. "
+msgstr ""
+
+#: salix-live-installer.glade:844
+msgid "<b>Selected keyboard layout: </b>"
+msgstr ""
+
+#: salix-live-installer.glade:884
+msgid "Cancel keyboard layout selection "
+msgstr ""
+
+#: salix-live-installer.glade:899
+msgid "Confirm your selection after highlighting the keyboard layout. "
+msgstr ""
+
+#: salix-live-installer.glade:916
+msgid "Select _keyboard "
+msgstr ""
+
+#: salix-live-installer.glade:954
+msgid "<b>Please select your system language:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:968
+msgid ""
+"Highlight your language from this list before clicking on the 'Select "
+"language' button."
+msgstr ""
+
+#: salix-live-installer.glade:981
+msgid "Locale"
+msgstr ""
+
+#: salix-live-installer.glade:993
+msgid "Description"
+msgstr ""
+
+#: salix-live-installer.glade:1015 salix-live-installer.glade:1031
+msgid ""
+"This is the system language you have selected. \n"
+"\n"
+"'None' will be displayed until you have confirmed that selection. "
+msgstr ""
+
+#: salix-live-installer.glade:1019
+msgid "<b>Selected system language: </b>"
+msgstr ""
+
+#: salix-live-installer.glade:1059
+msgid "Cancel language selection "
+msgstr ""
+
+#: salix-live-installer.glade:1074
+msgid "Confirm your selection after highlighting the system language"
+msgstr ""
+
+#: salix-live-installer.glade:1091
+msgid "Select _language "
+msgstr ""
+
+#: salix-live-installer.glade:1129
+msgid "<b>Please select Salix main partition:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1143
+msgid ""
+"Highlight the partition from this list before clicking on the 'Select "
+"partition' button."
+msgstr ""
+
+#: salix-live-installer.glade:1156 salix-live-installer.glade:1370
+#: salix-live-installer.glade:1564
+msgid "Disk"
+msgstr ""
+
+#: salix-live-installer.glade:1168 salix-live-installer.glade:1382
+#: salix-live-installer.glade:1576
+msgid "Partition"
+msgstr ""
+
+#: salix-live-installer.glade:1180 salix-live-installer.glade:1394
+#: salix-live-installer.glade:1588
+msgid "Size"
+msgstr ""
+
+#: salix-live-installer.glade:1192 salix-live-installer.glade:1600
+msgid "File System"
+msgstr ""
+
+#: salix-live-installer.glade:1211
+msgid "Display attached external devices"
+msgstr ""
+
+#: salix-live-installer.glade:1215
+msgid ""
+"Check this box if you want your external disk drive(s) to be displayed in "
+"the list above. "
+msgstr ""
+
+#: salix-live-installer.glade:1229
+msgid ""
+"From the above partitions found on your system, please select the \n"
+"one where Salix' main directory tree (/) should be installed.\n"
+"\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be "
+"erased."
+msgstr ""
+
+#: salix-live-installer.glade:1248 salix-live-installer.glade:1261
+msgid "The filesystem that will be used to format Salix main partition."
+msgstr ""
+
+#: salix-live-installer.glade:1250
+msgid "Format with: "
+msgstr ""
+
+#: salix-live-installer.glade:1283
+msgid "Confirm your selection after highlighting the partition. "
+msgstr ""
+
+#: salix-live-installer.glade:1300
+msgid "Select _partition "
+msgstr ""
+
+#: salix-live-installer.glade:1338
+msgid "<b>Please configure your other Linux partition(s):</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1352
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to modify the "
+"filesystem of a partition and/or if you wish to assign its mount point. \n"
+"\n"
+"You can either choose one of the suggested mount points or enter your own.\n"
+"\n"
+"You must configure all the desired partitions before clicking on the 'Apply "
+"settings' button. Any unset parameters will be ignored. "
+msgstr ""
+
+#: salix-live-installer.glade:1406
+msgid "Current FS"
+msgstr ""
+
+#: salix-live-installer.glade:1418
+msgid "Format as:"
+msgstr ""
+
+#: salix-live-installer.glade:1432 salix-live-installer.glade:1612
+msgid "Mount as:"
+msgstr ""
+
+#: salix-live-installer.glade:1456
+msgid ""
+"It appears that you have more than one Linux partition. If you wish, \n"
+"you can now spread Salix directory tree on separate partitions. In \n"
+"fact, it is highly recommended to have the /home directory on a \n"
+"separate partition."
+msgstr ""
+
+#: salix-live-installer.glade:1478
+msgid "Confirm the Linux partition(s) settings from the list above. "
+msgstr ""
+
+#: salix-live-installer.glade:1495 salix-live-installer.glade:1674
+msgid "Apply _settings "
+msgstr ""
+
+#: salix-live-installer.glade:1534
+msgid "<b>Please configure your Windows partition(s):</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1548
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to assign the mount "
+"point of a partition. \n"
+"\n"
+"You must configure all the desired partitions before clicking on the 'Apply "
+"settings' button. Any unset parameters will be ignored. "
+msgstr ""
+
+#: salix-live-installer.glade:1636
+msgid ""
+"It appears that some of your partitions have a Windows formatting. \n"
+"Here you can set a mount point for each one if you wish them to be \n"
+"accessible in Salix system."
+msgstr ""
+
+#: salix-live-installer.glade:1657
+msgid "Confirm the Windows partition(s) settings from the list above. "
+msgstr ""
+
+#: salix-live-installer.glade:1708
+msgid "Recapitulation of your partition(s) settings."
+msgstr ""
+
+#: salix-live-installer.glade:1714
+msgid "<b>Salix main partition:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1727
+msgid "Main partition"
+msgstr ""
+
+#: salix-live-installer.glade:1739
+msgid "<b>Other Linux partitions:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1752
+msgid "Home partition"
+msgstr ""
+
+#: salix-live-installer.glade:1764
+msgid "<b>Windows partitions:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1777
+msgid "Windows partitions"
+msgstr ""
+
+#: salix-live-installer.glade:1795
+msgid "Cancel all partition(s) settings. "
+msgstr ""
+
+#: salix-live-installer.glade:1819
+msgid ""
+"A Linux system can manage many registered users and requires each one to log "
+"in, and to produce some form of authentication (usually a user's name "
+"coupled with a password) before allowing the user access to system resources."
+msgstr ""
+
+#: salix-live-installer.glade:1825
+msgid "<b>Please create a new standard user:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:1841
+msgid "Enter login: "
+msgstr ""
+
+#: salix-live-installer.glade:1853
+msgid ""
+"Here you must define your user's name which should only include "
+"alphanumerical characters with no space or upper case letters."
+msgstr ""
+
+#: salix-live-installer.glade:1872
+msgid "Enter password: "
+msgstr ""
+
+#: salix-live-installer.glade:1884
+msgid ""
+"Choose a password or passphrase to be coupled with your user's name. Your "
+"password or passprase should include a mix of upper and lower case letters, "
+"numbers, and even symbols (such as the @, !, and &)"
+msgstr ""
+
+#: salix-live-installer.glade:1895 salix-live-installer.glade:2071
+msgid "Do not hide"
+msgstr ""
+
+#: salix-live-installer.glade:1899 salix-live-installer.glade:2075
+msgid ""
+"Check this box if you want to be able to see the password you are typing."
+msgstr ""
+
+#: salix-live-installer.glade:1919
+msgid "Re-enter password: "
+msgstr ""
+
+#: salix-live-installer.glade:1931
+msgid ""
+"Here you must retype your user's password as a confirmation of your choice."
+msgstr ""
+
+#: salix-live-installer.glade:1952
+msgid "<b>User created: </b>"
+msgstr ""
+
+#: salix-live-installer.glade:1981
+msgid "Cancel new user creation"
+msgstr ""
+
+#: salix-live-installer.glade:1995
+msgid "Create new user"
+msgstr ""
+
+#: salix-live-installer.glade:2032
+msgid "<b>Please create a new administrator's password:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:2048
+msgid "Enter root password: "
+msgstr ""
+
+#: salix-live-installer.glade:2060
+msgid ""
+"On Linux systems, the superuser, or root, is a special user account used for "
+"system administration. Here you must set its password or passphrase. "
+"Remember, this password or passphrase should include a mix of upper and "
+"lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr ""
+
+#: salix-live-installer.glade:2095
+msgid "Re-enter root password: "
+msgstr ""
+
+#: salix-live-installer.glade:2107
+msgid ""
+"Here you must retype the superuser (root) password as a confirmation of your "
+"choice."
+msgstr ""
+
+#: salix-live-installer.glade:2128
+msgid "<b>Password created: </b>"
+msgstr ""
+
+#: salix-live-installer.glade:2156
+msgid "Cancel new root password"
+msgstr ""
+
+#: salix-live-installer.glade:2170
+msgid "Apply new root password"
+msgstr ""
+
+#: salix-live-installer.glade:2205
+msgid "<b>Please select your installation mode:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:2220
+msgid "Core"
+msgstr ""
+
+#: salix-live-installer.glade:2224
+msgid ""
+"Core installation: \n"
+"\n"
+"Only the minimum essentials for a console system to start are included. A "
+"graphical environment is not provided. This is ideal if you are an "
+"experienced user and want to customize your installation for any specific "
+"purpose, such as a web server, file server etc. "
+msgstr ""
+
+#: salix-live-installer.glade:2255
+msgid "Basic"
+msgstr ""
+
+#: salix-live-installer.glade:2259
+msgid ""
+"Basic installation: \n"
+"\n"
+"This installs only the Xfce desktop environment with the Firefox web browser "
+"and the gslapt package manager. Ideal for advanced users that would like to "
+"install a lightweight Xfce and add their own choice of applications."
+msgstr ""
+
+#: salix-live-installer.glade:2290
+msgid "Full"
+msgstr ""
+
+#: salix-live-installer.glade:2294
+msgid ""
+"Full installation: \n"
+"\n"
+"Everything that is included in the iso is installed. That includes the Xfce "
+"desktop environment, the Firefox web browser and Claws-mail email client, a "
+"complete OpenOffice.org office suite, a Java Runtime Environment, the Totem "
+"media player and Exaile music manager, the gslapt package manager and "
+"several other applications, always following the 'one application per task' "
+"rationale."
+msgstr ""
+
+#: salix-live-installer.glade:2332
+msgid "<b>Please select your kernel:</b>"
+msgstr ""
+
+#: salix-live-installer.glade:2347
+msgid "Standard kernel"
+msgstr ""
+
+#: salix-live-installer.glade:2351
+msgid ""
+"The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-"
+"loaded SMP Linux kernel with built-in support for most disk controllers."
+msgstr ""
+
+#: salix-live-installer.glade:2380
+msgid "Live kernel (with live tools)"
+msgstr ""
+
+#: salix-live-installer.glade:2384
+msgid ""
+"SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it "
+"has been patched to include aufs2 filesystem as well as squashfs-lzma "
+"compression. Its configuration has also been slightly changed to ensure most "
+"strategic devices would be available to the live system booting process.\n"
+"\n"
+"You may prefer to install this kernel if you want to build your own LiveCD "
+"out of an installed Salix system (The live tools will also be installed if "
+"you select this kernel)."
+msgstr ""
+
+#: salix-live-installer.glade:2419
+msgid "Cancel all packages selection "
+msgstr ""
+
+#: salix-live-installer.glade:2433
+msgid "Confirm your packages selection "
+msgstr ""
+
+#: salix-live-installer.glade:2487
+msgid "Exit Salix Installer"
+msgstr ""
+
+#: salix-live-installer.glade:2503
+msgid ""
+"Launch Salix installation.\n"
+"\n"
+"This button will not be active until all settings are configured correctly."
+msgstr ""
+
+#: salix-live-installer.glade:2522
+msgid "Launch Salix _install "
+msgstr ""
+
+#: salix-live-installer.glade:2563
+msgid "Copyright © 2010 Pierrick Le Brun"
+msgstr ""
+
+#: salix-live-installer.glade:2564
+msgid "SalixOS installation from SalixLive's graphic environment"
+msgstr ""
+
+#: salix-live-installer.glade:2567
+msgid ""
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"      \n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"      \n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
+"MA 02110-1301, USA."
+msgstr ""
+
+#: salix-live-installer.glade:2582
+msgid "French: Pierrick Le Brun"
+msgstr ""
+
+#: salix-live-installer.glade:2608
+msgid "Confirmation needed"
+msgstr ""
+
+#: salix-live-installer.glade:2627
+msgid "<b>Message about the particular choice: </b>"
+msgstr ""
+
+#: salix-live-installer.glade:2640
+msgid "<b>Do you want to proceed with this?</b>"
+msgstr ""
+
+#: salix-live-installer.glade:2715
+msgid "Please be patient, Salix installation is in progress... "
+msgstr ""

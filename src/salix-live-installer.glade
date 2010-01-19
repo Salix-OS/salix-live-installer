@@ -102,9 +102,6 @@
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Do not format!</col>
-      </row>
-      <row>
         <col id="0" translatable="yes">ext2</col>
       </row>
       <row>
@@ -122,6 +119,9 @@
       <row>
         <col id="0" translatable="yes">jfs</col>
       </row>
+      <row>
+        <col id="0" translatable="yes">Select...</col>
+      </row>
     </data>
   </object>
   <object class="GtkListStore" id="linux_mountpoint_list_store">
@@ -130,9 +130,6 @@
       <column type="gchararray"/>
     </columns>
     <data>
-      <row>
-        <col id="0" translatable="yes">Do not mount!</col>
-      </row>
       <row>
         <col id="0" translatable="yes">/home</col>
       </row>
@@ -147,6 +144,9 @@
       </row>
       <row>
         <col id="0" translatable="yes">/mnt/custom</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Select...</col>
       </row>
     </data>
   </object>
@@ -236,9 +236,6 @@
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Do not mount!</col>
-      </row>
-      <row>
         <col id="0" translatable="yes">/mnt/windows</col>
       </row>
       <row>
@@ -249,6 +246,9 @@
       </row>
       <row>
         <col id="0" translatable="yes">/mnt/custom</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Select...</col>
       </row>
     </data>
   </object>
@@ -274,7 +274,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">About Salix Installer </property>
+                    <property name="tooltip_text" translatable="yes">About Salix Installer...</property>
                     <property name="relief">none</property>
                     <signal name="clicked" handler="on_about_link_clicked"/>
                     <child>
@@ -572,7 +572,7 @@ SalixLive's graphic environment.</property>
                                         <child>
                                           <object class="GtkLabel" id="keyboard_check_marker">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">      </property>
+                                            <property name="label">      </property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -599,7 +599,7 @@ SalixLive's graphic environment.</property>
                                         <child>
                                           <object class="GtkLabel" id="locale_check_marker">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">     </property>
+                                            <property name="label">     </property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -626,7 +626,7 @@ SalixLive's graphic environment.</property>
                                         <child>
                                           <object class="GtkLabel" id="partition_check_marker">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">     </property>
+                                            <property name="label">     </property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -653,7 +653,7 @@ SalixLive's graphic environment.</property>
                                         <child>
                                           <object class="GtkLabel" id="users_check_marker">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">     </property>
+                                            <property name="label">     </property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -680,7 +680,7 @@ SalixLive's graphic environment.</property>
                                         <child>
                                           <object class="GtkLabel" id="packages_check_marker">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">     </property>
+                                            <property name="label">     </property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -773,8 +773,7 @@ them first.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow1">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight your favorite keyboard layout from this list 
-before clicking on the 'Select keyboard' button.</property>
+                                        <property name="tooltip_text" translatable="yes">Highlight your favorite keyboard layout from this list before clicking on the 'Select keyboard' button.</property>
                                         <property name="hscrollbar_policy">never</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -788,7 +787,7 @@ before clicking on the 'Select keyboard' button.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="layout_column">
                                                 <property name="sizing">autosize</property>
-                                                <property name="title">Layout</property>
+                                                <property name="title" translatable="yes">Layout</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="layout_list"/>
                                                   <attributes>
@@ -800,7 +799,7 @@ before clicking on the 'Select keyboard' button.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="Type_column">
                                                 <property name="sizing">autosize</property>
-                                                <property name="title">Type</property>
+                                                <property name="title" translatable="yes">Type</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="type_list"/>
                                                   <attributes>
@@ -822,8 +821,7 @@ before clicking on the 'Select keyboard' button.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="tooltip_text" translatable="yes">Check this box if you want your numeric keypad 
-to be activated during the boot process.</property>
+                                        <property name="tooltip_text" translatable="yes">Check this box if you want your numeric keypad to be activated during the boot process.</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_numlock_checkbutton_toggled"/>
                                       </object>
@@ -839,7 +837,8 @@ to be activated during the boot process.</property>
                                         <child>
                                           <object class="GtkLabel" id="label13">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected.
+                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected. 
+
 'None' will be displayed until you have confirmed that selection. </property>
                                             <property name="xalign">0</property>
                                             <property name="label" translatable="yes">&lt;b&gt;Selected keyboard layout: &lt;/b&gt;</property>
@@ -854,7 +853,8 @@ to be activated during the boot process.</property>
                                         <child>
                                           <object class="GtkLabel" id="keyboard_selection">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected.
+                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected. 
+
 'None' will be displayed until you have confirmed that selection. </property>
                                             <property name="xalign">0</property>
                                             <property name="label" translatable="yes">None</property>
@@ -877,7 +877,7 @@ to be activated during the boot process.</property>
                                         <property name="layout_style">edge</property>
                                         <child>
                                           <object class="GtkButton" id="keyboard_undo">
-                                            <property name="label" translatable="yes">gtk-undo</property>
+                                            <property name="label">gtk-undo</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -896,8 +896,7 @@ to be activated during the boot process.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after 
-highlighting the keyboard layout. </property>
+                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the keyboard layout. </property>
                                             <signal name="clicked" handler="on_keyboard_apply_clicked"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox14">
@@ -966,8 +965,7 @@ highlighting the keyboard layout. </property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow2">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight your language from this list before clicking on 
-the 'Select language' button.</property>
+                                        <property name="tooltip_text" translatable="yes">Highlight your language from this list before clicking on the 'Select language' button.</property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -980,7 +978,7 @@ the 'Select language' button.</property>
                                             <property name="search_column">0</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="locale_column">
-                                                <property name="title">Locale</property>
+                                                <property name="title" translatable="yes">Locale</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="loc_list"/>
@@ -992,7 +990,7 @@ the 'Select language' button.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="Descript_column">
-                                                <property name="title">Description</property>
+                                                <property name="title" translatable="yes">Description</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="desc_list"/>
                                                   <attributes>
@@ -1014,7 +1012,8 @@ the 'Select language' button.</property>
                                         <child>
                                           <object class="GtkLabel" id="label14">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected.
+                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected. 
+
 'None' will be displayed until you have confirmed that selection. </property>
                                             <property name="xalign">0</property>
                                             <property name="label" translatable="yes">&lt;b&gt;Selected system language: &lt;/b&gt;</property>
@@ -1029,7 +1028,8 @@ the 'Select language' button.</property>
                                         <child>
                                           <object class="GtkLabel" id="locale_selection">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected.
+                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected. 
+
 'None' will be displayed until you have confirmed that selection. </property>
                                             <property name="xalign">0</property>
                                             <property name="label" translatable="yes">None</property>
@@ -1052,7 +1052,7 @@ the 'Select language' button.</property>
                                         <property name="layout_style">edge</property>
                                         <child>
                                           <object class="GtkButton" id="locale_undo">
-                                            <property name="label" translatable="yes">gtk-undo</property>
+                                            <property name="label">gtk-undo</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1071,8 +1071,7 @@ the 'Select language' button.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after 
-highlighting the system language</property>
+                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the system language</property>
                                             <signal name="clicked" handler="on_locale_apply_clicked"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox15">
@@ -1141,8 +1140,7 @@ highlighting the system language</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow3">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight the partition from this list before clicking on 
-the 'Select partition' button.</property>
+                                        <property name="tooltip_text" translatable="yes">Highlight the partition from this list before clicking on the 'Select partition' button.</property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1155,7 +1153,7 @@ the 'Select partition' button.</property>
                                             <property name="search_column">0</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_disk_column">
-                                                <property name="title">Disk</property>
+                                                <property name="title" translatable="yes">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_disk_renderer_text"/>
@@ -1167,7 +1165,7 @@ the 'Select partition' button.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_part_column">
-                                                <property name="title">Partition</property>
+                                                <property name="title" translatable="yes">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_part_renderer_text"/>
@@ -1179,7 +1177,7 @@ the 'Select partition' button.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_size_column">
-                                                <property name="title">Size</property>
+                                                <property name="title" translatable="yes">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main-size_renderer_text"/>
@@ -1191,7 +1189,7 @@ the 'Select partition' button.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="format_column">
-                                                <property name="title">File System</property>
+                                                <property name="title" translatable="yes">File System</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_format_renderer_text"/>
@@ -1214,8 +1212,7 @@ the 'Select partition' button.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="tooltip_text" translatable="yes">Check this box if you want your external disk 
-drive(s) to be displayed in the list above. </property>
+                                        <property name="tooltip_text" translatable="yes">Check this box if you want your external disk drive(s) to be displayed in the list above. </property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_external_device_checkbutton_toggled"/>
                                       </object>
@@ -1248,8 +1245,7 @@ one where Salix' main directory tree (/) should be installed.
                                         <child>
                                           <object class="GtkLabel" id="main_format_label">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used 
-to format Salix main partition.</property>
+                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used to format Salix main partition.</property>
                                             <property name="xalign">1</property>
                                             <property name="label" translatable="yes">Format with: </property>
                                           </object>
@@ -1262,8 +1258,7 @@ to format Salix main partition.</property>
                                         <child>
                                           <object class="GtkComboBox" id="main_format_combobox">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used 
-to format Salix main partition.</property>
+                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used to format Salix main partition.</property>
                                             <property name="model">main_format_list_store</property>
                                             <property name="active">2</property>
                                             <property name="has_frame">False</property>
@@ -1285,8 +1280,7 @@ to format Salix main partition.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after 
-highlighting the partition. </property>
+                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the partition. </property>
                                             <signal name="clicked" handler="on_main_partition_apply_clicked"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox20">
@@ -1355,15 +1349,11 @@ highlighting the partition. </property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow4">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to 
-modify the filesystem of a partition and/or if you wish 
-to assign its mount point. 
+                                        <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point. 
 
-You must configure all the desired partitions before 
-clicking on the 'Apply settings' button.
+You can either choose one of the suggested mount points or enter your own.
 
-Any unset option will count as a 'Do not format! or a
-'Do not mount!' setting.</property>
+You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. </property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1377,7 +1367,7 @@ Any unset option will count as a 'Do not format! or a
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_disk_column">
                                                 <property name="visible">False</property>
-                                                <property name="title">Disk</property>
+                                                <property name="title" translatable="yes">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_renderer_text"/>
@@ -1389,7 +1379,7 @@ Any unset option will count as a 'Do not format! or a
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_part_column">
-                                                <property name="title">Partition</property>
+                                                <property name="title" translatable="yes">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_part_renderer_text"/>
@@ -1401,7 +1391,7 @@ Any unset option will count as a 'Do not format! or a
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_size_column">
-                                                <property name="title">Size</property>
+                                                <property name="title" translatable="yes">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_size_renderer_text"/>
@@ -1413,7 +1403,7 @@ Any unset option will count as a 'Do not format! or a
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_oldsys_column">
-                                                <property name="title">Current FS</property>
+                                                <property name="title" translatable="yes">Current FS</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_oldsys_renderer_text"/>
@@ -1425,7 +1415,7 @@ Any unset option will count as a 'Do not format! or a
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_newsys_column">
-                                                <property name="title">Format as:</property>
+                                                <property name="title" translatable="yes">Format as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
@@ -1439,7 +1429,7 @@ Any unset option will count as a 'Do not format! or a
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_newmount_column">
-                                                <property name="title">Mount as:</property>
+                                                <property name="title" translatable="yes">Mount as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
@@ -1485,8 +1475,7 @@ separate partition.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm the Linux partition(s)
-settings from the list above. </property>
+                                            <property name="tooltip_text" translatable="yes">Confirm the Linux partition(s) settings from the list above. </property>
                                             <signal name="clicked" handler="on_linux_partition_apply_clicked"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox21">
@@ -1556,19 +1545,15 @@ settings from the list above. </property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow5">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
+                                        <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. 
+
+You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. </property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
                                           <object class="GtkTreeView" id="win_partition_list">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to 
-assign the mount point of a partition. 
-
-You must configure all the desired partitions before 
-clicking on the 'Apply settings' button.
-
-Any unset option will count as a 'Do not mount!' setting.</property>
                                             <property name="model">win_partition_list_store</property>
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
@@ -1576,7 +1561,7 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_disk_column">
                                                 <property name="visible">False</property>
-                                                <property name="title">Disk</property>
+                                                <property name="title" translatable="yes">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_disk_renderer_text"/>
@@ -1588,7 +1573,7 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_part_column">
-                                                <property name="title">Partition</property>
+                                                <property name="title" translatable="yes">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_part_renderer_text"/>
@@ -1600,7 +1585,7 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_size_column">
-                                                <property name="title">Size</property>
+                                                <property name="title" translatable="yes">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_size_renderer_text"/>
@@ -1612,7 +1597,7 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_oldsys_column">
-                                                <property name="title">File System</property>
+                                                <property name="title" translatable="yes">File System</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_oldsys_renderer_text"/>
@@ -1624,7 +1609,7 @@ Any unset option will count as a 'Do not mount!' setting.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_newmount_column">
-                                                <property name="title">Mount as:</property>
+                                                <property name="title" translatable="yes">Mount as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">
@@ -1669,8 +1654,7 @@ accessible in Salix system.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm the Windows partition(s)
-settings from the list above. </property>
+                                            <property name="tooltip_text" translatable="yes">Confirm the Windows partition(s) settings from the list above. </property>
                                             <signal name="clicked" handler="on_windows_partition_apply_clicked"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox19">
@@ -1804,7 +1788,7 @@ settings from the list above. </property>
                                         <property name="layout_style">start</property>
                                         <child>
                                           <object class="GtkButton" id="partition_recap_undo">
-                                            <property name="label" translatable="yes">gtk-undo</property>
+                                            <property name="label">gtk-undo</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -1832,11 +1816,7 @@ settings from the list above. </property>
                                 </child>
                                 <child>
                                   <object class="GtkVBox" id="users_box">
-                                    <property name="tooltip_text" translatable="yes">A Linux system can manage many registered users and 
-requires each one to log in, and to produce some form of 
-authentication (usually a user's name coupled with a 
-password) before allowing the user access to system 
-resources.</property>
+                                    <property name="tooltip_text" translatable="yes">A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a user's name coupled with a password) before allowing the user access to system resources.</property>
                                     <property name="border_width">1</property>
                                     <child>
                                       <object class="GtkLabel" id="label11">
@@ -1870,9 +1850,7 @@ resources.</property>
                                           <object class="GtkEntry" id="user_login_entry">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must define your user's name which should 
-only include alphanumerical characters with no space or
-upper case letters.</property>
+                                            <property name="tooltip_text" translatable="yes">Here you must define your user's name which should only include alphanumerical characters with no space or upper case letters.</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1903,10 +1881,7 @@ upper case letters.</property>
                                           <object class="GtkEntry" id="user_pass1_entry">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Choose a password or passphrase to be coupled with your 
-user's name. Your password or passprase should include a 
-mix of upper and lower case letters, numbers, and even 
-symbols (such as the @, !, and &amp;)</property>
+                                            <property name="tooltip_text" translatable="yes">Choose a password or passphrase to be coupled with your user's name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1921,8 +1896,7 @@ symbols (such as the @, !, and &amp;)</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see 
-the password you are typing.</property>
+                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see the password you are typing.</property>
                                             <property name="draw_indicator">True</property>
                                             <signal name="toggled" handler="on_user_visible_checkbutton_toggled"/>
                                           </object>
@@ -1954,8 +1928,7 @@ the password you are typing.</property>
                                           <object class="GtkEntry" id="user_pass2_entry">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must retype your user's password 
-as a confirmation of your choice.</property>
+                                            <property name="tooltip_text" translatable="yes">Here you must retype your user's password as a confirmation of your choice.</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2001,7 +1974,7 @@ as a confirmation of your choice.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <object class="GtkButton" id="users_undo">
-                                                <property name="label" translatable="yes">gtk-undo</property>
+                                                <property name="label">gtk-undo</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
@@ -2015,7 +1988,7 @@ as a confirmation of your choice.</property>
                                             </child>
                                             <child>
                                               <object class="GtkButton" id="users_apply">
-                                                <property name="label" translatable="yes">gtk-apply</property>
+                                                <property name="label">gtk-apply</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
@@ -2084,11 +2057,7 @@ as a confirmation of your choice.</property>
                                           <object class="GtkEntry" id="root_pass1_entry">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">On Linux systems, the superuser, or root, is a special user 
-account used for system administration. Here you must 
-set its password or passphrase. Remember, this password 
-or passphrase should include a mix of upper and lower case 
-letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
+                                            <property name="tooltip_text" translatable="yes">On Linux systems, the superuser, or root, is a special user account used for system administration. Here you must set its password or passphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2103,8 +2072,7 @@ letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see 
-the password you are typing.</property>
+                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see the password you are typing.</property>
                                             <property name="draw_indicator">True</property>
                                             <signal name="toggled" handler="on_root_visible_checkbutton_toggled"/>
                                           </object>
@@ -2136,8 +2104,7 @@ the password you are typing.</property>
                                           <object class="GtkEntry" id="root_pass2_entry">
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must retype the superuser (root) 
-password as a confirmation of your choice.</property>
+                                            <property name="tooltip_text" translatable="yes">Here you must retype the superuser (root) password as a confirmation of your choice.</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2182,7 +2149,7 @@ password as a confirmation of your choice.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <object class="GtkButton" id="rootpass_undo">
-                                                <property name="label" translatable="yes">gtk-undo</property>
+                                                <property name="label">gtk-undo</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
@@ -2196,7 +2163,7 @@ password as a confirmation of your choice.</property>
                                             </child>
                                             <child>
                                               <object class="GtkButton" id="rootpass_apply">
-                                                <property name="label" translatable="yes">gtk-apply</property>
+                                                <property name="label">gtk-apply</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
@@ -2255,11 +2222,8 @@ password as a confirmation of your choice.</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">Core installation: 
-Only the minimum essentials for a console system to start are 
-included. A graphical environment is not provided. This is ideal 
-if you are an experienced user and want to customize your 
-installation for any specific purpose, such as a web server, file 
-server etc. </property>
+
+Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. </property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">full_radiobutton</property>
@@ -2293,6 +2257,7 @@ server etc. </property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">Basic installation: 
+
 This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
@@ -2327,7 +2292,8 @@ This installs only the Xfce desktop environment with the Firefox web browser and
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">Full installation: 
-Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the gslapt package manager and several other applications, always following the "one application per task" rationale.</property>
+
+Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the gslapt package manager and several other applications, always following the 'one application per task' rationale.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                           </object>
@@ -2416,6 +2382,7 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process.
+
 You may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The live tools will also be installed if you select this kernel).</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
@@ -2445,7 +2412,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                                         <property name="layout_style">edge</property>
                                         <child>
                                           <object class="GtkButton" id="packages_undo">
-                                            <property name="label" translatable="yes">gtk-undo</property>
+                                            <property name="label">gtk-undo</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -2459,7 +2426,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="packages_apply">
-                                            <property name="label" translatable="yes">gtk-apply</property>
+                                            <property name="label">gtk-apply</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
@@ -2513,7 +2480,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                 <property name="layout_style">edge</property>
                 <child>
                   <object class="GtkButton" id="button_quit">
-                    <property name="label" translatable="yes">gtk-quit</property>
+                    <property name="label">gtk-quit</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -2534,6 +2501,7 @@ You may prefer to install this kernel if you want to build your own LiveCD out o
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Launch Salix installation.
+
 This button will not be active until all settings are configured correctly.</property>
                     <signal name="clicked" handler="on_install_button_clicked"/>
                     <child>
@@ -2610,7 +2578,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.</property>
-    <property name="translator_credits" translatable="yes">  </property>
+    <property name="authors">Pierrick Le Brun</property>
+    <property name="translator_credits" translatable="yes">French: Pierrick Le Brun</property>
     <property name="logo">salix-live-installer.png</property>
     <signal name="response" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
@@ -2690,7 +2659,7 @@ MA 02110-1301, USA.</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="do_not_confirm_button">
-                <property name="label" translatable="yes">gtk-no</property>
+                <property name="label">gtk-no</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -2703,7 +2672,7 @@ MA 02110-1301, USA.</property>
             </child>
             <child>
               <object class="GtkButton" id="confirm_button">
-                <property name="label" translatable="yes">gtk-yes</property>
+                <property name="label">gtk-yes</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
