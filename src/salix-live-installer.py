@@ -1070,9 +1070,6 @@ class SalixLiveInstaller:
         # (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
         os.mkdir(Main_MountPoint + "/temp_mount")
         Temp_Mount = Main_MountPoint + "/temp_mount"
-        # We also need to ensure a loop device is available for mounting our modules
-        if os.path.exists("/dev/loop77") == False :
-            subprocess.call("mknod /dev/loop77 b 7 77 ", shell=True)
         if Selected_Install_Mode == _('core') :
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})

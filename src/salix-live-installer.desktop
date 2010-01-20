@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=Application;System;Settings;
+Categories=Application;System;
 Exec=gksu /usr/sbin/salix-live-installer.py
 Icon=salix-live-installer
 StartupNotify=true
