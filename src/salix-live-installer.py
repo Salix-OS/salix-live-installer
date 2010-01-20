@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100119 build -  First version
+# version = '0.1' - 20100120 build -  First version
 
 import commands
 import subprocess
@@ -44,8 +44,6 @@ gtk.glade.bindtextdomain("salix-live-installer", "/usr/share/locale")
 gtk.glade.textdomain("salix-live-installer")
 
 # To do => Add time zone settings
-# To do => Refine fstab lines
-# To do => Test & refine all formatting options
 # To do => Install log
 # To do => More Error checking with subprocess.check_call() and try/except
 
@@ -311,6 +309,8 @@ class SalixLiveInstaller:
                     part_size = line.split() [3]
                     try :
                         part_system = line.split() [5]
+                        if 'ext3' in part_system:
+                            part_system = 'ext3/ext4'
                     except :
                         part_system = 'None'
                     # Check if removable devices should be displayed.
@@ -1123,7 +1123,7 @@ class SalixLiveInstaller:
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(-("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
+            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
             self.InstallProgressBar.set_fraction(0.35)
             # there's more work, yield True
             yield True
@@ -1201,12 +1201,29 @@ class SalixLiveInstaller:
                 Win_Filesys = commands.getoutput(fdisk_win_output)
                 os.makedirs(Main_MountPoint + i[1])
                 if 'NTFS' in Win_Filesys :
-                    Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'ntfs-3g' , 'umask=022', '1', '0'))
+                    Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'ntfs-3g' , 'umask=000', '1', '0'))
                 if 'FAT32' in Win_Filesys :
-                    Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'vfat' , 'defaults', '1', '0'))
+                    Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'vfat' , 'defaults,utf8,umask=0,shortname=mixed', '1', '0'))
         Fstab_File.close()
+
+        # Create /etc/rc.d/rc.font
+        self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.font..."))
+        self.InstallProgressBar.set_fraction(0.88)
+        # there's more work, yield True
+        yield True
+        RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
+        RCfont_File.write("#!/bin/sh\n\
+#\n\
+#This selects your default screen font from among the ones in\n\
+# /usr/share/kbd/consolefonts.\n\
+#\n\
+#setfont -v ter-v16n\n\
+unicode_start ter-v16n")
+        RCfont_File.close()
+
+        # Set Keyboard, locale, login...
         self.InstallProgressBar.set_text(_("Setting the keyboard, locale & login..."))
-        self.InstallProgressBar.set_fraction(0.90)
+        self.InstallProgressBar.set_fraction(0.93)
         # there's more work, yield True
         yield True
         NewPid = os.fork()

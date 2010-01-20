@@ -323,11 +323,11 @@ SalixLive's graphic environment.</property>
                             <property name="border_width">5</property>
                             <child>
                               <object class="GtkHBox" id="hbox2">
-                                <property name="width_request">200</property>
+                                <property name="width_request">220</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="vbox2">
-                                    <property name="width_request">150</property>
+                                    <property name="width_request">180</property>
                                     <property name="visible">True</property>
                                     <property name="spacing">1</property>
                                     <child>
@@ -555,6 +555,7 @@ SalixLive's graphic environment.</property>
                                 </child>
                                 <child>
                                   <object class="GtkVBox" id="vbox3">
+                                    <property name="width_request">40</property>
                                     <property name="visible">True</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox8">
@@ -716,8 +717,8 @@ SalixLive's graphic environment.</property>
                             </child>
                             <child>
                               <object class="GtkVBox" id="vbox4">
-                                <property name="width_request">580</property>
-                                <property name="height_request">280</property>
+                                <property name="width_request">610</property>
+                                <property name="height_request">305</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="intro_box">
@@ -2701,6 +2702,7 @@ MA 02110-1301, USA.</property>
   </object>
   <object class="GtkDialog" id="progress_dialog">
     <property name="border_width">15</property>
+    <property name="title" translatable="yes">Salix installation</property>
     <property name="modal">True</property>
     <property name="icon">salix-live-installer.png</property>
     <property name="type_hint">normal</property>
