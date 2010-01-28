@@ -2352,7 +2352,6 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                             <property name="tooltip_text" translatable="yes">The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-loaded SMP Linux kernel with built-in support for most disk controllers.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
-                                            <property name="group">live_kernel_radiobutton</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2378,15 +2377,16 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                         <property name="visible">True</property>
                                         <child>
                                           <object class="GtkRadioButton" id="live_kernel_radiobutton">
-                                            <property name="label" translatable="yes">Live kernel (with live tools)</property>
+                                            <property name="label" translatable="yes">Live kernel (+ live scripts)</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
                                             <property name="tooltip_text" translatable="yes">SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process.
 
-You may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The live tools will also be installed if you select this kernel).</property>
+Although not absolutely necessary, you may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The Linux Live Scripts will also be installed if you select this kernel).</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
+											<property name="group">salix_kernel_radiobutton</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
