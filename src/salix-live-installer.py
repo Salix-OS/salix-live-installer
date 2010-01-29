@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100120 build -  First version
+# version = '0.1' - 20100129 build -  First version
 
 import commands
 import subprocess
@@ -31,6 +31,7 @@ import os
 import gtk
 import sys
 import gobject
+import glob
 
 # Internationalization
 import locale
@@ -64,22 +65,26 @@ class SalixLiveInstaller:
         self.ProgressWindow = builder.get_object("progress_dialog")
         self.InstallProgressBar = builder.get_object("install_progressbar")
         self.AboutDialog = builder.get_object("about_dialog")
+        self.TimeTab = builder.get_object("time_tab")
         self.KeyboardTab = builder.get_object("keyboard_tab")
         self.LocaleTab = builder.get_object("locale_tab")
         self.PartitionTab = builder.get_object("partition_tab")
         self.UsersTab = builder.get_object("users_tab")
         self.PackagesTab = builder.get_object("packages_tab")
+        self.TimeCheck = builder.get_object("time_check")
         self.KeyboardCheck = builder.get_object("keyboard_check")
         self.LocaleCheck = builder.get_object("locale_check")
         self.PartitionCheck = builder.get_object("partition_check")
         self.UsersCheck = builder.get_object("users_check")
         self.PackagesCheck = builder.get_object("packages_check")
+        self.TimeCheckMarker = builder.get_object("time_check_marker")
         self.KeyboardCheckMarker = builder.get_object("keyboard_check_marker")
         self.LocaleCheckMarker = builder.get_object("locale_check_marker")
         self.PartitionCheckMarker = builder.get_object("partition_check_marker")
         self.UsersCheckMarker = builder.get_object("users_check_marker")
         self.PackagesCheckMarker = builder.get_object("packages_check_marker")
         self.IntroBox = builder.get_object("intro_box")
+        self.TimeBox = builder.get_object("time_box")
         self.KeyboardBox = builder.get_object("keyboard_box")
         self.LocaleBox = builder.get_object("locale_box")
         self.MainPartitionBox = builder.get_object("main_partition_box")
@@ -97,7 +102,6 @@ class SalixLiveInstaller:
         self.MainPartitionList = builder.get_object("main_partition_list")
         self.MainPartitionListStore = builder.get_object("main_partition_list_store")
         self.MainFormatCombobox = builder.get_object("main_format_combobox")
-        self.MainFormatListStore = builder.get_object("main_format_list_store")
         self.LinuxPartitionList = builder.get_object("linux_partition_list")
         self.LinuxPartitionListStore = builder.get_object("linux_partition_list_store")
         self.WindowsPartitionList = builder.get_object("win_partition_list")
@@ -124,6 +128,7 @@ class SalixLiveInstaller:
         self.BasicRadioButton = builder.get_object("basic_radiobutton")
         self.FullRadioButton = builder.get_object("full_radiobutton")
         self.PackagesApplyButton = builder.get_object("packages_apply")
+        self.TimeApplyButton = builder.get_object("time_apply")
         self.KeyboardApplyButton = builder.get_object("keyboard_apply")
         self.LocaleApplyButton = builder.get_object("locale_apply")
         self.RootPass1Entry = builder.get_object("root_pass1_entry")
@@ -140,6 +145,19 @@ class SalixLiveInstaller:
         self.UsersApplyButton = builder.get_object("users_apply")
         self.RootPassApplyButton = builder.get_object("rootpass_apply")
         self.InstallButton = builder.get_object("install_button")
+        self.YearCombobox = builder.get_object("year_combobox")
+        self.MonthCombobox = builder.get_object("month_combobox")
+        self.DayCombobox = builder.get_object("day_combobox")
+        self.ZoneCombobox = builder.get_object("zone_combobox")
+        self.YearListStore = builder.get_object("year_list_store")
+        self.MonthListStore = builder.get_object("month_list_store")
+        self.DayListStore = builder.get_object("day_list_store")
+        self.ZoneListStore = builder.get_object("zone_list_store")
+        self.NTPCheckButton = builder.get_object("ntp_checkbutton")
+        self.ManualTimeBox = builder.get_object("manual_time_box")
+        self.HourSpinButton = builder.get_object("hour_spinbutton")
+        self.MinuteSpinButton = builder.get_object("minute_spinbutton")
+        self.SecondSpinButton = builder.get_object("second_spinbutton")
 
         # Connect signals
         builder.connect_signals(self)
@@ -158,7 +176,7 @@ class SalixLiveInstaller:
         Selected_Main_Partition = ''
         # Initialize the lock system preventing the Install button to be activated prematurely
         global ConfigurationSet
-        ConfigurationSet = ['no'] * 6
+        ConfigurationSet = ['no'] * 7
         # Initialise the external device checkbutton value
         global show_external_device
         show_external_device = 'no'
@@ -166,7 +184,9 @@ class SalixLiveInstaller:
         LaunchLiloSetup = False
         global LinPartConfirmLabel
         LinPartConfirmLabel = ''
-
+        global set_ntp
+        set_ntp = 'yes'
+            
         # Initialize the passwords entry box to not display characters
         self.UserPass1Entry.set_visibility(False)
         self.UserPass2Entry.set_visibility(False)
@@ -268,6 +288,66 @@ class SalixLiveInstaller:
         for locale_set in LocaleFeedList:
             locale_set = list(locale_set)
             self.LocaleListStore.append(locale_set)
+
+        # Initializing the Time comboboxes
+        global time_settings_initialization
+        def time_settings_initialization() :
+            self.NTPCheckButton.set_active(True)
+            self.YearListStore.clear()
+            years = range(2000,2051)
+            current_year = commands.getoutput('date +%Y')
+            global current_year_index
+            year_index = 0
+            for i in years:
+                self.YearListStore.append([i])
+                if current_year == str(i):
+                    current_year_index = year_index
+                year_index += 1
+
+            self.MonthListStore.clear()
+            global current_month_index, months
+            months = [_('January'), _('February'), _('March'), _('April'), _('Mai'), _('June'), _('July'),
+            _('August'), _('September'), _('August'), _('September'), _('October'), _('November'), _('December')]
+            month_index = 0
+            current_month = commands.getoutput('date +%m')
+            for i in months:
+                self.MonthListStore.append([i])
+                if int(current_month)-1 == month_index:
+                    current_month_index = month_index
+                month_index += 1
+
+            self.DayListStore.clear()
+            days = range(32)
+            global current_day_index
+            day_index = 0
+            current_day = commands.getoutput('date +%d')
+            for i in days:
+                self.DayListStore.append([i])
+                if current_day == str(i):
+                    current_day_index = day_index
+                day_index += 1
+
+            global current_hour
+            current_hour = int(commands.getoutput('date +%H'))
+
+            global current_minute
+            current_minute = int(commands.getoutput('date +%M'))
+
+            global current_second
+            current_second = int(commands.getoutput('date +%S'))
+
+            self.ZoneListStore.clear()
+            global zonelist
+            zonelist = sorted(glob.glob("/usr/share/zoneinfo/*/*"))
+            current_zone = commands.getoutput("ls -l /etc/localtime-copied-from").split()[-1].replace('/usr/share/zoneinfo/', '')
+            global current_zone_index
+            zone_index = 0
+            for i in zonelist:
+                zone_info = i.replace('/usr/share/zoneinfo/', '')
+                self.ZoneListStore.append([zone_info])
+                if current_zone == zone_info:
+                    current_zone_index = zone_index
+                zone_index += 1
 
         # Initialize the main partitions list.
         global partition_list_initialization
@@ -382,6 +462,17 @@ class SalixLiveInstaller:
 
 ### CHECKBUTTONS ###
 
+
+    # What to do when the NTP checkbutton is toggled
+    def on_ntp_checkbutton_toggled(self, widget, data=None):
+        global set_ntp
+        if self.NTPCheckButton.get_active() == True:
+            self.ManualTimeBox.set_sensitive(False)
+            set_ntp = 'yes'
+        else:
+            self.ManualTimeBox.set_sensitive(True)
+            set_ntp = 'no'
+
     # What to do when the user's password visible checkbutton is toggled
     def on_numlock_checkbutton_toggled(self, widget, data=None):
         global set_numlock
@@ -417,8 +508,8 @@ class SalixLiveInstaller:
             show_external_device = 'no'
         partition_list_initialization ()
 			
-### COMBO LINES ###
-		
+### COMBOBOX LINES ###
+
     # What to do when a combo line is edited in the Linux New system column
     def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
         # Retrieve the selected Linux partition row iter
@@ -445,6 +536,36 @@ class SalixLiveInstaller:
         self.WindowsPartitionListStore.set_value(iter, 4, new_text)
 
 # CONFIGURATION APPLY BUTTONS ###
+
+    # What to do when the time selection button is clicked
+    def on_time_apply_clicked(self, widget, data=None):
+        # Display the 'Done' check
+        self.TimeCheck.show()
+        self.TimeCheckMarker.hide()
+        self.TimeApplyButton.set_sensitive(False)
+        global ConfigurationSet, set_ntp, months, zonelist, set_zone
+        ConfigurationSet[6] = 'yes'
+        set_zone = zonelist[self.ZoneCombobox.get_active()]
+        subprocess.call('ln -sf ' + set_zone + ' /etc/localtime-copied-from', shell=True)
+        subprocess.call('rm -f /etc/localtime', shell=True)
+        subprocess.call('cp /etc/localtime-copied-from /etc/localtime', shell=True)
+        if set_ntp == 'yes':
+            subprocess.call('chmod +x /etc/rc.d/rc.ntpd', shell=True)
+            subprocess.call("/etc/rc.d/rc.ntpd sync 2>/dev/null", shell=True)
+        if set_ntp == 'no':
+            subprocess.call("/etc/rc.d/rc.ntpd stop 2>/dev/null", shell=True)
+            subprocess.call('chmod -x /etc/rc.d/rc.ntpd', shell=True)
+            set_hour = str(int(self.HourSpinButton.get_value()))
+            set_minute = str(int(self.MinuteSpinButton.get_value()))
+            set_second = str(int(self.SecondSpinButton.get_value()))
+            set_year = str(2000 + int(self.YearCombobox.get_active()))
+            set_month = str(1 + int(self.MonthCombobox.get_active()))
+            set_day = str(self.DayCombobox.get_active())
+            subprocess.call('date -s "' + set_month + "/" + set_day + "/" + set_year +
+            " " + set_hour + ":" + set_minute + ":" + set_second +'"', shell=True)
+            subprocess.call('hwclock --systohc', shell=True)
+        if 'no' not in ConfigurationSet:
+            self.InstallButton.set_sensitive(True)
 
     # What to do when the keyboard selection button is clicked
     def on_keyboard_apply_clicked(self, widget, data=None):		
@@ -758,6 +879,16 @@ class SalixLiveInstaller:
         self.YesNoDialog.resize(1, 1)
 
 ### CONFIGURATION UNDO BUTTONS ###
+
+    # What to do when the time undo button is clicked
+    def on_time_undo_clicked(self, widget, data=None):
+        # Remove the 'Done' check
+        self.TimeCheck.hide()
+        self.TimeCheckMarker.show()
+        self.TimeApplyButton.set_sensitive(True)
+        global ConfigurationSet
+        ConfigurationSet[6] = 'no'
+        self.InstallButton.set_sensitive(False)
 
     # What to do when the keyboard undo button is clicked
     def on_keyboard_undo_clicked(self, widget, data=None):
@@ -1218,11 +1349,19 @@ class SalixLiveInstaller:
 unicode_start ter-v16n")
         RCfont_File.close()
 
-        # Set Keyboard, locale, login...
-        self.InstallProgressBar.set_text(_("Setting the keyboard, locale & login..."))
+        # Set Time, Keyboard, locale, login...
+        self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
         self.InstallProgressBar.set_fraction(0.93)
         # there's more work, yield True
         yield True
+        global set_ntp, set_zone
+        if set_ntp == 'yes':
+            subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
+        if set_ntp == 'no':
+            subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
+        subprocess.call('ln -sf ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
+        subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
+        subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
         NewPid = os.fork()
         if NewPid == 0 :
             self.chroot_settings()
@@ -1306,6 +1445,36 @@ and use the application of your choice before rebooting your machine.)\n"""))
 
 ### CONFIGURATION TABS ###
 
+    # What to do when the time tab is clicked
+    def on_time_tab_clicked(self, widget, data=None):
+        if switch_tab_lock == 'on' :
+            pass
+        else :
+            # Show the keyboard setting area & hide all the others
+            time_settings_initialization()
+            self.IntroBox.hide()
+            self.KeyboardBox.hide()
+            self.LocaleBox.hide()
+            self.MainPartitionBox.hide()
+            self.RecapPartitionBox.hide()
+            self.UsersBox.hide()
+            self.PackagesBox.hide()
+            self.TimeBox.show()
+            # Set the combo cursors on current values
+            self.YearCombobox.set_active(current_year_index)
+            self.MonthCombobox.set_active(current_month_index)
+            self.DayCombobox.set_active(current_day_index)
+            self.ZoneCombobox.set_active(current_zone_index)
+            self.HourSpinButton.set_value(current_hour)
+            self.MinuteSpinButton.set_value(current_minute)
+            self.SecondSpinButton.set_value(current_second)
+            self.TimeTab.set_relief(gtk.RELIEF_HALF)
+            self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
+            self.LocaleTab.set_relief(gtk.RELIEF_NONE)
+            self.PartitionTab.set_relief(gtk.RELIEF_NONE)
+            self.UsersTab.set_relief(gtk.RELIEF_NONE)
+            self.PackagesTab.set_relief(gtk.RELIEF_NONE)
+
     # What to do when the keyboard tab is clicked
     def on_keyboard_tab_clicked(self, widget, data=None):
         if switch_tab_lock == 'on' :
@@ -1313,6 +1482,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
         else :
             # Show the keyboard setting area & hide all the others
             self.IntroBox.hide()
+            self.TimeBox.hide()
             self.LocaleBox.hide()
             self.MainPartitionBox.hide()
             self.RecapPartitionBox.hide()
@@ -1323,6 +1493,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
                 self.KeyboardList.set_cursor(UsedKeybRow)
             except :
                 pass
+            self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
             self.PartitionTab.set_relief(gtk.RELIEF_NONE)
@@ -1335,6 +1506,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
             pass
         else :
             self.IntroBox.hide()
+            self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.MainPartitionBox.hide()
             self.RecapPartitionBox.hide()
@@ -1345,6 +1517,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
                 self.LocaleList.set_cursor(UsedLocaleRow)
             except :
                 pass
+            self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_HALF)
             self.PartitionTab.set_relief(gtk.RELIEF_NONE)
@@ -1357,6 +1530,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
             pass
         else :
             self.IntroBox.hide()
+            self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
             self.UsersBox.hide()
@@ -1368,6 +1542,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
                 partition_list_initialization()
                 self.RecapPartitionBox.hide()
                 self.MainPartitionBox.show()
+            self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
             self.PartitionTab.set_relief(gtk.RELIEF_HALF)
@@ -1380,12 +1555,14 @@ and use the application of your choice before rebooting your machine.)\n"""))
             pass
         else :
             self.IntroBox.hide()
+            self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
             self.MainPartitionBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.show()
             self.PackagesBox.hide()
+            self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
             self.PartitionTab.set_relief(gtk.RELIEF_NONE)
@@ -1398,12 +1575,14 @@ and use the application of your choice before rebooting your machine.)\n"""))
             pass
         else :
             self.IntroBox.hide()
+            self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
             self.MainPartitionBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.hide()
             self.PackagesBox.show()
+            self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
             self.PartitionTab.set_relief(gtk.RELIEF_NONE)
