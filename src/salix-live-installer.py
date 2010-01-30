@@ -1460,14 +1460,17 @@ and use the application of your choice before rebooting your machine.)\n"""))
             self.UsersBox.hide()
             self.PackagesBox.hide()
             self.TimeBox.show()
-            # Set the combo cursors on current values
+            # Set the combo cursors on current values 
             self.YearCombobox.set_active(current_year_index)
             self.MonthCombobox.set_active(current_month_index)
             self.DayCombobox.set_active(current_day_index)
-            self.ZoneCombobox.set_active(current_zone_index)
             self.HourSpinButton.set_value(current_hour)
             self.MinuteSpinButton.set_value(current_minute)
             self.SecondSpinButton.set_value(current_second)
+            try:
+                self.ZoneCombobox.set_active(current_zone_index)
+            except NameError:
+                pass
             self.TimeTab.set_relief(gtk.RELIEF_HALF)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
