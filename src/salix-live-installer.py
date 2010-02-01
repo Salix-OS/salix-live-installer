@@ -158,7 +158,7 @@ class SalixLiveInstaller:
         self.HourSpinButton = builder.get_object("hour_spinbutton")
         self.MinuteSpinButton = builder.get_object("minute_spinbutton")
         self.SecondSpinButton = builder.get_object("second_spinbutton")
-        self.TimeZoneBox = builder.get_object("hbox40")
+        self.TimeZoneBox = builder.get_object("time_zone_box")
 
         # Connect signals
         builder.connect_signals(self)
@@ -1366,11 +1366,10 @@ class SalixLiveInstaller:
 #\n\
 #setfont -v ter-v16n\n\
 unicode_start ter-v16n")
-        RCfont_File.close()
 
         # Create /etc/rc.d/rc.keymap
         self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.keymap..."))
-        self.InstallProgressBar.set_fraction(0.91)
+        self.InstallProgressBar.set_fraction(0.90)
         # there's more work, yield True
         yield True
         RCkeymap_File = open(Main_MountPoint + '/etc/rc.d/rc.keymap', 'w')
@@ -1384,7 +1383,7 @@ fi")
 
         # Set Time, Keyboard, locale, login...
         self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
-        self.InstallProgressBar.set_fraction(0.94)
+        self.InstallProgressBar.set_fraction(0.92)
         # there's more work, yield True
         yield True
         global set_ntp, set_zone
@@ -1398,12 +1397,20 @@ fi")
         NewPid = os.fork()
         if NewPid == 0 :
             self.chroot_settings()
+            # Exit child process
+            sys.exit(0)
         else :
-            os.wait()
+            os.waitpid(pid, 0) # make sure the child process gets cleaned up
+            self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
+            self.InstallProgressBar.set_fraction(0.98)
+            # there's more work, yield True
+            yield True
+
             self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
             self.InstallProgressBar.set_fraction(1.0)
             # there's more work, yield True
             yield True
+
             # Close install confirmation + progress dialog
             self.ProgressWindow.hide()
             # Call Success dialog & offer to launch LiloSetup
@@ -1455,8 +1462,6 @@ and use the application of your choice before rebooting your machine.)\n"""))
             subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. "))
-        global Chrooted_Process
-        os._exit(0)
 
     # What to do when the no button of the YesNo dialog is clicked
     def on_do_not_confirm_button_clicked(self, widget, data=None):

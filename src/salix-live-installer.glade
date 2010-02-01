@@ -1175,7 +1175,7 @@ them first.</property>
                                       <object class="GtkHBox" id="hbox37">
                                         <property name="visible">True</property>
                                         <child>
-                                          <object class="GtkHBox" id="hbox40">
+                                          <object class="GtkHBox" id="time_zone_box">
                                             <property name="width_request">405</property>
                                             <property name="visible">True</property>
                                             <child>
