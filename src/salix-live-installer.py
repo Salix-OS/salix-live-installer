@@ -1380,6 +1380,7 @@ if [ -x /usr/bin/loadkeys ]; then\n\
 /usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
 fi")
         RCkeymap_File.close()
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
 
         # Set Time, Keyboard, locale, login...
         self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
