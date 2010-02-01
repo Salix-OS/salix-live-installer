@@ -1004,7 +1004,7 @@ msgid ""
 msgstr ""
 "Lancer l'installation de Salix.\n"
 "\n"
-"Ce button ne sera pas accesssible tant que tous les paramétrages nécessaires n'auront pas été effectués."
+"Ce button ne sera pas accessible tant que tous les paramétrages nécessaires n'auront pas été effectués."
 
 #: salix-live-installer.glade:3052
 msgid "Launch Salix _install "
