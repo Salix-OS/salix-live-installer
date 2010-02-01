@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100201 build -  First version
+# version = '0.1' - 201002012225 build -  First version
 
 import commands
 import subprocess
@@ -1401,7 +1401,7 @@ fi")
             # Exit child process
             sys.exit(0)
         else :
-            os.waitpid(pid, 0) # make sure the child process gets cleaned up
+            os.waitpid(NewPid, 0) # make sure the child process gets cleaned up
             self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
             self.InstallProgressBar.set_fraction(0.98)
             # there's more work, yield True
