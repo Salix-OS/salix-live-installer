@@ -158,6 +158,7 @@ class SalixLiveInstaller:
         self.HourSpinButton = builder.get_object("hour_spinbutton")
         self.MinuteSpinButton = builder.get_object("minute_spinbutton")
         self.SecondSpinButton = builder.get_object("second_spinbutton")
+        self.TimeZoneBox = builder.get_object("hbox40")
 
         # Connect signals
         builder.connect_signals(self)
@@ -269,7 +270,7 @@ class SalixLiveInstaller:
         locale_list = []
         descript_list = []
         # Use non-localized environment to avoid problems
-        os.environ['LANG'] = 'en_US'
+#        os.environ['LANG'] = 'en_US'
         # Parse locale output with a basic stripping of relevant lines
         locale_shell_output = "locale -cva | grep -A 2 utf8 | sed -e '/^-/d' -e 's/ *directory.*utf8//' -e 's/^ *title | //'"
         stripped_locale_output = commands.getoutput(locale_shell_output)
@@ -332,7 +333,7 @@ class SalixLiveInstaller:
             current_day = commands.getoutput('date +%d')
             for i in days:
                 self.DayListStore.append([i])
-                if current_day == str(i):
+                if str(int(current_day)) == str(i):
                     current_day_index = day_index
                 day_index += 1
 
@@ -552,6 +553,9 @@ class SalixLiveInstaller:
         self.TimeCheck.show()
         self.TimeCheckMarker.hide()
         self.TimeApplyButton.set_sensitive(False)
+        self.ManualTimeBox.set_sensitive(False)
+        self.NTPCheckButton.set_sensitive(False)
+        self.TimeZoneBox.set_sensitive(False)
         global ConfigurationSet, set_ntp, months, zonelist, set_zone
         ConfigurationSet[6] = 'yes'
         set_zone = zonelist[self.ZoneCombobox.get_active()]
@@ -591,6 +595,7 @@ class SalixLiveInstaller:
         self.KeyboardCheckMarker.hide()
         self.KeyboardList.set_sensitive(False)
         self.KeyboardApplyButton.set_sensitive(False)
+        self.NumLockCheckButton.set_sensitive(False)
         global ConfigurationSet
         ConfigurationSet[0] = 'yes'
         if 'no' not in ConfigurationSet :
@@ -857,7 +862,7 @@ class SalixLiveInstaller:
         # Prepare the install recap text
         LastRecapFullText = ''
         LastRecapFullText += "\n<b>" + _("You are about to install Salix with the following settings") + ":</b> \n"
-        LastRecapFullText += "\n<b>" + _("Time zone") + ":</b> \n" + set_zone + "\n"
+        LastRecapFullText += "\n<b>" + _("Time zone") + ":</b> \n" + set_zone.replace('/usr/share/zoneinfo/', '') + "\n"
         LastRecapFullText += "\n<b>" + _("Keyboard layout") + ":</b> \n" + Selected_Keyboard + "\n"
         LastRecapFullText += "\n<b>" + _("System language") + ":</b> \n" + Selected_Locale + "\n"
         LastRecapFullText += "\n<b>" + _("Partitions") + ":</b> \n"
@@ -896,6 +901,9 @@ class SalixLiveInstaller:
         self.TimeCheck.hide()
         self.TimeCheckMarker.show()
         self.TimeApplyButton.set_sensitive(True)
+        self.NTPCheckButton.set_active(True)
+        self.NTPCheckButton.set_sensitive(True)
+        self.TimeZoneBox.set_sensitive(True)
         global ConfigurationSet
         ConfigurationSet[6] = 'no'
         self.InstallButton.set_sensitive(False)
@@ -909,6 +917,7 @@ class SalixLiveInstaller:
         self.KeyboardSelection.set_text(_('None'))
         self.KeyboardList.set_sensitive(True)
         self.KeyboardApplyButton.set_sensitive(True)
+        self.NumLockCheckButton.set_sensitive(True)
         global ConfigurationSet
         ConfigurationSet[0] = 'no'
         self.InstallButton.set_sensitive(False)
@@ -1359,9 +1368,23 @@ class SalixLiveInstaller:
 unicode_start ter-v16n")
         RCfont_File.close()
 
+        # Create /etc/rc.d/rc.keymap
+        self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.keymap..."))
+        self.InstallProgressBar.set_fraction(0.91)
+        # there's more work, yield True
+        yield True
+        RCkeymap_File = open(Main_MountPoint + '/etc/rc.d/rc.keymap', 'w')
+        RCkeymap_File.write("#!/bin/sh\n\
+#\n\
+# Load the keyboard map.  More maps are in /usr/share/kbd/keymaps.\n\
+if [ -x /usr/bin/loadkeys ]; then\n\
+/usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
+fi")
+        RCkeymap_File.close()
+
         # Set Time, Keyboard, locale, login...
         self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
-        self.InstallProgressBar.set_fraction(0.93)
+        self.InstallProgressBar.set_fraction(0.94)
         # there's more work, yield True
         yield True
         global set_ntp, set_zone
@@ -1388,6 +1411,8 @@ unicode_start ter-v16n")
 \nLiloSetup will now be launched to enable you to add Salix to your bootloader.
 (If you prefer to use another bootloader utility, click on the no button
 and use the application of your choice before rebooting your machine.)\n"""))
+            # Set localized environment back so that lilosetup comes up in the local language
+            os.environ['LANG'] = Selected_Locale
             global LaunchLiloSetup
             LaunchLiloSetup = True
             self.YesNoDialog.show()
