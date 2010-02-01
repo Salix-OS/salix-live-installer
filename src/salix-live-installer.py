@@ -221,7 +221,7 @@ class SalixLiveInstaller:
             elif  os.path.exists('/proc/cmdline'):
                 UsedKeymapFile = open('/proc/cmdline', 'r')
                 for line in UsedKeymapFile:
-                    if 'keyb=' + keyb_item in line:
+                    if 'keyb=' + keyb_item + ' ' in line:
                         UsedKeyMap = keyb_item
                 UsedKeymapFile.close()
             # Determine if azerty is the type of keyboard
