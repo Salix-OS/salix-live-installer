@@ -411,6 +411,7 @@ SalixLive's graphic environment.</property>
                                         <property name="can_default">True</property>
                                         <property name="has_default">True</property>
                                         <property name="receives_default">True</property>
+                                        <property name="tooltip_text" translatable="yes">Access the time settings </property>
                                         <property name="relief">none</property>
                                         <signal name="clicked" handler="on_time_tab_clicked"/>
                                         <child>
@@ -944,6 +945,7 @@ them first.</property>
                                           <object class="GtkVBox" id="manual_time_box">
                                             <property name="visible">True</property>
                                             <property name="sensitive">False</property>
+                                            <property name="tooltip_text" translatable="yes">Set the date &amp; time manually if you do not use NTP service.</property>
                                             <child>
                                               <object class="GtkFrame" id="time_frame">
                                                 <property name="visible">True</property>
@@ -1179,6 +1181,7 @@ them first.</property>
                                             <child>
                                               <object class="GtkLabel" id="label41">
                                                 <property name="visible">True</property>
+                                                <property name="tooltip_text" translatable="yes">Set the time zone</property>
                                                 <property name="label" translatable="yes">Time zone: </property>
                                               </object>
                                               <packing>
@@ -1243,6 +1246,7 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Cancel time settings.</property>
                                             <property name="use_stock">True</property>
                                             <signal name="clicked" handler="on_time_undo_clicked"/>
                                           </object>
@@ -1256,6 +1260,7 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Activate the time settings after options above have been defined.</property>
                                             <property name="use_stock">True</property>
                                             <signal name="clicked" handler="on_time_apply_clicked"/>
                                           </object>

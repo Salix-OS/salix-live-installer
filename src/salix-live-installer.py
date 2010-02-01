@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 20100129 build -  First version
+# version = '0.1' - 20100201 build -  First version
 
 import commands
 import subprocess
@@ -211,10 +211,19 @@ class SalixLiveInstaller:
         global keyb_item
         for keyb_item in KeymapsFeedList:
             # Check if it is the one being used by the environment by parsing rc.keymap:
-            UsedKeymapFile = open('/etc/rc.d/rc.keymap', 'r')
-            for line in UsedKeymapFile:
-                if keyb_item +'.map' in line:
-                    UsedKeyMap = keyb_item
+            if  os.path.exists('/etc/rc.d/rc.keymap'):
+                UsedKeymapFile = open('/etc/rc.d/rc.keymap', 'r')
+                for line in UsedKeymapFile:
+                    if keyb_item +'.map' in line:
+                        UsedKeyMap = keyb_item
+                UsedKeymapFile.close()
+            # Or by parsing /proc/cmdline:
+            elif  os.path.exists('/proc/cmdline'):
+                UsedKeymapFile = open('/proc/cmdline', 'r')
+                for line in UsedKeymapFile:
+                    if 'keyb=' + keyb_item in line:
+                        UsedKeyMap = keyb_item
+                UsedKeymapFile.close()
             # Determine if azerty is the type of keyboard
             if os.path.exists('/usr/share/kbd/keymaps/i386/azerty/'+keyb_item+'.map.gz'):
                 type = 'azerty'
@@ -848,6 +857,7 @@ class SalixLiveInstaller:
         # Prepare the install recap text
         LastRecapFullText = ''
         LastRecapFullText += "\n<b>" + _("You are about to install Salix with the following settings") + ":</b> \n"
+        LastRecapFullText += "\n<b>" + _("Time zone") + ":</b> \n" + set_zone + "\n"
         LastRecapFullText += "\n<b>" + _("Keyboard layout") + ":</b> \n" + Selected_Keyboard + "\n"
         LastRecapFullText += "\n<b>" + _("System language") + ":</b> \n" + Selected_Locale + "\n"
         LastRecapFullText += "\n<b>" + _("Partitions") + ":</b> \n"
