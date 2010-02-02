@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 201002012225 build -  First version
+# version = '0.1' - 201002021400 build -  First version
 
 import commands
 import subprocess
