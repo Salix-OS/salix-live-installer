@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 201002021400 build -  First version
+# version = '0.1' - 201002022230 build -  First version
 
 import commands
 import subprocess
@@ -148,11 +148,13 @@ class SalixLiveInstaller:
         self.YearCombobox = builder.get_object("year_combobox")
         self.MonthCombobox = builder.get_object("month_combobox")
         self.DayCombobox = builder.get_object("day_combobox")
-        self.ZoneCombobox = builder.get_object("zone_combobox")
+        self.ContinentZoneCombobox = builder.get_object("continent_zone_combobox")
+        self.CountryZoneCombobox = builder.get_object("country_zone_combobox")
         self.YearListStore = builder.get_object("year_list_store")
         self.MonthListStore = builder.get_object("month_list_store")
         self.DayListStore = builder.get_object("day_list_store")
-        self.ZoneListStore = builder.get_object("zone_list_store")
+        self.ContinentZoneListStore = builder.get_object("continent_zone_list_store")
+        self.CountryZoneListStore = builder.get_object("country_zone_list_store")
         self.NTPCheckButton = builder.get_object("ntp_checkbutton")
         self.ManualTimeBox = builder.get_object("manual_time_box")
         self.HourSpinButton = builder.get_object("hour_spinbutton")
@@ -299,6 +301,39 @@ class SalixLiveInstaller:
             locale_set = list(locale_set)
             self.LocaleListStore.append(locale_set)
 
+        # Initialize continent time zone
+        global set_continent_zone
+        def set_continent_zone ():
+            self.ContinentZoneListStore.clear()
+            global continent_zonelist, continent_current_zone, continent_current_zone_index
+            continent_zonelist = sorted(glob.glob("/usr/share/zoneinfo/*"))
+            continent_current_zone = commands.getoutput("ls -l /etc/localtime-copied-from").split()[-1].split('/')[-2]
+            continent_zone_index = 0
+            for i in continent_zonelist:
+                if os.path.isdir(i):
+                    continent_zone_info = i.replace('/usr/share/zoneinfo/', '')
+                    self.ContinentZoneListStore.append([continent_zone_info])
+                    if continent_current_zone == continent_zone_info:
+                        continent_current_zone_index = continent_zone_index
+                    continent_zone_index += 1
+
+        global set_country_zone
+        def set_country_zone ():
+            self.CountryZoneListStore.clear()
+            global country_zonelist, country_current_zone_index
+            try:
+                country_zonelist = sorted(glob.glob("/usr/share/zoneinfo/" + continent_current_zone  + "/*"))
+                country_current_zone = commands.getoutput("ls -l /etc/localtime-copied-from").split()[-1].split('/')[-1]
+                country_zone_index = 0
+                for i in country_zonelist:
+                    country_zone_info = i.replace('/usr/share/zoneinfo/' + continent_current_zone + '/', '')
+                    self.CountryZoneListStore.append([country_zone_info])
+                    if country_current_zone == country_zone_info:
+                        country_current_zone_index = country_zone_index
+                    country_zone_index += 1
+            except:
+                pass
+
         # Initializing the Time comboboxes
         global time_settings_initialization
         def time_settings_initialization() :
@@ -346,18 +381,9 @@ class SalixLiveInstaller:
             global current_second
             current_second = int(commands.getoutput('date +%S'))
 
-            self.ZoneListStore.clear()
-            global zonelist
-            zonelist = sorted(glob.glob("/usr/share/zoneinfo/*/*"))
-            current_zone = commands.getoutput("ls -l /etc/localtime-copied-from").split()[-1].replace('/usr/share/zoneinfo/', '')
-            global current_zone_index
-            zone_index = 0
-            for i in zonelist:
-                zone_info = i.replace('/usr/share/zoneinfo/', '')
-                self.ZoneListStore.append([zone_info])
-                if current_zone == zone_info:
-                    current_zone_index = zone_index
-                zone_index += 1
+            set_continent_zone ()
+
+            set_country_zone ()
 
         # Initialize the main partitions list.
         global partition_list_initialization
@@ -520,6 +546,12 @@ class SalixLiveInstaller:
 			
 ### COMBOBOX LINES ###
 
+    # What to do when a combo line is changed in continent zone
+    def on_continent_zone_combobox_changed(self, widget, data=None):
+        global continent_current_zone
+        continent_current_zone = self.ContinentZoneCombobox.get_active_text()
+        set_country_zone ()
+
     # What to do when a combo line is edited in the Linux New system column
     def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
         # Retrieve the selected Linux partition row iter
@@ -549,36 +581,42 @@ class SalixLiveInstaller:
 
     # What to do when the time selection button is clicked
     def on_time_apply_clicked(self, widget, data=None):
-        # Display the 'Done' check
-        self.TimeCheck.show()
-        self.TimeCheckMarker.hide()
-        self.TimeApplyButton.set_sensitive(False)
-        self.ManualTimeBox.set_sensitive(False)
-        self.NTPCheckButton.set_sensitive(False)
-        self.TimeZoneBox.set_sensitive(False)
-        global ConfigurationSet, set_ntp, months, zonelist, set_zone
-        ConfigurationSet[6] = 'yes'
-        set_zone = zonelist[self.ZoneCombobox.get_active()]
-        subprocess.call('ln -sf ' + set_zone + ' /etc/localtime-copied-from', shell=True)
-        subprocess.call('rm -f /etc/localtime', shell=True)
-        subprocess.call('cp /etc/localtime-copied-from /etc/localtime', shell=True)
-        if set_ntp == 'yes':
-            subprocess.call('chmod +x /etc/rc.d/rc.ntpd', shell=True)
-            subprocess.call("/etc/rc.d/rc.ntpd sync 2>/dev/null", shell=True)
-        if set_ntp == 'no':
-            subprocess.call("/etc/rc.d/rc.ntpd stop 2>/dev/null", shell=True)
-            subprocess.call('chmod -x /etc/rc.d/rc.ntpd', shell=True)
-            set_hour = str(int(self.HourSpinButton.get_value()))
-            set_minute = str(int(self.MinuteSpinButton.get_value()))
-            set_second = str(int(self.SecondSpinButton.get_value()))
-            set_year = str(2000 + int(self.YearCombobox.get_active()))
-            set_month = str(1 + int(self.MonthCombobox.get_active()))
-            set_day = str(self.DayCombobox.get_active())
-            subprocess.call('date -s "' + set_month + "/" + set_day + "/" + set_year +
-            " " + set_hour + ":" + set_minute + ":" + set_second +'"', shell=True)
-            subprocess.call('hwclock --systohc', shell=True)
-        if 'no' not in ConfigurationSet:
-            self.InstallButton.set_sensitive(True)
+        global ConfigurationSet, set_ntp, months, set_zone
+        continent_zone = self.ContinentZoneCombobox.get_active_text()
+        country_zone = self.CountryZoneCombobox.get_active_text()
+        if continent_zone == None:
+            error_dialog("\n" + _("The time zone has not been set") + ". " + _("Please verify and correct") + "! \n")
+        elif country_zone == None:
+            error_dialog("\n" + _("The time zone has not been set") + ". " + _("Please verify and correct") + "! \n")
+        else:
+            set_zone = "/usr/share/zoneinfo/" + continent_zone + "/" + country_zone
+            self.TimeCheck.show()
+            self.TimeCheckMarker.hide()
+            self.TimeApplyButton.set_sensitive(False)
+            self.ManualTimeBox.set_sensitive(False)
+            self.NTPCheckButton.set_sensitive(False)
+            self.TimeZoneBox.set_sensitive(False)
+            ConfigurationSet[6] = 'yes'
+            subprocess.call('ln -sf ' + set_zone + ' /etc/localtime-copied-from', shell=True)
+            subprocess.call('rm -f /etc/localtime', shell=True)
+            subprocess.call('cp /etc/localtime-copied-from /etc/localtime', shell=True)
+            if set_ntp == 'yes':
+                subprocess.call('chmod +x /etc/rc.d/rc.ntpd', shell=True)
+                subprocess.call("/etc/rc.d/rc.ntpd sync 2>/dev/null", shell=True)
+            if set_ntp == 'no':
+                subprocess.call("/etc/rc.d/rc.ntpd stop 2>/dev/null", shell=True)
+                subprocess.call('chmod -x /etc/rc.d/rc.ntpd', shell=True)
+                set_hour = str(int(self.HourSpinButton.get_value()))
+                set_minute = str(int(self.MinuteSpinButton.get_value()))
+                set_second = str(int(self.SecondSpinButton.get_value()))
+                set_year = str(2000 + int(self.YearCombobox.get_active()))
+                set_month = str(1 + int(self.MonthCombobox.get_active()))
+                set_day = str(self.DayCombobox.get_active())
+                subprocess.call('date -s "' + set_month + "/" + set_day + "/" + set_year +
+                " " + set_hour + ":" + set_minute + ":" + set_second +'"', shell=True)
+                subprocess.call('hwclock --systohc', shell=True)
+            if 'no' not in ConfigurationSet:
+                self.InstallButton.set_sensitive(True)
 
     # What to do when the keyboard selection button is clicked
     def on_keyboard_apply_clicked(self, widget, data=None):		
@@ -1507,7 +1545,8 @@ and use the application of your choice before rebooting your machine.)\n"""))
             self.MinuteSpinButton.set_value(current_minute)
             self.SecondSpinButton.set_value(current_second)
             try:
-                self.ZoneCombobox.set_active(current_zone_index)
+                self.ContinentZoneCombobox.set_active(continent_current_zone_index)
+                self.CountryZoneCombobox.set_active(country_current_zone_index)
             except NameError:
                 pass
             self.TimeTab.set_relief(gtk.RELIEF_HALF)

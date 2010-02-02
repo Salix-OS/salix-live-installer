@@ -315,14 +315,25 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="zone_list_store">
+  <object class="GtkListStore" id="continent_zone_list_store">
     <columns>
       <!-- column-name zone -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Europe/Paris</col>
+        <col id="0" translatable="yes">Paris</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="country_zone_list_store">
+    <columns>
+      <!-- column-name zone -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Paris</col>
       </row>
     </data>
   </object>
@@ -1190,9 +1201,10 @@ them first.</property>
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkComboBox" id="zone_combobox">
+                                              <object class="GtkComboBox" id="continent_zone_combobox">
                                                 <property name="visible">True</property>
-                                                <property name="model">zone_list_store</property>
+                                                <property name="model">continent_zone_list_store</property>
+                                                <signal name="changed" handler="on_continent_zone_combobox_changed"/>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="cellrenderertext6"/>
                                                   <attributes>
@@ -1202,6 +1214,21 @@ them first.</property>
                                               </object>
                                               <packing>
                                                 <property name="position">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkComboBox" id="country_zone_combobox">
+                                                <property name="visible">True</property>
+                                                <property name="model">country_zone_list_store</property>
+                                                <child>
+                                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                                                  <attributes>
+                                                    <attribute name="text">0</attribute>
+                                                  </attributes>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">2</property>
                                               </packing>
                                             </child>
                                           </object>
