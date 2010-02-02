@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: salix-live-installer 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 13:47+0100\n"
+"POT-Creation-Date: 2010-02-02 16:31+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
+"Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -443,7 +443,7 @@ msgid "Lo_cale"
 msgstr "Lan_gage"
 
 #: salix-live-installer.glade:547
-msgid "Acces the partitions settings "
+msgid "Access the partitions settings "
 msgstr "Accéder au paramétrage des partitions"
 
 #: salix-live-installer.glade:569
@@ -791,7 +791,7 @@ msgid "Confirm the Windows partition(s) settings from the list above. "
 msgstr "Confirmer le paramétrage des partitions Windows effectué ci-dessus."
 
 #: salix-live-installer.glade:2238
-msgid "Recapitulation of your partition(s) settings."
+msgid "Summary of your partition(s) settings."
 msgstr "Récapitulatif du paramètrage de vos partitions."
 
 #: salix-live-installer.glade:2244
@@ -836,7 +836,7 @@ msgstr "Saisir l'identifiant: "
 
 #: salix-live-installer.glade:2383
 msgid "Here you must define your user's name which should only include alphanumerical characters with no space or upper case letters."
-msgstr "Ici, vous devez définir votre nom d'utilisateur qui ne doitcontenir uniquement que des caractères \alphanumériques sans espace ni majuscules."
+msgstr "Ici, vous devez définir votre nom d'utilisateur qui ne doitcontenir uniquement que des caractères alphanumériques sans espace ni majuscules."
 
 #: salix-live-installer.glade:2402
 msgid "Enter password: "
