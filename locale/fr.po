@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: salix-live-installer 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 19:45+0100\n"
+"POT-Creation-Date: 2010-02-02 13:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
 "Language-Team: \n"
@@ -29,7 +29,7 @@ msgid "April"
 msgstr "avril"
 
 #: salix-live-installer.py:319
-msgid "Mai"
+msgid "May"
 msgstr "mai"
 
 #: salix-live-installer.py:319
@@ -315,20 +315,16 @@ msgstr "Création du fichier /etc/fstab..."
 msgid "Creating /etc/rc.d/rc.font..."
 msgstr "Création du fichier /etc/rc.d/rc.font..."
 
-#: salix-live-installer.py:1371
-msgid "Creating /etc/rc.d/rc.keymap..."
-msgstr "Création du fichier /etc/rc.d/keymap..."
-
-#: salix-live-installer.py:1385
+#: salix-live-installer.py:1372
 msgid "Setting the time, keyboard, locale & login..."
 msgstr "Paramétrage de l'heure, du clavier, de la langue, des identifiants..."
 
-#: salix-live-installer.py:1404
-#: salix-live-installer.py:1409
+#: salix-live-installer.py:1401
+#: salix-live-installer.py:1406
 msgid "Installation process completed successfully ..."
 msgstr "L'installation s'est déroulée avec succès..."
 
-#: salix-live-installer.py:1417
+#: salix-live-installer.py:1414
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
@@ -343,8 +339,8 @@ msgstr ""
 "veuillez cliquer sur le bouton 'non' puis utiliser l'application de votre choix\n"
 "avant de redémarrer votre machine.)\n"
 
-#: salix-live-installer.py:1441
-#: salix-live-installer.py:1446
+#: salix-live-installer.py:1438
+#: salix-live-installer.py:1443
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -354,7 +350,7 @@ msgstr ""
 "\n"
 "Impossible de paramétrer la nouvelle disposition du clavier. "
 
-#: salix-live-installer.py:1452
+#: salix-live-installer.py:1449
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -364,7 +360,7 @@ msgstr ""
 "\n"
 "Impossible de paramétrer la langue du nouveau système. "
 
-#: salix-live-installer.py:1456
+#: salix-live-installer.py:1453
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -374,7 +370,7 @@ msgstr ""
 "\n"
 "Impossible de créer un nouveau compte d'utilisateur."
 
-#: salix-live-installer.py:1460
+#: salix-live-installer.py:1457
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -384,7 +380,7 @@ msgstr ""
 "\n"
 "Impossible de définir le mot de passe du nouvel identifiant. "
 
-#: salix-live-installer.py:1464
+#: salix-live-installer.py:1461
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -394,7 +390,7 @@ msgstr ""
 "\n"
 "Impossible de définit le mot de passe de l'administrateur 'root'. "
 
-#: salix-live-installer.py:1651
+#: salix-live-installer.py:1650
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1074,6 +1070,8 @@ msgstr "Installation de Salix"
 msgid "Please be patient, Salix installation is in progress... "
 msgstr "Veuillez patienter, l'installation de Salix est en cours..."
 
+#~ msgid "Creating /etc/rc.d/rc.keymap..."
+#~ msgstr "Création du fichier /etc/rc.d/keymap..."
 #~ msgid "P_ackages"
 #~ msgstr "L_ogiciels"
 

@@ -316,7 +316,7 @@ class SalixLiveInstaller:
 
             self.MonthListStore.clear()
             global current_month_index, months
-            months = [_('January'), _('February'), _('March'), _('April'), _('Mai'), _('June'), _('July'),
+            months = [_('January'), _('February'), _('March'), _('April'), _('May'), _('June'), _('July'),
             _('August'), _('September'), _('August'), _('September'), _('October'), _('November'), _('December')]
             month_index = 0
             current_month = commands.getoutput('date +%m')
@@ -1355,7 +1355,7 @@ class SalixLiveInstaller:
 
         # Create /etc/rc.d/rc.font
         self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.font..."))
-        self.InstallProgressBar.set_fraction(0.88)
+        self.InstallProgressBar.set_fraction(0.90)
         # there's more work, yield True
         yield True
         RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
@@ -1366,25 +1366,11 @@ class SalixLiveInstaller:
 #\n\
 #setfont -v ter-v16n\n\
 unicode_start ter-v16n")
-
-        # Create /etc/rc.d/rc.keymap
-        self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.keymap..."))
-        self.InstallProgressBar.set_fraction(0.90)
-        # there's more work, yield True
-        yield True
-        RCkeymap_File = open(Main_MountPoint + '/etc/rc.d/rc.keymap', 'w')
-        RCkeymap_File.write("#!/bin/sh\n\
-#\n\
-# Load the keyboard map.  More maps are in /usr/share/kbd/keymaps.\n\
-if [ -x /usr/bin/loadkeys ]; then\n\
-/usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
-fi")
-        RCkeymap_File.close()
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
+        RCfont_File.close()
 
         # Set Time, Keyboard, locale, login...
         self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
-        self.InstallProgressBar.set_fraction(0.92)
+        self.InstallProgressBar.set_fraction(0.95)
         # there's more work, yield True
         yield True
         global set_ntp, set_zone
@@ -1395,11 +1381,21 @@ fi")
         subprocess.call('ln -sf ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
         subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
         subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
+
+        RCkeymap_File = open(Main_MountPoint + '/etc/rc.d/rc.keymap', 'w')
+        RCkeymap_File.write("#!/bin/sh\n\
+#\n\
+# Load the keyboard map.  More maps are in /usr/share/kbd/keymaps.\n\
+if [ -x /usr/bin/loadkeys ]; then\n\
+/usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
+fi")
+        RCkeymap_File.close()
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
+
+        # Create a fork to not get stuck in the chroot
         NewPid = os.fork()
         if NewPid == 0 :
             self.chroot_settings()
-            # Exit child process
-            sys.exit(0)
         else :
             os.waitpid(NewPid, 0) # make sure the child process gets cleaned up
             self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
@@ -1463,7 +1459,9 @@ and use the application of your choice before rebooting your machine.)\n"""))
             subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. "))
-
+        # Exit child process
+        sys.exit(0)
+        
     # What to do when the no button of the YesNo dialog is clicked
     def on_do_not_confirm_button_clicked(self, widget, data=None):
         # Check what is being cancelled & act accordingly if necessary

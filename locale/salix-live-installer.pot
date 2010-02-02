@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 19:50+0100\n"
+"POT-Creation-Date: 2010-02-02 13:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgid "April"
 msgstr ""
 
 #: salix-live-installer.py:319
-msgid "Mai"
+msgid "May"
 msgstr ""
 
 #: salix-live-installer.py:319
@@ -272,19 +272,15 @@ msgstr ""
 msgid "Creating /etc/rc.d/rc.font..."
 msgstr ""
 
-#: salix-live-installer.py:1371
-msgid "Creating /etc/rc.d/rc.keymap..."
-msgstr ""
-
-#: salix-live-installer.py:1385
+#: salix-live-installer.py:1372
 msgid "Setting the time, keyboard, locale & login..."
 msgstr ""
 
-#: salix-live-installer.py:1404 salix-live-installer.py:1409
+#: salix-live-installer.py:1401 salix-live-installer.py:1406
 msgid "Installation process completed successfully ..."
 msgstr ""
 
-#: salix-live-installer.py:1417
+#: salix-live-installer.py:1414
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
@@ -294,42 +290,42 @@ msgid ""
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
 
-#: salix-live-installer.py:1441 salix-live-installer.py:1446
+#: salix-live-installer.py:1438 salix-live-installer.py:1443
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new keyboard selection on the installation target. "
 msgstr ""
 
-#: salix-live-installer.py:1452
+#: salix-live-installer.py:1449
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new language selection on the installation target. "
 msgstr ""
 
-#: salix-live-installer.py:1456
+#: salix-live-installer.py:1453
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to create the new user on the installation target. "
 msgstr ""
 
-#: salix-live-installer.py:1460
+#: salix-live-installer.py:1457
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new user's password on the installation target. "
 msgstr ""
 
-#: salix-live-installer.py:1464
+#: salix-live-installer.py:1461
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set root's password on the installation target. "
 msgstr ""
 
-#: salix-live-installer.py:1651
+#: salix-live-installer.py:1650
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
