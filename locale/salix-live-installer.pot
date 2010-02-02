@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 13:47+0100\n"
+"POT-Creation-Date: 2010-02-02 16:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -372,7 +372,7 @@ msgid "Lo_cale"
 msgstr ""
 
 #: salix-live-installer.glade:547
-msgid "Acces the partitions settings "
+msgid "Access the partitions settings "
 msgstr ""
 
 #: salix-live-installer.glade:569
@@ -685,7 +685,7 @@ msgid "Confirm the Windows partition(s) settings from the list above. "
 msgstr ""
 
 #: salix-live-installer.glade:2238
-msgid "Recapitulation of your partition(s) settings."
+msgid "Summary of your partition(s) settings."
 msgstr ""
 
 #: salix-live-installer.glade:2244
