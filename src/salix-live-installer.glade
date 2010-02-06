@@ -875,7 +875,7 @@ SalixLive's graphic environment.</property>
                             </child>
                             <child>
                               <object class="GtkVBox" id="vbox4">
-                                <property name="width_request">580</property>
+                                <property name="width_request">485</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="intro_box">
@@ -1187,12 +1187,12 @@ them first.</property>
                                         <property name="visible">True</property>
                                         <child>
                                           <object class="GtkHBox" id="time_zone_box">
-                                            <property name="width_request">405</property>
+                                            <property name="width_request">300</property>
                                             <property name="visible">True</property>
+                                            <property name="tooltip_text" translatable="yes">Set the time zone</property>
                                             <child>
                                               <object class="GtkLabel" id="label41">
                                                 <property name="visible">True</property>
-                                                <property name="tooltip_text" translatable="yes">Set the time zone</property>
                                                 <property name="label" translatable="yes">Time zone: </property>
                                               </object>
                                               <packing>
@@ -1260,6 +1260,7 @@ them first.</property>
                                         </child>
                                       </object>
                                       <packing>
+                                        <property name="fill">False</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1786,7 +1787,8 @@ them first.</property>
                                         <property name="label" translatable="yes">From the above partitions found on your system, please select the 
 one where Salix' main directory tree (/) should be installed.
 
-&lt;b&gt;Warning!&lt;/b&gt; This partition will be reformatted and its data will be erased.</property>
+&lt;b&gt;Warning!&lt;/b&gt; This partition will be reformatted and its data will be 
+permanently erased.</property>
                                         <property name="use_markup">True</property>
                                       </object>
                                       <packing>
