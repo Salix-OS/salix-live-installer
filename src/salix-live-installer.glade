@@ -356,12 +356,14 @@
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkButton" id="about_link">
+                    <property name="width_request">250</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">About Salix Installer...</property>
                     <property name="relief">none</property>
+                    <signal name="leave_notify_event" handler="on_about_link_leave_notify_event"/>
                     <signal name="clicked" handler="on_about_link_clicked"/>
+                    <signal name="enter_notify_event" handler="on_about_link_enter_notify_event"/>
                     <child>
                       <object class="GtkImage" id="image1">
                         <property name="visible">True</property>
@@ -371,15 +373,25 @@
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">6</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkEventBox" id="context_eventbox">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">SalixLive Installer will perform a standard installation of Salix 
-Operating System on your computer from the comfort of 
-SalixLive's graphic environment.</property>
+                    <signal name="leave_notify_event" handler="on_context_eventbox_leave_notify_event"/>
+                    <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
+                    <child>
+                      <object class="GtkLabel" id="context_label">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="xpad">7</property>
+                        <property name="ypad">3</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -422,9 +434,10 @@ SalixLive's graphic environment.</property>
                                         <property name="can_default">True</property>
                                         <property name="has_default">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the time settings </property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_time_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_time_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_time_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox35">
                                             <property name="visible">True</property>
@@ -468,9 +481,10 @@ SalixLive's graphic environment.</property>
                                         <property name="can_default">True</property>
                                         <property name="has_default">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the keyboard settings </property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_keyboard_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_keyboard_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_keyboard_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox3">
                                             <property name="visible">True</property>
@@ -512,9 +526,10 @@ SalixLive's graphic environment.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the language settings </property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_locale_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_locale_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_locale_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox4">
                                             <property name="visible">True</property>
@@ -555,9 +570,10 @@ SalixLive's graphic environment.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the partitions settings </property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_partition_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_partition_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_partition_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox5">
                                             <property name="visible">True</property>
@@ -598,9 +614,10 @@ SalixLive's graphic environment.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the users and passwords settings</property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_users_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_users_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_users_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox6">
                                             <property name="visible">True</property>
@@ -641,9 +658,10 @@ SalixLive's graphic environment.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="tooltip_text" translatable="yes">Access the packages selection</property>
                                         <property name="relief">none</property>
+                                        <signal name="leave_notify_event" handler="on_packages_tab_leave_notify_event"/>
                                         <signal name="clicked" handler="on_packages_tab_clicked"/>
+                                        <signal name="enter_notify_event" handler="on_packages_tab_enter_notify_event"/>
                                         <child>
                                           <object class="GtkHBox" id="hbox7">
                                             <property name="visible">True</property>
@@ -953,22 +971,28 @@ them first.</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkVBox" id="manual_time_box">
+                                          <object class="GtkEventBox" id="manual_time_eventbox">
                                             <property name="visible">True</property>
-                                            <property name="sensitive">False</property>
-                                            <property name="tooltip_text" translatable="yes">Set the date &amp; time manually if you do not use NTP service.</property>
+                                            <signal name="leave_notify_event" handler="on_manual_time_eventbox_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_manual_time_eventbox_enter_notify_event"/>
                                             <child>
-                                              <object class="GtkFrame" id="time_frame">
+                                              <object class="GtkVBox" id="manual_time_box">
                                                 <property name="visible">True</property>
-                                                <property name="label_xalign">0.5</property>
+                                                <property name="sensitive">False</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <child>
-                                                  <object class="GtkAlignment" id="alignment4">
+                                                  <object class="GtkFrame" id="time_frame">
                                                     <property name="visible">True</property>
+                                                    <property name="label_xalign">0.5</property>
                                                     <child>
-                                                      <object class="GtkHBox" id="hbox41">
+                                                      <object class="GtkAlignment" id="alignment4">
                                                         <property name="visible">True</property>
                                                         <child>
-                                                          <object class="GtkSpinButton" id="hour_spinbutton">
+                                                          <object class="GtkHBox" id="hbox41">
+                                                            <property name="visible">True</property>
+                                                            <child>
+                                                            <object class="GtkSpinButton" id="hour_spinbutton">
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="max_length">2</property>
@@ -976,22 +1000,22 @@ them first.</property>
                                                             <property name="xalign">1</property>
                                                             <property name="adjustment">adjustment2</property>
                                                             <property name="climb_rate">1</property>
-                                                          </object>
-                                                          <packing>
+                                                            </object>
+                                                            <packing>
                                                             <property name="position">0</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkLabel" id="label43">
+                                                            </packing>
+                                                            </child>
+                                                            <child>
+                                                            <object class="GtkLabel" id="label43">
                                                             <property name="visible">True</property>
                                                             <property name="label"> : </property>
-                                                          </object>
-                                                          <packing>
+                                                            </object>
+                                                            <packing>
                                                             <property name="position">1</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkSpinButton" id="minute_spinbutton">
+                                                            </packing>
+                                                            </child>
+                                                            <child>
+                                                            <object class="GtkSpinButton" id="minute_spinbutton">
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="max_length">2</property>
@@ -999,22 +1023,22 @@ them first.</property>
                                                             <property name="xalign">1</property>
                                                             <property name="adjustment">adjustment1</property>
                                                             <property name="climb_rate">1</property>
-                                                          </object>
-                                                          <packing>
+                                                            </object>
+                                                            <packing>
                                                             <property name="position">2</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkLabel" id="label44">
+                                                            </packing>
+                                                            </child>
+                                                            <child>
+                                                            <object class="GtkLabel" id="label44">
                                                             <property name="visible">True</property>
                                                             <property name="label"> : </property>
-                                                          </object>
-                                                          <packing>
+                                                            </object>
+                                                            <packing>
                                                             <property name="position">3</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkSpinButton" id="second_spinbutton">
+                                                            </packing>
+                                                            </child>
+                                                            <child>
+                                                            <object class="GtkSpinButton" id="second_spinbutton">
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="max_length">2</property>
@@ -1022,158 +1046,158 @@ them first.</property>
                                                             <property name="xalign">1</property>
                                                             <property name="adjustment">adjustment3</property>
                                                             <property name="climb_rate">1</property>
-                                                          </object>
-                                                          <packing>
+                                                            </object>
+                                                            <packing>
                                                             <property name="position">4</property>
-                                                          </packing>
+                                                            </packing>
+                                                            </child>
+                                                          </object>
                                                         </child>
                                                       </object>
                                                     </child>
-                                                  </object>
-                                                </child>
-                                                <child type="label">
-                                                  <object class="GtkLabel" id="label42">
-                                                    <property name="visible">True</property>
-                                                    <property name="label" translatable="yes"> hrs : min : sec </property>
-                                                    <property name="use_markup">True</property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">False</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel" id="label47">
-                                                <property name="visible">True</property>
-                                                <property name="label">   </property>
-                                              </object>
-                                              <packing>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkHBox" id="hbox42">
-                                                <property name="visible">True</property>
-                                                <child>
-                                                  <object class="GtkVBox" id="vbox9">
-                                                    <property name="visible">True</property>
-                                                    <child>
-                                                      <object class="GtkLabel" id="year_label">
+                                                    <child type="label">
+                                                      <object class="GtkLabel" id="label42">
                                                         <property name="visible">True</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">Year:</property>
+                                                        <property name="label" translatable="yes"> hrs : min : sec </property>
+                                                        <property name="use_markup">True</property>
                                                       </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="month_label">
-                                                        <property name="visible">True</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">Month:</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">1</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel" id="day_label">
-                                                        <property name="visible">True</property>
-                                                        <property name="xalign">1</property>
-                                                        <property name="label" translatable="yes">Day:</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">2</property>
-                                                      </packing>
                                                     </child>
                                                   </object>
                                                   <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
                                                     <property name="position">0</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkVBox" id="vbox10">
+                                                  <object class="GtkLabel" id="label47">
                                                     <property name="visible">True</property>
-                                                    <child>
-                                                      <object class="GtkComboBox" id="year_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="model">year_list_store</property>
-                                                        <child>
-                                                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
-                                                          <attributes>
-                                                            <attribute name="text">0</attribute>
-                                                          </attributes>
-                                                        </child>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkComboBox" id="month_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="model">month_list_store</property>
-                                                        <child>
-                                                          <object class="GtkCellRendererText" id="month_list"/>
-                                                          <attributes>
-                                                            <attribute name="text">0</attribute>
-                                                          </attributes>
-                                                        </child>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">1</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkComboBox" id="day_combobox">
-                                                        <property name="visible">True</property>
-                                                        <property name="model">day_list_store</property>
-                                                        <child>
-                                                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
-                                                          <attributes>
-                                                            <attribute name="text">0</attribute>
-                                                          </attributes>
-                                                        </child>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">2</property>
-                                                      </packing>
-                                                    </child>
+                                                    <property name="label">   </property>
                                                   </object>
                                                   <packing>
                                                     <property name="position">1</property>
                                                   </packing>
                                                 </child>
+                                                <child>
+                                                  <object class="GtkHBox" id="hbox42">
+                                                    <property name="visible">True</property>
+                                                    <child>
+                                                      <object class="GtkVBox" id="vbox9">
+                                                        <property name="visible">True</property>
+                                                        <child>
+                                                          <object class="GtkLabel" id="year_label">
+                                                            <property name="visible">True</property>
+                                                            <property name="xalign">1</property>
+                                                            <property name="label" translatable="yes">Year:</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">0</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel" id="month_label">
+                                                            <property name="visible">True</property>
+                                                            <property name="xalign">1</property>
+                                                            <property name="label" translatable="yes">Month:</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel" id="day_label">
+                                                            <property name="visible">True</property>
+                                                            <property name="xalign">1</property>
+                                                            <property name="label" translatable="yes">Day:</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">2</property>
+                                                          </packing>
+                                                        </child>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">0</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkVBox" id="vbox10">
+                                                        <property name="visible">True</property>
+                                                        <child>
+                                                          <object class="GtkComboBox" id="year_combobox">
+                                                            <property name="visible">True</property>
+                                                            <property name="model">year_list_store</property>
+                                                            <child>
+                                                            <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                                                            <attributes>
+                                                            <attribute name="text">0</attribute>
+                                                            </attributes>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">0</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkComboBox" id="month_combobox">
+                                                            <property name="visible">True</property>
+                                                            <property name="model">month_list_store</property>
+                                                            <child>
+                                                            <object class="GtkCellRendererText" id="month_list"/>
+                                                            <attributes>
+                                                            <attribute name="text">0</attribute>
+                                                            </attributes>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkComboBox" id="day_combobox">
+                                                            <property name="visible">True</property>
+                                                            <property name="model">day_list_store</property>
+                                                            <child>
+                                                            <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                                                            <attributes>
+                                                            <attribute name="text">0</attribute>
+                                                            </attributes>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">2</property>
+                                                          </packing>
+                                                        </child>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkLabel" id="label46">
+                                                    <property name="visible">True</property>
+                                                    <property name="label">   </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">3</property>
+                                                  </packing>
+                                                </child>
                                               </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">False</property>
-                                                <property name="position">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel" id="label46">
-                                                <property name="visible">True</property>
-                                                <property name="label">   </property>
-                                              </object>
-                                              <packing>
-                                                <property name="position">3</property>
-                                              </packing>
                                             </child>
                                           </object>
                                           <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">2</property>
                                           </packing>
                                         </child>
@@ -1186,55 +1210,60 @@ them first.</property>
                                       <object class="GtkHBox" id="hbox37">
                                         <property name="visible">True</property>
                                         <child>
-                                          <object class="GtkHBox" id="time_zone_box">
-                                            <property name="width_request">300</property>
+                                          <object class="GtkEventBox" id="timezone_eventbox">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">Set the time zone</property>
+                                            <signal name="leave_notify_event" handler="on_timezone_eventbox_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_timezone_eventbox_enter_notify_event"/>
                                             <child>
-                                              <object class="GtkLabel" id="label41">
+                                              <object class="GtkHBox" id="time_zone_box">
+                                                <property name="width_request">300</property>
                                                 <property name="visible">True</property>
-                                                <property name="label" translatable="yes">Time zone: </property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkComboBox" id="continent_zone_combobox">
-                                                <property name="visible">True</property>
-                                                <property name="model">continent_zone_list_store</property>
-                                                <signal name="changed" handler="on_continent_zone_combobox_changed"/>
                                                 <child>
-                                                  <object class="GtkCellRendererText" id="cellrenderertext6"/>
-                                                  <attributes>
-                                                    <attribute name="text">0</attribute>
-                                                  </attributes>
+                                                  <object class="GtkLabel" id="label41">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Time zone: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkComboBox" id="continent_zone_combobox">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="model">continent_zone_list_store</property>
+                                                    <signal name="changed" handler="on_continent_zone_combobox_changed"/>
+                                                    <child>
+                                                      <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                                                      <attributes>
+                                                        <attribute name="text">0</attribute>
+                                                      </attributes>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkComboBox" id="country_zone_combobox">
+                                                    <property name="visible">True</property>
+                                                    <property name="model">country_zone_list_store</property>
+                                                    <child>
+                                                      <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                                                      <attributes>
+                                                        <attribute name="text">0</attribute>
+                                                      </attributes>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">2</property>
+                                                  </packing>
                                                 </child>
                                               </object>
-                                              <packing>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkComboBox" id="country_zone_combobox">
-                                                <property name="visible">True</property>
-                                                <property name="model">country_zone_list_store</property>
-                                                <child>
-                                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
-                                                  <attributes>
-                                                    <attribute name="text">0</attribute>
-                                                  </attributes>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="position">2</property>
-                                              </packing>
                                             </child>
                                           </object>
                                           <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -1244,12 +1273,13 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Use Network Time Protocol daemon to synchronize time via Internet</property>
                                             <property name="xalign">1</property>
                                             <property name="image_position">right</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
+                                            <signal name="leave_notify_event" handler="on_ntp_checkbutton_leave_notify_event"/>
                                             <signal name="toggled" handler="on_ntp_checkbutton_toggled"/>
+                                            <signal name="enter_notify_event" handler="on_ntp_checkbutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1274,9 +1304,10 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Cancel time settings.</property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_time_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_time_undo_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_time_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="position">0</property>
@@ -1288,9 +1319,10 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Activate the time settings after options above have been defined.</property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_time_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_time_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_time_apply_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="pack_type">end</property>
@@ -1331,7 +1363,6 @@ them first.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow1">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight your favorite keyboard layout from this list before clicking on the 'Select keyboard' button.</property>
                                         <property name="hscrollbar_policy">never</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1342,6 +1373,8 @@ them first.</property>
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
                                             <property name="search_column">0</property>
+                                            <signal name="leave_notify_event" handler="on_keyboard_list_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_keyboard_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="layout_column">
                                                 <property name="sizing">autosize</property>
@@ -1379,9 +1412,10 @@ them first.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="tooltip_text" translatable="yes">Check this box if you want your numeric keypad to be activated during the boot process.</property>
                                         <property name="draw_indicator">True</property>
+                                        <signal name="leave_notify_event" handler="on_numlock_checkbutton_leave_notify_event"/>
                                         <signal name="toggled" handler="on_numlock_checkbutton_toggled"/>
+                                        <signal name="enter_notify_event" handler="on_numlock_checkbutton_enter_notify_event"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1393,14 +1427,38 @@ them first.</property>
                                       <object class="GtkHBox" id="hbox16">
                                         <property name="visible">True</property>
                                         <child>
-                                          <object class="GtkLabel" id="label13">
+                                          <object class="GtkEventBox" id="keyboard_selection_eventbox">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected. 
-
-'None' will be displayed until you have confirmed that selection. </property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;b&gt;Selected keyboard layout: &lt;/b&gt;</property>
-                                            <property name="use_markup">True</property>
+                                            <signal name="leave_notify_event" handler="on_keyboard_selection_eventbox_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_keyboard_selection_eventbox_enter_notify_event"/>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox39">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label13">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">&lt;b&gt;Selected keyboard layout: &lt;/b&gt;</property>
+                                                    <property name="use_markup">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkLabel" id="keyboard_selection">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">None</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                            </child>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1409,13 +1467,8 @@ them first.</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel" id="keyboard_selection">
+                                          <object class="GtkFixed" id="fixed7">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the keyboard layout you have selected. 
-
-'None' will be displayed until you have confirmed that selection. </property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">None</property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -1439,9 +1492,10 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Cancel keyboard layout selection </property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_keyboard_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_keyboard_undo_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_keyboard_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1454,8 +1508,9 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the keyboard layout. </property>
+                                            <signal name="leave_notify_event" handler="on_keyboard_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_keyboard_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_keyboard_apply_enter_notify_event"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox14">
                                                 <property name="visible">True</property>
@@ -1523,7 +1578,6 @@ them first.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow2">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight your language from this list before clicking on the 'Select language' button.</property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1534,6 +1588,8 @@ them first.</property>
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
                                             <property name="search_column">0</property>
+                                            <signal name="leave_notify_event" handler="on_locale_list_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_locale_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="locale_column">
                                                 <property name="title" translatable="yes">Locale</property>
@@ -1568,14 +1624,38 @@ them first.</property>
                                       <object class="GtkHBox" id="hbox17">
                                         <property name="visible">True</property>
                                         <child>
-                                          <object class="GtkLabel" id="label14">
+                                          <object class="GtkEventBox" id="locale_selection_eventbox">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected. 
-
-'None' will be displayed until you have confirmed that selection. </property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;b&gt;Selected system language: &lt;/b&gt;</property>
-                                            <property name="use_markup">True</property>
+                                            <signal name="leave_notify_event" handler="on_locale_selection_eventbox_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_locale_selection_eventbox_enter_notify_event"/>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox40">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label14">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">&lt;b&gt;Selected system language: &lt;/b&gt;</property>
+                                                    <property name="use_markup">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkLabel" id="locale_selection">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">None</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                            </child>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1584,13 +1664,8 @@ them first.</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel" id="locale_selection">
+                                          <object class="GtkFixed" id="fixed8">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">This is the system language you have selected. 
-
-'None' will be displayed until you have confirmed that selection. </property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">None</property>
                                           </object>
                                           <packing>
                                             <property name="position">1</property>
@@ -1614,9 +1689,10 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Cancel language selection </property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_locale_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_locale_undo_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_locale_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1629,8 +1705,9 @@ them first.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the system language</property>
+                                            <signal name="leave_notify_event" handler="on_locale_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_locale_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_locale_apply_enter_notify_event"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox15">
                                                 <property name="visible">True</property>
@@ -1698,7 +1775,6 @@ them first.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow3">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Highlight the partition from this list before clicking on the 'Select partition' button.</property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1709,6 +1785,8 @@ them first.</property>
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
                                             <property name="search_column">0</property>
+                                            <signal name="leave_notify_event" handler="on_main_partition_list_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_main_partition_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_disk_column">
                                                 <property name="title" translatable="yes">Disk</property>
@@ -1770,9 +1848,10 @@ them first.</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="tooltip_text" translatable="yes">Check this box if you want your external disk drive(s) to be displayed in the list above. </property>
                                         <property name="draw_indicator">True</property>
+                                        <signal name="leave_notify_event" handler="on_external_device_checkbutton_leave_notify_event"/>
                                         <signal name="toggled" handler="on_external_device_checkbutton_toggled"/>
+                                        <signal name="enter_notify_event" handler="on_external_device_checkbutton_enter_notify_event"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1802,11 +1881,46 @@ permanently erased.</property>
                                       <object class="GtkHBox" id="hbox18">
                                         <property name="visible">True</property>
                                         <child>
-                                          <object class="GtkLabel" id="main_format_label">
+                                          <object class="GtkEventBox" id="main_format_eventbox">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used to format Salix main partition.</property>
-                                            <property name="xalign">1</property>
-                                            <property name="label" translatable="yes">Format with: </property>
+                                            <signal name="leave_notify_event" handler="on_main_format_eventbox_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_main_format_eventbox_enter_notify_event"/>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox43">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="main_format_label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">1</property>
+                                                    <property name="label" translatable="yes">Format with: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkComboBox" id="main_format_combobox">
+                                                    <property name="visible">True</property>
+                                                    <property name="model">main_format_list_store</property>
+                                                    <property name="active">2</property>
+                                                    <property name="has_frame">False</property>
+                                                    <child>
+                                                      <object class="GtkCellRendererText" id="format_list"/>
+                                                      <attributes>
+                                                        <attribute name="text">0</attribute>
+                                                      </attributes>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                            </child>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1815,22 +1929,10 @@ permanently erased.</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkComboBox" id="main_format_combobox">
+                                          <object class="GtkFixed" id="fixed9">
                                             <property name="visible">True</property>
-                                            <property name="tooltip_text" translatable="yes">The filesystem that will be used to format Salix main partition.</property>
-                                            <property name="model">main_format_list_store</property>
-                                            <property name="active">2</property>
-                                            <property name="has_frame">False</property>
-                                            <child>
-                                              <object class="GtkCellRendererText" id="format_list"/>
-                                              <attributes>
-                                                <attribute name="text">0</attribute>
-                                              </attributes>
-                                            </child>
                                           </object>
                                           <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -1839,8 +1941,9 @@ permanently erased.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your selection after highlighting the partition. </property>
+                                            <signal name="leave_notify_event" handler="on_main_partition_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_main_partition_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_main_partition_apply_enter_notify_event"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox20">
                                                 <property name="visible">True</property>
@@ -1870,7 +1973,6 @@ permanently erased.</property>
                                           <packing>
                                             <property name="expand">False</property>
                                             <property name="fill">False</property>
-                                            <property name="pack_type">end</property>
                                             <property name="position">2</property>
                                           </packing>
                                         </child>
@@ -1908,11 +2010,6 @@ permanently erased.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow4">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point. 
-
-You can either choose one of the suggested mount points or enter your own.
-
-You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. </property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -1923,6 +2020,8 @@ You must configure all the desired partitions before clicking on the 'Apply sett
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
                                             <property name="search_column">0</property>
+                                            <signal name="leave_notify_event" handler="on_linux_partition_list_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_linux_partition_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_disk_column">
                                                 <property name="visible">False</property>
@@ -2034,8 +2133,9 @@ separate partition.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm the Linux partition(s) settings from the list above. </property>
+                                            <signal name="leave_notify_event" handler="on_linux_partition_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_linux_partition_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_linux_partition_apply_enter_notify_event"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox21">
                                                 <property name="visible">True</property>
@@ -2104,9 +2204,6 @@ separate partition.</property>
                                       <object class="GtkScrolledWindow" id="scrolledwindow5">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. 
-
-You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. </property>
                                         <property name="hscrollbar_policy">automatic</property>
                                         <property name="vscrollbar_policy">automatic</property>
                                         <child>
@@ -2117,6 +2214,8 @@ You must configure all the desired partitions before clicking on the 'Apply sett
                                             <property name="headers_clickable">False</property>
                                             <property name="rules_hint">True</property>
                                             <property name="search_column">0</property>
+                                            <signal name="leave_notify_event" handler="on_win_partition_list_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_win_partition_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_disk_column">
                                                 <property name="visible">False</property>
@@ -2213,8 +2312,9 @@ accessible in Salix system.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm the Windows partition(s) settings from the list above. </property>
+                                            <signal name="leave_notify_event" handler="on_windows_partition_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_windows_partition_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_windows_partition_apply_enter_notify_event"/>
                                             <child>
                                               <object class="GtkHBox" id="hbox19">
                                                 <property name="visible">True</property>
@@ -2264,81 +2364,95 @@ accessible in Salix system.</property>
                                 </child>
                                 <child>
                                   <object class="GtkVBox" id="recap_partition_box">
-                                    <property name="tooltip_text" translatable="yes">Summary of your partition(s) settings.</property>
                                     <property name="border_width">1</property>
                                     <child>
-                                      <object class="GtkLabel" id="label27">
+                                      <object class="GtkEventBox" id="partition_recap_eventbox">
                                         <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Salix main partition:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <signal name="leave_notify_event" handler="on_partition_recap_eventbox_leave_notify_event"/>
+                                        <signal name="enter_notify_event" handler="on_partition_recap_eventbox_enter_notify_event"/>
+                                        <child>
+                                          <object class="GtkVBox" id="vbox6">
+                                            <property name="visible">True</property>
+                                            <child>
+                                              <object class="GtkLabel" id="label27">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;Salix main partition:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="main_part_recap_label">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Main partition</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="label1">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;Other Linux partitions:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="lin_part_recap_label">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Home partition</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="label2">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;Windows partitions:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">4</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="win_part_recap_label">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">Windows partitions</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">5</property>
+                                              </packing>
+                                            </child>
+                                          </object>
+                                        </child>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
                                         <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="main_part_recap_label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Main partition</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="label28">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Other Linux partitions:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">3</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="lin_part_recap_label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Home partition</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">4</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="label2">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Windows partitions:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">5</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="win_part_recap_label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Windows partitions</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">6</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -2351,9 +2465,10 @@ accessible in Salix system.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Cancel all partition(s) settings. </property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_partition_recap_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_partition_recap_undo_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_partition_recap_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="position">0</property>
@@ -2364,7 +2479,6 @@ accessible in Salix system.</property>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
                                         <property name="padding">3</property>
-                                        <property name="pack_type">end</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -2375,378 +2489,403 @@ accessible in Salix system.</property>
                                 </child>
                                 <child>
                                   <object class="GtkVBox" id="users_box">
-                                    <property name="tooltip_text" translatable="yes">A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a user's name coupled with a password) before allowing the user access to system resources.</property>
-                                    <property name="border_width">1</property>
                                     <child>
-                                      <object class="GtkLabel" id="label11">
+                                      <object class="GtkEventBox" id="users_eventbox">
                                         <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Please create a new standard user:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
+                                        <signal name="leave_notify_event" handler="on_users_eventbox_leave_notify_event"/>
+                                        <signal name="enter_notify_event" handler="on_users_eventbox_enter_notify_event"/>
+                                        <child>
+                                          <object class="GtkVBox" id="vbox">
+                                            <property name="visible">True</property>
+                                            <property name="border_width">1</property>
+                                            <child>
+                                              <object class="GtkLabel" id="label11">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;Please create a new standard user:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="padding">5</property>
+                                                <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox22">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label29">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Enter login: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkEntry" id="user_login_entry">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <signal name="leave_notify_event" handler="on_user_login_entry_leave_notify_event"/>
+                                                    <signal name="enter_notify_event" handler="on_user_login_entry_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox24">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label30">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Enter password: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkEntry" id="user_pass1_entry">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <signal name="leave_notify_event" handler="on_user_pass1_entry_leave_notify_event"/>
+                                                    <signal name="enter_notify_event" handler="on_user_pass1_entry_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="padding">2</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkCheckButton" id="user_visible_checkbutton">
+                                                    <property name="label" translatable="yes">Do not hide</property>
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="receives_default">False</property>
+                                                    <property name="draw_indicator">True</property>
+                                                    <signal name="leave_notify_event" handler="on_user_visible_checkbutton_leave_notify_event"/>
+                                                    <signal name="toggled" handler="on_user_visible_checkbutton_toggled"/>
+                                                    <signal name="enter_notify_event" handler="on_user_visible_checkbutton_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="padding">3</property>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox25">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label31">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Re-enter password: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkEntry" id="user_pass2_entry">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <signal name="leave_notify_event" handler="on_user_pass2_entry_leave_notify_event"/>
+                                                    <signal name="enter_notify_event" handler="on_user_pass2_entry_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="padding">2</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox28">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label35">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">&lt;b&gt;User created: &lt;/b&gt;</property>
+                                                    <property name="use_markup">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkLabel" id="new_user_login">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">None</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="padding">2</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkHButtonBox" id="hbuttonbox6">
+                                                    <property name="visible">True</property>
+                                                    <child>
+                                                      <object class="GtkButton" id="users_undo">
+                                                        <property name="label">gtk-undo</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can_focus">True</property>
+                                                        <property name="receives_default">True</property>
+                                                        <property name="use_stock">True</property>
+                                                        <signal name="leave_notify_event" handler="on_users_undo_leave_notify_event"/>
+                                                        <signal name="clicked" handler="on_users_undo_clicked"/>
+                                                        <signal name="enter_notify_event" handler="on_users_undo_enter_notify_event"/>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">0</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkButton" id="users_apply">
+                                                        <property name="label">gtk-apply</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can_focus">True</property>
+                                                        <property name="receives_default">True</property>
+                                                        <property name="use_stock">True</property>
+                                                        <signal name="leave_notify_event" handler="on_users_apply_leave_notify_event"/>
+                                                        <signal name="clicked" handler="on_users_apply_clicked"/>
+                                                        <signal name="enter_notify_event" handler="on_users_apply_enter_notify_event"/>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="padding">3</property>
+                                                <property name="position">4</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHSeparator" id="hseparator1">
+                                                <property name="visible">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="padding">4</property>
+                                                <property name="position">5</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="label32">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;Please create a new administrator's password:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="padding">5</property>
+                                                <property name="position">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox26">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label33">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Enter root password: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkEntry" id="root_pass1_entry">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <signal name="leave_notify_event" handler="on_root_pass1_entry_leave_notify_event"/>
+                                                    <signal name="enter_notify_event" handler="on_root_pass1_entry_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="padding">2</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkCheckButton" id="root_visible_checkbutton">
+                                                    <property name="label" translatable="yes">Do not hide</property>
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="receives_default">False</property>
+                                                    <property name="draw_indicator">True</property>
+                                                    <signal name="leave_notify_event" handler="on_root_visible_checkbutton_leave_notify_event"/>
+                                                    <signal name="toggled" handler="on_root_visible_checkbutton_toggled"/>
+                                                    <signal name="enter_notify_event" handler="on_root_visible_checkbutton_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="padding">3</property>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">7</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox27">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label34">
+                                                    <property name="visible">True</property>
+                                                    <property name="label" translatable="yes">Re-enter root password: </property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkEntry" id="root_pass2_entry">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <signal name="leave_notify_event" handler="on_root_pass2_entry_leave_notify_event"/>
+                                                    <signal name="enter_notify_event" handler="on_root_pass2_entry_enter_notify_event"/>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="padding">2</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="position">8</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkHBox" id="hbox30">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <object class="GtkLabel" id="label37">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">&lt;b&gt;Password created: &lt;/b&gt;</property>
+                                                    <property name="use_markup">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkLabel" id="root_pass_created">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">None</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkHButtonBox" id="hbuttonbox9">
+                                                    <property name="visible">True</property>
+                                                    <child>
+                                                      <object class="GtkButton" id="rootpass_undo">
+                                                        <property name="label">gtk-undo</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can_focus">True</property>
+                                                        <property name="receives_default">True</property>
+                                                        <property name="use_stock">True</property>
+                                                        <signal name="leave_notify_event" handler="on_rootpass_undo_leave_notify_event"/>
+                                                        <signal name="clicked" handler="on_rootpass_undo_clicked"/>
+                                                        <signal name="enter_notify_event" handler="on_rootpass_undo_enter_notify_event"/>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">0</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkButton" id="rootpass_apply">
+                                                        <property name="label">gtk-apply</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can_focus">True</property>
+                                                        <property name="receives_default">True</property>
+                                                        <property name="use_stock">True</property>
+                                                        <signal name="leave_notify_event" handler="on_rootpass_apply_leave_notify_event"/>
+                                                        <signal name="clicked" handler="on_rootpass_apply_clicked"/>
+                                                        <signal name="enter_notify_event" handler="on_rootpass_apply_enter_notify_event"/>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="padding">3</property>
+                                                <property name="position">9</property>
+                                              </packing>
+                                            </child>
+                                          </object>
+                                        </child>
                                       </object>
                                       <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="padding">5</property>
                                         <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox22">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label29">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Enter login: </property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkEntry" id="user_login_entry">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must define your user's name which should only include alphanumerical characters with no space or upper case letters.</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox24">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label30">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Enter password: </property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkEntry" id="user_pass1_entry">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Choose a password or passphrase to be coupled with your user's name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkCheckButton" id="user_visible_checkbutton">
-                                            <property name="label" translatable="yes">Do not hide</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see the password you are typing.</property>
-                                            <property name="draw_indicator">True</property>
-                                            <signal name="toggled" handler="on_user_visible_checkbutton_toggled"/>
-                                          </object>
-                                          <packing>
-                                            <property name="padding">3</property>
-                                            <property name="position">2</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox25">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label31">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Re-enter password: </property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkEntry" id="user_pass2_entry">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must retype your user's password as a confirmation of your choice.</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">3</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox28">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label35">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;b&gt;User created: &lt;/b&gt;</property>
-                                            <property name="use_markup">True</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="new_user_login">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">None</property>
-                                          </object>
-                                          <packing>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkHButtonBox" id="hbuttonbox6">
-                                            <property name="visible">True</property>
-                                            <child>
-                                              <object class="GtkButton" id="users_undo">
-                                                <property name="label">gtk-undo</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">True</property>
-                                                <property name="tooltip_text" translatable="yes">Cancel new user creation</property>
-                                                <property name="use_stock">True</property>
-                                                <signal name="clicked" handler="on_users_undo_clicked"/>
-                                              </object>
-                                              <packing>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkButton" id="users_apply">
-                                                <property name="label">gtk-apply</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">True</property>
-                                                <property name="tooltip_text" translatable="yes">Create new user</property>
-                                                <property name="use_stock">True</property>
-                                                <signal name="clicked" handler="on_users_apply_clicked"/>
-                                              </object>
-                                              <packing>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">2</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="padding">3</property>
-                                        <property name="position">4</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHSeparator" id="hseparator1">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="padding">4</property>
-                                        <property name="position">5</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="label32">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Please create a new administrator's password:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="padding">5</property>
-                                        <property name="position">6</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox26">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label33">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Enter root password: </property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkEntry" id="root_pass1_entry">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">On Linux systems, the superuser, or root, is a special user account used for system administration. Here you must set its password or passphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &amp;)</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkCheckButton" id="root_visible_checkbutton">
-                                            <property name="label" translatable="yes">Do not hide</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Check this box if you want to be able to see the password you are typing.</property>
-                                            <property name="draw_indicator">True</property>
-                                            <signal name="toggled" handler="on_root_visible_checkbutton_toggled"/>
-                                          </object>
-                                          <packing>
-                                            <property name="padding">3</property>
-                                            <property name="position">2</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">7</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox27">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label34">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Re-enter root password: </property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkEntry" id="root_pass2_entry">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="tooltip_text" translatable="yes">Here you must retype the superuser (root) password as a confirmation of your choice.</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="padding">2</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">8</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox30">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkLabel" id="label37">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">&lt;b&gt;Password created: &lt;/b&gt;</property>
-                                            <property name="use_markup">True</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="root_pass_created">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">None</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkHButtonBox" id="hbuttonbox9">
-                                            <property name="visible">True</property>
-                                            <child>
-                                              <object class="GtkButton" id="rootpass_undo">
-                                                <property name="label">gtk-undo</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">True</property>
-                                                <property name="tooltip_text" translatable="yes">Cancel new root password</property>
-                                                <property name="use_stock">True</property>
-                                                <signal name="clicked" handler="on_rootpass_undo_clicked"/>
-                                              </object>
-                                              <packing>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkButton" id="rootpass_apply">
-                                                <property name="label">gtk-apply</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">True</property>
-                                                <property name="tooltip_text" translatable="yes">Apply new root password</property>
-                                                <property name="use_stock">True</property>
-                                                <signal name="clicked" handler="on_rootpass_apply_clicked"/>
-                                              </object>
-                                              <packing>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">2</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="padding">3</property>
-                                        <property name="position">9</property>
                                       </packing>
                                     </child>
                                   </object>
@@ -2780,12 +2919,11 @@ accessible in Salix system.</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Core installation: 
-
-Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. </property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">full_radiobutton</property>
+                                            <signal name="leave_notify_event" handler="on_core_radiobutton_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_core_radiobutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2815,12 +2953,11 @@ Only the minimum essentials for a console system to start are included. A graphi
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Basic installation: 
-
-This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">full_radiobutton</property>
+                                            <signal name="leave_notify_event" handler="on_basic_radiobutton_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_basic_radiobutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2850,11 +2987,10 @@ This installs only the Xfce desktop environment with the Firefox web browser and
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">Full installation: 
-
-Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the gslapt package manager and several other applications, always following the 'one application per task' rationale.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
+                                            <signal name="leave_notify_event" handler="on_full_radiobutton_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_full_radiobutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2907,9 +3043,10 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-loaded SMP Linux kernel with built-in support for most disk controllers.</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
+                                            <signal name="leave_notify_event" handler="on_salix_kernel_radiobutton_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_salix_kernel_radiobutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2939,12 +3076,11 @@ Everything that is included in the iso is installed. That includes the Xfce desk
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="tooltip_text" translatable="yes">SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process.
-
-Although not absolutely necessary, you may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The Linux Live Scripts will also be installed if you select this kernel).</property>
                                             <property name="active">True</property>
                                             <property name="draw_indicator">True</property>
                                             <property name="group">salix_kernel_radiobutton</property>
+                                            <signal name="leave_notify_event" handler="on_live_kernel_radiobutton_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_live_kernel_radiobutton_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2975,9 +3111,10 @@ Although not absolutely necessary, you may prefer to install this kernel if you 
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Cancel all packages selection </property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_packages_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_packages_undo_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_packages_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="position">0</property>
@@ -2989,9 +3126,10 @@ Although not absolutely necessary, you may prefer to install this kernel if you 
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="tooltip_text" translatable="yes">Confirm your packages selection </property>
                                             <property name="use_stock">True</property>
+                                            <signal name="leave_notify_event" handler="on_packages_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_packages_apply_clicked"/>
+                                            <signal name="enter_notify_event" handler="on_packages_apply_enter_notify_event"/>
                                           </object>
                                           <packing>
                                             <property name="pack_type">end</property>
@@ -3043,9 +3181,10 @@ Although not absolutely necessary, you may prefer to install this kernel if you 
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Exit Salix Installer</property>
                     <property name="use_stock">True</property>
+                    <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                     <signal name="clicked" handler="on_button_quit_clicked"/>
+                    <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -3054,44 +3193,47 @@ Although not absolutely necessary, you may prefer to install this kernel if you 
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="install_button">
+                  <object class="GtkEventBox" id="launch_eventbox">
                     <property name="visible">True</property>
-                    <property name="sensitive">False</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Launch Salix installation.
-
-This button will not be active until all settings are configured correctly.</property>
-                    <signal name="clicked" handler="on_install_button_clicked"/>
+                    <signal name="leave_notify_event" handler="on_launch_eventbox_leave_notify_event"/>
+                    <signal name="enter_notify_event" handler="on_launch_eventbox_enter_notify_event"/>
                     <child>
-                      <object class="GtkHBox" id="hbox13">
+                      <object class="GtkButton" id="install_button">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="leave_notify_event" handler="on_install_button_leave_notify_event"/>
+                        <signal name="clicked" handler="on_install_button_clicked"/>
+                        <signal name="enter_notify_event" handler="on_install_button_enter_notify_event"/>
                         <child>
-                          <object class="GtkImage" id="image7">
+                          <object class="GtkHBox" id="hbox13">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-execute</property>
+                            <child>
+                              <object class="GtkImage" id="image7">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-execute</property>
+                              </object>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label17">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Launch Salix _install </property>
+                                <property name="use_underline">True</property>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label17">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Launch Salix _install </property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">install_button</property>
-                          </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -3138,7 +3280,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun</property>
-    <property name="translator_credits" translatable="yes">French: Pierrick Le Brun</property>
+    <property name="translator_credits" translatable="yes">French: Pierrick Le Brun
+Greek: George Vlahavas </property>
     <property name="logo">salix-live-installer.png</property>
     <signal name="response" handler="on_about_dialog_close"/>
     <child internal-child="vbox">

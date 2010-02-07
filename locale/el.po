@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-06 13:47+0100\n"
+"POT-Creation-Date: 2010-02-07 20:10+0100\n"
 "PO-Revision-Date: 2010-02-02 16:32+0200\n"
 "Last-Translator: George Vlahavas <vlahavas~at~gmail~dot~com>\n"
 "Language-Team: Greek\n"
@@ -64,155 +64,583 @@ msgstr "Νοέμβριος"
 msgid "December"
 msgstr "Δεκέμβριος"
 
-#: salix-live-installer.py:588 salix-live-installer.py:590
+#: salix-live-installer.py:464
+msgid ""
+"SalixLive Installer will perform a standard installation of Salix \n"
+"Operating System on your computer from the comfort of \n"
+"SalixLive's graphic environment."
+msgstr ""
+"Η εφαρμογή εγκατάστασης του SalixLive θα πραγματοποιήσει μια \n"
+"τυπική εγκατάσταση του Salix στον υπολογιστή σας μέσα από την \n"
+"άνεση του γραφικού περιβάλλοντος του SalixLive."
+
+#: salix-live-installer.py:474
+#, fuzzy
+msgid "About Salix Installer."
+msgstr "Σχετικά με την εφαρμογή εγκατάστασης του Salix..."
+
+#: salix-live-installer.py:478
+msgid "Contextual help."
+msgstr ""
+
+#: salix-live-installer.py:482
+#, fuzzy
+msgid "Exit Salix Installer."
+msgstr "Έξοδος από την εφαρμογή εγκατάστασης του Salix."
+
+#: salix-live-installer.py:486 salix-live-installer.py:491
+#, fuzzy
+msgid ""
+"Launch Salix installation. This button will not be active \n"
+"until all settings are configured correctly."
+msgstr ""
+"Έναρξη της εγκατάστασης του Salix.\n"
+"\n"
+"Το πλήκτρο δεν θα είναι ενεργό, προτού όλες οι ρυθμίσεις εγκατάστασης έχουν "
+"πραγματοποιηθεί."
+
+#: salix-live-installer.py:498
+#, fuzzy
+msgid "Access the time settings."
+msgstr "Πρόσβαση στις ρυθμίσεις ώρας"
+
+#: salix-live-installer.py:502
+#, fuzzy
+msgid "Use Network Time Protocol daemon to synchronize time via Internet."
+msgstr "Χρήση του Network Time Protocol για συγχρονισμό της ώρας μέσω Internet"
+
+#: salix-live-installer.py:506
+msgid "Cancel time settings."
+msgstr "Ακύρωση των ρυθμίσεων ώρας."
+
+#: salix-live-installer.py:510
+#, fuzzy
+msgid "Activate the time settings after options have been defined."
+msgstr ""
+"Ενεργοποίηση των ρυθμίσεων ώρας μόνο αφού οι ανωτέρω ρυθμίσεων έχουν "
+"πραγματοποιηθεί."
+
+#: salix-live-installer.py:514
+msgid "Set the date & time manually if you do not use NTP service."
+msgstr ""
+"Ρύθμιση της ημερομηνίας και της ώρας χειροκίνητα αν δεν χρησιμοποιείτε την "
+"υπηρεσία NTP."
+
+#: salix-live-installer.py:518
+#, fuzzy
+msgid "Set the time zone."
+msgstr "Ρύθμιση της ζώνης ώρας"
+
+#: salix-live-installer.py:524
+#, fuzzy
+msgid "Access the keyboard settings."
+msgstr "Πρόσβαση στις ρυθμίσεις πληκτρολογίου"
+
+#: salix-live-installer.py:528
+#, fuzzy
+msgid ""
+"Highlight your favorite keyboard layout from this \n"
+"list before clicking on the 'Select keyboard' button."
+msgstr ""
+"Επιλέξτε τη διάταξη πληκτρολογίου προτού χρησιμοποιήσετε το πλήκτρο "
+"\"Επιλογή πληκτρολογίου\"."
+
+#: salix-live-installer.py:533
+#, fuzzy
+msgid ""
+"Check this box if you want your numeric keypad \n"
+"to be activated during the boot process."
+msgstr ""
+"Επιλέξτε το αν επιθυμείτε να είναι ενεργοποιημένο το numlock κατά την "
+"εκκίνηση του συστήματος."
+
+#: salix-live-installer.py:538
+#, fuzzy
+msgid "Cancel keyboard layout selection."
+msgstr "Ακύρωση της επιλογής διάταξης πληκτρολογίου"
+
+#: salix-live-installer.py:542
+#, fuzzy
+msgid "Confirm your selection after highlighting the keyboard layout."
+msgstr "Επαλήθευση της επιλογής αφού επιλέξετε τη διάταξη πληκτρολογίου."
+
+#: salix-live-installer.py:546
+#, fuzzy
+msgid ""
+"This is the keyboard layout you have selected. \n"
+"'None' will be displayed until you have confirmed that selection."
+msgstr ""
+"Αυτή είναι η διάταξη πληκτρολογίου που έχετε επιλέξει.\n"
+"\n"
+"Θα εμφανίζεται ως 'Καμία' εως ότου επαληθεύσετε την επιλογή."
+
+#: salix-live-installer.py:553
+#, fuzzy
+msgid "Access the language settings."
+msgstr "Πρόσβαση στις ρυθμίσεις γλώσσας"
+
+#: salix-live-installer.py:557
+#, fuzzy
+msgid ""
+"Highlight your language from this list before \n"
+"clicking on the 'Select language' button."
+msgstr ""
+"Επιλέξτε τη γλώσσα από τη λίστα προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή "
+"γλώσσας\"."
+
+#: salix-live-installer.py:562
+#, fuzzy
+msgid ""
+"This is the system language you have selected. \n"
+"'None' will be displayed until you have confirmed that selection. "
+msgstr ""
+"Αυτή είναι η γλώσσα συστήματος που έχετε επιλέξει. \n"
+"\n"
+"Θα εμφανίζεται ως 'Καμία' εως ότου έχετε επαληθεύσει την επιλογή σας."
+
+#: salix-live-installer.py:567
+#, fuzzy
+msgid "Cancel language selection."
+msgstr "Ακύρωση της επιλογής γλώσσας"
+
+#: salix-live-installer.py:571
+#, fuzzy
+msgid "Confirm your selection after highlighting the system language."
+msgstr "Επαλήθευση της επιλογής αφού επιλέξετε τη γλώσσα συστήματος"
+
+#: salix-live-installer.py:577
+#, fuzzy
+msgid "Access the partitions settings."
+msgstr "Πρόσβαση στις ρυθμίσεις κατατμήσεων"
+
+#: salix-live-installer.py:581
+#, fuzzy
+msgid ""
+"Highlight the partition from this list before \n"
+"clicking on the 'Select partition' button."
+msgstr ""
+"Επιλογή της κατάτμησης προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή κατάτμησης"
+"\"."
+
+#: salix-live-installer.py:586
+#, fuzzy
+msgid ""
+"Check this box if you want your external disk drive(s) \n"
+"to be displayed in the list above. "
+msgstr ""
+"Επιλέξτε το αν επιθυμείτε να εμφανίζονται οι συνδεδεμένες εξωτερικές "
+"αποθήκευσης στην παραπάνω λίστα."
+
+#: salix-live-installer.py:591
+#, fuzzy
+msgid "Confirm your selection after highlighting the partition."
+msgstr "Επαλήθευση της επιλογής μετά την επιλογή της κατάτμησης."
+
+#: salix-live-installer.py:595
+msgid "The filesystem that will be used to format Salix main partition."
+msgstr ""
+"Το σύστημα αρχείων που θα χρησιμοποιηθεί για τη διαμόρφωση της κύριας "
+"κατάτμησης του Salix."
+
+#: salix-live-installer.py:599
+#, fuzzy
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to modify the \n"
+"filesystem of a partition and/or if you wish to assign its mount point.\n"
+"You can either choose one of the suggested mount points or enter \n"
+"your own. You must configure all the desired partitions before clicking \n"
+"on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr ""
+"Επιλέξτε κάποιο κελί αν επιθυμείτε να αλλάξετε το σύστημα αρχείων ή αν "
+"επιθυμείτε να αντιστοιχίσετε ένα σημείο προσάρτησης. \n"
+"\n"
+"Μπορείτε να επιλέξετε ένα από τα έτοιμα σημείο προσάρτησης, ή να "
+"πληκτρολογήσετε αυτό που θέλετε.\n"
+"\n"
+"Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε "
+"προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν "
+"έχει ρυθμιστεί θα αγνοηθει."
+
+#: salix-live-installer.py:607
+#, fuzzy
+msgid "Confirm the Linux partition(s) settings from the list."
+msgstr "Επαλήθευση των ρυθμίσεων κατατμήσεων Linux από την παραπάνω λίστα."
+
+#: salix-live-installer.py:611
+#, fuzzy
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to assign \n"
+"the mount point of a partition. You must configure all the \n"
+"desired partitions before clicking on the 'Apply settings' button. \n"
+"Any unset parameters will be ignored. "
+msgstr ""
+"Επιλέξτε το αντίστοιχο κελί αν επιθυμείτε να θέσετε το σημείο προσάρτησης "
+"μιας κατάτμησης. \n"
+"\n"
+"Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε "
+"προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν "
+"θα ρυθμιστεί, θα αγνοηθεί."
+
+#: salix-live-installer.py:618
+#, fuzzy
+msgid "Confirm the Windows partition(s) settings from the list above."
+msgstr "Επαληθεύστε τις ρυθμίσεις κατατμήσεων Windows από την παραπάνω λίστα."
+
+#: salix-live-installer.py:622
+msgid "Summary of your partition(s) settings."
+msgstr "Περίληψη των ρυθμίσεων κατατμήσεων."
+
+#: salix-live-installer.py:626
+#, fuzzy
+msgid "Cancel all partition(s) settings."
+msgstr "Ακύρωση όλων των ρυθμίσεων κατατμήσεων"
+
+#: salix-live-installer.py:632
+#, fuzzy
+msgid "Access the users and passwords settings."
+msgstr "Πρόσβαση στις ρυθμίσεις χρηστών και κωδικών"
+
+#: salix-live-installer.py:636
+#, fuzzy
+msgid ""
+"A Linux system can manage many registered users and requires each \n"
+"one to log in, and to produce some form of authentication (usually a \n"
+"user's name coupled with a password) before allowing the user access \n"
+"to system resources."
+msgstr ""
+"Ένα σύστημα Linux μπορεί να περιλαμβάνει πολλούς χρήστες και απαιτεί από τον "
+"καθένα να εισέρχεται στο σύστημα χρησιμοποιώντας κάποια μέθοδο αναγνώρισης "
+"(συνήθως το όνομα και ο κωδικός χρήστη) προτού επιτρέψει στον χρήστη να "
+"χρησιμοποιήσει το σύστημα."
+
+#: salix-live-installer.py:643
+#, fuzzy
+msgid ""
+"Here you must define your user's name which should only include \n"
+"alphanumerical characters with no space or upper case letters. "
+msgstr ""
+"Εδώ πρέπει να εισάγετε το όνομα χρήστη το οποίο πρέπει να περιλαμβάνει μόνο "
+"αλφαριθμητικούς χαρακτήρες χωρίς κενά και κεφαλαία."
+
+#: salix-live-installer.py:648
+#, fuzzy
+msgid ""
+"Choose a password or passphrase to be coupled with your user's \n"
+"name. Your password or passprase should include a mix of upper \n"
+"and lower case letters, numbers, and even symbols (such as the \n"
+"@, !, and &)"
+msgstr ""
+"Εισάγετε έναν κωδικό χρήστη. Ο κωδικός χρήστη θα πρέπει να περιλαμβάνει πεζά "
+"και κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
+
+#: salix-live-installer.py:655
+#, fuzzy
+msgid ""
+"Here you must retype your user's password as a confirmation \n"
+"of your choice."
+msgstr "Εδώ πρέπει να επανεισάγετε των κωδικό χρήστη για επαλήθευση."
+
+#: salix-live-installer.py:660 salix-live-installer.py:687
+#, fuzzy
+msgid ""
+"Check this box if you want to be able to see the password you \n"
+"are typing."
+msgstr ""
+"Επιλέξτε το αν επιθυμείτε να εμφανίζεται ο κωδικός κατά την πληκτρολόγηση."
+
+#: salix-live-installer.py:665
+#, fuzzy
+msgid "Create new user."
+msgstr "Δημιουργία νέου χρήστη"
+
+#: salix-live-installer.py:669
+#, fuzzy
+msgid "Cancel new user creation."
+msgstr "Ακύρωση της δημιουργίας νέου χρήστη"
+
+#: salix-live-installer.py:674
+#, fuzzy
+msgid ""
+"On Linux systems, the superuser, or root, is a special user account\n"
+"used for system administration. Here you must set its password or\n"
+"passphrase. Remember, this password or passphrase should include \n"
+"a mix of upper and lower case letters, numbers, and even symbols \n"
+"(such as the @, !, and &)"
+msgstr ""
+"Στα συστήματα Linux, ο διαχειριστής συστήματος, ή root, αποτελεί ένα ειδικό "
+"λογαριασμό χρήστη που χρησιμοποιείται για τη διαχείρηση συστήματος. Πρέπει "
+"να εισάγετε ένα κωδικό χρήστη. Ο κωδικός θα πρέπει να περιλαμβάνει πεζά και "
+"κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
+
+#: salix-live-installer.py:682
+#, fuzzy
+msgid ""
+"Here you must retype the superuser (root) password as a \n"
+"confirmation of your choice."
+msgstr ""
+"Εδώ πρέπει να επανεισάγετε τον κωδικό του διαχειριστή χρήστη για επαλήθευση."
+
+#: salix-live-installer.py:692
+#, fuzzy
+msgid "Apply new root password."
+msgstr "Εφαρμογή νέου κωδικού διαχειριστή συστήματος"
+
+#: salix-live-installer.py:696
+#, fuzzy
+msgid "Cancel new root password."
+msgstr "Ακύρωση νέου κωδικού διαχειριστή συστήματος"
+
+#: salix-live-installer.py:702
+#, fuzzy
+msgid "Access the packages selection."
+msgstr "Πρόσβαση στις επιλογές πακέτων"
+
+#: salix-live-installer.py:706
+#, fuzzy
+msgid ""
+"Core installation:\n"
+"Only the minimum essentials for a console system to start are \n"
+"included. A graphical environment is not provided. This is ideal \n"
+"if you are an experienced user and want to customize your \n"
+"installation for any specific purpose, such as a web server, \n"
+"file server etc. "
+msgstr ""
+"Ελάχιστη εγκατάσταση: \n"
+"\n"
+"Μόνο τα ελάχιστα για τη λειτουργία ενός συστήματος κονσόλας Linux θα "
+"εγκατασταθούν. Δεν περιλαμβάνεται κανένα γραφικό περιβάλλον. Ιδανικό για "
+"έμπειρους χρήστες που επιθυμούν να τροποποιήσουν μια εγκατάσταση για "
+"οποιοδήποτε σκοπό, όπως web server, file server κλπ."
+
+#: salix-live-installer.py:715
+#, fuzzy
+msgid ""
+"Basic installation: \n"
+"This installs only the Xfce desktop environment with the Firefox \n"
+"web browser and the gslapt package manager. Ideal for advanced \n"
+"users that would like to install a lightweight Xfce and add their \n"
+"own choice of applications."
+msgstr ""
+"Βασική εγκατάσταση: \n"
+"\n"
+"Εγκαθιστάται μόνο το γραφικό περιβαλλον Xfce μαζί με το Firefox και την "
+"εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους "
+"χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον Xfce ώστε να προσθέσουν τις "
+"εφαρμογές της αρεσκείας τους."
+
+#: salix-live-installer.py:723
+#, fuzzy
+msgid ""
+"Full installation:\n"
+"Everything that is included in the iso is installed. That includes the\n"
+"Xfce desktop environment, the Firefox web browser and Claws-mail\n"
+"email client, a complete OpenOffice.org office suite, a Java Runtime\n"
+"Environment, the Totem media player and Exaile music manager, \n"
+"the Gslapt package manager and several other applications, always \n"
+"following the 'one application per task' rationale."
+msgstr ""
+"Πλήρης εγκατάσταση: \n"
+"\n"
+"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό "
+"περιβάλλον Xfce, τον περιηγητή διαδικτύου Firefox και την εφαρμογή "
+"ηλεκτρονικής αλληλογραφίας Claws-mail, την πλήρη σουίτα γραφείου OpenOffice."
+"org, Java, την εφαρμογή πολυμέσων Totem και την εφαρμογή διαχείρησης "
+"μουσικών αρχείων Exaile, το διαχειριστή πακέτων λογισμικού gslapt και πολλές "
+"άλλες εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε "
+"λειτουργία\"."
+
+#: salix-live-installer.py:734
+#, fuzzy
+msgid ""
+"The standard kernel used by Salix is Slackware's kernel-huge-smp. \n"
+"A fully-loaded SMP Linux kernel with built-in support for most \n"
+"disk controllers."
+msgstr ""
+"Ο τυπικός πυρήνας που χρησιμοποιείται από το Salix είναι ο kernel-huge-smp "
+"του Slackware, ο οποίος περιλαμβανει υποστήριξη για τους περισσότερους "
+"ελεγκτές σκληρών δίσκων."
+
+#: salix-live-installer.py:740
+#, fuzzy
+msgid ""
+"SalixLive's live kernel is based on Slackware's kernel-huge-smp, \n"
+"but it has been patched to include aufs2 filesystem as well as \n"
+"squashfs-lzma compression. Its configuration has also been slightly \n"
+"changed to ensure most strategic devices would be available to the \n"
+"live system booting process. Although not absolutely necessary, you \n"
+"may prefer to install this kernel if you want to build your own \n"
+"LiveCD out of an installed Salix system (The Linux Live Scripts \n"
+"will also be installed if you select this kernel)."
+msgstr ""
+"Ο πυρήνας του SalixLive βασίζεται επίσης στην πυρήνα kernel-huge-smp του "
+"Slackware, αλλά έχει μετατραπεί για την ενσωμάτωση του συστήματος αρχείων "
+"aufs2 όπως επίσης και για τη συμπίεση squashfs-lzma. Η διαμόρφωση του έχει "
+"αλλαχτεί ελάχιστα για να γίνει βέβαιο ότι οι περισσότερες σημαντικές "
+"συσκευές θα είναι διαθέσιμες με την εκκίνηση του live συστήματος.\n"
+"\n"
+"Αν και δεν είναι απαραίτητο, ενδέχεται να προτιμήσετε αυτόν τον πυρήνα αν "
+"επιθυμείτε αν δημιουργήστε το δικό σας LiveCD από ένα σύστημα Salix (Τα "
+"Linux Live Scripts θα εγκατασταθούν με τη χρήση αυτού του πυρήνα)."
+
+#: salix-live-installer.py:752
+#, fuzzy
+msgid "Confirm your packages selection."
+msgstr "Επαλήθευση της επιλογής πακέτων λογισμικού."
+
+#: salix-live-installer.py:756
+#, fuzzy
+msgid "Cancel all packages selection."
+msgstr "Ακύρωση της επιλογής πακέτων λογισμικού."
+
+#: salix-live-installer.py:881 salix-live-installer.py:883
 msgid "The time zone has not been set"
 msgstr ""
 
-#: salix-live-installer.py:588 salix-live-installer.py:590
-#: salix-live-installer.py:795 salix-live-installer.py:798
-#: salix-live-installer.py:801 salix-live-installer.py:804
-#: salix-live-installer.py:806 salix-live-installer.py:809
-#: salix-live-installer.py:811 salix-live-installer.py:837
-#: salix-live-installer.py:840 salix-live-installer.py:842
+#: salix-live-installer.py:881 salix-live-installer.py:883
+#: salix-live-installer.py:1088 salix-live-installer.py:1091
+#: salix-live-installer.py:1094 salix-live-installer.py:1097
+#: salix-live-installer.py:1099 salix-live-installer.py:1102
+#: salix-live-installer.py:1104 salix-live-installer.py:1130
+#: salix-live-installer.py:1133 salix-live-installer.py:1135
 msgid "Please verify and correct"
 msgstr "Παρακαλώ ελέγξτε και διορθώστε"
 
-#: salix-live-installer.py:694 salix-live-installer.py:725
-#: salix-live-installer.py:729 salix-live-installer.py:907
-#: salix-live-installer.py:911 salix-live-installer.py:915
+#: salix-live-installer.py:987 salix-live-installer.py:1018
+#: salix-live-installer.py:1022 salix-live-installer.py:1200
+#: salix-live-installer.py:1204 salix-live-installer.py:1208
 msgid "will be formatted with"
 msgstr "θα διαμορφωθεί ως"
 
-#: salix-live-installer.py:695 salix-live-installer.py:726
-#: salix-live-installer.py:735 salix-live-installer.py:779
-#: salix-live-installer.py:908 salix-live-installer.py:912
-#: salix-live-installer.py:920 salix-live-installer.py:924
+#: salix-live-installer.py:988 salix-live-installer.py:1019
+#: salix-live-installer.py:1028 salix-live-installer.py:1072
+#: salix-live-installer.py:1201 salix-live-installer.py:1205
+#: salix-live-installer.py:1213 salix-live-installer.py:1217
 msgid "and will be mounted as"
 msgstr "και θα προσαρτηθεί στο"
 
-#: salix-live-installer.py:721 salix-live-installer.py:771
-#: salix-live-installer.py:1067 salix-live-installer.py:1073
-#: salix-live-installer.py:1098
+#: salix-live-installer.py:1014 salix-live-installer.py:1064
+#: salix-live-installer.py:1360 salix-live-installer.py:1366
+#: salix-live-installer.py:1391
 msgid "Select..."
 msgstr "Επιλογή..."
 
-#: salix-live-installer.py:730 salix-live-installer.py:739
-#: salix-live-installer.py:775
+#: salix-live-installer.py:1023 salix-live-installer.py:1032
+#: salix-live-installer.py:1068
 msgid "and will not be mounted"
 msgstr "και δεν θα προσαρτηθεί"
 
-#: salix-live-installer.py:734 salix-live-installer.py:738
-#: salix-live-installer.py:774 salix-live-installer.py:778
-#: salix-live-installer.py:919 salix-live-installer.py:923
+#: salix-live-installer.py:1027 salix-live-installer.py:1031
+#: salix-live-installer.py:1067 salix-live-installer.py:1071
+#: salix-live-installer.py:1212 salix-live-installer.py:1216
 msgid "will not be formatted"
 msgstr "δε θα διαμορφωθεί"
 
-#: salix-live-installer.py:795
+#: salix-live-installer.py:1088
 msgid "Your user's name is empty"
 msgstr "Το όνομα χρήστη είναι κενό"
 
-#: salix-live-installer.py:797
+#: salix-live-installer.py:1090
 msgid "Your user's name should only contain alphanumeric characters"
 msgstr "Το όνομα χρήστη πρέπει να περιλαμβάνει μόνο αλφαριθμητικούς χαρακτήρες"
 
-#: salix-live-installer.py:800
+#: salix-live-installer.py:1093
 msgid "Your user's name should not contain any space"
 msgstr "Το όνομα χρήστη δεν πρέπει να περιλαμβάνει κενούς χαρακτήρες"
 
-#: salix-live-installer.py:803
+#: salix-live-installer.py:1096
 msgid "Your user's name should not contain any upper case letter"
 msgstr "Το όνομα χρήστη δεν πρέπει να περιλαμβάνει κεφαλαία"
 
-#: salix-live-installer.py:806 salix-live-installer.py:837
+#: salix-live-installer.py:1099 salix-live-installer.py:1130
 msgid "Your password entry is empty"
 msgstr "Ο κωδικός χρήστη είναι κενός"
 
-#: salix-live-installer.py:808 salix-live-installer.py:839
+#: salix-live-installer.py:1101 salix-live-installer.py:1132
 msgid "Your password is too short. It should have at least 5 characters"
 msgstr ""
 "Ο κωδικός χρήστης είναι πολύ μικρός. Πρέπει να είναι τουλάχιστον 5 χαρακτήρες"
 
-#: salix-live-installer.py:811 salix-live-installer.py:842
+#: salix-live-installer.py:1104 salix-live-installer.py:1135
 msgid "Your 2 password entries do not match"
 msgstr "Οι κωδικοί χρήστη που εισάγατε δεν είναι ίδιοι"
 
-#: salix-live-installer.py:818 salix-live-installer.py:845
-#: salix-live-installer.py:955 salix-live-installer.py:969
-#: salix-live-installer.py:1002 salix-live-installer.py:1017
-#: salix-live-installer.py:1119 salix-live-installer.py:1120
-#: salix-live-installer.py:1143 salix-live-installer.py:1161
-#: salix-live-installer.glade:1418 salix-live-installer.glade:1593
-#: salix-live-installer.glade:2524 salix-live-installer.glade:2700
+#: salix-live-installer.py:1111 salix-live-installer.py:1138
+#: salix-live-installer.py:1248 salix-live-installer.py:1262
+#: salix-live-installer.py:1295 salix-live-installer.py:1310
+#: salix-live-installer.py:1412 salix-live-installer.py:1413
+#: salix-live-installer.py:1436 salix-live-installer.py:1454
+#: salix-live-installer.glade:1454 salix-live-installer.glade:1651
+#: salix-live-installer.glade:2649 salix-live-installer.glade:2830
 msgid "None"
 msgstr "Κανένα"
 
-#: salix-live-installer.py:844
+#: salix-live-installer.py:1137
 msgid "Yes"
 msgstr "Ναι"
 
-#: salix-live-installer.py:866 salix-live-installer.py:1261
-#: salix-live-installer.py:1279 salix-live-installer.py:1303
+#: salix-live-installer.py:1159 salix-live-installer.py:1554
+#: salix-live-installer.py:1572 salix-live-installer.py:1596
 msgid "core"
 msgstr "ελάχιστη"
 
-#: salix-live-installer.py:868 salix-live-installer.py:1277
-#: salix-live-installer.py:1311
+#: salix-live-installer.py:1161 salix-live-installer.py:1570
+#: salix-live-installer.py:1604
 msgid "basic"
 msgstr "βασική"
 
-#: salix-live-installer.py:870 salix-live-installer.py:1301
+#: salix-live-installer.py:1163 salix-live-installer.py:1594
 msgid "full"
 msgstr "πλήρη"
 
-#: salix-live-installer.py:873 salix-live-installer.py:1350
+#: salix-live-installer.py:1166 salix-live-installer.py:1643
 msgid "standard"
 msgstr "τυπικός"
 
-#: salix-live-installer.py:875 salix-live-installer.py:1333
+#: salix-live-installer.py:1168 salix-live-installer.py:1626
 msgid "live"
 msgstr "live"
 
-#: salix-live-installer.py:902
+#: salix-live-installer.py:1195
 msgid "You are about to install Salix with the following settings"
 msgstr "Είστε έτοιμοι να εγκαταστήσετε το Salix με τις ακόλουθες ρυθμίσεις"
 
-#: salix-live-installer.py:903
+#: salix-live-installer.py:1196
 msgid "Time zone"
 msgstr "Ζώνη ώρας"
 
-#: salix-live-installer.py:904
+#: salix-live-installer.py:1197
 msgid "Keyboard layout"
 msgstr "Διάταξη πληκτρολογίου"
 
-#: salix-live-installer.py:905
+#: salix-live-installer.py:1198
 msgid "System language"
 msgstr "Γλώσσα συστήματος"
 
-#: salix-live-installer.py:906
+#: salix-live-installer.py:1199
 msgid "Partitions"
 msgstr "Κατατμήσεις"
 
-#: salix-live-installer.py:916
+#: salix-live-installer.py:1209
 msgid "but will not be mounted"
 msgstr "δεν θα προσαρτηθεί"
 
-#: salix-live-installer.py:925
+#: salix-live-installer.py:1218
 msgid "Standard User"
 msgstr "Τυπικός χρήστης"
 
-#: salix-live-installer.py:926
+#: salix-live-installer.py:1219
 msgid "Packages"
 msgstr "Πακέτα"
 
 #. TRANSLATORS: Please just reposition the 2 '%(...)s' variables as required by your grammar.
-#: salix-live-installer.py:928
+#: salix-live-installer.py:1221
 #, python-format
 msgid ""
 "You have chosen the %(mode)s installation mode with the %(type)s kernel.\n"
 msgstr ""
 "Έχετε επιλέξει %(mode)s εγκατάσταση, χρησιμοποιώντας τον %(type)s πυρήνα.\n"
 
-#: salix-live-installer.py:1176
+#: salix-live-installer.py:1469
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -223,7 +651,7 @@ msgstr ""
 "Δεν ήταν δυνατό να εκκινήσει το LiloSetup, πρέπει να εγκαταστήσετε το LILO "
 "μόνοι σας."
 
-#: salix-live-installer.py:1186 salix-live-installer.py:1191
+#: salix-live-installer.py:1479 salix-live-installer.py:1484
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
@@ -238,68 +666,68 @@ msgstr ""
 "\n"
 "Δεν μπορείτε να προχωρήστε παρακάτω!"
 
-#: salix-live-installer.py:1202
+#: salix-live-installer.py:1495
 msgid "Starting installation process..."
 msgstr "Έναρξη της εγκατάστασης..."
 
-#: salix-live-installer.py:1215
+#: salix-live-installer.py:1508
 msgid "Formatting the main partition..."
 msgstr "Διαμόρφωση της κύριας κατάτμησης..."
 
-#: salix-live-installer.py:1226
+#: salix-live-installer.py:1519
 msgid "Formatting and mounting your Linux partition(s)..."
 msgstr "Διαμόρφωση και προσάρτηση των κατατμήσεων Linux..."
 
-#: salix-live-installer.py:1239
+#: salix-live-installer.py:1532
 msgid "Formatting your Linux partition(s)..."
 msgstr "Διαμόρφωση των κατατμήσεων Linux..."
 
-#: salix-live-installer.py:1250
+#: salix-live-installer.py:1543
 msgid "Mounting your Linux partition(s)..."
 msgstr "Προσάρτηση των κατατμήσεων Linux..."
 
 #. TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-#: salix-live-installer.py:1263 salix-live-installer.py:1279
-#: salix-live-installer.py:1287 salix-live-installer.py:1303
-#: salix-live-installer.py:1311 salix-live-installer.py:1319
+#: salix-live-installer.py:1556 salix-live-installer.py:1572
+#: salix-live-installer.py:1580 salix-live-installer.py:1596
+#: salix-live-installer.py:1604 salix-live-installer.py:1612
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
 msgstr "Εγκατάσταση των πακέτων του σετ %(mode)s..."
 
-#: salix-live-installer.py:1270 salix-live-installer.py:1294
-#: salix-live-installer.py:1326
+#: salix-live-installer.py:1563 salix-live-installer.py:1587
+#: salix-live-installer.py:1619
 msgid "Installing the common packages..."
 msgstr "Εγκατάσταση κοινών πακέτων..."
 
 #. TRANSLATORS: Simply reposition the '%(type)s' variable as required by your grammar. The value of '%(type)s' will be 'standard' or 'live'.
-#: salix-live-installer.py:1335 salix-live-installer.py:1352
+#: salix-live-installer.py:1628 salix-live-installer.py:1645
 #, python-format
 msgid "Installing the %(type)s kernel..."
 msgstr "Εγκατάσταση του πυρήνα %(type)s..."
 
-#: salix-live-installer.py:1342
+#: salix-live-installer.py:1635
 msgid "Installing the livetools..."
 msgstr "Εγκατάσταση των εργαλείων live..."
 
-#: salix-live-installer.py:1360
+#: salix-live-installer.py:1653
 msgid "Creating /etc/fstab..."
 msgstr "Δημιουργία του /etc/fstab..."
 
-#: salix-live-installer.py:1395
+#: salix-live-installer.py:1688
 msgid "Creating /etc/rc.d/rc.font..."
 msgstr "Δημιουργία του /etc/rc.d/rc.font..."
 
-#: salix-live-installer.py:1410
+#: salix-live-installer.py:1703
 msgid "Setting the time, keyboard, locale & login..."
 msgstr ""
 "Ρύθμιση της ώρας, του πληκτρολογίου, της γλώσσας συστήματος και των "
 "πληροφοριών χρηστών..."
 
-#: salix-live-installer.py:1439 salix-live-installer.py:1444
+#: salix-live-installer.py:1732 salix-live-installer.py:1737
 msgid "Installation process completed successfully ..."
 msgstr "Η εγκατάσταση ολοκληρώθηκε με επιτυχία.."
 
-#: salix-live-installer.py:1452
+#: salix-live-installer.py:1745
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
@@ -316,7 +744,7 @@ msgstr ""
 "Lilo, επιλέξτε Όχι\n"
 "και ρυθμίστε το μόνοι σας πριν επανεκκινήσετε τον υπολογιστή σας).\n"
 
-#: salix-live-installer.py:1476 salix-live-installer.py:1481
+#: salix-live-installer.py:1769 salix-live-installer.py:1774
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -326,7 +754,7 @@ msgstr ""
 "\n"
 "Δεν ήταν δυνατό να γίνει η ρύθμιση της διάταξης πληκτρολογίου."
 
-#: salix-live-installer.py:1487
+#: salix-live-installer.py:1780
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -336,7 +764,7 @@ msgstr ""
 "\n"
 "Δεν ήταν δυνατό να ρυθμιστεί η γλώσσα συστήματος."
 
-#: salix-live-installer.py:1491
+#: salix-live-installer.py:1784
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -346,7 +774,7 @@ msgstr ""
 "\n"
 "Δεν ήταν δυνατό να δημιουργηθεί ο χρήστης."
 
-#: salix-live-installer.py:1495
+#: salix-live-installer.py:1788
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -356,7 +784,7 @@ msgstr ""
 "\n"
 "Δεν ήταν δυνατό να ρυθμιστεί ο κωδικός χρήστη."
 
-#: salix-live-installer.py:1499
+#: salix-live-installer.py:1792
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -366,7 +794,7 @@ msgstr ""
 "\n"
 "Δεν ήταν δυνατό να ρυθμιστεί ο κωδικός του διαχειριστή συστήματος."
 
-#: salix-live-installer.py:1689
+#: salix-live-installer.py:1982
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -381,69 +809,31 @@ msgstr ""
 msgid "SalixLive Installer"
 msgstr "Εφαρμογή εγκατάστασης SalixLive"
 
-#: salix-live-installer.glade:362
-msgid "About Salix Installer..."
-msgstr "Σχετικά με την εφαρμογή εγκατάστασης του Salix..."
-
-#: salix-live-installer.glade:380
-msgid ""
-"SalixLive Installer will perform a standard installation of Salix \n"
-"Operating System on your computer from the comfort of \n"
-"SalixLive's graphic environment."
-msgstr ""
-"Η εφαρμογή εγκατάστασης του SalixLive θα πραγματοποιήσει μια \n"
-"τυπική εγκατάσταση του Salix στον υπολογιστή σας μέσα από την \n"
-"άνεση του γραφικού περιβάλλοντος του SalixLive."
-
-#: salix-live-installer.glade:425
-msgid "Access the time settings "
-msgstr "Πρόσβαση στις ρυθμίσεις ώρας"
-
-#: salix-live-installer.glade:448
+#: salix-live-installer.glade:461
 msgid "_Time"
 msgstr "_Χρόνος"
 
-#: salix-live-installer.glade:471
-msgid "Access the keyboard settings "
-msgstr "Πρόσβαση στις ρυθμίσεις πληκτρολογίου"
-
-#: salix-live-installer.glade:494
+#: salix-live-installer.glade:508
 msgid "Key_board"
 msgstr "_Πληκτρολόγιο"
 
-#: salix-live-installer.glade:515
-msgid "Access the language settings "
-msgstr "Πρόσβαση στις ρυθμίσεις γλώσσας"
-
-#: salix-live-installer.glade:537
+#: salix-live-installer.glade:552
 msgid "Lo_cale"
 msgstr "_Γλώσσα"
 
-#: salix-live-installer.glade:558
-msgid "Access the partitions settings "
-msgstr "Πρόσβαση στις ρυθμίσεις κατατμήσεων"
-
-#: salix-live-installer.glade:580
+#: salix-live-installer.glade:596
 msgid "_Partitions"
 msgstr "_Κατατμήσεις"
 
-#: salix-live-installer.glade:601
-msgid "Access the users and passwords settings"
-msgstr "Πρόσβαση στις ρυθμίσεις χρηστών και κωδικών"
-
-#: salix-live-installer.glade:623
+#: salix-live-installer.glade:640
 msgid "U_sers"
 msgstr "_Χρήστες"
 
-#: salix-live-installer.glade:644
-msgid "Access the packages selection"
-msgstr "Πρόσβαση στις επιλογές πακέτων"
-
-#: salix-live-installer.glade:666
+#: salix-live-installer.glade:684
 msgid "S_oftware"
 msgstr "Λογισμικό"
 
-#: salix-live-installer.glade:887
+#: salix-live-installer.glade:905
 msgid ""
 "<b>Important!</b>\n"
 "\n"
@@ -475,206 +865,106 @@ msgstr ""
 "κλείστε την εφαρμογή εγκατάστασης και χρησιμοποιήστε την \n"
 "εφαρμογή GParted για να τις δημιουργήστε πρώτα."
 
-#: salix-live-installer.glade:920
+#: salix-live-installer.glade:938
 msgid "<b>Please set the time, date and time zone:</b>"
 msgstr "<b>Παρακαλώ ρυθμίστε την ώρα, την ημερομηνία και τη ζώνη ώρας:</b>"
 
-#: salix-live-installer.glade:959
-msgid "Set the date & time manually if you do not use NTP service."
-msgstr ""
-"Ρύθμιση της ημερομηνίας και της ώρας χειροκίνητα αν δεν χρησιμοποιείτε την "
-"υπηρεσία NTP."
-
-#: salix-live-installer.glade:1037
+#: salix-live-installer.glade:1061
 msgid " hrs : min : sec "
 msgstr " ώρες:λεπτά:δεύτερα"
 
-#: salix-live-installer.glade:1067
+#: salix-live-installer.glade:1091
 msgid "Year:"
 msgstr "Έτος:"
 
-#: salix-live-installer.glade:1078
+#: salix-live-installer.glade:1102
 msgid "Month:"
 msgstr "Μήνας:"
 
-#: salix-live-installer.glade:1089
+#: salix-live-installer.glade:1113
 msgid "Day:"
 msgstr "Ημέρα:"
 
-#: salix-live-installer.glade:1192
-msgid "Set the time zone"
-msgstr "Ρύθμιση της ζώνης ώρας"
-
-#: salix-live-installer.glade:1196
+#: salix-live-installer.glade:1224
 msgid "Time zone: "
 msgstr "Ζώνη ώρας:"
 
-#: salix-live-installer.glade:1243
+#: salix-live-installer.glade:1272
 msgid "Use NTP service"
 msgstr "Χρήση της υπηρεσίας NTP."
 
-#: salix-live-installer.glade:1247
-msgid "Use Network Time Protocol daemon to synchronize time via Internet"
-msgstr "Χρήση του Network Time Protocol για συγχρονισμό της ώρας μέσω Internet"
-
-#: salix-live-installer.glade:1277
-msgid "Cancel time settings."
-msgstr "Ακύρωση των ρυθμίσεων ώρας."
-
-#: salix-live-installer.glade:1291
-msgid "Activate the time settings after options above have been defined."
-msgstr ""
-"Ενεργοποίηση των ρυθμίσεων ώρας μόνο αφού οι ανωτέρω ρυθμίσεων έχουν "
-"πραγματοποιηθεί."
-
-#: salix-live-installer.glade:1320
+#: salix-live-installer.glade:1352
 msgid "<b>Please select your keyboard layout:</b>"
 msgstr "<b>Παρακαλώ επιλέξτε το διάταξη πληκτρολογίου:</b>"
 
-#: salix-live-installer.glade:1334
-msgid ""
-"Highlight your favorite keyboard layout from this list before clicking on "
-"the 'Select keyboard' button."
-msgstr ""
-"Επιλέξτε τη διάταξη πληκτρολογίου προτού χρησιμοποιήσετε το πλήκτρο "
-"\"Επιλογή πληκτρολογίου\"."
-
-#: salix-live-installer.glade:1348
+#: salix-live-installer.glade:1381
 msgid "Layout"
 msgstr "Διάταξη"
 
-#: salix-live-installer.glade:1360
+#: salix-live-installer.glade:1393
 msgid "Type"
 msgstr "Τύπος"
 
-#: salix-live-installer.glade:1378
+#: salix-live-installer.glade:1411
 msgid "Activate numlock"
 msgstr "Ενεργοποίηση numlock"
 
-#: salix-live-installer.glade:1382
-msgid ""
-"Check this box if you want your numeric keypad to be activated during the "
-"boot process."
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να είναι ενεργοποιημένο το numlock κατά την "
-"εκκίνηση του συστήματος."
-
-#: salix-live-installer.glade:1398 salix-live-installer.glade:1414
-msgid ""
-"This is the keyboard layout you have selected. \n"
-"\n"
-"'None' will be displayed until you have confirmed that selection. "
-msgstr ""
-"Αυτή είναι η διάταξη πληκτρολογίου που έχετε επιλέξει.\n"
-"\n"
-"Θα εμφανίζεται ως 'Καμία' εως ότου επαληθεύσετε την επιλογή."
-
-#: salix-live-installer.glade:1402
+#: salix-live-installer.glade:1441
 msgid "<b>Selected keyboard layout: </b>"
 msgstr "<b>Επιλεγμένη διάταξη πληκτρολογίου: </b>"
 
-#: salix-live-installer.glade:1442
-msgid "Cancel keyboard layout selection "
-msgstr "Ακύρωση της επιλογής διάταξης πληκτρολογίου"
-
-#: salix-live-installer.glade:1457
-msgid "Confirm your selection after highlighting the keyboard layout. "
-msgstr "Επαλήθευση της επιλογής αφού επιλέξετε τη διάταξη πληκτρολογίου."
-
-#: salix-live-installer.glade:1474
+#: salix-live-installer.glade:1529
 msgid "Select _keyboard "
 msgstr "_Επιλογή πληκτρολογίου"
 
-#: salix-live-installer.glade:1512
+#: salix-live-installer.glade:1567
 msgid "<b>Please select your system language:</b>"
 msgstr "<b>Παρακαλώ επιλέξτε τη γλώσσα συστήματος:</b>"
 
-#: salix-live-installer.glade:1526
-msgid ""
-"Highlight your language from this list before clicking on the 'Select "
-"language' button."
-msgstr ""
-"Επιλέξτε τη γλώσσα από τη λίστα προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή "
-"γλώσσας\"."
-
-#: salix-live-installer.glade:1539
+#: salix-live-installer.glade:1595
 msgid "Locale"
 msgstr "Γλώσσα"
 
-#: salix-live-installer.glade:1551
+#: salix-live-installer.glade:1607
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: salix-live-installer.glade:1573 salix-live-installer.glade:1589
-msgid ""
-"This is the system language you have selected. \n"
-"\n"
-"'None' will be displayed until you have confirmed that selection. "
-msgstr ""
-"Αυτή είναι η γλώσσα συστήματος που έχετε επιλέξει. \n"
-"\n"
-"Θα εμφανίζεται ως 'Καμία' εως ότου έχετε επαληθεύσει την επιλογή σας."
-
-#: salix-live-installer.glade:1577
+#: salix-live-installer.glade:1638
 msgid "<b>Selected system language: </b>"
 msgstr "<b>Επιλογή της γλώσσας συστήματος: </b>"
 
-#: salix-live-installer.glade:1617
-msgid "Cancel language selection "
-msgstr "Ακύρωση της επιλογής γλώσσας"
-
-#: salix-live-installer.glade:1632
-msgid "Confirm your selection after highlighting the system language"
-msgstr "Επαλήθευση της επιλογής αφού επιλέξετε τη γλώσσα συστήματος"
-
-#: salix-live-installer.glade:1649
+#: salix-live-installer.glade:1726
 msgid "Select _language "
 msgstr "_Επιλογή γλώσσας"
 
-#: salix-live-installer.glade:1687
+#: salix-live-installer.glade:1764
 msgid "<b>Please select Salix main partition:</b>"
 msgstr "<b>Παρακαλώ επιλέξτε την κύρια κατάτμηση του Salix:</b>"
 
-#: salix-live-installer.glade:1701
-msgid ""
-"Highlight the partition from this list before clicking on the 'Select "
-"partition' button."
-msgstr ""
-"Επιλογή της κατάτμησης προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή κατάτμησης"
-"\"."
-
-#: salix-live-installer.glade:1714 salix-live-installer.glade:1929
-#: salix-live-installer.glade:2123
+#: salix-live-installer.glade:1792 salix-live-installer.glade:2028
+#: salix-live-installer.glade:2222
 msgid "Disk"
 msgstr "Δίσκος"
 
-#: salix-live-installer.glade:1726 salix-live-installer.glade:1941
-#: salix-live-installer.glade:2135
+#: salix-live-installer.glade:1804 salix-live-installer.glade:2040
+#: salix-live-installer.glade:2234
 msgid "Partition"
 msgstr "Κατάτμηση"
 
-#: salix-live-installer.glade:1738 salix-live-installer.glade:1953
-#: salix-live-installer.glade:2147
+#: salix-live-installer.glade:1816 salix-live-installer.glade:2052
+#: salix-live-installer.glade:2246
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: salix-live-installer.glade:1750 salix-live-installer.glade:2159
+#: salix-live-installer.glade:1828 salix-live-installer.glade:2258
 msgid "File System"
 msgstr "Σύστημα αρχείων"
 
-#: salix-live-installer.glade:1769
+#: salix-live-installer.glade:1847
 msgid "Display attached external devices"
 msgstr "Εμφάνιση συνδεδεμένων εξωτερικών συσκευών"
 
-#: salix-live-installer.glade:1773
-msgid ""
-"Check this box if you want your external disk drive(s) to be displayed in "
-"the list above. "
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να εμφανίζονται οι συνδεδεμένες εξωτερικές "
-"αποθήκευσης στην παραπάνω λίστα."
-
-#: salix-live-installer.glade:1787
+#: salix-live-installer.glade:1866
 #, fuzzy
 msgid ""
 "From the above partitions found on your system, please select the \n"
@@ -689,61 +979,31 @@ msgstr ""
 "<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα "
 "διαγραφούν."
 
-#: salix-live-installer.glade:1807 salix-live-installer.glade:1820
-msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
-"Το σύστημα αρχείων που θα χρησιμοποιηθεί για τη διαμόρφωση της κύριας "
-"κατάτμησης του Salix."
-
-#: salix-live-installer.glade:1809
+#: salix-live-installer.glade:1895
 msgid "Format with: "
 msgstr "Διαμόρφωση με:"
 
-#: salix-live-installer.glade:1842
-msgid "Confirm your selection after highlighting the partition. "
-msgstr "Επαλήθευση της επιλογής μετά την επιλογή της κατάτμησης."
-
-#: salix-live-installer.glade:1859
+#: salix-live-installer.glade:1962
 msgid "Select _partition "
 msgstr "Επιλογή _κατάτμησης"
 
-#: salix-live-installer.glade:1897
+#: salix-live-installer.glade:1999
 msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr "<b>Παρακαλώ ρυθμίστε τις υπόλοιπες κατατμήσεις linux:</b>"
 
-#: salix-live-installer.glade:1911
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to modify the "
-"filesystem of a partition and/or if you wish to assign its mount point. \n"
-"\n"
-"You can either choose one of the suggested mount points or enter your own.\n"
-"\n"
-"You must configure all the desired partitions before clicking on the 'Apply "
-"settings' button. Any unset parameters will be ignored. "
-msgstr ""
-"Επιλέξτε κάποιο κελί αν επιθυμείτε να αλλάξετε το σύστημα αρχείων ή αν "
-"επιθυμείτε να αντιστοιχίσετε ένα σημείο προσάρτησης. \n"
-"\n"
-"Μπορείτε να επιλέξετε ένα από τα έτοιμα σημείο προσάρτησης, ή να "
-"πληκτρολογήσετε αυτό που θέλετε.\n"
-"\n"
-"Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε "
-"προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν "
-"έχει ρυθμιστεί θα αγνοηθει."
-
-#: salix-live-installer.glade:1965
+#: salix-live-installer.glade:2064
 msgid "Current FS"
 msgstr "Τρέχον σύστημα αρχείων"
 
-#: salix-live-installer.glade:1977
+#: salix-live-installer.glade:2076
 msgid "Format as:"
 msgstr "Διαμόρφωση ως:"
 
-#: salix-live-installer.glade:1991 salix-live-installer.glade:2171
+#: salix-live-installer.glade:2090 salix-live-installer.glade:2270
 msgid "Mount as:"
 msgstr "Προσάρτηση ως:"
 
-#: salix-live-installer.glade:2015
+#: salix-live-installer.glade:2114
 msgid ""
 "It appears that you have more than one Linux partition. If you wish, \n"
 "you can now spread Salix directory tree on separate partitions. In \n"
@@ -755,34 +1015,15 @@ msgstr ""
 "κατατμήσεις. \n"
 "Είναι προτεινομενο ο κατάλογος /home να είναι σε αυτόνομη κατάτμηση."
 
-#: salix-live-installer.glade:2037
-msgid "Confirm the Linux partition(s) settings from the list above. "
-msgstr "Επαλήθευση των ρυθμίσεων κατατμήσεων Linux από την παραπάνω λίστα."
-
-#: salix-live-installer.glade:2054 salix-live-installer.glade:2233
+#: salix-live-installer.glade:2154 salix-live-installer.glade:2333
 msgid "Apply _settings "
 msgstr "Εφαρμογή _ρυθμίσεων"
 
-#: salix-live-installer.glade:2093
+#: salix-live-installer.glade:2193
 msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr "<b>Παρακαλώ ρυθμίστε τις κατατμήσεις Windows:</b>"
 
-#: salix-live-installer.glade:2107
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to assign the mount "
-"point of a partition. \n"
-"\n"
-"You must configure all the desired partitions before clicking on the 'Apply "
-"settings' button. Any unset parameters will be ignored. "
-msgstr ""
-"Επιλέξτε το αντίστοιχο κελί αν επιθυμείτε να θέσετε το σημείο προσάρτησης "
-"μιας κατάτμησης. \n"
-"\n"
-"Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε "
-"προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν "
-"θα ρυθμιστεί, θα αγνοηθεί."
-
-#: salix-live-installer.glade:2195
+#: salix-live-installer.glade:2294
 msgid ""
 "It appears that some of your partitions have a Windows formatting. \n"
 "Here you can set a mount point for each one if you wish them to be \n"
@@ -793,302 +1034,111 @@ msgstr ""
 "έχετε \n"
 "πρόσβαση σε αυτές μέσω του Salix."
 
-#: salix-live-installer.glade:2216
-msgid "Confirm the Windows partition(s) settings from the list above. "
-msgstr "Επαληθεύστε τις ρυθμίσεις κατατμήσεων Windows από την παραπάνω λίστα."
-
-#: salix-live-installer.glade:2267
-msgid "Summary of your partition(s) settings."
-msgstr "Περίληψη των ρυθμίσεων κατατμήσεων."
-
-#: salix-live-installer.glade:2273
+#: salix-live-installer.glade:2380
 msgid "<b>Salix main partition:</b>"
 msgstr "<b>Κύρια κατάτμηση του Salix:</b>"
 
-#: salix-live-installer.glade:2286
+#: salix-live-installer.glade:2393
 msgid "Main partition"
 msgstr "Κύρια κατάτμηση"
 
-#: salix-live-installer.glade:2298
+#: salix-live-installer.glade:2405
 msgid "<b>Other Linux partitions:</b>"
 msgstr "<b>Άλλες κατατμήσεις Linux:</b>"
 
-#: salix-live-installer.glade:2311
+#: salix-live-installer.glade:2418
 msgid "Home partition"
 msgstr "Κατάτμηση home"
 
-#: salix-live-installer.glade:2323
+#: salix-live-installer.glade:2430
 msgid "<b>Windows partitions:</b>"
 msgstr "<b>Κατατμήσεις Windows:</b>"
 
-#: salix-live-installer.glade:2336
+#: salix-live-installer.glade:2443
 msgid "Windows partitions"
 msgstr "Κατατμήσεις Windows"
 
-#: salix-live-installer.glade:2354
-msgid "Cancel all partition(s) settings. "
-msgstr "Ακύρωση όλων των ρυθμίσεων κατατμήσεων"
-
-#: salix-live-installer.glade:2378
-msgid ""
-"A Linux system can manage many registered users and requires each one to log "
-"in, and to produce some form of authentication (usually a user's name "
-"coupled with a password) before allowing the user access to system resources."
-msgstr ""
-"Ένα σύστημα Linux μπορεί να περιλαμβάνει πολλούς χρήστες και απαιτεί από τον "
-"καθένα να εισέρχεται στο σύστημα χρησιμοποιώντας κάποια μέθοδο αναγνώρισης "
-"(συνήθως το όνομα και ο κωδικός χρήστη) προτού επιτρέψει στον χρήστη να "
-"χρησιμοποιήσει το σύστημα."
-
-#: salix-live-installer.glade:2384
+#: salix-live-installer.glade:2505
 msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Παρακαλώ δημιουργήστε ένα νέο χρήστη:</b>"
 
-#: salix-live-installer.glade:2400
+#: salix-live-installer.glade:2521
 msgid "Enter login: "
 msgstr "Όνομα χρήστη:"
 
-#: salix-live-installer.glade:2412
-msgid ""
-"Here you must define your user's name which should only include "
-"alphanumerical characters with no space or upper case letters."
-msgstr ""
-"Εδώ πρέπει να εισάγετε το όνομα χρήστη το οποίο πρέπει να περιλαμβάνει μόνο "
-"αλφαριθμητικούς χαρακτήρες χωρίς κενά και κεφαλαία."
-
-#: salix-live-installer.glade:2431
+#: salix-live-installer.glade:2553
 msgid "Enter password: "
 msgstr "Κωδικός:"
 
-#: salix-live-installer.glade:2443
-msgid ""
-"Choose a password or passphrase to be coupled with your user's name. Your "
-"password or passprase should include a mix of upper and lower case letters, "
-"numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"Εισάγετε έναν κωδικό χρήστη. Ο κωδικός χρήστη θα πρέπει να περιλαμβάνει πεζά "
-"και κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
-
-#: salix-live-installer.glade:2454 salix-live-installer.glade:2630
+#: salix-live-installer.glade:2577 salix-live-installer.glade:2758
 msgid "Do not hide"
 msgstr "Χωρίς απόκρυψη"
 
-#: salix-live-installer.glade:2458 salix-live-installer.glade:2634
-msgid ""
-"Check this box if you want to be able to see the password you are typing."
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να εμφανίζεται ο κωδικός κατά την πληκτρολόγηση."
-
-#: salix-live-installer.glade:2478
+#: salix-live-installer.glade:2602
 msgid "Re-enter password: "
 msgstr "Επανεισαγωγή κωδικού:"
 
-#: salix-live-installer.glade:2490
-msgid ""
-"Here you must retype your user's password as a confirmation of your choice."
-msgstr "Εδώ πρέπει να επανεισάγετε των κωδικό χρήστη για επαλήθευση."
-
-#: salix-live-installer.glade:2511
+#: salix-live-installer.glade:2636
 msgid "<b>User created: </b>"
 msgstr "<b>Ο χρήστης δημιουργήθηκε: </b>"
 
-#: salix-live-installer.glade:2540
-msgid "Cancel new user creation"
-msgstr "Ακύρωση της δημιουργίας νέου χρήστη"
-
-#: salix-live-installer.glade:2554
-msgid "Create new user"
-msgstr "Δημιουργία νέου χρήστη"
-
-#: salix-live-installer.glade:2591
+#: salix-live-installer.glade:2718
 msgid "<b>Please create a new administrator's password:</b>"
 msgstr "<b>Παρακαλώ εισάγετε νέο κωδικό διαχειριστή συστήματος:</b>"
 
-#: salix-live-installer.glade:2607
+#: salix-live-installer.glade:2734
 msgid "Enter root password: "
 msgstr "Εισαγωγή κωδικού διαχειριστή συστήματος:"
 
-#: salix-live-installer.glade:2619
-msgid ""
-"On Linux systems, the superuser, or root, is a special user account used for "
-"system administration. Here you must set its password or passphrase. "
-"Remember, this password or passphrase should include a mix of upper and "
-"lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"Στα συστήματα Linux, ο διαχειριστής συστήματος, ή root, αποτελεί ένα ειδικό "
-"λογαριασμό χρήστη που χρησιμοποιείται για τη διαχείρηση συστήματος. Πρέπει "
-"να εισάγετε ένα κωδικό χρήστη. Ο κωδικός θα πρέπει να περιλαμβάνει πεζά και "
-"κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
-
-#: salix-live-installer.glade:2654
+#: salix-live-installer.glade:2783
 msgid "Re-enter root password: "
 msgstr "Επανεισαγωγή του κωδικού διαχειριστή:"
 
-#: salix-live-installer.glade:2666
-msgid ""
-"Here you must retype the superuser (root) password as a confirmation of your "
-"choice."
-msgstr ""
-"Εδώ πρέπει να επανεισάγετε τον κωδικό του διαχειριστή χρήστη για επαλήθευση."
-
-#: salix-live-installer.glade:2687
+#: salix-live-installer.glade:2817
 msgid "<b>Password created: </b>"
 msgstr "<b>Ο κωδικός δημιουργήθηκε: </b>"
 
-#: salix-live-installer.glade:2715
-msgid "Cancel new root password"
-msgstr "Ακύρωση νέου κωδικού διαχειριστή συστήματος"
-
-#: salix-live-installer.glade:2729
-msgid "Apply new root password"
-msgstr "Εφαρμογή νέου κωδικού διαχειριστή συστήματος"
-
-#: salix-live-installer.glade:2764
+#: salix-live-installer.glade:2903
 msgid "<b>Please select your installation mode:</b>"
 msgstr "<b>Παρακαλώ επιλέξτε τρόπο εγκατάστασης:</b>"
 
-#: salix-live-installer.glade:2779
+#: salix-live-installer.glade:2918
 msgid "Core"
 msgstr "Ελάχιστη"
 
-#: salix-live-installer.glade:2783
-msgid ""
-"Core installation: \n"
-"\n"
-"Only the minimum essentials for a console system to start are included. A "
-"graphical environment is not provided. This is ideal if you are an "
-"experienced user and want to customize your installation for any specific "
-"purpose, such as a web server, file server etc. "
-msgstr ""
-"Ελάχιστη εγκατάσταση: \n"
-"\n"
-"Μόνο τα ελάχιστα για τη λειτουργία ενός συστήματος κονσόλας Linux θα "
-"εγκατασταθούν. Δεν περιλαμβάνεται κανένα γραφικό περιβάλλον. Ιδανικό για "
-"έμπειρους χρήστες που επιθυμούν να τροποποιήσουν μια εγκατάσταση για "
-"οποιοδήποτε σκοπό, όπως web server, file server κλπ."
-
-#: salix-live-installer.glade:2814
+#: salix-live-installer.glade:2952
 msgid "Basic"
 msgstr "Βασική"
 
-#: salix-live-installer.glade:2818
-msgid ""
-"Basic installation: \n"
-"\n"
-"This installs only the Xfce desktop environment with the Firefox web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight Xfce and add their own choice of applications."
-msgstr ""
-"Βασική εγκατάσταση: \n"
-"\n"
-"Εγκαθιστάται μόνο το γραφικό περιβαλλον Xfce μαζί με το Firefox και την "
-"εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους "
-"χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον Xfce ώστε να προσθέσουν τις "
-"εφαρμογές της αρεσκείας τους."
-
-#: salix-live-installer.glade:2849
+#: salix-live-installer.glade:2986
 msgid "Full"
 msgstr "Πλήρης"
 
-#: salix-live-installer.glade:2853
-msgid ""
-"Full installation: \n"
-"\n"
-"Everything that is included in the iso is installed. That includes the Xfce "
-"desktop environment, the Firefox web browser and Claws-mail email client, a "
-"complete OpenOffice.org office suite, a Java Runtime Environment, the Totem "
-"media player and Exaile music manager, the gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
-msgstr ""
-"Πλήρης εγκατάσταση: \n"
-"\n"
-"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό "
-"περιβάλλον Xfce, τον περιηγητή διαδικτύου Firefox και την εφαρμογή "
-"ηλεκτρονικής αλληλογραφίας Claws-mail, την πλήρη σουίτα γραφείου OpenOffice."
-"org, Java, την εφαρμογή πολυμέσων Totem και την εφαρμογή διαχείρησης "
-"μουσικών αρχείων Exaile, το διαχειριστή πακέτων λογισμικού gslapt και πολλές "
-"άλλες εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε "
-"λειτουργία\"."
-
-#: salix-live-installer.glade:2891
+#: salix-live-installer.glade:3027
 msgid "<b>Please select your kernel:</b>"
 msgstr "<b>Παρακαλώ επιλέξτε τον πυρήνα:</b>"
 
-#: salix-live-installer.glade:2906
+#: salix-live-installer.glade:3042
 msgid "Standard kernel"
 msgstr "Τυπικός πυρήνας"
 
-#: salix-live-installer.glade:2910
-msgid ""
-"The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-"
-"loaded SMP Linux kernel with built-in support for most disk controllers."
-msgstr ""
-"Ο τυπικός πυρήνας που χρησιμοποιείται από το Salix είναι ο kernel-huge-smp "
-"του Slackware, ο οποίος περιλαμβανει υποστήριξη για τους περισσότερους "
-"ελεγκτές σκληρών δίσκων."
-
-#: salix-live-installer.glade:2938
+#: salix-live-installer.glade:3075
 msgid "Live kernel (+ live scripts)"
 msgstr "Πυρήνας live (+ live scripts)"
 
-#: salix-live-installer.glade:2942
-msgid ""
-"SalixLive's live kernel is also based on Slackware's kernel-huge-smp, but it "
-"has been patched to include aufs2 filesystem as well as squashfs-lzma "
-"compression. Its configuration has also been slightly changed to ensure most "
-"strategic devices would be available to the live system booting process.\n"
-"\n"
-"Although not absolutely necessary, you may prefer to install this kernel if "
-"you want to build your own LiveCD out of an installed Salix system (The "
-"Linux Live Scripts will also be installed if you select this kernel)."
-msgstr ""
-"Ο πυρήνας του SalixLive βασίζεται επίσης στην πυρήνα kernel-huge-smp του "
-"Slackware, αλλά έχει μετατραπεί για την ενσωμάτωση του συστήματος αρχείων "
-"aufs2 όπως επίσης και για τη συμπίεση squashfs-lzma. Η διαμόρφωση του έχει "
-"αλλαχτεί ελάχιστα για να γίνει βέβαιο ότι οι περισσότερες σημαντικές "
-"συσκευές θα είναι διαθέσιμες με την εκκίνηση του live συστήματος.\n"
-"\n"
-"Αν και δεν είναι απαραίτητο, ενδέχεται να προτιμήσετε αυτόν τον πυρήνα αν "
-"επιθυμείτε αν δημιουργήστε το δικό σας LiveCD από ένα σύστημα Salix (Τα "
-"Linux Live Scripts θα εγκατασταθούν με τη χρήση αυτού του πυρήνα)."
-
-#: salix-live-installer.glade:2978
-msgid "Cancel all packages selection "
-msgstr "Ακύρωση της επιλογής πακέτων λογισμικού."
-
-#: salix-live-installer.glade:2992
-msgid "Confirm your packages selection "
-msgstr "Επαλήθευση της επιλογής πακέτων λογισμικού."
-
-#: salix-live-installer.glade:3046
-msgid "Exit Salix Installer"
-msgstr "Έξοδος από την εφαρμογή εγκατάστασης του Salix."
-
-#: salix-live-installer.glade:3062
-msgid ""
-"Launch Salix installation.\n"
-"\n"
-"This button will not be active until all settings are configured correctly."
-msgstr ""
-"Έναρξη της εγκατάστασης του Salix.\n"
-"\n"
-"Το πλήκτρο δεν θα είναι ενεργό, προτού όλες οι ρυθμίσεις εγκατάστασης έχουν "
-"πραγματοποιηθεί."
-
-#: salix-live-installer.glade:3081
+#: salix-live-installer.glade:3224
 msgid "Launch Salix _install "
 msgstr "Έναρξη της _εγκατάστασης του Salix"
 
-#: salix-live-installer.glade:3122
+#: salix-live-installer.glade:3264
 msgid "Copyright © 2010 Pierrick Le Brun"
 msgstr "Copyright © 2010 Pierrick Le Brun"
 
-#: salix-live-installer.glade:3123
+#: salix-live-installer.glade:3265
 msgid "SalixOS installation from SalixLive's graphic environment"
 msgstr "Εγκατάσταση του Salix μέσω του περιβάλλοντος SalixLive"
 
-#: salix-live-installer.glade:3126
+#: salix-live-installer.glade:3268
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1120,27 +1170,30 @@ msgstr ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 
-#: salix-live-installer.glade:3141
-msgid "French: Pierrick Le Brun"
+#: salix-live-installer.glade:3283
+#, fuzzy
+msgid ""
+"French: Pierrick Le Brun\n"
+"Greek: George Vlahavas "
 msgstr "French: Pierrick Le Brun"
 
-#: salix-live-installer.glade:3167
+#: salix-live-installer.glade:3310
 msgid "Confirmation needed"
 msgstr "Χρειάζεται επαλήθευση"
 
-#: salix-live-installer.glade:3186
+#: salix-live-installer.glade:3329
 msgid "<b>Message about the particular choice: </b>"
 msgstr "<b>Μύνημα για τη συγκεκριμένη επιλογή: </b>"
 
-#: salix-live-installer.glade:3199
+#: salix-live-installer.glade:3342
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>Επιθυμείτε να συνεχίσετε;</b>"
 
-#: salix-live-installer.glade:3263
+#: salix-live-installer.glade:3406
 msgid "Salix installation"
 msgstr "Εγκατάσταση του Salix"
 
-#: salix-live-installer.glade:3275
+#: salix-live-installer.glade:3418
 msgid "Please be patient, Salix installation is in progress... "
 msgstr "Παρακαλώ περιμένετε όσο πραγματοποιείται η εγκατάσταση του Salix..."
 
