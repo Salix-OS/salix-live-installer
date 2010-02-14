@@ -356,7 +356,7 @@
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkButton" id="about_link">
-                    <property name="width_request">250</property>
+                    <property name="width_request">210</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -367,7 +367,6 @@
                     <child>
                       <object class="GtkImage" id="image1">
                         <property name="visible">True</property>
-                        <property name="yalign">0.47999998927116394</property>
                         <property name="pixbuf">salix-live-installer.png</property>
                       </object>
                     </child>
@@ -386,14 +385,19 @@
                     <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
                     <child>
                       <object class="GtkLabel" id="context_label">
+                        <property name="height_request">170</property>
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="xpad">7</property>
-                        <property name="ypad">3</property>
+                        <property name="xpad">2</property>
+                        <property name="ypad">2</property>
+                        <property name="wrap">True</property>
+                        <property name="width_chars">59</property>
                       </object>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -420,7 +424,7 @@
                             <property name="border_width">5</property>
                             <child>
                               <object class="GtkHBox" id="hbox2">
-                                <property name="width_request">220</property>
+                                <property name="width_request">180</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="vbox2">
@@ -893,7 +897,7 @@
                             </child>
                             <child>
                               <object class="GtkVBox" id="vbox4">
-                                <property name="width_request">485</property>
+                                <property name="width_request">475</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="intro_box">
@@ -902,24 +906,23 @@
                                     <child>
                                       <object class="GtkLabel" id="label38">
                                         <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="xpad">2</property>
                                         <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
 
-Before executing SalixLive's installer, you should already 
-have the necessary partitions available on your system.
+Before executing SalixLive's installer, you should already have the necessary partitions available on your system.
 
-Salix needs, at the very minimum, one swap partition and  
-one Linux  partition to hold its main directory tree. 
+Salix needs, at the very minimum, one swap partition and  one Linux  partition to hold its main directory tree. 
 
-If possible, it is recommended to also have at least
-another Linux partition to hold your /home directory.
+If possible, it is recommended to also have at least another Linux partition to hold your /home directory.
 
-If you do not already have these needed partitions ready,
-please exit SalixLive's installer and use Gparted to create
-them first.</property>
+If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first.</property>
                                         <property name="use_markup">True</property>
+                                        <property name="wrap">True</property>
+                                        <property name="width_chars">58</property>
                                       </object>
                                       <packing>
-                                        <property name="padding">5</property>
+                                        <property name="padding">3</property>
                                         <property name="position">0</property>
                                       </packing>
                                     </child>
@@ -1378,7 +1381,7 @@ them first.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="layout_column">
                                                 <property name="sizing">autosize</property>
-                                                <property name="title" translatable="yes">Layout</property>
+                                                <property name="title">Layout</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="layout_list"/>
                                                   <attributes>
@@ -1388,9 +1391,9 @@ them first.</property>
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkTreeViewColumn" id="Type_column">
+                                              <object class="GtkTreeViewColumn" id="type_column">
                                                 <property name="sizing">autosize</property>
-                                                <property name="title" translatable="yes">Type</property>
+                                                <property name="title">Type</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="type_list"/>
                                                   <attributes>
@@ -1592,7 +1595,7 @@ them first.</property>
                                             <signal name="enter_notify_event" handler="on_locale_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="locale_column">
-                                                <property name="title" translatable="yes">Locale</property>
+                                                <property name="title">Locale</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="loc_list"/>
@@ -1603,8 +1606,8 @@ them first.</property>
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkTreeViewColumn" id="Descript_column">
-                                                <property name="title" translatable="yes">Description</property>
+                                              <object class="GtkTreeViewColumn" id="descript_column">
+                                                <property name="title">Description</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="desc_list"/>
                                                   <attributes>
@@ -1789,7 +1792,7 @@ them first.</property>
                                             <signal name="enter_notify_event" handler="on_main_partition_list_enter_notify_event"/>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_disk_column">
-                                                <property name="title" translatable="yes">Disk</property>
+                                                <property name="title">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_disk_renderer_text"/>
@@ -1801,7 +1804,7 @@ them first.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_part_column">
-                                                <property name="title" translatable="yes">Partition</property>
+                                                <property name="title">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_part_renderer_text"/>
@@ -1813,7 +1816,7 @@ them first.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="main_size_column">
-                                                <property name="title" translatable="yes">Size</property>
+                                                <property name="title">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main-size_renderer_text"/>
@@ -1824,8 +1827,8 @@ them first.</property>
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkTreeViewColumn" id="format_column">
-                                                <property name="title" translatable="yes">File System</property>
+                                              <object class="GtkTreeViewColumn" id="main_format_column">
+                                                <property name="title">File System</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="main_format_renderer_text"/>
@@ -2025,7 +2028,7 @@ permanently erased.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_disk_column">
                                                 <property name="visible">False</property>
-                                                <property name="title" translatable="yes">Disk</property>
+                                                <property name="title">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_renderer_text"/>
@@ -2037,7 +2040,7 @@ permanently erased.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_part_column">
-                                                <property name="title" translatable="yes">Partition</property>
+                                                <property name="title">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_part_renderer_text"/>
@@ -2049,7 +2052,7 @@ permanently erased.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_size_column">
-                                                <property name="title" translatable="yes">Size</property>
+                                                <property name="title">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_size_renderer_text"/>
@@ -2061,7 +2064,7 @@ permanently erased.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_oldsys_column">
-                                                <property name="title" translatable="yes">Current FS</property>
+                                                <property name="title">Current FS</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="linux_oldsys_renderer_text"/>
@@ -2073,7 +2076,7 @@ permanently erased.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_newsys_column">
-                                                <property name="title" translatable="yes">Format as:</property>
+                                                <property name="title">Format as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
@@ -2087,7 +2090,7 @@ permanently erased.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="linux_newmount_column">
-                                                <property name="title" translatable="yes">Mount as:</property>
+                                                <property name="title">Mount as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
@@ -2219,7 +2222,7 @@ separate partition.</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_disk_column">
                                                 <property name="visible">False</property>
-                                                <property name="title" translatable="yes">Disk</property>
+                                                <property name="title">Disk</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_disk_renderer_text"/>
@@ -2231,7 +2234,7 @@ separate partition.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_part_column">
-                                                <property name="title" translatable="yes">Partition</property>
+                                                <property name="title">Partition</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_part_renderer_text"/>
@@ -2243,7 +2246,7 @@ separate partition.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_size_column">
-                                                <property name="title" translatable="yes">Size</property>
+                                                <property name="title">Size</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_size_renderer_text"/>
@@ -2255,7 +2258,7 @@ separate partition.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_oldsys_column">
-                                                <property name="title" translatable="yes">File System</property>
+                                                <property name="title">File System</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="win_oldsys_renderer_text"/>
@@ -2267,7 +2270,7 @@ separate partition.</property>
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="win_newmount_column">
-                                                <property name="title" translatable="yes">Mount as:</property>
+                                                <property name="title">Mount as:</property>
                                                 <property name="expand">True</property>
                                                 <child>
                                                   <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">

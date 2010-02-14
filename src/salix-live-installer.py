@@ -45,6 +45,8 @@ gtk.glade.bindtextdomain("salix-live-installer", "/usr/share/locale")
 gtk.glade.textdomain("salix-live-installer")
 
 # To do => Install log
+# To do => Integrate Gparted in installer
+# To do => Add a lilo simple option ?
 # To do => More Error checking with subprocess.check_call() and try/except
 
 class SalixLiveInstaller:
@@ -161,11 +163,49 @@ class SalixLiveInstaller:
         self.SecondSpinButton = builder.get_object("second_spinbutton")
         self.TimeZoneBox = builder.get_object("time_zone_box")
         self.ContextLabel = builder.get_object("context_label")
+        self.LayoutColumn = builder.get_object("layout_column")
+        self.TypeColumn = builder.get_object("type_column")
+        self.LocaleColumn = builder.get_object("locale_column")
+        self.DescriptColumn = builder.get_object("descript_column")
+        self.MainDiskColumn = builder.get_object("main_disk_column")
+        self.MainPartColumn = builder.get_object("main_part_column")
+        self.MainSizeColumn = builder.get_object("main_size_column")
+        self.MainFormatColumn = builder.get_object("main_format_column")
+        self.LinuxPartColumn = builder.get_object("linux_part_column")
+        self.LinuxSizeColumn = builder.get_object("linux_size_column")
+        self.LinuxOldSysColumn = builder.get_object("linux_oldsys_column")
+        self.LinuxNewSysColumn = builder.get_object("linux_newsys_column")
+        self.LinuxNewMountColumn = builder.get_object("linux_newmount_column")
+        self.WinPartColumn = builder.get_object("win_part_column")
+        self.WinSizeColumn = builder.get_object("win_size_column")
+        self.WinOldSysColumn = builder.get_object("win_oldsys_column")    
+        self.WinNewMountColumn = builder.get_object("win_newmount_column")
+
+
 
         # Connect signals
         builder.connect_signals(self)
 
 ### INITIALIZATION ###
+
+        # Set the column names
+        self.LayoutColumn.set_title(_('Layout'))
+        self.TypeColumn.set_title(_('Type'))
+        self.LocaleColumn.set_title(_('Locale'))
+        self.DescriptColumn.set_title(_('Description'))
+        self.MainDiskColumn.set_title(_('Disk'))
+        self.MainPartColumn.set_title(_('Partition'))
+        self.MainSizeColumn.set_title(_('Size'))
+        self.MainFormatColumn.set_title(_('File System'))
+        self.LinuxPartColumn.set_title(_('Partition'))
+        self.LinuxSizeColumn.set_title(_('Size'))
+        self.LinuxOldSysColumn.set_title(_('Current FS'))
+        self.LinuxNewSysColumn.set_title(_('Format as:'))
+        self.LinuxNewMountColumn.set_title(_('Mount as:'))
+        self.WinPartColumn.set_title(_('Partition'))
+        self.WinSizeColumn.set_title(_('Size'))
+        self.WinOldSysColumn.set_title(_('File System'))
+        self.WinNewMountColumn.set_title(_('Mount as:'))
 
         ### Initialise some global variables ###
         # Prevent switching to another tab until the current configuration is completed or cancelled
@@ -461,9 +501,10 @@ class SalixLiveInstaller:
             self.MainPartitionList.set_cursor(0)
 
         # Initialize the contextual help box
-        self.ContextLabel.set_text(_("SalixLive Installer will perform a standard installation of Salix \n\
-Operating System on your computer from the comfort of \n\
-SalixLive's graphic environment."))
+        global context_intro
+        context_intro = _("SalixLive Installer will perform a standard installation of Salix Operating \n\
+System on your computer from the comfort of SalixLive's graphic environment.")
+        self.ContextLabel.set_text(context_intro)
 
 ### Callback signals waiting in a constant loop: ###
 
@@ -473,289 +514,344 @@ SalixLive's graphic environment."))
     def on_about_link_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("About Salix Installer."))
     def on_about_link_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_context_eventbox_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Contextual help."))
     def on_context_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_button_quit_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Exit Salix Installer."))
     def on_button_quit_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_install_button_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Launch Salix installation. This button will not be active \n\
-until all settings are configured correctly."))
+	self.ContextLabel.set_text(_("Launch Salix installation. This button will not be active until \
+all settings are configured correctly."))
     def on_install_button_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_launch_eventbox_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Launch Salix installation. This button will not be active \n\
-until all settings are configured correctly."))
+	self.ContextLabel.set_text(_("Launch Salix installation. This button will not be active until \
+all settings are configured correctly."))
     def on_launch_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # Time contextual help
     def on_time_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the time settings."))
     def on_time_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_ntp_checkbutton_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Use Network Time Protocol daemon to synchronize time via Internet."))
     def on_ntp_checkbutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_time_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel time settings."))
     def on_time_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_time_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Activate the time settings after options have been defined."))
     def on_time_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_manual_time_eventbox_enter_notify_event(self, widget, data=None):
         self.ContextLabel.set_text(_("Set the date & time manually if you do not use NTP service."))
     def on_manual_time_eventbox_leave_notify_event(self, widget, data=None):
-        self.ContextLabel.set_text(" ")
+        global context_intro
+        self.ContextLabel.set_text(context_intro)
     def on_timezone_eventbox_enter_notify_event(self, widget, data=None):
         self.ContextLabel.set_text(_("Set the time zone."))
     def on_timezone_eventbox_leave_notify_event(self, widget, data=None):
-        self.ContextLabel.set_text(" ")
+        global context_intro
+        self.ContextLabel.set_text(context_intro)
 
     # Keyboard contextual help
     def on_keyboard_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the keyboard settings."))
     def on_keyboard_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_keyboard_list_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Highlight your favorite keyboard layout \
 from this \nlist before clicking on the 'Select keyboard' button."))
     def on_keyboard_list_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_numlock_checkbutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Check this box if you want your numeric keypad \n\
+	self.ContextLabel.set_text(_("Check this box if you want your numeric keypad \
 to be activated during the boot process."))
     def on_numlock_checkbutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_keyboard_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel keyboard layout selection."))
     def on_keyboard_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_keyboard_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm your selection after highlighting the keyboard layout."))
     def on_keyboard_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_keyboard_selection_eventbox_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("This is the keyboard layout you have selected. \n\
+	self.ContextLabel.set_text(_("This is the keyboard layout you have selected. \
 'None' will be displayed until you have confirmed that selection."))
     def on_keyboard_selection_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # Locale contextual help
     def on_locale_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the language settings."))
     def on_locale_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_locale_list_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Highlight your language from this list before \n\
+	self.ContextLabel.set_text(_("Highlight your language from this list before \
 clicking on the 'Select language' button."))
     def on_locale_list_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_locale_selection_eventbox_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("This is the system language you have selected. \n\
+	self.ContextLabel.set_text(_("This is the system language you have selected. \
 'None' will be displayed until you have confirmed that selection. "))
     def on_locale_selection_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_locale_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel language selection."))
     def on_locale_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_locale_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm your selection after highlighting the system language."))
     def on_locale_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # Partitions contextual help
     def on_partition_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the partitions settings."))
     def on_partition_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_main_partition_list_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Highlight the partition from this list before \n\
+	self.ContextLabel.set_text(_("Highlight the partition from this list before \
 clicking on the 'Select partition' button."))
     def on_main_partition_list_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_external_device_checkbutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Check this box if you want your external disk drive(s) \n\
+	self.ContextLabel.set_text(_("Check this box if you want your external disk drive(s) \
 to be displayed in the list above. "))
     def on_external_device_checkbutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_main_partition_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm your selection after highlighting the partition."))
     def on_main_partition_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_main_format_eventbox_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("The filesystem that will be used to format Salix main partition."))
     def on_main_format_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_linux_partition_list_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Click on the appropriate 'Select...' cell if you wish to modify the \n\
-filesystem of a partition and/or if you wish to assign its mount point.\n\
-You can either choose one of the suggested mount points or enter \n\
-your own. You must configure all the desired partitions before clicking \n\
+	self.ContextLabel.set_text(_("Click on the appropriate 'Select...' cell if you wish to modify the \
+filesystem of a partition and/or if you wish to assign its mount point.\
+You can either choose one of the suggested mount points or enter \
+your own. You must configure all the desired partitions before clicking \
 on the 'Apply settings' button. Any unset parameters will be ignored. "))
     def on_linux_partition_list_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_linux_partition_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm the Linux partition(s) settings from the list."))
     def on_linux_partition_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_win_partition_list_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Click on the appropriate 'Select...' cell if you wish to assign \n\
-the mount point of a partition. You must configure all the \n\
-desired partitions before clicking on the 'Apply settings' button. \n\
+	self.ContextLabel.set_text(_("Click on the appropriate 'Select...' cell if you wish to assign \
+the mount point of a partition. You must configure all the \
+desired partitions before clicking on the 'Apply settings' button. \
 Any unset parameters will be ignored. "))
     def on_win_partition_list_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_windows_partition_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm the Windows partition(s) settings from the list above."))
     def on_windows_partition_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_partition_recap_eventbox_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Summary of your partition(s) settings."))
     def on_partition_recap_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_partition_recap_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel all partition(s) settings."))
     def on_partition_recap_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # Users contextual help
     def on_users_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the users and passwords settings."))
     def on_users_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_users_eventbox_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("A Linux system can manage many registered users and requires each \n\
-one to log in, and to produce some form of authentication (usually a \n\
-user's name coupled with a password) before allowing the user access \n\
+	self.ContextLabel.set_text(_("A Linux system can manage many registered users and requires each \
+one to log in, and to produce some form of authentication (usually a \
+user's name coupled with a password) before allowing the user access \
 to system resources."))
     def on_users_eventbox_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_user_login_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Here you must define your user's name which should only include \n\
+	self.ContextLabel.set_text(_("Here you must define your user's name which should only include \
 alphanumerical characters with no space or upper case letters. "))
     def on_user_login_entry_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_user_pass1_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Choose a password or passphrase to be coupled with your user's \n\
-name. Your password or passprase should include a mix of upper \n\
-and lower case letters, numbers, and even symbols (such as the \n\
+	self.ContextLabel.set_text(_("Choose a password or passphrase to be coupled with your user's \
+name. Your password or passprase should include a mix of upper \
+and lower case letters, numbers, and even symbols (such as the \
 @, !, and &)"))
     def on_user_pass1_entry_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_user_pass2_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Here you must retype your user's password as a confirmation \n\
+	self.ContextLabel.set_text(_("Here you must retype your user's password as a confirmation \
 of your choice."))
     def on_user_pass2_entry_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_user_visible_checkbutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \n\
+	self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \
 are typing."))
     def on_user_visible_checkbutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_users_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Create new user."))
     def on_users_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_users_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel new user creation."))
     def on_users_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     def on_root_pass1_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("On Linux systems, the superuser, or root, is a special user account\n\
-used for system administration. Here you must set its password or\n\
-passphrase. Remember, this password or passphrase should include \n\
-a mix of upper and lower case letters, numbers, and even symbols \n\
+	self.ContextLabel.set_text(_("On Linux systems, the superuser, or root, is a special user account\
+used for system administration. Here you must set its password or\
+passphrase. Remember, this password or passphrase should include \
+a mix of upper and lower case letters, numbers, and even symbols \
 (such as the @, !, and &)"))
     def on_root_pass1_entry_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_root_pass2_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Here you must retype the superuser (root) password as a \n\
+	self.ContextLabel.set_text(_("Here you must retype the superuser (root) password as a \
 confirmation of your choice."))
     def on_root_pass2_entry_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_root_visible_checkbutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \n\
+	self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \
 are typing."))
     def on_root_visible_checkbutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_rootpass_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Apply new root password."))
     def on_rootpass_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_rootpass_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel new root password."))
     def on_rootpass_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # Packages contextual help
     def on_packages_tab_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Access the packages selection."))
     def on_packages_tab_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_core_radiobutton_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Core installation:\n\
-Only the minimum essentials for a console system to start are \n\
-included. A graphical environment is not provided. This is ideal \n\
-if you are an experienced user and want to customize your \n\
-installation for any specific purpose, such as a web server, \n\
+\n\
+Only the minimum essentials for a console system to start are \
+included. A graphical environment is not provided. This is ideal \
+if you are an experienced user and want to customize your \
+installation for any specific purpose, such as a web server, \
 file server etc. "))
     def on_core_radiobutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Basic installation: \n\
-This installs only the Xfce desktop environment with the Firefox \n\
-web browser and the gslapt package manager. Ideal for advanced \n\
-users that would like to install a lightweight Xfce and add their \n\
+\n\
+This installs only the Xfce desktop environment with the Firefox \
+web browser and the gslapt package manager. Ideal for advanced \
+users that would like to install a lightweight Xfce and add their \
 own choice of applications."))
     def on_basic_radiobutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_full_radiobutton_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Full installation:\n\
-Everything that is included in the iso is installed. That includes the\n\
-Xfce desktop environment, the Firefox web browser and Claws-mail\n\
-email client, a complete OpenOffice.org office suite, a Java Runtime\n\
-Environment, the Totem media player and Exaile music manager, \n\
-the Gslapt package manager and several other applications, always \n\
+\n\
+Everything that is included in the iso is installed. That includes the \
+Xfce desktop environment, the Firefox web browser and Claws-mail \
+email client, a complete OpenOffice.org office suite, a Java Runtime \
+Environment, the Totem media player and Exaile music manager, \
+the Gslapt package manager and several other applications, always \
 following the 'one application per task' rationale."))
     def on_full_radiobutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     def on_salix_kernel_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("The standard kernel used by Salix is Slackware's kernel-huge-smp. \n\
-A fully-loaded SMP Linux kernel with built-in support for most \n\
-disk controllers."))
+	self.ContextLabel.set_text(_("The standard kernel used by Salix is Slackware's kernel-huge-smp. \
+A fully-loaded SMP Linux kernel with built-in support for most disk controllers."))
     def on_salix_kernel_radiobutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_live_kernel_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("SalixLive's live kernel is based on Slackware's kernel-huge-smp, \n\
-but it has been patched to include aufs2 filesystem as well as \n\
-squashfs-lzma compression. Its configuration has also been slightly \n\
-changed to ensure most strategic devices would be available to the \n\
-live system booting process. Although not absolutely necessary, you \n\
-may prefer to install this kernel if you want to build your own \n\
-LiveCD out of an installed Salix system (The Linux Live Scripts \n\
-will also be installed if you select this kernel)."))
+	self.ContextLabel.set_text(_("SalixLive's live kernel is based on Slackware's kernel-huge-smp, \
+but it has been patched to include aufs2 filesystem as well as squashfs-lzma \
+compression. Its configuration has also been slightly changed to ensure most \
+strategic devices would be available to the live system booting process. \
+Although not absolutely necessary, you may prefer to install this kernel \
+if you want to build your own LiveCD out of an installed Salix system \
+(The Linux Live Scripts will also be installed if you select this kernel)."))
     def on_live_kernel_radiobutton_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     def on_packages_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm your packages selection."))
     def on_packages_apply_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_packages_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel all packages selection."))
     def on_packages_undo_leave_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(" ")
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
 
     # What to do when the exit X on the main window upper right is clicked
     def gtk_main_quit(self, widget, data=None):
@@ -1684,24 +1780,10 @@ will also be installed if you select this kernel)."))
                     Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'vfat' , 'defaults,utf8,umask=0,shortname=mixed', '1', '0'))
         Fstab_File.close()
 
-        # Create /etc/rc.d/rc.font
-        self.InstallProgressBar.set_text(_("Creating /etc/rc.d/rc.font..."))
-        self.InstallProgressBar.set_fraction(0.90)
-        # there's more work, yield True
-        yield True
-        RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
-        RCfont_File.write("#!/bin/sh\n\
-#\n\
-#This selects your default screen font from among the ones in\n\
-# /usr/share/kbd/consolefonts.\n\
-#\n\
-#setfont -v ter-v16n\n\
-unicode_start ter-v16n")
-        RCfont_File.close()
 
-        # Set Time, Keyboard, locale, login...
-        self.InstallProgressBar.set_text(_("Setting the time, keyboard, locale & login..."))
-        self.InstallProgressBar.set_fraction(0.95)
+        # Set Time, Keyboard, locale, login, etc...
+        self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
+        self.InstallProgressBar.set_fraction(0.90)
         # there's more work, yield True
         yield True
         global set_ntp, set_zone
@@ -1713,6 +1795,18 @@ unicode_start ter-v16n")
         subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
         subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
 
+        # Create /etc/rc.d/rc.font
+        RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
+        RCfont_File.write("#!/bin/sh\n\
+#\n\
+#This selects your default screen font from among the ones in\n\
+# /usr/share/kbd/consolefonts.\n\
+#\n\
+#setfont -v ter-v16n\n\
+unicode_start ter-v16n")
+        RCfont_File.close()
+
+        # Create /etc/rc.d/rc.keymap
         RCkeymap_File = open(Main_MountPoint + '/etc/rc.d/rc.keymap', 'w')
         RCkeymap_File.write("#!/bin/sh\n\
 #\n\
@@ -1721,8 +1815,14 @@ if [ -x /usr/bin/loadkeys ]; then\n\
 /usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
 fi")
         RCkeymap_File.close()
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
 
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.07.update-mime-database', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
         # Create a fork to not get stuck in the chroot
         NewPid = os.fork()
         if NewPid == 0 :
@@ -1755,10 +1855,16 @@ and use the application of your choice before rebooting your machine.)\n"""))
             # there's no more work, yield False
             yield False
 
-    # Set up keyboard, locale & users
+    # Set up keyboard, locale, users, etc...
     def chroot_settings(self) :
         os.listdir(Main_MountPoint)
         os.chroot(Main_MountPoint)
+        subprocess.call('/var/log/setup/setup.07.update-desktop-database', shell=True)
+        subprocess.call('/var/log/setup/setup.07.update-mime-database', shell=True)
+        subprocess.call('/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
+        subprocess.call('/var/log/setup/setup.htmlview', shell=True)
+        subprocess.call('/var/log/setup/setup.services', shell=True)
+
         # We have to deactivate some stuff in keyboardsetup first
         subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
         subprocess.call('sed -i "s/\/etc\/rc.d\/rc.hald restart/# \/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
