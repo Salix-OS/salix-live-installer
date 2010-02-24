@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 100214 build -  First version
+# version = '0.1' - 100224 build -  First version
 
 import commands
 import subprocess
@@ -433,65 +433,68 @@ class SalixLiveInstaller:
             self.MainPartitionListStore.clear()
             # Use non-localized environment to avoid problems
             os.environ['LANG'] = 'en_US'
-            # Detect all partitions except swap and extended
-            strip_swap_extended = 'parted -sl | grep -v swap | grep -v extended'
-            global parted_output
-            parted_output = commands.getoutput(strip_swap_extended).splitlines()
+            # Detect all disk drives
+            fdisk_output = commands.getoutput('fdisk -l | grep -i disk | grep -v identifier').splitlines()
             # Initialize the different variables
             disk_name = ''
             disk_size = ''
-            disk_device = ''
+            disk_device = []
             part_name = ''
             part_size = ''
             part_system = ''
             part_feedline = ''
-            # Parse each line of parted output
-            for line in parted_output:
-                # Get the name of each hard drive
-                if 'Model:' in line:
-                    model_string = line
-                    # Some hard drives insert ATA before their name
-                    if 'ATA' in model_string:
-                        disk_name = model_string.split()[2]
-                    else:
-                        disk_name = model_string.split()[1]
-                # Get the device reference & size of the disk
-                elif 'Disk' in line:
-                    disk_device = line.split()[1]
-                    disk_size = line.split()[2]
-                # Get the size & filesystem for each partition of the disk
-                elif line.startswith(' '):
-                    part_name = disk_device.replace(':', '') + line.split() [0]
-                    part_size = line.split() [3]
-                    try :
-                        part_system = line.split() [5]
-                        if 'ext3' in part_system:
-                            part_system = 'ext3/ext4'
-                    except :
-                        part_system = 'None'
-                    # Check if removable devices should be displayed.
-                    if show_external_device == 'yes' :
-                        # Put all needed variables in one set per line
-                        part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system]
-                        # Put each set in a list
-                        part_feedline_list.append(part_feedline)
-                    else :
-                        usb_dev = ''
-                        firewire_dev = ''
-                        dev_root = part_name[5:-1]
-                        check_if_usb = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /usb'
-                        usb_dev = commands.getoutput(check_if_usb)
-                        check_if_firewire = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /fw-host'
-                        firewire_dev = commands.getoutput(check_if_firewire)
-                        if usb_dev != '' :
-                            pass
-                        elif firewire_dev != '' :
-                            pass
+            # Get the relevant partitions info
+            for line in fdisk_output:
+                if line.startswith('Disk'):
+                    disk_device.append(line.split()[1].replace(':', ''))
+            for drive in disk_device:
+                parted_output = commands.getoutput('parted ' + drive + ' print | grep -iv extended | grep -iv swap').splitlines()
+                # Parse each line of parted output
+                for line in parted_output:
+                    # Get the name of each hard drive
+                    if 'Model:' in line:
+                        model_string = line
+                        # Some hard drives insert ATA before their name
+                        if 'ATA' in model_string:
+                            disk_name = model_string.split()[2]
                         else:
+                            disk_name = model_string.split()[1]
+                    # Get the size of the disk
+                    elif 'Disk' in line:
+                        disk_size = line.split()[2]
+                    # Get the size & filesystem for each partition of the disk
+                    elif line.startswith(' '):
+                        part_name = drive.replace(':', '') + line.split() [0]
+                        part_size = line.split() [3]
+                        try :
+                            part_system = line.split() [5]
+                            if 'ext3' in part_system:
+                                part_system = 'ext3/ext4'
+                        except :
+                            part_system = 'None'
+                        # Check if removable devices should be displayed.
+                        if show_external_device == 'yes' :
                             # Put all needed variables in one set per line
                             part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system]
                             # Put each set in a list
                             part_feedline_list.append(part_feedline)
+                        else :
+                            usb_dev = ''
+                            firewire_dev = ''
+                            dev_root = part_name[5:-1]
+                            check_if_usb = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /usb'
+                            usb_dev = commands.getoutput(check_if_usb)
+                            check_if_firewire = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /fw-host'
+                            firewire_dev = commands.getoutput(check_if_firewire)
+                            if usb_dev != '' :
+                                pass
+                            elif firewire_dev != '' :
+                                pass
+                            else:
+                                # Put all needed variables in one set per line
+                                part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system]
+                                # Put each set in a list
+                                part_feedline_list.append(part_feedline)
             # Sort the list for the partitions who do not follow the hard drive order
             part_feedline_list.sort()
             # Populate GUI partition list view rows
