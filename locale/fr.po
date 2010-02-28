@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: salix-live-installer 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-28 17:14+0100\n"
+"POT-Creation-Date: 2010-02-28 21:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pierrick Le Brun <akuna~at~free~dot~fr>\n"
 "Language-Team: \n"
@@ -346,7 +346,7 @@ msgid ""
 msgstr ""
 "Installation en mode complet: \n"
 "\n"
-"Tout ce qui est inclus sur l'image ISO est installé. Ceci inclut l'environnement de bureau Xfce, le navigateur Internet Firefox, le client de courrier électronique Claws-mail, la suite bureautique OpenOffice.org complète, le plugin java, le lecteur multimédia Totem,l e gestionnaire de musique Exaile, le gestionnaire d'installation de logiciels Gslapt et plusieurs autres applications en suivant le principe rationnel d'une application par tâche."
+"Tout ce qui est inclus sur l'image ISO est installé. Ceci inclut l'environnement de bureau Xfce, le navigateur Internet Firefox, le client de courrier électronique Claws-mail, la suite bureautique OpenOffice.org complète, le plugin java, le lecteur multimédia Totem, le gestionnaire de musique Exaile, le gestionnaire d'installation de logiciels Gslapt et plusieurs autres applications en suivant le principe rationnel d'une application par tâche."
 
 #: salix-live-installer.py:827
 msgid "Confirm your packages selection."
@@ -460,10 +460,10 @@ msgstr "Vos deux saisies de mot de passe ne sont pas identiques"
 #: salix-live-installer.py:1481
 #: salix-live-installer.py:1504
 #: salix-live-installer.py:1522
-#: salix-live-installer.glade:1458
-#: salix-live-installer.glade:1655
-#: salix-live-installer.glade:2653
-#: salix-live-installer.glade:2834
+#: salix-live-installer.glade:1445
+#: salix-live-installer.glade:1642
+#: salix-live-installer.glade:2640
+#: salix-live-installer.glade:2822
 msgid "None"
 msgstr "Aucun"
 
@@ -682,35 +682,35 @@ msgstr ""
 "\n"
 "Les droits d'administrateur (Root) sont requis pour exécuter ce programme. "
 
-#: salix-live-installer.glade:343
+#: salix-live-installer.glade:344
 msgid "SalixLive Installer"
 msgstr "Installateur SalixLive"
 
-#: salix-live-installer.glade:465
+#: salix-live-installer.glade:456
 msgid "_Time"
 msgstr "_Heure"
 
-#: salix-live-installer.glade:512
+#: salix-live-installer.glade:503
 msgid "Key_board"
 msgstr "Cla_vier"
 
-#: salix-live-installer.glade:556
+#: salix-live-installer.glade:547
 msgid "Lo_cale"
 msgstr "Lan_gage"
 
-#: salix-live-installer.glade:600
+#: salix-live-installer.glade:591
 msgid "_Partitions"
 msgstr "_Partitions"
 
-#: salix-live-installer.glade:645
+#: salix-live-installer.glade:636
 msgid "U_sers"
 msgstr "U_tilisateurs"
 
-#: salix-live-installer.glade:689
+#: salix-live-installer.glade:680
 msgid "S_oftware"
 msgstr "L_ogiciels"
 
-#: salix-live-installer.glade:912
+#: salix-live-installer.glade:903
 msgid ""
 "<b>Important!</b>\n"
 "\n"
@@ -732,222 +732,203 @@ msgstr ""
 "\n"
 "Si ces partitions ne sont pas déjà prêtes à l'emploi, veuillez, quitter l'installateur de SalixLive puis utiliser Gparted afin de les préparer."
 
-#: salix-live-installer.glade:942
+#: salix-live-installer.glade:932
 msgid "<b>Please set the time, date and time zone:</b>"
 msgstr "<b>Veuillez définir l'heure, la date et le fuseau horaire:</b>"
 
-#: salix-live-installer.glade:1065
+#: salix-live-installer.glade:1051
 msgid " hrs : min : sec "
 msgstr " hrs : min : sec "
 
-#: salix-live-installer.glade:1095
+#: salix-live-installer.glade:1081
 msgid "Year:"
 msgstr "Année:"
 
-#: salix-live-installer.glade:1106
+#: salix-live-installer.glade:1092
 msgid "Month:"
 msgstr "Mois:"
 
-#: salix-live-installer.glade:1117
+#: salix-live-installer.glade:1103
 msgid "Day:"
 msgstr "Jour:"
 
-#: salix-live-installer.glade:1228
+#: salix-live-installer.glade:1214
 msgid "Time zone: "
 msgstr "Fuseau horaire:"
 
-#: salix-live-installer.glade:1276
+#: salix-live-installer.glade:1262
 msgid "Use NTP service"
 msgstr "Utiliser le service NTP"
 
-#: salix-live-installer.glade:1356
+#: salix-live-installer.glade:1342
 msgid "<b>Please select your keyboard layout:</b>"
 msgstr "<b>Veuillez sélectionner la disposition de votre clavier:</b>"
 
-#: salix-live-installer.glade:1415
+#: salix-live-installer.glade:1402
 msgid "Activate numlock"
 msgstr "Activer le bloc numérique"
 
-#: salix-live-installer.glade:1445
+#: salix-live-installer.glade:1432
 msgid "<b>Selected keyboard layout: </b>"
 msgstr "<b>Clavier sélectionné: </b>"
 
-#: salix-live-installer.glade:1533
+#: salix-live-installer.glade:1520
 msgid "Select _keyboard "
 msgstr "Sélection du _clavier"
 
-#: salix-live-installer.glade:1571
+#: salix-live-installer.glade:1558
 msgid "<b>Please select your system language:</b>"
 msgstr "<b>Veuillez sélectionner la langue du système:</b>"
 
-#: salix-live-installer.glade:1642
+#: salix-live-installer.glade:1629
 msgid "<b>Selected system language: </b>"
 msgstr "<b>Langage sélectionné: </b>"
 
-#: salix-live-installer.glade:1730
+#: salix-live-installer.glade:1717
 msgid "Select _language "
 msgstr "Sélection du langage"
 
-#: salix-live-installer.glade:1768
+#: salix-live-installer.glade:1755
 msgid "<b>Please select Salix main partition:</b>"
 msgstr "<b>Veuillez sélectionner la partition principale de Salix:</b>"
 
-#: salix-live-installer.glade:1851
+#: salix-live-installer.glade:1839
 msgid "Display attached external devices"
 msgstr "Afficher les périphériques externes"
 
-#: salix-live-installer.glade:1870
+#: salix-live-installer.glade:1858
 msgid ""
-"From the above partitions found on your system, please select the \n"
-"one where Salix' main directory tree (/) should be installed.\n"
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
 "\n"
-"<b>Warning!</b> This partition will be reformatted and its data will be \n"
-"permanently erased."
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
-"À partir des partitions détectées ci-dessus, veuillez sélectionner \n"
-"celle sur laquelle l'arborescence principale (/) de Salix OS devra être \n"
-"installée.\n"
+"À partir des partitions détectées ci-dessus, veuillez sélectionner celle sur laquelle l'arborescence principale (/) de Salix OS devra être installée.\n"
 "\n"
-"<b>Avertissement!</b> Cette partition sera reformatée et toutes \n"
-"ses données seront irrémédiablement supprimées."
+"<b>Avertissement!</b> Cette partition sera reformatée et toutes ses données seront irrémédiablement supprimées."
 
-#: salix-live-installer.glade:1899
+#: salix-live-installer.glade:1886
 msgid "Format with: "
 msgstr "Formater avec:"
 
-#: salix-live-installer.glade:1966
+#: salix-live-installer.glade:1953
 msgid "Select _partition "
 msgstr "Sélection de la partition"
 
-#: salix-live-installer.glade:2003
+#: salix-live-installer.glade:1990
 msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr "<b>Veuillez configurer vos autres partitions Linux:</b>"
 
-#: salix-live-installer.glade:2118
-msgid ""
-"It appears that you have more than one Linux partition. If you wish, \n"
-"you can now spread Salix directory tree on separate partitions. In \n"
-"fact, it is highly recommended to have the /home directory on a \n"
-"separate partition."
-msgstr ""
-"Il semble que vous disposez de plus d'une partition Linux. Si vous le \n"
-"désirez, vous pouvez étendre l'arborescence des répertoires de \n"
-"Salix sur plusieurs partitions. D'ailleurs il est fortement recommandé \n"
-"d'avoir au moins le répertoire /home sur une partition séparée."
+#: salix-live-installer.glade:2106
+msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr "Il semble que vous disposez de plus d'une partition Linux. Si vous le désirez, vous pouvez étendre l'arborescence des répertoires de Salix sur plusieurs partitions. D'ailleurs il est fortement recommandé d'avoir au moins le répertoire /home sur une partition séparée."
 
-#: salix-live-installer.glade:2158
-#: salix-live-installer.glade:2337
+#: salix-live-installer.glade:2144
+#: salix-live-installer.glade:2323
 msgid "Apply _settings "
 msgstr "A_ppliquer les paramètres"
 
-#: salix-live-installer.glade:2197
+#: salix-live-installer.glade:2183
 msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr "<b>Veuillez configurer vos partitions Windows:</b>"
 
-#: salix-live-installer.glade:2298
-msgid ""
-"It appears that some of your partitions have a Windows formatting. \n"
-"Here you can set a mount point for each one if you wish them to be \n"
-"accessible in Salix system."
-msgstr ""
-"Il semble que certaines de vos partitions possèdent un système de \n"
-"fichier Windows. Si vous le désirez, vous pouvez leur définir un point \n"
-"de montage afin d'y avoir accès à partir du système Salix."
+#: salix-live-installer.glade:2285
+msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr "Il semble que certaines de vos partitions possèdent un système de fichier Windows. Si vous le désirez, vous pouvez leur définir un point de montage afin d'y avoir accès à partir du système Salix."
 
-#: salix-live-installer.glade:2384
+#: salix-live-installer.glade:2370
 msgid "<b>Salix main partition:</b>"
 msgstr "<b>Partition principale de Salix:</b>"
 
-#: salix-live-installer.glade:2397
+#: salix-live-installer.glade:2383
 msgid "Main partition"
 msgstr "Partition principale"
 
-#: salix-live-installer.glade:2409
+#: salix-live-installer.glade:2395
 msgid "<b>Other Linux partitions:</b>"
 msgstr "<b>Autres partitions Linux:</b>"
 
-#: salix-live-installer.glade:2422
+#: salix-live-installer.glade:2408
 msgid "Home partition"
 msgstr "Partition 'Home'"
 
-#: salix-live-installer.glade:2434
+#: salix-live-installer.glade:2420
 msgid "<b>Windows partitions:</b>"
 msgstr "<b>Partitions Windows:</b>"
 
-#: salix-live-installer.glade:2447
+#: salix-live-installer.glade:2433
 msgid "Windows partitions"
 msgstr "Partitions Windows"
 
-#: salix-live-installer.glade:2509
+#: salix-live-installer.glade:2495
 msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Veuillez créer un nouvel utilisateur ordinaire:</b>"
 
-#: salix-live-installer.glade:2525
+#: salix-live-installer.glade:2512
 msgid "Enter login: "
 msgstr "Saisir l'identifiant: "
 
-#: salix-live-installer.glade:2557
+#: salix-live-installer.glade:2544
 msgid "Enter password: "
 msgstr "Saisir le mot de passe: "
 
-#: salix-live-installer.glade:2581
-#: salix-live-installer.glade:2762
+#: salix-live-installer.glade:2568
+#: salix-live-installer.glade:2750
 msgid "Do not hide"
 msgstr "Ne pas cacher"
 
-#: salix-live-installer.glade:2606
+#: salix-live-installer.glade:2593
 msgid "Re-enter password: "
 msgstr "Saisir à nouveau le mot de passe:"
 
-#: salix-live-installer.glade:2640
+#: salix-live-installer.glade:2627
 msgid "<b>User created: </b>"
 msgstr "<b>Utilisateur créé: </b>"
 
-#: salix-live-installer.glade:2722
+#: salix-live-installer.glade:2709
 msgid "<b>Please create a new administrator's password:</b>"
 msgstr "<b>Veuillez créer un nouveau mot de passe administrateur:</b>"
 
-#: salix-live-installer.glade:2738
+#: salix-live-installer.glade:2726
 msgid "Enter root password: "
 msgstr "Saisir le mot de passe 'root':"
 
-#: salix-live-installer.glade:2787
+#: salix-live-installer.glade:2775
 msgid "Re-enter root password: "
 msgstr "Saisir à nouveau le mot de passe:"
 
-#: salix-live-installer.glade:2821
+#: salix-live-installer.glade:2809
 msgid "<b>Password created: </b>"
 msgstr "<b>Mot de passe créé: </b>"
 
-#: salix-live-installer.glade:2907
+#: salix-live-installer.glade:2895
 msgid "<b>Please select your installation mode:</b>"
 msgstr "<b>Veuillez sélectionner votre mode d'installation:</b>"
 
-#: salix-live-installer.glade:2922
+#: salix-live-installer.glade:2911
 msgid "Core"
 msgstr "Essentiel"
 
-#: salix-live-installer.glade:2956
+#: salix-live-installer.glade:2944
 msgid "Basic"
 msgstr "De base"
 
-#: salix-live-installer.glade:2990
+#: salix-live-installer.glade:2977
 msgid "Full"
 msgstr "Complet"
 
-#: salix-live-installer.glade:3138
+#: salix-live-installer.glade:3121
 msgid "Launch Salix _install "
 msgstr "Lancer l'_installation de Salix"
 
-#: salix-live-installer.glade:3178
+#: salix-live-installer.glade:3159
 msgid "Copyright © 2010 Pierrick Le Brun"
 msgstr "Copyright © 2010 Pierrick Le Brun"
 
-#: salix-live-installer.glade:3179
+#: salix-live-installer.glade:3160
 msgid "SalixOS installation from SalixLive's graphic environment"
 msgstr "Installation de SalixOS à partir de l'environnement graphique de SalixLive"
 
-#: salix-live-installer.glade:3182
+#: salix-live-installer.glade:3163
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -979,31 +960,33 @@ msgstr ""
 "ce programme ; si ce n’est pas le cas, écrivez à la Free Software \n"
 "Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis."
 
-#: salix-live-installer.glade:3197
+#: salix-live-installer.glade:3178
 msgid ""
 "French: Pierrick Le Brun\n"
-"Greek: George Vlahavas "
+"German: Andreas Born\n"
+"Greek: George Vlahavas"
 msgstr ""
-"Français: Pierrick Le Brun \n"
+"Allemand: Andreas Born\n"
+"Français: Pierrick Le Brun\n"
 "Grec: George Vlahavas "
 
-#: salix-live-installer.glade:3224
+#: salix-live-installer.glade:3206
 msgid "Confirmation needed"
 msgstr "Confirmation nécessaire"
 
-#: salix-live-installer.glade:3243
+#: salix-live-installer.glade:3225
 msgid "<b>Message about the particular choice: </b>"
 msgstr "<b>Message about the particular choice: </b>"
 
-#: salix-live-installer.glade:3256
+#: salix-live-installer.glade:3238
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>Voulez vous vraiment continuer?</b>"
 
-#: salix-live-installer.glade:3320
+#: salix-live-installer.glade:3302
 msgid "Salix installation"
 msgstr "Installation de Salix"
 
-#: salix-live-installer.glade:3332
+#: salix-live-installer.glade:3314
 msgid "Please be patient, Salix installation is in progress... "
 msgstr "Veuillez patienter, l'installation de Salix est en cours..."
 
