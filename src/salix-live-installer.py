@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' - 100224 build -  First version
+# version = '0.1' -  First version
 
 import commands
 import subprocess
@@ -123,8 +123,6 @@ class SalixLiveInstaller:
         self.MainPartRecapLabel = builder.get_object("main_part_recap_label")
         self.LinPartRecapLabel = builder.get_object("lin_part_recap_label")
         self.WinPartRecapLabel = builder.get_object("win_part_recap_label")
-        self.LiveKernelRadioButton = builder.get_object("live_kernel_radiobutton")
-        self.SalixKernelRadioButton = builder.get_object("salix_kernel_radiobutton")
         self.CoreRadioButton = builder.get_object("core_radiobutton")
         self.BasicRadioButton = builder.get_object("basic_radiobutton")
         self.FullRadioButton = builder.get_object("full_radiobutton")
@@ -180,8 +178,6 @@ class SalixLiveInstaller:
         self.WinSizeColumn = builder.get_object("win_size_column")
         self.WinOldSysColumn = builder.get_object("win_oldsys_column")    
         self.WinNewMountColumn = builder.get_object("win_newmount_column")
-
-
 
         # Connect signals
         builder.connect_signals(self)
@@ -827,24 +823,6 @@ following the 'one application per task' rationale."))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
 
-    def on_salix_kernel_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("The standard kernel used by Salix is Slackware's kernel-huge-smp. \
-A fully-loaded SMP Linux kernel with built-in support for most disk controllers."))
-    def on_salix_kernel_radiobutton_leave_notify_event(self, widget, data=None):
-        global context_intro
-	self.ContextLabel.set_text(context_intro)
-    def on_live_kernel_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("SalixLive's live kernel is based on Slackware's kernel-huge-smp, \
-but it has been patched to include aufs2 filesystem as well as squashfs-lzma \
-compression. Its configuration has also been slightly changed to ensure most \
-strategic devices would be available to the live system booting process. \
-Although not absolutely necessary, you may prefer to install this kernel \
-if you want to build your own LiveCD out of an installed Salix system \
-(The Linux Live Scripts will also be installed if you select this kernel)."))
-    def on_live_kernel_radiobutton_leave_notify_event(self, widget, data=None):
-        global context_intro
-	self.ContextLabel.set_text(context_intro)
-
     def on_packages_apply_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Confirm your packages selection."))
     def on_packages_apply_leave_notify_event(self, widget, data=None):
@@ -1260,16 +1238,9 @@ if you want to build your own LiveCD out of an installed Salix system \
             Selected_Install_Mode = _('basic')
         elif self.FullRadioButton.get_active() == True :
             Selected_Install_Mode = _('full')
-        global Selected_Kernel
-        if self.SalixKernelRadioButton.get_active() == True :
-            Selected_Kernel = _('standard')
-        elif self.LiveKernelRadioButton.get_active() == True :
-            Selected_Kernel = _('live')
         self.CoreRadioButton.set_sensitive(False)
         self.BasicRadioButton.set_sensitive(False)
         self.FullRadioButton.set_sensitive(False)
-        self.SalixKernelRadioButton.set_sensitive(False)
-        self.LiveKernelRadioButton.set_sensitive(False)
         self.PackagesCheck.show()
         self.PackagesCheckMarker.hide()
         self.PackagesApplyButton.set_sensitive(False)
@@ -1316,9 +1287,9 @@ if you want to build your own LiveCD out of an installed Salix system \
                 " " + _("and will be mounted as") + " " + i[1] + "\n"
         LastRecapFullText += "\n<b>" + _("Standard User") + ":</b> \n" + NewUser + "\n"
         LastRecapFullText += "\n<b>" + _("Packages") + ":</b> \n"
-        # TRANSLATORS: Please just reposition the 2 '%(...)s' variables as required by your grammar.
-        LastRecapFullText += _("You have chosen the %(mode)s installation mode with the %(type)s kernel.\n")\
-        % {'mode': Selected_Install_Mode, 'type': Selected_Kernel}
+        # TRANSLATORS: Please just reposition the '%(mode)' variable as required by your grammar.
+        LastRecapFullText += _("You have chosen the %(mode)s installation mode.\n")\
+        % {'mode': Selected_Install_Mode}
         self.YesNoLabel.set_markup(LastRecapFullText)
         self.YesNoDialog.show()
         self.YesNoDialog.resize(1, 1)
@@ -1416,8 +1387,6 @@ if you want to build your own LiveCD out of an installed Salix system \
         self.CoreRadioButton.set_sensitive(True)
         self.BasicRadioButton.set_sensitive(True)
         self.FullRadioButton.set_sensitive(True)
-        self.SalixKernelRadioButton.set_sensitive(True)
-        self.LiveKernelRadioButton.set_sensitive(True)
         self.PackagesCheck.hide()
         self.PackagesCheckMarker.show()
         self.PackagesApplyButton.set_sensitive(True)
@@ -1722,30 +1691,11 @@ if you want to build your own LiveCD out of an installed Salix system \
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
-        if Selected_Kernel == _('live') :
-            # TRANSLATORS: Simply reposition the '%(type)s' variable as required by your grammar. The value of '%(type)s' will be 'standard' or 'live'.
-            self.InstallProgressBar.set_text(_("Installing the %(type)s kernel...") % {'type': Selected_Kernel})
-            self.InstallProgressBar.set_fraction(0.65)
-            # there's more work, yield True
-            yield True
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*kernel.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            self.InstallProgressBar.set_text(_("Installing the livetools..."))
-            self.InstallProgressBar.set_fraction(0.75)
-            # there's more work, yield True
-            yield True
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*livetools.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-
-        elif Selected_Kernel == _('standard') :
-            # TRANSLATORS: Simply reposition the '%(type)s' variable as required by your grammar. The value of '%(type)s' will be 'standard' or 'live'.
-            self.InstallProgressBar.set_text(_("Installing the %(type)s kernel...") % {'type': Selected_Kernel})
-            self.InstallProgressBar.set_fraction(0.70)
-            # there's more work, yield True
-            yield True
-            subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
+        self.InstallProgressBar.set_text(_("Installing the kernel..."))
+        self.InstallProgressBar.set_fraction(0.70)
+        # there's more work, yield True
+        yield True
+        subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
         os.rmdir(Temp_Mount)
 
         # Create /etc/fstab
@@ -1818,14 +1768,13 @@ if [ -x /usr/bin/loadkeys ]; then\n\
 /usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
 fi")
         RCkeymap_File.close()
-
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.07.update-mime-database', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-mime-database', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
         # Create a fork to not get stuck in the chroot
         NewPid = os.fork()
         if NewPid == 0 :

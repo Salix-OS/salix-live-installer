@@ -424,7 +424,7 @@
                             <property name="border_width">5</property>
                             <child>
                               <object class="GtkHBox" id="hbox2">
-                                <property name="width_request">180</property>
+                                <property name="width_request">190</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="vbox2">
@@ -640,6 +640,7 @@
                                             </child>
                                             <child>
                                               <object class="GtkLabel" id="label6">
+                                                <property name="width_request">120</property>
                                                 <property name="visible">True</property>
                                                 <property name="label" translatable="yes">U_sers</property>
                                                 <property name="use_underline">True</property>
@@ -897,7 +898,7 @@
                             </child>
                             <child>
                               <object class="GtkVBox" id="vbox4">
-                                <property name="width_request">475</property>
+                                <property name="width_request">480</property>
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="intro_box">
@@ -3012,96 +3013,6 @@ accessible in Salix system.</property>
                                       </object>
                                       <packing>
                                         <property name="position">4</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkFixed" id="fixed1">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="padding">3</property>
-                                        <property name="position">5</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel" id="label36">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Please select your kernel:&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="padding">5</property>
-                                        <property name="position">6</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox33">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkRadioButton" id="salix_kernel_radiobutton">
-                                            <property name="label" translatable="yes">Standard kernel</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="active">True</property>
-                                            <property name="draw_indicator">True</property>
-                                            <signal name="leave_notify_event" handler="on_salix_kernel_radiobutton_leave_notify_event"/>
-                                            <signal name="enter_notify_event" handler="on_salix_kernel_radiobutton_enter_notify_event"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkFixed" id="fixed5">
-                                            <property name="visible">True</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">7</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkHBox" id="hbox34">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <object class="GtkRadioButton" id="live_kernel_radiobutton">
-                                            <property name="label" translatable="yes">Live kernel (+ live scripts)</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="active">True</property>
-                                            <property name="draw_indicator">True</property>
-                                            <property name="group">salix_kernel_radiobutton</property>
-                                            <signal name="leave_notify_event" handler="on_live_kernel_radiobutton_leave_notify_event"/>
-                                            <signal name="enter_notify_event" handler="on_live_kernel_radiobutton_enter_notify_event"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkFixed" id="fixed6">
-                                            <property name="visible">True</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="position">8</property>
                                       </packing>
                                     </child>
                                     <child>
