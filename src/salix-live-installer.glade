@@ -339,12 +339,9 @@
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="width_request">800</property>
-    <property name="height_request">600</property>
     <property name="visible">True</property>
     <property name="title" translatable="yes">SalixLive Installer</property>
     <property name="window_position">center-always</property>
-    <property name="default_width">800</property>
-    <property name="default_height">600</property>
     <property name="icon">salix-live-installer.png</property>
     <signal name="destroy" handler="gtk_main_quit"/>
     <child>
@@ -356,7 +353,8 @@
             <property name="spacing">5</property>
             <child>
               <object class="GtkButton" id="about_link">
-                <property name="width_request">195</property>
+                <property name="width_request">200</property>
+                <property name="height_request">180</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -384,8 +382,8 @@
                 <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
                 <child>
                   <object class="GtkLabel" id="context_label">
-                    <property name="width_request">550</property>
-                    <property name="height_request">100</property>
+                    <property name="width_request">585</property>
+                    <property name="height_request">180</property>
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
                     <property name="xpad">2</property>
@@ -397,6 +395,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="padding">4</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -414,14 +413,15 @@
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkHBox" id="hbox2">
-                    <property name="width_request">185</property>
-                    <property name="height_request">320</property>
+                    <property name="width_request">190</property>
+                    <property name="height_request">380</property>
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkVBox" id="vbox2">
                         <property name="width_request">0</property>
                         <property name="visible">True</property>
                         <property name="spacing">1</property>
+                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkButton" id="time_tab">
                             <property name="visible">True</property>
@@ -631,7 +631,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkLabel" id="label6">
-                                    <property name="width_request">135</property>
+                                    <property name="width_request">140</property>
                                     <property name="visible">True</property>
                                     <property name="label" translatable="yes">U_sers</property>
                                     <property name="use_underline">True</property>
@@ -883,13 +883,12 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="padding">5</property>
+                    <property name="padding">7</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkVBox" id="vbox4">
-                    <property name="width_request">515</property>
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkVBox" id="intro_box">
@@ -897,6 +896,7 @@
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label38">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="xpad">2</property>
@@ -927,6 +927,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label40">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please set the time, date and time zone:&lt;/b&gt;</property>
@@ -945,13 +946,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkImage" id="image14">
+                                <property name="width_request">300</property>
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
                                 <property name="pixbuf">Goode-homolosine.jpg</property>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1199,6 +1200,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <child>
                           <object class="GtkHBox" id="hbox37">
                             <property name="visible">True</property>
+                            <property name="spacing">10</property>
                             <child>
                               <object class="GtkEventBox" id="timezone_eventbox">
                                 <property name="visible">True</property>
@@ -1206,7 +1208,6 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <signal name="enter_notify_event" handler="on_timezone_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="time_zone_box">
-                                    <property name="width_request">300</property>
                                     <property name="visible">True</property>
                                     <child>
                                       <object class="GtkLabel" id="label41">
@@ -1232,6 +1233,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                         </child>
                                       </object>
                                       <packing>
+                                        <property name="expand">False</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -1247,6 +1249,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                         </child>
                                       </object>
                                       <packing>
+                                        <property name="expand">False</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1337,6 +1340,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label8">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please select your keyboard layout:&lt;/b&gt;</property>
@@ -1553,10 +1557,12 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label9">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please select your system language:&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
+                            <property name="wrap">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1750,6 +1756,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label10">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please select Salix main partition:&lt;/b&gt;</property>
@@ -1853,10 +1860,10 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                         <child>
                           <object class="GtkLabel" id="label20">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.
-
 &lt;b&gt;Warning!&lt;/b&gt; This partition will be reformatted and its data will be permanently erased.</property>
                             <property name="use_markup">True</property>
                             <property name="wrap">True</property>
@@ -1864,7 +1871,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="padding">10</property>
+                            <property name="padding">3</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
@@ -1985,6 +1992,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label22">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please configure your other Linux partition(s):&lt;/b&gt;</property>
@@ -2101,6 +2109,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                         <child>
                           <object class="GtkLabel" id="label23">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition.</property>
@@ -2110,7 +2119,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="padding">10</property>
+                            <property name="padding">3</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -2178,11 +2187,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label15">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please configure your Windows partition(s):&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="wrap">True</property>
+                            <property name="width_chars">54</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2280,6 +2291,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                         <child>
                           <object class="GtkLabel" id="label16">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system.</property>
@@ -2289,7 +2301,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="padding">10</property>
+                            <property name="padding">3</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
@@ -2490,6 +2502,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="border_width">1</property>
                                 <child>
                                   <object class="GtkLabel" id="label11">
+                                    <property name="width_request">580</property>
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">&lt;b&gt;Please create a new standard user:&lt;/b&gt;</property>
@@ -2704,6 +2717,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 </child>
                                 <child>
                                   <object class="GtkLabel" id="label32">
+                                    <property name="width_request">580</property>
                                     <property name="visible">True</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">&lt;b&gt;Please create a new administrator's password:&lt;/b&gt;</property>
@@ -2890,6 +2904,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <property name="border_width">1</property>
                         <child>
                           <object class="GtkLabel" id="label25">
+                            <property name="width_request">580</property>
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">&lt;b&gt;Please select your installation mode:&lt;/b&gt;</property>
@@ -3003,6 +3018,14 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkFixed" id="fixed1">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">5</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkHButtonBox" id="hbuttonbox5">
                             <property name="visible">True</property>
                             <property name="layout_style">edge</property>
@@ -3070,7 +3093,6 @@ If you do not already have these needed partitions ready, please exit SalixLive'
         <child>
           <object class="GtkHButtonBox" id="hbuttonbox_final">
             <property name="visible">True</property>
-            <property name="border_width">9</property>
             <property name="layout_style">edge</property>
             <child>
               <object class="GtkButton" id="button_quit">

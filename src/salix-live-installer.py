@@ -790,8 +790,7 @@ are typing."))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_core_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Core installation:\n\
-\n\
+	self.ContextLabel.set_markup(_("<b>Core installation:</b>\n\
 Only the minimum essentials for a console system to start are \
 included. A graphical environment is not provided. This is ideal \
 if you are an experienced user and want to customize your \
@@ -801,8 +800,7 @@ file server etc. "))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Basic installation: \n\
-\n\
+	self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
 This installs only the Xfce desktop environment with the Firefox \
 web browser and the gslapt package manager. Ideal for advanced \
 users that would like to install a lightweight Xfce and add their \
@@ -811,8 +809,7 @@ own choice of applications."))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_full_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Full installation:\n\
-\n\
+	self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Everything that is included in the iso is installed. That includes the \
 Xfce desktop environment, the Firefox web browser and Claws-mail \
 email client, a complete OpenOffice.org office suite, a Java Runtime \
