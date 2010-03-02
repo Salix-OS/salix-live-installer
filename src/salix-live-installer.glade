@@ -401,6 +401,8 @@
             </child>
           </object>
           <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -3400,6 +3402,7 @@ MA 02110-1301, USA.</property>
 German: Andreas Born
 Greek: George Vlahavas</property>
     <property name="logo">salix-live-installer.png</property>
+    <signal name="delete_event" handler="on_about_dialog_delete_event"/>
     <signal name="response" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">

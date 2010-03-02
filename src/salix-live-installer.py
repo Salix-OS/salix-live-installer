@@ -847,6 +847,10 @@ following the 'one application per task' rationale."))
     def on_about_dialog_close(self, widget, data=None):
         self.AboutDialog.hide()
 
+    def on_about_dialog_delete_event(self, widget, data=None):
+        self.AboutDialog.hide()
+        return True
+
 # LISTS ROWS ###
 
     # What to do when a keymap list row is added
