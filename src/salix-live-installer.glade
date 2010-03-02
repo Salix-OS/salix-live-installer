@@ -946,7 +946,6 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkImage" id="image14">
-                                <property name="width_request">300</property>
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
@@ -2924,6 +2923,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <child>
                               <object class="GtkRadioButton" id="core_radiobutton">
                                 <property name="label" translatable="yes">Core</property>
+                                <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2939,10 +2939,22 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFixed" id="fixed2">
+                              <object class="GtkHBox" id="hbox44">
                                 <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkImage" id="image15">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">utilities-terminal</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -2957,6 +2969,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <child>
                               <object class="GtkRadioButton" id="basic_radiobutton">
                                 <property name="label" translatable="yes">Basic</property>
+                                <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2972,10 +2985,52 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFixed" id="fixed3">
+                              <object class="GtkHBox" id="hbox33">
                                 <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkImage" id="image16">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">utilities-terminal</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image17">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">xfce-mouse</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image18">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">applications-internet</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image19">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">gslapt</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -2990,6 +3045,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <child>
                               <object class="GtkRadioButton" id="full_radiobutton">
                                 <property name="label" translatable="yes">Full</property>
+                                <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -3005,10 +3061,153 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFixed" id="fixed4">
+                              <object class="GtkHBox" id="hbox34">
                                 <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkImage" id="image20">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">utilities-terminal</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image21">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">xfce-mouse</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image22">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">applications-internet</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image23">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">gslapt</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image24">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">claws-mail</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image25">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">openoffice</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">5</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image26">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">totem</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">6</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image27">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">gimp</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">7</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image28">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">brasero</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">8</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image29">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">pidgin</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">9</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image30">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">exaile</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">11</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image31">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">epdfview</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">12</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image32">
+                                    <property name="visible">True</property>
+                                    <property name="icon_name">transmission</property>
+                                  </object>
+                                  <packing>
+                                    <property name="padding">5</property>
+                                    <property name="position">13</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label28">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label">...</property>
+                                  </object>
+                                  <packing>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">10</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
