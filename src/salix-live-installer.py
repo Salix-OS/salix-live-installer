@@ -846,9 +846,6 @@ following the 'one application per task' rationale."))
     # What to do when the about dialog quit button is clicked
     def on_about_dialog_close(self, widget, data=None):
         self.AboutDialog.hide()
-
-    def on_about_dialog_delete_event(self, widget, data=None):
-        self.AboutDialog.hide()
         return True
 
 # LISTS ROWS ###

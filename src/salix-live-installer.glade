@@ -3402,7 +3402,7 @@ MA 02110-1301, USA.</property>
 German: Andreas Born
 Greek: George Vlahavas</property>
     <property name="logo">salix-live-installer.png</property>
-    <signal name="delete_event" handler="on_about_dialog_delete_event"/>
+    <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
