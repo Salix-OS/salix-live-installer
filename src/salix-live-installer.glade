@@ -3400,7 +3400,8 @@ MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun</property>
     <property name="translator_credits" translatable="yes">French: Pierrick Le Brun
 German: Andreas Born
-Greek: George Vlahavas</property>
+Greek: George Vlahavas
+Spanish: Fernando Velo</property>
     <property name="logo">salix-live-installer.png</property>
     <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>
