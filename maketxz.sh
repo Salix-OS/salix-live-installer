@@ -5,7 +5,7 @@ cd $(dirname $0)
 mkdir -p pkg
 export DESTDIR=$PWD/pkg
 ./install.sh
-VER=$(grep 'version =' src/salix-live-installer.py | head -n 1 | sed "s/.*'\(.*\)' - \([0-9]*\).*/\1.\2/")
+VER=$(grep 'version =' src/salix-live-installer.py | head -n 1 | sed "s/.*'\(.*\)' - .*/\1/")
 cd pkg
 cat <<EOF > install/slack-desc
 salix-live-installer: Salix Live Installer - Install Salix Standard from LiveCD.
