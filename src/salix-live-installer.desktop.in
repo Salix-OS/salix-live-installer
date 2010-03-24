@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Application;System;
+Exec=gksu /usr/sbin/salix-live-installer.py
+Icon=salix-live-installer
+StartupNotify=true
+Terminal=false
+Type=Application
+_Name=Salix Installer
+_GenericName=Salix Installer
+_Comment=Install Salix on your computer from a SalixLive session
