@@ -359,8 +359,8 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="relief">none</property>
-                <signal name="leave_notify_event" handler="on_about_link_leave_notify_event"/>
                 <signal name="clicked" handler="on_about_link_clicked"/>
+                <signal name="leave_notify_event" handler="on_about_link_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_about_link_enter_notify_event"/>
                 <child>
                   <object class="GtkImage" id="image1">
@@ -432,8 +432,8 @@
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_time_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_time_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_time_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_time_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox35">
@@ -479,8 +479,8 @@
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_keyboard_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_keyboard_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_keyboard_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_keyboard_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox3">
@@ -524,8 +524,8 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_locale_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_locale_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_locale_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_locale_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox4">
@@ -568,8 +568,8 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_partition_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_partition_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_partition_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_partition_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox5">
@@ -612,8 +612,8 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_users_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_users_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_users_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_users_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox6">
@@ -657,8 +657,8 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_packages_tab_leave_notify_event"/>
                             <signal name="clicked" handler="on_packages_tab_clicked"/>
+                            <signal name="leave_notify_event" handler="on_packages_tab_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_packages_tab_enter_notify_event"/>
                             <child>
                               <object class="GtkHBox" id="hbox7">
@@ -1299,11 +1299,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_time_undo_leave_notify_event"/>
                                 <signal name="clicked" handler="on_time_undo_clicked"/>
+                                <signal name="leave_notify_event" handler="on_time_undo_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_time_undo_enter_notify_event"/>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1314,11 +1316,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_time_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_time_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_time_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_time_apply_enter_notify_event"/>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="pack_type">end</property>
                                 <property name="position">1</property>
                               </packing>
@@ -1489,8 +1493,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_undo_leave_notify_event"/>
                                 <signal name="clicked" handler="on_keyboard_undo_clicked"/>
+                                <signal name="leave_notify_event" handler="on_keyboard_undo_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_undo_enter_notify_event"/>
                               </object>
                               <packing>
@@ -1504,8 +1508,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_keyboard_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_keyboard_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_apply_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox14">
@@ -1688,8 +1692,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_locale_undo_leave_notify_event"/>
                                 <signal name="clicked" handler="on_locale_undo_clicked"/>
+                                <signal name="leave_notify_event" handler="on_locale_undo_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_undo_enter_notify_event"/>
                               </object>
                               <packing>
@@ -1703,8 +1707,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_locale_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_locale_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_locale_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_apply_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox15">
@@ -1940,8 +1944,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_main_partition_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_main_partition_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_main_partition_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_main_partition_apply_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox20">
@@ -2079,6 +2083,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <child>
                                       <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
                                         <signal name="edited" handler="on_linux_newsys_renderer_combo_edited"/>
+                                        <signal name="editing_started" handler="on_linux_newsys_renderer_combo_editing_started"/>
+                                        <signal name="editing_canceled" handler="on_linux_newsys_renderer_combo_editing_canceled"/>
                                       </object>
                                       <attributes>
                                         <attribute name="text">4</attribute>
@@ -2093,6 +2099,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <child>
                                       <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
                                         <signal name="edited" handler="on_linux_newmount_renderer_combo_edited"/>
+                                        <signal name="editing_started" handler="on_linux_newmount_renderer_combo_editing_started"/>
+                                        <signal name="editing_canceled" handler="on_linux_newmount_renderer_combo_editing_canceled"/>
                                       </object>
                                       <attributes>
                                         <attribute name="alignment">0</attribute>
@@ -2133,8 +2141,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_linux_partition_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_linux_partition_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_linux_partition_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_linux_partition_apply_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox21">
@@ -2275,6 +2283,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <child>
                                       <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">
                                         <signal name="edited" handler="on_win_newmount_renderer_combo_edited"/>
+                                        <signal name="editing_started" handler="on_win_newmount_renderer_combo_editing_started"/>
+                                        <signal name="editing_canceled" handler="on_win_newmount_renderer_combo_editing_canceled"/>
                                       </object>
                                       <attributes>
                                         <attribute name="alignment">0</attribute>
@@ -2315,8 +2325,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_windows_partition_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_windows_partition_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_windows_partition_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_windows_partition_apply_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox19">
@@ -2469,11 +2479,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_partition_recap_undo_leave_notify_event"/>
                                 <signal name="clicked" handler="on_partition_recap_undo_clicked"/>
+                                <signal name="leave_notify_event" handler="on_partition_recap_undo_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_partition_recap_undo_enter_notify_event"/>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -2668,11 +2680,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_users_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_users_undo_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_users_undo_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_users_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -2683,11 +2697,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_users_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_users_apply_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_users_apply_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_users_apply_enter_notify_event"/>
                                           </object>
                                           <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -2850,11 +2866,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_rootpass_undo_leave_notify_event"/>
                                             <signal name="clicked" handler="on_rootpass_undo_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_rootpass_undo_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_rootpass_undo_enter_notify_event"/>
                                           </object>
                                           <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -2865,11 +2883,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_rootpass_apply_leave_notify_event"/>
                                             <signal name="clicked" handler="on_rootpass_apply_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_rootpass_apply_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_rootpass_apply_enter_notify_event"/>
                                           </object>
                                           <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -3237,11 +3257,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_packages_undo_leave_notify_event"/>
                                 <signal name="clicked" handler="on_packages_undo_clicked"/>
+                                <signal name="leave_notify_event" handler="on_packages_undo_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_packages_undo_enter_notify_event"/>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -3252,11 +3274,13 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_packages_apply_leave_notify_event"/>
                                 <signal name="clicked" handler="on_packages_apply_clicked"/>
+                                <signal name="leave_notify_event" handler="on_packages_apply_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_packages_apply_enter_notify_event"/>
                               </object>
                               <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="pack_type">end</property>
                                 <property name="position">1</property>
                               </packing>
@@ -3302,8 +3326,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="clicked" handler="on_button_quit_clicked"/>
+                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
               </object>
               <packing>
@@ -3323,8 +3347,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="leave_notify_event" handler="on_install_button_leave_notify_event"/>
                     <signal name="clicked" handler="on_install_button_clicked"/>
+                    <signal name="leave_notify_event" handler="on_install_button_leave_notify_event"/>
                     <signal name="enter_notify_event" handler="on_install_button_enter_notify_event"/>
                     <child>
                       <object class="GtkHBox" id="hbox13">
@@ -3354,6 +3378,8 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                 </child>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -3403,8 +3429,8 @@ German: Andreas Born
 Greek: George Vlahavas
 Spanish: Fernando Velo</property>
     <property name="logo">salix-live-installer.png</property>
-    <signal name="delete_event" handler="on_about_dialog_close"/>
     <signal name="response" handler="on_about_dialog_close"/>
+    <signal name="delete_event" handler="on_about_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -3490,6 +3516,8 @@ Spanish: Fernando Velo</property>
                 <signal name="clicked" handler="on_do_not_confirm_button_clicked"/>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -3504,6 +3532,8 @@ Spanish: Fernando Velo</property>
                 <signal name="released" handler="on_confirm_button_released"/>
               </object>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>

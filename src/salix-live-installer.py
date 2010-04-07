@@ -117,6 +117,8 @@ class SalixLiveInstaller:
         self.LinuxNewMountComboCell = builder.get_object("linux_newmount_renderer_combo")
         self.LinuxNewMountColumn = builder.get_object("linux_newmount_column")
         self.LinuxMountListStore = builder.get_object("linux_mountpoint_list_store")
+        self.LinuxPartitionApply = builder.get_object("linux_partition_apply")
+        self.WindowsPartitionApply = builder.get_object("windows_partition_apply")
         self.WinMountComboCell = builder.get_object("win_newmount_renderer_combo")
         self.WinMountColumn = builder.get_object("win_newmount_column")
         self.WinMountListStore = builder.get_object("win_mountpoint_list_store")
@@ -928,6 +930,14 @@ following the 'one application per task' rationale."))
         # Set the new partition row value on the fifth column (4)
         if new_text in ('ext2', 'ext3', 'ext4', 'reiserfs', 'xfs', 'jfs', 'Select...' ):
             self.LinuxPartitionListStore.set_value(iter, 4, new_text)
+        self.LinuxPartitionApply.set_sensitive(True)
+
+    def on_linux_newsys_renderer_combo_editing_started(self, widget, path, data):
+        self.LinuxPartitionApply.set_sensitive(False)
+
+    def on_linux_newsys_renderer_combo_editing_canceled(self, data):
+        self.LinuxPartitionApply.set_sensitive(True)
+
 
     # What to do when a combo line is edited in the Linux mountpoint column
     def on_linux_newmount_renderer_combo_edited(self, widget, row_number, new_text):
@@ -936,7 +946,14 @@ following the 'one application per task' rationale."))
         self.LinuxPartitionListStore, iter = linuxnewmountchoice.get_selected()
         # Set the new partition row value on the sixth column (5)
         self.LinuxPartitionListStore.set_value(iter, 5, new_text)
-				
+        self.LinuxPartitionApply.set_sensitive(True)
+
+    def on_linux_newmount_renderer_combo_editing_started(self, widget, path, data):
+        self.LinuxPartitionApply.set_sensitive(False)
+
+    def on_linux_newmount_renderer_combo_editing_canceled(self, data):
+        self.LinuxPartitionApply.set_sensitive(True)
+
     # What to do when a combo line is edited in the Windows mountpoint column
     def on_win_newmount_renderer_combo_edited(self, widget, row_number, new_text,):
         # Retrieve the selected Windows partition row iter
@@ -944,6 +961,13 @@ following the 'one application per task' rationale."))
         self.WindowsPartitionListStore, iter = windowsnewmountchoice.get_selected()
         # Set the new mountpoint row value on the fifth column (4)
         self.WindowsPartitionListStore.set_value(iter, 4, new_text)
+        self.WindowsPartitionApply.set_sensitive(True)
+
+    def on_win_newmount_renderer_combo_editing_started(self, widget, path, data):
+        self.WindowsPartitionApply.set_sensitive(False)
+
+    def on_win_newmount_renderer_combo_editing_canceled(self, data):
+        self.WindowsPartitionApply.set_sensitive(True)
 
 # CONFIGURATION APPLY BUTTONS ###
 
