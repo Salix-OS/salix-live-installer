@@ -46,8 +46,7 @@ gtk.glade.textdomain("salix-live-installer")
 
 # To do => Install log
 # To do => Integrate Gparted in installer
-# To do => Add a lilo simple option ?
-# To do => More Error checking with subprocess.check_call() and try/except
+# To do => More Error checking process
 
 class SalixLiveInstaller:
 
@@ -218,13 +217,16 @@ class SalixLiveInstaller:
         # Initialize the lock system preventing the Install button to be activated prematurely
         global ConfigurationSet
         ConfigurationSet = ['no'] * 7
-        # Initialise the external device checkbutton value
+        # Initialise default value for the external device checkbutton
         global show_external_device
         show_external_device = 'no'
+        # Initialise default value for Lilosetup execution
         global LaunchLiloSetup
         LaunchLiloSetup = False
+        # Initialise default value for the Linux partitions confirmation dialog
         global LinPartConfirmLabel
         LinPartConfirmLabel = ''
+        # Initialise default value for NTP configuration settings
         global set_ntp
         set_ntp = 'yes'
             
@@ -1055,13 +1057,13 @@ following the 'one application per task' rationale."))
     def on_main_partition_apply_clicked(self, widget, data=None):
         # Initialize other partitions variables
         global LinFullSets
-        LinFullSets = []
+        LinFullSets = [] # These partitions will be formatted -and- mounted (the 'full' treatment)
         global LinFormatSets
-        LinFormatSets = []
+        LinFormatSets = [] # These partitions only get formatted
         global LinMountSets
-        LinMountSets = []
+        LinMountSets = [] # These partitions only get mounted
         global WinMountSets
-        WinMountSets = []
+        WinMountSets = [] # We probably want Windows partitions to get mounted without any tempering
         # Tell the confirmation dialog what it is dealing with
         global MainPartitionConfirmation
         MainPartitionConfirmation = True
@@ -1580,80 +1582,97 @@ following the 'one application per task' rationale."))
 
     # Install process
     def salix_install_process(self):
+        # first we hide unecessary windows & bring on the progress bar with some info
         self.YesNoDialog.hide()
         self.Window.hide()
         self.InstallProgressBar.set_text(_("Starting installation process..."))
         self.InstallProgressBar.set_fraction(0.03)
         self.ProgressWindow.show()
         self.ProgressWindow.set_keep_above(True)
-        # there's more work, yield True
+        # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
-        # Format and remount the main partition
+        # format and remount the main partition
         global Main_MountPoint
         Main_MountPoint = Selected_Main_Partition.replace('dev', 'mnt')
+        # if necessary, create the mountpoint first
         if os.path.exists(Main_MountPoint) == False :
             os.mkdir(Main_MountPoint)
         subprocess.call("umount -l " + Selected_Main_Partition, shell=True)
-
         self.InstallProgressBar.set_text(_("Formatting the main partition..."))
         self.InstallProgressBar.set_fraction(0.06)
-        # there's more work, yield True
+        # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
+        # adjust the format command to the selected formatting type
         if 'ext' in Selected_Main_Format :
             subprocess.call("mkfs -t " + Selected_Main_Format + " " + Selected_Main_Partition, shell=True)
         else :
             subprocess.call("mkfs -t " + Selected_Main_Format + " -f " + Selected_Main_Partition, shell=True)
+        # the main partition has to be mounted so we can copy the OS files to it
         subprocess.call("mount -t " + Selected_Main_Format + " " + Selected_Main_Partition + " " + Main_MountPoint , shell=True)
-        # Format and/or remount the other Linux partitions (Windows partitions will be managed later while generating /etc/fstab)
-        if LinFullSets != [] :
+        # format and/or remount the eventual other Linux partitions
+        # (existing Windows partitions will be managed later while generating /etc/fstab)
+        if LinFullSets != [] : # Here we will format -and- mount
             self.InstallProgressBar.set_text(_("Formatting and mounting your Linux partition(s)..."))
             self.InstallProgressBar.set_fraction(0.09)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
             for i in LinFullSets :
+                # first we create the mountpoint on the target
                 os.makedirs(Main_MountPoint + i[2])
+                # we ensure that the partition is unmounted before formatting
                 subprocess.call("umount -l " + i[0], shell=True)
+                # we adapt our formatting command to the chosen formatting type
                 if 'ext' in i[1] :
                     subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
                 else :
                     subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
+                # finally we mount the device on the target
                 subprocess.call("mount -t " + i[1] + " " + i[0] + " " + Main_MountPoint + i[2], shell=True)
-        if LinFormatSets != [] :
+        if LinFormatSets != [] : # Here we will only format the partition (no mounting)
             self.InstallProgressBar.set_text(_("Formatting your Linux partition(s)..."))
             self.InstallProgressBar.set_fraction(0.12)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
             for i in LinFormatSets :
+                # we ensure that the device is unmounted before formatting
                 subprocess.call("umount -l " + i[0], shell=True)
+                # we adapt our formatting command to the chosen formatting type
                 if 'ext' in i[1] :
                     subprocess.call("mkfs -t " + i[1] + " " + i[0], shell=True)
                 else :
                     subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
-        if LinMountSets != [] :
+        if LinMountSets != [] : # Here we will only mount the partition (no formatting)
             self.InstallProgressBar.set_text(_("Mounting your Linux partition(s)..."))
             self.InstallProgressBar.set_fraction(0.15)
             # there's more work, yield True
             yield True
             for i in LinMountSets :
+                # first we create the mountpoint on the target
                 os.makedirs(Main_MountPoint + i[2])
+                # then we mount the device on the target
                 subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
-        # Unsquashfs the live modules on the mounted installation partition(s)
-        # (Actually since unsquashfs can be buggy & can stall, we will mount + copy instead)
-        os.mkdir(Main_MountPoint + "/temp_mount")
+        # Now we are ready to copy the new OS on the adequate target partition. Normally we should
+        # simply unsquashfs the live modules, but since unsquashfs can be buggy & can stall, it is safer
+        # to first mount the squashfs module to a temporary mountpoint & copy its content instead.
+        # So first we create the temporary mountpoint
         Temp_Mount = Main_MountPoint + "/temp_mount"
+        os.mkdir(Temp_Mount)
         if Selected_Install_Mode == _('core') :
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
             self.InstallProgressBar.set_fraction(0.40)
             # there's more work, yield True
             yield True
+            # first we install the core module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             self.InstallProgressBar.set_text(_("Installing the common packages..."))
             self.InstallProgressBar.set_fraction(0.50)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # finally we install all the packages that are common to any installation mode
+            # this would be the kernel related packages, etc...
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
@@ -1661,23 +1680,27 @@ following the 'one application per task' rationale."))
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
             self.InstallProgressBar.set_fraction(0.25)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # first we install the core module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
             self.InstallProgressBar.set_fraction(0.50)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # then we install the basic module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             self.InstallProgressBar.set_text(_("Installing the common packages..."))
             self.InstallProgressBar.set_fraction(0.60)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # finally we install all the packages that are common to any installation mode
+            # this would be the kernel related packages, etc...
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
@@ -1685,37 +1708,42 @@ following the 'one application per task' rationale."))
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
             self.InstallProgressBar.set_fraction(0.20)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # first we install the core module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
             self.InstallProgressBar.set_fraction(0.35)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # then we install the basic module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
             self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
             self.InstallProgressBar.set_fraction(0.50)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # then we install the full module
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
             self.InstallProgressBar.set_text(_("Installing the common packages..."))
             self.InstallProgressBar.set_fraction(0.60)
-            # there's more work, yield True
+            # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
+            # finally we install all the packages that are common to any installation mode
+            # those are the kernel related packages, etc...
             subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
             subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
             subprocess.call("umount " + Temp_Mount, shell=True)
         self.InstallProgressBar.set_text(_("Installing the kernel..."))
         self.InstallProgressBar.set_fraction(0.70)
-        # there's more work, yield True
+        # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
         subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
         os.rmdir(Temp_Mount)
@@ -1723,7 +1751,7 @@ following the 'one application per task' rationale."))
         # Create /etc/fstab
         self.InstallProgressBar.set_text(_("Creating /etc/fstab..."))
         self.InstallProgressBar.set_fraction(0.80)
-        # there's more work, yield True
+        # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
         fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
         Swap_Partition = commands.getoutput(fdisk_swap_output)
@@ -1735,17 +1763,19 @@ following the 'one application per task' rationale."))
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (Selected_Main_Partition, '/', Selected_Main_Format, 'noatime,defaults', '1', '1'))
         LinSets = LinFullSets + LinFormatSets
         if LinSets != [] :
-            for i in LinSets :
+            for i in LinSets : # i[0] is the partition, i[1] is the format type, i[2] is the mountpoint.
                 Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[2], i[1] , 'noatime,defaults', '1', '2'))
         if LinMountSets != [] :
-            for i in LinMountSets :
-                lshal_fstype_output = "lshal | grep -A10 hda5 | grep 'volume.fstype =' "
+            for i in LinMountSets : # Here, i[1] value will be 'Select...'
+                # so we have to detect the linux partition formating type -> Lin_Filesys
+                lshal_fstype_output = "lshal | grep -A10 " + i[0] + " | grep 'volume.fstype =' "
                 Lin_Filesys_String = commands.getoutput(lshal_fstype_output)
                 Lin_Filesys = Lin_Filesys_String.split("'")[1]
                 Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[2], Lin_Filesys , 'noatime,defaults', '1', '2'))
         if WinMountSets != [] :
             os.environ['LANG'] = 'en_US'
-            for i in WinMountSets :
+            for i in WinMountSets : # Here i[0] is the partition while i[1] is the mountpoint.
+                # so we also have to detect the format type
                 fdisk_win_output = 'fdisk -l | grep ' + i[0]
                 Win_Filesys = commands.getoutput(fdisk_win_output)
                 os.makedirs(Main_MountPoint + i[1])
