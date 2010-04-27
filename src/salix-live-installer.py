@@ -1768,7 +1768,7 @@ following the 'one application per task' rationale."))
         if LinMountSets != [] :
             for i in LinMountSets : # Here, i[1] value will be 'Select...'
                 # so we have to detect the linux partition formating type -> Lin_Filesys
-                lshal_fstype_output = "lshal | grep -A10 " + i[0] + " | grep 'volume.fstype =' "
+                lshal_fstype_output = "lshal | grep -A50 " + i[0] + " | grep -m 1 'volume.fstype =' "
                 Lin_Filesys_String = commands.getoutput(lshal_fstype_output)
                 Lin_Filesys = Lin_Filesys_String.split("'")[1]
                 Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[2], Lin_Filesys , 'noatime,defaults', '1', '2'))
