@@ -463,8 +463,9 @@ class SalixLiveInstaller:
                     elif 'Disk' in line:
                         disk_size = line.split()[2]
                     # Get the size & filesystem for each partition of the disk
-                    elif line.startswith(' '):
-                        part_name = drive.replace(':', '') + line.split() [0]
+                    # Here the line will start by a space followed by a number or straight by a number
+                    elif line[0:1] == ' ' or line[0:1].isdigit():
+                        part_name = drive + line.split() [0]
                         part_size = line.split() [3]
                         try :
                             part_system = line.split() [5]
@@ -486,9 +487,9 @@ class SalixLiveInstaller:
                             usb_dev = commands.getoutput(check_if_usb)
                             check_if_firewire = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /fw-host'
                             firewire_dev = commands.getoutput(check_if_firewire)
-                            if usb_dev != '' :
+                            if '/usb' in usb_dev :
                                 pass
-                            elif firewire_dev != '' :
+                            elif '/fw-host' in firewire_dev :
                                 pass
                             else:
                                 # Put all needed variables in one set per line
