@@ -120,97 +120,88 @@ msgid "Select _keyboard "
 msgstr "Selecteer _toetsenbord"
 
 #: src/salix-live-installer.glade:1564
-#, fuzzy
 msgid "<b>Please select your system language:</b>"
-msgstr "Kies a.u.b. de ISO-code voor de taal:"
+msgstr "<b>Selecteer uw systeemtaal alstublieft:</b>"
 
 #: src/salix-live-installer.glade:1636
-#, fuzzy
 msgid "<b>Selected system language: </b>"
-msgstr "Standaard systeemtaal"
+msgstr "<b>Geselecteerde systeemtaal:</b>"
 
 #: src/salix-live-installer.glade:1724
-#, fuzzy
 msgid "Select _language "
-msgstr "Taal &selecteren:"
+msgstr "Selecteer taa_l"
 
 #: src/salix-live-installer.glade:1763
 msgid "<b>Please select Salix main partition:</b>"
-msgstr ""
+msgstr "<b>Selecteer Salix hoofdpartitie:</b>"
 
 #: src/salix-live-installer.glade:1847
 msgid "Display attached external devices"
-msgstr ""
+msgstr "Extern aangesloten beeldapparaten"
 
 #: src/salix-live-installer.glade:1867
 msgid ""
 "From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
 "<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
+"Selecteer alstublieft uit de bovenstaande gevonden partities op uw systeem waar de root folder van Salix (/) moet worden geïnstalleerd.\n"
+"<b>Waarschuwing!</b> Deze partitie wordt opnieuw geformatteerd en de gegevens zullen permanent worden verwijderd."
 
 #: src/salix-live-installer.glade:1894
-#, fuzzy
 msgid "Format with: "
-msgstr "%s is in strijd met %s"
+msgstr "Formatteer met:"
 
 #: src/salix-live-installer.glade:1961
-#, fuzzy
 msgid "Select _partition "
-msgstr "Selectie is mislukt"
+msgstr "Selecteer _partitie"
 
 #: src/salix-live-installer.glade:1999
 msgid "<b>Please configure your other Linux partition(s):</b>"
-msgstr ""
+msgstr "<b>Gelieve uw andere Linux partitie(s) te configureren:</b>"
 
 #: src/salix-live-installer.glade:2116
 msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
-msgstr ""
+msgstr "Het lijkt erop dat u meer dan 1 Linux partitie heeft. Indien wenselijk, kunt u de Salix folderhierarchie op aparte partities verspreiden. In feite is het sterk aanbevolen om de /home folder op een aparte partitie te hebben."
 
 #: src/salix-live-installer.glade:2154 src/salix-live-installer.glade:2336
-#, fuzzy
 msgid "Apply _settings "
-msgstr "OTR Instellingen"
+msgstr "Activeer _settings"
 
 #: src/salix-live-installer.glade:2194
 msgid "<b>Please configure your Windows partition(s):</b>"
-msgstr ""
+msgstr "<b>Configureer uw Windows-partitie(s) alstublieft:</b>"
 
 #: src/salix-live-installer.glade:2298
 msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
-msgstr ""
+msgstr "Het lijkt erop dat sommige van uw partities een Windows formattering hebben. Hier kunt u een mountpoint maken voor elk als u ze toegankelijk wilt hebben in het Salix besturingssysteem."
 
 #: src/salix-live-installer.glade:2383
-#, fuzzy
 msgid "<b>Salix main partition:</b>"
-msgstr "Eigenlijke grafische interface"
+msgstr "<b>Salix hoofdpartitie:</b>"
 
 #: src/salix-live-installer.glade:2396
-#, fuzzy
 msgid "Main partition"
-msgstr "Hoofdgereedschapsbalk"
+msgstr "Hoofdpartitie"
 
 #: src/salix-live-installer.glade:2408
-#, fuzzy
 msgid "<b>Other Linux partitions:</b>"
-msgstr "Partities om in besluit te nemen"
+msgstr "<b>Andere Linux-partities:</b>"
 
 #: src/salix-live-installer.glade:2421
 msgid "Home partition"
-msgstr ""
+msgstr "Home partitie"
 
 #: src/salix-live-installer.glade:2433
-#, fuzzy
 msgid "<b>Windows partitions:</b>"
-msgstr "Actieve vensters"
+msgstr "<b>Windows-partities:</b>"
 
 #: src/salix-live-installer.glade:2446
-#, fuzzy
 msgid "Windows partitions"
-msgstr "Actieve vensters"
+msgstr "Windows partities"
 
 #: src/salix-live-installer.glade:2509
 msgid "<b>Please create a new standard user:</b>"
-msgstr ""
+msgstr "<b>Maak een nieuwe standaardgebruiker:</b>"
 
 #: src/salix-live-installer.glade:2526
 #, fuzzy
