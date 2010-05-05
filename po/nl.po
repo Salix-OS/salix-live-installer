@@ -204,80 +204,68 @@ msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Maak een nieuwe standaardgebruiker:</b>"
 
 #: src/salix-live-installer.glade:2526
-#, fuzzy
 msgid "Enter login: "
-msgstr "Login:wachtwoord"
+msgstr "Voer login in:"
 
 #: src/salix-live-installer.glade:2558
-#, fuzzy
 msgid "Enter password: "
-msgstr "Voer een wachtwoord in"
+msgstr "Voer wachtwoord in:"
 
 #: src/salix-live-installer.glade:2582 src/salix-live-installer.glade:2765
-#, fuzzy
 msgid "Do not hide"
-msgstr "Niet sluiten"
+msgstr "Niet verbergen"
 
 #: src/salix-live-installer.glade:2607
-#, fuzzy
 msgid "Re-enter password: "
-msgstr "Voer een gebruikersnaam en wachtwoord in"
+msgstr "Voer wachtwoord opnieuw in:"
 
 #: src/salix-live-installer.glade:2641
-#, fuzzy
 msgid "<b>User created: </b>"
-msgstr "Project gemaakt"
+msgstr "<b>Gebruiker aangemaakt:</b>"
 
 #: src/salix-live-installer.glade:2724
 msgid "<b>Please create a new administrator's password:</b>"
-msgstr ""
+msgstr "<b>Maak een nieuw administrator wachtwoord:</b>"
 
 #: src/salix-live-installer.glade:2741
-#, fuzzy
 msgid "Enter root password: "
-msgstr "Voer een gebruikersnaam en wachtwoord in"
+msgstr "Voer root wachtwoord in:"
 
 #: src/salix-live-installer.glade:2790
-#, fuzzy
 msgid "Re-enter root password: "
-msgstr "Voer een gebruikersnaam en wachtwoord in"
+msgstr "Voer root wachtwoord opnieuw in:"
 
 #: src/salix-live-installer.glade:2824
-#, fuzzy
 msgid "<b>Password created: </b>"
-msgstr "Project gemaakt"
+msgstr "<b>Wachtwoord aangemaakt:</b>"
 
 #: src/salix-live-installer.glade:2911
 msgid "<b>Please select your installation mode:</b>"
-msgstr ""
+msgstr "<b>Selecteer uw installatiemodus:</b>"
 
 #: src/salix-live-installer.glade:2927
-#, fuzzy
 msgid "Core"
-msgstr ", kern gedumpt"
+msgstr "Core"
 
 #: src/salix-live-installer.glade:2973
-#, fuzzy
 msgid "Basic"
 msgstr "Basis"
 
 #: src/salix-live-installer.glade:3049
-#, fuzzy
 msgid "Full"
-msgstr "volledig"
+msgstr "Volledig"
 
 #: src/salix-live-installer.glade:3344
-#, fuzzy
 msgid "Launch Salix _install "
-msgstr "nieuwe omleidingen installeren: %s"
+msgstr "Start Salix _install"
 
 #: src/salix-live-installer.glade:3382
 msgid "Copyright © 2010 Pierrick Le Brun"
-msgstr ""
+msgstr "Copyright © 2010 Pierrick Le Brun"
 
 #: src/salix-live-installer.glade:3383
 msgid "SalixOS installation from SalixLive's graphic environment"
-msgstr ""
+msgstr "SalixOS installatie vanuit SalixLive's grafische omgeving"
 
 #: src/salix-live-installer.glade:3386
 msgid ""
@@ -296,9 +284,24 @@ msgid ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 msgstr ""
+"Dit programma is vrije software; u kan het herdistribueren\n"
+"en/of aanpassen onder de voorwaarden van de GNU General\n"
+"Public License zoals gepubliceerd door de Free Software\n"
+"Foundation; zowel versie 2, als (naar uw keuze) enige latere\n"
+"versie.\n"
+"\n"
+"Dit programma is gedistribueerd in de hoop dat het nuttig\n"
+"kan zijn, maar ZONDER GARANTIE; zonder zelfs de impliciete\n"
+"garantie van verhandelbaarheid of geschiktheid voor een\n"
+"bepaald doel. Zie de GNU General Public License voor meer\n"
+"details.\n"
+"\n"
+"U behoort een copie vna de GNU General Public License\n"
+"te hebben ontvangen samen met dit programma; indien niet,\n"
+"schrijf naar de Free Software Foundation, Inc., 51 Franklin Street, \n"
+"Fifth Floor, Boston, MA 02110-1301, USA."
 
 #: src/salix-live-installer.glade:3401
-#, fuzzy
 msgid ""
 "French: Pierrick Le Brun\n"
 "German: Andreas Born\n"
@@ -306,19 +309,18 @@ msgid ""
 "Spanish: Fernando Velo"
 msgstr ""
 "French: Pierrick Le Brun\n"
-"Greek: Dimitris Tzemos\n"
 "German: Andreas Born\n"
+"Greek: George Vlahavas\n"
 "Spanish: Fernando Velo\n"
-"Dutch: Imar van Erven Dorens"
+" Dutch: Imar van Erven Dorens"
 
 #: src/salix-live-installer.glade:3431
-#, fuzzy
 msgid "Confirmation needed"
-msgstr "Bevestiging vereist"
+msgstr "Bevestiging nodig"
 
 #: src/salix-live-installer.glade:3450
 msgid "<b>Message about the particular choice: </b>"
-msgstr ""
+msgstr "<b>Bericht over de specifieke keuze:</b>"
 
 #: src/salix-live-installer.glade:3463
 msgid "<b>Do you want to proceed with this?</b>"
