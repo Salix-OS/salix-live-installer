@@ -406,94 +406,91 @@ msgstr "Juni"
 
 #: src/salix-live-installer.py:390
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: src/salix-live-installer.py:391
 msgid "August"
-msgstr ""
+msgstr "Augustus"
 
 #: src/salix-live-installer.py:391
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: src/salix-live-installer.py:391
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: src/salix-live-installer.py:391
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: src/salix-live-installer.py:391
 msgid "December"
-msgstr ""
+msgstr "December"
 
 #: src/salix-live-installer.py:504
 msgid ""
 "SalixLive Installer will perform a standard installation of Salix Operating \n"
 "System on your computer from the comfort of SalixLive's graphic environment."
 msgstr ""
+"SalixLive Installer zal een standaard installatie van het Salix besturingssysteem\n"
+"op uw computer installeren vanuit het comfort van SalixLive's grafische omgeving."
 
 #: src/salix-live-installer.py:514
-#, fuzzy
 msgid "About Salix Installer."
-msgstr "'Over...'-venster tonen"
+msgstr "Over Salix Installer."
 
 #: src/salix-live-installer.py:519
-#, fuzzy
 msgid "Contextual help."
-msgstr "&Hulp verkrijgen..."
+msgstr "Contextuele hulp."
 
 #: src/salix-live-installer.py:524
-#, fuzzy
 msgid "Exit Salix Installer."
-msgstr "Afspelen en afsluiten"
+msgstr "Salix Installer Afsluiten."
 
 #: src/salix-live-installer.py:529 src/salix-live-installer.py:535
 msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
-msgstr ""
+msgstr "Start de Salix installatie. Deze knop zal niet actief zijn totdat alle instellingen correct zijn geconfigureerd."
 
 #: src/salix-live-installer.py:543
-#, fuzzy
 msgid "Access the time settings."
-msgstr "Standaard OTR instellingen"
+msgstr "Toegang tot de tijdsinstellingen."
 
 #: src/salix-live-installer.py:548
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
-msgstr ""
+msgstr "Gebruik de Network Time Protocol daemon om de tijd te synchroniseren via internet."
 
 #: src/salix-live-installer.py:553
-#, fuzzy
 msgid "Cancel time settings."
-msgstr "Standaard OTR instellingen"
+msgstr "Annuleer de tijdsinstellingen."
 
 #: src/salix-live-installer.py:558
 msgid "Activate the time settings after options have been defined."
-msgstr ""
+msgstr "Activeer de tijdsinstellingen nadat de opties zijn gedefinieerd."
 
 #: src/salix-live-installer.py:563
 msgid "Set the date & time manually if you do not use NTP service."
-msgstr ""
+msgstr "Stel de datum en tijd handmatig in als u geen gebruik maakt van een NTP-service."
 
 #: src/salix-live-installer.py:568
-#, fuzzy
 msgid "Set the time zone."
-msgstr "Instellen van de aanpassingstijd is mislukt"
+msgstr "Stel de tijdzone in."
 
 #: src/salix-live-installer.py:575
-#, fuzzy
 msgid "Access the keyboard settings."
-msgstr "Standaard OTR instellingen"
+msgstr "Toegang tot de toetsenbordinstellingen."
 
 #: src/salix-live-installer.py:580
 msgid ""
 "Highlight your favorite keyboard layout from this \n"
 "list before clicking on the 'Select keyboard' button."
 msgstr ""
+"Markeer uw favoriete toetsenbord indeling van deze\n"
+"lijst alvorens te klikken op de knop 'Selecteer toetsenbord'."
 
 #: src/salix-live-installer.py:586
 msgid "Check this box if you want your numeric keypad to be activated during the boot process."
-msgstr ""
+msgstr "Vink dit aan als u wilt dat uw numerieke toetsenblok moet worden geactiveerd tijdens het bootproces."
 
 #: src/salix-live-installer.py:592
 msgid "Cancel keyboard layout selection."
