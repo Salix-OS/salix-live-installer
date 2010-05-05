@@ -2,7 +2,7 @@
 # Copyright (C) 2010
 # This file is distributed under the same license as the salix-live-installer package.
 # Imar van Erven Dorens <gambit73@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -17,35 +17,31 @@ msgstr ""
 
 #: src/salix-live-installer.glade:343
 msgid "SalixLive Installer"
-msgstr ""
+msgstr "SalixLive Installer"
 
 #: src/salix-live-installer.glade:458
-#, fuzzy
 msgid "_Time"
-msgstr "Tijd"
+msgstr "_Tijd"
 
 #: src/salix-live-installer.glade:505
-#, fuzzy
 msgid "Key_board"
-msgstr "Sleutel verwijderen"
+msgstr "Toetsen_bord"
 
 #: src/salix-live-installer.glade:549
-#, fuzzy
 msgid "Lo_cale"
-msgstr "Lo-Fi"
+msgstr "Lo_cale"
 
 #: src/salix-live-installer.glade:593
-#, fuzzy
 msgid "_Partitions"
-msgstr "Partities om in besluit te nemen"
+msgstr "_Partities"
 
 #: src/salix-live-installer.glade:638
 msgid "U_sers"
-msgstr ""
+msgstr "Gebruiker_s"
 
 #: src/salix-live-installer.glade:682
 msgid "S_oftware"
-msgstr ""
+msgstr "S_oftware"
 
 #: src/salix-live-installer.glade:905
 msgid ""
@@ -59,77 +55,69 @@ msgid ""
 "\n"
 "If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first."
 msgstr ""
+"<b>Belangrijk!</b>\n"
+"\n"
+"Voor de SalixLive installer uit te voeren, moet u al de benodigde partities op uw systeem beschikbaar te hebben.\n"
+"\n"
+"Salix heeft minimaal een swap-partitie en een Linux-partitie naar de root folder nodig.\n"
+"\n"
+"Het is raadzaam om ook een partitie naar je /home folder te hebben.\n"
+"\n"
+"Als u deze partities niet gereed heeft, stop dan de SalixLive installatie en gebruik GParted om deze eerst aan te maken."
 
 #: src/salix-live-installer.glade:935
 msgid "<b>Please set the time, date and time zone:</b>"
-msgstr ""
+msgstr "<b>Stel de tijd, datum en tijdzone in:</b>"
 
 #: src/salix-live-installer.glade:1053
-#, fuzzy
 msgid " hrs : min : sec "
-msgstr "RTP-bron timeout (sec)"
+msgstr "uur: min: sec"
 
 #: src/salix-live-installer.glade:1083
-#, fuzzy
 msgid "Year:"
-msgstr "Dag / Maand / Jaar:"
+msgstr "Jaar:"
 
 #: src/salix-live-installer.glade:1094
-#, fuzzy
 msgid "Month:"
-msgstr "Dag / Maand / Jaar:"
+msgstr "Maand:"
 
 #: src/salix-live-installer.glade:1105
-#, fuzzy
 msgid "Day:"
-msgstr "Dag / Maand / Jaar:"
+msgstr "Dag:"
 
 #: src/salix-live-installer.glade:1216
-#, fuzzy
 msgid "Time zone: "
-msgstr "Neutrale Zone"
+msgstr "Tijdzone:"
 
 #: src/salix-live-installer.glade:1266
-#, fuzzy
 msgid "Use NTP service"
-msgstr "Start dienst nu"
+msgstr "Gebruik NTP-service"
 
 #: src/salix-live-installer.glade:1347
 msgid "<b>Please select your keyboard layout:</b>"
-msgstr ""
+msgstr "<b>Selecteer uw toetsenbordindeling:</b>"
 
 #: src/salix-live-installer.glade:1407
-#, fuzzy
 msgid "Activate numlock"
-msgstr "Activeer transcodering"
+msgstr "Activeer NumLock"
 
 #: src/salix-live-installer.glade:1437
-#, fuzzy
 msgid "<b>Selected keyboard layout: </b>"
-msgstr "Lay-outcache leegmaken"
+msgstr "<b>Geselecteerde toetsenbordindeling:</b>"
 
-#: src/salix-live-installer.glade:1450
-#: src/salix-live-installer.glade:1649
-#: src/salix-live-installer.glade:2654
-#: src/salix-live-installer.glade:2837
-#: src/salix-live-installer.py:1186
-#: src/salix-live-installer.py:1213
-#: src/salix-live-installer.py:1316
-#: src/salix-live-installer.py:1330
-#: src/salix-live-installer.py:1363
-#: src/salix-live-installer.py:1378
-#: src/salix-live-installer.py:1478
-#: src/salix-live-installer.py:1479
-#: src/salix-live-installer.py:1502
-#: src/salix-live-installer.py:1520
-#, fuzzy
+#: src/salix-live-installer.glade:1450 src/salix-live-installer.glade:1649
+#: src/salix-live-installer.glade:2654 src/salix-live-installer.glade:2837
+#: src/salix-live-installer.py:1186 src/salix-live-installer.py:1213
+#: src/salix-live-installer.py:1316 src/salix-live-installer.py:1330
+#: src/salix-live-installer.py:1363 src/salix-live-installer.py:1378
+#: src/salix-live-installer.py:1478 src/salix-live-installer.py:1479
+#: src/salix-live-installer.py:1502 src/salix-live-installer.py:1520
 msgid "None"
 msgstr "Geen"
 
 #: src/salix-live-installer.glade:1525
-#, fuzzy
 msgid "Select _keyboard "
-msgstr "Toetsenbordpiep"
+msgstr "Selecteer _toetsenbord"
 
 #: src/salix-live-installer.glade:1564
 #, fuzzy
@@ -178,8 +166,7 @@ msgstr ""
 msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
 msgstr ""
 
-#: src/salix-live-installer.glade:2154
-#: src/salix-live-installer.glade:2336
+#: src/salix-live-installer.glade:2154 src/salix-live-installer.glade:2336
 #, fuzzy
 msgid "Apply _settings "
 msgstr "OTR Instellingen"
@@ -235,8 +222,7 @@ msgstr "Login:wachtwoord"
 msgid "Enter password: "
 msgstr "Voer een wachtwoord in"
 
-#: src/salix-live-installer.glade:2582
-#: src/salix-live-installer.glade:2765
+#: src/salix-live-installer.glade:2582 src/salix-live-installer.glade:2765
 #, fuzzy
 msgid "Do not hide"
 msgstr "Niet sluiten"
@@ -381,21 +367,18 @@ msgstr "Omschrijving"
 msgid "Disk"
 msgstr "Gebruik:  %s schijfnaam\n"
 
-#: src/salix-live-installer.py:193
-#: src/salix-live-installer.py:196
+#: src/salix-live-installer.py:193 src/salix-live-installer.py:196
 #: src/salix-live-installer.py:201
 msgid "Partition"
 msgstr ""
 
-#: src/salix-live-installer.py:194
-#: src/salix-live-installer.py:197
+#: src/salix-live-installer.py:194 src/salix-live-installer.py:197
 #: src/salix-live-installer.py:202
 #, fuzzy
 msgid "Size"
 msgstr "Grootte"
 
-#: src/salix-live-installer.py:195
-#: src/salix-live-installer.py:203
+#: src/salix-live-installer.py:195 src/salix-live-installer.py:203
 #, fuzzy
 msgid "File System"
 msgstr ""
@@ -412,8 +395,7 @@ msgstr "Huidig kanaal:"
 msgid "Format as:"
 msgstr "&Opslaan als..."
 
-#: src/salix-live-installer.py:200
-#: src/salix-live-installer.py:204
+#: src/salix-live-installer.py:200 src/salix-live-installer.py:204
 #, fuzzy
 msgid "Mount as:"
 msgstr "&Opslaan als..."
@@ -487,8 +469,7 @@ msgstr "&Hulp verkrijgen..."
 msgid "Exit Salix Installer."
 msgstr "Afspelen en afsluiten"
 
-#: src/salix-live-installer.py:529
-#: src/salix-live-installer.py:535
+#: src/salix-live-installer.py:529 src/salix-live-installer.py:535
 msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
 msgstr ""
 
@@ -633,8 +614,7 @@ msgstr ""
 msgid "Here you must retype your user's password as a confirmation of your choice."
 msgstr ""
 
-#: src/salix-live-installer.py:738
-#: src/salix-live-installer.py:770
+#: src/salix-live-installer.py:738 src/salix-live-installer.py:770
 msgid "Check this box if you want to be able to see the password you are typing."
 msgstr ""
 
@@ -695,70 +675,50 @@ msgstr ""
 msgid "Cancel all packages selection."
 msgstr "Forceer selectie van alle streams"
 
-#: src/salix-live-installer.py:956
-#: src/salix-live-installer.py:958
+#: src/salix-live-installer.py:956 src/salix-live-installer.py:958
 msgid "The time zone has not been set"
 msgstr ""
 
-#: src/salix-live-installer.py:956
-#: src/salix-live-installer.py:958
-#: src/salix-live-installer.py:1163
-#: src/salix-live-installer.py:1166
-#: src/salix-live-installer.py:1169
-#: src/salix-live-installer.py:1172
-#: src/salix-live-installer.py:1174
-#: src/salix-live-installer.py:1177
-#: src/salix-live-installer.py:1179
-#: src/salix-live-installer.py:1205
-#: src/salix-live-installer.py:1208
-#: src/salix-live-installer.py:1210
+#: src/salix-live-installer.py:956 src/salix-live-installer.py:958
+#: src/salix-live-installer.py:1163 src/salix-live-installer.py:1166
+#: src/salix-live-installer.py:1169 src/salix-live-installer.py:1172
+#: src/salix-live-installer.py:1174 src/salix-live-installer.py:1177
+#: src/salix-live-installer.py:1179 src/salix-live-installer.py:1205
+#: src/salix-live-installer.py:1208 src/salix-live-installer.py:1210
 msgid "Please verify and correct"
 msgstr ""
 
-#: src/salix-live-installer.py:1062
-#: src/salix-live-installer.py:1093
-#: src/salix-live-installer.py:1097
-#: src/salix-live-installer.py:1268
-#: src/salix-live-installer.py:1272
-#: src/salix-live-installer.py:1276
+#: src/salix-live-installer.py:1062 src/salix-live-installer.py:1093
+#: src/salix-live-installer.py:1097 src/salix-live-installer.py:1268
+#: src/salix-live-installer.py:1272 src/salix-live-installer.py:1276
 #, fuzzy
 msgid "will be formatted with"
 msgstr "gecompileerd met GIMP-"
 
-#: src/salix-live-installer.py:1063
-#: src/salix-live-installer.py:1094
-#: src/salix-live-installer.py:1103
-#: src/salix-live-installer.py:1147
-#: src/salix-live-installer.py:1269
-#: src/salix-live-installer.py:1273
-#: src/salix-live-installer.py:1281
-#: src/salix-live-installer.py:1285
+#: src/salix-live-installer.py:1063 src/salix-live-installer.py:1094
+#: src/salix-live-installer.py:1103 src/salix-live-installer.py:1147
+#: src/salix-live-installer.py:1269 src/salix-live-installer.py:1273
+#: src/salix-live-installer.py:1281 src/salix-live-installer.py:1285
 #, fuzzy
 msgid "and will be mounted as"
 msgstr "%s moet als root worden uitgevoerd"
 
-#: src/salix-live-installer.py:1089
-#: src/salix-live-installer.py:1139
-#: src/salix-live-installer.py:1426
-#: src/salix-live-installer.py:1432
+#: src/salix-live-installer.py:1089 src/salix-live-installer.py:1139
+#: src/salix-live-installer.py:1426 src/salix-live-installer.py:1432
 #: src/salix-live-installer.py:1457
 #, fuzzy
 msgid "Select..."
 msgstr "&Selecteren"
 
-#: src/salix-live-installer.py:1098
-#: src/salix-live-installer.py:1107
+#: src/salix-live-installer.py:1098 src/salix-live-installer.py:1107
 #: src/salix-live-installer.py:1143
 #, fuzzy
 msgid "and will not be mounted"
 msgstr "De wachtrij zal niet opgeslagen worden."
 
-#: src/salix-live-installer.py:1102
-#: src/salix-live-installer.py:1106
-#: src/salix-live-installer.py:1142
-#: src/salix-live-installer.py:1146
-#: src/salix-live-installer.py:1280
-#: src/salix-live-installer.py:1284
+#: src/salix-live-installer.py:1102 src/salix-live-installer.py:1106
+#: src/salix-live-installer.py:1142 src/salix-live-installer.py:1146
+#: src/salix-live-installer.py:1280 src/salix-live-installer.py:1284
 #, fuzzy
 msgid "will not be formatted"
 msgstr "De wachtrij zal niet opgeslagen worden."
@@ -779,18 +739,15 @@ msgstr ""
 msgid "Your user's name should not contain any upper case letter"
 msgstr ""
 
-#: src/salix-live-installer.py:1174
-#: src/salix-live-installer.py:1205
+#: src/salix-live-installer.py:1174 src/salix-live-installer.py:1205
 msgid "Your password entry is empty"
 msgstr ""
 
-#: src/salix-live-installer.py:1176
-#: src/salix-live-installer.py:1207
+#: src/salix-live-installer.py:1176 src/salix-live-installer.py:1207
 msgid "Your password is too short. It should have at least 5 characters"
 msgstr ""
 
-#: src/salix-live-installer.py:1179
-#: src/salix-live-installer.py:1210
+#: src/salix-live-installer.py:1179 src/salix-live-installer.py:1210
 msgid "Your 2 password entries do not match"
 msgstr ""
 
@@ -799,23 +756,19 @@ msgstr ""
 msgid "Yes"
 msgstr "Ja"
 
-#: src/salix-live-installer.py:1234
-#: src/salix-live-installer.py:1620
-#: src/salix-live-installer.py:1638
-#: src/salix-live-installer.py:1662
+#: src/salix-live-installer.py:1234 src/salix-live-installer.py:1620
+#: src/salix-live-installer.py:1638 src/salix-live-installer.py:1662
 #, fuzzy
 msgid "core"
 msgstr ", kern gedumpt"
 
-#: src/salix-live-installer.py:1236
-#: src/salix-live-installer.py:1636
+#: src/salix-live-installer.py:1236 src/salix-live-installer.py:1636
 #: src/salix-live-installer.py:1670
 #, fuzzy
 msgid "basic"
 msgstr "Basis"
 
-#: src/salix-live-installer.py:1238
-#: src/salix-live-installer.py:1660
+#: src/salix-live-installer.py:1238 src/salix-live-installer.py:1660
 #, fuzzy
 msgid "full"
 msgstr "volledig"
@@ -871,8 +824,7 @@ msgid ""
 "Unable to launch LiloSetup, you must set LILO 'manually'. "
 msgstr ""
 
-#: src/salix-live-installer.py:1545
-#: src/salix-live-installer.py:1550
+#: src/salix-live-installer.py:1545 src/salix-live-installer.py:1550
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
@@ -905,18 +857,14 @@ msgstr "# Linux bootable partitie configuratie begin\n"
 msgid "Mounting your Linux partition(s)..."
 msgstr "# Linux bootable partitie configuratie begin\n"
 
-#: src/salix-live-installer.py:1622
-#: src/salix-live-installer.py:1638
-#: src/salix-live-installer.py:1646
-#: src/salix-live-installer.py:1662
-#: src/salix-live-installer.py:1670
-#: src/salix-live-installer.py:1678
+#: src/salix-live-installer.py:1622 src/salix-live-installer.py:1638
+#: src/salix-live-installer.py:1646 src/salix-live-installer.py:1662
+#: src/salix-live-installer.py:1670 src/salix-live-installer.py:1678
 #, fuzzy, python-format
 msgid "Installing the %(mode)s mode packages..."
 msgstr "Downloaden en installeren van pakketten..."
 
-#: src/salix-live-installer.py:1629
-#: src/salix-live-installer.py:1653
+#: src/salix-live-installer.py:1629 src/salix-live-installer.py:1653
 #: src/salix-live-installer.py:1685
 #, fuzzy
 msgid "Installing the common packages..."
@@ -936,8 +884,7 @@ msgstr "Aanmaken van journal (%d blokken): "
 msgid "Time, keyboard, locale, login and other system configuration..."
 msgstr ""
 
-#: src/salix-live-installer.py:1782
-#: src/salix-live-installer.py:1787
+#: src/salix-live-installer.py:1782 src/salix-live-installer.py:1787
 msgid "Installation process completed successfully ..."
 msgstr ""
 
@@ -950,8 +897,7 @@ msgid ""
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
 
-#: src/salix-live-installer.py:1825
-#: src/salix-live-installer.py:1830
+#: src/salix-live-installer.py:1825 src/salix-live-installer.py:1830
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1000,4 +946,3 @@ msgstr ""
 #: src/salix-live-installer.desktop.in.h:2
 msgid "Salix Installer"
 msgstr ""
-
