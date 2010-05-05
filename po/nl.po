@@ -324,98 +324,85 @@ msgstr "<b>Bericht over de specifieke keuze:</b>"
 
 #: src/salix-live-installer.glade:3463
 msgid "<b>Do you want to proceed with this?</b>"
-msgstr ""
+msgstr "<b>Wilt u hiermee doorgaan?</b>"
 
 #: src/salix-live-installer.glade:3527
-#, fuzzy
 msgid "Salix installation"
-msgstr "Pakketinstallatie"
+msgstr "Salix installatie"
 
 #: src/salix-live-installer.glade:3539
 msgid "Please be patient, Salix installation is in progress... "
-msgstr ""
+msgstr "Even geduld aub, de Salix installatie bezig..."
 
 #: src/salix-live-installer.py:188
-#, fuzzy
 msgid "Layout"
 msgstr "Opmaak"
 
 #: src/salix-live-installer.py:189
-#, fuzzy
 msgid "Type"
 msgstr "Type"
 
 #: src/salix-live-installer.py:190
-#, fuzzy
 msgid "Locale"
-msgstr "nl_NL"
+msgstr "Locale"
 
 #: src/salix-live-installer.py:191
-#, fuzzy
 msgid "Description"
-msgstr "Omschrijving"
+msgstr "Beschrijving"
 
 #: src/salix-live-installer.py:192
-#, fuzzy
 msgid "Disk"
-msgstr "Gebruik:  %s schijfnaam\n"
+msgstr "Disk"
 
 #: src/salix-live-installer.py:193 src/salix-live-installer.py:196
 #: src/salix-live-installer.py:201
 msgid "Partition"
-msgstr ""
+msgstr "Partitie"
 
 #: src/salix-live-installer.py:194 src/salix-live-installer.py:197
 #: src/salix-live-installer.py:202
-#, fuzzy
 msgid "Size"
 msgstr "Grootte"
 
 #: src/salix-live-installer.py:195 src/salix-live-installer.py:203
-#, fuzzy
 msgid "File System"
-msgstr ""
-"\n"
-"%s: ***** BESTANDSSYSTEEM IS VERANDERD *****\n"
+msgstr "Bestandssysteem"
 
 #: src/salix-live-installer.py:198
-#, fuzzy
 msgid "Current FS"
-msgstr "Huidig kanaal:"
+msgstr "Huidig FS"
 
 #: src/salix-live-installer.py:199
-#, fuzzy
 msgid "Format as:"
-msgstr "&Opslaan als..."
+msgstr "Formatteer als:"
 
 #: src/salix-live-installer.py:200 src/salix-live-installer.py:204
-#, fuzzy
 msgid "Mount as:"
-msgstr "&Opslaan als..."
+msgstr "Mount als:"
 
 #: src/salix-live-installer.py:390
 msgid "January"
-msgstr ""
+msgstr "Januari"
 
 #: src/salix-live-installer.py:390
 msgid "February"
-msgstr ""
+msgstr "Februari"
 
 #: src/salix-live-installer.py:390
 msgid "March"
-msgstr ""
+msgstr "Maart"
 
 #: src/salix-live-installer.py:390
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: src/salix-live-installer.py:390
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 #: src/salix-live-installer.py:390
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: src/salix-live-installer.py:390
 msgid "July"
