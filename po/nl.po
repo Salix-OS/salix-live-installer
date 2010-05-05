@@ -494,62 +494,60 @@ msgstr "Vink dit aan als u wilt dat uw numerieke toetsenblok moet worden geactiv
 
 #: src/salix-live-installer.py:592
 msgid "Cancel keyboard layout selection."
-msgstr ""
+msgstr "Annuleer de toetsenbordindeling selectie."
 
 #: src/salix-live-installer.py:597
 msgid "Confirm your selection after highlighting the keyboard layout."
-msgstr ""
+msgstr "Bevestig uw keuze na het markeren van de toetsenbordindeling."
 
 #: src/salix-live-installer.py:602
 msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
-msgstr ""
+msgstr "Dit is de toetsenbordindeling welke u heeft geselecteerd. 'Geen' zal worden weergegeven totdat u die selectie heeft bevestigd."
 
 #: src/salix-live-installer.py:610
-#, fuzzy
 msgid "Access the language settings."
-msgstr "Standaard OTR instellingen"
+msgstr "Toegang tot de taalinstellingen."
 
 #: src/salix-live-installer.py:615
 msgid "Highlight your language from this list before clicking on the 'Select language' button."
-msgstr ""
+msgstr "Markeer uw taal uit deze lijst alvorens te klikken op de knop 'Selecteer taal'."
 
 #: src/salix-live-installer.py:621
 msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
-msgstr ""
+msgstr "Dit is de systeemtaal welke u heeft geselecteerd. 'Geen' zal worden weergegeven totdat u die selectie heeft bevestigd."
 
 #: src/salix-live-installer.py:627
-#, fuzzy
 msgid "Cancel language selection."
-msgstr "Selectie %s niet gevonden"
+msgstr "Taalkeuze annuleren."
 
 #: src/salix-live-installer.py:632
 msgid "Confirm your selection after highlighting the system language."
-msgstr ""
+msgstr "Bevestig uw keuze na het markeren van de systeemtaal."
 
 #: src/salix-live-installer.py:639
-#, fuzzy
 msgid "Access the partitions settings."
-msgstr "Standaard OTR instellingen"
+msgstr "Toegang tot de partitie instellingen."
 
 #: src/salix-live-installer.py:644
 msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
-msgstr ""
+msgstr "Markeer de partitie uit deze lijst alvorens te klikken op de knop 'Selecteer partitie'."
 
 #: src/salix-live-installer.py:650
 msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
-msgstr ""
+msgstr "Vink dit aan als u wilt dat uw externe schijven worden getoond in de bovenstaande lijst."
 
 #: src/salix-live-installer.py:656
 msgid "Confirm your selection after highlighting the partition."
-msgstr ""
+msgstr "Bevestig uw keuze na de markering van de partitie."
 
 #: src/salix-live-installer.py:661
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
+msgstr "Het bestandssysteem welke zal worden gebruikt voor de hoofdpartitie van Salix te formatteren."
 
 #: src/salix-live-installer.py:666
+#, fuzzy
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr ""
+msgstr "Klik op de juiste 'Selecteer ...' cel als u het bestandssysteem van een partitie wilt wijzigen en/of als u wilt toewijzen de houder daartoe aangewezen kunnen ervoor kiezen een van de voorgestelde mount points of voer uw eigen. U moet de door u gewenste partities voordat u klikt op 'Toepassen instellingen' te klikken. Elke uitgeschakeld parameters worden genegeerd."
 
 #: src/salix-live-installer.py:675
 msgid "Confirm the Linux partition(s) settings from the list."
