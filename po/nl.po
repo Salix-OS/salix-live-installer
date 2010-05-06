@@ -929,6 +929,5 @@ msgid "Install Salix on your computer from a SalixLive session"
 msgstr "Installeer Salix op uw computer van een SalixLive sessie"
 
 #: src/salix-live-installer.desktop.in.h:2
-#, fuzzy
 msgid "Salix Installer"
 msgstr "Salix Installer"
