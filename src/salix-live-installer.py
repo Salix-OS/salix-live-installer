@@ -448,7 +448,8 @@ class SalixLiveInstaller:
                 if line.startswith('Disk'):
                     disk_device.append(line.split()[1].replace(':', ''))
             for drive in disk_device:
-                parted_output = commands.getoutput('parted ' + drive + ' print | grep -iv extended | grep -iv swap').splitlines()
+                # Set language again just to be sure
+                parted_output = commands.getoutput('LANG=C parted ' + drive + ' print | grep -iv extended | grep -iv swap').splitlines()
                 # Parse each line of parted output
                 for line in parted_output:
                     # Get the name of each hard drive
@@ -465,13 +466,17 @@ class SalixLiveInstaller:
                     # Get the size & filesystem for each partition of the disk
                     # Here the line will start by a space followed by a number or straight by a number
                     elif line[0:1] == ' ' or line[0:1].isdigit():
-                        part_name = drive + line.split() [0]
-                        part_size = line.split() [3]
                         try :
-                            part_system = line.split() [5]
+                            part_name = drive + line.split()[0]
+                        except IndexError:
+                            continue # go to next line
+                        part_size = line.split()[3]
+                        try :
+                            part_system = line.split()[5]
+                            # The following will be removed in 13.1 when parted will correctly recognise ext4
                             if 'ext3' in part_system:
                                 part_system = 'ext3/ext4'
-                        except :
+                        except IndexError:
                             part_system = 'None'
                         # Check if removable devices should be displayed.
                         if show_external_device == 'yes' :
@@ -714,19 +719,19 @@ Any unset parameters will be ignored. "))
     def on_users_eventbox_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("A Linux system can manage many registered users and requires each \
 one to log in, and to produce some form of authentication (usually a \
-user's name coupled with a password) before allowing the user access \
+login name coupled with a password) before allowing the user access \
 to system resources."))
     def on_users_eventbox_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_user_login_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Here you must define your user's name which should only include \
+	self.ContextLabel.set_text(_("Here you must define your login name which should only include \
 alphanumerical characters with no space or upper case letters. "))
     def on_user_login_entry_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_user_pass1_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Choose a password or passphrase to be coupled with your user's \
+	self.ContextLabel.set_text(_("Choose a password or passphrase to be coupled with your login \
 name. Your password or passprase should include a mix of upper \
 and lower case letters, numbers, and even symbols (such as the \
 @, !, and &)"))
@@ -734,7 +739,7 @@ and lower case letters, numbers, and even symbols (such as the \
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_user_pass2_entry_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Here you must retype your user's password as a confirmation \
+	self.ContextLabel.set_text(_("Here you must retype your password as a confirmation \
 of your choice."))
     def on_user_pass2_entry_leave_notify_event(self, widget, data=None):
         global context_intro
@@ -1187,15 +1192,15 @@ following the 'one application per task' rationale."))
         # Pass some basic sanity checks
         # To do => prevent the use of caps for login
         if self.UserLoginEntry.get_text() == '' :
-            error_dialog("\n" + _("Your user's name is empty") + ". " + _("Please verify and correct") + "! \n")
+            error_dialog("\n" + _("Your login name is empty") + ". " + _("Please verify and correct") + "! \n")
         elif self.UserLoginEntry.get_text().replace(' ', '').isalnum() == False :
-            error_dialog("\n" + _("Your user's name should only contain alphanumeric characters") + ". "\
+            error_dialog("\n" + _("Your login name should only contain alphanumeric characters") + ". "\
             + _("Please verify and correct") + "! \n")
         elif ' ' in self.UserLoginEntry.get_text() :
-            error_dialog("\n" + _("Your user's name should not contain any space") + ". "\
+            error_dialog("\n" + _("Your login name should not contain any space") + ". "\
             + _("Please verify and correct") + "! \n")
         elif self.UserLoginEntry.get_text().islower() != True :
-            error_dialog("\n" + _("Your user's name should not contain any upper case letter") + ". "\
+            error_dialog("\n" + _("Your login name should not contain any upper case letter") + ". "\
             + _("Please verify and correct") + "! \n")
         elif self.UserPass1Entry.get_text() == '' :
             error_dialog("\n" + _("Your password entry is empty") + ". " + _("Please verify and correct") + "! \n")
