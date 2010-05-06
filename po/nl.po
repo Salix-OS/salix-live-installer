@@ -750,39 +750,33 @@ msgid "Time zone"
 msgstr "Tijdzone"
 
 #: src/salix-live-installer.py:1265
-#, fuzzy
 msgid "Keyboard layout"
-msgstr "Pagina-indeling:"
+msgstr "Keyboard indeling"
 
 #: src/salix-live-installer.py:1266
-#, fuzzy
 msgid "System language"
-msgstr "Standaard systeemtaal"
+msgstr "Systeemtaal"
 
 #: src/salix-live-installer.py:1267
-#, fuzzy
 msgid "Partitions"
-msgstr "Partities om in besluit te nemen"
+msgstr "Partities"
 
 #: src/salix-live-installer.py:1277
-#, fuzzy
 msgid "but will not be mounted"
-msgstr "De wachtrij zal niet opgeslagen worden."
+msgstr "maar zal niet worden gemount"
 
 #: src/salix-live-installer.py:1286
-#, fuzzy
 msgid "Standard User"
-msgstr "%s - Proxygebruiker"
+msgstr "Standaardgebruiker"
 
 #: src/salix-live-installer.py:1287
-#, fuzzy
 msgid "Packages"
-msgstr "  Normale pakketten: "
+msgstr "Pakketten"
 
 #: src/salix-live-installer.py:1289
-#, fuzzy, python-format
+#, python-format
 msgid "You have chosen the %(mode)s installation mode.\n"
-msgstr "U kunt kiezen voor de standaard deïnterlacemodus"
+msgstr "U hebt gekozen voor de %(mode)s installatiemodus.\n"
 
 #: src/salix-live-installer.py:1535
 msgid ""
@@ -790,6 +784,9 @@ msgid ""
 "\n"
 "Unable to launch LiloSetup, you must set LILO 'manually'. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om LiloSetup te starten, u moet LILO 'handmatig' instellen."
 
 #: src/salix-live-installer.py:1545 src/salix-live-installer.py:1550
 msgid ""
@@ -799,11 +796,15 @@ msgid ""
 "\n"
 "You cannot proceed any further! "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Salix Live Installer is alleen bedoeld om gebruikt te worden in een LiveCD omgeving.\n"
+"\n"
+"U kunt niet doorgaan!"
 
 #: src/salix-live-installer.py:1561
-#, fuzzy
 msgid "Starting installation process..."
-msgstr "Dochterproces is mislukt"
+msgstr "installatieproces starten..."
 
 #: src/salix-live-installer.py:1574
 #, fuzzy
