@@ -562,92 +562,95 @@ msgstr "Bevestig de Windowspartitie instellingen uit de lijst hierboven."
 
 #: src/salix-live-installer.py:693
 msgid "Summary of your partition(s) settings."
-msgstr ""
+msgstr "Samenvatting van de partitieinstellingen."
 
 #: src/salix-live-installer.py:698
 msgid "Cancel all partition(s) settings."
-msgstr ""
+msgstr "Annuleer alle partitieinstellingen."
 
 #: src/salix-live-installer.py:705
 msgid "Access the users and passwords settings."
-msgstr ""
+msgstr "Toegang tot de gebruikers en wachtwoordinstellingen."
 
 #: src/salix-live-installer.py:710
 msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a user's name coupled with a password) before allowing the user access to system resources."
-msgstr ""
+msgstr "Een Linux-systeem kan een groot aantal geregistreerde gebruikers beheren en vereist een login om enige vorm van authenticatie (meestal een naam van de gebruiker gekoppeld met een wachtwoord) te hebben alvorens toegang te verlenen tot de systeembronnen."
 
 #: src/salix-live-installer.py:718
 msgid "Here you must define your user's name which should only include alphanumerical characters with no space or upper case letters. "
-msgstr ""
+msgstr "Hier moet u uw gebruikersnaam definiëren welke alleen alfanumerieke karakters zonder spatie of hoofdletters mag bevatten."
 
 #: src/salix-live-installer.py:724
 msgid "Choose a password or passphrase to be coupled with your user's name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
+msgstr "Kies een wachtwoord of -zin welke wordt gekoppeld aan de naam van uw gebruiker. Uw wachtwoord of -zin moet een mix van hoofd- en kleine letters, cijfers en zelfs symbolen (zoals @!, En &)"
 
 #: src/salix-live-installer.py:732
 msgid "Here you must retype your user's password as a confirmation of your choice."
-msgstr ""
+msgstr "Hier moet u opnieuw uw wachtwoord van de gebruiker ter bevestiging van uw keuze."
 
 #: src/salix-live-installer.py:738 src/salix-live-installer.py:770
 msgid "Check this box if you want to be able to see the password you are typing."
-msgstr ""
+msgstr "Vink dit vakje aan als u het wachtwoord dat u aan het typen bent wilt zien."
 
 #: src/salix-live-installer.py:744
-#, fuzzy
 msgid "Create new user."
-msgstr "diversions-new aanmaken: %s"
+msgstr "Nieuwe gebruiker aanmaken."
 
 #: src/salix-live-installer.py:749
 msgid "Cancel new user creation."
-msgstr ""
+msgstr "Annuleren creatie nieuwe gebruiker."
 
 #: src/salix-live-installer.py:755
 msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
+msgstr "Op Linux systemen is de superuser of root een speciale gebruikersaccount bestemd voor systeembeheer. Hier dient u het wachtwoord of -zin invoeren. Denk eraan, dit wachtwoord of -zin moet een mix van hoofd- en kleine letters, cijfers en zelfs symbolen (zoals @!, En &)"
 
 #: src/salix-live-installer.py:764
 msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
-msgstr ""
+msgstr "Hier moet u het superuser (root) wachtwoord invoeren als een bevestiging van uw keuze."
 
 #: src/salix-live-installer.py:776
 msgid "Apply new root password."
-msgstr ""
+msgstr "Toepassen van nieuwe root wachtwoord."
 
 #: src/salix-live-installer.py:781
 msgid "Cancel new root password."
-msgstr ""
+msgstr "Annuleren nieuwe root wachtwoord."
 
 #: src/salix-live-installer.py:788
-#, fuzzy
 msgid "Access the packages selection."
-msgstr "Selectie %s niet gevonden"
+msgstr "Toegang tot de pakketselectie."
 
 #: src/salix-live-installer.py:793
 msgid ""
 "<b>Core installation:</b>\n"
 "Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
+"<b>Core installatie:</b>\n"
+"Alleen de minimale benodigdheden voor een console zijn inbegrepen. Een grafische omgeving is niet voorzien. Dit is ideaal als u een ervaren gebruiker bent en u wilt uw installatie aanpassen voor een bepaald doel, zoals een webserver, bestandsserver, enz."
 
 #: src/salix-live-installer.py:803
 msgid ""
 "<b>Basic installation:</b>\n"
 "This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
 msgstr ""
+"<b>Basis installatie:</b>\n"
+"Dit installeert alleen de Xfce desktop omgeving met de Firefox webbrowser en de gslapt pakketmanager. Ideaal voor gevorderde gebruikers die een lichtgewicht Xfce willen installeren en hun eigen keuze aan applicaties toevoegen."
 
 #: src/salix-live-installer.py:812
 msgid ""
 "<b>Full installation:</b>\n"
 "Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
+"<b>Volledige installatie:</b>\n"
+"Alles dat is opgenomen in de ISO wordt geïnstalleerd. Dat geldt ook voor de Xfce desktop omgeving, Firefox-webbrowser, de claws-mail e-mailclient, de complete OpenOffice.org office suite, Java Runtime Environment, de Totem mediaspeler en Exaile Music Manager, de Gslapt pakketmanager en diverse andere applicaties, altijd volgens de achterliggende 'een aanvraag per taak' gedachte."
 
 #: src/salix-live-installer.py:824
 msgid "Confirm your packages selection."
-msgstr ""
+msgstr "Bevestig uw pakketkeuze."
 
 #: src/salix-live-installer.py:829
-#, fuzzy
 msgid "Cancel all packages selection."
-msgstr "Forceer selectie van alle streams"
+msgstr "Annuleer alle pakketselecties."
 
 #: src/salix-live-installer.py:956 src/salix-live-installer.py:958
 msgid "The time zone has not been set"
