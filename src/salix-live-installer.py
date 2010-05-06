@@ -469,7 +469,7 @@ class SalixLiveInstaller:
                         try :
                             part_name = drive + line.split()[0]
                         except IndexError:
-                            continue # go to next line
+                            continue # Stop process for this line & go straight to the next line
                         part_size = line.split()[3]
                         try :
                             part_system = line.split()[5]
