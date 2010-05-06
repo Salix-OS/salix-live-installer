@@ -654,7 +654,7 @@ msgstr "Annuleer alle pakketselecties."
 
 #: src/salix-live-installer.py:956 src/salix-live-installer.py:958
 msgid "The time zone has not been set"
-msgstr ""
+msgstr "De tijdzone is niet ingesteld"
 
 #: src/salix-live-installer.py:956 src/salix-live-installer.py:958
 #: src/salix-live-installer.py:1163 src/salix-live-installer.py:1166
@@ -663,101 +663,91 @@ msgstr ""
 #: src/salix-live-installer.py:1179 src/salix-live-installer.py:1205
 #: src/salix-live-installer.py:1208 src/salix-live-installer.py:1210
 msgid "Please verify and correct"
-msgstr ""
+msgstr "Gelieve te verifiëren en te corrigeren"
 
 #: src/salix-live-installer.py:1062 src/salix-live-installer.py:1093
 #: src/salix-live-installer.py:1097 src/salix-live-installer.py:1268
 #: src/salix-live-installer.py:1272 src/salix-live-installer.py:1276
-#, fuzzy
 msgid "will be formatted with"
-msgstr "gecompileerd met GIMP-"
+msgstr "zal worden geformatteerd met"
 
 #: src/salix-live-installer.py:1063 src/salix-live-installer.py:1094
 #: src/salix-live-installer.py:1103 src/salix-live-installer.py:1147
 #: src/salix-live-installer.py:1269 src/salix-live-installer.py:1273
 #: src/salix-live-installer.py:1281 src/salix-live-installer.py:1285
-#, fuzzy
 msgid "and will be mounted as"
-msgstr "%s moet als root worden uitgevoerd"
+msgstr "en zal worden gemount als"
 
 #: src/salix-live-installer.py:1089 src/salix-live-installer.py:1139
 #: src/salix-live-installer.py:1426 src/salix-live-installer.py:1432
 #: src/salix-live-installer.py:1457
-#, fuzzy
 msgid "Select..."
-msgstr "&Selecteren"
+msgstr "Selecteer..."
 
 #: src/salix-live-installer.py:1098 src/salix-live-installer.py:1107
 #: src/salix-live-installer.py:1143
-#, fuzzy
 msgid "and will not be mounted"
-msgstr "De wachtrij zal niet opgeslagen worden."
+msgstr "en zal niet worden gemount"
 
 #: src/salix-live-installer.py:1102 src/salix-live-installer.py:1106
 #: src/salix-live-installer.py:1142 src/salix-live-installer.py:1146
 #: src/salix-live-installer.py:1280 src/salix-live-installer.py:1284
-#, fuzzy
 msgid "will not be formatted"
-msgstr "De wachtrij zal niet opgeslagen worden."
+msgstr "zal niet worden geformatteerd"
 
 #: src/salix-live-installer.py:1163
 msgid "Your user's name is empty"
-msgstr ""
+msgstr "Uw gebruikersnaam is leeg"
 
 #: src/salix-live-installer.py:1165
 msgid "Your user's name should only contain alphanumeric characters"
-msgstr ""
+msgstr "Uw gebruikersnaam mag alleen alfanumerieke tekens bevatten"
 
 #: src/salix-live-installer.py:1168
 msgid "Your user's name should not contain any space"
-msgstr ""
+msgstr "Uw gebruikersnaam mag geen spatie bevatten"
 
 #: src/salix-live-installer.py:1171
 msgid "Your user's name should not contain any upper case letter"
-msgstr ""
+msgstr "Uw gebruikersnaam mag geen hoofdletter bevatten"
 
 #: src/salix-live-installer.py:1174 src/salix-live-installer.py:1205
 msgid "Your password entry is empty"
-msgstr ""
+msgstr "Uw wachtwoord invoer is leeg"
 
 #: src/salix-live-installer.py:1176 src/salix-live-installer.py:1207
 msgid "Your password is too short. It should have at least 5 characters"
-msgstr ""
+msgstr "Uw wachtwoord is te kort. Het moet minstens 5 tekens bevatten"
 
 #: src/salix-live-installer.py:1179 src/salix-live-installer.py:1210
 msgid "Your 2 password entries do not match"
-msgstr ""
+msgstr "Uw 2 wachtwoord invoeren komen niet overeen"
 
 #: src/salix-live-installer.py:1212
-#, fuzzy
 msgid "Yes"
 msgstr "Ja"
 
 #: src/salix-live-installer.py:1234 src/salix-live-installer.py:1620
 #: src/salix-live-installer.py:1638 src/salix-live-installer.py:1662
-#, fuzzy
 msgid "core"
-msgstr ", kern gedumpt"
+msgstr "core"
 
 #: src/salix-live-installer.py:1236 src/salix-live-installer.py:1636
 #: src/salix-live-installer.py:1670
-#, fuzzy
 msgid "basic"
-msgstr "Basis"
+msgstr "basis"
 
 #: src/salix-live-installer.py:1238 src/salix-live-installer.py:1660
-#, fuzzy
 msgid "full"
 msgstr "volledig"
 
 #: src/salix-live-installer.py:1263
 msgid "You are about to install Salix with the following settings"
-msgstr ""
+msgstr "U staat op het punt Salix te installeren met de volgende instellingen"
 
 #: src/salix-live-installer.py:1264
-#, fuzzy
 msgid "Time zone"
-msgstr "Neutrale Zone"
+msgstr "Tijdzone"
 
 #: src/salix-live-installer.py:1265
 #, fuzzy
