@@ -807,54 +807,48 @@ msgid "Starting installation process..."
 msgstr "installatieproces starten..."
 
 #: src/salix-live-installer.py:1574
-#, fuzzy
 msgid "Formatting the main partition..."
-msgstr "Eigenlijke grafische interface"
+msgstr "Formatteren van de hoofdpartitie..."
 
 #: src/salix-live-installer.py:1585
 msgid "Formatting and mounting your Linux partition(s)..."
-msgstr ""
+msgstr "Formatteren en mounten van uw linuxpartitie(s)..."
 
 #: src/salix-live-installer.py:1598
-#, fuzzy
 msgid "Formatting your Linux partition(s)..."
-msgstr "# Linux bootable partitie configuratie begin\n"
+msgstr "Formatteren van uw linuxpartitie(s)..."
 
 #: src/salix-live-installer.py:1609
-#, fuzzy
 msgid "Mounting your Linux partition(s)..."
-msgstr "# Linux bootable partitie configuratie begin\n"
+msgstr "Mounten van uw linuxpartitie(s)..."
 
 #: src/salix-live-installer.py:1622 src/salix-live-installer.py:1638
 #: src/salix-live-installer.py:1646 src/salix-live-installer.py:1662
 #: src/salix-live-installer.py:1670 src/salix-live-installer.py:1678
-#, fuzzy, python-format
+#, python-format
 msgid "Installing the %(mode)s mode packages..."
-msgstr "Downloaden en installeren van pakketten..."
+msgstr "Installeren van de %(mode)s modus pakketten..."
 
 #: src/salix-live-installer.py:1629 src/salix-live-installer.py:1653
 #: src/salix-live-installer.py:1685
-#, fuzzy
 msgid "Installing the common packages..."
-msgstr "Downloaden en installeren van pakketten..."
+msgstr "Installeren van de standaard pakketten..."
 
 #: src/salix-live-installer.py:1692
-#, fuzzy
 msgid "Installing the kernel..."
-msgstr "Downloaden en installeren van pakketten..."
+msgstr "Installeren van de kernel..."
 
 #: src/salix-live-installer.py:1700
-#, fuzzy
 msgid "Creating /etc/fstab..."
-msgstr "Aanmaken van journal (%d blokken): "
+msgstr "Creëren van /etc/fstab..."
 
 #: src/salix-live-installer.py:1736
 msgid "Time, keyboard, locale, login and other system configuration..."
-msgstr ""
+msgstr "Tijd, toetsenbord, locale, de login en andere systeemconfiguraties..."
 
 #: src/salix-live-installer.py:1782 src/salix-live-installer.py:1787
 msgid "Installation process completed successfully ..."
-msgstr ""
+msgstr "Het installatie proces is succesvol voltooid..."
 
 #: src/salix-live-installer.py:1795
 msgid ""
@@ -864,6 +858,11 @@ msgid ""
 "(If you prefer to use another bootloader utility, click on the no button\n"
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
+"<b>De Salix installatie is met succes uitgevoerd!</b>\n"
+"\n"
+"LiloSetup zal nu worden gestart, zodat u Salix kan toevoegen aan de bootloader.\n"
+"(Als u liever van een andere bootloader gebruik wilt maken, klik dan op de knop Nee\n"
+"en kies de applicatie van uw keuze voor de herstart van het systeem.)\n"
 
 #: src/salix-live-installer.py:1825 src/salix-live-installer.py:1830
 msgid ""
@@ -871,6 +870,9 @@ msgid ""
 "\n"
 "Unable to set the new keyboard selection on the installation target. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om de nieuwe toetsenbordselectie in te stellen op het doelsysteem."
 
 #: src/salix-live-installer.py:1836
 msgid ""
@@ -878,6 +880,9 @@ msgid ""
 "\n"
 "Unable to set the new language selection on the installation target. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om de nieuwe taalselectie in te stellen op het doelsysteem."
 
 #: src/salix-live-installer.py:1840
 msgid ""
@@ -885,6 +890,9 @@ msgid ""
 "\n"
 "Unable to create the new user on the installation target. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om de nieuwe gebruiker aan te maken op het doelsysteem."
 
 #: src/salix-live-installer.py:1844
 msgid ""
@@ -892,6 +900,9 @@ msgid ""
 "\n"
 "Unable to set the new user's password on the installation target. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om het nieuwe gebruikerswachtwoord in te stellen op het doelsysteem."
 
 #: src/salix-live-installer.py:1848
 msgid ""
@@ -899,6 +910,9 @@ msgid ""
 "\n"
 "Unable to set root's password on the installation target. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Het is niet mogelijk om het nieuwe root wachtwoord in te stellen op het doelsysteem."
 
 #: src/salix-live-installer.py:2038
 msgid ""
@@ -906,11 +920,15 @@ msgid ""
 "\n"
 "Root privileges are required to run this program. "
 msgstr ""
+"<b>Sorry!</b>\n"
+"\n"
+"Root privileges nodig zijn om dit programma uit te voeren."
 
 #: src/salix-live-installer.desktop.in.h:1
 msgid "Install Salix on your computer from a SalixLive session"
-msgstr ""
+msgstr "Installeer Salix op uw computer van een SalixLive sessie"
 
 #: src/salix-live-installer.desktop.in.h:2
+#, fuzzy
 msgid "Salix Installer"
-msgstr ""
+msgstr "Salix Installer"
