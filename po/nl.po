@@ -545,21 +545,20 @@ msgid "The filesystem that will be used to format Salix main partition."
 msgstr "Het bestandssysteem welke zal worden gebruikt voor de hoofdpartitie van Salix te formatteren."
 
 #: src/salix-live-installer.py:666
-#, fuzzy
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr "Klik op de juiste 'Selecteer ...' cel als u het bestandssysteem van een partitie wilt wijzigen en/of als u wilt toewijzen de houder daartoe aangewezen kunnen ervoor kiezen een van de voorgestelde mount points of voer uw eigen. U moet de door u gewenste partities voordat u klikt op 'Toepassen instellingen' te klikken. Elke uitgeschakeld parameters worden genegeerd."
+msgstr "Klik op de juiste 'Selecteer...' cel als u het bestandssysteem van een partitie wilt wijzigen en/of als u het mountpoint wilt toewijzen. U kunt kiezen voor een van de voorgestelde mountpoints of voer uw eigen mountpoint in. U moet alle gewenste partities configureren voordat u klikt op 'Instellngen toepassen'. Elke uitgeschakelde parameter wordt genegeerd."
 
 #: src/salix-live-installer.py:675
 msgid "Confirm the Linux partition(s) settings from the list."
-msgstr ""
+msgstr "Bevestig de Linux partitieinstellingen uit de lijst."
 
 #: src/salix-live-installer.py:680
 msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr ""
+msgstr "Klik op de juiste 'Selecteer...' cel als u het mountpoint wilt toewijzen. U moet alle gewenste partities configureren voordat u klikt op 'Instellngen toepassen'. Elke uitgeschakelde parameter wordt genegeerd."
 
 #: src/salix-live-installer.py:688
 msgid "Confirm the Windows partition(s) settings from the list above."
-msgstr ""
+msgstr "Bevestig de Windowspartitie instellingen uit de lijst hierboven."
 
 #: src/salix-live-installer.py:693
 msgid "Summary of your partition(s) settings."
