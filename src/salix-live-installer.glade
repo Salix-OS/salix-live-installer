@@ -349,12 +349,12 @@
         <property name="visible">True</property>
         <child>
           <object class="GtkHBox" id="hbox1">
+            <property name="height_request">170</property>
             <property name="visible">True</property>
             <property name="spacing">5</property>
             <child>
               <object class="GtkButton" id="about_link">
                 <property name="width_request">200</property>
-                <property name="height_request">180</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -383,7 +383,6 @@
                 <child>
                   <object class="GtkLabel" id="context_label">
                     <property name="width_request">585</property>
-                    <property name="height_request">180</property>
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
                     <property name="xpad">2</property>
@@ -416,7 +415,6 @@
                 <child>
                   <object class="GtkHBox" id="hbox2">
                     <property name="width_request">190</property>
-                    <property name="height_request">380</property>
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkVBox" id="vbox2">
@@ -948,6 +946,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkImage" id="image14">
+                                <property name="width_request">375</property>
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
@@ -1209,6 +1208,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                 <signal name="enter_notify_event" handler="on_timezone_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="time_zone_box">
+                                    <property name="width_request">375</property>
                                     <property name="visible">True</property>
                                     <child>
                                       <object class="GtkLabel" id="label41">
