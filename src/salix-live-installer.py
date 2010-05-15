@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.1' -  First version
+# version = '0.2'
 
 import commands
 import subprocess
@@ -140,6 +140,7 @@ class SalixLiveInstaller:
         self.RootVisibleCheckButton = builder.get_object("root_visible_checkbutton")
         self.ExternalDeviceCheckButton = builder.get_object("external_device_checkbutton")
         self.NumLockCheckButton = builder.get_object("numlock_checkbutton")
+        self.ScimCheckButton = builder.get_object("scim_checkbutton")
         self.RootPassCreated = builder.get_object("root_pass_created")
         self.NewUserLogin = builder.get_object("new_user_login")
         self.UsersApplyButton = builder.get_object("users_apply")
@@ -295,12 +296,26 @@ class SalixLiveInstaller:
                 keyb_feedline = (keyb_item, type)
                 # And populate the GUI keymap list view
                 self.KeyboardListStore.append(keyb_feedline)
-                # set the status of the numlock checkbutton
-                global set_numlock
-                if self.NumLockCheckButton.get_active() == True :
-                    set_numlock = 'yes'
+            # Detect & set the status of the numlock checkbutton
+            global set_numlock
+            if os.access('/etc/rc.d/rc.numlock', os.X_OK) == True :
+                set_numlock = 'on'
+                self.NumLockCheckButton.set_active(True)
+            else :
+                set_numlock = 'off'
+                self.NumLockCheckButton.set_active(False)
+            # Detect & set the status of the SCIM checkbutton
+            global set_scim
+            if os.access('/usr/bin/scim', os.X_OK) == True :
+                if os.access('/etc/profile.d/scim.sh', os.X_OK) == True :
+                    set_scim = 'on'
+                    self.ScimCheckButton.set_active(True)
                 else :
-                    set_numlock = 'no'
+                    set_scim = 'off'
+                    self.ScimCheckButton.set_active(False)
+            else :
+                set_scim = 'off'
+                self.ScimCheckButton.set_active(False)           
             # Close the opened files
             UsedKeymapFile.close()
         SalixKeymapList.close()
@@ -598,6 +613,14 @@ to be activated during the boot process."))
     def on_numlock_checkbutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
+    def on_scim_checkbutton_enter_notify_event(self, widget, data=None):
+	self.ContextLabel.set_text(_("Check this box if you want SCIM to be \
+activated during the boot process. The Smart Common Input Method platform (SCIM) \
+is an input method platform containing support for more than thirty complex \
+languages such as Chinese, Japanese, Korean and many European languages."))
+    def on_scim_checkbutton_leave_notify_event(self, widget, data=None):
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_keyboard_undo_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Cancel keyboard layout selection."))
     def on_keyboard_undo_leave_notify_event(self, widget, data=None):
@@ -887,14 +910,22 @@ following the 'one application per task' rationale."))
             self.ManualTimeBox.set_sensitive(True)
             set_ntp = 'no'
 
-    # What to do when the user's password visible checkbutton is toggled
+    # What to do when the numlock checkbutton is toggled
     def on_numlock_checkbutton_toggled(self, widget, data=None):
         global set_numlock
         if self.NumLockCheckButton.get_active() == True :
-            set_numlock = 'yes'
+            set_numlock = 'on'
         else :
-            set_numlock = 'no'
-						
+            set_numlock = 'off'
+
+    # What to do when the SCIM checkbutton is toggled
+    def on_scim_checkbutton_toggled(self, widget, data=None):
+        global set_scim
+        if self.ScimCheckButton.get_active() == True :
+            set_scim = 'on'
+        else :
+            set_scim = 'off'
+
     # What to do when the user's password visible checkbutton is toggled
     def on_user_visible_checkbutton_toggled(self, widget, data=None):		
         if self.UserVisibleCheckButton.get_active() == True :
@@ -938,6 +969,10 @@ following the 'one application per task' rationale."))
         # Set the new partition row value on the fifth column (4)
         if new_text in ('ext2', 'ext3', 'ext4', 'reiserfs', 'xfs', 'jfs', 'Select...' ):
             self.LinuxPartitionListStore.set_value(iter, 4, new_text)
+            if new_text != _("Select..."):
+                self.LinuxPartitionListStore.set_value(iter, 6, 'gtk-yes')
+            else:
+                self.LinuxPartitionListStore.set_value(iter, 6, 'gtk-edit')
         self.LinuxPartitionApply.set_sensitive(True)
 
     def on_linux_newsys_renderer_combo_editing_started(self, widget, path, data):
@@ -954,6 +989,10 @@ following the 'one application per task' rationale."))
         self.LinuxPartitionListStore, iter = linuxnewmountchoice.get_selected()
         # Set the new partition row value on the sixth column (5)
         self.LinuxPartitionListStore.set_value(iter, 5, new_text)
+        if new_text != _("Select..."):
+            self.LinuxPartitionListStore.set_value(iter, 7, 'gtk-yes')
+        else:
+            self.LinuxPartitionListStore.set_value(iter, 7, 'gtk-edit')
         self.LinuxPartitionApply.set_sensitive(True)
 
     def on_linux_newmount_renderer_combo_editing_started(self, widget, path, data):
@@ -969,6 +1008,10 @@ following the 'one application per task' rationale."))
         self.WindowsPartitionListStore, iter = windowsnewmountchoice.get_selected()
         # Set the new mountpoint row value on the fifth column (4)
         self.WindowsPartitionListStore.set_value(iter, 4, new_text)
+        if new_text != _("Select..."):
+            self.WindowsPartitionListStore.set_value(iter, 5, 'gtk-yes')
+        else:
+            self.WindowsPartitionListStore.set_value(iter, 5, 'gtk-edit')
         self.WindowsPartitionApply.set_sensitive(True)
 
     def on_win_newmount_renderer_combo_editing_started(self, widget, path, data):
@@ -1034,6 +1077,7 @@ following the 'one application per task' rationale."))
         self.KeyboardList.set_sensitive(False)
         self.KeyboardApplyButton.set_sensitive(False)
         self.NumLockCheckButton.set_sensitive(False)
+        self.ScimCheckButton.set_sensitive(False)
         global ConfigurationSet
         ConfigurationSet[0] = 'yes'
         if 'no' not in ConfigurationSet :
@@ -1349,6 +1393,7 @@ following the 'one application per task' rationale."))
         self.KeyboardList.set_sensitive(True)
         self.KeyboardApplyButton.set_sensitive(True)
         self.NumLockCheckButton.set_sensitive(True)
+        self.ScimCheckButton.set_sensitive(True)
         global ConfigurationSet
         ConfigurationSet[0] = 'no'
         self.InstallButton.set_sensitive(False)
@@ -1454,14 +1499,18 @@ following the 'one application per task' rationale."))
                         self.LinuxNewSysComboCell.set_property("model", self.LinuxFormatListStore)
                         self.LinuxNewSysComboCell.set_property('text-column', 0)
                         self.LinuxNewSysComboCell.set_property('editable', True)
+                        self.LinuxNewSysComboCell.set_property('cell-background', '#CCCCCC')
                         self.LinuxNewSysColumn.set_attributes(self.LinuxNewSysComboCell, text = 4)
                         set.append(_("Select..."))
                         # Insert editable combobox in appropriate list cells for new mounting configuration
                         self.LinuxNewMountComboCell.set_property("model", self.LinuxMountListStore)
                         self.LinuxNewMountComboCell.set_property('text-column', 0)
                         self.LinuxNewMountComboCell.set_property('editable', True)
+                        self.LinuxNewMountComboCell.set_property('cell-background', '#CCCCCC')
                         self.LinuxNewMountColumn.set_attributes(self.LinuxNewMountComboCell, text = 5)
                         set.append(_("Select..."))
+                        set.append("gtk-edit")
+                        set.append("gtk-edit")
                         # Add the partition's data row to the list view
                         self.LinuxPartitionListStore.append(set)
                         # Set the cursor on the first row
@@ -1485,8 +1534,10 @@ following the 'one application per task' rationale."))
                             self.WinMountComboCell.set_property("model", self.WinMountListStore)
                             self.WinMountComboCell.set_property('text-column', 0)
                             self.WinMountComboCell.set_property('editable', True)
+                            self.WinMountComboCell.set_property('cell-background', '#CCCCCC')
                             self.WinMountColumn.set_attributes(self.WinMountComboCell, text = 4)
                             set.append(_("Select..."))
+                            set.append("gtk-edit")
                             # Add the partition's data row to the list view
                             self.WindowsPartitionListStore.append(set)
                             # Set the cursor on the first row
@@ -1875,19 +1926,15 @@ and use the application of your choice before rebooting your machine.)\n"""))
         subprocess.call('/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('/var/log/setup/setup.services', shell=True)
 
-        # We have to deactivate some stuff in keyboardsetup first
+        # We have to deactivate some stuff in keyboardsetup first since we are in a chrooted environment
         subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
         subprocess.call('sed -i "s/\/etc\/rc.d\/rc.hald restart/# \/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
-        if set_numlock == 'yes' :
-            try :
-                subprocess.check_call('keyboardsetup ' + Selected_Keyboard + ' on', shell=True)
-            except :
-                error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. "))
-        else :
-            try :
-                subprocess.check_call('keyboardsetup ' + Selected_Keyboard + ' off', shell=True)
-            except :
-                error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. "))
+        # Now we can execute keyboardsetup
+        try :
+            subprocess.check_call('keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -s ' + set_scim, shell=True)
+        except :
+            error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. "))
+        # And finally we need to undo our temporary changes
         subprocess.call('sed -i "s/# cd $backtohome/cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
         subprocess.call('sed -i "s/# \/etc\/rc.d\/rc.hald restart/\/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
         try :
@@ -1895,7 +1942,7 @@ and use the application of your choice before rebooting your machine.)\n"""))
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new language selection on the installation target. "))
         try :
-            subprocess.check_call('useradd -m -s /bin/bash -G floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
+            subprocess.check_call('useradd -m -s /bin/bash -G lp,floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to create the new user on the installation target. "))
         try :
