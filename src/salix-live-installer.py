@@ -488,9 +488,9 @@ class SalixLiveInstaller:
                         part_size = line.split()[3]
                         try :
                             part_system = line.split()[5]
-                            # The following will be removed in 13.1 when parted will correctly recognise ext4
-                            if 'ext3' in part_system:
-                                part_system = 'ext3/ext4'
+                            # This should not be needed anymore
+#                            if 'ext3' in part_system:
+#                                part_system = 'ext3/ext4'
                         except IndexError:
                             part_system = 'None'
                         # Check if removable devices should be displayed.

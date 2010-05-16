@@ -2121,6 +2121,12 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <property name="title">Format as:</property>
                                     <property name="expand">True</property>
                                     <child>
+                                      <object class="GtkCellRendererPixbuf" id="linux_newsys_cellrenderer_pixbuf"/>
+                                      <attributes>
+                                        <attribute name="stock-id">6</attribute>
+                                      </attributes>
+                                    </child>
+                                    <child>
                                       <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
                                         <signal name="edited" handler="on_linux_newsys_renderer_combo_edited"/>
                                         <signal name="editing_started" handler="on_linux_newsys_renderer_combo_editing_started"/>
@@ -2130,12 +2136,6 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                         <attribute name="text">4</attribute>
                                       </attributes>
                                     </child>
-                                    <child>
-                                      <object class="GtkCellRendererPixbuf" id="linux_newsys_cellrenderer_pixbuf"/>
-                                      <attributes>
-                                        <attribute name="stock-id">6</attribute>
-                                      </attributes>
-                                    </child>
                                   </object>
                                 </child>
                                 <child>
@@ -2143,20 +2143,19 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <property name="title">Mount as:</property>
                                     <property name="expand">True</property>
                                     <child>
+                                      <object class="GtkCellRendererPixbuf" id="linux_newmount_cellrenderer_pixbuf"/>
+                                      <attributes>
+                                        <attribute name="stock-id">7</attribute>
+                                      </attributes>
+                                    </child>
+                                    <child>
                                       <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
                                         <signal name="edited" handler="on_linux_newmount_renderer_combo_edited"/>
                                         <signal name="editing_started" handler="on_linux_newmount_renderer_combo_editing_started"/>
                                         <signal name="editing_canceled" handler="on_linux_newmount_renderer_combo_editing_canceled"/>
                                       </object>
                                       <attributes>
-                                        <attribute name="alignment">0</attribute>
                                         <attribute name="text">5</attribute>
-                                      </attributes>
-                                    </child>
-                                    <child>
-                                      <object class="GtkCellRendererPixbuf" id="linux_newmount_cellrenderer_pixbuf"/>
-                                      <attributes>
-                                        <attribute name="stock-id">7</attribute>
                                       </attributes>
                                     </child>
                                   </object>
@@ -2333,20 +2332,19 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <property name="title">Mount as:</property>
                                     <property name="expand">True</property>
                                     <child>
+                                      <object class="GtkCellRendererPixbuf" id="win_newmount_cellrenderer_pixbuf"/>
+                                      <attributes>
+                                        <attribute name="stock-id">5</attribute>
+                                      </attributes>
+                                    </child>
+                                    <child>
                                       <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">
                                         <signal name="edited" handler="on_win_newmount_renderer_combo_edited"/>
                                         <signal name="editing_started" handler="on_win_newmount_renderer_combo_editing_started"/>
                                         <signal name="editing_canceled" handler="on_win_newmount_renderer_combo_editing_canceled"/>
                                       </object>
                                       <attributes>
-                                        <attribute name="alignment">0</attribute>
-                                        <attribute name="text">5</attribute>
-                                      </attributes>
-                                    </child>
-                                    <child>
-                                      <object class="GtkCellRendererPixbuf" id="win_newmount_cellrenderer_pixbuf"/>
-                                      <attributes>
-                                        <attribute name="stock-id">5</attribute>
+                                        <attribute name="text">4</attribute>
                                       </attributes>
                                     </child>
                                   </object>
@@ -3462,7 +3460,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.1</property>
+    <property name="version">0.2</property>
     <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
