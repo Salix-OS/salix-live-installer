@@ -44,40 +44,31 @@ msgstr "S_oftware"
 msgid ""
 "<b>Important!</b>\n"
 "\n"
-"Before executing SalixLive's installer, you should already have the "
-"necessary partitions available on your system.\n"
+"Before executing SalixLive's installer, you should already have the necessary partitions available on your system.\n"
 "\n"
-"Salix needs, at the very minimum, one swap partition and  one Linux  "
-"partition to hold its main directory tree. \n"
+"Salix needs, at the very minimum, one swap partition and  one Linux  partition to hold its main directory tree. \n"
 "\n"
-"If possible, it is recommended to also have at least another Linux partition "
-"to hold your /home directory.\n"
+"If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
 "\n"
-"If you do not already have these needed partitions ready, please exit "
-"SalixLive's installer and use Gparted to create them first."
+"If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first."
 msgstr ""
 "<b>¡Importante!</b>\n"
 "\n"
-"Antes de ejecutar el instalador de SalixLive, debería tener las particiones "
-"necesarias disponibles en su sistema.\n"
+"Antes de ejecutar el instalador de SalixLive, debería tener las particiones necesarias disponibles en su sistema.\n"
 "\n"
-"Salix necesita, como mínimo, una partición de intercambio (swap) y una "
-"partición Linux para mantener el árbol de directorios principal.\n"
+"Salix necesita, como mínimo, una partición de intercambio (swap) y una partición Linux para mantener el árbol de directorios principal.\n"
 "\n"
-"Si es posible, se recomienda también tener al menos otra partición Linux "
-"para mantener su directorio /home.\n"
+"Si es posible, se recomienda también tener al menos otra partición Linux para mantener su directorio /home.\n"
 "\n"
-"Si no tiene listas ya estas particiones, por favor salga del Instalador de "
-"SalixLive y use Gparted para crearlas primero."
+"Si no tiene listas ya estas particiones, por favor salga del Instalador de SalixLive y use Gparted para crearlas primero."
 
 #: src/salix-live-installer.glade:948
 msgid "<b>Please set the time, date and time zone:</b>"
 msgstr "<b>Por favor, establezca la fecha, hora y zona horaria:</b>"
 
 #: src/salix-live-installer.glade:1064
-#, fuzzy
 msgid " hour : min : sec "
-msgstr " hrs : min : seg "
+msgstr " hr : min : seg "
 
 #: src/salix-live-installer.glade:1094
 msgid "Year:"
@@ -108,21 +99,27 @@ msgid "Activate numlock"
 msgstr "Activar numlock"
 
 #: src/salix-live-installer.glade:1444
-#, fuzzy
 msgid "Activate SCIM"
-msgstr "Activar numlock"
+msgstr "Activar SCIM"
 
 #: src/salix-live-installer.glade:1481
 msgid "<b>Selected keyboard layout: </b>"
 msgstr "<b>Distribución de teclado seleccionada: </b>"
 
-#: src/salix-live-installer.glade:1494 src/salix-live-installer.glade:1693
-#: src/salix-live-installer.glade:2724 src/salix-live-installer.glade:2911
-#: src/salix-live-installer.py:1262 src/salix-live-installer.py:1289
-#: src/salix-live-installer.py:1392 src/salix-live-installer.py:1407
-#: src/salix-live-installer.py:1440 src/salix-live-installer.py:1455
-#: src/salix-live-installer.py:1561 src/salix-live-installer.py:1562
-#: src/salix-live-installer.py:1585 src/salix-live-installer.py:1603
+#: src/salix-live-installer.glade:1494
+#: src/salix-live-installer.glade:1693
+#: src/salix-live-installer.glade:2724
+#: src/salix-live-installer.glade:2911
+#: src/salix-live-installer.py:1262
+#: src/salix-live-installer.py:1289
+#: src/salix-live-installer.py:1392
+#: src/salix-live-installer.py:1407
+#: src/salix-live-installer.py:1440
+#: src/salix-live-installer.py:1455
+#: src/salix-live-installer.py:1561
+#: src/salix-live-installer.py:1562
+#: src/salix-live-installer.py:1585
+#: src/salix-live-installer.py:1603
 msgid "None"
 msgstr "Ninguno"
 
@@ -152,15 +149,11 @@ msgstr "Mostrar los dispositivos externos conectados"
 
 #: src/salix-live-installer.glade:1911
 msgid ""
-"From the above partitions found on your system, please select the one where "
-"Salix' main directory tree (/) should be installed.\n"
-"<b>Warning!</b> This partition will be reformatted and its data will be "
-"permanently erased."
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
-"De las particiones de arriba, encontradas en su sistema, por favor elija una "
-"donde debería instalarse el árbol de directorios principal de Salix (/).\n"
-"<b>¡Advertencia!</b> Esta partición será reformateada y su contenido borrado "
-"permanentemente."
+"De las particiones de arriba, encontradas en su sistema, por favor elija una donde debería instalarse el árbol de directorios principal de Salix (/).\n"
+"<b>¡Advertencia!</b> Esta partición será reformateada y su contenido borrado permanentemente."
 
 #: src/salix-live-installer.glade:1938
 msgid "Format with: "
@@ -175,16 +168,11 @@ msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr "<b>Por favor, configure su(s) otra(s) particion(es) Linux:</b>"
 
 #: src/salix-live-installer.glade:2176
-msgid ""
-"It appears that you have more than one Linux partition. If you wish, you can "
-"now spread Salix directory tree on separate partitions. In fact, it is "
-"highly recommended to have the /home directory on a separate partition."
-msgstr ""
-"Parece que tiene más de una partición Linux. Si lo desea, puede abrir el "
-"árbol de directorios de Salix en particiones separadas. De hecho, es "
-"altamente recomendable tener el directorio /home en una partición separada"
+msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr "Parece que tiene más de una partición Linux. Si lo desea, puede abrir el árbol de directorios de Salix en particiones separadas. De hecho, es altamente recomendable tener el directorio /home en una partición separada"
 
-#: src/salix-live-installer.glade:2214 src/salix-live-installer.glade:2404
+#: src/salix-live-installer.glade:2214
+#: src/salix-live-installer.glade:2404
 msgid "Apply _settings "
 msgstr "Aplicar _valores"
 
@@ -193,14 +181,8 @@ msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr "<b>Por favor, configure su(s) particion(es) Windows:</b>"
 
 #: src/salix-live-installer.glade:2366
-msgid ""
-"It appears that some of your partitions have a Windows formatting. Here you "
-"can set a mount point for each one if you wish them to be accessible in "
-"Salix system."
-msgstr ""
-"Parece que algunas de sus particiones tienen formato Windows. Aquí puede "
-"establecer un punto de montaje para cada una, si desea que sean accesibles "
-"en el sistema Salix."
+msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr "Parece que algunas de sus particiones tienen formato Windows. Aquí puede establecer un punto de montaje para cada una, si desea que sean accesibles en el sistema Salix."
 
 #: src/salix-live-installer.glade:2451
 msgid "<b>Salix main partition:</b>"
@@ -238,7 +220,8 @@ msgstr "Ingresar usuario:"
 msgid "Enter password: "
 msgstr "Ingresar contraseña:"
 
-#: src/salix-live-installer.glade:2652 src/salix-live-installer.glade:2839
+#: src/salix-live-installer.glade:2652
+#: src/salix-live-installer.glade:2839
 msgid "Do not hide"
 msgstr "No ocultar"
 
@@ -328,7 +311,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:3485
 msgid "Salix Transifex team"
-msgstr ""
+msgstr "Equipo Transifex de Salix"
 
 #: src/salix-live-installer.glade:3512
 msgid "Confirmation needed"
@@ -370,17 +353,20 @@ msgstr "Descripción"
 msgid "Disk"
 msgstr "Disco"
 
-#: src/salix-live-installer.py:195 src/salix-live-installer.py:198
+#: src/salix-live-installer.py:195
+#: src/salix-live-installer.py:198
 #: src/salix-live-installer.py:203
 msgid "Partition"
 msgstr "Partición"
 
-#: src/salix-live-installer.py:196 src/salix-live-installer.py:199
+#: src/salix-live-installer.py:196
+#: src/salix-live-installer.py:199
 #: src/salix-live-installer.py:204
 msgid "Size"
 msgstr "Tamaño"
 
-#: src/salix-live-installer.py:197 src/salix-live-installer.py:205
+#: src/salix-live-installer.py:197
+#: src/salix-live-installer.py:205
 msgid "File System"
 msgstr "Sistema de archivos"
 
@@ -392,7 +378,8 @@ msgstr "Sistema de archivo actual"
 msgid "Format as:"
 msgstr "Dar formato como:"
 
-#: src/salix-live-installer.py:202 src/salix-live-installer.py:206
+#: src/salix-live-installer.py:202
+#: src/salix-live-installer.py:206
 msgid "Mount as:"
 msgstr "Montar como:"
 
@@ -446,8 +433,7 @@ msgstr "Diciembre"
 
 #: src/salix-live-installer.py:529
 msgid ""
-"SalixLive Installer will perform a standard installation of Salix "
-"Operating \n"
+"SalixLive Installer will perform a standard installation of Salix Operating \n"
 "System on your computer from the comfort of SalixLive's graphic environment."
 msgstr ""
 "El instalador de SalixLive realizará una instalación estándar de SalixOS\n"
@@ -465,13 +451,10 @@ msgstr "Ayuda sensible al contexto."
 msgid "Exit Salix Installer."
 msgstr "Salir del Instalador de Salix."
 
-#: src/salix-live-installer.py:554 src/salix-live-installer.py:560
-msgid ""
-"Launch Salix installation. This button will not be active until all settings "
-"are configured correctly."
-msgstr ""
-"Lanzar la instalación de Salix. Este botón no estará activo hasta que todos "
-"los valores se configuren correctamente."
+#: src/salix-live-installer.py:554
+#: src/salix-live-installer.py:560
+msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
+msgstr "Lanzar la instalación de Salix. Este botón no estará activo hasta que todos los valores se configuren correctamente."
 
 #: src/salix-live-installer.py:568
 msgid "Access the time settings."
@@ -479,8 +462,7 @@ msgstr "Accede a la configuración de la hora."
 
 #: src/salix-live-installer.py:573
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
-msgstr ""
-"Usar el demonio Network Time Protocol para sincronizar la hora vía Internet."
+msgstr "Usar el demonio Network Time Protocol para sincronizar la hora vía Internet."
 
 #: src/salix-live-installer.py:578
 msgid "Cancel time settings."
@@ -488,9 +470,7 @@ msgstr "Cancelar la configuración horaria."
 
 #: src/salix-live-installer.py:583
 msgid "Activate the time settings after options have been defined."
-msgstr ""
-"Activar la configuración de la hora después que se hayan definido las "
-"opciones."
+msgstr "Activar la configuración de la hora después que se hayan definido las opciones."
 
 #: src/salix-live-installer.py:588
 msgid "Set the date & time manually if you do not use NTP service."
@@ -513,20 +493,12 @@ msgstr ""
 "lista antes de hacer clic en el botón 'Seleccionar teclado'."
 
 #: src/salix-live-installer.py:611
-msgid ""
-"Check this box if you want your numeric keypad to be activated during the "
-"boot process."
-msgstr ""
-"Marque esta caja si quiere que el teclado numérico se active durante el "
-"proceso de arranque."
+msgid "Check this box if you want your numeric keypad to be activated during the boot process."
+msgstr "Marque esta caja si quiere que el teclado numérico se active durante el proceso de arranque."
 
 #: src/salix-live-installer.py:617
-msgid ""
-"Check this box if you want SCIM to be activated during the boot process. The "
-"Smart Common Input Method platform (SCIM) is an input method platform "
-"containing support for more than thirty complex languages such as Chinese, "
-"Japanese, Korean and many European languages."
-msgstr ""
+msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
+msgstr "Marcar esta caja si desea que SCIM se active durante el proceso de arranque. La plataforma Método de Entrada Común Inteligente (SCIM, por sus iniciales en inglés) es una plataforma de mótodo de entrada que contiene soporte para más de treinta idiomas complejos tales como chino, japonés, coreano y algunos idiomas europeos."
 
 #: src/salix-live-installer.py:625
 msgid "Cancel keyboard layout selection."
@@ -537,32 +509,20 @@ msgid "Confirm your selection after highlighting the keyboard layout."
 msgstr "Confirme su selección después de resaltar la distribución de teclado."
 
 #: src/salix-live-installer.py:635
-msgid ""
-"This is the keyboard layout you have selected. 'None' will be displayed "
-"until you have confirmed that selection."
-msgstr ""
-"Esta es la distribución de teclado que Ud seleccionó. Se mostrará 'Ninguno' "
-"hasta que haya confirmado esa selección."
+msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
+msgstr "Esta es la distribución de teclado que Ud seleccionó. Se mostrará 'Ninguno' hasta que haya confirmado esa selección."
 
 #: src/salix-live-installer.py:643
 msgid "Access the language settings."
 msgstr "Accede a la configuración del idioma."
 
 #: src/salix-live-installer.py:648
-msgid ""
-"Highlight your language from this list before clicking on the 'Select "
-"language' button."
-msgstr ""
-"Resalte su idioma de la lista, antes de hacer clic en el botón 'Seleccionar "
-"idioma'."
+msgid "Highlight your language from this list before clicking on the 'Select language' button."
+msgstr "Resalte su idioma de la lista, antes de hacer clic en el botón 'Seleccionar idioma'."
 
 #: src/salix-live-installer.py:654
-msgid ""
-"This is the system language you have selected. 'None' will be displayed "
-"until you have confirmed that selection. "
-msgstr ""
-"Este es el idioma del sistema que Ud seleccionó. Se mostrará 'Ninguno' hasta "
-"que haya confirmado esa selección."
+msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
+msgstr "Este es el idioma del sistema que Ud seleccionó. Se mostrará 'Ninguno' hasta que haya confirmado esa selección."
 
 #: src/salix-live-installer.py:660
 msgid "Cancel language selection."
@@ -577,20 +537,12 @@ msgid "Access the partitions settings."
 msgstr "Accede a la configuración de particiones."
 
 #: src/salix-live-installer.py:677
-msgid ""
-"Highlight the partition from this list before clicking on the 'Select "
-"partition' button."
-msgstr ""
-"Resalte la partición de la lista, antes de hacer clic en el botón "
-"'Seleccionar partición'."
+msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
+msgstr "Resalte la partición de la lista, antes de hacer clic en el botón 'Seleccionar partición'."
 
 #: src/salix-live-installer.py:683
-msgid ""
-"Check this box if you want your external disk drive(s) to be displayed in "
-"the list above. "
-msgstr ""
-"Marque esta caja si desea que su(s) unidad(es) de disco externa(s) se muestre"
-"(n) en la lista."
+msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
+msgstr "Marque esta caja si desea que su(s) unidad(es) de disco externa(s) se muestre(n) en la lista."
 
 #: src/salix-live-installer.py:689
 msgid "Confirm your selection after highlighting the partition."
@@ -598,40 +550,19 @@ msgstr "Confirme su selección después de resaltar la partición."
 
 #: src/salix-live-installer.py:694
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
-"El sistema de archivos que se usará para dar formato a la partición "
-"principal de Salix."
+msgstr "El sistema de archivos que se usará para dar formato a la partición principal de Salix."
 
 #: src/salix-live-installer.py:699
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to modify the "
-"filesystem of a partition and/or if you wish to assign its mount point.You "
-"can either choose one of the suggested mount points or enter your own. You "
-"must configure all the desired partitions before clicking on the 'Apply "
-"settings' button. Any unset parameters will be ignored. "
-msgstr ""
-"Haga clic en la celda 'Seleccionar...' adecuada si desea modificar el "
-"sistema de archivos de una partición y/o si desea asignar su punto de "
-"montaje. Tanto puede elegir uno de los puntos de montaje sugeridos, como "
-"ingresar el suyo. Tiene que configurar todas las particiones deseadas antes "
-"de hacer clic en el botón 'Aplicar configuración'. Cualquier parámetro no "
-"establecido será ignorado."
+msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Haga clic en la celda 'Seleccionar...' adecuada si desea modificar el sistema de archivos de una partición y/o si desea asignar su punto de montaje. Tanto puede elegir uno de los puntos de montaje sugeridos, como ingresar el suyo. Tiene que configurar todas las particiones deseadas antes de hacer clic en el botón 'Aplicar configuración'. Cualquier parámetro no establecido será ignorado."
 
 #: src/salix-live-installer.py:708
 msgid "Confirm the Linux partition(s) settings from the list."
 msgstr "Confirme la configuración de la(s) particion(es) Linux de la lista."
 
 #: src/salix-live-installer.py:713
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to assign the mount "
-"point of a partition. You must configure all the desired partitions before "
-"clicking on the 'Apply settings' button. Any unset parameters will be "
-"ignored. "
-msgstr ""
-"Haga clic en la celda 'Seleccionar...' adecuada si desea el punto de montaje "
-"de una partición. Tiene que configurar todas las particiones deseadas antes "
-"de hacer clic en el botón 'Aplicar configuración'. Cualquier parámetro no "
-"establecido será ignorado."
+msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Haga clic en la celda 'Seleccionar...' adecuada si desea el punto de montaje de una partición. Tiene que configurar todas las particiones deseadas antes de hacer clic en el botón 'Aplicar configuración'. Cualquier parámetro no establecido será ignorado."
 
 #: src/salix-live-installer.py:721
 msgid "Confirm the Windows partition(s) settings from the list above."
@@ -650,45 +581,25 @@ msgid "Access the users and passwords settings."
 msgstr "Accede a la configuración de usuarios y contraseñas."
 
 #: src/salix-live-installer.py:743
-msgid ""
-"A Linux system can manage many registered users and requires each one to log "
-"in, and to produce some form of authentication (usually a login name coupled "
-"with a password) before allowing the user access to system resources."
-msgstr ""
-"Un sistema Linux puede administrar varios usuarios registrados y necesita "
-"que cada uno inicie sesión y produzca algún tipo de autenticación "
-"(usualmente un nombre de usuario junto con una contraseña) antes de permitir "
-"al usuario acceder a los recursos del sistema."
+msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
+msgstr "Un sistema Linux puede administrar varios usuarios registrados y necesita que cada uno inicie sesión y produzca algún tipo de autenticación (usualmente un nombre de usuario junto con una contraseña) antes de permitir al usuario acceder a los recursos del sistema."
 
 #: src/salix-live-installer.py:751
-msgid ""
-"Here you must define your login name which should only include "
-"alphanumerical characters with no space or upper case letters. "
-msgstr ""
-"Aquí tiene que definir su nombre de usuario, el que debería incluir "
-"solamente caracteres alfanuméricos, sin espacios o letras en mayúsculas. "
+msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
+msgstr "Aquí tiene que definir su nombre de usuario, el que debería incluir solamente caracteres alfanuméricos, sin espacios o letras en mayúsculas. "
 
 #: src/salix-live-installer.py:757
-msgid ""
-"Choose a password or passphrase to be coupled with your login name. Your "
-"password or passprase should include a mix of upper and lower case letters, "
-"numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"Elija una contraseña que se usará junto con su nombre de usuario. Su "
-"contraseña debería incluir una mezcla de letras mayúsculas y minúsculas, "
-"números e incluso símbolos (tales como @, !, &)"
+msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "Elija una contraseña que se usará junto con su nombre de usuario. Su contraseña debería incluir una mezcla de letras mayúsculas y minúsculas, números e incluso símbolos (tales como @, !, &)"
 
 #: src/salix-live-installer.py:765
 msgid "Here you must retype your password as a confirmation of your choice."
-msgstr ""
-"Aquí tiene que volver a escribir la contraseña del usuario a modo de "
-"confirmación."
+msgstr "Aquí tiene que volver a escribir la contraseña del usuario a modo de confirmación."
 
-#: src/salix-live-installer.py:771 src/salix-live-installer.py:803
-msgid ""
-"Check this box if you want to be able to see the password you are typing."
-msgstr ""
-"Marcar esta caja si desea ser capaz de ver la contraseña mientras la escribe."
+#: src/salix-live-installer.py:771
+#: src/salix-live-installer.py:803
+msgid "Check this box if you want to be able to see the password you are typing."
+msgstr "Marcar esta caja si desea ser capaz de ver la contraseña mientras la escribe."
 
 #: src/salix-live-installer.py:777
 msgid "Create new user."
@@ -699,24 +610,12 @@ msgid "Cancel new user creation."
 msgstr "Cancelar la creación del usuario nuevo."
 
 #: src/salix-live-installer.py:788
-msgid ""
-"On Linux systems, the superuser, or root, is a special user accountused for "
-"system administration. Here you must set its password orpassphrase. "
-"Remember, this password or passphrase should include a mix of upper and "
-"lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"En sistemas Linux, el superusuario o root, es una cuenta de usuario especial "
-"para la administración del sistema. Aquí tiene que establecer su contraseña. "
-"Recuerde, esta contraseña debería incluir una mezcla de letras en mayúsculas "
-"y minúsculas, números e incluso símbolos (tales como @, !, &)"
+msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "En sistemas Linux, el superusuario o root, es una cuenta de usuario especial para la administración del sistema. Aquí tiene que establecer su contraseña. Recuerde, esta contraseña debería incluir una mezcla de letras en mayúsculas y minúsculas, números e incluso símbolos (tales como @, !, &)"
 
 #: src/salix-live-installer.py:797
-msgid ""
-"Here you must retype the superuser (root) password as a confirmation of your "
-"choice."
-msgstr ""
-"Aquí tiene que volver a escribir la contraseña del superusuario (root) a "
-"modo de confirmación."
+msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
+msgstr "Aquí tiene que volver a escribir la contraseña del superusuario (root) a modo de confirmación."
 
 #: src/salix-live-installer.py:809
 msgid "Apply new root password."
@@ -733,47 +632,26 @@ msgstr "Accede a la selección de paquetes."
 #: src/salix-live-installer.py:826
 msgid ""
 "<b>Core installation:</b>\n"
-"Only the minimum essentials for a console system to start are included. A "
-"graphical environment is not provided. This is ideal if you are an "
-"experienced user and want to customize your installation for any specific "
-"purpose, such as a web server, file server etc. "
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
 "<b>Instalación Núcleo:</b>\n"
-"Solamente se incluye el mínimo esencial para que arranque el sistema de "
-"consola. No se provee entorno gráfico. Es ideal si Ud es un usuario "
-"experimentado y quiere personalizar su instalación para algún propósito "
-"especial, tal como un servidor de Web, servidor de archivos, etc."
+"Solamente se incluye el mínimo esencial para que arranque el sistema de consola. No se provee entorno gráfico. Es ideal si Ud es un usuario experimentado y quiere personalizar su instalación para algún propósito especial, tal como un servidor de Web, servidor de archivos, etc."
 
 #: src/salix-live-installer.py:836
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only the Xfce desktop environment with the Firefox web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight Xfce and add their own choice of applications."
+"This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
 msgstr ""
 "<b>Instalación Básica:</b>\n"
-"Instala solamente el entorno de escritorio Xfce con el navegador de Internet "
-"Firefox y el administrador de paquetes Gslapt. Ideal para usuarios avanzados "
-"que les gustase instalar un Xfce ligero y agregarle las aplicaciones de su "
-"preferencia."
+"Instala solamente el entorno de escritorio Xfce con el navegador de Internet Firefox y el administrador de paquetes Gslapt. Ideal para usuarios avanzados que les gustase instalar un Xfce ligero y agregarle las aplicaciones de su preferencia."
 
 #: src/salix-live-installer.py:845
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the Xfce "
-"desktop environment, the Firefox web browser and Claws-mail email client, a "
-"complete OpenOffice.org office suite, a Java Runtime Environment, the Totem "
-"media player and Exaile music manager, the Gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
+"Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Instalación Completa:</b>\n"
-"Se instala todo lo que está incluido en la imagen ISO. Incluye el entorno de "
-"escritorio Xfce, el navegador de Internet Firefox y el cliente de correo "
-"Claws-mail, el paquete de oficina OpenOffice.org completo, el Java Runtime "
-"Environment, el reproductor de medios Totem y el administrador de música "
-"Exaile, el administrador de paquetes Gslapt y varias otras aplicaciones, "
-"siempre siguiendo la lógica 'una aplicación por tarea'."
+"Se instala todo lo que está incluido en la imagen ISO. Incluye el entorno de escritorio Xfce, el navegador de Internet Firefox y el cliente de correo Claws-mail, el paquete de oficina OpenOffice.org completo, el Java Runtime Environment, el reproductor de medios Totem y el administrador de música Exaile, el administrador de paquetes Gslapt y varias otras aplicaciones, siempre siguiendo la lógica 'una aplicación por tarea'."
 
 #: src/salix-live-installer.py:857
 msgid "Confirm your packages selection."
@@ -783,47 +661,69 @@ msgstr "Confirmar su selección de paquetes."
 msgid "Cancel all packages selection."
 msgstr "Cancelar la selección de todos los paquetes."
 
-#: src/salix-live-installer.py:972 src/salix-live-installer.py:992
-#: src/salix-live-installer.py:1011 src/salix-live-installer.py:1165
-#: src/salix-live-installer.py:1215 src/salix-live-installer.py:1504
-#: src/salix-live-installer.py:1511 src/salix-live-installer.py:1539
+#: src/salix-live-installer.py:972
+#: src/salix-live-installer.py:992
+#: src/salix-live-installer.py:1011
+#: src/salix-live-installer.py:1165
+#: src/salix-live-installer.py:1215
+#: src/salix-live-installer.py:1504
+#: src/salix-live-installer.py:1511
+#: src/salix-live-installer.py:1539
 msgid "Select..."
 msgstr "Seleccionar..."
 
-#: src/salix-live-installer.py:1031 src/salix-live-installer.py:1033
+#: src/salix-live-installer.py:1031
+#: src/salix-live-installer.py:1033
 msgid "The time zone has not been set"
 msgstr "No se configuró la zona horaria"
 
-#: src/salix-live-installer.py:1031 src/salix-live-installer.py:1033
-#: src/salix-live-installer.py:1239 src/salix-live-installer.py:1242
-#: src/salix-live-installer.py:1245 src/salix-live-installer.py:1248
-#: src/salix-live-installer.py:1250 src/salix-live-installer.py:1253
-#: src/salix-live-installer.py:1255 src/salix-live-installer.py:1281
-#: src/salix-live-installer.py:1284 src/salix-live-installer.py:1286
+#: src/salix-live-installer.py:1031
+#: src/salix-live-installer.py:1033
+#: src/salix-live-installer.py:1239
+#: src/salix-live-installer.py:1242
+#: src/salix-live-installer.py:1245
+#: src/salix-live-installer.py:1248
+#: src/salix-live-installer.py:1250
+#: src/salix-live-installer.py:1253
+#: src/salix-live-installer.py:1255
+#: src/salix-live-installer.py:1281
+#: src/salix-live-installer.py:1284
+#: src/salix-live-installer.py:1286
 msgid "Please verify and correct"
 msgstr "Por favor, verificar y corregir"
 
-#: src/salix-live-installer.py:1138 src/salix-live-installer.py:1169
-#: src/salix-live-installer.py:1173 src/salix-live-installer.py:1344
-#: src/salix-live-installer.py:1348 src/salix-live-installer.py:1352
+#: src/salix-live-installer.py:1138
+#: src/salix-live-installer.py:1169
+#: src/salix-live-installer.py:1173
+#: src/salix-live-installer.py:1344
+#: src/salix-live-installer.py:1348
+#: src/salix-live-installer.py:1352
 msgid "will be formatted with"
 msgstr "se formateará como"
 
-#: src/salix-live-installer.py:1139 src/salix-live-installer.py:1170
-#: src/salix-live-installer.py:1179 src/salix-live-installer.py:1223
-#: src/salix-live-installer.py:1345 src/salix-live-installer.py:1349
-#: src/salix-live-installer.py:1357 src/salix-live-installer.py:1361
+#: src/salix-live-installer.py:1139
+#: src/salix-live-installer.py:1170
+#: src/salix-live-installer.py:1179
+#: src/salix-live-installer.py:1223
+#: src/salix-live-installer.py:1345
+#: src/salix-live-installer.py:1349
+#: src/salix-live-installer.py:1357
+#: src/salix-live-installer.py:1361
 msgid "and will be mounted as"
 msgstr "y se montará como"
 
-#: src/salix-live-installer.py:1174 src/salix-live-installer.py:1183
+#: src/salix-live-installer.py:1174
+#: src/salix-live-installer.py:1183
 #: src/salix-live-installer.py:1219
 msgid "and will not be mounted"
 msgstr "y no se montará"
 
-#: src/salix-live-installer.py:1178 src/salix-live-installer.py:1182
-#: src/salix-live-installer.py:1218 src/salix-live-installer.py:1222
-#: src/salix-live-installer.py:1356 src/salix-live-installer.py:1360
+#: src/salix-live-installer.py:1178
+#: src/salix-live-installer.py:1182
+#: src/salix-live-installer.py:1218
+#: src/salix-live-installer.py:1222
+#: src/salix-live-installer.py:1356
+#: src/salix-live-installer.py:1360
 msgid "will not be formatted"
 msgstr "no se formateará"
 
@@ -833,8 +733,7 @@ msgstr "Su nombre de usuario está vacío"
 
 #: src/salix-live-installer.py:1241
 msgid "Your login name should only contain alphanumeric characters"
-msgstr ""
-"Su nombre de usuario solamente debería contener caracteres alfanuméricos"
+msgstr "Su nombre de usuario solamente debería contener caracteres alfanuméricos"
 
 #: src/salix-live-installer.py:1244
 msgid "Your login name should not contain any space"
@@ -844,15 +743,18 @@ msgstr "Su nombre de usuario no debería contener espacios"
 msgid "Your login name should not contain any upper case letter"
 msgstr "Su nombre de usuario no debería contener ninguna letra mayúscula"
 
-#: src/salix-live-installer.py:1250 src/salix-live-installer.py:1281
+#: src/salix-live-installer.py:1250
+#: src/salix-live-installer.py:1281
 msgid "Your password entry is empty"
 msgstr "Su entrada de contraseña está vacía"
 
-#: src/salix-live-installer.py:1252 src/salix-live-installer.py:1283
+#: src/salix-live-installer.py:1252
+#: src/salix-live-installer.py:1283
 msgid "Your password is too short. It should have at least 5 characters"
 msgstr "Su contraseña es demasiado corta. Debería tener al menos 5 caracteres"
 
-#: src/salix-live-installer.py:1255 src/salix-live-installer.py:1286
+#: src/salix-live-installer.py:1255
+#: src/salix-live-installer.py:1286
 msgid "Your 2 password entries do not match"
 msgstr "Sus dos entradas de contraseña no coinciden"
 
@@ -860,17 +762,21 @@ msgstr "Sus dos entradas de contraseña no coinciden"
 msgid "Yes"
 msgstr "Sí"
 
-#: src/salix-live-installer.py:1310 src/salix-live-installer.py:1717
-#: src/salix-live-installer.py:1738 src/salix-live-installer.py:1766
+#: src/salix-live-installer.py:1310
+#: src/salix-live-installer.py:1717
+#: src/salix-live-installer.py:1738
+#: src/salix-live-installer.py:1766
 msgid "core"
 msgstr "núcleo"
 
-#: src/salix-live-installer.py:1312 src/salix-live-installer.py:1736
+#: src/salix-live-installer.py:1312
+#: src/salix-live-installer.py:1736
 #: src/salix-live-installer.py:1775
 msgid "basic"
 msgstr "básico"
 
-#: src/salix-live-installer.py:1314 src/salix-live-installer.py:1764
+#: src/salix-live-installer.py:1314
+#: src/salix-live-installer.py:1764
 msgid "full"
 msgstr "completo"
 
@@ -921,7 +827,8 @@ msgstr ""
 "\n"
 "Imposible lanzar LiloSetup, tiene que configurar LILO 'manualmente'. "
 
-#: src/salix-live-installer.py:1628 src/salix-live-installer.py:1633
+#: src/salix-live-installer.py:1628
+#: src/salix-live-installer.py:1633
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
@@ -955,14 +862,18 @@ msgstr "Dando formato a su(s) particion(es) Linux..."
 msgid "Mounting your Linux partition(s)..."
 msgstr "Montando su(s) particion(es) Linux..."
 
-#: src/salix-live-installer.py:1719 src/salix-live-installer.py:1738
-#: src/salix-live-installer.py:1747 src/salix-live-installer.py:1766
-#: src/salix-live-installer.py:1775 src/salix-live-installer.py:1784
+#: src/salix-live-installer.py:1719
+#: src/salix-live-installer.py:1738
+#: src/salix-live-installer.py:1747
+#: src/salix-live-installer.py:1766
+#: src/salix-live-installer.py:1775
+#: src/salix-live-installer.py:1784
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
 msgstr "Instalando los paquetes del modo %(mode)s..."
 
-#: src/salix-live-installer.py:1727 src/salix-live-installer.py:1755
+#: src/salix-live-installer.py:1727
+#: src/salix-live-installer.py:1755
 #: src/salix-live-installer.py:1792
 msgid "Installing the common packages..."
 msgstr "Instalando los paquetes comunes..."
@@ -977,11 +888,10 @@ msgstr "Creando /etc/fstab..."
 
 #: src/salix-live-installer.py:1847
 msgid "Time, keyboard, locale, login and other system configuration..."
-msgstr ""
-"Fecha/hora, teclado, locale, inicio de sesión y otras configuraciones del "
-"sistema..."
+msgstr "Fecha/hora, teclado, locale, inicio de sesión y otras configuraciones del sistema..."
 
-#: src/salix-live-installer.py:1893 src/salix-live-installer.py:1898
+#: src/salix-live-installer.py:1893
+#: src/salix-live-installer.py:1898
 msgid "Installation process completed successfully ..."
 msgstr "Proceso de instalación terminado exitosamente..."
 
@@ -989,17 +899,14 @@ msgstr "Proceso de instalación terminado exitosamente..."
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
-"LiloSetup will now be launched to enable you to add Salix to your "
-"bootloader.\n"
+"LiloSetup will now be launched to enable you to add Salix to your bootloader.\n"
 "(If you prefer to use another bootloader utility, click on the no button\n"
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
 "<b>¡La instalación de Salix se ejecutó con éxito!</b>\n"
 "\n"
-"Ahora se lanzará LiloSetup para permitirle agregar Salix a su cargador de "
-"arranque.\n"
-"(Si prefiere usar otra utilidad de cargador de arranque, haga clic en el "
-"botón No\n"
+"Ahora se lanzará LiloSetup para permitirle agregar Salix a su cargador de arranque.\n"
+"(Si prefiere usar otra utilidad de cargador de arranque, haga clic en el botón No\n"
 "y use la aplicación de su elección antes de reiniciar la máquina.)\n"
 
 #: src/salix-live-installer.py:1936
