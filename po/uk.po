@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -165,9 +165,8 @@ msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr "<b>Будь ласка, налаштуйте Ваші інші розділи Linux:</b>"
 
 #: src/salix-live-installer.glade:2176
-#, fuzzy
 msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
-msgstr "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr "Схоже, що у Вас є більше ніж один розділ Linux. Якщо ви бажаєте, Ви можете розширити дерево тек Salix на окремі розділи. Справді, дуже рекомендується мати /home теку на окремому розділі."
 
 #: src/salix-live-installer.glade:2214 src/salix-live-installer.glade:2404
 msgid "Apply _settings "
@@ -178,9 +177,8 @@ msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr "<b>Будь ласка, налаштуйте Ваші розділи Windows:</b>"
 
 #: src/salix-live-installer.glade:2366
-#, fuzzy
 msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
-msgstr "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr "Схоже, що деякі з Ваших розділів мають формат Windows. Тут Ви можете встановити точки монтування для кожного з них, якщо Ви бажаєте, щоб вони були доступні в системі Salix."
 
 #: src/salix-live-installer.glade:2451
 msgid "<b>Salix main partition:</b>"
@@ -489,9 +487,8 @@ msgid "Check this box if you want your numeric keypad to be activated during the
 msgstr "Відмітьте це галочкою, якщо Ви бажаєте активувати цифрову клавіатуру під час процесу завантаження."
 
 #: src/salix-live-installer.py:617
-#, fuzzy
 msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
-msgstr "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
+msgstr "Відмітьте це галочкою, якщо Ви бажаєте, щоб SCIM був активований під час процесу завантаження. Платформа Smart Common Input Method (SCIM) є платформою для методу вводу, що містить підтримку більш ніж 30 складних мов, таких як китайська, японська, корейська і багато європейських мов."
 
 #: src/salix-live-installer.py:625
 msgid "Cancel keyboard layout selection."
@@ -546,18 +543,16 @@ msgid "The filesystem that will be used to format Salix main partition."
 msgstr "Файлова система, яка буде використана для форматування основного розділу Salix."
 
 #: src/salix-live-installer.py:699
-#, fuzzy
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Натисніть на відповідну клітинку 'Вибрати ...', якщо Ви бажаєте змінити файлову систему розділу та/або якщо Ви бажаєте призначити його точку монтування. Ви можете вибрати одну із запропонованих точок монтування або ввести свою власну. Ви повинні налаштувати всі потрібні розділи, перш ніж натиснути на кнопку \"Застосувати налаштування\". Будь-які не налаштовані параметри будуть ігноруватися."
 
 #: src/salix-live-installer.py:708
 msgid "Confirm the Linux partition(s) settings from the list."
 msgstr "Підтвердити налаштування розділів з списку."
 
 #: src/salix-live-installer.py:713
-#, fuzzy
 msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Натисніть на відповідну клітинку 'Вибрати ...', якщо Ви бажаєте призначити його точку монтування. Ви повинні налаштувати всі потрібні розділи, перш ніж натиснути на кнопку \"Застосувати налаштування\". Будь-які не налаштовані параметри будуть ігноруватися."
 
 #: src/salix-live-installer.py:721
 msgid "Confirm the Windows partition(s) settings from the list above."
@@ -576,19 +571,16 @@ msgid "Access the users and passwords settings."
 msgstr "Доступ до налаштувань користувачів і паролів."
 
 #: src/salix-live-installer.py:743
-#, fuzzy
 msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
-msgstr "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
+msgstr "Система Linux може керувати багатьма зареєстрованими користувачами і вимагає від кожного входу в систему, а також зробити деякі форми розпізнавання (зазвичай логін в поєднанні з паролем), перш ніж дозволити доступ користувачів до ресурсів системи."
 
 #: src/salix-live-installer.py:751
-#, fuzzy
 msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
-msgstr "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
+msgstr "Тут ви повинні вказати Ваше логін, який повинен містити лише алфавітно-цифрових символи без пропусків та великих літер."
 
 #: src/salix-live-installer.py:757
-#, fuzzy
 msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "Виберіть пароль або фразу паролю, що поєднується з вашим логіном. Ваш пароль або фраза паролю повинна включати в себе поєднання символів з верхнім та нижнім регістром, цифр і навіть символів (таких як @,!, і &)"
 
 #: src/salix-live-installer.py:765
 msgid "Here you must retype your password as a confirmation of your choice."
@@ -607,9 +599,8 @@ msgid "Cancel new user creation."
 msgstr "Відмінити створення нового користувача."
 
 #: src/salix-live-installer.py:788
-#, fuzzy
 msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "На Linux системах суперкористувач, або root, є спеціальним користувачем, який відповідає за адміністрацію системи. Тут Ви повинні встановити пароль або фразу паролю. Пам’ятайте, цей пароль або фраза паролю повинна включати в себе поєднання символів з верхнім та нижнім регістром, цифр і навіть символів (таких як @,!, і &)"
 
 #: src/salix-live-installer.py:797
 msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
