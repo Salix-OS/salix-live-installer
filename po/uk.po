@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -151,7 +151,7 @@ msgstr "Вибрати _партицію"
 
 #: src/salix-live-installer.glade:2043
 msgid "<b>Please configure your other Linux partition(s):</b>"
-msgstr ""
+msgstr "<b>Будь ласка, налаштуйте Ваші інші партиції Linux:</b>"
 
 #: src/salix-live-installer.glade:2176
 msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
@@ -159,11 +159,11 @@ msgstr ""
 
 #: src/salix-live-installer.glade:2214 src/salix-live-installer.glade:2404
 msgid "Apply _settings "
-msgstr ""
+msgstr "Застосувати _налаштування"
 
 #: src/salix-live-installer.glade:2254
 msgid "<b>Please configure your Windows partition(s):</b>"
-msgstr ""
+msgstr "<b>Будь ласка, налаштуйте Ваші партиції Windows:</b>"
 
 #: src/salix-live-installer.glade:2366
 msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
@@ -171,7 +171,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:2451
 msgid "<b>Salix main partition:</b>"
-msgstr ""
+msgstr "<b>Основна партиція Salix:</b>"
 
 #: src/salix-live-installer.glade:2464
 msgid "Main partition"
@@ -179,7 +179,7 @@ msgstr "Основна партиція"
 
 #: src/salix-live-installer.glade:2476
 msgid "<b>Other Linux partitions:</b>"
-msgstr ""
+msgstr "<b>Інші партиції Linux:</b>"
 
 #: src/salix-live-installer.glade:2489
 msgid "Home partition"
@@ -187,7 +187,7 @@ msgstr "Домашня партиція"
 
 #: src/salix-live-installer.glade:2501
 msgid "<b>Windows partitions:</b>"
-msgstr ""
+msgstr "<b>Партиції Windows:</b>"
 
 #: src/salix-live-installer.glade:2514
 msgid "Windows partitions"
@@ -195,7 +195,7 @@ msgstr "Партиція Windows"
 
 #: src/salix-live-installer.glade:2579
 msgid "<b>Please create a new standard user:</b>"
-msgstr ""
+msgstr "<b>Будь ласка, створіть нового стандартного користувача:</b>"
 
 #: src/salix-live-installer.glade:2596
 msgid "Enter login: "
@@ -203,63 +203,63 @@ msgstr "Введіть логін:"
 
 #: src/salix-live-installer.glade:2628
 msgid "Enter password: "
-msgstr ""
+msgstr "Введіть пароль:"
 
 #: src/salix-live-installer.glade:2652 src/salix-live-installer.glade:2839
 msgid "Do not hide"
-msgstr ""
+msgstr "Не приховувати"
 
 #: src/salix-live-installer.glade:2677
 msgid "Re-enter password: "
-msgstr ""
+msgstr "Введіть пароль ще раз:"
 
 #: src/salix-live-installer.glade:2711
 msgid "<b>User created: </b>"
-msgstr ""
+msgstr "<b>Користувач створений: </b>"
 
 #: src/salix-live-installer.glade:2798
 msgid "<b>Please create a new administrator's password:</b>"
-msgstr ""
+msgstr "<b>Будь ласка, створіть новий пароль адміністратора:</b>"
 
 #: src/salix-live-installer.glade:2815
 msgid "Enter root password: "
-msgstr ""
+msgstr "Введіть пароль root'а:"
 
 #: src/salix-live-installer.glade:2864
 msgid "Re-enter root password: "
-msgstr ""
+msgstr "Ще раз введіть пароль root'а:"
 
 #: src/salix-live-installer.glade:2898
 msgid "<b>Password created: </b>"
-msgstr ""
+msgstr "<b>Пароль створений: </b>"
 
 #: src/salix-live-installer.glade:2989
 msgid "<b>Please select your installation mode:</b>"
-msgstr ""
+msgstr "<b>Будь ласка, виберіть Ваш режим встановлення:</b>"
 
 #: src/salix-live-installer.glade:3005
 msgid "Core"
-msgstr ""
+msgstr "Основна система"
 
 #: src/salix-live-installer.glade:3051
 msgid "Basic"
-msgstr ""
+msgstr "Базова система"
 
 #: src/salix-live-installer.glade:3127
 msgid "Full"
-msgstr ""
+msgstr "Повний"
 
 #: src/salix-live-installer.glade:3426
 msgid "Launch Salix _install "
-msgstr ""
+msgstr "Запустити _встановлення Salix"
 
 #: src/salix-live-installer.glade:3466
 msgid "Copyright © 2010 Pierrick Le Brun"
-msgstr ""
+msgstr "Всі права застережено © 2010 Pierrick Le Brun"
 
 #: src/salix-live-installer.glade:3467
 msgid "SalixOS installation from SalixLive's graphic environment"
-msgstr ""
+msgstr "Встановлення SalixOS з графічного середовища SalixLive"
 
 #: src/salix-live-installer.glade:3470
 msgid ""
@@ -278,14 +278,28 @@ msgid ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 msgstr ""
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"      \n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"      \n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
+"MA 02110-1301, USA."
 
 #: src/salix-live-installer.glade:3485
 msgid "Salix Transifex team"
-msgstr ""
+msgstr "Команда Salix Transifex"
 
 #: src/salix-live-installer.glade:3512
 msgid "Confirmation needed"
-msgstr ""
+msgstr "Потрібне підтвердження"
 
 #: src/salix-live-installer.glade:3531
 msgid "<b>Message about the particular choice: </b>"
@@ -297,7 +311,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:3612
 msgid "Salix installation"
-msgstr ""
+msgstr "Встановлення Salix"
 
 #: src/salix-live-installer.glade:3624
 msgid "Please be patient, Salix installation is in progress... "
@@ -305,115 +319,117 @@ msgstr ""
 
 #: src/salix-live-installer.py:190
 msgid "Layout"
-msgstr ""
+msgstr "Розкладка"
 
 #: src/salix-live-installer.py:191
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: src/salix-live-installer.py:192
 msgid "Locale"
-msgstr ""
+msgstr "Локаль"
 
 #: src/salix-live-installer.py:193
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
 #: src/salix-live-installer.py:194
 msgid "Disk"
-msgstr ""
+msgstr "Диск"
 
 #: src/salix-live-installer.py:195 src/salix-live-installer.py:198
 #: src/salix-live-installer.py:203
 msgid "Partition"
-msgstr ""
+msgstr "Партиція"
 
 #: src/salix-live-installer.py:196 src/salix-live-installer.py:199
 #: src/salix-live-installer.py:204
 msgid "Size"
-msgstr ""
+msgstr "Розмір"
 
 #: src/salix-live-installer.py:197 src/salix-live-installer.py:205
 msgid "File System"
-msgstr ""
+msgstr "Файлова система"
 
 #: src/salix-live-installer.py:200
 msgid "Current FS"
-msgstr ""
+msgstr "Поточна файл. с-ма"
 
 #: src/salix-live-installer.py:201
 msgid "Format as:"
-msgstr ""
+msgstr "Форматувати як:"
 
 #: src/salix-live-installer.py:202 src/salix-live-installer.py:206
 msgid "Mount as:"
-msgstr ""
+msgstr "Монтувати як:"
 
 #: src/salix-live-installer.py:409
 msgid "January"
-msgstr ""
+msgstr "Січень"
 
 #: src/salix-live-installer.py:409
 msgid "February"
-msgstr ""
+msgstr "Лютий"
 
 #: src/salix-live-installer.py:409
 msgid "March"
-msgstr ""
+msgstr "Березень"
 
 #: src/salix-live-installer.py:409
 msgid "April"
-msgstr ""
+msgstr "Квітень"
 
 #: src/salix-live-installer.py:409
 msgid "May"
-msgstr ""
+msgstr "Травень"
 
 #: src/salix-live-installer.py:409
 msgid "June"
-msgstr ""
+msgstr "Червень"
 
 #: src/salix-live-installer.py:409
 msgid "July"
-msgstr ""
+msgstr "Липень"
 
 #: src/salix-live-installer.py:410
 msgid "August"
-msgstr ""
+msgstr "Серпень"
 
 #: src/salix-live-installer.py:410
 msgid "September"
-msgstr ""
+msgstr "Вересень"
 
 #: src/salix-live-installer.py:410
 msgid "October"
-msgstr ""
+msgstr "Жовтень"
 
 #: src/salix-live-installer.py:410
 msgid "November"
-msgstr ""
+msgstr "Листопад"
 
 #: src/salix-live-installer.py:410
 msgid "December"
-msgstr ""
+msgstr "Грудень"
 
 #: src/salix-live-installer.py:529
 msgid ""
 "SalixLive Installer will perform a standard installation of Salix Operating \n"
 "System on your computer from the comfort of SalixLive's graphic environment."
 msgstr ""
+"Встановлювач SalixLive виконає стандартну установку Операційної Системи\n"
+"Salix на Вашому комп'ютері в графічному середовищі SalixLive."
 
 #: src/salix-live-installer.py:539
 msgid "About Salix Installer."
-msgstr ""
+msgstr "Про встановлювач Salix."
 
 #: src/salix-live-installer.py:544
 msgid "Contextual help."
-msgstr ""
+msgstr "Контекстна довідка."
 
 #: src/salix-live-installer.py:549
 msgid "Exit Salix Installer."
-msgstr ""
+msgstr "Вийти з встановлювача Salix."
 
 #: src/salix-live-installer.py:554 src/salix-live-installer.py:560
 msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
@@ -421,7 +437,7 @@ msgstr ""
 
 #: src/salix-live-installer.py:568
 msgid "Access the time settings."
-msgstr ""
+msgstr "Доступ до налаштувань часу."
 
 #: src/salix-live-installer.py:573
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
@@ -441,11 +457,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:593
 msgid "Set the time zone."
-msgstr ""
+msgstr "Встановити часову зону."
 
 #: src/salix-live-installer.py:600
 msgid "Access the keyboard settings."
-msgstr ""
+msgstr "Доступ до налаштувань клавіатури."
 
 #: src/salix-live-installer.py:605
 msgid ""
@@ -563,11 +579,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:777
 msgid "Create new user."
-msgstr ""
+msgstr "Створити нового користувача."
 
 #: src/salix-live-installer.py:782
 msgid "Cancel new user creation."
-msgstr ""
+msgstr "Відмінити створення нового користувача."
 
 #: src/salix-live-installer.py:788
 msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
