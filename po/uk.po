@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -619,22 +619,20 @@ msgid "Access the packages selection."
 msgstr "Доступ до вибору пакунків."
 
 #: src/salix-live-installer.py:826
-#, fuzzy
 msgid ""
 "<b>Core installation:</b>\n"
 "Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
-"<b>Core installation:</b>\n"
-"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
+"<b>Основне встановлення:</b>\n"
+"Включені тільки мінімальні необхідні пакунки для запуску консольної системи. Графічне середовище не передбачено. Це ідеальний варіант, якщо Ви є досвідченим користувачем і бажаєте налаштувати Ваше встановлення  для конкретних цілей, таких як веб-сервер, файл сервер і т.д."
 
 #: src/salix-live-installer.py:836
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
 "This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
 msgstr ""
-"<b>Basic installation:</b>\n"
-"This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
+"<b>Базове встановлення:</b>\n"
+"Це встановлює тільки Xfce Desktop середовище  з веб-переглядачем Firefox і менеджером пакетів gslapt. Ідеально підходить для досвідчених користувачів, які бажали б встановити легкий Xfce і додати свій власний вибір програмного забезпечення."
 
 #: src/salix-live-installer.py:845
 #, fuzzy
@@ -642,7 +640,7 @@ msgid ""
 "<b>Full installation:</b>\n"
 "Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
-"<b>Full installation:</b>\n"
+"<b>Повне встановлення:</b>\n"
 "Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 
 #: src/salix-live-installer.py:857
