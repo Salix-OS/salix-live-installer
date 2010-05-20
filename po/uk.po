@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -34,7 +34,7 @@ msgstr "Ло_каль"
 
 #: src/salix-live-installer.glade:606
 msgid "_Partitions"
-msgstr "_Партиції"
+msgstr "_Розділи"
 
 #: src/salix-live-installer.glade:651
 msgid "U_sers"
@@ -129,7 +129,7 @@ msgstr "Вибрати _мову"
 
 #: src/salix-live-installer.glade:1807
 msgid "<b>Please select Salix main partition:</b>"
-msgstr "<b>Будь ласка, виберіть основну партицію Salix:</b>"
+msgstr "<b>Будь ласка, виберіть основний розділ Salix:</b>"
 
 #: src/salix-live-installer.glade:1891
 msgid "Display attached external devices"
@@ -147,11 +147,11 @@ msgstr "Форматувати як:"
 
 #: src/salix-live-installer.glade:2005
 msgid "Select _partition "
-msgstr "Вибрати _партицію"
+msgstr "Вибрати _розділ"
 
 #: src/salix-live-installer.glade:2043
 msgid "<b>Please configure your other Linux partition(s):</b>"
-msgstr "<b>Будь ласка, налаштуйте Ваші інші партиції Linux:</b>"
+msgstr "<b>Будь ласка, налаштуйте Ваші інші розділи Linux:</b>"
 
 #: src/salix-live-installer.glade:2176
 msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
@@ -163,7 +163,7 @@ msgstr "Застосувати _налаштування"
 
 #: src/salix-live-installer.glade:2254
 msgid "<b>Please configure your Windows partition(s):</b>"
-msgstr "<b>Будь ласка, налаштуйте Ваші партиції Windows:</b>"
+msgstr "<b>Будь ласка, налаштуйте Ваші розділи Windows:</b>"
 
 #: src/salix-live-installer.glade:2366
 msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
@@ -171,27 +171,27 @@ msgstr ""
 
 #: src/salix-live-installer.glade:2451
 msgid "<b>Salix main partition:</b>"
-msgstr "<b>Основна партиція Salix:</b>"
+msgstr "<b>Основний розділ Salix:</b>"
 
 #: src/salix-live-installer.glade:2464
 msgid "Main partition"
-msgstr "Основна партиція"
+msgstr "Основний розділ"
 
 #: src/salix-live-installer.glade:2476
 msgid "<b>Other Linux partitions:</b>"
-msgstr "<b>Інші партиції Linux:</b>"
+msgstr "<b>Інші розділи Linux:</b>"
 
 #: src/salix-live-installer.glade:2489
 msgid "Home partition"
-msgstr "Домашня партиція"
+msgstr "Домашній розділ"
 
 #: src/salix-live-installer.glade:2501
 msgid "<b>Windows partitions:</b>"
-msgstr "<b>Партиції Windows:</b>"
+msgstr "<b>Розділи Windows:</b>"
 
 #: src/salix-live-installer.glade:2514
 msgid "Windows partitions"
-msgstr "Партиція Windows"
+msgstr "Розділи Windows"
 
 #: src/salix-live-installer.glade:2579
 msgid "<b>Please create a new standard user:</b>"
@@ -239,11 +239,11 @@ msgstr "<b>Будь ласка, виберіть Ваш режим встано�
 
 #: src/salix-live-installer.glade:3005
 msgid "Core"
-msgstr "Основна система"
+msgstr "Основний"
 
 #: src/salix-live-installer.glade:3051
 msgid "Basic"
-msgstr "Базова система"
+msgstr "Базовий"
 
 #: src/salix-live-installer.glade:3127
 msgid "Full"
@@ -340,7 +340,7 @@ msgstr "Диск"
 #: src/salix-live-installer.py:195 src/salix-live-installer.py:198
 #: src/salix-live-installer.py:203
 msgid "Partition"
-msgstr "Партиція"
+msgstr "Розділ"
 
 #: src/salix-live-installer.py:196 src/salix-live-installer.py:199
 #: src/salix-live-installer.py:204
@@ -353,7 +353,7 @@ msgstr "Файлова система"
 
 #: src/salix-live-installer.py:200
 msgid "Current FS"
-msgstr "Поточна файл. с-ма"
+msgstr "Поточна файлова с-ма"
 
 #: src/salix-live-installer.py:201
 msgid "Format as:"
@@ -627,18 +627,18 @@ msgstr ""
 
 #: src/salix-live-installer.py:857
 msgid "Confirm your packages selection."
-msgstr ""
+msgstr "Підтвердити Ваш вибір пакунків."
 
 #: src/salix-live-installer.py:862
 msgid "Cancel all packages selection."
-msgstr ""
+msgstr "Відмінити весь вибір пакунків."
 
 #: src/salix-live-installer.py:972 src/salix-live-installer.py:992
 #: src/salix-live-installer.py:1011 src/salix-live-installer.py:1165
 #: src/salix-live-installer.py:1215 src/salix-live-installer.py:1504
 #: src/salix-live-installer.py:1511 src/salix-live-installer.py:1539
 msgid "Select..."
-msgstr ""
+msgstr "Вибрати..."
 
 #: src/salix-live-installer.py:1031 src/salix-live-installer.py:1033
 msgid "The time zone has not been set"
@@ -651,114 +651,114 @@ msgstr ""
 #: src/salix-live-installer.py:1255 src/salix-live-installer.py:1281
 #: src/salix-live-installer.py:1284 src/salix-live-installer.py:1286
 msgid "Please verify and correct"
-msgstr ""
+msgstr "Будь ласка, перевірте і виправте"
 
 #: src/salix-live-installer.py:1138 src/salix-live-installer.py:1169
 #: src/salix-live-installer.py:1173 src/salix-live-installer.py:1344
 #: src/salix-live-installer.py:1348 src/salix-live-installer.py:1352
 msgid "will be formatted with"
-msgstr ""
+msgstr "буде відформатовано з"
 
 #: src/salix-live-installer.py:1139 src/salix-live-installer.py:1170
 #: src/salix-live-installer.py:1179 src/salix-live-installer.py:1223
 #: src/salix-live-installer.py:1345 src/salix-live-installer.py:1349
 #: src/salix-live-installer.py:1357 src/salix-live-installer.py:1361
 msgid "and will be mounted as"
-msgstr ""
+msgstr "і буде змонтовано як"
 
 #: src/salix-live-installer.py:1174 src/salix-live-installer.py:1183
 #: src/salix-live-installer.py:1219
 msgid "and will not be mounted"
-msgstr ""
+msgstr "і не буде змонтовано "
 
 #: src/salix-live-installer.py:1178 src/salix-live-installer.py:1182
 #: src/salix-live-installer.py:1218 src/salix-live-installer.py:1222
 #: src/salix-live-installer.py:1356 src/salix-live-installer.py:1360
 msgid "will not be formatted"
-msgstr ""
+msgstr "не буде відформатовано"
 
 #: src/salix-live-installer.py:1239
 msgid "Your login name is empty"
-msgstr ""
+msgstr "Ваш логін порожній"
 
 #: src/salix-live-installer.py:1241
 msgid "Your login name should only contain alphanumeric characters"
-msgstr ""
+msgstr "Ваш логін повинен містити тільки букви і цифри"
 
 #: src/salix-live-installer.py:1244
 msgid "Your login name should not contain any space"
-msgstr ""
+msgstr "Ваш логін не повинен містити жодного пропуску"
 
 #: src/salix-live-installer.py:1247
 msgid "Your login name should not contain any upper case letter"
-msgstr ""
+msgstr "Ваш логін не повинен містити жодної великої букви"
 
 #: src/salix-live-installer.py:1250 src/salix-live-installer.py:1281
 msgid "Your password entry is empty"
-msgstr ""
+msgstr "Ваш пароль порожній"
 
 #: src/salix-live-installer.py:1252 src/salix-live-installer.py:1283
 msgid "Your password is too short. It should have at least 5 characters"
-msgstr ""
+msgstr "Ваш пароль закороткий. Він повинен містити мінімум 5 символів"
 
 #: src/salix-live-installer.py:1255 src/salix-live-installer.py:1286
 msgid "Your 2 password entries do not match"
-msgstr ""
+msgstr "Ваші два вводи паролю не збігаються"
 
 #: src/salix-live-installer.py:1288
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
 #: src/salix-live-installer.py:1310 src/salix-live-installer.py:1717
 #: src/salix-live-installer.py:1738 src/salix-live-installer.py:1766
 msgid "core"
-msgstr ""
+msgstr "основний"
 
 #: src/salix-live-installer.py:1312 src/salix-live-installer.py:1736
 #: src/salix-live-installer.py:1775
 msgid "basic"
-msgstr ""
+msgstr "базовий"
 
 #: src/salix-live-installer.py:1314 src/salix-live-installer.py:1764
 msgid "full"
-msgstr ""
+msgstr "повний"
 
 #: src/salix-live-installer.py:1339
 msgid "You are about to install Salix with the following settings"
-msgstr ""
+msgstr "Ви збираєтеся встановити Salix з наступними налаштуваннями"
 
 #: src/salix-live-installer.py:1340
 msgid "Time zone"
-msgstr ""
+msgstr "Часова зона"
 
 #: src/salix-live-installer.py:1341
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Розкладка клавіатури"
 
 #: src/salix-live-installer.py:1342
 msgid "System language"
-msgstr ""
+msgstr "Мова системи"
 
 #: src/salix-live-installer.py:1343
 msgid "Partitions"
-msgstr ""
+msgstr "Розділи"
 
 #: src/salix-live-installer.py:1353
 msgid "but will not be mounted"
-msgstr ""
+msgstr "але не буде змонтовано"
 
 #: src/salix-live-installer.py:1362
 msgid "Standard User"
-msgstr ""
+msgstr "Стандартний користувач"
 
 #: src/salix-live-installer.py:1363
 msgid "Packages"
-msgstr ""
+msgstr "Пакунки"
 
 #: src/salix-live-installer.py:1365
 #, python-format
 msgid "You have chosen the %(mode)s installation mode.\n"
-msgstr ""
+msgstr "Ви вибрали  режим встановлення %(mode)s.\n"
 
 #: src/salix-live-installer.py:1618
 msgid ""
@@ -782,47 +782,47 @@ msgstr ""
 
 #: src/salix-live-installer.py:1658
 msgid "Formatting the main partition..."
-msgstr ""
+msgstr "Форматування основного розділу..."
 
 #: src/salix-live-installer.py:1672
 msgid "Formatting and mounting your Linux partition(s)..."
-msgstr ""
+msgstr "Форматування і монтування Ваших розділів Linux..."
 
 #: src/salix-live-installer.py:1689
 msgid "Formatting your Linux partition(s)..."
-msgstr ""
+msgstr "Форматування Ваших розділів Linux..."
 
 #: src/salix-live-installer.py:1702
 msgid "Mounting your Linux partition(s)..."
-msgstr ""
+msgstr "Монтування Ваших розділів Linux..."
 
 #: src/salix-live-installer.py:1719 src/salix-live-installer.py:1738
 #: src/salix-live-installer.py:1747 src/salix-live-installer.py:1766
 #: src/salix-live-installer.py:1775 src/salix-live-installer.py:1784
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
-msgstr ""
+msgstr "Встановлення пакунків режиму %(mode)s"
 
 #: src/salix-live-installer.py:1727 src/salix-live-installer.py:1755
 #: src/salix-live-installer.py:1792
 msgid "Installing the common packages..."
-msgstr ""
+msgstr "Встановлення загальних пакунків"
 
 #: src/salix-live-installer.py:1801
 msgid "Installing the kernel..."
-msgstr ""
+msgstr "Встановлення ядра..."
 
 #: src/salix-live-installer.py:1809
 msgid "Creating /etc/fstab..."
-msgstr ""
+msgstr "Створення /etc/fstab..."
 
 #: src/salix-live-installer.py:1847
 msgid "Time, keyboard, locale, login and other system configuration..."
-msgstr ""
+msgstr "Час, клавіатура, локаль, логін і інші системні налаштування..."
 
 #: src/salix-live-installer.py:1893 src/salix-live-installer.py:1898
 msgid "Installation process completed successfully ..."
-msgstr ""
+msgstr "Процес встановлення успішно закінчено..."
 
 #: src/salix-live-installer.py:1906
 msgid ""
