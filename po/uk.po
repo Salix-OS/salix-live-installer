@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -433,7 +433,7 @@ msgstr "Вийти з встановлювача Salix."
 
 #: src/salix-live-installer.py:554 src/salix-live-installer.py:560
 msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
-msgstr ""
+msgstr "Запустити встановлення Salix. Ця кнопка не буде активною, поки всі налаштування не будуть зроблені правильно."
 
 #: src/salix-live-installer.py:568
 msgid "Access the time settings."
@@ -441,7 +441,7 @@ msgstr "Доступ до налаштувань часу."
 
 #: src/salix-live-installer.py:573
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
-msgstr ""
+msgstr "Використати Мережний Протокол Часу (NTP) для синхронізації через мережу."
 
 #: src/salix-live-installer.py:578
 msgid "Cancel time settings."
@@ -449,11 +449,11 @@ msgstr "Відмінити налаштування часу."
 
 #: src/salix-live-installer.py:583
 msgid "Activate the time settings after options have been defined."
-msgstr ""
+msgstr "Активувати налаштування часу після визначених опцій."
 
 #: src/salix-live-installer.py:588
 msgid "Set the date & time manually if you do not use NTP service."
-msgstr ""
+msgstr "Встановити дату і час вручну, якщо Ви не використовуєте сервіс NTP."
 
 #: src/salix-live-installer.py:593
 msgid "Set the time zone."
@@ -473,7 +473,7 @@ msgstr ""
 
 #: src/salix-live-installer.py:611
 msgid "Check this box if you want your numeric keypad to be activated during the boot process."
-msgstr ""
+msgstr "Відмітьте це галочкою, якщо Ви бажаєте активувати цифрову клавіатуру під час процесу завантаження."
 
 #: src/salix-live-installer.py:617
 msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
@@ -485,7 +485,7 @@ msgstr "Відмінити вибір розкладки клавіатури."
 
 #: src/salix-live-installer.py:630
 msgid "Confirm your selection after highlighting the keyboard layout."
-msgstr ""
+msgstr "Підтвердити вибір після вибору розкладки клавіатури."
 
 #: src/salix-live-installer.py:635
 msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
@@ -525,11 +525,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:689
 msgid "Confirm your selection after highlighting the partition."
-msgstr ""
+msgstr "Підтвердити ваш вибір після вибору розділу."
 
 #: src/salix-live-installer.py:694
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
+msgstr "Файлова система, яка буде використана для форматування основного розділу Salix."
 
 #: src/salix-live-installer.py:699
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
