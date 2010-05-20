@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -489,7 +489,7 @@ msgstr "Підтвердити вибір після вибору розклад
 
 #: src/salix-live-installer.py:635
 msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
-msgstr ""
+msgstr "Це є розкладка клавіатури, яку Ви вибрали. 'Нема' буде показуватися, поки Ви не підтвердите цей вибір."
 
 #: src/salix-live-installer.py:643
 msgid "Access the language settings."
@@ -497,11 +497,11 @@ msgstr "Доступ до налаштування мови."
 
 #: src/salix-live-installer.py:648
 msgid "Highlight your language from this list before clicking on the 'Select language' button."
-msgstr ""
+msgstr "Виберіть Вашу мову з цього списку перед натискання на кнопку 'Вибрати мову'."
 
 #: src/salix-live-installer.py:654
 msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
-msgstr ""
+msgstr "Це є мова системи, яку Ви вибрали. 'Нема' буде показуватися, поки Ви не підтвердите цей вибір."
 
 #: src/salix-live-installer.py:660
 msgid "Cancel language selection."
@@ -517,11 +517,11 @@ msgstr "Доступ до налаштувань розділів."
 
 #: src/salix-live-installer.py:677
 msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
-msgstr ""
+msgstr "Виберіть розділ з списку перед натискання кнопки 'Вибрати розділ'."
 
 #: src/salix-live-installer.py:683
 msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
-msgstr ""
+msgstr "Відмітьте галочкою, якщо Ви бажаєте, щоб Ваш зовнішній диск був показаний в списку вище."
 
 #: src/salix-live-installer.py:689
 msgid "Confirm your selection after highlighting the partition."
@@ -573,11 +573,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:765
 msgid "Here you must retype your password as a confirmation of your choice."
-msgstr ""
+msgstr "Тут Вам потрібно ще раз ввести Ваш пароль для підтвердження Вашого вибору."
 
 #: src/salix-live-installer.py:771 src/salix-live-installer.py:803
 msgid "Check this box if you want to be able to see the password you are typing."
-msgstr ""
+msgstr "Відмітьте це галочкою, якщо Ви бажаєте бачити пароль під час вводу."
 
 #: src/salix-live-installer.py:777
 msgid "Create new user."
@@ -593,11 +593,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:797
 msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
-msgstr ""
+msgstr "Тут Вам потрібно ще раз ввести пароль суперкористувача (root'а) для підтвердження Вашого вибору."
 
 #: src/salix-live-installer.py:809
 msgid "Apply new root password."
-msgstr ""
+msgstr "Застосувати новий пароль root'а."
 
 #: src/salix-live-installer.py:814
 msgid "Cancel new root password."
