@@ -490,7 +490,7 @@ msgstr "Επιλέξτε το αν επιθυμείτε να είναι ενερ
 
 #: src/salix-live-installer.py:617
 msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
-msgstr ""
+msgstr "Επιλέξετε αυτό το κουτί αν επιθυμείτε την ενεργοποίηση του SCIM κατά την εκκίνηση. Το Smart Common Input Method (SCIM) είναι μία μέθοδος εισαγωγής με υποστήριξη για πάνω από τριάντα πολύπλοκες γλώσσες όπως Κινέζικα, Γιαπωνέζικα, Κορεάτικα και πολλές Ευρωπαϊκές γλώσσες."
 
 #: src/salix-live-installer.py:625
 msgid "Cancel keyboard layout selection."
