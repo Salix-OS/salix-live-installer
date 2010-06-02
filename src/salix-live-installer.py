@@ -23,8 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2'
-
+# version = '0.2.1'
 import commands
 import subprocess
 import os
@@ -1811,12 +1810,13 @@ following the 'one application per task' rationale."))
         # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
         fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
-        Swap_Partition = commands.getoutput(fdisk_swap_output)
+        Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
         Fstab_File = open(Main_MountPoint + '/etc/fstab', 'w')
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('devpts', '/dev/pts', 'devpts', 'gid=5,mode=620', '0', '0'))
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('proc', '/proc', 'proc', 'defaults', '0', '0'))
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('tmpfs', '/dev/shm', 'tmpfs', 'defaults', '0', '0'))
-        Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (Swap_Partition, 'swap', 'swap', 'defaults', '0', '0'))
+        for i in Swap_Partition:
+            Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i, 'swap', 'swap', 'defaults', '0', '0'))
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (Selected_Main_Partition, '/', Selected_Main_Format, 'noatime,defaults', '1', '1'))
         LinSets = LinFullSets + LinFormatSets
         if LinSets != [] :
