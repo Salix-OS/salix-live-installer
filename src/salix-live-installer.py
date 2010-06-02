@@ -1490,7 +1490,7 @@ following the 'one application per task' rationale."))
                     # Use non-localized environment to avoid problems
                     os.environ['LANG'] = 'en_US'
                     # Parse fdisk -l output (This will not work with raid disks)
-                    fdisk_shell_output = "fdisk -l | grep " + set[1]
+                    fdisk_shell_output = "fdisk -l | grep -w " + set[1]
                     stripped_fdisk_output = commands.getoutput(fdisk_shell_output)
                     if "Linux" in stripped_fdisk_output :
                         # Let the installer know about it:
@@ -1523,7 +1523,7 @@ following the 'one application per task' rationale."))
                     # Use non-localized environment to avoid problems
                     os.environ['LANG'] = 'en_US'
                     # Parse fdisk -l output (This will not work for raid disks)
-                    fdisk_shell_output = "fdisk -l | grep " + set[1]
+                    fdisk_shell_output = "fdisk -l | grep -w " + set[1]
                     stripped_fdisk_output = commands.getoutput(fdisk_shell_output)
                     winsys = ('NTFS', 'FAT32')
                     for i in winsys :
