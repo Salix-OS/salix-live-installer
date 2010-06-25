@@ -1,0 +1,14 @@
+version 0.2
+* Release for SalixLive 13.0.1
+* Added support for multiple swap partitions.
+* Improved multiple partitions autodetection.
+* Improved partitions configuration section's visual interface.
+* Added support for new salixtools.
+* Added SCIM support + autodetection of Numlock & SCIM states.
+* Improved lshal file system detection used in fstab.
+* Fixed fstab Linux partition bug.
+* Translations in Danish, Dutch, Ukrainian.
+
+version 0.1
+* First release of Salix Live Installer in SalixLive 13.0
+* Translations in Greek, French, German, Spanish.
