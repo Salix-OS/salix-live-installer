@@ -23,7 +23,8 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2'
+# version = '0.2.1'
+
 import commands
 import subprocess
 import os
@@ -1880,8 +1881,6 @@ fi")
         subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-mime-database', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
         # Create a fork to not get stuck in the chroot
@@ -1921,10 +1920,9 @@ and use the application of your choice before rebooting your machine.)\n"""))
         os.listdir(Main_MountPoint)
         os.chroot(Main_MountPoint)
         subprocess.call('/var/log/setup/setup.07.update-desktop-database', shell=True)
-        subprocess.call('/var/log/setup/setup.07.update-mime-database', shell=True)
-        subprocess.call('/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
         subprocess.call('/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('/var/log/setup/setup.services', shell=True)
+        subprocess.call('/etc/cron.daily/housekeeping', shell=True)
 
         # We have to deactivate some stuff in keyboardsetup first since we are in a chrooted environment
         subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)

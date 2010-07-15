@@ -1,5 +1,7 @@
+version 0.2.1
+* Added 'housekeeping' to installation routine
+
 version 0.2
-* Release for SalixLive 13.0.1
 * Added support for multiple swap partitions.
 * Improved multiple partitions autodetection.
 * Improved partitions configuration section's visual interface.
