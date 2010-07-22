@@ -1,0 +1,957 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: salix-live-installer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-15 13:58+0200\n"
+"PO-Revision-Date: 2010-07-22 22:01+0100\n"
+"Last-Translator: Peter Polonkai <polesz@nedudu.hu>\n"
+"Language-Team: Nedudu Team <nedudu@nedudu.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/salix-live-installer.glade:358
+msgid "SalixLive Installer"
+msgstr "SalixLive Telepítő"
+
+#: src/salix-live-installer.glade:471
+msgid "_Time"
+msgstr "_Idő"
+
+#: src/salix-live-installer.glade:518
+msgid "Key_board"
+msgstr "_Billentyűzet"
+
+#: src/salix-live-installer.glade:562
+msgid "Lo_cale"
+msgstr "_Nyelvi beállítás"
+
+#: src/salix-live-installer.glade:606
+msgid "_Partitions"
+msgstr "_Partíciók"
+
+#: src/salix-live-installer.glade:651
+msgid "U_sers"
+msgstr "Felha_sználók"
+
+#: src/salix-live-installer.glade:695
+msgid "S_oftware"
+msgstr "Sz_ofver"
+
+#: src/salix-live-installer.glade:918
+msgid ""
+"<b>Important!</b>\n"
+"\n"
+"Before executing SalixLive's installer, you should already have the necessary partitions available on your system.\n"
+"\n"
+"Salix needs, at the very minimum, one swap partition and  one Linux  partition to hold its main directory tree. \n"
+"\n"
+"If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
+"\n"
+"If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first."
+msgstr ""
+"<b>Fontos!</b>\n"
+"\n"
+"A SalixLive telepítő indítása előtt szükséges hogy legyenek elérhető partíciók a rendszerben.\n"
+"\n"
+"A Salixhoz minimálisan szükséges egy swap partíció és egy Linux partíciót a rendszernek.\n"
+"\n"
+"Ha lehetséges, akkor ajánlott még legalább egy Linux partíciót tartani a /home könyvtár számára.\n"
+"\n"
+"Ha még nincsenek meg a szükséges partíciók, lépjen ki a SalixLive a telepítőből és használja először a GParted programot a partíciók létrehozásához."
+
+#: src/salix-live-installer.glade:948
+msgid "<b>Please set the time, date and time zone:</b>"
+msgstr "<b>Kérem adja meg az időt, a dátumot és az időzónát:</b>"
+
+#: src/salix-live-installer.glade:1064
+msgid " hour : min : sec "
+msgstr "óra : perc : mp"
+
+#: src/salix-live-installer.glade:1094
+msgid "Year:"
+msgstr "Év:"
+
+#: src/salix-live-installer.glade:1105
+msgid "Month:"
+msgstr "Hónap:"
+
+#: src/salix-live-installer.glade:1116
+msgid "Day:"
+msgstr "Nap:"
+
+#: src/salix-live-installer.glade:1228
+msgid "Time zone: "
+msgstr "Időzóna:"
+
+#: src/salix-live-installer.glade:1278
+msgid "Use NTP service"
+msgstr "NTP szolgáltatás használata"
+
+#: src/salix-live-installer.glade:1363
+msgid "<b>Please select your keyboard layout:</b>"
+msgstr "<b>Válassza ki az Ön által használt billentyűzet kiosztást:</b>"
+
+#: src/salix-live-installer.glade:1427
+msgid "Activate numlock"
+msgstr "Numlock aktíválása"
+
+#: src/salix-live-installer.glade:1444
+msgid "Activate SCIM"
+msgstr "SCIM aktíválása"
+
+#: src/salix-live-installer.glade:1481
+msgid "<b>Selected keyboard layout: </b>"
+msgstr "<b>Kiválasztott billentyűzetkiosztás: </b>"
+
+#: src/salix-live-installer.glade:1494
+#: src/salix-live-installer.glade:1693
+#: src/salix-live-installer.glade:2724
+#: src/salix-live-installer.glade:2911
+#: src/salix-live-installer.py:1262
+#: src/salix-live-installer.py:1289
+#: src/salix-live-installer.py:1392
+#: src/salix-live-installer.py:1407
+#: src/salix-live-installer.py:1440
+#: src/salix-live-installer.py:1455
+#: src/salix-live-installer.py:1561
+#: src/salix-live-installer.py:1562
+#: src/salix-live-installer.py:1585
+#: src/salix-live-installer.py:1603
+msgid "None"
+msgstr "Nincs"
+
+#: src/salix-live-installer.glade:1569
+msgid "Select _keyboard "
+msgstr "Billentyűzet választás"
+
+#: src/salix-live-installer.glade:1608
+msgid "<b>Please select your system language:</b>"
+msgstr "<b>Kérem válassza ki az Ön által előnyben részesített nyelvet:</b>"
+
+#: src/salix-live-installer.glade:1680
+msgid "<b>Selected system language: </b>"
+msgstr "<b>Kiválasztott rendszer nyelv: </b>"
+
+#: src/salix-live-installer.glade:1768
+msgid "Select _language "
+msgstr "_Nyelv kiválasztása"
+
+#: src/salix-live-installer.glade:1807
+msgid "<b>Please select Salix main partition:</b>"
+msgstr "<b>Kérem válasszon fő partíciót a Salixnak:</b>"
+
+#: src/salix-live-installer.glade:1891
+msgid "Display attached external devices"
+msgstr "Külső csatlakoztatott eszközök megjelenítése"
+
+#: src/salix-live-installer.glade:1911
+msgid ""
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
+msgstr ""
+
+#: src/salix-live-installer.glade:1938
+msgid "Format with: "
+msgstr "Formázás ezzel:"
+
+#: src/salix-live-installer.glade:2005
+msgid "Select _partition "
+msgstr "_Partíció választása"
+
+#: src/salix-live-installer.glade:2043
+msgid "<b>Please configure your other Linux partition(s):</b>"
+msgstr "<b>Kérem állítsa be az egyéb Linux partíciókat:</b>"
+
+#: src/salix-live-installer.glade:2176
+msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr ""
+
+#: src/salix-live-installer.glade:2214
+#: src/salix-live-installer.glade:2404
+msgid "Apply _settings "
+msgstr "Beállítá_sok elfogadása"
+
+#: src/salix-live-installer.glade:2254
+msgid "<b>Please configure your Windows partition(s):</b>"
+msgstr "<b>Kérem állítsa be a Windows partíciókat:</b>"
+
+#: src/salix-live-installer.glade:2366
+msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr ""
+
+#: src/salix-live-installer.glade:2451
+msgid "<b>Salix main partition:</b>"
+msgstr "<b>Salix fő partíció:</b>"
+
+#: src/salix-live-installer.glade:2464
+msgid "Main partition"
+msgstr "Fő partíció"
+
+#: src/salix-live-installer.glade:2476
+msgid "<b>Other Linux partitions:</b>"
+msgstr "<b>Egyéb Linux partíciók:</b>"
+
+#: src/salix-live-installer.glade:2489
+msgid "Home partition"
+msgstr "Munka partíció"
+
+#: src/salix-live-installer.glade:2501
+msgid "<b>Windows partitions:</b>"
+msgstr "<b>Windows partíciók:</b>"
+
+#: src/salix-live-installer.glade:2514
+msgid "Windows partitions"
+msgstr "Windows partíciók"
+
+#: src/salix-live-installer.glade:2579
+msgid "<b>Please create a new standard user:</b>"
+msgstr "<b>Kérem hozzon létre egy új normál felhasználót:</b>"
+
+#: src/salix-live-installer.glade:2596
+msgid "Enter login: "
+msgstr "Adja meg a bejelentkezési nevet:"
+
+#: src/salix-live-installer.glade:2628
+msgid "Enter password: "
+msgstr "Adja meg a jelszót:"
+
+#: src/salix-live-installer.glade:2652
+#: src/salix-live-installer.glade:2839
+msgid "Do not hide"
+msgstr "Ne legyen rejtett"
+
+#: src/salix-live-installer.glade:2677
+msgid "Re-enter password: "
+msgstr "Új jelszó ismét:"
+
+#: src/salix-live-installer.glade:2711
+msgid "<b>User created: </b>"
+msgstr "<b>Felhasználó létrehozva:</b>"
+
+#: src/salix-live-installer.glade:2798
+msgid "<b>Please create a new administrator's password:</b>"
+msgstr "<b>Kérem adja meg az új rendszergazda jelszavát:<b>"
+
+#: src/salix-live-installer.glade:2815
+msgid "Enter root password: "
+msgstr "Adja meg root jelszót:"
+
+#: src/salix-live-installer.glade:2864
+msgid "Re-enter root password: "
+msgstr "Új root jelszó ismét: "
+
+#: src/salix-live-installer.glade:2898
+msgid "<b>Password created: </b>"
+msgstr "<b>Jelszó létrehozva: </b>"
+
+#: src/salix-live-installer.glade:2989
+msgid "<b>Please select your installation mode:</b>"
+msgstr "<b>Kérem válasszon telepítési módot:</b>"
+
+#: src/salix-live-installer.glade:3005
+msgid "Core"
+msgstr "Minimális"
+
+#: src/salix-live-installer.glade:3051
+msgid "Basic"
+msgstr "Alap"
+
+#: src/salix-live-installer.glade:3127
+msgid "Full"
+msgstr "Teljes"
+
+#: src/salix-live-installer.glade:3426
+msgid "Launch Salix _install "
+msgstr "Salix telepítő _indítása"
+
+#: src/salix-live-installer.glade:3466
+msgid "Copyright © 2010 Pierrick Le Brun"
+msgstr "Copyright © 2010 Pierrick Le Brun"
+
+#: src/salix-live-installer.glade:3467
+msgid "SalixOS installation from SalixLive's graphic environment"
+msgstr "SalixOS telepítő a SalixLive grafikus környezetben"
+
+#: src/salix-live-installer.glade:3470
+msgid ""
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"      \n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"      \n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
+"MA 02110-1301, USA."
+msgstr ""
+
+#: src/salix-live-installer.glade:3485
+msgid "Salix Transifex team"
+msgstr "Salix Transifex csapat"
+
+#: src/salix-live-installer.glade:3512
+msgid "Confirmation needed"
+msgstr "Megerősítés szükséges"
+
+#: src/salix-live-installer.glade:3531
+msgid "<b>Message about the particular choice: </b>"
+msgstr "<b>Üzenet az adott választáshoz: </b>"
+
+#: src/salix-live-installer.glade:3544
+msgid "<b>Do you want to proceed with this?</b>"
+msgstr "<b>Szeretné folytatni ezt?</b>"
+
+#: src/salix-live-installer.glade:3612
+msgid "Salix installation"
+msgstr "Salix telepítés"
+
+#: src/salix-live-installer.glade:3624
+msgid "Please be patient, Salix installation is in progress... "
+msgstr "Legyen türelemmel, a Salix telepítése folyamatban..."
+
+#: src/salix-live-installer.py:190
+msgid "Layout"
+msgstr "Elrendezés"
+
+#: src/salix-live-installer.py:191
+msgid "Type"
+msgstr "Típus"
+
+#: src/salix-live-installer.py:192
+msgid "Locale"
+msgstr "Területi beállítás"
+
+#: src/salix-live-installer.py:193
+msgid "Description"
+msgstr "Leírás"
+
+#: src/salix-live-installer.py:194
+msgid "Disk"
+msgstr "Lemez"
+
+#: src/salix-live-installer.py:195
+#: src/salix-live-installer.py:198
+#: src/salix-live-installer.py:203
+msgid "Partition"
+msgstr "Partíció"
+
+#: src/salix-live-installer.py:196
+#: src/salix-live-installer.py:199
+#: src/salix-live-installer.py:204
+msgid "Size"
+msgstr "Méret"
+
+#: src/salix-live-installer.py:197
+#: src/salix-live-installer.py:205
+msgid "File System"
+msgstr "Fájlrendszer"
+
+#: src/salix-live-installer.py:200
+msgid "Current FS"
+msgstr "Aktuális FS"
+
+#: src/salix-live-installer.py:201
+msgid "Format as:"
+msgstr "Formázás:"
+
+#: src/salix-live-installer.py:202
+#: src/salix-live-installer.py:206
+msgid "Mount as:"
+msgstr "Csatolás:"
+
+#: src/salix-live-installer.py:409
+msgid "January"
+msgstr "Január"
+
+#: src/salix-live-installer.py:409
+msgid "February"
+msgstr "Február"
+
+#: src/salix-live-installer.py:409
+msgid "March"
+msgstr "Március"
+
+#: src/salix-live-installer.py:409
+msgid "April"
+msgstr "Április"
+
+#: src/salix-live-installer.py:409
+msgid "May"
+msgstr "Május"
+
+#: src/salix-live-installer.py:409
+msgid "June"
+msgstr "Június"
+
+#: src/salix-live-installer.py:409
+msgid "July"
+msgstr "Július"
+
+#: src/salix-live-installer.py:410
+msgid "August"
+msgstr "Augusztus"
+
+#: src/salix-live-installer.py:410
+msgid "September"
+msgstr "Szeptember"
+
+#: src/salix-live-installer.py:410
+msgid "October"
+msgstr "Október"
+
+#: src/salix-live-installer.py:410
+msgid "November"
+msgstr "November"
+
+#: src/salix-live-installer.py:410
+msgid "December"
+msgstr "December"
+
+#: src/salix-live-installer.py:529
+msgid ""
+"SalixLive Installer will perform a standard installation of Salix Operating \n"
+"System on your computer from the comfort of SalixLive's graphic environment."
+msgstr ""
+
+#: src/salix-live-installer.py:539
+msgid "About Salix Installer."
+msgstr "Salix Telepítő Névjegye"
+
+#: src/salix-live-installer.py:544
+msgid "Contextual help."
+msgstr "Helyzetérzékeny súgó"
+
+#: src/salix-live-installer.py:549
+msgid "Exit Salix Installer."
+msgstr "Kilépés a Salix telepítőből."
+
+#: src/salix-live-installer.py:554
+#: src/salix-live-installer.py:560
+msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
+msgstr "Salix telepítés indítása. A gomb addig nem válik aktívvá amíg minden beállítás nincs rendesen konfigurálva."
+
+#: src/salix-live-installer.py:568
+msgid "Access the time settings."
+msgstr "Idő beállítások."
+
+#: src/salix-live-installer.py:573
+msgid "Use Network Time Protocol daemon to synchronize time via Internet."
+msgstr "NTP szolgáltatás használata az internetes időszinkronizációhoz."
+
+#: src/salix-live-installer.py:578
+msgid "Cancel time settings."
+msgstr "Idő beállítások megszakítása."
+
+#: src/salix-live-installer.py:583
+msgid "Activate the time settings after options have been defined."
+msgstr ""
+
+#: src/salix-live-installer.py:588
+msgid "Set the date & time manually if you do not use NTP service."
+msgstr "Dátum és idő kézi beállítása ha nem használ NTP szolgáltatlást."
+
+#: src/salix-live-installer.py:593
+msgid "Set the time zone."
+msgstr "Időzóna beállítása."
+
+#: src/salix-live-installer.py:600
+msgid "Access the keyboard settings."
+msgstr "Billentyűzet beállítások."
+
+#: src/salix-live-installer.py:605
+msgid ""
+"Highlight your favorite keyboard layout from this \n"
+"list before clicking on the 'Select keyboard' button."
+msgstr ""
+
+#: src/salix-live-installer.py:611
+msgid "Check this box if you want your numeric keypad to be activated during the boot process."
+msgstr ""
+
+#: src/salix-live-installer.py:617
+msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
+msgstr ""
+
+#: src/salix-live-installer.py:625
+msgid "Cancel keyboard layout selection."
+msgstr "Billentyűzet beállítások megszakítása."
+
+#: src/salix-live-installer.py:630
+msgid "Confirm your selection after highlighting the keyboard layout."
+msgstr "A választás megerősítése a kiemelt billentyűzet kiosztáson."
+
+#: src/salix-live-installer.py:635
+msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
+msgstr ""
+
+#: src/salix-live-installer.py:643
+msgid "Access the language settings."
+msgstr "Nyelvi beállítások,"
+
+#: src/salix-live-installer.py:648
+msgid "Highlight your language from this list before clicking on the 'Select language' button."
+msgstr ""
+
+#: src/salix-live-installer.py:654
+msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
+msgstr ""
+
+#: src/salix-live-installer.py:660
+msgid "Cancel language selection."
+msgstr "Nyelvi beállítások megszakítása."
+
+#: src/salix-live-installer.py:665
+msgid "Confirm your selection after highlighting the system language."
+msgstr "A választás megerősítése a kijelölt rendszer nyelven."
+
+#: src/salix-live-installer.py:672
+msgid "Access the partitions settings."
+msgstr "Partíció beállítások."
+
+#: src/salix-live-installer.py:677
+msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
+msgstr ""
+
+#: src/salix-live-installer.py:683
+msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
+msgstr ""
+
+#: src/salix-live-installer.py:689
+msgid "Confirm your selection after highlighting the partition."
+msgstr "A választás megerősítése a kiemelt partíción."
+
+#: src/salix-live-installer.py:694
+msgid "The filesystem that will be used to format Salix main partition."
+msgstr ""
+
+#: src/salix-live-installer.py:699
+msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr ""
+
+#: src/salix-live-installer.py:708
+msgid "Confirm the Linux partition(s) settings from the list."
+msgstr "Erősítse meg a Linux partíciók beállításait a listából."
+
+#: src/salix-live-installer.py:713
+msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Kattintson a megfelelő \"kiválasztása ...\" opcióra, ha csatlakozási pontot szeretne rendelni a partícióhoz. Be kell állítani az összes kívánt partíciót, mielőtt rákattint a \"Beállítások\" gombra. Minden be nem állított  paramétert figyelembe kell venni."
+
+#: src/salix-live-installer.py:721
+msgid "Confirm the Windows partition(s) settings from the list above."
+msgstr ""
+
+#: src/salix-live-installer.py:726
+msgid "Summary of your partition(s) settings."
+msgstr "Összegzés a partíció beállításokról."
+
+#: src/salix-live-installer.py:731
+msgid "Cancel all partition(s) settings."
+msgstr "Partíció beállítások megszakítása."
+
+#: src/salix-live-installer.py:738
+msgid "Access the users and passwords settings."
+msgstr "Felhasználó és jelszó beállítások."
+
+#: src/salix-live-installer.py:743
+msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
+msgstr ""
+
+#: src/salix-live-installer.py:751
+msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
+msgstr ""
+
+#: src/salix-live-installer.py:757
+msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "Válasszon jelszót vagy jelmondatot a saját felhasználói nevéhez. A jelszónak vagy jelmondatnak tartalmaznia kell keverve nagy- és kisbetűket, számokat, és egyéb szimbólumokat (például @, !, és &)"
+
+#: src/salix-live-installer.py:765
+msgid "Here you must retype your password as a confirmation of your choice."
+msgstr "Újra meg kell adnia a  jelszavát hogy megerősítse a választását."
+
+#: src/salix-live-installer.py:771
+#: src/salix-live-installer.py:803
+msgid "Check this box if you want to be able to see the password you are typing."
+msgstr "Jelölje be a kiválasztó dobozt ha látni szeretné a jelszót gépelés közben."
+
+#: src/salix-live-installer.py:777
+msgid "Create new user."
+msgstr "Új felhasználó hozzáadása."
+
+#: src/salix-live-installer.py:782
+msgid "Cancel new user creation."
+msgstr "Új felhasználó létrehozás megszakítása."
+
+#: src/salix-live-installer.py:788
+msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "A Linux rendszereken a rendszergazda, vagy a root egy speciális felhasználó a rendszer adminisztrációjához. Itt kell beállítania a jelszót vagy a jelmondatot. Ne feledje, ennek a jelszónak vagy jelmondatnak tartalmaznia kell keverve a kis- és nagybetűket, számokat és szimbólumokat is (mint például a @,!, és &)"
+
+#: src/salix-live-installer.py:797
+msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
+msgstr "Újra meg kell adnia a rendszergazda (root) jelszavát hogy megerősítse a választását."
+
+#: src/salix-live-installer.py:809
+msgid "Apply new root password."
+msgstr "Jelszó alkalmazása a root felhasználóhoz."
+
+#: src/salix-live-installer.py:814
+msgid "Cancel new root password."
+msgstr "Jelszó törlése a root felhasználóhoz."
+
+#: src/salix-live-installer.py:821
+msgid "Access the packages selection."
+msgstr "Hozzáférés a csomag választóhoz."
+
+#: src/salix-live-installer.py:826
+msgid ""
+"<b>Core installation:</b>\n"
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
+msgstr ""
+"<b>Minimális telepítés:</b>\n"
+"Csak a minimális és a rendszer működése szempontjából létszükséges csomagokat telepíti fel, amely konzolos bejelentkezést tesz lehetővé. Grafikus felületet ez esetben nem kapunk. Azon tapasztalt felhasználók számára ideális, akik saját maguk szeretnék speciális célokra felépíteni a rendszert, mint például egy web-szerver, vagy fájl-kiszolgáló."
+
+#: src/salix-live-installer.py:836
+msgid ""
+"<b>Basic installation:</b>\n"
+"This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
+msgstr ""
+"<b>Alap telepítés:</b>\n"
+"Ez a módozat csak az pehelykönnyű Xfce munkaasztal környezetet telepíti a Firefox böngészővel és a gslapt csomagkezelővel. Tapasztalt felhasználók számára ideális, akik az Xfce mellé maguk szeretnék összeválogatni a programokat."
+
+#: src/salix-live-installer.py:845
+msgid ""
+"<b>Full installation:</b>\n"
+"Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Totem media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
+msgstr ""
+"<b>Teljes telepítés:</b>\n"
+"Minden telepítésre kerül, ami a készletben megtalálható. Beletartozik az Xfce munkaasztal környezet, a Firefox web-böngésző, a Claws-mail levelező alkalmazás, a teljes OpenOffice.org irodai programcsomag, Java futtató környezet (JRE), a Totem médialejátszó, az Exaile zene lejátszó és kezelő, a gslapt csomagkezelő és még számos egyéb alkalmazás, követve az \"egy feladatra egy program\" elvét."
+
+#: src/salix-live-installer.py:857
+msgid "Confirm your packages selection."
+msgstr "Kattintson a csomag választás megerősítéséhez"
+
+#: src/salix-live-installer.py:862
+msgid "Cancel all packages selection."
+msgstr "Minden csomag kiválasztás elvetése."
+
+#: src/salix-live-installer.py:972
+#: src/salix-live-installer.py:992
+#: src/salix-live-installer.py:1011
+#: src/salix-live-installer.py:1165
+#: src/salix-live-installer.py:1215
+#: src/salix-live-installer.py:1504
+#: src/salix-live-installer.py:1511
+#: src/salix-live-installer.py:1539
+msgid "Select..."
+msgstr "Választás..."
+
+#: src/salix-live-installer.py:1031
+#: src/salix-live-installer.py:1033
+msgid "The time zone has not been set"
+msgstr "Az időzóna nincs beállítva"
+
+#: src/salix-live-installer.py:1031
+#: src/salix-live-installer.py:1033
+#: src/salix-live-installer.py:1239
+#: src/salix-live-installer.py:1242
+#: src/salix-live-installer.py:1245
+#: src/salix-live-installer.py:1248
+#: src/salix-live-installer.py:1250
+#: src/salix-live-installer.py:1253
+#: src/salix-live-installer.py:1255
+#: src/salix-live-installer.py:1281
+#: src/salix-live-installer.py:1284
+#: src/salix-live-installer.py:1286
+msgid "Please verify and correct"
+msgstr "Kérem ellenőrizze és javítsa"
+
+#: src/salix-live-installer.py:1138
+#: src/salix-live-installer.py:1169
+#: src/salix-live-installer.py:1173
+#: src/salix-live-installer.py:1344
+#: src/salix-live-installer.py:1348
+#: src/salix-live-installer.py:1352
+msgid "will be formatted with"
+msgstr "formázva erre"
+
+#: src/salix-live-installer.py:1139
+#: src/salix-live-installer.py:1170
+#: src/salix-live-installer.py:1179
+#: src/salix-live-installer.py:1223
+#: src/salix-live-installer.py:1345
+#: src/salix-live-installer.py:1349
+#: src/salix-live-installer.py:1357
+#: src/salix-live-installer.py:1361
+msgid "and will be mounted as"
+msgstr "és csatolva mint"
+
+#: src/salix-live-installer.py:1174
+#: src/salix-live-installer.py:1183
+#: src/salix-live-installer.py:1219
+msgid "and will not be mounted"
+msgstr "és nincs csatolva"
+
+#: src/salix-live-installer.py:1178
+#: src/salix-live-installer.py:1182
+#: src/salix-live-installer.py:1218
+#: src/salix-live-installer.py:1222
+#: src/salix-live-installer.py:1356
+#: src/salix-live-installer.py:1360
+msgid "will not be formatted"
+msgstr "nincs megformázva"
+
+#: src/salix-live-installer.py:1239
+msgid "Your login name is empty"
+msgstr "Az Ön felhasználó neve üres"
+
+#: src/salix-live-installer.py:1241
+msgid "Your login name should only contain alphanumeric characters"
+msgstr "A felhasználónév csak alfanumerikus karaktereket tartalmazhat"
+
+#: src/salix-live-installer.py:1244
+msgid "Your login name should not contain any space"
+msgstr "A felhasználó név nem tartalmazhat szóköz karaktert"
+
+#: src/salix-live-installer.py:1247
+msgid "Your login name should not contain any upper case letter"
+msgstr "A felhasználó név nem tartalmazhat nagy betűket"
+
+#: src/salix-live-installer.py:1250
+#: src/salix-live-installer.py:1281
+msgid "Your password entry is empty"
+msgstr "A jelszó mező üres"
+
+#: src/salix-live-installer.py:1252
+#: src/salix-live-installer.py:1283
+msgid "Your password is too short. It should have at least 5 characters"
+msgstr "A jelszó túl rövid, legalább 5 karakter hosszú kell hogy legyen"
+
+#: src/salix-live-installer.py:1255
+#: src/salix-live-installer.py:1286
+msgid "Your 2 password entries do not match"
+msgstr "A 2 megadott jelszó nem egyezik"
+
+#: src/salix-live-installer.py:1288
+msgid "Yes"
+msgstr "Igen"
+
+#: src/salix-live-installer.py:1310
+#: src/salix-live-installer.py:1717
+#: src/salix-live-installer.py:1738
+#: src/salix-live-installer.py:1766
+msgid "core"
+msgstr "minimális"
+
+#: src/salix-live-installer.py:1312
+#: src/salix-live-installer.py:1736
+#: src/salix-live-installer.py:1775
+msgid "basic"
+msgstr "alap"
+
+#: src/salix-live-installer.py:1314
+#: src/salix-live-installer.py:1764
+msgid "full"
+msgstr "teljes"
+
+#: src/salix-live-installer.py:1339
+msgid "You are about to install Salix with the following settings"
+msgstr ""
+
+#: src/salix-live-installer.py:1340
+msgid "Time zone"
+msgstr "Időzóna"
+
+#: src/salix-live-installer.py:1341
+msgid "Keyboard layout"
+msgstr "Billentyűzet-kiosztás"
+
+#: src/salix-live-installer.py:1342
+msgid "System language"
+msgstr "Rendszer nyelv"
+
+#: src/salix-live-installer.py:1343
+msgid "Partitions"
+msgstr "Partíciók"
+
+#: src/salix-live-installer.py:1353
+msgid "but will not be mounted"
+msgstr "de a kötet nincs csatolva"
+
+#: src/salix-live-installer.py:1362
+msgid "Standard User"
+msgstr "Szabványos felhasználó"
+
+#: src/salix-live-installer.py:1363
+msgid "Packages"
+msgstr "Csomagok"
+
+#: src/salix-live-installer.py:1365
+#, python-format
+msgid "You have chosen the %(mode)s installation mode.\n"
+msgstr "Az Ön választása: %(mode)s telepítési mód.\n"
+
+#: src/salix-live-installer.py:1618
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to launch LiloSetup, you must set LILO 'manually'. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült a LiloSetup futtatása, állítsa be kézzel a LILO-t."
+
+#: src/salix-live-installer.py:1628
+#: src/salix-live-installer.py:1633
+msgid ""
+"<b>Sorry!</b>\n"
+"\n"
+"Salix Live Installer is only meant to be used in a LiveCD environment. \n"
+"\n"
+"You cannot proceed any further! "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"A Salix Live Telepítő csak a LiveCD környezetben működik.\n"
+"\n"
+"Nem folytatódhat a program!"
+
+#: src/salix-live-installer.py:1645
+msgid "Starting installation process..."
+msgstr "Telepítési folyamat indítása..."
+
+#: src/salix-live-installer.py:1658
+msgid "Formatting the main partition..."
+msgstr "A fő partíció formázása..."
+
+#: src/salix-live-installer.py:1672
+msgid "Formatting and mounting your Linux partition(s)..."
+msgstr "A Linux partíciók formázása és csatolása..."
+
+#: src/salix-live-installer.py:1689
+msgid "Formatting your Linux partition(s)..."
+msgstr "A Linux partíciók formázása..."
+
+#: src/salix-live-installer.py:1702
+msgid "Mounting your Linux partition(s)..."
+msgstr "A Linux partíciók csatolása..."
+
+#: src/salix-live-installer.py:1719
+#: src/salix-live-installer.py:1738
+#: src/salix-live-installer.py:1747
+#: src/salix-live-installer.py:1766
+#: src/salix-live-installer.py:1775
+#: src/salix-live-installer.py:1784
+#, python-format
+msgid "Installing the %(mode)s mode packages..."
+msgstr "Kiválasztott mód: %(mode)s csomagjainak telepítése..."
+
+#: src/salix-live-installer.py:1727
+#: src/salix-live-installer.py:1755
+#: src/salix-live-installer.py:1792
+msgid "Installing the common packages..."
+msgstr "Közös csomagok telepítése..."
+
+#: src/salix-live-installer.py:1801
+msgid "Installing the kernel..."
+msgstr "Kernel telepítése..."
+
+#: src/salix-live-installer.py:1809
+msgid "Creating /etc/fstab..."
+msgstr "/etc/fstab létrehozása..."
+
+#: src/salix-live-installer.py:1847
+msgid "Time, keyboard, locale, login and other system configuration..."
+msgstr "Idő, billentyűzet, nyelv, belépés és egyéb rendszer konfiguráció..."
+
+#: src/salix-live-installer.py:1893
+#: src/salix-live-installer.py:1898
+msgid "Installation process completed successfully ..."
+msgstr "A telepítési folyamat sikeresen végetért ..."
+
+#: src/salix-live-installer.py:1906
+msgid ""
+"<b>Salix installation was executed with success!</b>\n"
+"\n"
+"LiloSetup will now be launched to enable you to add Salix to your bootloader.\n"
+"(If you prefer to use another bootloader utility, click on the no button\n"
+"and use the application of your choice before rebooting your machine.)\n"
+msgstr ""
+
+#: src/salix-live-installer.py:1936
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new keyboard selection on the installation target. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült beállítani az új billentyűzet kiosztást a cél meghajtón."
+
+#: src/salix-live-installer.py:1943
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new language selection on the installation target. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült beállítani az új nyelvet a cél meghajtón."
+
+#: src/salix-live-installer.py:1947
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to create the new user on the installation target. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült létrehozni az új felhasználót a cél meghajtón."
+
+#: src/salix-live-installer.py:1951
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set the new user's password on the installation target. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült beállítani az új felhasználó jelszavát a cél meghajtón."
+
+#: src/salix-live-installer.py:1955
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Unable to set root's password on the installation target. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Nem sikerült beállítani a rendszergazda jelszavát a cél meghajtón."
+
+#: src/salix-live-installer.py:2145
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Root privileges are required to run this program. "
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Rendszergazda jogosultság szükséges a program futtatásához."
+
+#: src/salix-live-installer.desktop.in.h:1
+msgid "Install Salix on your computer from a SalixLive session"
+msgstr "Salix telepítése az Ön számítógépére a SalixLive környezetben"
+
+#: src/salix-live-installer.desktop.in.h:2
+msgid "Salix Installer"
+msgstr "Salix Telepítő"
+
