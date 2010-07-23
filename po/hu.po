@@ -464,14 +464,16 @@ msgid ""
 "Highlight your favorite keyboard layout from this \n"
 "list before clicking on the 'Select keyboard' button."
 msgstr ""
+"Jelölje ki az Ön által használt billentyűzet kiosztást\n"
+"a listából miután kattintott a \"Billentyűzet kiválasztása' gombra."
 
 #: src/salix-live-installer.py:611
 msgid "Check this box if you want your numeric keypad to be activated during the boot process."
-msgstr ""
+msgstr "Jelölje be ezt az opciót ha szeretné hogy a numerikus billentyűzet aktív legyen a rendszerindítás folyamán."
 
 #: src/salix-live-installer.py:617
 msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
-msgstr ""
+msgstr "Jelölje be ezt az opciót ha szeretné hogy a SCIM aktív legyen a rendszerindítás folyamán. Az Intelligens Közös Beviteli Mód (SCIM) egy beviteli módszer amely támogatja a több mint harminc összetettebb nyelvet, mint a kínai, japán, koreai és számos európai nyelv."
 
 #: src/salix-live-installer.py:625
 msgid "Cancel keyboard layout selection."
@@ -483,7 +485,7 @@ msgstr "A választás megerősítése a kiemelt billentyűzet kiosztáson."
 
 #: src/salix-live-installer.py:635
 msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
-msgstr ""
+msgstr "Ez a billentyűzet kiosztás lesz a kiválasztott. Amíg nincs kiválasztva addig a 'Nincs' jelenik meg a választás helyett."
 
 #: src/salix-live-installer.py:643
 msgid "Access the language settings."
@@ -491,11 +493,11 @@ msgstr "Nyelvi beállítások,"
 
 #: src/salix-live-installer.py:648
 msgid "Highlight your language from this list before clicking on the 'Select language' button."
-msgstr ""
+msgstr "Válasszon nyelvet a listából miután kattintott a 'Nyelv kiválasztása' gombra."
 
 #: src/salix-live-installer.py:654
 msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
-msgstr ""
+msgstr "Ez a kiválasztott nyelv lesz a rendszer alapértelmezett nyelve. Amíg nincs kiválasztva addig a 'Nincs' jelenik meg a választás helyett."
 
 #: src/salix-live-installer.py:660
 msgid "Cancel language selection."
@@ -511,11 +513,11 @@ msgstr "Partíció beállítások."
 
 #: src/salix-live-installer.py:677
 msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
-msgstr ""
+msgstr "Jelölje ki a partíciót a listából mielőtt kattint a 'Partíció kiválasztása' gombra."
 
 #: src/salix-live-installer.py:683
 msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
-msgstr ""
+msgstr "Jelölje be ezt az opciót ha szeretné látni a külső merevlemezeket (eszközöket) a listában."
 
 #: src/salix-live-installer.py:689
 msgid "Confirm your selection after highlighting the partition."
@@ -523,11 +525,11 @@ msgstr "A választás megerősítése a kiemelt partíción."
 
 #: src/salix-live-installer.py:694
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
+msgstr "A fájlrendszer amit a Salix fő partíciója használni fog."
 
 #: src/salix-live-installer.py:699
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr ""
+msgstr "Kattintson a megfelelő 'kiválasztása ...' opcióra, ha szeretné módosítani a fájlrendszer egy partícióját és/vagy szeretne hozzárendelni csatolási pontot. Választhat a javasolt csatolási pontok közül, vagy meg adhat sajátot is. Be kell állítania az összes használni kívánt partíciót, mielőtt rákattint a 'Beállítások alkalmazása' gombra. Minden 'értékkel nem rendelkező' paramétert figyelembe kell venni."
 
 #: src/salix-live-installer.py:708
 msgid "Confirm the Linux partition(s) settings from the list."
@@ -539,7 +541,7 @@ msgstr "Kattintson a megfelelő \"kiválasztása ...\" opcióra, ha csatlakozás
 
 #: src/salix-live-installer.py:721
 msgid "Confirm the Windows partition(s) settings from the list above."
-msgstr ""
+msgstr "Erősítse meg a Windows partíciók beállításait a fenti listában."
 
 #: src/salix-live-installer.py:726
 msgid "Summary of your partition(s) settings."
@@ -555,11 +557,11 @@ msgstr "Felhasználó és jelszó beállítások."
 
 #: src/salix-live-installer.py:743
 msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
-msgstr ""
+msgstr "A Linux rendszer sok regisztrált felhasználót kezel és előírja, hogy minden egyes bejelentkezéskor valamilyen formában legyen hitelesítés (általában bejelentkezési név és jelszó páros), amely lehetővé teszi a felhasználó hozzáférését a rendszer erőforrásaihoz."
 
 #: src/salix-live-installer.py:751
 msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
-msgstr ""
+msgstr "Itt kell megadni a bejelentkezési (login) nevet ami csak alfanumerikus karaktereket tartalmazhat szóköz és nagybetűk nélkül."
 
 #: src/salix-live-installer.py:757
 msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
@@ -725,7 +727,7 @@ msgstr "teljes"
 
 #: src/salix-live-installer.py:1339
 msgid "You are about to install Salix with the following settings"
-msgstr ""
+msgstr "A Salix telepítése a következő beállításokkal"
 
 #: src/salix-live-installer.py:1340
 msgid "Time zone"
