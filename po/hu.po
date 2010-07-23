@@ -842,6 +842,11 @@ msgid ""
 "(If you prefer to use another bootloader utility, click on the no button\n"
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
+"<b>A Salix telepítés sikeresen befejeződött!</b>\n"
+"\n"
+" A LiloSetup most el fog indulni annak érdekében, hogy a Salix-ot hozzáadjuk a rendszerindításhoz.\n"
+"(Ha szívesebben alkalmazna egy másik rendszerindító segédprogramot, akkor kattintson a nem gombra\n"
+"és futtassa az alkalmazást még a gép újraindítás előtt.)\n"
 
 #: src/salix-live-installer.py:1936
 msgid ""
