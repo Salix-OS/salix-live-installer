@@ -288,6 +288,19 @@ msgid ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 msgstr ""
+"Ez a program szabad szoftver; terjeszthető illetve módosítható\r\n"
+"a Free Software Foundation által kiadott\r\n"
+"GNU General Public License dokumentumában leírtak; akár a licenc 2-es,\r\n"
+"akár (tetszőleges) későbbi változata szerint.\r\n"
+"Ez a program abban a reményben kerül közreadásra,\r\n"
+"hogy hasznos lesz, de minden egyéb GARANCIA\r\n"
+"NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA\r\n"
+"VALÓ ALKALMAZHATÓSÁGRA való származtatott\r\n"
+"garanciát is beleértve. További részleteket a GNU\r\n"
+"General Public License tartalmaz.\r\n"
+"A felhasználónak a programmal együtt meg kell kapnia a GNU General  Public License egy példányát;\r\n"
+"ha mégsem kapta meg, akkor ezt a Free Software Foundationnak\r\n"
+"küldött levélben jelezze (cím: Free Software Foundation Inc., 59 Temple Place, Suite 330,  Boston, MA 02111-1307, USA.)"
 
 #: src/salix-live-installer.glade:3485
 msgid "Salix Transifex team"
@@ -445,7 +458,7 @@ msgstr "Idő beállítások megszakítása."
 
 #: src/salix-live-installer.py:583
 msgid "Activate the time settings after options have been defined."
-msgstr ""
+msgstr "Az időbeállítások aktiválása miután meglettem határozva a paraméterek."
 
 #: src/salix-live-installer.py:588
 msgid "Set the date & time manually if you do not use NTP service."
