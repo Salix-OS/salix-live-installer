@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-15 13:58+0200\n"
+"POT-Creation-Date: 2010-07-26 10:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid "<b>Selected keyboard layout: </b>"
 msgstr ""
 
 #: src/salix-live-installer.glade:1494 src/salix-live-installer.glade:1693
-#: src/salix-live-installer.glade:2724 src/salix-live-installer.glade:2911
+#: src/salix-live-installer.glade:2722 src/salix-live-installer.glade:2909
 #: src/salix-live-installer.py:1262 src/salix-live-installer.py:1289
 #: src/salix-live-installer.py:1392 src/salix-live-installer.py:1407
 #: src/salix-live-installer.py:1440 src/salix-live-installer.py:1455
@@ -159,121 +159,121 @@ msgstr ""
 msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2176
+#: src/salix-live-installer.glade:2175
 msgid ""
 "It appears that you have more than one Linux partition. If you wish, you can "
 "now spread Salix directory tree on separate partitions. In fact, it is "
 "highly recommended to have the /home directory on a separate partition."
 msgstr ""
 
-#: src/salix-live-installer.glade:2214 src/salix-live-installer.glade:2404
+#: src/salix-live-installer.glade:2213 src/salix-live-installer.glade:2402
 msgid "Apply _settings "
 msgstr ""
 
-#: src/salix-live-installer.glade:2254
+#: src/salix-live-installer.glade:2253
 msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2366
+#: src/salix-live-installer.glade:2364
 msgid ""
 "It appears that some of your partitions have a Windows formatting. Here you "
 "can set a mount point for each one if you wish them to be accessible in "
 "Salix system."
 msgstr ""
 
-#: src/salix-live-installer.glade:2451
+#: src/salix-live-installer.glade:2449
 msgid "<b>Salix main partition:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2464
+#: src/salix-live-installer.glade:2462
 msgid "Main partition"
 msgstr ""
 
-#: src/salix-live-installer.glade:2476
+#: src/salix-live-installer.glade:2474
 msgid "<b>Other Linux partitions:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2489
+#: src/salix-live-installer.glade:2487
 msgid "Home partition"
 msgstr ""
 
-#: src/salix-live-installer.glade:2501
+#: src/salix-live-installer.glade:2499
 msgid "<b>Windows partitions:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2514
+#: src/salix-live-installer.glade:2512
 msgid "Windows partitions"
 msgstr ""
 
-#: src/salix-live-installer.glade:2579
+#: src/salix-live-installer.glade:2577
 msgid "<b>Please create a new standard user:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2596
+#: src/salix-live-installer.glade:2594
 msgid "Enter login: "
 msgstr ""
 
-#: src/salix-live-installer.glade:2628
+#: src/salix-live-installer.glade:2626
 msgid "Enter password: "
 msgstr ""
 
-#: src/salix-live-installer.glade:2652 src/salix-live-installer.glade:2839
+#: src/salix-live-installer.glade:2650 src/salix-live-installer.glade:2837
 msgid "Do not hide"
 msgstr ""
 
-#: src/salix-live-installer.glade:2677
+#: src/salix-live-installer.glade:2675
 msgid "Re-enter password: "
 msgstr ""
 
-#: src/salix-live-installer.glade:2711
+#: src/salix-live-installer.glade:2709
 msgid "<b>User created: </b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2798
+#: src/salix-live-installer.glade:2796
 msgid "<b>Please create a new administrator's password:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2815
+#: src/salix-live-installer.glade:2813
 msgid "Enter root password: "
 msgstr ""
 
-#: src/salix-live-installer.glade:2864
+#: src/salix-live-installer.glade:2862
 msgid "Re-enter root password: "
 msgstr ""
 
-#: src/salix-live-installer.glade:2898
+#: src/salix-live-installer.glade:2896
 msgid "<b>Password created: </b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:2989
+#: src/salix-live-installer.glade:2987
 msgid "<b>Please select your installation mode:</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:3005
+#: src/salix-live-installer.glade:3003
 msgid "Core"
 msgstr ""
 
-#: src/salix-live-installer.glade:3051
+#: src/salix-live-installer.glade:3049
 msgid "Basic"
 msgstr ""
 
-#: src/salix-live-installer.glade:3127
+#: src/salix-live-installer.glade:3125
 msgid "Full"
 msgstr ""
 
-#: src/salix-live-installer.glade:3426
+#: src/salix-live-installer.glade:3424
 msgid "Launch Salix _install "
 msgstr ""
 
-#: src/salix-live-installer.glade:3466
+#: src/salix-live-installer.glade:3464
 msgid "Copyright © 2010 Pierrick Le Brun"
 msgstr ""
 
-#: src/salix-live-installer.glade:3467
+#: src/salix-live-installer.glade:3465
 msgid "SalixOS installation from SalixLive's graphic environment"
 msgstr ""
 
-#: src/salix-live-installer.glade:3470
+#: src/salix-live-installer.glade:3468
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -291,27 +291,27 @@ msgid ""
 "MA 02110-1301, USA."
 msgstr ""
 
-#: src/salix-live-installer.glade:3485
+#: src/salix-live-installer.glade:3483
 msgid "Salix Transifex team"
 msgstr ""
 
-#: src/salix-live-installer.glade:3512
+#: src/salix-live-installer.glade:3510
 msgid "Confirmation needed"
 msgstr ""
 
-#: src/salix-live-installer.glade:3531
+#: src/salix-live-installer.glade:3529
 msgid "<b>Message about the particular choice: </b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:3544
+#: src/salix-live-installer.glade:3542
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:3612
+#: src/salix-live-installer.glade:3610
 msgid "Salix installation"
 msgstr ""
 
-#: src/salix-live-installer.glade:3624
+#: src/salix-live-installer.glade:3622
 msgid "Please be patient, Salix installation is in progress... "
 msgstr ""
 
@@ -863,15 +863,15 @@ msgstr ""
 msgid "Creating /etc/fstab..."
 msgstr ""
 
-#: src/salix-live-installer.py:1847
+#: src/salix-live-installer.py:1848
 msgid "Time, keyboard, locale, login and other system configuration..."
 msgstr ""
 
-#: src/salix-live-installer.py:1893 src/salix-live-installer.py:1898
+#: src/salix-live-installer.py:1892 src/salix-live-installer.py:1897
 msgid "Installation process completed successfully ..."
 msgstr ""
 
-#: src/salix-live-installer.py:1906
+#: src/salix-live-installer.py:1905
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
@@ -881,42 +881,42 @@ msgid ""
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
 
-#: src/salix-live-installer.py:1936
+#: src/salix-live-installer.py:1934
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new keyboard selection on the installation target. "
 msgstr ""
 
-#: src/salix-live-installer.py:1943
+#: src/salix-live-installer.py:1941
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new language selection on the installation target. "
 msgstr ""
 
-#: src/salix-live-installer.py:1947
+#: src/salix-live-installer.py:1945
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to create the new user on the installation target. "
 msgstr ""
 
-#: src/salix-live-installer.py:1951
+#: src/salix-live-installer.py:1949
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set the new user's password on the installation target. "
 msgstr ""
 
-#: src/salix-live-installer.py:1955
+#: src/salix-live-installer.py:1953
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
 "Unable to set root's password on the installation target. "
 msgstr ""
 
-#: src/salix-live-installer.py:2145
+#: src/salix-live-installer.py:2143
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
