@@ -125,7 +125,9 @@ class SalixLiveInstaller:
         self.LinPartRecapLabel = builder.get_object("lin_part_recap_label")
         self.WinPartRecapLabel = builder.get_object("win_part_recap_label")
         self.CoreRadioButton = builder.get_object("core_radiobutton")
+        self.CoreHBox = builder.get_object("core_hbox")
         self.BasicRadioButton = builder.get_object("basic_radiobutton")
+        self.BasicHBox = builder.get_object("basic_hbox")
         self.FullRadioButton = builder.get_object("full_radiobutton")
         self.PackagesApplyButton = builder.get_object("packages_apply")
         self.TimeApplyButton = builder.get_object("time_apply")
@@ -206,6 +208,16 @@ class SalixLiveInstaller:
         self.WinNewMountColumn.set_title(_('Mount as:'))
 
         ### Initialise some global variables ###
+        # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
+        global liveclone_install
+        if os.path.exists("/mnt/live/memory/images/01-clone.lzm") == True :
+            liveclone_install = True
+            self.CoreRadioButton.set_sensitive(False)
+            self.CoreHBox.set_sensitive(False)
+            self.BasicRadioButton.set_sensitive(False)
+            self.BasicHBox.set_sensitive(False)
+        else:
+            liveclone_install = False
         # Prevent switching to another tab until the current configuration is completed or cancelled
         global switch_tab_lock
         switch_tab_lock = ''
@@ -842,13 +854,20 @@ own choice of applications."))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_full_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
+        if liveclone_install == False :
+            self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Everything that is included in the iso is installed. That includes the \
 Xfce desktop environment, the Firefox web browser and Claws-mail \
 email client, a complete OpenOffice.org office suite, a Java Runtime \
 Environment, the Totem media player and Exaile music manager, \
 the Gslapt package manager and several other applications, always \
 following the 'one application per task' rationale."))
+        elif liveclone_install == True :
+            self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
+Salix Live Installer has detected a LiveClone customized environment. \
+Core and Basic installation modes are therefore not available. \n\
+You can only perform a full installation: all software \
+included in your customized LiveClone will be installed."))
     def on_full_radiobutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
@@ -1714,96 +1733,108 @@ following the 'one application per task' rationale."))
         # So first we create the temporary mountpoint
         Temp_Mount = Main_MountPoint + "/temp_mount"
         os.mkdir(Temp_Mount)
-        if Selected_Install_Mode == _('core') :
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-            self.InstallProgressBar.set_fraction(0.40)
-            # there's more work, yield True
-            yield True
-            # first we install the core module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            self.InstallProgressBar.set_text(_("Installing the common packages..."))
-            self.InstallProgressBar.set_fraction(0.50)
+        if liveclone_install == True : # We are in a LiveClone generated LiveCD
+                self.InstallProgressBar.set_text(_("Installing your LiveClone system..."))
+                self.InstallProgressBar.set_fraction(0.50)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # we install the one & only clone module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/01-clone.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+
+        elif liveclone_install == False : # We are in a regular Salix LiveCD
+
+            if Selected_Install_Mode == _('core') :
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
+                self.InstallProgressBar.set_fraction(0.40)
+                # there's more work, yield True
+                yield True
+                # first we install the core module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                self.InstallProgressBar.set_text(_("Installing the common packages..."))
+                self.InstallProgressBar.set_fraction(0.50)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # finally we install all the packages that are common to any installation mode
+                # this would be the kernel related packages, etc...
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+            elif Selected_Install_Mode == _('basic') :
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
+                self.InstallProgressBar.set_fraction(0.25)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # first we install the core module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
+                self.InstallProgressBar.set_fraction(0.50)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # then we install the basic module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                self.InstallProgressBar.set_text(_("Installing the common packages..."))
+                self.InstallProgressBar.set_fraction(0.60)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # finally we install all the packages that are common to any installation mode
+                # this would be the kernel related packages, etc...
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+            elif Selected_Install_Mode == _('full') :
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
+                self.InstallProgressBar.set_fraction(0.20)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # first we install the core module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
+                self.InstallProgressBar.set_fraction(0.35)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # then we install the basic module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
+                self.InstallProgressBar.set_fraction(0.50)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # then we install the full module
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+                self.InstallProgressBar.set_text(_("Installing the common packages..."))
+                self.InstallProgressBar.set_fraction(0.60)
+                # there's more work, yield True to prevent the progress bar from looking inactive
+                yield True
+                # finally we install all the packages that are common to any installation mode
+                # those are the kernel related packages, etc...
+                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
+                subprocess.call("umount " + Temp_Mount, shell=True)
+            self.InstallProgressBar.set_text(_("Installing the kernel..."))
+            self.InstallProgressBar.set_fraction(0.70)
             # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
-            # finally we install all the packages that are common to any installation mode
-            # this would be the kernel related packages, etc...
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-        elif Selected_Install_Mode == _('basic') :
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
-            self.InstallProgressBar.set_fraction(0.25)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # first we install the core module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-            self.InstallProgressBar.set_fraction(0.50)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # then we install the basic module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            self.InstallProgressBar.set_text(_("Installing the common packages..."))
-            self.InstallProgressBar.set_fraction(0.60)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # finally we install all the packages that are common to any installation mode
-            # this would be the kernel related packages, etc...
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-        elif Selected_Install_Mode == _('full') :
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
-            self.InstallProgressBar.set_fraction(0.20)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # first we install the core module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
-            self.InstallProgressBar.set_fraction(0.35)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # then we install the basic module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-            self.InstallProgressBar.set_fraction(0.50)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # then we install the full module
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-            self.InstallProgressBar.set_text(_("Installing the common packages..."))
-            self.InstallProgressBar.set_fraction(0.60)
-            # there's more work, yield True to prevent the progress bar from looking inactive
-            yield True
-            # finally we install all the packages that are common to any installation mode
-            # those are the kernel related packages, etc...
-            subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
-            subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-            subprocess.call("umount " + Temp_Mount, shell=True)
-        self.InstallProgressBar.set_text(_("Installing the kernel..."))
-        self.InstallProgressBar.set_fraction(0.70)
-        # there's more work, yield True to prevent the progress bar from looking inactive
-        yield True
-        subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
-        os.rmdir(Temp_Mount)
+            subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
+            os.rmdir(Temp_Mount)
 
         # Create /etc/fstab
         self.InstallProgressBar.set_text(_("Creating /etc/fstab..."))

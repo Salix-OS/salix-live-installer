@@ -3020,7 +3020,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox44">
+                              <object class="GtkHBox" id="core_hbox">
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkImage" id="image15">
@@ -3066,7 +3066,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox33">
+                              <object class="GtkHBox" id="basic_hbox">
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkImage" id="image16">
@@ -3463,7 +3463,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.2</property>
+    <property name="version">0.2.2</property>
     <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
@@ -3483,7 +3483,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.</property>
     <property name="authors">Pierrick Le Brun</property>
-    <property name="translator_credits" translatable="yes">Salix Transifex team</property>
+    <property name="translator_credits" translatable="yes">Salix OS Transifex team</property>
     <property name="logo">salix-live-installer.png</property>
     <signal name="response" handler="on_about_dialog_close"/>
     <signal name="delete_event" handler="on_about_dialog_close"/>
