@@ -1642,12 +1642,12 @@ included in your customized LiveClone will be installed."))
     def on_confirm_button_released(self, widget, data=None):
             if InstallButtonConfirmation == True :
                 # Verify we are in a LiveCD environment
-                if os.path.exists("/mnt/live/memory/images/01-core.lzm") == False :
+                if os.path.exists("/mnt/live/memory/images") == False :
                     self.YesNoDialog.hide()
                     error_dialog(_("""<b>Sorry!</b>
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
 \nYou cannot proceed any further! """))
-                elif os.path.exists("/mnt/live/memory/changes/home/one") == False :
+                elif os.path.exists("/mnt/live/memory/changes") == False :
                     self.YesNoDialog.hide()
                     error_dialog(_("""<b>Sorry!</b>
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
