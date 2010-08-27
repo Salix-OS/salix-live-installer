@@ -1,5 +1,7 @@
+version 0.2.3
+* Added support for LiveClone generated LiveCD/DVD/USB
+
 version 0.2.2
-* Now also works from a LiveClone generated LiveCD/DVD/USB
 * Translation in Hungarian
 
 version 0.2.1

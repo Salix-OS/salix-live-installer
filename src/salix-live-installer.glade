@@ -2520,6 +2520,31 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                                     <property name="position">5</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkLabel" id="label48">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;Swap partitions:&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">6</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="swap_part_recap_label">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">Swap partitions</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">7</property>
+                                  </packing>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -2563,6 +2588,103 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                     </child>
                     <child>
                       <object class="GtkVBox" id="users_box">
+                        <child>
+                          <object class="GtkEventBox" id="clone_login_eventbox">
+                            <signal name="leave_notify_event" handler="on_clone_login_eventbox_leave_notify_event"/>
+                            <signal name="enter_notify_event" handler="on_clone_login_eventbox_enter_notify_event"/>
+                            <child>
+                              <object class="GtkVBox" id="vbox7">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <child>
+                                  <object class="GtkHBox" id="hbox33">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkCheckButton" id="clone_login_checkbutton">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">True</property>
+                                        <signal name="leave_notify_event" handler="on_clone_login_eventbox_leave_notify_event"/>
+                                        <signal name="toggled" handler="on_clone_login_checkbutton_toggled"/>
+                                        <signal name="enter_notify_event" handler="on_clone_login_eventbox_enter_notify_event"/>
+                                        <child>
+                                          <object class="GtkLabel" id="label36">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">&lt;b&gt;Transfer LiveClone login accounts&lt;/b&gt;</property>
+                                            <property name="use_markup">True</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkHButtonBox" id="hbuttonbox10">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <object class="GtkButton" id="clone_login_undo">
+                                            <property name="label">gtk-undo</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="use_stock">True</property>
+                                            <signal name="clicked" handler="on_clone_login_undo_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_clone_login_undo_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_clone_login_undo_enter_notify_event"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="clone_login_apply">
+                                            <property name="label">gtk-apply</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="use_stock">True</property>
+                                            <signal name="clicked" handler="on_clone_login_apply_clicked"/>
+                                            <signal name="leave_notify_event" handler="on_clone_login_apply_leave_notify_event"/>
+                                            <signal name="enter_notify_event" handler="on_clone_login_apply_enter_notify_event"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkHSeparator" id="hseparator2">
+                                    <property name="visible">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                         <child>
                           <object class="GtkEventBox" id="users_eventbox">
                             <property name="visible">True</property>
@@ -2971,7 +3093,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             </child>
                           </object>
                           <packing>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
@@ -3609,11 +3731,14 @@ MA 02110-1301, USA.</property>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="progress_dialog">
-    <property name="border_width">15</property>
+    <property name="border_width">5</property>
     <property name="title" translatable="yes">Salix installation</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
+    <property name="window_position">center-always</property>
     <property name="icon">salix-live-installer.png</property>
     <property name="type_hint">normal</property>
+    <property name="deletable">False</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">

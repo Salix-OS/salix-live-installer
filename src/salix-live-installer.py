@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.2'
+# version = '0.2.3'
 
 import commands
 import subprocess
@@ -32,6 +32,7 @@ import gtk
 import sys
 import gobject
 import glob
+import shutil
 
 # Internationalization
 import locale
@@ -124,6 +125,7 @@ class SalixLiveInstaller:
         self.MainPartRecapLabel = builder.get_object("main_part_recap_label")
         self.LinPartRecapLabel = builder.get_object("lin_part_recap_label")
         self.WinPartRecapLabel = builder.get_object("win_part_recap_label")
+        self.SwapPartRecapLabel = builder.get_object("swap_part_recap_label")
         self.CoreRadioButton = builder.get_object("core_radiobutton")
         self.CoreHBox = builder.get_object("core_hbox")
         self.BasicRadioButton = builder.get_object("basic_radiobutton")
@@ -133,6 +135,11 @@ class SalixLiveInstaller:
         self.TimeApplyButton = builder.get_object("time_apply")
         self.KeyboardApplyButton = builder.get_object("keyboard_apply")
         self.LocaleApplyButton = builder.get_object("locale_apply")
+        self.CloneLoginEventbox = builder.get_object("clone_login_eventbox")
+        self.UsersEventbox = builder.get_object("users_eventbox")
+        self.CloneLoginCheckbutton = builder.get_object("clone_login_checkbutton")
+        self.CloneLoginUndo = builder.get_object("clone_login_undo")
+        self.CloneLoginApply = builder.get_object("clone_login_apply")
         self.RootPass1Entry = builder.get_object("root_pass1_entry")
         self.RootPass2Entry = builder.get_object("root_pass2_entry")
         self.UserPass1Entry = builder.get_object("user_pass1_entry")
@@ -208,16 +215,29 @@ class SalixLiveInstaller:
         self.WinNewMountColumn.set_title(_('Mount as:'))
 
         ### Initialise some global variables ###
+        global liveclone_users
+        liveclone_users = []
+        global login_transfer
+        login_transfer = False
+        # Initialize the lock system preventing the Install button to be activated prematurely
+        global ConfigurationSet
+        ConfigurationSet = ['no'] * 7
         # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
         global liveclone_install
         if os.path.exists("/mnt/live/memory/images/01-clone.lzm") == True :
             liveclone_install = True
+            self.CloneLoginEventbox.show()
             self.CoreRadioButton.set_sensitive(False)
             self.CoreHBox.set_sensitive(False)
             self.BasicRadioButton.set_sensitive(False)
             self.BasicHBox.set_sensitive(False)
+            self.CloneLoginCheckbutton.set_active(True)
+            self.CloneLoginUndo.set_sensitive(True)
+            self.CloneLoginApply.set_sensitive(True)
+
         else:
             liveclone_install = False
+            self.CloneLoginEventbox.hide()
         # Prevent switching to another tab until the current configuration is completed or cancelled
         global switch_tab_lock
         switch_tab_lock = ''
@@ -227,9 +247,6 @@ class SalixLiveInstaller:
         # The other partition lists needs to know what has been chosen as the main partition
         global Selected_Main_Partition
         Selected_Main_Partition = ''
-        # Initialize the lock system preventing the Install button to be activated prematurely
-        global ConfigurationSet
-        ConfigurationSet = ['no'] * 7
         # Initialise default value for the external device checkbutton
         global show_external_device
         show_external_device = 'no'
@@ -751,6 +768,25 @@ Any unset parameters will be ignored. "))
     def on_users_tab_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
+    def on_clone_login_eventbox_enter_notify_event(self, widget, data=None):
+	self.ContextLabel.set_text(_("Salix Live Installer has detected a \
+LiveClone customized environment. You can transfer your existing LiveClone \
+login accounts along with matching personnal directories to the installation \
+target or you can wipe them out & create a complete new login account instead."))
+    def on_clone_login_eventbox_leave_notify_event(self, widget, data=None):
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
+    def on_clone_login_apply_enter_notify_event(self, widget, data=None):
+	self.ContextLabel.set_text(_("Transfer existing users."))
+    def on_clone_login_apply_leave_notify_event(self, widget, data=None):
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
+    def on_clone_login_undo_enter_notify_event(self, widget, data=None):
+	self.ContextLabel.set_text(_("Cancel users transfer."))
+    def on_clone_login_undo_leave_notify_event(self, widget, data=None):
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
+
     def on_users_eventbox_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("A Linux system can manage many registered users and requires each \
 one to log in, and to produce some form of authentication (usually a \
@@ -918,6 +954,18 @@ included in your customized LiveClone will be installed."))
 
 ### CHECKBUTTONS ###
 
+    # What to do when the liveclone login checkbutton is toggled
+    def on_clone_login_checkbutton_toggled(self, widget, data=None):
+        if self.CloneLoginCheckbutton.get_active() == True:
+            users_undo(self)
+            rootpass_undo(self)
+            self.UsersEventbox.set_sensitive(False)
+            self.CloneLoginUndo.set_sensitive(True)
+            self.CloneLoginApply.set_sensitive(True)
+        else:
+            self.UsersEventbox.set_sensitive(True)
+            self.CloneLoginUndo.set_sensitive(False)
+            self.CloneLoginApply.set_sensitive(False)
 
     # What to do when the NTP checkbutton is toggled
     def on_ntp_checkbutton_toggled(self, widget, data=None):
@@ -1250,6 +1298,25 @@ included in your customized LiveClone will be installed."))
         self.YesNoDialog.show()
         self.YesNoDialog.resize(1, 1)
 
+    # What to do when the clone login apply button is clicked
+    def on_clone_login_apply_clicked(self, widget, data=None):
+        global login_transfer
+        login_transfer = True
+        # Detect existing regular users
+        passwd_list = commands.getoutput("cat /etc/passwd | grep /bin/bash | grep /home/").splitlines()
+        global liveclone_users
+        for i in passwd_list :
+            liveclone_users.append(i.split(":")[0])
+        global ConfigurationSet
+        ConfigurationSet[3] = 'yes'
+        ConfigurationSet[4] = 'yes'
+        self.UsersCheck.show()
+        self.UsersCheckMarker.hide()
+        if 'no' not in ConfigurationSet :
+            self.InstallButton.set_sensitive(True)
+        self.CloneLoginApply.set_sensitive(False)
+        self.CloneLoginCheckbutton.set_sensitive(False)
+
     # What to do when the user's settings apply button is clicked
     def on_users_apply_clicked(self, widget, data=None):
         # Pass some basic sanity checks
@@ -1378,7 +1445,17 @@ included in your customized LiveClone will be installed."))
             for i in WinMountSets :
                 LastRecapFullText += i[0] + " " + _("will not be formatted") + \
                 " " + _("and will be mounted as") + " " + i[1] + "\n"
-        LastRecapFullText += "\n<b>" + _("Standard User") + ":</b> \n" + NewUser + "\n"
+        try:
+            for i in Swap_Partition:
+                LastRecapFullText += i + " " + _("will not be formatted") + \
+                " " + _("and will mounted as swap") + "\n"
+        except:
+            info_dialog(_("Salix Live Installer was not able to detect a valid \
+Swap partition on your system."))
+        if login_transfer == True :
+            LastRecapFullText += "\n<b>" + _("Standard User") + ":</b> \n" + _("Using LiveClone login. ")  + "\n"
+        elif login_transfer == False :
+            LastRecapFullText += "\n<b>" + _("Standard User") + ":</b> \n" + NewUser + "\n"
         LastRecapFullText += "\n<b>" + _("Packages") + ":</b> \n"
         # TRANSLATORS: Please just reposition the '%(mode)' variable as required by your grammar.
         LastRecapFullText += _("You have chosen the %(mode)s installation mode.\n")\
@@ -1444,8 +1521,22 @@ included in your customized LiveClone will be installed."))
         ConfigurationSet[2] = 'no'
         self.InstallButton.set_sensitive(False)
 
+    # What to do when the clone login undo button is clicked
+    def on_clone_login_undo_clicked(self, widget, data=None):
+        global login_transfer
+        login_transfer = False
+        global ConfigurationSet
+        ConfigurationSet[3] = 'no'
+        ConfigurationSet[4] = 'no'
+        self.UsersCheck.hide()
+        self.UsersCheckMarker.show()
+        self.InstallButton.set_sensitive(False)
+        self.CloneLoginApply.set_sensitive(True)
+        self.CloneLoginCheckbutton.set_sensitive(True)
+
     # What to do when the user's settings undo button is clicked
-    def on_users_undo_clicked(self, widget, data=None):
+    global users_undo
+    def users_undo(self):
         self.UsersCheck.hide()
         self.UsersCheckMarker.show()
         self.UserLoginEntry.set_sensitive(True)
@@ -1460,9 +1551,12 @@ included in your customized LiveClone will be installed."))
         global ConfigurationSet
         ConfigurationSet[3] = 'no'
         self.InstallButton.set_sensitive(False)
+    def on_users_undo_clicked(self, widget, data=None):
+        users_undo(self)
 
     # What to do when the root password settings undo button is clicked
-    def on_rootpass_undo_clicked(self, widget, data=None):
+    global rootpass_undo
+    def rootpass_undo(self):
         self.UsersCheck.hide()
         self.UsersCheckMarker.show()
         self.RootPass1Entry.set_sensitive(True)
@@ -1475,6 +1569,8 @@ included in your customized LiveClone will be installed."))
         global ConfigurationSet
         ConfigurationSet[4] = 'no'
         self.InstallButton.set_sensitive(False)
+    def on_rootpass_undo_clicked(self, widget, data=None):
+        rootpass_undo(self)
 
     # What to do when the package selection undo button is clicked
     def on_packages_undo_clicked(self, widget, data=None):
@@ -1620,7 +1716,16 @@ included in your customized LiveClone will be installed."))
                 self.LinPartRecapLabel.set_text(LinPartConfirmLabel)
             else :
                 self.LinPartRecapLabel.set_text(_('None') + ' \n')
-            self.WinPartRecapLabel.set_text(WinPartConfirmLabel)
+            if WinPartConfirmLabel != '' :
+                self.WinPartRecapLabel.set_text(WinPartConfirmLabel)
+            else :
+                self.WinPartRecapLabel.set_text(_('None') + ' \n')
+            try:
+                for i in Swap_Partition:
+                    self.SwapPartRecapLabel.set_text( i + "\n")
+            except:
+                self.SwapPartRecapLabel.set_text(_('None') + ' \n')
+
             self.YesNoDialog.hide()
             self.WindowsPartitionBox.hide()
             self.RecapPartitionBox.show()
@@ -1742,6 +1847,34 @@ included in your customized LiveClone will be installed."))
                 subprocess.call("mount -t squashfs /mnt/*/salixlive/base/01-clone.lzm " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
+                os.rmdir(Temp_Mount)
+                # We add missing items, restore some non-live stock files, remove some specific live stuff
+                os.makedirs(Main_MountPoint + "/media")
+                os.makedirs(Main_MountPoint + "/opt")
+                os.makedirs(Main_MountPoint + "/proc")
+                os.makedirs(Main_MountPoint + "/sys")
+                os.makedirs(Main_MountPoint + "/tmp")
+                shutil.copytree("/usr/share/liveclone/stockskel/boot", Main_MountPoint + "/boot", symlinks=False)
+                shutil.copy("/boot/vmlinuz", Main_MountPoint + "/boot")
+                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.6", Main_MountPoint + "/etc/rc.d")
+                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.M", Main_MountPoint + "/etc/rc.d")
+                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.S", Main_MountPoint + "/etc/rc.d")
+                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.alsa", Main_MountPoint + "/etc/rc.d")
+                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.services", Main_MountPoint + "/etc/rc.d")
+                subprocess.call("cp --preserve -rf /dev " + Main_MountPoint, shell=True)
+                subprocess.call("mount -t proc proc " + Main_MountPoint + "/proc", shell=True)
+                subprocess.call("mount --bind /dev " + Main_MountPoint + "/dev", shell=True)
+                subprocess.call("spkg -d liveclone --root=" + Main_MountPoint, shell=True)
+                subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
+                subprocess.call("spkg -d linux-live --root=" + Main_MountPoint, shell=True)
+                subprocess.call("rm -f " + Main_MountPoint + "/etc/ssh/ssh_host_* 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/home/one/Desktop/guide.desktop 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/user/share/applications/guide.desktop 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/home/one/Desktop/persistence*desktop 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/user/share/applications/persistence*desktop 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/home/one/Desktop/salix-live*desktop 2>/dev/null", shell=True)
+                subprocess.call("rm -f" + Main_MountPoint + "/home/one/Desktop/gparted*desktop 2>/dev/null", shell=True)
+                os.remove(Main_MountPoint + "/etc/rc.d/rc.live")
 
         elif liveclone_install == False : # We are in a regular Salix LiveCD
 
@@ -1841,8 +1974,6 @@ included in your customized LiveClone will be installed."))
         self.InstallProgressBar.set_fraction(0.80)
         # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
-        fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
-        Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
         Fstab_File = open(Main_MountPoint + '/etc/fstab', 'w')
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('devpts', '/dev/pts', 'devpts', 'gid=5,mode=620', '0', '0'))
         Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % ('proc', '/proc', 'proc', 'defaults', '0', '0'))
@@ -1911,6 +2042,9 @@ fi")
         RCkeymap_File.close()
         subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
+        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.cups', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.pcmcia', shell=True)
+        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.sshd', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
@@ -1970,18 +2104,22 @@ and use the application of your choice before rebooting your machine.)\n"""))
             subprocess.check_call('localesetup ' + Selected_Locale, shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new language selection on the installation target. "))
-        try :
-            subprocess.check_call('useradd -m -s /bin/bash -G lp,floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
-        except :
-            error_dialog(_("<b>Sorry!</b> \n\nUnable to create the new user on the installation target. "))
-        try :
-            subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | chpasswd', shell=True)
-        except :
-            error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new user's password on the installation target. "))
-        try :
-            subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
-        except :
-            error_dialog(_("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. "))
+
+        if login_transfer == False : # We must first delete eventual regular users' login accounts in the chrooted target
+            for i in liveclone_users :
+                subprocess.call(" userdel -r " + i + " 2>/dev/null", shell=True)
+            try :
+                subprocess.check_call('useradd -m -s /bin/bash -G lp,floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
+            except :
+                error_dialog(_("<b>Sorry!</b> \n\nUnable to create the new user on the installation target. "))
+            try :
+                subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | chpasswd', shell=True)
+            except :
+                error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new user's password on the installation target. "))
+            try :
+                subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
+            except :
+                error_dialog(_("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. "))
         # Exit child process
         sys.exit(0)
         
@@ -2108,6 +2246,22 @@ and use the application of your choice before rebooting your machine.)\n"""))
                 partition_list_initialization()
                 self.RecapPartitionBox.hide()
                 self.MainPartitionBox.show()
+                # Detect the swap partition
+                global Swap_Partition
+                fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
+                Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
+                SwapText = "\n<b>" + _("Swap Partition") + ":</b> \n"
+                try:
+                    for i in Swap_Partition:
+                        SwapText += _("Salix Live Installer has detected a Swap \
+partition on " + i +" and will automatically add it to your configuration.\n")
+                    info_dialog(SwapText)
+                except:
+                    info_dialog(_("Salix Live Installer was not able to detect a valid \
+Swap partition on your system. \nA Swap partition could improve overall performances. \
+You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
+tool of your choice, to first create a swap partition before resuming with Salix Live \
+Installer process."))
             self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
@@ -2154,6 +2308,18 @@ and use the application of your choice before rebooting your machine.)\n"""))
             self.PartitionTab.set_relief(gtk.RELIEF_NONE)
             self.UsersTab.set_relief(gtk.RELIEF_NONE)
             self.PackagesTab.set_relief(gtk.RELIEF_HALF)
+
+# Info window skeleton:
+def info_dialog(message, parent = None):
+    """
+    Display an information message.
+
+    """
+    dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
+    dialog.set_markup(message)
+    global result_info
+    result_info = dialog.run()
+    dialog.destroy()
 
 # Error window skeleton:
 def error_dialog(message, parent = None):
