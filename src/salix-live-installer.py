@@ -2317,6 +2317,7 @@ def info_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
+    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/gtk-info.svg")
     global result_info
     result_info = dialog.run()
     dialog.destroy()
@@ -2328,7 +2329,7 @@ def error_dialog(message, parent = None):
     """
     dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
     dialog.set_markup(message)
-    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/actions/gtk-stop.svg")
+    dialog.set_icon_from_file("/usr/share/icons/gnome-colors-common/scalable/status/dialog-error.svg")
     global result_error
     result_error = dialog.run()
     dialog.destroy()
