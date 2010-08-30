@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Swedish\n"
 "X-Poedit-Country: SWEDEN\n"
+"X-Poedit-Language: Swedish\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -190,27 +190,22 @@ msgid "Main partition"
 msgstr "Huvud partition"
 
 #: src/salix-live-installer.glade:2476
-#, fuzzy
 msgid "<b>Other Linux partitions:</b>"
 msgstr "<b>Andra Linux-partitioner:</b>"
 
 #: src/salix-live-installer.glade:2489
-#, fuzzy
 msgid "Home partition"
 msgstr "Hem partition"
 
 #: src/salix-live-installer.glade:2501
-#, fuzzy
 msgid "<b>Windows partitions:</b>"
 msgstr "<b>Windows partitioner:</b>"
 
 #: src/salix-live-installer.glade:2514
-#, fuzzy
 msgid "Windows partitions"
 msgstr "Windows-partitioner"
 
 #: src/salix-live-installer.glade:2579
-#, fuzzy
 msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Skapa en ny standard användare:</b>"
 
@@ -260,15 +255,15 @@ msgstr "Kärn"
 
 #: src/salix-live-installer.glade:3051
 msgid "Basic"
-msgstr ""
+msgstr "Grundläggande"
 
 #: src/salix-live-installer.glade:3127
 msgid "Full"
-msgstr ""
+msgstr "Fullständig"
 
 #: src/salix-live-installer.glade:3426
 msgid "Launch Salix _install "
-msgstr ""
+msgstr "Starta Salix _install"
 
 #: src/salix-live-installer.glade:3466
 msgid "Copyright © 2010 Pierrick Le Brun"
@@ -276,7 +271,7 @@ msgstr "Copyright © 2010 Pierrick Le Brun"
 
 #: src/salix-live-installer.glade:3467
 msgid "SalixOS installation from SalixLive's graphic environment"
-msgstr ""
+msgstr "SalixOS installation från SalixLive grafiska miljön"
 
 #: src/salix-live-installer.glade:3470
 msgid ""
@@ -302,15 +297,15 @@ msgstr "Salix Transifex team"
 
 #: src/salix-live-installer.glade:3512
 msgid "Confirmation needed"
-msgstr ""
+msgstr "Bekräftelse behövs"
 
 #: src/salix-live-installer.glade:3531
 msgid "<b>Message about the particular choice: </b>"
-msgstr ""
+msgstr "<b>Meddelande om särskild val:</b>"
 
 #: src/salix-live-installer.glade:3544
 msgid "<b>Do you want to proceed with this?</b>"
-msgstr ""
+msgstr "<b>Vill du fortsätta med detta?</b>"
 
 #: src/salix-live-installer.glade:3612
 msgid "Salix installation"
@@ -338,12 +333,12 @@ msgstr "Beskrivning"
 
 #: src/salix-live-installer.py:194
 msgid "Disk"
-msgstr ""
+msgstr "Disk"
 
 #: src/salix-live-installer.py:195 src/salix-live-installer.py:198
 #: src/salix-live-installer.py:203
 msgid "Partition"
-msgstr ""
+msgstr "Partition"
 
 #: src/salix-live-installer.py:196 src/salix-live-installer.py:199
 #: src/salix-live-installer.py:204
@@ -356,7 +351,7 @@ msgstr "Fil system"
 
 #: src/salix-live-installer.py:200
 msgid "Current FS"
-msgstr ""
+msgstr "Nuvarande FS"
 
 #: src/salix-live-installer.py:201
 msgid "Format as:"
@@ -419,6 +414,8 @@ msgid ""
 "SalixLive Installer will perform a standard installation of Salix Operating \n"
 "System on your computer from the comfort of SalixLive's graphic environment."
 msgstr ""
+"SalixLive Installer kommer att utföra en standardinstallation av Salix Operativsystem \n"
+"System på datorn från komfort av SalixLive grafiska miljön."
 
 #: src/salix-live-installer.py:539
 msgid "About Salix Installer."
@@ -426,7 +423,7 @@ msgstr "Om Salix Installer:"
 
 #: src/salix-live-installer.py:544
 msgid "Contextual help."
-msgstr ""
+msgstr "Kontextuell hjälp."
 
 #: src/salix-live-installer.py:549
 msgid "Exit Salix Installer."
@@ -434,27 +431,27 @@ msgstr "Avsluta Salix Installer."
 
 #: src/salix-live-installer.py:554 src/salix-live-installer.py:560
 msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
-msgstr ""
+msgstr "Launch Salix installation. Den här knappen kommer inte att vara aktiv förrän alla inställningar är korrekt konfigurerade."
 
 #: src/salix-live-installer.py:568
 msgid "Access the time settings."
-msgstr ""
+msgstr "Öppna tidsinställningarna."
 
 #: src/salix-live-installer.py:573
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
-msgstr ""
+msgstr "Använd Network Time Protocol demonen att synkronisera tiden via Internet."
 
 #: src/salix-live-installer.py:578
 msgid "Cancel time settings."
-msgstr ""
+msgstr "Avbryt tidsinställningarna."
 
 #: src/salix-live-installer.py:583
 msgid "Activate the time settings after options have been defined."
-msgstr ""
+msgstr "Aktivera tidsinställningarna efter alternativ har definierats."
 
 #: src/salix-live-installer.py:588
 msgid "Set the date & time manually if you do not use NTP service."
-msgstr ""
+msgstr "Ställ in datum och tid manuellt om du inte använder NTP-tjänst."
 
 #: src/salix-live-installer.py:593
 msgid "Set the time zone."
@@ -462,69 +459,71 @@ msgstr "Välj tids zon."
 
 #: src/salix-live-installer.py:600
 msgid "Access the keyboard settings."
-msgstr ""
+msgstr "Öppna tangentbordet inställningar."
 
 #: src/salix-live-installer.py:605
 msgid ""
 "Highlight your favorite keyboard layout from this \n"
 "list before clicking on the 'Select keyboard' button."
 msgstr ""
+"Markera din favorit tangentbordslayout från denna \n"
+"lista innan du klickar på \"Välj tangentbordet\"-knappen."
 
 #: src/salix-live-installer.py:611
 msgid "Check this box if you want your numeric keypad to be activated during the boot process."
-msgstr ""
+msgstr "Markera denna box om du vill att dina numeriska tangentbordet för att aktiveras under uppstartsprocessen."
 
 #: src/salix-live-installer.py:617
 msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
-msgstr ""
+msgstr "Markera den här rutan om du vill SCIM för att aktiveras under uppstartsprocessen. Smart gemensamma Input Method plattform (SCIM) är en inmatningsmetod plattform med stöd för mer än trettio komplexa språk som kinesiska, japanska, koreanska och många europeiska språk."
 
 #: src/salix-live-installer.py:625
 msgid "Cancel keyboard layout selection."
-msgstr ""
+msgstr "Avbryt tangentbordslayout urval."
 
 #: src/salix-live-installer.py:630
 msgid "Confirm your selection after highlighting the keyboard layout."
-msgstr ""
+msgstr "Bekräfta ditt val efter val av tangentbordslayout."
 
 #: src/salix-live-installer.py:635
 msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
-msgstr ""
+msgstr "Detta är den tangentbordslayout du har valt. \"Ingen\" kommer att visas tills du har bekräftat valet."
 
 #: src/salix-live-installer.py:643
 msgid "Access the language settings."
-msgstr ""
+msgstr "Öppna språkinställningarna."
 
 #: src/salix-live-installer.py:648
 msgid "Highlight your language from this list before clicking on the 'Select language' button."
-msgstr ""
+msgstr "Markera ditt språk från listan innan du klickar på \"Välj språk\"-knappen."
 
 #: src/salix-live-installer.py:654
 msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
-msgstr ""
+msgstr "Detta är det system språk som du har valt. \"Ingen\" kommer att visas tills du har bekräftat valet."
 
 #: src/salix-live-installer.py:660
 msgid "Cancel language selection."
-msgstr ""
+msgstr "Avbryt språkval."
 
 #: src/salix-live-installer.py:665
 msgid "Confirm your selection after highlighting the system language."
-msgstr ""
+msgstr "Bekräfta ditt val efter val av system språket."
 
 #: src/salix-live-installer.py:672
 msgid "Access the partitions settings."
-msgstr ""
+msgstr "Öppna partitions inställningar."
 
 #: src/salix-live-installer.py:677
 msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
-msgstr ""
+msgstr "Markera partition från listan innan du klickar på \"Välj partitionen\"-knappen."
 
 #: src/salix-live-installer.py:683
 msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
-msgstr ""
+msgstr "Markera den här rutan om du vill att dina externa hårddisk(ar) skall visas i listan ovan."
 
 #: src/salix-live-installer.py:689
 msgid "Confirm your selection after highlighting the partition."
-msgstr ""
+msgstr "Bekräfta ditt val efter val partitionen."
 
 #: src/salix-live-installer.py:694
 msgid "The filesystem that will be used to format Salix main partition."
