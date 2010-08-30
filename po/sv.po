@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: SWEDEN\n"
 "X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -527,55 +527,55 @@ msgstr "Bekräfta ditt val efter val partitionen."
 
 #: src/salix-live-installer.py:694
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
+msgstr "Filsystemet som kommer att användas för att formatera Salix root partitionen."
 
 #: src/salix-live-installer.py:699
 msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr ""
+msgstr "Klicka på lämplig \"Välj ...\" cell om du vill ändra filsystem på en partition och/eller om du vill tilldela dess monterings punkt. Du kan antingen välja ett av de föreslagna monteringspunkter eller ange en egen. Du måste konfigurera alla önskade partitioner innan du klickar på \"Tillämpa inställningar\"-knappen. Alla okonfigurerade parametrar kommer att ignoreras."
 
 #: src/salix-live-installer.py:708
 msgid "Confirm the Linux partition(s) settings from the list."
-msgstr ""
+msgstr "Bekräfta Linux partition(er) inställningar från listan."
 
 #: src/salix-live-installer.py:713
 msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
-msgstr ""
+msgstr "Klicka på lämplig \"Välj ...\" cell om du vill tilldela den monteringspunkten för en partition. Du måste konfigurera alla önskade partitioner innan du klickar på \"Tillämpa inställningar\"-knappen. Alla okonfigurerade parametrar kommer att ignoreras."
 
 #: src/salix-live-installer.py:721
 msgid "Confirm the Windows partition(s) settings from the list above."
-msgstr ""
+msgstr "Bekräfta Windows-partition(er) inställningar från listan ovan."
 
 #: src/salix-live-installer.py:726
 msgid "Summary of your partition(s) settings."
-msgstr ""
+msgstr "Sammanfattning av din partition(s) inställningar."
 
 #: src/salix-live-installer.py:731
 msgid "Cancel all partition(s) settings."
-msgstr ""
+msgstr "Avbryt alla partition(s) inställningar."
 
 #: src/salix-live-installer.py:738
 msgid "Access the users and passwords settings."
-msgstr ""
+msgstr "Öppna användare och lösenords inställningar."
 
 #: src/salix-live-installer.py:743
 msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
-msgstr ""
+msgstr "Ett Linux-system kan hantera många registrerade användare och kräver att varje användare loggar in och producera någon form av autentisering (vanligtvis ett inloggningsnamn tillsammans med ett lösenord) innan man ger användaren tillgång till system resurserna."
 
 #: src/salix-live-installer.py:751
 msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
-msgstr ""
+msgstr "Här måste du ange ditt inloggningsnamn som endast skall omfatta alfanumeriska tecken utan mellanslag eller övre bokstäver."
 
 #: src/salix-live-installer.py:757
 msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
+msgstr "Välj ett lösenord eller lösenfras måste förenas med ditt inloggningsnamn. Ditt lösenord eller passphrase bör innehålla en blandning av gemener och versaler, siffror och även symboler (såsom @, !, Och &)"
 
 #: src/salix-live-installer.py:765
 msgid "Here you must retype your password as a confirmation of your choice."
-msgstr ""
+msgstr "Här måste du skriva in ditt lösenord som bekräftelse på ditt val."
 
 #: src/salix-live-installer.py:771 src/salix-live-installer.py:803
 msgid "Check this box if you want to be able to see the password you are typing."
-msgstr ""
+msgstr "Markera den här rutan om du vill kunna se det lösenord du skriver."
 
 #: src/salix-live-installer.py:777
 msgid "Create new user."
@@ -587,29 +587,31 @@ msgstr "Avbryt skapande av ny användare."
 
 #: src/salix-live-installer.py:788
 msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
+msgstr "På Linux-system är superanvändaren eller root, en speciell användare för systemadministration. Här måste du ställa in lösenordet eller passphrase. Kom ihåg att detta lösenord eller lösenfras bör innehålla en blandning av gemener och versaler, siffror och även symboler (såsom @, !, Och &)"
 
 #: src/salix-live-installer.py:797
 msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
-msgstr ""
+msgstr "Här måste du skriva om superanvändarens (root) lösenord som bekräftelse på ditt val."
 
 #: src/salix-live-installer.py:809
 msgid "Apply new root password."
-msgstr ""
+msgstr "Tillämpa nya root-lösenord."
 
 #: src/salix-live-installer.py:814
 msgid "Cancel new root password."
-msgstr ""
+msgstr "Avbryt nytt root-lösenord."
 
 #: src/salix-live-installer.py:821
 msgid "Access the packages selection."
-msgstr ""
+msgstr "Öppna paket valen."
 
 #: src/salix-live-installer.py:826
 msgid ""
 "<b>Core installation:</b>\n"
 "Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
+"<b>Core installation:</b> \n"
+"Det minsta du behöver för ett konsol system. En grafisk miljö ingår inte. Detta är perfekt om du är en van användare och vill anpassa installationen för något speciellt ändamål, t.ex. en webbserver, filserver etc."
 
 #: src/salix-live-installer.py:836
 msgid ""
