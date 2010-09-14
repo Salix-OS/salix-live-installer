@@ -3585,7 +3585,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.2.3</property>
+    <property name="version">0.2.4</property>
     <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
@@ -3604,8 +3604,30 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.</property>
-    <property name="authors">Pierrick Le Brun</property>
-    <property name="translator_credits" translatable="yes">Salix OS Transifex team</property>
+    <property name="authors">Pierrick Le Brun &lt;akuna~at~free~dot~fr&gt;</property>
+    <property name="translator_credits">Danish: Kris Thomsen &lt;lakristho~at~gmail~dot~com&gt;
+	      mjjzf http://www.transifex.net/accounts/profile/mjjzf/
+
+Dutch: Imar van Erven Dorens &lt;gambit73~at~gmail~dot~com&gt;
+
+French: Pierrick Le Brun &lt;akuna~at~free~dot~fr&gt;
+        
+German: Andreas Born &lt;andreas~at~gogglemail~dot~com&gt;
+               Thorsten M&#xFC;hlfelder &lt;thenktor~at~gmx~dot~de&gt;
+
+Greek:  George Vlahavas &lt;vlahavas~at~gmail~dot~com&gt;
+
+Hungarian: Peter Polonkai &lt;polesz~at~nedudu~dot~hu&gt;
+
+Japanese: tsuren &lt;hydrangea_and_snail~at~hotmail~dot~com&gt;
+
+Spanish(Argentinian):	Fernando Velo &lt;seacat~at~prog@gmail~dot~com&gt;
+
+Spanish(Castilian): Fernando Velo &lt;seacat~at~prog@gmail~dot~com&gt;
+
+Swedish: Ingemar Karlsson &lt;ingemar~at~ingk~dot~se&gt;
+
+Ukrainian: Yarema aka Knedly &lt;yupadmin~at~gmail~dot~com&gt;</property>
     <property name="logo">salix-live-installer.png</property>
     <signal name="response" handler="on_about_dialog_close"/>
     <signal name="delete_event" handler="on_about_dialog_close"/>
