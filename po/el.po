@@ -687,6 +687,8 @@ msgid ""
 "Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
 "You can only perform a full installation: all software included in your customized LiveClone will be installed."
 msgstr ""
+"<b>Πλήρης εγκατάσταση:</b>\n"
+"Η εφαρμογή εγκατάστασης του Salix εντόπισε ένα προσαρμοσμένο περιβάλλον. Οι Core και Βασικές επιλογές εγκατάστασης κατά συνέπεια δεν είναι διαθέσιμα. Μπορείτε να εκτελέσει μόνο μια πλήρη εγκατάσταση: όλα τα προϊόντα λογισμικού που περιλαμβάνονται στο προσαρμοσμένο περιβάλλον σας θα εγκατασταθούν."
 
 #: src/salix-live-installer.py:928
 msgid "Confirm your packages selection."
@@ -812,13 +814,12 @@ msgid "but will not be mounted"
 msgstr "δεν θα προσαρτηθεί"
 
 #: src/salix-live-installer.py:1467
-#, fuzzy
 msgid "and will mounted as swap"
-msgstr "και θα προσαρτηθεί στο"
+msgstr "και θα προσαρτηθεί ως εικονική μνήμη"
 
 #: src/salix-live-installer.py:1469
 msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
-msgstr ""
+msgstr "Δεν ήταν δυνατός ο εντοπισμός μιας έγκυρης κατάτμησης εικονικής μνήμης στο σύστημά σας."
 
 #: src/salix-live-installer.py:1472 src/salix-live-installer.py:1474
 msgid "Standard User"
@@ -826,7 +827,7 @@ msgstr "Τυπικός χρήστης"
 
 #: src/salix-live-installer.py:1472
 msgid "Using LiveClone login. "
-msgstr ""
+msgstr "Χρησιμοποιούνται οι υπάρχοντες λογαριασμοί χρηστών."
 
 #: src/salix-live-installer.py:1475
 msgid "Packages"
@@ -882,9 +883,8 @@ msgid "Mounting your Linux partition(s)..."
 msgstr "Προσάρτηση των κατατμήσεων Linux..."
 
 #: src/salix-live-installer.py:1858
-#, fuzzy
 msgid "Installing your LiveClone system..."
-msgstr "Εγκατάσταση των εργαλείων live..."
+msgstr "Εγκατάσταση του προσαρμοσμένου συστήματος..."
 
 #: src/salix-live-installer.py:1899 src/salix-live-installer.py:1918
 #: src/salix-live-installer.py:1927 src/salix-live-installer.py:1946
@@ -981,26 +981,27 @@ msgstr ""
 
 #: src/salix-live-installer.py:2267
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions on your system before resuming with Salix Live Installer process."
-msgstr ""
+msgstr "Η εφαρμογή εγκατάστασης του Salix δεν μπόρεσε να εντοπίσει ένα έγκυρο διαμέρισμα στο σύστημά σας. Θα πρέπει να κλείσετε την εφαρμογή εγκατάστασης τώρα και να χρησιμοποιήσετε το Gparted, ή οποιοδήποτε άλλο εργαλείο κατάτμησης της επιλογής σας, ώστε να δημιουργήσετε πρώτα έγκυρες κατατμήσεις στο σύστημά σας, προτού συνεχίσετε με το υπόλοιπο της εγκατάστασης."
 
 #: src/salix-live-installer.py:2275
-#, fuzzy
 msgid "Detected Swap partition(s)"
-msgstr "Επιλογή _κατάτμησης"
+msgstr "Κατατμήσεις εικονικής μνήμης που εντοπίστηκαν."
 
 #: src/salix-live-installer.py:2277
 msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your system. \n"
 "A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
 msgstr ""
+"Η εφαρμογή εγκατάστασης του Salix δεν μπόρεσε να εντοπίσει μια έγκυρο κατάτμηση εικονικής μνήμης στο σύστημά σας.\n"
+"Μια κατάτμηση εικονικής μνήμης θα μπορούσε να βελτιώσει τη συνολική απόδοση του συστήματος. Μπορεί αν θέλετε να κλείσετε την εφαρμογή εγκατάστασης τώρα και να χρησιμοποιήσετε το Gparted, ή οποιοδήποτε άλλο εργαλείο κατάτμησης της επιλογής σας, ώστε να δημιουργήσετε πρώτα μια κατάτμηση εικονικής μνήμης, προτού συνεχίσετε με το υπόλοιπο της εγκατάστασης."
 
 #: src/salix-live-installer.py:2285
 msgid "Salix Live Installer has detected a Swap partition on "
-msgstr ""
+msgstr "Η εφαρμογή εγκατάστασης του Salix εντόπισε μια κατάτμηση εικονικής μνήμης στο"
 
 #: src/salix-live-installer.py:2288
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live Installer process."
-msgstr ""
+msgstr "Η εφαρμογή εγκατάστασης του Salix δεν μπόρεσε να εντοπίσει μια έγκυρο κατάτμηση στο σύστημά σας. Θα πρέπει να κλείσετε την εφαρμογή εγκατάστασης τώρα και να χρησιμοποιήσετε το Gparted, ή οποιοδήποτε άλλο εργαλείο κατάτμησης της επιλογής σας, ώστε να δημιουργήσετε πρώτα έγκυρες κατατμήσεις στο σύστημά σας, προτού συνεχίσετε με το υπόλοιπο της εγκατάστασης."
 
 #: src/salix-live-installer.py:2370
 msgid ""
