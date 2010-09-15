@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -648,13 +648,12 @@ msgstr ""
 "Включені тільки мінімальні необхідні пакунки для запуску консольної системи. Графічне середовище не передбачено. Це ідеальний варіант, якщо Ви є досвідченим користувачем і бажаєте налаштувати Ваше встановлення  для конкретних цілей, таких як веб-сервер, файл сервер і т.д."
 
 #: src/salix-live-installer.py:885
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
 "This installs only the Lxde desktop environment with the Midori web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Lxde and add their own choice of applications."
 msgstr ""
 "<b>Базове встановлення:</b>\n"
-"Це встановлює тільки Xfce Desktop середовище  з веб-переглядачем Firefox і менеджером пакетів gslapt. Ідеально підходить для досвідчених користувачів, які бажали б встановити легкий Xfce і додати свій власний вибір програмного забезпечення."
+"Це встановлює тільки середовище  робочого столу LXDE з веб-переглядачем Midori і менеджером пакетів gslapt. Ідеально підходить для досвідчених користувачів, які бажали б встановити легке  Lxde і додати свій власний вибір програмного забезпечення."
 
 #: src/salix-live-installer.py:891
 msgid ""
@@ -673,13 +672,12 @@ msgstr ""
 "Все, що входить до ISO, буде встановлене. Це включає в себе середовище робочого столу Lxde, браузер Midori і поштовий клієнт Claws-mail, Gnumeric і Abiword (пакет офісу), Java Runtime Environment, програвач мультимедіа Whaah! та музичний менеджер Exaile, менеджер пакунків Gslapt і ряд інших програм."
 
 #: src/salix-live-installer.py:910
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
 "Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Parole media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Повне встановлення:</b>\n"
-"Все, що входить до ISO, буде встановлене. Це включає в себе середовище робочого столу Xfce, браузер Firefox і поштовий клієнт Claws-mail, повний пакет офісу OpenOffice.org, Java Runtime Environment, програвач мультимедіа Totem та музичний менеджер Exaile, менеджер пакунків Gslapt і ряд інших програм."
+"Все, що входить до ISO, буде встановлене. Це включає в себе середовище робочого столу Lxde, браузер Midori і поштовий клієнт Claws-mail, повний пакет офісу OpenOffice.org, Java Runtime Environment, програвач мультимедіа Parole та музичний менеджер Exaile, менеджер пакунків Gslapt і ряд інших програм."
 
 #: src/salix-live-installer.py:918
 msgid ""
@@ -817,7 +815,7 @@ msgstr "і буде змонтовано як розділ підкачки"
 
 #: src/salix-live-installer.py:1469
 msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
-msgstr ""
+msgstr "Встановлювач Salix Live не в змозі визначити розділ підкачки у Вашій системі."
 
 #: src/salix-live-installer.py:1472 src/salix-live-installer.py:1474
 msgid "Standard User"
