@@ -3,7 +3,7 @@
 # Copyright (C) 2010 Pierrick Le Brun
 # This file is distributed under the same license as the salix-live-installer package.
 # George Vlahavas <george@eva>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: salix-live-installer 0.1\n"
@@ -49,32 +49,23 @@ msgstr "Λογισμικό"
 msgid ""
 "<b>Important!</b>\n"
 "\n"
-"Before executing SalixLive's installer, you should already have the "
-"necessary partitions available on your system.\n"
+"Before executing SalixLive's installer, you should already have the necessary partitions available on your system.\n"
 "\n"
-"Salix needs, at the very minimum, one swap partition and  one Linux  "
-"partition to hold its main directory tree. \n"
+"Salix needs, at the very minimum, one swap partition and  one Linux  partition to hold its main directory tree. \n"
 "\n"
-"If possible, it is recommended to also have at least another Linux partition "
-"to hold your /home directory.\n"
+"If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
 "\n"
-"If you do not already have these needed partitions ready, please exit "
-"SalixLive's installer and use Gparted to create them first."
+"If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first."
 msgstr ""
 "<b>Σημαντικό!</b>\n"
 "\n"
-"Προτού εκτελέσετε την εγκατάσταση του Salix, θα πρέπει να έχετε ήδη έτοιμες "
-"τις κατατμήσεις στο σύστημά σας.\n"
+"Προτού εκτελέσετε την εγκατάσταση του Salix, θα πρέπει να έχετε ήδη έτοιμες τις κατατμήσεις στο σύστημά σας.\n"
 "\n"
-"To Salix χρειάζεται το ελάχιστο, μια κατάτμηση swap και μία κατάτμηση για το "
-"σύστημα.\n"
+"To Salix χρειάζεται το ελάχιστο, μια κατάτμηση swap και μία κατάτμηση για το σύστημα.\n"
 "\n"
-"Αν είναι δυνατό, προτείνεται να χρησιμοποιήσετε μία ξεχωριστή κατάτμηση για "
-"τον κατάλογο /home.\n"
+"Αν είναι δυνατό, προτείνεται να χρησιμοποιήσετε μία ξεχωριστή κατάτμηση για τον κατάλογο /home.\n"
 "\n"
-"Αν δεν έχετε ήδη έτοιμες αυτές τις κατατμήσεις, κλείστε την εφαρμογή "
-"εγκατάστασης και χρησιμοποιήστε την εφαρμογή GParted για να τις δημιουργήστε "
-"πρώτα."
+"Αν δεν έχετε ήδη έτοιμες αυτές τις κατατμήσεις, κλείστε την εφαρμογή εγκατάστασης και χρησιμοποιήστε την εφαρμογή GParted για να τις δημιουργήστε πρώτα."
 
 #: src/salix-live-installer.glade:948
 msgid "<b>Please set the time, date and time zone:</b>"
@@ -157,15 +148,11 @@ msgstr "Εμφάνιση συνδεδεμένων εξωτερικών συσκ�
 
 #: src/salix-live-installer.glade:1914
 msgid ""
-"From the above partitions found on your system, please select the one where "
-"Salix' main directory tree (/) should be installed.\n"
-"<b>Warning!</b> This partition will be reformatted and its data will be "
-"permanently erased."
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
-"Από τις παραπάνω κατατμήσεις που βρέθηκαν στο σύστημα, παρακαλώ επιλέξτε "
-"αυτή που θα περιέχει τον κύριο κατάλογο (/) του Salix.\n"
-"<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα "
-"διαγραφούν."
+"Από τις παραπάνω κατατμήσεις που βρέθηκαν στο σύστημα, παρακαλώ επιλέξτε αυτή που θα περιέχει τον κύριο κατάλογο (/) του Salix.\n"
+"<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα διαγραφούν."
 
 #: src/salix-live-installer.glade:1941
 msgid "Format with: "
@@ -180,14 +167,8 @@ msgid "<b>Please configure your other Linux partition(s):</b>"
 msgstr "<b>Παρακαλώ ρυθμίστε τις υπόλοιπες κατατμήσεις linux:</b>"
 
 #: src/salix-live-installer.glade:2178
-msgid ""
-"It appears that you have more than one Linux partition. If you wish, you can "
-"now spread Salix directory tree on separate partitions. In fact, it is "
-"highly recommended to have the /home directory on a separate partition."
-msgstr ""
-"Φαίνεται πως έχετε περισσόρες από μία κατατμήσεις Linux. Αν επιθυμείτε, "
-"μπορείτε να διαχωρίσετε την εγκατάσταση του Salix σε πολλαπλές κατατμήσεις. "
-"Eίναι προτεινομενο ο κατάλογος /home να είναι σε αυτόνομη κατάτμηση."
+msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr "Φαίνεται πως έχετε περισσόρες από μία κατατμήσεις Linux. Αν επιθυμείτε, μπορείτε να διαχωρίσετε την εγκατάσταση του Salix σε πολλαπλές κατατμήσεις. Eίναι προτεινομενο ο κατάλογος /home να είναι σε αυτόνομη κατάτμηση."
 
 #: src/salix-live-installer.glade:2216 src/salix-live-installer.glade:2405
 msgid "Apply _settings "
@@ -198,14 +179,8 @@ msgid "<b>Please configure your Windows partition(s):</b>"
 msgstr "<b>Παρακαλώ ρυθμίστε τις κατατμήσεις Windows:</b>"
 
 #: src/salix-live-installer.glade:2367
-msgid ""
-"It appears that some of your partitions have a Windows formatting. Here you "
-"can set a mount point for each one if you wish them to be accessible in "
-"Salix system."
-msgstr ""
-"Φαίνεται πως κάποιες από τις κατατμήσεις είναι διαμορφωμένες με Windows. "
-"Μπορείτε να θέσετε ένα σημείο προσάρτησης για κάθε μία αν επιθυμείτε να "
-"έχετε πρόσβαση σε αυτές μέσω του Salix."
+msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr "Φαίνεται πως κάποιες από τις κατατμήσεις είναι διαμορφωμένες με Windows. Μπορείτε να θέσετε ένα σημείο προσάρτησης για κάθε μία αν επιθυμείτε να έχετε πρόσβαση σε αυτές μέσω του Salix."
 
 #: src/salix-live-installer.glade:2452
 msgid "<b>Salix main partition:</b>"
@@ -232,18 +207,16 @@ msgid "Windows partitions"
 msgstr "Κατατμήσεις Windows"
 
 #: src/salix-live-installer.glade:2527
-#, fuzzy
 msgid "<b>Swap partitions:</b>"
-msgstr "<b>Κατατμήσεις Windows:</b>"
+msgstr "<b>Κατατμήσεις εικονικής μνήμης:</b>"
 
 #: src/salix-live-installer.glade:2540
-#, fuzzy
 msgid "Swap partitions"
-msgstr "Κύρια κατάτμηση"
+msgstr "Κατατμήσεις εικονικής μνήμης"
 
 #: src/salix-live-installer.glade:2614
 msgid "<b>Transfer LiveClone login accounts</b>"
-msgstr ""
+msgstr "<b>Μεταφορά των λογαριασμών χρηστών</b>"
 
 #: src/salix-live-installer.glade:2702
 msgid "<b>Please create a new standard user:</b>"
@@ -461,8 +434,7 @@ msgstr "Δεκέμβριος"
 
 #: src/salix-live-installer.py:558
 msgid ""
-"SalixLive Installer will perform a standard installation of Salix "
-"Operating \n"
+"SalixLive Installer will perform a standard installation of Salix Operating \n"
 "System on your computer from the comfort of SalixLive's graphic environment."
 msgstr ""
 "Η εφαρμογή εγκατάστασης του SalixLive θα πραγματοποιήσει μια \n"
@@ -475,20 +447,15 @@ msgstr "Σχετικά με την εφαρμογή εγκατάστασης τ�
 
 #: src/salix-live-installer.py:573
 msgid "Contextual help."
-msgstr ""
-"Εδώ εμφανίζονται μυνήματα βοήθειας για την εφαρμογή εγκατάστασης του Salix."
+msgstr "Εδώ εμφανίζονται μυνήματα βοήθειας για την εφαρμογή εγκατάστασης του Salix."
 
 #: src/salix-live-installer.py:578
 msgid "Exit Salix Installer."
 msgstr "Έξοδος από την εφαρμογή εγκατάστασης του Salix."
 
 #: src/salix-live-installer.py:583 src/salix-live-installer.py:589
-msgid ""
-"Launch Salix installation. This button will not be active until all settings "
-"are configured correctly."
-msgstr ""
-"Έναρξη της εγκατάστασης του Salix. Το πλήκτρο δεν θα είναι ενεργό, προτού "
-"όλες οι ρυθμίσεις εγκατάστασης έχουν πραγματοποιηθεί."
+msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
+msgstr "Έναρξη της εγκατάστασης του Salix. Το πλήκτρο δεν θα είναι ενεργό, προτού όλες οι ρυθμίσεις εγκατάστασης έχουν πραγματοποιηθεί."
 
 #: src/salix-live-installer.py:597
 msgid "Access the time settings."
@@ -496,8 +463,7 @@ msgstr "Πρόσβαση στις ρυθμίσεις ώρας."
 
 #: src/salix-live-installer.py:602
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
-msgstr ""
-"Χρήση του Network Time Protocol για συγχρονισμό της ώρας μέσω Internet."
+msgstr "Χρήση του Network Time Protocol για συγχρονισμό της ώρας μέσω Internet."
 
 #: src/salix-live-installer.py:607
 msgid "Cancel time settings."
@@ -505,15 +471,11 @@ msgstr "Ακύρωση των ρυθμίσεων ώρας."
 
 #: src/salix-live-installer.py:612
 msgid "Activate the time settings after options have been defined."
-msgstr ""
-"Ενεργοποίηση των ρυθμίσεων ώρας μόνο αφού οι ανωτέρω ρυθμίσεων έχουν "
-"πραγματοποιηθεί."
+msgstr "Ενεργοποίηση των ρυθμίσεων ώρας μόνο αφού οι ανωτέρω ρυθμίσεων έχουν πραγματοποιηθεί."
 
 #: src/salix-live-installer.py:617
 msgid "Set the date & time manually if you do not use NTP service."
-msgstr ""
-"Ρύθμιση της ημερομηνίας και της ώρας χειροκίνητα αν δεν χρησιμοποιείτε την "
-"υπηρεσία NTP."
+msgstr "Ρύθμιση της ημερομηνίας και της ώρας χειροκίνητα αν δεν χρησιμοποιείτε την υπηρεσία NTP."
 
 #: src/salix-live-installer.py:622
 msgid "Set the time zone."
@@ -532,24 +494,12 @@ msgstr ""
 "χρησιμοποιήσετε το πλήκτρο \"Επιλογή πληκτρολογίου\"."
 
 #: src/salix-live-installer.py:640
-msgid ""
-"Check this box if you want your numeric keypad to be activated during the "
-"boot process."
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να είναι ενεργοποιημένο το numlock κατά την "
-"εκκίνηση του συστήματος."
+msgid "Check this box if you want your numeric keypad to be activated during the boot process."
+msgstr "Επιλέξτε το αν επιθυμείτε να είναι ενεργοποιημένο το numlock κατά την εκκίνηση του συστήματος."
 
 #: src/salix-live-installer.py:646
-msgid ""
-"Check this box if you want SCIM to be activated during the boot process. The "
-"Smart Common Input Method platform (SCIM) is an input method platform "
-"containing support for more than thirty complex languages such as Chinese, "
-"Japanese, Korean and many European languages."
-msgstr ""
-"Επιλέξετε αυτό το κουτί αν επιθυμείτε την ενεργοποίηση του SCIM κατά την "
-"εκκίνηση. Το Smart Common Input Method (SCIM) είναι μία μέθοδος εισαγωγής με "
-"υποστήριξη για πάνω από τριάντα πολύπλοκες γλώσσες όπως Κινέζικα, "
-"Γιαπωνέζικα, Κορεάτικα και πολλές Ευρωπαϊκές γλώσσες."
+msgid "Check this box if you want SCIM to be activated during the boot process. The Smart Common Input Method platform (SCIM) is an input method platform containing support for more than thirty complex languages such as Chinese, Japanese, Korean and many European languages."
+msgstr "Επιλέξετε αυτό το κουτί αν επιθυμείτε την ενεργοποίηση του SCIM κατά την εκκίνηση. Το Smart Common Input Method (SCIM) είναι μία μέθοδος εισαγωγής με υποστήριξη για πάνω από τριάντα πολύπλοκες γλώσσες όπως Κινέζικα, Γιαπωνέζικα, Κορεάτικα και πολλές Ευρωπαϊκές γλώσσες."
 
 #: src/salix-live-installer.py:654
 msgid "Cancel keyboard layout selection."
@@ -560,32 +510,20 @@ msgid "Confirm your selection after highlighting the keyboard layout."
 msgstr "Επαλήθευση της επιλογής αφού επιλέξετε τη διάταξη πληκτρολογίου."
 
 #: src/salix-live-installer.py:664
-msgid ""
-"This is the keyboard layout you have selected. 'None' will be displayed "
-"until you have confirmed that selection."
-msgstr ""
-"Αυτή είναι η διάταξη πληκτρολογίου που έχετε επιλέξει. Θα εμφανίζεται ως "
-"'Καμία' εως ότου επαληθεύσετε την επιλογή."
+msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
+msgstr "Αυτή είναι η διάταξη πληκτρολογίου που έχετε επιλέξει. Θα εμφανίζεται ως 'Καμία' εως ότου επαληθεύσετε την επιλογή."
 
 #: src/salix-live-installer.py:672
 msgid "Access the language settings."
 msgstr "Πρόσβαση στις ρυθμίσεις γλώσσας."
 
 #: src/salix-live-installer.py:677
-msgid ""
-"Highlight your language from this list before clicking on the 'Select "
-"language' button."
-msgstr ""
-"Επιλέξτε τη γλώσσα από τη λίστα προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή "
-"γλώσσας\"."
+msgid "Highlight your language from this list before clicking on the 'Select language' button."
+msgstr "Επιλέξτε τη γλώσσα από τη λίστα προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή γλώσσας\"."
 
 #: src/salix-live-installer.py:683
-msgid ""
-"This is the system language you have selected. 'None' will be displayed "
-"until you have confirmed that selection. "
-msgstr ""
-"Αυτή είναι η γλώσσα συστήματος που έχετε επιλέξει. Θα εμφανίζεται ως 'Καμία' "
-"εως ότου έχετε επαληθεύσει την επιλογή σας."
+msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection. "
+msgstr "Αυτή είναι η γλώσσα συστήματος που έχετε επιλέξει. Θα εμφανίζεται ως 'Καμία' εως ότου έχετε επαληθεύσει την επιλογή σας."
 
 #: src/salix-live-installer.py:689
 msgid "Cancel language selection."
@@ -600,20 +538,12 @@ msgid "Access the partitions settings."
 msgstr "Πρόσβαση στις ρυθμίσεις κατατμήσεων."
 
 #: src/salix-live-installer.py:706
-msgid ""
-"Highlight the partition from this list before clicking on the 'Select "
-"partition' button."
-msgstr ""
-"Επιλογή της κατάτμησης προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή κατάτμησης"
-"\"."
+msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
+msgstr "Επιλογή της κατάτμησης προτού χρησιμοποιήσετε το πλήκτρο \"Επιλογή κατάτμησης\"."
 
 #: src/salix-live-installer.py:712
-msgid ""
-"Check this box if you want your external disk drive(s) to be displayed in "
-"the list above. "
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να εμφανίζονται οι συνδεδεμένες εξωτερικές "
-"αποθήκευσης στην παραπάνω λίστα."
+msgid "Check this box if you want your external disk drive(s) to be displayed in the list above. "
+msgstr "Επιλέξτε το αν επιθυμείτε να εμφανίζονται οι συνδεδεμένες εξωτερικές αποθήκευσης στην παραπάνω λίστα."
 
 #: src/salix-live-installer.py:718
 msgid "Confirm your selection after highlighting the partition."
@@ -621,40 +551,19 @@ msgstr "Επαλήθευση της επιλογής μετά την επιλο�
 
 #: src/salix-live-installer.py:723
 msgid "The filesystem that will be used to format Salix main partition."
-msgstr ""
-"Το σύστημα αρχείων που θα χρησιμοποιηθεί για τη διαμόρφωση της κύριας "
-"κατάτμησης του Salix."
+msgstr "Το σύστημα αρχείων που θα χρησιμοποιηθεί για τη διαμόρφωση της κύριας κατάτμησης του Salix."
 
 #: src/salix-live-installer.py:728
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to modify the "
-"filesystem of a partition and/or if you wish to assign its mount point.You "
-"can either choose one of the suggested mount points or enter your own. You "
-"must configure all the desired partitions before clicking on the 'Apply "
-"settings' button. Any unset parameters will be ignored. "
-msgstr ""
-"Επιλέξτε κάποιο κελί αν επιθυμείτε να αλλάξετε το σύστημα αρχείων ή αν "
-"επιθυμείτε να αντιστοιχίσετε ένα σημείο προσάρτησης. Μπορείτε να επιλέξετε "
-"ένα από τα έτοιμα σημείο προσάρτησης, ή να πληκτρολογήσετε αυτό που θέλετε. "
-"Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε "
-"προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν "
-"έχει ρυθμιστεί θα αγνοηθει."
+msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Επιλέξτε κάποιο κελί αν επιθυμείτε να αλλάξετε το σύστημα αρχείων ή αν επιθυμείτε να αντιστοιχίσετε ένα σημείο προσάρτησης. Μπορείτε να επιλέξετε ένα από τα έτοιμα σημείο προσάρτησης, ή να πληκτρολογήσετε αυτό που θέλετε. Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν έχει ρυθμιστεί θα αγνοηθει."
 
 #: src/salix-live-installer.py:737
 msgid "Confirm the Linux partition(s) settings from the list."
 msgstr "Επαλήθευση των ρυθμίσεων κατατμήσεων Linux από την παραπάνω λίστα."
 
 #: src/salix-live-installer.py:742
-msgid ""
-"Click on the appropriate 'Select...' cell if you wish to assign the mount "
-"point of a partition. You must configure all the desired partitions before "
-"clicking on the 'Apply settings' button. Any unset parameters will be "
-"ignored. "
-msgstr ""
-"Επιλέξτε το αντίστοιχο κελί αν επιθυμείτε να θέσετε το σημείο προσάρτησης "
-"μιας κατάτμησης. Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να "
-"χρησιμοποιήσετε προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε "
-"παράμετρος που δεν θα ρυθμιστεί, θα αγνοηθεί."
+msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored. "
+msgstr "Επιλέξτε το αντίστοιχο κελί αν επιθυμείτε να θέσετε το σημείο προσάρτησης μιας κατάτμησης. Πρέπει να ρυθμίσετε όλες τις κατατμήσεις που επιθυμείτε να χρησιμοποιήσετε προτού πατήσετε το πλήκτρο \"Εφαρμογή ρυθμίσεων\". Κάθε παράμετρος που δεν θα ρυθμιστεί, θα αγνοηθεί."
 
 #: src/salix-live-installer.py:750
 msgid "Confirm the Windows partition(s) settings from the list above."
@@ -673,59 +582,36 @@ msgid "Access the users and passwords settings."
 msgstr "Πρόσβαση στις ρυθμίσεις χρηστών και κωδικών."
 
 #: src/salix-live-installer.py:772
-msgid ""
-"Salix Live Installer has detected a LiveClone customized environment. You "
-"can transfer your existing LiveClone login accounts along with matching "
-"personnal directories to the installation target or you can wipe them out & "
-"create a complete new login account instead."
-msgstr ""
+msgid "Salix Live Installer has detected a LiveClone customized environment. You can transfer your existing LiveClone login accounts along with matching personnal directories to the installation target or you can wipe them out & create a complete new login account instead."
+msgstr "Η εφαρμογή εγκατάστασης του Salix ανίχνευσε ένα προσαρμοσμένο περιβάλλον LiveClone. Μπορείτε να μεταφέρετε τους υπάρχοντες λογαριασμούς μαζί με τους αρχικούς καταλόγους χρηστών στο νέο σύστημα ή μπορείτε να τους διαγράψετε και να δημιουργήσετε νέους λογαριασμούς."
 
 #: src/salix-live-installer.py:780
 msgid "Transfer existing users."
-msgstr ""
+msgstr "Μεταφορά υπάρχοντων χρηστών."
 
 #: src/salix-live-installer.py:785
-#, fuzzy
 msgid "Cancel users transfer."
-msgstr "Ακύρωση της δημιουργίας νέου χρήστη."
+msgstr "Ακύρωση της μεταφοράς χρηστών."
 
 #: src/salix-live-installer.py:791
-msgid ""
-"A Linux system can manage many registered users and requires each one to log "
-"in, and to produce some form of authentication (usually a login name coupled "
-"with a password) before allowing the user access to system resources."
-msgstr ""
-"Ένα σύστημα Linux μπορεί να περιλαμβάνει πολλούς χρήστες και απαιτεί από τον "
-"καθένα να εισέρχεται στο σύστημα χρησιμοποιώντας κάποια μέθοδο αναγνώρισης "
-"(συνήθως το όνομα και ο κωδικός χρήστη) προτού επιτρέψει στον χρήστη να "
-"χρησιμοποιήσει το σύστημα."
+msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
+msgstr "Ένα σύστημα Linux μπορεί να περιλαμβάνει πολλούς χρήστες και απαιτεί από τον καθένα να εισέρχεται στο σύστημα χρησιμοποιώντας κάποια μέθοδο αναγνώρισης (συνήθως το όνομα και ο κωδικός χρήστη) προτού επιτρέψει στον χρήστη να χρησιμοποιήσει το σύστημα."
 
 #: src/salix-live-installer.py:799
-msgid ""
-"Here you must define your login name which should only include "
-"alphanumerical characters with no space or upper case letters. "
-msgstr ""
-"Εδώ πρέπει να εισάγετε το όνομα χρήστη το οποίο πρέπει να περιλαμβάνει μόνο "
-"αλφαριθμητικούς χαρακτήρες χωρίς κενά και κεφαλαία."
+msgid "Here you must define your login name which should only include alphanumerical characters with no space or upper case letters. "
+msgstr "Εδώ πρέπει να εισάγετε το όνομα χρήστη το οποίο πρέπει να περιλαμβάνει μόνο αλφαριθμητικούς χαρακτήρες χωρίς κενά και κεφαλαία."
 
 #: src/salix-live-installer.py:805
-msgid ""
-"Choose a password or passphrase to be coupled with your login name. Your "
-"password or passprase should include a mix of upper and lower case letters, "
-"numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"Εισάγετε έναν κωδικό χρήστη. Ο κωδικός χρήστη θα πρέπει να περιλαμβάνει πεζά "
-"και κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)."
+msgid "Choose a password or passphrase to be coupled with your login name. Your password or passprase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "Εισάγετε έναν κωδικό χρήστη. Ο κωδικός χρήστη θα πρέπει να περιλαμβάνει πεζά και κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)."
 
 #: src/salix-live-installer.py:813
 msgid "Here you must retype your password as a confirmation of your choice."
 msgstr "Εδώ πρέπει να επανεισάγετε των κωδικό χρήστη για επαλήθευση."
 
 #: src/salix-live-installer.py:819 src/salix-live-installer.py:851
-msgid ""
-"Check this box if you want to be able to see the password you are typing."
-msgstr ""
-"Επιλέξτε το αν επιθυμείτε να εμφανίζεται ο κωδικός κατά την πληκτρολόγηση."
+msgid "Check this box if you want to be able to see the password you are typing."
+msgstr "Επιλέξτε το αν επιθυμείτε να εμφανίζεται ο κωδικός κατά την πληκτρολόγηση."
 
 #: src/salix-live-installer.py:825
 msgid "Create new user."
@@ -736,24 +622,12 @@ msgid "Cancel new user creation."
 msgstr "Ακύρωση της δημιουργίας νέου χρήστη."
 
 #: src/salix-live-installer.py:836
-msgid ""
-"On Linux systems, the superuser, or root, is a special user accountused for "
-"system administration. Here you must set its password orpassphrase. "
-"Remember, this password or passphrase should include a mix of upper and "
-"lower case letters, numbers, and even symbols (such as the @, !, and &)"
-msgstr ""
-"Στα συστήματα Linux, ο διαχειριστής συστήματος, ή root, αποτελεί ένα ειδικό "
-"λογαριασμό χρήστη που χρησιμοποιείται για τη διαχείρηση συστήματος. Πρέπει "
-"να εισάγετε ένα κωδικό χρήστη. Ο κωδικός θα πρέπει να περιλαμβάνει πεζά και "
-"κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
+msgid "On Linux systems, the superuser, or root, is a special user accountused for system administration. Here you must set its password orpassphrase. Remember, this password or passphrase should include a mix of upper and lower case letters, numbers, and even symbols (such as the @, !, and &)"
+msgstr "Στα συστήματα Linux, ο διαχειριστής συστήματος, ή root, αποτελεί ένα ειδικό λογαριασμό χρήστη που χρησιμοποιείται για τη διαχείρηση συστήματος. Πρέπει να εισάγετε ένα κωδικό χρήστη. Ο κωδικός θα πρέπει να περιλαμβάνει πεζά και κεφαλαία, νούμερα, ακόμα και σύμβολα (όπως @, ! και &)"
 
 #: src/salix-live-installer.py:845
-msgid ""
-"Here you must retype the superuser (root) password as a confirmation of your "
-"choice."
-msgstr ""
-"Εδώ πρέπει να επανεισάγετε τον κωδικό του διαχειριστή του συστήματος για "
-"επαλήθευση."
+msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
+msgstr "Εδώ πρέπει να επανεισάγετε τον κωδικό του διαχειριστή του συστήματος για επαλήθευση."
 
 #: src/salix-live-installer.py:857
 msgid "Apply new root password."
@@ -770,89 +644,48 @@ msgstr "Πρόσβαση στις επιλογές πακέτων."
 #: src/salix-live-installer.py:874
 msgid ""
 "<b>Core installation:</b>\n"
-"Only the minimum essentials for a console system to start are included. A "
-"graphical environment is not provided. This is ideal if you are an "
-"experienced user and want to customize your installation for any specific "
-"purpose, such as a web server, file server etc. "
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
 "<b>Εγκατάσταση Core:</b>\n"
-"Μόνο τα ελάχιστα για τη λειτουργία ενός συστήματος κονσόλας Linux θα "
-"εγκατασταθούν. Δεν περιλαμβάνεται κανένα γραφικό περιβάλλον. Ιδανικό για "
-"έμπειρους χρήστες που επιθυμούν να τροποποιήσουν μια εγκατάσταση για "
-"οποιοδήποτε σκοπό, όπως web server, file server κλπ."
+"Μόνο τα ελάχιστα για τη λειτουργία ενός συστήματος κονσόλας Linux θα εγκατασταθούν. Δεν περιλαμβάνεται κανένα γραφικό περιβάλλον. Ιδανικό για έμπειρους χρήστες που επιθυμούν να τροποποιήσουν μια εγκατάσταση για οποιοδήποτε σκοπό, όπως web server, file server κλπ."
 
 #: src/salix-live-installer.py:885
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only the Lxde desktop environment with the Midori web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight Lxde and add their own choice of applications."
+"This installs only the Lxde desktop environment with the Midori web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Lxde and add their own choice of applications."
 msgstr ""
 "<b>Βασική εγκατάσταση:</b>\n"
-"Εγκαθιστάται μόνο το γραφικό περιβαλλον Xfce μαζί με το Firefox και την "
-"εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους "
-"χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον Xfce ώστε να προσθέσουν τις "
-"εφαρμογές της αρεσκείας τους."
+"Εγκαθίσταται μόνο το γραφικό περιβαλλον LXDE μαζί με το Midori και την εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον LXDE ώστε να προσθέσουν τις εφαρμογές της αρεσκείας τους."
 
 #: src/salix-live-installer.py:891
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only the Xfce desktop environment with the Firefox web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight Xfce and add their own choice of applications."
+"This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
 msgstr ""
 "<b>Βασική εγκατάσταση:</b>\n"
-"Εγκαθιστάται μόνο το γραφικό περιβαλλον Xfce μαζί με το Firefox και την "
-"εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους "
-"χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον Xfce ώστε να προσθέσουν τις "
-"εφαρμογές της αρεσκείας τους."
+"Εγκαθιστάται μόνο το γραφικό περιβαλλον Xfce μαζί με το Firefox και την εφαρμογή διαχείρησης πακέτων λογισμικού gslapt. Ιδανικό για προχωρημένους χρήστες που επιθυμούν ένα ελαφρύ περιβάλλον Xfce ώστε να προσθέσουν τις εφαρμογές της αρεσκείας τους."
 
 #: src/salix-live-installer.py:902
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the Lxde "
-"desktop environment, the Midori web browser and Claws-mail email client, "
-"Gnumeric and Abiword for office work, a Java Runtime Environment, the Whaah! "
-"media player and Exaile music manager, the Gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
+"Everything that is included in the iso is installed. That includes the Lxde desktop environment, the Midori web browser and Claws-mail email client, Gnumeric and Abiword for office work, a Java Runtime Environment, the Whaah! media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Πλήρης εγκατάσταση:</b>\n"
-"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό "
-"περιβάλλον Xfce, τον περιηγητή διαδικτύου Firefox και την εφαρμογή "
-"ηλεκτρονικής αλληλογραφίας Claws-mail, την πλήρη σουίτα γραφείου OpenOffice."
-"org, Java, το διαχειριστή πακέτων λογισμικού gslapt και πολλές άλλες "
-"εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε λειτουργία"
-"\"."
+"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό περιβάλλον LXDE, τον περιηγητή διαδικτύου Midori και την εφαρμογή ηλεκτρονικής αλληλογραφίας Claws-mail, τις εφαρμογές γραφείου Gnumeric και Abiword, Java, το διαχειριστή πακέτων λογισμικού gslapt και πολλές άλλες εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε λειτουργία\"."
 
 #: src/salix-live-installer.py:910
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the Xfce "
-"desktop environment, the Firefox web browser and Claws-mail email client, a "
-"complete OpenOffice.org office suite, a Java Runtime Environment, the Parole "
-"media player and Exaile music manager, the Gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
+"Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Parole media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Πλήρης εγκατάσταση:</b>\n"
-"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό "
-"περιβάλλον Xfce, τον περιηγητή διαδικτύου Firefox και την εφαρμογή "
-"ηλεκτρονικής αλληλογραφίας Claws-mail, την πλήρη σουίτα γραφείου OpenOffice."
-"org, Java, το διαχειριστή πακέτων λογισμικού gslapt και πολλές άλλες "
-"εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε λειτουργία"
-"\"."
+"Όλο το διαθέσιμο λογισμικό θα εγκατασταθεί. Περιλαμβάνει το γραφικό περιβάλλον Xfce, τον περιηγητή διαδικτύου Firefox και την εφαρμογή ηλεκτρονικής αλληλογραφίας Claws-mail, την πλήρη σουίτα γραφείου OpenOffice.org, Java, το διαχειριστή πακέτων λογισμικού gslapt και πολλές άλλες εφαρμογές, πάντα ακολουθώντας τη φιλοσοφία \"μία εφαρμογή για κάθε λειτουργία\"."
 
 #: src/salix-live-installer.py:918
 msgid ""
 "<b>Full installation:</b>\n"
-"Salix Live Installer has detected a LiveClone customized environment. Core "
-"and Basic installation modes are therefore not available. \n"
-"You can only perform a full installation: all software included in your "
-"customized LiveClone will be installed."
+"Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
+"You can only perform a full installation: all software included in your customized LiveClone will be installed."
 msgstr ""
 
 #: src/salix-live-installer.py:928
@@ -930,9 +763,7 @@ msgstr "Ο κωδικός χρήστη είναι κενός"
 
 #: src/salix-live-installer.py:1354 src/salix-live-installer.py:1385
 msgid "Your password is too short. It should have at least 5 characters"
-msgstr ""
-"Ο κωδικός χρήστης είναι πολύ μικρός. Πρέπει να έχει μήκος τουλάχιστον 5 "
-"χαρακτήρες"
+msgstr "Ο κωδικός χρήστης είναι πολύ μικρός. Πρέπει να έχει μήκος τουλάχιστον 5 χαρακτήρες"
 
 #: src/salix-live-installer.py:1357 src/salix-live-installer.py:1388
 msgid "Your 2 password entries do not match"
@@ -986,9 +817,7 @@ msgid "and will mounted as swap"
 msgstr "και θα προσαρτηθεί στο"
 
 #: src/salix-live-installer.py:1469
-msgid ""
-"Salix Live Installer was not able to detect a valid Swap partition on your "
-"system."
+msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
 msgstr ""
 
 #: src/salix-live-installer.py:1472 src/salix-live-installer.py:1474
@@ -1016,8 +845,7 @@ msgid ""
 msgstr ""
 "<b>Συγγνώμη!</b> \n"
 "\n"
-"Δεν ήταν δυνατό να εκκινήσει το LiloSetup, πρέπει να εγκαταστήσετε το LILO "
-"μόνοι σας."
+"Δεν ήταν δυνατό να εκκινήσει το LiloSetup, πρέπει να εγκαταστήσετε το LILO μόνοι σας."
 
 #: src/salix-live-installer.py:1768 src/salix-live-installer.py:1773
 msgid ""
@@ -1029,8 +857,7 @@ msgid ""
 msgstr ""
 "<b>Συγγνώμη!</b>\n"
 "\n"
-"Η εφαρμογή Salix Live Installer μπορεί να εκτελεστεί μόνο σε περιβάλλον "
-"LiveCD.\n"
+"Η εφαρμογή Salix Live Installer μπορεί να εκτελεστεί μόνο σε περιβάλλον LiveCD.\n"
 "\n"
 "Δεν μπορείτε να προχωρήστε παρακάτω!"
 
@@ -1091,8 +918,7 @@ msgstr "Η εγκατάσταση ολοκληρώθηκε με επιτυχία
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
-"LiloSetup will now be launched to enable you to add Salix to your "
-"bootloader.\n"
+"LiloSetup will now be launched to enable you to add Salix to your bootloader.\n"
 "(If you prefer to use another bootloader utility, click on the no button\n"
 "and use the application of your choice before rebooting your machine.)\n"
 msgstr ""
@@ -1154,11 +980,7 @@ msgstr ""
 "Δεν ήταν δυνατό να ρυθμιστεί ο κωδικός του διαχειριστή συστήματος."
 
 #: src/salix-live-installer.py:2267
-msgid ""
-"Salix Live Installer was not able to detect a valid partition on your "
-"system. You should exit Salix Live Installer now and use Gparted, or any "
-"other partitioning tool of your choice, to first create valid partitions on "
-"your system before resuming with Salix Live Installer process."
+msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions on your system before resuming with Salix Live Installer process."
 msgstr ""
 
 #: src/salix-live-installer.py:2275
@@ -1168,12 +990,8 @@ msgstr "Επιλογή _κατάτμησης"
 
 #: src/salix-live-installer.py:2277
 msgid ""
-"Salix Live Installer was not able to detect a valid Swap partition on your "
-"system. \n"
-"A Swap partition could improve overall performances. You may want to exit "
-"Salix Live Installer now and use Gparted, or any other partitioning tool of "
-"your choice, to first create a Swap partition before resuming with Salix "
-"Live Installer process."
+"Salix Live Installer was not able to detect a valid Swap partition on your system. \n"
+"A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
 msgstr ""
 
 #: src/salix-live-installer.py:2285
@@ -1181,11 +999,7 @@ msgid "Salix Live Installer has detected a Swap partition on "
 msgstr ""
 
 #: src/salix-live-installer.py:2288
-msgid ""
-"Salix Live Installer was not able to detect a valid partition on your "
-"system. You should exit Salix Live Installer now and use Gparted, or any "
-"other partitioning tool of your choice, to first create valid partitions "
-"before resuming with Salix Live Installer process."
+msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live Installer process."
 msgstr ""
 
 #: src/salix-live-installer.py:2370
@@ -1196,19 +1010,16 @@ msgid ""
 msgstr ""
 "<b>Συγγνώμη!</b> \n"
 "\n"
-"Πρέπει να έχετε δικαιώματα διαχειριστή συστήματος για να εκτελέσετε αυτή την "
-"εφαρμογή."
+"Πρέπει να έχετε δικαιώματα διαχειριστή συστήματος για να εκτελέσετε αυτή την εφαρμογή."
 
 #: src/salix-live-installer.desktop.in.h:1
 msgid "Install Salix on your computer from a SalixLive session"
-msgstr ""
-"Εγκατάσταση του Salix στον υπολογιστή σας μέσω του περιβάλλοντος SalixLive"
+msgstr "Εγκατάσταση του Salix στον υπολογιστή σας μέσω του περιβάλλοντος SalixLive"
 
 #: src/salix-live-installer.desktop.in.h:2
 msgid "Salix Installer"
 msgstr "Εγκατάσταση του Salix"
 
-#, fuzzy
 #~ msgid "Salix OS Transifex team"
 #~ msgstr "Ομάδα Transifex του Salix"
 
@@ -1226,31 +1037,11 @@ msgstr "Εγκατάσταση του Salix"
 #~ msgid "Mount as"
 #~ msgstr "Προσάρτηση ως"
 
-#~ msgid ""
-#~ "The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-"
-#~ "loaded SMP Linux kernel with built-in support for most disk controllers."
-#~ msgstr ""
-#~ "Ο τυπικός πυρήνας που χρησιμοποιείται από το Salix είναι ο kernel-huge-"
-#~ "smp του Slackware, ο οποίος περιλαμβανει υποστήριξη για τους "
-#~ "περισσότερους ελεγκτές σκληρών δίσκων."
+#~ msgid "The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-loaded SMP Linux kernel with built-in support for most disk controllers."
+#~ msgstr "Ο τυπικός πυρήνας που χρησιμοποιείται από το Salix είναι ο kernel-huge-smp του Slackware, ο οποίος περιλαμβανει υποστήριξη για τους περισσότερους ελεγκτές σκληρών δίσκων."
 
-#~ msgid ""
-#~ "SalixLive's live kernel is based on Slackware's kernel-huge-smp, but it "
-#~ "has been patched to include aufs2 filesystem as well as squashfs-lzma "
-#~ "compression. Its configuration has also been slightly changed to ensure "
-#~ "most strategic devices would be available to the live system booting "
-#~ "process. Although not absolutely necessary, you may prefer to install "
-#~ "this kernel if you want to build your own LiveCD out of an installed "
-#~ "Salix system (The Linux Live Scripts will also be installed if you select "
-#~ "this kernel)."
-#~ msgstr ""
-#~ "Ο πυρήνας του SalixLive βασίζεται στην πυρήνα kernel-huge-smp του "
-#~ "Slackware, αλλά έχει ενσωματωθεί το σύστημα αρχείων aufs2 όπως επίσης και "
-#~ "η συμπίεση squashfs-lzma. Η διαμόρφωση του έχει αλλαχτεί ελάχιστα για να "
-#~ "γίνει βέβαιο ότι όλες οι σημαντικές συσκευές θα είναι διαθέσιμες με την "
-#~ "εκκίνηση του live συστήματος. Προτιμήστε αυτόν τον πυρήνα αν επιθυμείτε "
-#~ "να δημιουργήστε το δικό σας LiveCD από ένα σύστημα Salix (Τα Linux Live "
-#~ "Scripts θα εγκατασταθούν με τη χρήση αυτού του πυρήνα)."
+#~ msgid "SalixLive's live kernel is based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process. Although not absolutely necessary, you may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The Linux Live Scripts will also be installed if you select this kernel)."
+#~ msgstr "Ο πυρήνας του SalixLive βασίζεται στην πυρήνα kernel-huge-smp του Slackware, αλλά έχει ενσωματωθεί το σύστημα αρχείων aufs2 όπως επίσης και η συμπίεση squashfs-lzma. Η διαμόρφωση του έχει αλλαχτεί ελάχιστα για να γίνει βέβαιο ότι όλες οι σημαντικές συσκευές θα είναι διαθέσιμες με την εκκίνηση του live συστήματος. Προτιμήστε αυτόν τον πυρήνα αν επιθυμείτε να δημιουργήστε το δικό σας LiveCD από ένα σύστημα Salix (Τα Linux Live Scripts θα εγκατασταθούν με τη χρήση αυτού του πυρήνα)."
 
 #~ msgid "standard"
 #~ msgstr "τυπικός"
@@ -1279,14 +1070,12 @@ msgstr "Εγκατάσταση του Salix"
 #~ "From the above partitions found on your system, please select the \n"
 #~ "one where Salix' main directory tree (/) should be installed.\n"
 #~ "\n"
-#~ "<b>Warning!</b> This partition will be reformatted and its data will be "
-#~ "erased."
+#~ "<b>Warning!</b> This partition will be reformatted and its data will be erased."
 #~ msgstr ""
 #~ "Από τις παραπάνω κατατμήσεις που βρέθηκαν στο σύστημα, παρακαλώ \n"
 #~ "επιλέξτε αυτή που θα περιέχει τον κύριο κατάλογο (/) του Salix.\n"
 #~ "\n"
-#~ "<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα "
-#~ "διαγραφούν."
+#~ "<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα διαγραφούν."
 
 #~ msgid "Creating /etc/rc.d/rc.keymap..."
 #~ msgstr "Δημιουργία του /etc/rc.d/rc.keymap..."
