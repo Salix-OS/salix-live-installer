@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.4'
+# version = '0.2.5'
 
 import commands
 import subprocess
@@ -881,7 +881,14 @@ file server etc. "))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
+		if os.path.exists("/usr/share/lxde") == True :
+			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
+This installs only the Lxde desktop environment with the Midori \
+web browser and the gslapt package manager. Ideal for advanced \
+users that would like to install a lightweight Lxde and add their \
+own choice of applications."))
+		else :
+			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
 This installs only the Xfce desktop environment with the Firefox \
 web browser and the gslapt package manager. Ideal for advanced \
 users that would like to install a lightweight Xfce and add their \
@@ -891,11 +898,20 @@ own choice of applications."))
 	self.ContextLabel.set_text(context_intro)
     def on_full_radiobutton_enter_notify_event(self, widget, data=None):
         if liveclone_install == False :
-            self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
+			if os.path.exists("/usr/share/lxde") == True :
+				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
+Everything that is included in the iso is installed. That includes the \
+Lxde desktop environment, the Midori web browser and Claws-mail \
+email client, Gnumeric and Abiword for office work, a Java Runtime \
+Environment, the Whaah! media player and Exaile music manager, \
+the Gslapt package manager and several other applications, always \
+following the 'one application per task' rationale."))
+			else :
+				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Everything that is included in the iso is installed. That includes the \
 Xfce desktop environment, the Firefox web browser and Claws-mail \
 email client, a complete OpenOffice.org office suite, a Java Runtime \
-Environment, the Totem media player and Exaile music manager, \
+Environment, the Parole media player and Exaile music manager, \
 the Gslapt package manager and several other applications, always \
 following the 'one application per task' rationale."))
         elif liveclone_install == True :
@@ -2246,22 +2262,35 @@ and use the application of your choice before rebooting your machine.)\n"""))
                 partition_list_initialization()
                 self.RecapPartitionBox.hide()
                 self.MainPartitionBox.show()
-                # Detect the swap partition
-                global Swap_Partition
-                fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
-                Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
-                SwapText = "\n<b>" + _("Swap Partition") + ":</b> \n"
-                try:
-                    for i in Swap_Partition:
-                        SwapText += _("Salix Live Installer has detected a Swap \
-partition on " + i +" and will automatically add it to your configuration.\n")
-                    info_dialog(SwapText)
-                except:
-                    info_dialog(_("Salix Live Installer was not able to detect a valid \
+                # Detect swap & other partitions
+                if part_feedline_list == [] :
+                    info_dialog(_("Salix Live Installer was not able to detect a \
+valid partition on your system. You should exit Salix Live Installer now and use \
+Gparted, or any other partitioning tool of your choice, to first create valid \
+partitions on your system before resuming with Salix Live Installer process."))
+                else :
+                    global Swap_Partition
+                    fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
+                    Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
+                    SwapText = "\n<b>" + _("Detected Swap partition(s)") + ":</b> \n"
+                    if commands.getoutput(fdisk_swap_output) == '' :
+                        info_dialog(_("Salix Live Installer was not able to detect a valid \
 Swap partition on your system. \nA Swap partition could improve overall performances. \
 You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
-tool of your choice, to first create a swap partition before resuming with Salix Live \
+tool of your choice, to first create a Swap partition before resuming with Salix Live \
 Installer process."))
+                    else :
+                        for i in Swap_Partition:
+                            if "doesn't contain a valid partition table" not in i :
+                                SwapText += _("Salix Live Installer has detected a Swap \
+partition on " + i +" and will automatically add it to your configuration.\n")
+                            else :
+                                SwapText = _("Salix Live Installer was not able to detect \
+a valid partition on your system. You should exit Salix Live Installer now and use Gparted, \
+or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live \
+Installer process.")
+                        info_dialog(SwapText)
+
             self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
