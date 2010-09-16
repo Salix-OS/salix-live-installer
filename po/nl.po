@@ -686,6 +686,8 @@ msgid ""
 "Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
 "You can only perform a full installation: all software included in your customized LiveClone will be installed."
 msgstr ""
+"<b>Volledige installatie:</b> \\ nSalix Live Installer heeft een aangepaste LiveClone omgeving ontdekt. Core en Basic installatie modi zijn derhalve niet beschikbaar. \n"
+"U kunt alleen een volledige installatie uitvoeren: alle software in uw aangepaste LiveClone zal worden geïnstalleerd."
 
 #: src/salix-live-installer.py:928
 msgid "Confirm your packages selection."
@@ -816,7 +818,7 @@ msgstr "en zal worden gemount als swap"
 
 #: src/salix-live-installer.py:1469
 msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
-msgstr ""
+msgstr "Salix Live Installer was niet in staat om een geldige Swap partitie te detecteren op uw systeem."
 
 #: src/salix-live-installer.py:1472 src/salix-live-installer.py:1474
 msgid "Standard User"
@@ -824,7 +826,7 @@ msgstr "Standaardgebruiker"
 
 #: src/salix-live-installer.py:1472
 msgid "Using LiveClone login. "
-msgstr ""
+msgstr "Gebruik de LiveClone login."
 
 #: src/salix-live-installer.py:1475
 msgid "Packages"
@@ -977,7 +979,7 @@ msgstr ""
 
 #: src/salix-live-installer.py:2267
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions on your system before resuming with Salix Live Installer process."
-msgstr ""
+msgstr "Salix Live Installer was niet in staat om een geldige partitie te detecteren op uw systeem. U moet nu Salix Live Installer afsluiten en eerst Gparted, of een andere partitionering tool naar keuze, gebruiken om geldige partities op uw systeem te maken alvorens het Salix Live Installer-proces te hervatten."
 
 #: src/salix-live-installer.py:2275
 msgid "Detected Swap partition(s)"
@@ -988,14 +990,16 @@ msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your system. \n"
 "A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
 msgstr ""
+"Salix Live Installer was niet in staat om een geldige Swap partitie te detecteren op uw systeem. \n"
+"U kunt nu Salix Live Installer afsluiten en eerst Gparted, of een andere partitionering tool naar keuze, gebruiken om een Swap partitie op uw systeem te maken alvorens het Salix Live Installer-proces te hervatten."
 
 #: src/salix-live-installer.py:2285
 msgid "Salix Live Installer has detected a Swap partition on "
-msgstr ""
+msgstr "Salix Live Installer heeft een Swap partitie gedetecteerd op"
 
 #: src/salix-live-installer.py:2288
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live Installer process."
-msgstr ""
+msgstr "Salix Live Installer was niet in staat om een geldige partitie te detecteren op uw systeem. U zou nu Salix Live Installer kunnen afsluiten en eerst Gparted, of een andere partitionering tool naar keuze, gebruiken om geldige partities op uw systeem te maken alvorens het Salix Live Installer-proces te hervatten."
 
 #: src/salix-live-installer.py:2370
 msgid ""
