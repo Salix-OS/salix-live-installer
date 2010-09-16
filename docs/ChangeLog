@@ -1,11 +1,8 @@
-Version 0.2.6
- * Translations updated
- * Tagged for Salix Live 13.1.1 release
-
 Version 0.2.5
  * Added LXDE support
  * Added a warning message in case of missing swap partition
  * Added a warning message in case of no partitions at all
+ * Updated translations
 
 Version 0.2.4
  * Added translation in Japanese & Swedish
