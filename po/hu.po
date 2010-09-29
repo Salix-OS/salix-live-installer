@@ -646,13 +646,12 @@ msgstr ""
 "Csak a minimális és a rendszer működése szempontjából létszükséges csomagokat telepíti fel, amely konzolos bejelentkezést tesz lehetővé. Grafikus felületet ez esetben nem kapunk. Azon tapasztalt felhasználók számára ideális, akik saját maguk szeretnék speciális célokra felépíteni a rendszert, mint például egy web-szerver, vagy fájl-kiszolgáló."
 
 #: src/salix-live-installer.py:885
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
 "This installs only the Lxde desktop environment with the Midori web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Lxde and add their own choice of applications."
 msgstr ""
 "<b>Alap telepítés:</b>\n"
-"Ez a módozat csak az pehelykönnyű Xfce munkaasztal környezetet telepíti a Firefox böngészővel és a gslapt csomagkezelővel. Tapasztalt felhasználók számára ideális, akik az Xfce mellé maguk szeretnék összeválogatni a programokat."
+"Ez a módozat csak az pehelykönnyű Xfce munkaasztal környezetet telepíti a Midori böngészővel és a gslapt csomagkezelővel. Tapasztalt felhasználók számára ideális, akik az Xfce mellé maguk szeretnék összeválogatni a programokat."
 
 #: src/salix-live-installer.py:891
 msgid ""
@@ -663,22 +662,20 @@ msgstr ""
 "Ez a módozat csak az pehelykönnyű Xfce munkaasztal környezetet telepíti a Firefox böngészővel és a gslapt csomagkezelővel. Tapasztalt felhasználók számára ideális, akik az Xfce mellé maguk szeretnék összeválogatni a programokat."
 
 #: src/salix-live-installer.py:902
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
 "Everything that is included in the iso is installed. That includes the Lxde desktop environment, the Midori web browser and Claws-mail email client, Gnumeric and Abiword for office work, a Java Runtime Environment, the Whaah! media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Teljes telepítés:</b>\n"
-"Minden telepítésre kerül, ami a készletben megtalálható. Beletartozik az Xfce munkaasztal környezet, a Firefox web-böngésző, a Claws-mail levelező alkalmazás, a teljes OpenOffice.org irodai programcsomag, Java futtató környezet (JRE), a Totem médialejátszó, az Exaile zene lejátszó és kezelő, a gslapt csomagkezelő és még számos egyéb alkalmazás, követve az \"egy feladatra egy program\" elvét."
+"Minden telepítésre kerül, ami a készletben megtalálható. Beletartozik az Xfce munkaasztal környezet, a Midori web-böngésző, a Claws-mail levelező alkalmazás, a Gnumeric és Abiword irodai programokat, Java futtató környezet (JRE), a Totem médialejátszó, az Whaah! zene lejátszó és kezelő, a gslapt csomagkezelő és még számos egyéb alkalmazás, követve az \"egy feladatra egy program\" elvét."
 
 #: src/salix-live-installer.py:910
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
 "Everything that is included in the iso is installed. That includes the Xfce desktop environment, the Firefox web browser and Claws-mail email client, a complete OpenOffice.org office suite, a Java Runtime Environment, the Parole media player and Exaile music manager, the Gslapt package manager and several other applications, always following the 'one application per task' rationale."
 msgstr ""
 "<b>Teljes telepítés:</b>\n"
-"Minden telepítésre kerül, ami a készletben megtalálható. Beletartozik az Xfce munkaasztal környezet, a Firefox web-böngésző, a Claws-mail levelező alkalmazás, a teljes OpenOffice.org irodai programcsomag, Java futtató környezet (JRE), a Totem médialejátszó, az Exaile zene lejátszó és kezelő, a gslapt csomagkezelő és még számos egyéb alkalmazás, követve az \"egy feladatra egy program\" elvét."
+"Minden telepítésre kerül, ami a készletben megtalálható. Beletartozik az Xfce munkaasztal környezet, a Midori web-böngésző, a Claws-mail levelező alkalmazás, a teljes OpenOffice.org irodai programcsomag, Java futtató környezet (JRE), a Parole médialejátszó, az Exaile zene lejátszó és kezelő, a gslapt csomagkezelő és még számos egyéb alkalmazás, követve az \"egy feladatra egy program\" elvét."
 
 #: src/salix-live-installer.py:918
 msgid ""
@@ -816,7 +813,7 @@ msgstr "és csatolva mint cserepartíció"
 
 #: src/salix-live-installer.py:1469
 msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
-msgstr ""
+msgstr "Salix Live telepítő nem talált valós Csere partíciót a rendszerben."
 
 #: src/salix-live-installer.py:1472 src/salix-live-installer.py:1474
 msgid "Standard User"
