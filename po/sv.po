@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: salix live installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-15 11:53+0200\n"
-"PO-Revision-Date: 2010-09-26 10:34+0100\n"
+"PO-Revision-Date: 2010-10-04 19:10+0100\n"
 "Last-Translator: Ingemar Karlsson <ingemar@ingk.se>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -942,13 +942,13 @@ msgstr "Installerar din LiveClone system..."
 #: src/salix-live-installer.py:1964
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
-msgstr "Installerar %(mode)s läget paket..."
+msgstr "Installerar %(mode)s paketen..."
 
 #: src/salix-live-installer.py:1907
 #: src/salix-live-installer.py:1935
 #: src/salix-live-installer.py:1972
 msgid "Installing the common packages..."
-msgstr "Installera vanliga paket..."
+msgstr "Installerar vanliga paket..."
 
 #: src/salix-live-installer.py:1981
 msgid "Installing the kernel..."
@@ -978,7 +978,7 @@ msgstr ""
 "<b>Salix installationen utfördes med framgång!</b>\n"
 "\n"
 "LiloSetup kommer nu att starta så att du kan lägga till Salix till din starthanterare. \n"
-"(Om du föredrar att använda en annan starthanterare, klicka på någon knapp \n"
+"(Om du föredrar att använda en annan starthanterare, klicka på nej knappen \n"
 "och använda valfritt program före omstart din dator.)\n"
 
 #: src/salix-live-installer.py:2115
