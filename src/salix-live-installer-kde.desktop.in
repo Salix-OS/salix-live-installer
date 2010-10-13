@@ -1,13 +1,13 @@
 [Desktop Entry]
 Categories=Application;System;
-Exec=gksu /usr/sbin/salix-live-installer.py
+Exec=kdesu /usr/sbin/salix-live-installer.py
 Icon=salix-live-installer
 StartupNotify=true
 Terminal=false
 Type=Application
 Encoding=UTF-8
 NoDisplay=false
-NotShowIn=KDE
+OnlyShowIn=KDE
 _Name=Salix Installer
 _GenericName=Salix Live Installer
 _Comment=Install Salix on your computer from a SalixLive session

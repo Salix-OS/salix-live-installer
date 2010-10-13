@@ -1,3 +1,6 @@
+Version 0.2.6
+ * Added salix-live-installer-kde.desktop.in file
+
 Version 0.2.5
  * Added LXDE support
  * Added a warning message in case of missing swap partition

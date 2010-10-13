@@ -20,6 +20,8 @@ install -m 644 src/salix-live-installer.glade \
 $DESTDIR/usr/share/salix-live-installer
 install -m 644 src/salix-live-installer.desktop \
 $DESTDIR/usr/share/applications/
+install -m 644 src/salix-live-installer-kde.desktop \
+$DESTDIR/usr/share/applications/
 install -m 644 icons/salix-live-installer-24.png \
 $DESTDIR/usr/share/icons/hicolor/24x24/apps/salix-live-installer.png
 install -m 644 icons/salix-live-installer-64.png \
