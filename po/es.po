@@ -253,11 +253,11 @@ msgstr "<b>Por favor, crear una nueva contraseña del administrador:</b>"
 
 #: src/salix-live-installer.glade:2938
 msgid "Enter root password: "
-msgstr "Ingresar la contrseña de root: "
+msgstr "Ingresar la contraseña de root: "
 
 #: src/salix-live-installer.glade:2987
 msgid "Re-enter root password: "
-msgstr "Re-ingresar la contrseña de root: "
+msgstr "Re-ingresar la contraseña de root: "
 
 #: src/salix-live-installer.glade:3021
 msgid "<b>Password created: </b>"
