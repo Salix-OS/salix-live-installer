@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
+"X-Poedit-Language: French\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -153,7 +153,7 @@ msgid ""
 "<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
 "À partir des partitions détectées ci-dessus, veuillez sélectionner celle sur laquelle l'arborescence principale (/) de Salix OS devra être installée.\n"
-"<b>Avertissement !</b> Cette partition sera reformatée et toutes ses données seront irrémédiablement supprimées."
+"<b>Avertissement !</b> Cette partition sera  de nouveau formatée et toutes ses données seront irrémédiablement supprimées."
 
 #: src/salix-live-installer.glade:1941
 msgid "Format with: "
