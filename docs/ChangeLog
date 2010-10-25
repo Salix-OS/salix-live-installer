@@ -1,5 +1,6 @@
 Version 0.2.6
- * Added salix-live-installer-kde.desktop.in file
+ * Added KDE support
+ * About window now grabs focus
 
 Version 0.2.5
  * Added LXDE support

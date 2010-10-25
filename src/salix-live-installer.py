@@ -883,9 +883,15 @@ file server etc. "))
     def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
 		if os.path.exists("/usr/share/lxde") == True :
 			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
-This installs only the Lxde desktop environment with the Midori \
+This installs only the LXDE desktop environment with the Midori \
 web browser and the gslapt package manager. Ideal for advanced \
-users that would like to install a lightweight Lxde and add their \
+users that would like to install a lightweight LXDE and add their \
+own choice of applications."))
+		elif os.path.exists("/usr/share/kde4") == True :
+			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
+This installs only the KDE desktop environment with the Konqueror \
+web browser and the gslapt package manager. Ideal for advanced \
+users that would like to install a basic KDE and add their \
 own choice of applications."))
 		else :
 			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
@@ -901,9 +907,17 @@ own choice of applications."))
 			if os.path.exists("/usr/share/lxde") == True :
 				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Everything that is included in the iso is installed. That includes the \
-Lxde desktop environment, the Midori web browser and Claws-mail \
+LXDE desktop environment, the Midori web browser and Claws-mail \
 email client, Gnumeric and Abiword for office work, a Java Runtime \
 Environment, the Whaah! media player and Exaile music manager, \
+the Gslapt package manager and several other applications, always \
+following the 'one application per task' rationale."))
+			elif os.path.exists("/usr/share/kde4") == True :
+				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
+Everything that is included in the iso is installed. That includes the \
+KDE desktop environment, the Konqueror web browser and KMail \
+email client, KSpread, KWord and the full KOffice suite, a Java Runtime \
+Environment, Kaffeine media player and Clementine music manager, \
 the Gslapt package manager and several other applications, always \
 following the 'one application per task' rationale."))
 			else :

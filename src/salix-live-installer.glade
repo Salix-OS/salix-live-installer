@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-naming-policy project-wide -->
   <!-- interface-local-resource-path /home/one/installersvn/trunk/pixmaps -->
   <object class="GtkListStore" id="keymap_list_store">
@@ -3576,6 +3576,9 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     </child>
   </object>
   <object class="GtkAboutDialog" id="about_dialog">
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
     <property name="border_width">5</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
@@ -3585,7 +3588,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.2.5</property>
+    <property name="version">0.2.6</property>
     <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
@@ -3653,6 +3656,9 @@ Ukrainian: Yarema aka Knedly &lt;yupadmin~at~gmail~dot~com&gt;</property>
     </child>
   </object>
   <object class="GtkDialog" id="yes_no_dialog">
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Confirmation needed</property>
     <property name="modal">True</property>
@@ -3753,6 +3759,9 @@ Ukrainian: Yarema aka Knedly &lt;yupadmin~at~gmail~dot~com&gt;</property>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="progress_dialog">
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Salix installation</property>
     <property name="resizable">False</property>
@@ -3761,6 +3770,7 @@ Ukrainian: Yarema aka Knedly &lt;yupadmin~at~gmail~dot~com&gt;</property>
     <property name="icon">salix-live-installer.png</property>
     <property name="type_hint">normal</property>
     <property name="deletable">False</property>
+    <property name="transient_for">main_window</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
