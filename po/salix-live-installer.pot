@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-25 11:34+0200\n"
+"POT-Creation-Date: 2010-10-25 14:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -304,23 +304,27 @@ msgid ""
 "MA 02110-1301, USA."
 msgstr ""
 
-#: src/salix-live-installer.glade:3663
+#: src/salix-live-installer.glade:3611
+msgid "translator-credits"
+msgstr ""
+
+#: src/salix-live-installer.glade:3641
 msgid "Confirmation needed"
 msgstr ""
 
-#: src/salix-live-installer.glade:3682
+#: src/salix-live-installer.glade:3660
 msgid "<b>Message about the particular choice: </b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:3695
+#: src/salix-live-installer.glade:3673
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr ""
 
-#: src/salix-live-installer.glade:3766
+#: src/salix-live-installer.glade:3744
 msgid "Salix installation"
 msgstr ""
 
-#: src/salix-live-installer.glade:3782
+#: src/salix-live-installer.glade:3760
 msgid "Please be patient, Salix installation is in progress... "
 msgstr ""
 

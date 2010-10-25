@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix Live Installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-25 11:30+0200\n"
+"POT-Creation-Date: 2010-10-25 14:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: seacat <seacat.linux@gmail.com>\n"
 "Language-Team: secat <seacat.linux@gmail.com>\n"
@@ -337,23 +337,27 @@ msgstr ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 
-#: src/salix-live-installer.glade:3663
+#: src/salix-live-installer.glade:3611
+msgid "translator-credits"
+msgstr "Fernando Velo <seacat~at~prog@gmail~dot~com>"
+
+#: src/salix-live-installer.glade:3641
 msgid "Confirmation needed"
 msgstr "Se necesita confirmación"
 
-#: src/salix-live-installer.glade:3682
+#: src/salix-live-installer.glade:3660
 msgid "<b>Message about the particular choice: </b>"
 msgstr "<b>Mensaje acerca de la opción particular: </b>"
 
-#: src/salix-live-installer.glade:3695
+#: src/salix-live-installer.glade:3673
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>¿Quiere continuar con esto?</b>"
 
-#: src/salix-live-installer.glade:3766
+#: src/salix-live-installer.glade:3744
 msgid "Salix installation"
 msgstr "Instalación de Salix"
 
-#: src/salix-live-installer.glade:3782
+#: src/salix-live-installer.glade:3760
 msgid "Please be patient, Salix installation is in progress... "
 msgstr "Por favor, sea paciente. La instalación de Salix se está realizando..."
 

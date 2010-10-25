@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-25 11:30+0200\n"
+"POT-Creation-Date: 2010-10-25 14:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: tsuren <hydrangea_and_snail@hotmail.com>\n"
 "Language-Team: \n"
@@ -343,23 +343,27 @@ msgstr ""
 "団まで請求してください(宛先は the Free Software Foundation, Inc., 59\n"
 "Temple Place, Suite 330, Boston, MA 02111-1307 USA)。"
 
-#: src/salix-live-installer.glade:3663
+#: src/salix-live-installer.glade:3611
+msgid "translator-credits"
+msgstr "tsuren <hydrangea_and_snail~at~hotmail~dot~com>"
+
+#: src/salix-live-installer.glade:3641
 msgid "Confirmation needed"
 msgstr "再確認が必要です。"
 
-#: src/salix-live-installer.glade:3682
+#: src/salix-live-installer.glade:3660
 msgid "<b>Message about the particular choice: </b>"
 msgstr "<b>特別な選択事項についてのメッセージ: </b>"
 
-#: src/salix-live-installer.glade:3695
+#: src/salix-live-installer.glade:3673
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>この設定でいいですか</b>"
 
-#: src/salix-live-installer.glade:3766
+#: src/salix-live-installer.glade:3744
 msgid "Salix installation"
 msgstr "Salixインストレーション"
 
-#: src/salix-live-installer.glade:3782
+#: src/salix-live-installer.glade:3760
 msgid "Please be patient, Salix installation is in progress... "
 msgstr ""
 "Salixが、インストールされています。時間がかかる場合があるので、終了するまで電"
