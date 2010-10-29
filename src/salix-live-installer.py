@@ -5,7 +5,7 @@
 # Salix installer will install Salix on your computer from the comfort of     #
 # SalixLive's graphic environment.                                            #
 #                                                                             #
-# Copyright Pierrick Le Brun <akuna~at~free~dot~fr>.                          #
+# Copyright Pierrick Le Brun <akuna~at~salixos~dot~org>.                      #
 #                                                                             #
 # This program is free software; you can redistribute it and/or               #
 # modify it under the terms of the GNU General Public License                 #
@@ -1898,11 +1898,12 @@ Swap partition on your system."))
                 subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
                 subprocess.call("spkg -d linux-live --root=" + Main_MountPoint, shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/etc/ssh/ssh_host_*", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/guide.desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/guide.desktop", shell=True)
+                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/*startup-guide*desktop", shell=True)
+                subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/*startup-guide*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/persistence*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/persistence*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/salix-live*desktop", shell=True)
+                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/liveclone*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/gparted*desktop", shell=True)
                 os.remove(Main_MountPoint + "/etc/rc.d/rc.live")
 
