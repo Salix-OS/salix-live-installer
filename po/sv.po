@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: salix live installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-25 11:34+0200\n"
-"PO-Revision-Date: 2010-10-29 18:45+0100\n"
+"PO-Revision-Date: 2010-10-31 15:02+0100\n"
 "Last-Translator: Ingemar Karlsson <ingemar@ingk.se>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -45,7 +45,7 @@ msgid ""
 "This installs only the Xfce desktop environment with the Firefox web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight Xfce and add their own choice of applications."
 msgstr ""
 "<b>Grundläggande installation:</b>\n"
-"Dettta installerar bara skrivbordsmiljön Xfce med webbläsaren Firefox och gslapt pakethanteraren. Idealisk för avancerade användare som vill installera ett lätt Xfce och lägga till sina egna val av program."
+"Detta installerar bara skrivbordsmiljön Xfce med webbläsaren Firefox och gslapt pakethanteraren. Idealisk för avancerade användare som vill installera ett lätt Xfce och lägga till sina egna val av program."
 
 #: src/salix-live-installer.py:874
 msgid ""
@@ -536,7 +536,7 @@ msgstr "Formatera och montering av din Linux-partition (s) ..."
 
 #: src/salix-live-installer.py:1812
 msgid "Formatting the main partition..."
-msgstr "Formatera de viktigaste partitionen ..."
+msgstr "Formatera huvud partitionen ..."
 
 #: src/salix-live-installer.py:1843
 msgid "Formatting your Linux partition(s)..."
@@ -604,13 +604,13 @@ msgstr "Installationen klar..."
 #: src/salix-live-installer.py:1978
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
-msgstr "Installera %(mode)s läget paket ..."
+msgstr "Installerar %(mode)s paketen..."
 
 #: src/salix-live-installer.py:1921
 #: src/salix-live-installer.py:1949
 #: src/salix-live-installer.py:1986
 msgid "Installing the common packages..."
-msgstr "Installera vanliga paket ..."
+msgstr "Installerar de gemensamma paketen..."
 
 #: src/salix-live-installer.py:1995
 msgid "Installing the kernel..."
@@ -741,7 +741,7 @@ msgstr "Partitioner"
 
 #: src/salix-live-installer.glade:3782
 msgid "Please be patient, Salix installation is in progress... "
-msgstr "Var vänlig vänta, Salix installerar..."
+msgstr "Var vänlig vänta, Salix installeras..."
 
 #: src/salix-live-installer.py:1128
 #: src/salix-live-installer.py:1130
