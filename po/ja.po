@@ -831,7 +831,7 @@ msgstr "そしてスワップとしてマウントされます"
 
 #: src/salix-live-installer.py:1483
 msgid "Salix Live Installer was not able to detect a valid Swap partition on your system."
-msgstr ""
+msgstr "SalixLiveインストーラは、システムで使えるスワップ·パーティションをみつけられませんでした。"
 
 #: src/salix-live-installer.py:1486 src/salix-live-installer.py:1488
 msgid "Standard User"
@@ -839,7 +839,7 @@ msgstr "一般ユーザ"
 
 #: src/salix-live-installer.py:1486
 msgid "Using LiveClone login. "
-msgstr ""
+msgstr "LiveCloneのログインを使用する。"
 
 #: src/salix-live-installer.py:1489
 msgid "Packages"
@@ -895,9 +895,8 @@ msgid "Mounting your Linux partition(s)..."
 msgstr "Linuxパーティションをマウントしています。"
 
 #: src/salix-live-installer.py:1872
-#, fuzzy
 msgid "Installing your LiveClone system..."
-msgstr "カーネルをインストールしています。"
+msgstr "LiveCloneシステムをインストールしています。"
 
 #: src/salix-live-installer.py:1913 src/salix-live-installer.py:1932
 #: src/salix-live-installer.py:1941 src/salix-live-installer.py:1960
@@ -993,12 +992,11 @@ msgstr ""
 
 #: src/salix-live-installer.py:2281
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions on your system before resuming with Salix Live Installer process."
-msgstr ""
+msgstr "SalixLiveインストーラは、システムで使用できるパーティションをみつけられませんでした。SalixLiveインストーラを閉じGParted、または別のパーティション分割ツールを使用し、インストール·プロセスを再開する前に、システムで使用できるパーティションを作成してください。"
 
 #: src/salix-live-installer.py:2289
-#, fuzzy
 msgid "Detected Swap partition(s)"
-msgstr "パーティションを選ぶ（_p）"
+msgstr "使用できるスワップ·パーティション"
 
 #: src/salix-live-installer.py:2291
 msgid ""
@@ -1008,7 +1006,7 @@ msgstr ""
 
 #: src/salix-live-installer.py:2299
 msgid "Salix Live Installer has detected a Swap partition on "
-msgstr ""
+msgstr "SalixLiveインストーラは、スワップ·パーティションをみつけました："
 
 #: src/salix-live-installer.py:2302
 msgid "Salix Live Installer was not able to detect a valid partition on your system. You should exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live Installer process."
@@ -1036,9 +1034,8 @@ msgstr "Salixインストーラー"
 
 #: src/salix-live-installer.desktop.in.h:3
 #: src/salix-live-installer-kde.desktop.in.h:3
-#, fuzzy
 msgid "Salix Live Installer"
-msgstr "SalixLiveインストーラー"
+msgstr "SalixLiveインストーラ"
 
 #~ msgid "Salix Transifex team"
 #~ msgstr "Salix Transifex チーム"
