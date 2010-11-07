@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-25 11:34+0200\n"
+"POT-Creation-Date: 2010-10-25 14:12+0200\n"
 "PO-Revision-Date: 2010-05-05 21:53+0100\n"
 "Last-Translator: Imar van Erven Dorens <gambit73@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -318,23 +318,27 @@ msgstr ""
 "schrijf naar de Free Software Foundation, Inc., 51 Franklin Street, \n"
 "Fifth Floor, Boston, MA 02110-1301, USA."
 
-#: src/salix-live-installer.glade:3663
+#: src/salix-live-installer.glade:3611
+msgid "translator-credits"
+msgstr "vertaler-credits"
+
+#: src/salix-live-installer.glade:3641
 msgid "Confirmation needed"
 msgstr "Bevestiging nodig"
 
-#: src/salix-live-installer.glade:3682
+#: src/salix-live-installer.glade:3660
 msgid "<b>Message about the particular choice: </b>"
 msgstr "<b>Bericht over de specifieke keuze:</b>"
 
-#: src/salix-live-installer.glade:3695
+#: src/salix-live-installer.glade:3673
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>Wilt u hiermee doorgaan?</b>"
 
-#: src/salix-live-installer.glade:3766
+#: src/salix-live-installer.glade:3744
 msgid "Salix installation"
 msgstr "Salix installatie"
 
-#: src/salix-live-installer.glade:3782
+#: src/salix-live-installer.glade:3760
 msgid "Please be patient, Salix installation is in progress... "
 msgstr "Even geduld aub, de Salix installatie bezig..."
 
