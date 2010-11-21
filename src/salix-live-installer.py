@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.6'
+# version = '0.2.7'
 
 import commands
 import subprocess
@@ -1703,6 +1703,11 @@ Swap partition on your system."))
                 partition_done_lock = 'on'
                 switch_tab_lock = ''
                 self.MainPartRecapLabel.set_text(MainPartConfirmLabel)
+                try:
+                    for i in Swap_Partition:
+                        self.SwapPartRecapLabel.set_text( i + "\n")
+                except:
+                    self.SwapPartRecapLabel.set_text(_('None') + ' \n')
                 self.LinPartRecapLabel.set_text(_('None') + ' \n')
                 self.WinPartRecapLabel.set_text(_('None') + ' \n')
                 self.YesNoDialog.hide()
@@ -1727,6 +1732,11 @@ Swap partition on your system."))
                 switch_tab_lock = ''
                 self.MainPartRecapLabel.set_text(MainPartConfirmLabel)
                 self.LinPartRecapLabel.set_text(LinPartConfirmLabel)
+                try:
+                    for i in Swap_Partition:
+                        self.SwapPartRecapLabel.set_text( i + "\n")
+                except:
+                    self.SwapPartRecapLabel.set_text(_('None') + ' \n')
                 self.WinPartRecapLabel.set_text(_('None') + ' \n')
                 self.YesNoDialog.hide()
                 self.LinuxPartitionBox.hide()
@@ -2079,6 +2089,11 @@ fi")
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
+        # Refresh the progress bar before creating the fork
+        self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
+        self.InstallProgressBar.set_fraction(0.91)
+        # there's more work, yield True
+        yield True
         # Create a fork to not get stuck in the chroot
         NewPid = os.fork()
         if NewPid == 0 :
@@ -2100,8 +2115,8 @@ fi")
             # Call Success dialog & offer to launch LiloSetup
             self.YesNoLabel.set_markup(_("""<b>Salix installation was executed with success!</b>
 \nLiloSetup will now be launched to enable you to add Salix to your bootloader.
-(If you prefer to use another bootloader utility, click on the no button
-and use the application of your choice before rebooting your machine.)\n"""))
+(If you prefer to use another bootloader utility, click on the No button and
+use the application of your choice before rebooting your machine.)\n"""))
             # Set localized environment back so that lilosetup comes up in the local language
             os.environ['LANG'] = Selected_Locale
             global LaunchLiloSetup
@@ -2119,36 +2134,28 @@ and use the application of your choice before rebooting your machine.)\n"""))
         subprocess.call('/var/log/setup/setup.htmlview', shell=True)
         subprocess.call('/var/log/setup/setup.services', shell=True)
         subprocess.call('/etc/cron.daily/housekeeping', shell=True)
-
-        # We have to deactivate some stuff in keyboardsetup first since we are in a chrooted environment
-        subprocess.call('sed -i "s/cd $backtohome/# cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
-        subprocess.call('sed -i "s/\/etc\/rc.d\/rc.hald restart/# \/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
-        # Now we can execute keyboardsetup
         try :
-            subprocess.check_call('keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -s ' + set_scim, shell=True)
+            subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -s ' + set_scim + ' -z', shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. "))
-        # And finally we need to undo our temporary changes
-        subprocess.call('sed -i "s/# cd $backtohome/cd $backtohome/" /usr/sbin/keyboardsetup', shell=True)
-        subprocess.call('sed -i "s/# \/etc\/rc.d\/rc.hald restart/\/etc\/rc.d\/rc.hald restart/" /usr/sbin/keyboardsetup', shell=True)
         try :
-            subprocess.check_call('localesetup ' + Selected_Locale, shell=True)
+            subprocess.check_call('/usr/sbin/localesetup ' + Selected_Locale, shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new language selection on the installation target. "))
 
         if login_transfer == False : # We must first delete eventual regular users' login accounts in the chrooted target
             for i in liveclone_users :
-                subprocess.call(" userdel -r " + i + " 2>/dev/null", shell=True)
+                subprocess.call(" /usr/sbin/userdel -r " + i + " 2>/dev/null", shell=True)
             try :
-                subprocess.check_call('useradd -m -s /bin/bash -G lp,floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
+                subprocess.check_call('/usr/sbin/useradd -m -s /bin/bash -G lp,floppy,audio,video,cdrom,plugdev,power,netdev,scanner ' + NewUser, shell=True)
             except :
                 error_dialog(_("<b>Sorry!</b> \n\nUnable to create the new user on the installation target. "))
             try :
-                subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | chpasswd', shell=True)
+                subprocess.check_call('echo "' + NewUser + ':' + NewUserPW + '" | /usr/sbin/chpasswd', shell=True)
             except :
                 error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new user's password on the installation target. "))
             try :
-                subprocess.check_call('echo "root:' + NewRootPW + '" | chpasswd', shell=True)
+                subprocess.check_call('echo "root:' + NewRootPW + '" | /usr/sbin/chpasswd', shell=True)
             except :
                 error_dialog(_("<b>Sorry!</b> \n\nUnable to set root's password on the installation target. "))
         # Exit child process
@@ -2172,6 +2179,8 @@ and use the application of your choice before rebooting your machine.)\n"""))
             WinMountSets = []
         self.YesNoDialog.hide()
         if LaunchLiloSetup == True :
+            info_dialog(_("""Installation process is fully completed but you have chosen not to install LILO.
+\nBefore rebooting your machine, you must now use another bootloader manager to setup Salix new system or it will not be operational."""))
             gtk.main_quit()
 
 ### CONFIGURATION TABS ###

@@ -1,3 +1,9 @@
+Version 0.2.7
+ * Fixed core install keyboardsetup bug
+ * Adapted new keyboardsetup syntax
+ * Added info box when quitting without executing lilosetup
+ * Fixed some partition recap box missing info strings regarding swap
+
 Version 0.2.6
  * Added KDE support
  * About window now grabs focus
