@@ -321,7 +321,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:3611
 msgid "translator-credits"
-msgstr ""
+msgstr "Übersetzer"
 
 #: src/salix-live-installer.glade:3641
 msgid "Confirmation needed"
