@@ -1,19 +1,21 @@
-# Dutch .po file for salix-live-installer.
-# Copyright (C) 2010
-# This file is distributed under the same license as the salix-live-installer package.
-# Imar van Erven Dorens <gambit73@gmail.com>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-21 18:58+0100\n"
-"PO-Revision-Date: 2010-05-05 21:53+0100\n"
-"Last-Translator: Imar van Erven Dorens <gambit73@gmail.com>\n"
-"Language-Team: Dutch <LL@li.org>\n"
+"PO-Revision-Date: 2011-01-09 12:33+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: Dutch <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -1056,18 +1058,3 @@ msgstr "Salix Installer"
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
 msgstr "Salix Live Installer"
-
-#~ msgid "Salix OS Transifex team"
-#~ msgstr "Salix Transifex team"
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "German: Andreas Born\n"
-#~ "Greek: George Vlahavas\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "French: Pierrick Le Brun\n"
-#~ "German: Andreas Born\n"
-#~ "Greek: George Vlahavas\n"
-#~ "Spanish: Fernando Velo\n"
-#~ " Dutch: Imar van Erven Dorens"

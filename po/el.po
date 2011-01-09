@@ -1,21 +1,21 @@
-# Greek translations for salix-live-installer package.
-# Greek messages for salix-live-installer.
-# Copyright (C) 2010 Pierrick Le Brun
-# This file is distributed under the same license as the salix-live-installer package.
-# George Vlahavas <george@eva>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: salix-live-installer 0.1\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-21 18:58+0100\n"
-"PO-Revision-Date: 2010-10-25 15:36+0200\n"
-"Last-Translator: Dimitrs Tzemos <djemos@slackel.gr>\n"
-"Language-Team: Greek\n"
+"PO-Revision-Date: 2011-01-09 12:33+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -1055,63 +1055,3 @@ msgstr "Εγκατάσταση του Salix"
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
 msgstr "Εφαρμογή εγκατάστασης SalixLive"
-
-#~ msgid "Salix OS Transifex team"
-#~ msgstr "Ομάδα Transifex του Salix"
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "German: Andreas Born\n"
-#~ "Greek: George Vlahavas\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "Γαλλικά: Pierrick Le Brun\n"
-#~ "Γερμανικά: Andreas Born\n"
-#~ "Ελληνικά: Γιώργος Βλαχάβας\n"
-#~ "Ισπανικά: Fernando Velo"
-
-#~ msgid "Mount as"
-#~ msgstr "Προσάρτηση ως"
-
-#~ msgid "The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-loaded SMP Linux kernel with built-in support for most disk controllers."
-#~ msgstr "Ο τυπικός πυρήνας που χρησιμοποιείται από το Salix είναι ο kernel-huge-smp του Slackware, ο οποίος περιλαμβανει υποστήριξη για τους περισσότερους ελεγκτές σκληρών δίσκων."
-
-#~ msgid "SalixLive's live kernel is based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process. Although not absolutely necessary, you may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The Linux Live Scripts will also be installed if you select this kernel)."
-#~ msgstr "Ο πυρήνας του SalixLive βασίζεται στην πυρήνα kernel-huge-smp του Slackware, αλλά έχει ενσωματωθεί το σύστημα αρχείων aufs2 όπως επίσης και η συμπίεση squashfs-lzma. Η διαμόρφωση του έχει αλλαχτεί ελάχιστα για να γίνει βέβαιο ότι όλες οι σημαντικές συσκευές θα είναι διαθέσιμες με την εκκίνηση του live συστήματος. Προτιμήστε αυτόν τον πυρήνα αν επιθυμείτε να δημιουργήστε το δικό σας LiveCD από ένα σύστημα Salix (Τα Linux Live Scripts θα εγκατασταθούν με τη χρήση αυτού του πυρήνα)."
-
-#~ msgid "standard"
-#~ msgstr "τυπικός"
-
-#~ msgid "live"
-#~ msgstr "live"
-
-#~ msgid "<b>Please select your kernel:</b>"
-#~ msgstr "<b>Παρακαλώ επιλέξτε τον πυρήνα:</b>"
-
-#~ msgid "Standard kernel"
-#~ msgstr "Τυπικός πυρήνας"
-
-#~ msgid "Live kernel (+ live scripts)"
-#~ msgstr "Πυρήνας live (+ live scripts)"
-
-#~ msgid "Creating /etc/rc.d/rc.font..."
-#~ msgstr "Δημιουργία του /etc/rc.d/rc.font..."
-
-#~ msgid "Setting the time, keyboard, locale & login..."
-#~ msgstr ""
-#~ "Ρύθμιση της ώρας, του πληκτρολογίου, της\n"
-#~ "γλώσσας συστήματος και των πληροφοριών χρηστών..."
-
-#~ msgid ""
-#~ "From the above partitions found on your system, please select the \n"
-#~ "one where Salix' main directory tree (/) should be installed.\n"
-#~ "\n"
-#~ "<b>Warning!</b> This partition will be reformatted and its data will be erased."
-#~ msgstr ""
-#~ "Από τις παραπάνω κατατμήσεις που βρέθηκαν στο σύστημα, παρακαλώ \n"
-#~ "επιλέξτε αυτή που θα περιέχει τον κύριο κατάλογο (/) του Salix.\n"
-#~ "\n"
-#~ "<b>Προσοχή!</b> Η κατάτμηση αυτή θα διαμορφωθεί και τα δεδομένα της θα διαγραφούν."
-
-#~ msgid "Creating /etc/rc.d/rc.keymap..."
-#~ msgstr "Δημιουργία του /etc/rc.d/rc.keymap..."

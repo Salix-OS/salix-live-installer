@@ -1,22 +1,21 @@
-# French translations for salix-live-installer package
-# French messages for salix-live-installer.
-# Copyright (C) 2010 Pierrick Le Brun
-# This file is distributed under the same license as the salix-live-installer package.
-# Pierrick Le Brun <akuna~at~salixos~dot~org>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: salix-live-installer 0.1\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-21 18:58+0100\n"
-"PO-Revision-Date: 2010-09-15 12:01+0100\n"
-"Last-Translator: Pierrick Le Brun <akuna~at~salixos~dot~org>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2011-01-09 12:33+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: French <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -1059,65 +1058,3 @@ msgstr "Installeur Salix"
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
 msgstr "Installeur Salix Live"
-
-#~ msgid "Salix OS Transifex team"
-#~ msgstr "L'équipe Transifex de Salix"
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "German: Andreas Born\n"
-#~ "Greek: George Vlahavas\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "Allemand : Andreas Born\n"
-#~ "Espagnol : Fernando Velo\n"
-#~ "Français : Pierrick Le Brun\n"
-#~ "Grec : George Vlahavas "
-
-#~ msgid "Mount as"
-#~ msgstr "Monter sur:"
-
-#~ msgid "The standard kernel used by Salix is Slackware's kernel-huge-smp. A fully-loaded SMP Linux kernel with built-in support for most disk controllers."
-#~ msgstr "Le noyau standard utilisé par Salix est la version kernel-huge-smp de Slackware. Un noyau SMP Linux complet apportant la prise en charge native de la plupart des contrôleurs de disque."
-
-#~ msgid "SalixLive's live kernel is based on Slackware's kernel-huge-smp, but it has been patched to include aufs2 filesystem as well as squashfs-lzma compression. Its configuration has also been slightly changed to ensure most strategic devices would be available to the live system booting process. Although not absolutely necessary, you may prefer to install this kernel if you want to build your own LiveCD out of an installed Salix system (The Linux Live Scripts will also be installed if you select this kernel)."
-#~ msgstr "Le noyau 'live' de SalixLive est également basé sur la version kernel-huge-smp de Slackware, mais il a été 'patché' afin d'inclure le système de fichier aufs2 ainsi que la compression squashfs-lzma. De plus sa configuration a légèrement été changée afin de s'assurer que les périphériques les plus stratégiques soient fonctionnels dès la procédure de démarrage du LiveCD. Bien que ce ne soit pas absolument nécessaire, il peut être judicieux d'installer ce noyau si vous désirez construire votre propre LiveCD à partir d'un système Salix standard (Les 'Linux Live Scripts' seront également installés si vous choisissez ce noyau)."
-
-#~ msgid "standard"
-#~ msgstr "standard"
-
-#~ msgid "live"
-#~ msgstr "'live'"
-
-#~ msgid "<b>Please select your kernel:</b>"
-#~ msgstr "<b>Veuillez sélectionner votre noyau:</b>"
-
-#~ msgid "Standard kernel"
-#~ msgstr "Noyau standard"
-
-#~ msgid "Live kernel (+ live scripts)"
-#~ msgstr "Noyau 'live' (+ 'live scripts')"
-
-#~ msgid "Creating /etc/rc.d/rc.font..."
-#~ msgstr "Création du fichier /etc/rc.d/rc.font..."
-
-#~ msgid "Setting the time, keyboard, locale & login..."
-#~ msgstr "Paramétrage de l'heure, du clavier, de la langue, des identifiants..."
-
-#~ msgid ""
-#~ "From the above partitions found on your system, please select the \n"
-#~ "one where Salix' main directory tree (/) should be installed.\n"
-#~ "\n"
-#~ "<b>Warning!</b> This partition will be reformatted and its data will be erased."
-#~ msgstr ""
-#~ "À partir des partitions détectées ci-dessus, veuillez sélectionner celle \n"
-#~ "sur laquelle l'arborescence principale (/) de Salix OS devra être installée.\n"
-#~ "\n"
-#~ "<b>Avertissement!</b> Cette partition sera reformatée et toutes ses \n"
-#~ "données seront supprimées."
-
-#~ msgid "Creating /etc/rc.d/rc.keymap..."
-#~ msgstr "Création du fichier /etc/rc.d/keymap..."
-
-#~ msgid "P_ackages"
-#~ msgstr "L_ogiciels"

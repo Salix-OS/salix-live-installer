@@ -1,17 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Salix Live Installer\n"
+"Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-11-21 18:58+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: seacat <seacat.lang@gmail.com>\n"
-"Language-Team: secat <seacat.linux@gmail.com>\n"
+"PO-Revision-Date: 2011-01-09 12:34+0000\n"
+"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
@@ -1053,17 +1057,3 @@ msgstr "Instalador de SalixLive"
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
 msgstr "Instalador de SalixLive"
-
-#~ msgid "Salix OS Transifex team"
-#~ msgstr "Equipo Transifex de Salix"
-
-#~ msgid ""
-#~ "French: Pierrick Le Brun\n"
-#~ "German: Andreas Born\n"
-#~ "Greek: George Vlahavas\n"
-#~ "Spanish: Fernando Velo"
-#~ msgstr ""
-#~ "Francés: Pierrick Le Brun\n"
-#~ "Alemán: Andreas Born\n"
-#~ "Griego: George Vlahavas\n"
-#~ "Español: Fernando Velo"
