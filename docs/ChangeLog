@@ -1,3 +1,9 @@
+Version 0.3
+ * Replaced LLS by SALT
+ * Replaced SCIM by IBus
+ * Added demo mode info box when running out of SALT LiveCD
+ * "Select..." instead of empty entries when no timezone has been set yet
+
 Version 0.2.7
  * Fixed core install keyboardsetup bug
  * Adapted new keyboardsetup syntax

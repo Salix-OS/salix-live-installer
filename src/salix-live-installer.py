@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.2.7'
+# version = '0.3'
 
 import commands
 import subprocess
@@ -46,7 +46,7 @@ gtk.glade.bindtextdomain("salix-live-installer", "/usr/share/locale")
 gtk.glade.textdomain("salix-live-installer")
 
 # To do => Install log
-# To do => Integrate Gparted in installer
+# To do => Integrate Gparted in installer?
 # To do => More Error checking process
 
 class SalixLiveInstaller:
@@ -149,7 +149,7 @@ class SalixLiveInstaller:
         self.RootVisibleCheckButton = builder.get_object("root_visible_checkbutton")
         self.ExternalDeviceCheckButton = builder.get_object("external_device_checkbutton")
         self.NumLockCheckButton = builder.get_object("numlock_checkbutton")
-        self.ScimCheckButton = builder.get_object("scim_checkbutton")
+        self.IBusCheckButton = builder.get_object("ibus_checkbutton")
         self.RootPassCreated = builder.get_object("root_pass_created")
         self.NewUserLogin = builder.get_object("new_user_login")
         self.UsersApplyButton = builder.get_object("users_apply")
@@ -222,9 +222,22 @@ class SalixLiveInstaller:
         # Initialize the lock system preventing the Install button to be activated prematurely
         global ConfigurationSet
         ConfigurationSet = ['no'] * 7
+        # SALT change #
+        # Get the LiveCD mountpoint
+        global LiveCdMountPoint
+        try :
+            global LiveCdMountPoint
+            with  open('/mnt/salt/tmp/distro_infos') as LiveCdMountInfo :
+                LiveCdMountPoint = "/mnt/salt" + LiveCdMountInfo.read().splitlines()[0].split(':')[1]
+        except :
+            LiveCdMountPoint = ''
+            info_dialog(_("""<b>Info</b>
+\nSalix Live Installer is only meant to be used in a SALT LiveCD environment.
+\nYou can continue to use it, but in restricted demo mode only.
+\nThe actual installation process will not be launched."""))
         # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
         global liveclone_install
-        if os.path.exists("/mnt/live/memory/images/01-clone.lzm") == True :
+        if os.path.exists(LiveCdMountPoint + "/salixlive/modules/01-clone.salt") == True :
             liveclone_install = True
             self.CloneLoginEventbox.show()
             self.CoreRadioButton.set_sensitive(False)
@@ -333,18 +346,19 @@ class SalixLiveInstaller:
             else :
                 set_numlock = 'off'
                 self.NumLockCheckButton.set_active(False)
-            # Detect & set the status of the SCIM checkbutton
-            global set_scim
-            if os.access('/usr/bin/scim', os.X_OK) == True :
-                if os.access('/etc/profile.d/scim.sh', os.X_OK) == True :
-                    set_scim = 'on'
-                    self.ScimCheckButton.set_active(True)
+            # SALT changes (well ibus actually)
+            # Detect & set the status of the Ibus checkbutton
+            global set_ibus
+            if os.access('/usr/bin/ibus-daemon', os.X_OK) == True :
+                if os.access('/etc/profile.d/ibus.sh', os.X_OK) == True :
+                    set_ibus = 'on'
+                    self.IBusCheckButton.set_active(True)
                 else :
-                    set_scim = 'off'
-                    self.ScimCheckButton.set_active(False)
+                    set_ibus = 'off'
+                    self.IBusCheckButton.set_active(False)
             else :
-                set_scim = 'off'
-                self.ScimCheckButton.set_active(False)           
+                set_ibus = 'off'
+                self.IBusCheckButton.set_active(False)
             # Close the opened files
             UsedKeymapFile.close()
         SalixKeymapList.close()
@@ -389,6 +403,7 @@ class SalixLiveInstaller:
         global set_continent_zone
         def set_continent_zone ():
             self.ContinentZoneListStore.clear()
+            self.ContinentZoneListStore.append([_("Select...")])
             global continent_zonelist, continent_current_zone, continent_current_zone_index
             continent_zonelist = sorted(glob.glob("/usr/share/zoneinfo/*"))
             continent_current_zone = commands.getoutput("ls -l /etc/localtime-copied-from").split()[-1].split('/')[-2]
@@ -404,6 +419,7 @@ class SalixLiveInstaller:
         global set_country_zone
         def set_country_zone ():
             self.CountryZoneListStore.clear()
+            self.CountryZoneListStore.append([_('Select...')])
             global country_zonelist, country_current_zone_index
             try:
                 country_zonelist = sorted(glob.glob("/usr/share/zoneinfo/" + continent_current_zone  + "/*"))
@@ -517,9 +533,6 @@ class SalixLiveInstaller:
                         part_size = line.split()[3]
                         try :
                             part_system = line.split()[5]
-                            # This should not be needed anymore
-#                            if 'ext3' in part_system:
-#                                part_system = 'ext3/ext4'
                         except IndexError:
                             part_system = 'None'
                         # Check if removable devices should be displayed.
@@ -642,12 +655,12 @@ to be activated during the boot process."))
     def on_numlock_checkbutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
-    def on_scim_checkbutton_enter_notify_event(self, widget, data=None):
+    def on_ibus_checkbutton_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("Check this box if you want SCIM to be \
 activated during the boot process. The Smart Common Input Method platform (SCIM) \
 is an input method platform containing support for more than thirty complex \
 languages such as Chinese, Japanese, Korean and many European languages."))
-    def on_scim_checkbutton_leave_notify_event(self, widget, data=None):
+    def on_ibus_checkbutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_keyboard_undo_enter_notify_event(self, widget, data=None):
@@ -1014,14 +1027,14 @@ included in your customized LiveClone will be installed."))
             set_numlock = 'on'
         else :
             set_numlock = 'off'
-
+    # SALT changes #
     # What to do when the SCIM checkbutton is toggled
-    def on_scim_checkbutton_toggled(self, widget, data=None):
-        global set_scim
-        if self.ScimCheckButton.get_active() == True :
-            set_scim = 'on'
+    def on_ibus_checkbutton_toggled(self, widget, data=None):
+        global set_ibus
+        if self.IBusCheckButton.get_active() == True :
+            set_ibus = 'on'
         else :
-            set_scim = 'off'
+            set_ibus = 'off'
 
     # What to do when the user's password visible checkbutton is toggled
     def on_user_visible_checkbutton_toggled(self, widget, data=None):		
@@ -1057,6 +1070,7 @@ included in your customized LiveClone will be installed."))
         global continent_current_zone
         continent_current_zone = self.ContinentZoneCombobox.get_active_text()
         set_country_zone ()
+        self.CountryZoneCombobox.set_active(0)
 
     # What to do when a combo line is edited in the Linux New system column
     def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
@@ -1174,7 +1188,7 @@ included in your customized LiveClone will be installed."))
         self.KeyboardList.set_sensitive(False)
         self.KeyboardApplyButton.set_sensitive(False)
         self.NumLockCheckButton.set_sensitive(False)
-        self.ScimCheckButton.set_sensitive(False)
+        self.IBusCheckButton.set_sensitive(False)
         global ConfigurationSet
         ConfigurationSet[0] = 'yes'
         if 'no' not in ConfigurationSet :
@@ -1519,7 +1533,7 @@ Swap partition on your system."))
         self.KeyboardList.set_sensitive(True)
         self.KeyboardApplyButton.set_sensitive(True)
         self.NumLockCheckButton.set_sensitive(True)
-        self.ScimCheckButton.set_sensitive(True)
+        self.IBusCheckButton.set_sensitive(True)
         global ConfigurationSet
         ConfigurationSet[0] = 'no'
         self.InstallButton.set_sensitive(False)
@@ -1786,13 +1800,9 @@ Swap partition on your system."))
     # What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
     def on_confirm_button_released(self, widget, data=None):
             if InstallButtonConfirmation == True :
-                # Verify we are in a LiveCD environment
-                if os.path.exists("/mnt/live/memory/images") == False :
-                    self.YesNoDialog.hide()
-                    error_dialog(_("""<b>Sorry!</b>
-\nSalix Live Installer is only meant to be used in a LiveCD environment. 
-\nYou cannot proceed any further! """))
-                elif os.path.exists("/mnt/live/memory/changes") == False :
+                # SALT change #
+                # Verify we are in a Salix LiveCD environment
+                if os.path.exists("/mnt/salt/tmp/distro_infos") == False :
                     self.YesNoDialog.hide()
                     error_dialog(_("""<b>Sorry!</b>
 \nSalix Live Installer is only meant to be used in a LiveCD environment. 
@@ -1877,14 +1887,15 @@ Swap partition on your system."))
         # to first mount the squashfs module to a temporary mountpoint & copy its content instead.
         # So first we create the temporary mountpoint
         Temp_Mount = Main_MountPoint + "/temp_mount"
-        os.mkdir(Temp_Mount)
+        os.makedirs(Temp_Mount)
+        # SALT Change #
         if liveclone_install == True : # We are in a LiveClone generated LiveCD
                 self.InstallProgressBar.set_text(_("Installing your LiveClone system..."))
                 self.InstallProgressBar.set_fraction(0.50)
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # we install the one & only clone module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/01-clone.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/01-clone.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 os.rmdir(Temp_Mount)
@@ -1916,9 +1927,8 @@ Swap partition on your system."))
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/liveclone*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/gparted*desktop", shell=True)
                 os.remove(Main_MountPoint + "/etc/rc.d/rc.live")
-
+        # SALT change #
         elif liveclone_install == False : # We are in a regular Salix LiveCD
-
             if Selected_Install_Mode == _('core') :
                 # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
                 self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
@@ -1926,7 +1936,7 @@ Swap partition on your system."))
                 # there's more work, yield True
                 yield True
                 # first we install the core module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/01-core.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 self.InstallProgressBar.set_text(_("Installing the common packages..."))
@@ -1935,7 +1945,7 @@ Swap partition on your system."))
                 yield True
                 # finally we install all the packages that are common to any installation mode
                 # this would be the kernel related packages, etc...
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
             elif Selected_Install_Mode == _('basic') :
@@ -1945,7 +1955,7 @@ Swap partition on your system."))
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # first we install the core module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*core.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
@@ -1954,7 +1964,7 @@ Swap partition on your system."))
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # then we install the basic module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*basic.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 self.InstallProgressBar.set_text(_("Installing the common packages..."))
@@ -1963,7 +1973,7 @@ Swap partition on your system."))
                 yield True
                 # finally we install all the packages that are common to any installation mode
                 # this would be the kernel related packages, etc...
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
             elif Selected_Install_Mode == _('full') :
@@ -1973,7 +1983,7 @@ Swap partition on your system."))
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # first we install the core module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*core.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*core.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
@@ -1982,7 +1992,7 @@ Swap partition on your system."))
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # then we install the basic module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*basic.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*basic.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
@@ -1991,7 +2001,7 @@ Swap partition on your system."))
                 # there's more work, yield True to prevent the progress bar from looking inactive
                 yield True
                 # then we install the full module
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*full.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*full.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 self.InstallProgressBar.set_text(_("Installing the common packages..."))
@@ -2000,14 +2010,14 @@ Swap partition on your system."))
                 yield True
                 # finally we install all the packages that are common to any installation mode
                 # those are the kernel related packages, etc...
-                subprocess.call("mount -t squashfs /mnt/*/salixlive/base/*common.lzm " + Temp_Mount + " -o loop", shell=True)
+                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
                 subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
                 subprocess.call("umount " + Temp_Mount, shell=True)
             self.InstallProgressBar.set_text(_("Installing the kernel..."))
             self.InstallProgressBar.set_fraction(0.70)
             # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
-            subprocess.call("spkg --root=" + Main_MountPoint + " /mnt/*/packages/std-kernel/*", shell=True)
+            subprocess.call("spkg --root=" + Main_MountPoint + " " + LiveCdMountPoint + "/packages/std-kernel/*", shell=True)
             os.rmdir(Temp_Mount)
 
         # Create /etc/fstab
@@ -2135,7 +2145,7 @@ use the application of your choice before rebooting your machine.)\n"""))
         subprocess.call('/var/log/setup/setup.services', shell=True)
         subprocess.call('/etc/cron.daily/housekeeping', shell=True)
         try :
-            subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -s ' + set_scim + ' -z', shell=True)
+            subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -i ' + set_ibus + ' -z', shell=True)
         except :
             error_dialog(_("<b>Sorry!</b> \n\nUnable to set the new keyboard selection on the installation target. "))
         try :
@@ -2211,7 +2221,8 @@ use the application of your choice before rebooting your machine.)\n"""))
                 self.ContinentZoneCombobox.set_active(continent_current_zone_index)
                 self.CountryZoneCombobox.set_active(country_current_zone_index)
             except NameError:
-                pass
+                self.ContinentZoneCombobox.set_active(0)
+                self.CountryZoneCombobox.set_active(0)
             self.TimeTab.set_relief(gtk.RELIEF_HALF)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
