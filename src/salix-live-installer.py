@@ -222,7 +222,7 @@ class SalixLiveInstaller:
         # Initialize the lock system preventing the Install button to be activated prematurely
         global ConfigurationSet
         ConfigurationSet = ['no'] * 7
-        # SALT change #
+        # SaLT change #
         # Get the LiveCD mountpoint
         global LiveCdMountPoint
         try :
@@ -232,7 +232,7 @@ class SalixLiveInstaller:
         except :
             LiveCdMountPoint = ''
             info_dialog(_("""<b>Info</b>
-\nSalix Live Installer is only meant to be used in a SALT LiveCD environment.
+\nSalix Live Installer is only meant to be used in a SaLT LiveCD environment.
 \nYou can continue to use it, but in restricted demo mode only.
 \nThe actual installation process will not be launched."""))
         # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
@@ -346,7 +346,7 @@ class SalixLiveInstaller:
             else :
                 set_numlock = 'off'
                 self.NumLockCheckButton.set_active(False)
-            # SALT changes (well ibus actually)
+            # SaLT changes (well ibus actually)
             # Detect & set the status of the Ibus checkbutton
             global set_ibus
             if os.access('/usr/bin/ibus-daemon', os.X_OK) == True :
@@ -1027,7 +1027,7 @@ included in your customized LiveClone will be installed."))
             set_numlock = 'on'
         else :
             set_numlock = 'off'
-    # SALT changes #
+    # SaLT changes #
     # What to do when the SCIM checkbutton is toggled
     def on_ibus_checkbutton_toggled(self, widget, data=None):
         global set_ibus
@@ -1800,12 +1800,12 @@ Swap partition on your system."))
     # What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
     def on_confirm_button_released(self, widget, data=None):
             if InstallButtonConfirmation == True :
-                # SALT change #
+                # SaLT change #
                 # Verify we are in a Salix LiveCD environment
                 if os.path.exists("/mnt/salt/tmp/distro_infos") == False :
                     self.YesNoDialog.hide()
                     error_dialog(_("""<b>Sorry!</b>
-\nSalix Live Installer is only meant to be used in a LiveCD environment. 
+\nSalix Live Installer is only meant to be used in a SaLT LiveCD environment.
 \nYou cannot proceed any further! """))
                 else :
                     task = self.salix_install_process()
@@ -1888,7 +1888,7 @@ Swap partition on your system."))
         # So first we create the temporary mountpoint
         Temp_Mount = Main_MountPoint + "/temp_mount"
         os.makedirs(Temp_Mount)
-        # SALT Change #
+        # SaLT Change #
         if liveclone_install == True : # We are in a LiveClone generated LiveCD
                 self.InstallProgressBar.set_text(_("Installing your LiveClone system..."))
                 self.InstallProgressBar.set_fraction(0.50)
@@ -1927,7 +1927,7 @@ Swap partition on your system."))
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/liveclone*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/gparted*desktop", shell=True)
                 os.remove(Main_MountPoint + "/etc/rc.d/rc.live")
-        # SALT change #
+        # SaLT change #
         elif liveclone_install == False : # We are in a regular Salix LiveCD
             if Selected_Install_Mode == _('core') :
                 # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
