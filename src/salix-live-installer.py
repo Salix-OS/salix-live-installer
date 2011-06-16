@@ -228,7 +228,7 @@ class SalixLiveInstaller:
         try :
             global LiveCdMountPoint
             with  open('/mnt/salt/tmp/distro_infos') as LiveCdMountInfo :
-                LiveCdMountPoint = "/mnt/salt" + LiveCdMountInfo.read().splitlines()[0].split(':')[1]
+                LiveCdMountPoint = "/mnt/salt" + LiveCdMountInfo.read().splitlines()[0].split(':')[0]
         except :
             LiveCdMountPoint = ''
             info_dialog(_("""<b>Info</b>
