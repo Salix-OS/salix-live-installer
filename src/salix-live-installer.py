@@ -656,10 +656,8 @@ to be activated during the boot process."))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_ibus_checkbutton_enter_notify_event(self, widget, data=None):
-	self.ContextLabel.set_text(_("Check this box if you want SCIM to be \
-activated during the boot process. The Smart Common Input Method platform (SCIM) \
-is an input method platform containing support for more than thirty complex \
-languages such as Chinese, Japanese, Korean and many European languages."))
+	self.ContextLabel.set_text(_("Check this box if you want iBus to be \
+activated during the boot process. IBus is an input method (IM) framework for multilingual input."))
     def on_ibus_checkbutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
@@ -894,53 +892,20 @@ file server etc. "))
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
-		if os.path.exists("/usr/share/lxde") == True :
-			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
-This installs only the LXDE desktop environment with the Midori \
-web browser and the gslapt package manager. Ideal for advanced \
-users that would like to install a lightweight LXDE and add their \
-own choice of applications."))
-		elif os.path.exists("/usr/share/kde4") == True :
-			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
-This installs only the KDE desktop environment with the Konqueror \
-web browser and the gslapt package manager. Ideal for advanced \
-users that would like to install a basic KDE and add their \
-own choice of applications."))
-		else :
-			self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
-This installs only the Xfce desktop environment with the Firefox \
-web browser and the gslapt package manager. Ideal for advanced \
-users that would like to install a lightweight Xfce and add their \
-own choice of applications."))
+        self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
+This installs only a basic desktop environment, with very few extra applications \
+installed on top, such as a web browser and the gslapt package manager. Ideal \
+for advanced users that would like to install a lightweight system and \
+add their own choice of applications. "))
     def on_basic_radiobutton_leave_notify_event(self, widget, data=None):
         global context_intro
 	self.ContextLabel.set_text(context_intro)
     def on_full_radiobutton_enter_notify_event(self, widget, data=None):
         if liveclone_install == False :
-			if os.path.exists("/usr/share/lxde") == True :
-				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
-Everything that is included in the iso is installed. That includes the \
-LXDE desktop environment, the Midori web browser and Claws-mail \
-email client, Gnumeric and Abiword for office work, a Java Runtime \
-Environment, the Whaah! media player and Exaile music manager, \
-the Gslapt package manager and several other applications, always \
-following the 'one application per task' rationale."))
-			elif os.path.exists("/usr/share/kde4") == True :
-				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
-Everything that is included in the iso is installed. That includes the \
-KDE desktop environment, the Konqueror web browser and KMail \
-email client, KSpread, KWord and the full KOffice suite, a Java Runtime \
-Environment, Kaffeine media player and Clementine music manager, \
-the Gslapt package manager and several other applications, always \
-following the 'one application per task' rationale."))
-			else :
-				self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
-Everything that is included in the iso is installed. That includes the \
-Xfce desktop environment, the Firefox web browser and Claws-mail \
-email client, a complete OpenOffice.org office suite, a Java Runtime \
-Environment, the Parole media player and Exaile music manager, \
-the Gslapt package manager and several other applications, always \
-following the 'one application per task' rationale."))
+            self.ContextLabel.set_markup(_('<b>Full installation:</b>\n\
+Everything that is included in the iso is installed. That includes a complete \
+desktop environment and a complete selection of matching applications, \
+always following the "one application per task" rationale. '))
         elif liveclone_install == True :
             self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Salix Live Installer has detected a LiveClone customized environment. \
@@ -1028,7 +993,7 @@ included in your customized LiveClone will be installed."))
         else :
             set_numlock = 'off'
     # SaLT changes #
-    # What to do when the SCIM checkbutton is toggled
+    # What to do when the iBus checkbutton is toggled
     def on_ibus_checkbutton_toggled(self, widget, data=None):
         global set_ibus
         if self.IBusCheckButton.get_active() == True :

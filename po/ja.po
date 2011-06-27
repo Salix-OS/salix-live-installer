@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-02 17:20+0200\n"
+"POT-Creation-Date: 2011-06-27 09:06+0200\n"
 "PO-Revision-Date: 2011-01-09 12:37+0000\n"
 "Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,13 +123,13 @@ msgstr "<b>選択されたキーボードのレイアウト: </b>"
 
 #: src/salix-live-installer.glade:1498 src/salix-live-installer.glade:1697
 #: src/salix-live-installer.glade:2848 src/salix-live-installer.glade:3035
-#: src/salix-live-installer.py:1392 src/salix-live-installer.py:1419
-#: src/salix-live-installer.py:1532 src/salix-live-installer.py:1547
-#: src/salix-live-installer.py:1594 src/salix-live-installer.py:1612
-#: src/salix-live-installer.py:1724 src/salix-live-installer.py:1725
-#: src/salix-live-installer.py:1726 src/salix-live-installer.py:1753
-#: src/salix-live-installer.py:1754 src/salix-live-installer.py:1772
-#: src/salix-live-installer.py:1776 src/salix-live-installer.py:1781
+#: src/salix-live-installer.py:1357 src/salix-live-installer.py:1384
+#: src/salix-live-installer.py:1497 src/salix-live-installer.py:1512
+#: src/salix-live-installer.py:1559 src/salix-live-installer.py:1577
+#: src/salix-live-installer.py:1689 src/salix-live-installer.py:1690
+#: src/salix-live-installer.py:1691 src/salix-live-installer.py:1718
+#: src/salix-live-installer.py:1719 src/salix-live-installer.py:1737
+#: src/salix-live-installer.py:1741 src/salix-live-installer.py:1746
 msgid "None"
 msgstr "無し"
 
@@ -308,7 +308,8 @@ msgid "Launch Salix _install "
 msgstr "Salixをインストールする。（_i）"
 
 #: src/salix-live-installer.glade:3592
-msgid "Copyright © 2010 Pierrick Le Brun"
+#, fuzzy
+msgid "Copyright © 2010-2011 Pierrick Le Brun"
 msgstr "Copyright © 2010 Pierrick Le Brun"
 
 #: src/salix-live-installer.glade:3593
@@ -425,7 +426,7 @@ msgstr "次の名前でマウントする："
 msgid ""
 "<b>Info</b>\n"
 "\n"
-"Salix Live Installer is only meant to be used in a SALT LiveCD environment.\n"
+"Salix Live Installer is only meant to be used in a SaLT LiveCD environment.\n"
 "\n"
 "You can continue to use it, but in restricted demo mode only.\n"
 "\n"
@@ -438,10 +439,10 @@ msgstr ""
 "これ以上先には、進めません。"
 
 #: src/salix-live-installer.py:406 src/salix-live-installer.py:422
-#: src/salix-live-installer.py:1083 src/salix-live-installer.py:1103
-#: src/salix-live-installer.py:1122 src/salix-live-installer.py:1276
-#: src/salix-live-installer.py:1326 src/salix-live-installer.py:1663
-#: src/salix-live-installer.py:1670 src/salix-live-installer.py:1698
+#: src/salix-live-installer.py:1048 src/salix-live-installer.py:1068
+#: src/salix-live-installer.py:1087 src/salix-live-installer.py:1241
+#: src/salix-live-installer.py:1291 src/salix-live-installer.py:1628
+#: src/salix-live-installer.py:1635 src/salix-live-installer.py:1663
 msgid "Select..."
 msgstr "選択"
 
@@ -571,24 +572,23 @@ msgstr ""
 "い。"
 
 #: src/salix-live-installer.py:659
+#, fuzzy
 msgid ""
-"Check this box if you want SCIM to be activated during the boot process. The "
-"Smart Common Input Method platform (SCIM) is an input method platform "
-"containing support for more than thirty complex languages such as Chinese, "
-"Japanese, Korean and many European languages."
+"Check this box if you want iBus to be activated during the boot process. "
+"IBus is an input method (IM) framework for multilingual input."
 msgstr ""
-"SCIMをデフォでアクチベートしたい場合は、この箱をティックしてください。SCIM"
-"は、とくに日本語などアジアの言語をLinuxでタイプできるようにするアプリです。"
+"数字キーパッドをデフォでアクチベートしたい場合は、この箱をティックしてくださ"
+"い。"
 
-#: src/salix-live-installer.py:667
+#: src/salix-live-installer.py:665
 msgid "Cancel keyboard layout selection."
 msgstr "キーボードのレイアウト設定をキャンセルする。"
 
-#: src/salix-live-installer.py:672
+#: src/salix-live-installer.py:670
 msgid "Confirm your selection after highlighting the keyboard layout."
 msgstr "キーボードのレイアウトをハイライトした後、選択を再確認してください。"
 
-#: src/salix-live-installer.py:677
+#: src/salix-live-installer.py:675
 msgid ""
 "This is the keyboard layout you have selected. 'None' will be displayed "
 "until you have confirmed that selection."
@@ -596,11 +596,11 @@ msgstr ""
 "これは、あなたの選択したキーボードのレイアウトです。選んだレイアウトを決定し"
 "ないかぎり、ここは、’無し’と表示されます。"
 
-#: src/salix-live-installer.py:685
+#: src/salix-live-installer.py:683
 msgid "Access the language settings."
 msgstr "言語設定にアクセスします。"
 
-#: src/salix-live-installer.py:690
+#: src/salix-live-installer.py:688
 msgid ""
 "Highlight your language from this list before clicking on the 'Select "
 "language' button."
@@ -608,7 +608,7 @@ msgstr ""
 "使用したい言語をハイライトしてください。そして’言語を選ぶ’のボタンをおしてく"
 "ださい。"
 
-#: src/salix-live-installer.py:696
+#: src/salix-live-installer.py:694
 msgid ""
 "This is the system language you have selected. 'None' will be displayed "
 "until you have confirmed that selection. "
@@ -616,19 +616,19 @@ msgstr ""
 "これは、あなたの選択した言語設定です。選んだ言語を決定しないかぎり、ここ"
 "は、’無し’と表示されます。"
 
-#: src/salix-live-installer.py:702
+#: src/salix-live-installer.py:700
 msgid "Cancel language selection."
 msgstr "選んだ言語を全てキャンセルする。"
 
-#: src/salix-live-installer.py:707
+#: src/salix-live-installer.py:705
 msgid "Confirm your selection after highlighting the system language."
 msgstr "システム用の言語をハイライトした後、選択を決定してください。"
 
-#: src/salix-live-installer.py:714
+#: src/salix-live-installer.py:712
 msgid "Access the partitions settings."
 msgstr "パーティション設定にアクセスします。"
 
-#: src/salix-live-installer.py:719
+#: src/salix-live-installer.py:717
 msgid ""
 "Highlight the partition from this list before clicking on the 'Select "
 "partition' button."
@@ -636,7 +636,7 @@ msgstr ""
 "’パーティションを選ぶ’のボタンを、パーティションをハイライトした後におしてく"
 "ださい。"
 
-#: src/salix-live-installer.py:725
+#: src/salix-live-installer.py:723
 msgid ""
 "Check this box if you want your external disk drive(s) to be displayed in "
 "the list above. "
@@ -644,16 +644,16 @@ msgstr ""
 "外部のディスク・ドライブを上のリストに表示したい場合は、この箱をティックして"
 "ください。"
 
-#: src/salix-live-installer.py:731
+#: src/salix-live-installer.py:729
 msgid "Confirm your selection after highlighting the partition."
 msgstr "パーティションをハイライトしたあと、選択を確認してください。"
 
-#: src/salix-live-installer.py:736
+#: src/salix-live-installer.py:734
 msgid "The filesystem that will be used to format Salix main partition."
 msgstr ""
 "Salixのメイン・パーティションとしてつかわれるファイル・システムのフォーマット"
 
-#: src/salix-live-installer.py:741
+#: src/salix-live-installer.py:739
 msgid ""
 "Click on the appropriate 'Select...' cell if you wish to modify the "
 "filesystem of a partition and/or if you wish to assign its mount point.You "
@@ -667,11 +667,11 @@ msgstr ""
 "ボタンをクリックするためには、使用したいパーティションの全てがきちんと設定さ"
 "れている必要があります。セットされていないユーザ設定は、無効となります。"
 
-#: src/salix-live-installer.py:750
+#: src/salix-live-installer.py:748
 msgid "Confirm the Linux partition(s) settings from the list."
 msgstr "リストのLinux用のパーティション設定を確認してください。"
 
-#: src/salix-live-installer.py:755
+#: src/salix-live-installer.py:753
 msgid ""
 "Click on the appropriate 'Select...' cell if you wish to assign the mount "
 "point of a partition. You must configure all the desired partitions before "
@@ -683,23 +683,23 @@ msgstr ""
 "パーティションの全てがきちんと設定されている必要があります。セットされていな"
 "いユーザ設定は、無効となります。"
 
-#: src/salix-live-installer.py:763
+#: src/salix-live-installer.py:761
 msgid "Confirm the Windows partition(s) settings from the list above."
 msgstr "上のリストからウィンドウズのパーティション設定を確認してください。"
 
-#: src/salix-live-installer.py:768
+#: src/salix-live-installer.py:766
 msgid "Summary of your partition(s) settings."
 msgstr "パーティション設定の概要"
 
-#: src/salix-live-installer.py:773
+#: src/salix-live-installer.py:771
 msgid "Cancel all partition(s) settings."
 msgstr "全てのパーティション設定をキャンセルする。"
 
-#: src/salix-live-installer.py:780
+#: src/salix-live-installer.py:778
 msgid "Access the users and passwords settings."
 msgstr "ユーザ設定、パスワード設定にアクセスする。"
 
-#: src/salix-live-installer.py:785
+#: src/salix-live-installer.py:783
 msgid ""
 "Salix Live Installer has detected a LiveClone customized environment. You "
 "can transfer your existing LiveClone login accounts along with matching "
@@ -711,15 +711,15 @@ msgstr ""
 "ディレクトリをトランスファーすることができます。当然、既存のアカウントを消去"
 "し、完全に新しいログイン·アカウントを作成することも可能です。"
 
-#: src/salix-live-installer.py:793
+#: src/salix-live-installer.py:791
 msgid "Transfer existing users."
 msgstr "既存のユーザをトランスファーする。"
 
-#: src/salix-live-installer.py:798
+#: src/salix-live-installer.py:796
 msgid "Cancel users transfer."
 msgstr "ユーザのトランスファーをキャンセルする。"
 
-#: src/salix-live-installer.py:804
+#: src/salix-live-installer.py:802
 msgid ""
 "A Linux system can manage many registered users and requires each one to log "
 "in, and to produce some form of authentication (usually a login name coupled "
@@ -729,7 +729,7 @@ msgstr ""
 "システムにアクセスするためには、ログインネームとそれに伴うパスワードが必要と"
 "なります。"
 
-#: src/salix-live-installer.py:812
+#: src/salix-live-installer.py:810
 msgid ""
 "Here you must define your login name which should only include "
 "alphanumerical characters with no space or upper case letters. "
@@ -737,7 +737,7 @@ msgstr ""
 "アルファニュメリック文字をつかいあなたのログインネームを決めてください。ス"
 "ペース、または大文字の使用は、できません。"
 
-#: src/salix-live-installer.py:818
+#: src/salix-live-installer.py:816
 msgid ""
 "Choose a password or passphrase to be coupled with your login name. Your "
 "password or passprase should include a mix of upper and lower case letters, "
@@ -747,24 +747,24 @@ msgstr ""
 "文字、小文字、数字、＠、！そして＆などを含むシンボルを取り混ぜたものがのぞま"
 "しいです。"
 
-#: src/salix-live-installer.py:826
+#: src/salix-live-installer.py:824
 msgid "Here you must retype your password as a confirmation of your choice."
 msgstr "パスワードを再確認のために再入力してください。"
 
-#: src/salix-live-installer.py:832 src/salix-live-installer.py:864
+#: src/salix-live-installer.py:830 src/salix-live-installer.py:862
 msgid ""
 "Check this box if you want to be able to see the password you are typing."
 msgstr "タイプしているパスワードを見たい場合は、この箱をティックしてください。"
 
-#: src/salix-live-installer.py:838
+#: src/salix-live-installer.py:836
 msgid "Create new user."
 msgstr "新しいユーザを作る。"
 
-#: src/salix-live-installer.py:843
+#: src/salix-live-installer.py:841
 msgid "Cancel new user creation."
 msgstr "ユーザの作成をキャンセルする。"
 
-#: src/salix-live-installer.py:849
+#: src/salix-live-installer.py:847
 msgid ""
 "On Linux systems, the superuser, or root, is a special user accountused for "
 "system administration. Here you must set its password orpassphrase. "
@@ -776,26 +776,26 @@ msgstr ""
 "行ってください。パスワードは、大文字、小文字、数字、＠、！そして＆などを含む"
 "シンボルを取り混ぜたものがのぞましいです。"
 
-#: src/salix-live-installer.py:858
+#: src/salix-live-installer.py:856
 msgid ""
 "Here you must retype the superuser (root) password as a confirmation of your "
 "choice."
 msgstr ""
 "再確認のためにスーパーユーザ（ルート）用のパスワードを再入力してください。"
 
-#: src/salix-live-installer.py:870
+#: src/salix-live-installer.py:868
 msgid "Apply new root password."
 msgstr "新しいルート用パスワードを設定する。"
 
-#: src/salix-live-installer.py:875
+#: src/salix-live-installer.py:873
 msgid "Cancel new root password."
 msgstr "新しいルート用パスワードを取り消す。"
 
-#: src/salix-live-installer.py:882
+#: src/salix-live-installer.py:880
 msgid "Access the packages selection."
 msgstr "パッケージ選択にアクセスする。"
 
-#: src/salix-live-installer.py:887
+#: src/salix-live-installer.py:885
 msgid ""
 "<b>Core installation:</b>\n"
 "Only the minimum essentials for a console system to start are included. A "
@@ -809,38 +809,14 @@ msgstr ""
 "のあるユーザ用、ウェブ・サーバー、ファイル・サーバーなど、特別なカスタム化が"
 "必要な場合、コア版が適切な選択となります。"
 
-#: src/salix-live-installer.py:898
+#: src/salix-live-installer.py:895
+#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only the LXDE desktop environment with the Midori web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight LXDE and add their own choice of applications."
-msgstr ""
-"<b>ベーシック版:</b>\n"
-"このインストレーションは、LXDEのデスクトップ、Midori ウェブ·ブラウザー、"
-"Gslaptパッケージマネージャーだけを、インストールします。自分で他のアプリを選"
-"びたいユーザ、経験のあるユーザ、または、軽いLXDEのデスクトップの環境を楽しみ"
-"たいユーザに適切な選択です。"
-
-#: src/salix-live-installer.py:904
-msgid ""
-"<b>Basic installation:</b>\n"
-"This installs only the KDE desktop environment with the Konqueror web "
-"browser and the gslapt package manager. Ideal for advanced users that would "
-"like to install a basic KDE and add their own choice of applications."
-msgstr ""
-"<b>ベーシック版:</b>\n"
-"このインストレーションは、KDEのデスクトップ、Konqueror ウェブ·ブラウザー、"
-"Gslaptパッケージマネージャーだけを、インストールします。自分で他のアプリを選"
-"びたいユーザ、経験のあるユーザ、または、KDEのベーシック環境を楽しみたいユーザ"
-"に適切な選択です。"
-
-#: src/salix-live-installer.py:910
-msgid ""
-"<b>Basic installation:</b>\n"
-"This installs only the Xfce desktop environment with the Firefox web browser "
-"and the gslapt package manager. Ideal for advanced users that would like to "
-"install a lightweight Xfce and add their own choice of applications."
+"This installs only a basic desktop environment, with very few extra "
+"applications installed on top, such as a web browser and the gslapt package "
+"manager. Ideal for advanced users that would like to install a lightweight "
+"system and add their own choice of applications. "
 msgstr ""
 "<b>ベーシック版:</b>\n"
 "このインストレーションは、Xfceのデスクトップ、ファイアーフォックス、Gslapt"
@@ -848,48 +824,13 @@ msgstr ""
 "ユーザ、経験のあるユーザ、または、軽いデスクトップの環境を楽しみたいユーザに"
 "適切な選択です。"
 
-#: src/salix-live-installer.py:921
+#: src/salix-live-installer.py:905
+#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the LXDE "
-"desktop environment, the Midori web browser and Claws-mail email client, "
-"Gnumeric and Abiword for office work, a Java Runtime Environment, the Whaah! "
-"media player and Exaile music manager, the Gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
-msgstr ""
-"<b>完全版:</b>\n"
-"SalixOSに含まれているアプリはすべてインストールされます。LXDEデスクトップ、"
-"Midori ウェブ·ブラウザー、Claws-mailメールクライアント、Abiword、ジャバ・ラン"
-"タイム環境、Whaah!メディア・プレーヤー、そしてExaileミュージック・マネー"
-"ジャー。Gslaptなど他に、一つのタスクに一つのアプリというLinux哲学にもとづいた"
-"アプリの選択がなされています。"
-
-#: src/salix-live-installer.py:929
-msgid ""
-"<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the KDE "
-"desktop environment, the Konqueror web browser and KMail email client, "
-"KSpread, KWord and the full KOffice suite, a Java Runtime Environment, "
-"Kaffeine media player and Clementine music manager, the Gslapt package "
-"manager and several other applications, always following the 'one "
-"application per task' rationale."
-msgstr ""
-"<b>完全版:</b>\n"
-"SalixOSに含まれているアプリはすべてインストールされます。KDEデスクトップ、"
-"Konqueror ウェブ·ブラウザー、KMailメールクライアント、KOffice、ジャバ・ランタ"
-"イム環境、そしてKaffeineメディア・プレーヤー。Gslaptなど他に、一つのタスクに"
-"一つのアプリというLinux哲学にもとづいたアプリの選択がなされています。"
-
-#: src/salix-live-installer.py:937
-msgid ""
-"<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes the Xfce "
-"desktop environment, the Firefox web browser and Claws-mail email client, a "
-"complete OpenOffice.org office suite, a Java Runtime Environment, the Parole "
-"media player and Exaile music manager, the Gslapt package manager and "
-"several other applications, always following the 'one application per task' "
-"rationale."
+"Everything that is included in the iso is installed. That includes a "
+"complete desktop environment and a complete selection of matching "
+"applications, always following the \"one application per task\" rationale. "
 msgstr ""
 "<b>完全版:</b>\n"
 "SalixOSに含まれているアプリはすべてインストールされます。Xfceデスクトップ、"
@@ -898,7 +839,7 @@ msgstr ""
 "ネージャー。Gslaptなど他に、一つのタスクに一つのアプリというLinux哲学にもとづ"
 "いたアプリの選択がなされています。"
 
-#: src/salix-live-installer.py:945
+#: src/salix-live-installer.py:910
 msgid ""
 "<b>Full installation:</b>\n"
 "Salix Live Installer has detected a LiveClone customized environment. Core "
@@ -912,127 +853,127 @@ msgstr ""
 "カスタマイズされたLiveCloneをふくむ全てのアプリを完全版としてインストールして"
 "ください。"
 
-#: src/salix-live-installer.py:955
+#: src/salix-live-installer.py:920
 msgid "Confirm your packages selection."
 msgstr "選んだパッケージを確認"
 
-#: src/salix-live-installer.py:960
+#: src/salix-live-installer.py:925
 msgid "Cancel all packages selection."
 msgstr "全てのパッケージ選択を取り消す。"
 
-#: src/salix-live-installer.py:1142 src/salix-live-installer.py:1144
+#: src/salix-live-installer.py:1107 src/salix-live-installer.py:1109
 msgid "The time zone has not been set"
 msgstr "時間帯の設定が、なされていません。"
 
-#: src/salix-live-installer.py:1142 src/salix-live-installer.py:1144
-#: src/salix-live-installer.py:1369 src/salix-live-installer.py:1372
-#: src/salix-live-installer.py:1375 src/salix-live-installer.py:1378
-#: src/salix-live-installer.py:1380 src/salix-live-installer.py:1383
-#: src/salix-live-installer.py:1385 src/salix-live-installer.py:1411
-#: src/salix-live-installer.py:1414 src/salix-live-installer.py:1416
+#: src/salix-live-installer.py:1107 src/salix-live-installer.py:1109
+#: src/salix-live-installer.py:1334 src/salix-live-installer.py:1337
+#: src/salix-live-installer.py:1340 src/salix-live-installer.py:1343
+#: src/salix-live-installer.py:1345 src/salix-live-installer.py:1348
+#: src/salix-live-installer.py:1350 src/salix-live-installer.py:1376
+#: src/salix-live-installer.py:1379 src/salix-live-installer.py:1381
 msgid "Please verify and correct"
 msgstr "確認し必要ならば修正してください"
 
-#: src/salix-live-installer.py:1249 src/salix-live-installer.py:1280
-#: src/salix-live-installer.py:1284 src/salix-live-installer.py:1474
-#: src/salix-live-installer.py:1478 src/salix-live-installer.py:1482
+#: src/salix-live-installer.py:1214 src/salix-live-installer.py:1245
+#: src/salix-live-installer.py:1249 src/salix-live-installer.py:1439
+#: src/salix-live-installer.py:1443 src/salix-live-installer.py:1447
 msgid "will be formatted with"
 msgstr "次の設定でフォーマットされます"
 
-#: src/salix-live-installer.py:1250 src/salix-live-installer.py:1281
-#: src/salix-live-installer.py:1290 src/salix-live-installer.py:1334
-#: src/salix-live-installer.py:1475 src/salix-live-installer.py:1479
-#: src/salix-live-installer.py:1487 src/salix-live-installer.py:1491
+#: src/salix-live-installer.py:1215 src/salix-live-installer.py:1246
+#: src/salix-live-installer.py:1255 src/salix-live-installer.py:1299
+#: src/salix-live-installer.py:1440 src/salix-live-installer.py:1444
+#: src/salix-live-installer.py:1452 src/salix-live-installer.py:1456
 msgid "and will be mounted as"
 msgstr "そして次のようにマウントされます："
 
-#: src/salix-live-installer.py:1285 src/salix-live-installer.py:1294
-#: src/salix-live-installer.py:1330
+#: src/salix-live-installer.py:1250 src/salix-live-installer.py:1259
+#: src/salix-live-installer.py:1295
 msgid "and will not be mounted"
 msgstr "マウントされません"
 
-#: src/salix-live-installer.py:1289 src/salix-live-installer.py:1293
-#: src/salix-live-installer.py:1329 src/salix-live-installer.py:1333
-#: src/salix-live-installer.py:1486 src/salix-live-installer.py:1490
-#: src/salix-live-installer.py:1494
+#: src/salix-live-installer.py:1254 src/salix-live-installer.py:1258
+#: src/salix-live-installer.py:1294 src/salix-live-installer.py:1298
+#: src/salix-live-installer.py:1451 src/salix-live-installer.py:1455
+#: src/salix-live-installer.py:1459
 msgid "will not be formatted"
 msgstr "フォーマットされません"
 
-#: src/salix-live-installer.py:1369
+#: src/salix-live-installer.py:1334
 msgid "Your login name is empty"
 msgstr "ログインの名前が、抜けています。"
 
-#: src/salix-live-installer.py:1371
+#: src/salix-live-installer.py:1336
 msgid "Your login name should only contain alphanumeric characters"
 msgstr "ログインの名前にアルファニュメリック以外の文字は、使えません。"
 
-#: src/salix-live-installer.py:1374
+#: src/salix-live-installer.py:1339
 msgid "Your login name should not contain any space"
 msgstr "ログインの名前にスペースは、使えません。"
 
-#: src/salix-live-installer.py:1377
+#: src/salix-live-installer.py:1342
 msgid "Your login name should not contain any upper case letter"
 msgstr "ログインの名前に大文字は、使えません。"
 
-#: src/salix-live-installer.py:1380 src/salix-live-installer.py:1411
+#: src/salix-live-installer.py:1345 src/salix-live-installer.py:1376
 msgid "Your password entry is empty"
 msgstr "パスワードが、入力されていません。"
 
-#: src/salix-live-installer.py:1382 src/salix-live-installer.py:1413
+#: src/salix-live-installer.py:1347 src/salix-live-installer.py:1378
 msgid "Your password is too short. It should have at least 5 characters"
 msgstr "パスワードが短すぎます。最低五文字以上にしてください。"
 
-#: src/salix-live-installer.py:1385 src/salix-live-installer.py:1416
+#: src/salix-live-installer.py:1350 src/salix-live-installer.py:1381
 msgid "Your 2 password entries do not match"
 msgstr "入力された二つのパスワードが、マッチしません。"
 
-#: src/salix-live-installer.py:1418
+#: src/salix-live-installer.py:1383
 msgid "Yes"
 msgstr "はい"
 
-#: src/salix-live-installer.py:1440 src/salix-live-installer.py:1932
-#: src/salix-live-installer.py:1953 src/salix-live-installer.py:1981
+#: src/salix-live-installer.py:1405 src/salix-live-installer.py:1897
+#: src/salix-live-installer.py:1918 src/salix-live-installer.py:1946
 msgid "core"
 msgstr "コア版"
 
-#: src/salix-live-installer.py:1442 src/salix-live-installer.py:1951
-#: src/salix-live-installer.py:1990
+#: src/salix-live-installer.py:1407 src/salix-live-installer.py:1916
+#: src/salix-live-installer.py:1955
 msgid "basic"
 msgstr "ベーシック版"
 
-#: src/salix-live-installer.py:1444 src/salix-live-installer.py:1979
+#: src/salix-live-installer.py:1409 src/salix-live-installer.py:1944
 msgid "full"
 msgstr "完全版"
 
-#: src/salix-live-installer.py:1469
+#: src/salix-live-installer.py:1434
 msgid "You are about to install Salix with the following settings"
 msgstr "Salixを次に示された設定をもとにインストールしようとしています。"
 
-#: src/salix-live-installer.py:1470
+#: src/salix-live-installer.py:1435
 msgid "Time zone"
 msgstr "時間帯"
 
-#: src/salix-live-installer.py:1471
+#: src/salix-live-installer.py:1436
 msgid "Keyboard layout"
 msgstr "キーボードのレイアウト"
 
-#: src/salix-live-installer.py:1472
+#: src/salix-live-installer.py:1437
 msgid "System language"
 msgstr "システム用言語"
 
-#: src/salix-live-installer.py:1473
+#: src/salix-live-installer.py:1438
 msgid "Partitions"
 msgstr "パーティション"
 
-#: src/salix-live-installer.py:1483
+#: src/salix-live-installer.py:1448
 msgid "but will not be mounted"
 msgstr "しかしマウントされません"
 
-#: src/salix-live-installer.py:1495
+#: src/salix-live-installer.py:1460
 msgid "and will mounted as swap"
 msgstr "そしてスワップとしてマウントされます"
 
-#: src/salix-live-installer.py:1497
+#: src/salix-live-installer.py:1462
 msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your "
 "system."
@@ -1040,24 +981,24 @@ msgstr ""
 "SalixLiveインストーラは、システムで使えるスワップ·パーティションをみつけられ"
 "ませんでした。"
 
-#: src/salix-live-installer.py:1500 src/salix-live-installer.py:1502
+#: src/salix-live-installer.py:1465 src/salix-live-installer.py:1467
 msgid "Standard User"
 msgstr "一般ユーザ"
 
-#: src/salix-live-installer.py:1500
+#: src/salix-live-installer.py:1465
 msgid "Using LiveClone login. "
 msgstr "LiveCloneのログインを使用する。"
 
-#: src/salix-live-installer.py:1503
+#: src/salix-live-installer.py:1468
 msgid "Packages"
 msgstr "パッケージ"
 
-#: src/salix-live-installer.py:1505
+#: src/salix-live-installer.py:1470
 #, python-format
 msgid "You have chosen the %(mode)s installation mode.\n"
 msgstr "%(mode)sをインストレーション・タイプとして選択しました。\n"
 
-#: src/salix-live-installer.py:1796
+#: src/salix-live-installer.py:1761
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1067,11 +1008,12 @@ msgstr ""
 "\n"
 "LiloSetupを実行するのに失敗しました。マニュアルでLILOを設定してください。 "
 
-#: src/salix-live-installer.py:1807
+#: src/salix-live-installer.py:1772
+#, fuzzy
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
-"Salix Live Installer is only meant to be used in a LiveCD environment. \n"
+"Salix Live Installer is only meant to be used in a SaLT LiveCD environment.\n"
 "\n"
 "You cannot proceed any further! "
 msgstr ""
@@ -1081,59 +1023,59 @@ msgstr ""
 "\n"
 "これ以上先には、進めません。"
 
-#: src/salix-live-installer.py:1819
+#: src/salix-live-installer.py:1784
 msgid "Starting installation process..."
 msgstr "インストレーションを始める。"
 
-#: src/salix-live-installer.py:1832
+#: src/salix-live-installer.py:1797
 msgid "Formatting the main partition..."
 msgstr "メイン・パーティションをフォーマットしています。"
 
-#: src/salix-live-installer.py:1846
+#: src/salix-live-installer.py:1811
 msgid "Formatting and mounting your Linux partition(s)..."
 msgstr "フォーマット、そしてLinuxパーティションをマウントしています。"
 
-#: src/salix-live-installer.py:1863
+#: src/salix-live-installer.py:1828
 msgid "Formatting your Linux partition(s)..."
 msgstr "Linuxパーティションをフォーマットしています。"
 
-#: src/salix-live-installer.py:1876
+#: src/salix-live-installer.py:1841
 msgid "Mounting your Linux partition(s)..."
 msgstr "Linuxパーティションをマウントしています。"
 
-#: src/salix-live-installer.py:1893
+#: src/salix-live-installer.py:1858
 msgid "Installing your LiveClone system..."
 msgstr "LiveCloneシステムをインストールしています。"
 
-#: src/salix-live-installer.py:1934 src/salix-live-installer.py:1953
-#: src/salix-live-installer.py:1962 src/salix-live-installer.py:1981
-#: src/salix-live-installer.py:1990 src/salix-live-installer.py:1999
+#: src/salix-live-installer.py:1899 src/salix-live-installer.py:1918
+#: src/salix-live-installer.py:1927 src/salix-live-installer.py:1946
+#: src/salix-live-installer.py:1955 src/salix-live-installer.py:1964
 #, python-format
 msgid "Installing the %(mode)s mode packages..."
 msgstr " %(mode)s用のパッケージをインストールしています。"
 
-#: src/salix-live-installer.py:1942 src/salix-live-installer.py:1970
-#: src/salix-live-installer.py:2007
+#: src/salix-live-installer.py:1907 src/salix-live-installer.py:1935
+#: src/salix-live-installer.py:1972
 msgid "Installing the common packages..."
 msgstr "パッケージをインストールしています。"
 
-#: src/salix-live-installer.py:2016
+#: src/salix-live-installer.py:1981
 msgid "Installing the kernel..."
 msgstr "カーネルをインストールしています。"
 
-#: src/salix-live-installer.py:2024
+#: src/salix-live-installer.py:1989
 msgid "Creating /etc/fstab..."
 msgstr "/etc/fstabを作っています。"
 
-#: src/salix-live-installer.py:2061 src/salix-live-installer.py:2103
+#: src/salix-live-installer.py:2026 src/salix-live-installer.py:2068
 msgid "Time, keyboard, locale, login and other system configuration..."
 msgstr "時間、キーボード、ローカル、ログイン、そのたのシステム設定"
 
-#: src/salix-live-installer.py:2113 src/salix-live-installer.py:2118
+#: src/salix-live-installer.py:2078 src/salix-live-installer.py:2083
 msgid "Installation process completed successfully ..."
 msgstr "インストレーション終了しました"
 
-#: src/salix-live-installer.py:2126
+#: src/salix-live-installer.py:2091
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
@@ -1154,7 +1096,7 @@ msgstr ""
 "いいえ、のボタンをクリックしてから使用したいブートーローダーのアプリをつかっ"
 "て設定を終わらしたのちに、再起動してください。）\n"
 
-#: src/salix-live-installer.py:2150
+#: src/salix-live-installer.py:2115
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1164,7 +1106,7 @@ msgstr ""
 "\n"
 "インストレーション先で新しいキーボード設定をすることが、できませんでした。"
 
-#: src/salix-live-installer.py:2154
+#: src/salix-live-installer.py:2119
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1174,7 +1116,7 @@ msgstr ""
 "\n"
 "インストレーション先で新しい言語設定をすることが、できませんでした。"
 
-#: src/salix-live-installer.py:2162
+#: src/salix-live-installer.py:2127
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1184,7 +1126,7 @@ msgstr ""
 "\n"
 "インストレーション先で新しいユーザをつくることが、できませんでした。"
 
-#: src/salix-live-installer.py:2166
+#: src/salix-live-installer.py:2131
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1194,7 +1136,7 @@ msgstr ""
 "\n"
 "インストレーション先のユーザ用のパスワード設定が、できませんでした。"
 
-#: src/salix-live-installer.py:2170
+#: src/salix-live-installer.py:2135
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1204,7 +1146,7 @@ msgstr ""
 "\n"
 "インストレーション先のルート用のパスワード設定が、できませんでした。"
 
-#: src/salix-live-installer.py:2192
+#: src/salix-live-installer.py:2157
 msgid ""
 "Installation process is fully completed but you have chosen not to install "
 "LILO.\n"
@@ -1220,7 +1162,7 @@ msgstr ""
 "再起動する前に、使用したいブートーローダーのアプリをつかって設定を行ってくだ"
 "さい。\\ n"
 
-#: src/salix-live-installer.py:2302
+#: src/salix-live-installer.py:2267
 msgid ""
 "Salix Live Installer was not able to detect a valid partition on your "
 "system. You should exit Salix Live Installer now and use Gparted, or any "
@@ -1232,11 +1174,11 @@ msgstr ""
 "ルを使用し、インストール·プロセスを再開する前に、システムで使用できるパーティ"
 "ションを作成してください。"
 
-#: src/salix-live-installer.py:2310
+#: src/salix-live-installer.py:2275
 msgid "Detected Swap partition(s)"
 msgstr "使用できるスワップ·パーティション"
 
-#: src/salix-live-installer.py:2312
+#: src/salix-live-installer.py:2277
 msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your "
 "system. \n"
@@ -1252,11 +1194,11 @@ msgstr ""
 "を閉じ、インストール再開する前に、スワップ·パーティションを作成してください。"
 "GParted、もしくは、べつのパーティション分割ツールを使用することで可能です。"
 
-#: src/salix-live-installer.py:2320
+#: src/salix-live-installer.py:2285
 msgid "Salix Live Installer has detected a Swap partition on "
 msgstr "SalixLiveインストーラは、スワップ·パーティションをみつけました："
 
-#: src/salix-live-installer.py:2323
+#: src/salix-live-installer.py:2288
 msgid ""
 "Salix Live Installer was not able to detect a valid partition on your "
 "system. You should exit Salix Live Installer now and use Gparted, or any "
@@ -1268,7 +1210,7 @@ msgstr ""
 "GParted、もしくは、べつのパーティション分割ツールをつかい、使用できるパーティ"
 "ションを作成してください。"
 
-#: src/salix-live-installer.py:2403
+#: src/salix-live-installer.py:2368
 msgid ""
 "<b>Sorry!</b> \n"
 "\n"
@@ -1292,3 +1234,71 @@ msgstr "Salixインストーラー"
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
 msgstr "SalixLiveインストーラ"
+
+#~ msgid ""
+#~ "Check this box if you want SCIM to be activated during the boot process. "
+#~ "The Smart Common Input Method platform (SCIM) is an input method platform "
+#~ "containing support for more than thirty complex languages such as "
+#~ "Chinese, Japanese, Korean and many European languages."
+#~ msgstr ""
+#~ "SCIMをデフォでアクチベートしたい場合は、この箱をティックしてください。SCIM"
+#~ "は、とくに日本語などアジアの言語をLinuxでタイプできるようにするアプリで"
+#~ "す。"
+
+#~ msgid ""
+#~ "<b>Basic installation:</b>\n"
+#~ "This installs only the LXDE desktop environment with the Midori web "
+#~ "browser and the gslapt package manager. Ideal for advanced users that "
+#~ "would like to install a lightweight LXDE and add their own choice of "
+#~ "applications."
+#~ msgstr ""
+#~ "<b>ベーシック版:</b>\n"
+#~ "このインストレーションは、LXDEのデスクトップ、Midori ウェブ·ブラウザー、"
+#~ "Gslaptパッケージマネージャーだけを、インストールします。自分で他のアプリを"
+#~ "選びたいユーザ、経験のあるユーザ、または、軽いLXDEのデスクトップの環境を楽"
+#~ "しみたいユーザに適切な選択です。"
+
+#~ msgid ""
+#~ "<b>Basic installation:</b>\n"
+#~ "This installs only the KDE desktop environment with the Konqueror web "
+#~ "browser and the gslapt package manager. Ideal for advanced users that "
+#~ "would like to install a basic KDE and add their own choice of "
+#~ "applications."
+#~ msgstr ""
+#~ "<b>ベーシック版:</b>\n"
+#~ "このインストレーションは、KDEのデスクトップ、Konqueror ウェブ·ブラウザー、"
+#~ "Gslaptパッケージマネージャーだけを、インストールします。自分で他のアプリを"
+#~ "選びたいユーザ、経験のあるユーザ、または、KDEのベーシック環境を楽しみたい"
+#~ "ユーザに適切な選択です。"
+
+#~ msgid ""
+#~ "<b>Full installation:</b>\n"
+#~ "Everything that is included in the iso is installed. That includes the "
+#~ "LXDE desktop environment, the Midori web browser and Claws-mail email "
+#~ "client, Gnumeric and Abiword for office work, a Java Runtime Environment, "
+#~ "the Whaah! media player and Exaile music manager, the Gslapt package "
+#~ "manager and several other applications, always following the 'one "
+#~ "application per task' rationale."
+#~ msgstr ""
+#~ "<b>完全版:</b>\n"
+#~ "SalixOSに含まれているアプリはすべてインストールされます。LXDEデスクトッ"
+#~ "プ、Midori ウェブ·ブラウザー、Claws-mailメールクライアント、Abiword、ジャ"
+#~ "バ・ランタイム環境、Whaah!メディア・プレーヤー、そしてExaileミュージック・"
+#~ "マネージャー。Gslaptなど他に、一つのタスクに一つのアプリというLinux哲学に"
+#~ "もとづいたアプリの選択がなされています。"
+
+#~ msgid ""
+#~ "<b>Full installation:</b>\n"
+#~ "Everything that is included in the iso is installed. That includes the "
+#~ "KDE desktop environment, the Konqueror web browser and KMail email "
+#~ "client, KSpread, KWord and the full KOffice suite, a Java Runtime "
+#~ "Environment, Kaffeine media player and Clementine music manager, the "
+#~ "Gslapt package manager and several other applications, always following "
+#~ "the 'one application per task' rationale."
+#~ msgstr ""
+#~ "<b>完全版:</b>\n"
+#~ "SalixOSに含まれているアプリはすべてインストールされます。KDEデスクトップ、"
+#~ "Konqueror ウェブ·ブラウザー、KMailメールクライアント、KOffice、ジャバ・ラ"
+#~ "ンタイム環境、そしてKaffeineメディア・プレーヤー。Gslaptなど他に、一つのタ"
+#~ "スクに一つのアプリというLinux哲学にもとづいたアプリの選択がなされていま"
+#~ "す。"

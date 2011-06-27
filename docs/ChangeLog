@@ -3,6 +3,8 @@ Version 0.3
  * Replaced SCIM by IBus
  * Added demo mode info box when running out of SaLT LiveCD
  * "Select..." instead of empty entries when no timezone has been set yet
+ * Generalized some contextual help to fit all Salix editions
+ * Added translation strings for Arabic, Italian & Polish
 
 Version 0.2.7
  * Fixed core install keyboardsetup bug

@@ -3589,7 +3589,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
     <property name="transient_for">main_window</property>
     <property name="program_name">SalixLive Installer</property>
     <property name="version">0.3</property>
-    <property name="copyright" translatable="yes">Copyright &#xA9; 2010 Pierrick Le Brun</property>
+    <property name="copyright" translatable="yes">Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
     <property name="website_label">salixos.org</property>
