@@ -494,7 +494,7 @@ class SalixLiveInstaller:
             # Use non-localized environment to avoid problems
             os.environ['LANG'] = 'en_US'
             # Detect all disk drives
-            fdisk_output = commands.getoutput('fdisk -l | grep -i disk | grep -v identifier').splitlines()
+            fdisk_output = commands.getoutput('LANG= fdisk -l | grep "^Disk /"').splitlines()
             # Initialize the different variables
             disk_name = ''
             disk_size = ''
@@ -505,23 +505,22 @@ class SalixLiveInstaller:
             part_feedline = ''
             # Get the relevant partitions info
             for line in fdisk_output:
-                if line.startswith('Disk'):
-                    disk_device.append(line.split()[1].replace(':', ''))
+                disk_device.append(line.split()[1].replace(':', ''))
             for drive in disk_device:
                 # Set language again just to be sure
-                parted_output = commands.getoutput('LANG=C parted ' + drive + ' print | grep -iv extended | grep -iv swap').splitlines()
+                parted_output = commands.getoutput('LANG= parted ' + drive + " print | grep -v ' extended$' | grep -v swapr").splitlines()
                 # Parse each line of parted output
                 for line in parted_output:
                     # Get the name of each hard drive
-                    if 'Model:' in line:
+                    if line.startswith('Model:'):
                         model_string = line
                         # Some hard drives insert ATA before their name
                         if 'ATA' in model_string:
-                            disk_name = model_string.split()[2]
+                            disk_name = ' '.join(model_string.split()[2:])
                         else:
-                            disk_name = model_string.split()[1]
+                            disk_name = ' '.join(model_string.split()[1:])
                     # Get the size of the disk
-                    elif 'Disk' in line:
+                    elif line.startswith('Disk'):
                         disk_size = line.split()[2]
                     # Get the size & filesystem for each partition of the disk
                     # Here the line will start by a space followed by a number or straight by a number
@@ -544,16 +543,11 @@ class SalixLiveInstaller:
                         else :
                             usb_dev = ''
                             firewire_dev = ''
-                            dev_root = part_name[5:-1]
-                            check_if_usb = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /usb'
-                            usb_dev = commands.getoutput(check_if_usb)
-                            check_if_firewire = 'udevadm info -a -p /sys/block/' + dev_root + ' | grep -m1 /fw-host'
-                            firewire_dev = commands.getoutput(check_if_firewire)
-                            if '/usb' in usb_dev :
-                                pass
-                            elif '/fw-host' in firewire_dev :
-                                pass
-                            else:
+                            # remove /dev/ part
+                            dev_root = drive[5:]
+                            check_removable = 'cat /sys/block/' + dev_root + '/removable 2>/dev/null || echo 0'
+                            removable = commands.getoutput(check_removable)
+                            if removable == '0' :
                                 # Put all needed variables in one set per line
                                 part_feedline = [disk_name +' (' + disk_size + ')', part_name, part_size, part_system]
                                 # Put each set in a list
@@ -1891,7 +1885,6 @@ Swap partition on your system."))
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/salix-live*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/liveclone*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/gparted*desktop", shell=True)
-                os.remove(Main_MountPoint + "/etc/rc.d/rc.live")
         # SaLT change #
         elif liveclone_install == False : # We are in a regular Salix LiveCD
             if Selected_Install_Mode == _('core') :
@@ -2032,9 +2025,10 @@ Swap partition on your system."))
             subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
         if set_ntp == 'no':
             subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
-        subprocess.call('ln -sf ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
+        # The symlink will be ok uppon chroot or reboot
+        subprocess.call('ln -sf ' + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
         subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
-        subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
+        subprocess.call('cp ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime', shell=True)
 
         # Create /etc/rc.d/rc.font
         RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
