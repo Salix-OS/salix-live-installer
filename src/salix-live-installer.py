@@ -508,7 +508,7 @@ class SalixLiveInstaller:
                 disk_device.append(line.split()[1].replace(':', ''))
             for drive in disk_device:
                 # Set language again just to be sure
-                parted_output = commands.getoutput('LANG= parted ' + drive + " print | grep -v ' extended$' | grep -v swapr").splitlines()
+                parted_output = commands.getoutput('LANG= parted ' + drive + " print | grep -v ' extended$' | grep -v swap").splitlines()
                 # Parse each line of parted output
                 for line in parted_output:
                     # Get the name of each hard drive
@@ -541,9 +541,6 @@ class SalixLiveInstaller:
                             # Put each set in a list
                             part_feedline_list.append(part_feedline)
                         else :
-                            usb_dev = ''
-                            firewire_dev = ''
-                            # remove /dev/ part
                             dev_root = drive[5:]
                             check_removable = 'cat /sys/block/' + dev_root + '/removable 2>/dev/null || echo 0'
                             removable = commands.getoutput(check_removable)
@@ -1859,32 +1856,16 @@ Swap partition on your system."))
                 subprocess.call("umount " + Temp_Mount, shell=True)
                 os.rmdir(Temp_Mount)
                 # We add missing items, restore some non-live stock files, remove some specific live stuff
-                os.makedirs(Main_MountPoint + "/media")
-                os.makedirs(Main_MountPoint + "/opt")
-                os.makedirs(Main_MountPoint + "/proc")
-                os.makedirs(Main_MountPoint + "/sys")
-                os.makedirs(Main_MountPoint + "/tmp")
-                shutil.copytree("/usr/share/liveclone/stockskel/boot", Main_MountPoint + "/boot", symlinks=False)
-                shutil.copy("/boot/vmlinuz", Main_MountPoint + "/boot")
-                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.6", Main_MountPoint + "/etc/rc.d")
-                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.M", Main_MountPoint + "/etc/rc.d")
-                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.S", Main_MountPoint + "/etc/rc.d")
-                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.alsa", Main_MountPoint + "/etc/rc.d")
-                shutil.copy("/usr/share/liveclone/stockskel/etc/rc.d/rc.services", Main_MountPoint + "/etc/rc.d")
                 subprocess.call("cp --preserve -rf /dev " + Main_MountPoint, shell=True)
                 subprocess.call("mount -t proc proc " + Main_MountPoint + "/proc", shell=True)
                 subprocess.call("mount --bind /dev " + Main_MountPoint + "/dev", shell=True)
                 subprocess.call("spkg -d liveclone --root=" + Main_MountPoint, shell=True)
                 subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
-                subprocess.call("spkg -d linux-live --root=" + Main_MountPoint, shell=True)
+                subprocess.call("spkg -d salix-persistence-wizard --root=" + Main_MountPoint, shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/etc/ssh/ssh_host_*", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/*startup-guide*desktop", shell=True)
+                subprocess.call("rm -f " + Main_MountPoint + "/home/*/Desktop/*startup-guide*desktop", shell=True)
                 subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/*startup-guide*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/persistence*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/persistence*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/salix-live*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/liveclone*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/one/Desktop/gparted*desktop", shell=True)
+                os.remove(Main_MountPoint + "/hooks.salt")
         # SaLT change #
         elif liveclone_install == False : # We are in a regular Salix LiveCD
             if Selected_Install_Mode == _('core') :
