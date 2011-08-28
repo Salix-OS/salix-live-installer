@@ -23,5 +23,5 @@ EOF
 makepkg -l y -c n ../salix-live-installer-$VER-noarch-1plb.txz
 cd ..
 md5sum salix-live-installer-$VER-noarch-1plb.txz > salix-live-installer-$VER-noarch-1plb.md5
-echo -e "python,parted,salixtools" > salix-live-installer-$VER-noarch-1plb.dep
+echo -e "gparted,python,salixtools" > salix-live-installer-$VER-noarch-1plb.dep
 rm -rf pkg

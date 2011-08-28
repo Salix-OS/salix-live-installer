@@ -910,25 +910,30 @@
                         <property name="visible">True</property>
                         <property name="border_width">1</property>
                         <child>
-                          <object class="GtkLabel" id="label38">
-                            <property name="width_request">580</property>
+                          <object class="GtkEventBox" id="intro_eventbox">
                             <property name="visible">True</property>
-                            <property name="xalign">0</property>
-                            <property name="xpad">2</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
+                            <signal name="enter_notify_event" handler="on_intro_eventbox_enter_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_intro_eventbox_leave_notify_event"/>
+                            <child>
+                              <object class="GtkLabel" id="label38">
+                                <property name="width_request">580</property>
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">SalixLive Installer will perform a standard installation of Salix Operating System on your computer.
 
-Before executing SalixLive's installer, you should already have the necessary partitions available on your system.
+Simply click on one of the categories in the left section to configure the corresponding settings. A check will be displayed beside each setting once it has been configured. All the settings must be configured before the 'Launch Salix installation' button becomes accessible.
 
-Salix needs, at the very minimum, one swap partition and  one Linux  partition to hold its main directory tree. 
+Depending on your system, the 'Partitions' settings are composed of successive steps which must all be configured before you can go onto another setting.
 
-If possible, it is recommended to also have at least another Linux partition to hold your /home directory.
+Once set, every configuration can be undone and reset as many times as necessary. No change will take effect until you click on the 'Launch Salix installation' button.
 
-If you do not already have these needed partitions ready, please exit SalixLive's installer and use Gparted to create them first.</property>
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
+Contextual help triggered by the mouse position is available each step of the way and will be displayed in the above section.</property>
+                                <property name="use_markup">True</property>
+                                <property name="wrap">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
-                            <property name="padding">3</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -1801,6 +1806,115 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkVBox" id="partitioning_box">
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel" id="label49">
+                            <property name="width_request">580</property>
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="xpad">2</property>
+                            <property name="label" translatable="yes">&lt;b&gt;Important!&lt;/b&gt;
+
+Salix needs, at the very minimum, one swap partition and one Linux partition to hold its main directory tree. If possible, it is recommended to also have at least another Linux partition to hold your /home directory.
+
+If you do not already have these needed partitions ready, you should now click on the button 'Modify partition scheme'  in order to create them. Be aware that partitioning a disk drive is a delicate operation which could lead to data loss if not performed cautiously. It is therefore highly advisable to backup important data before starting this procedure.
+
+If you already have all the needed partitions, please click on the button 'Do not modify partition scheme' to continue without altering your current partitioning scheme.</property>
+                            <property name="use_markup">True</property>
+                            <property name="wrap">True</property>
+                          </object>
+                          <packing>
+                            <property name="padding">3</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkHButtonBox" id="hbuttonbox11">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkButton" id="modify_partition_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <signal name="clicked" handler="on_modify_partition_button_clicked"/>
+                                <child>
+                                  <object class="GtkHBox" id="hbox44">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label50">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">Modify partition scheme</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage" id="image33">
+                                        <property name="visible">True</property>
+                                        <property name="icon_name">gparted</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="do_not_modify_partition_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <signal name="clicked" handler="on_do_not_modify_partition_button_clicked"/>
+                                <child>
+                                  <object class="GtkHBox" id="hbox46">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label51">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">Do not modify partition scheme</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage" id="image34">
+                                        <property name="visible">True</property>
+                                        <property name="stock">gtk-go-forward</property>
+                                      </object>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkVBox" id="main_partition_box">
                         <property name="border_width">1</property>
                         <child>
@@ -1818,6 +1932,9 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="padding">5</property>
                             <property name="position">0</property>
                           </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
                         </child>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow3">
@@ -1887,7 +2004,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             </child>
                           </object>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -1904,7 +2021,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -1921,7 +2038,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="padding">3</property>
-                            <property name="position">3</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                         <child>
@@ -2028,12 +2145,12 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="padding">3</property>
-                            <property name="position">4</property>
+                            <property name="position">5</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
@@ -2243,7 +2360,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                       </object>
                       <packing>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                     <child>
@@ -2432,7 +2549,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                       </object>
                       <packing>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                       </packing>
                     </child>
                     <child>
@@ -2584,7 +2701,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                       </object>
                       <packing>
-                        <property name="position">7</property>
+                        <property name="position">8</property>
                       </packing>
                     </child>
                     <child>
@@ -3099,7 +3216,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                       </object>
                       <packing>
-                        <property name="position">8</property>
+                        <property name="position">9</property>
                       </packing>
                     </child>
                     <child>
@@ -3478,7 +3595,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         </child>
                       </object>
                       <packing>
-                        <property name="position">9</property>
+                        <property name="position">10</property>
                       </packing>
                     </child>
                   </object>
@@ -3547,7 +3664,7 @@ If you do not already have these needed partitions ready, please exit SalixLive'
                         <child>
                           <object class="GtkLabel" id="label17">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Launch Salix _install </property>
+                            <property name="label" translatable="yes">Launch Salix _installation </property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>

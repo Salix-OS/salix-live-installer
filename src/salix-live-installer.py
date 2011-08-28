@@ -26,18 +26,19 @@
 # version = '0.3'
 
 import commands
-import subprocess
-import os
-import gtk
-import sys
-import gobject
 import glob
-import shutil
+import gobject
+import gtk
+import os
+import subprocess
+import sys
+import thread
 
 # Internationalization
-import locale
 import gettext
 import gtk.glade
+import locale
+
 locale.setlocale(locale.LC_ALL, "")
 gettext.bindtextdomain("salix-live-installer", "/usr/share/locale")
 gettext.textdomain("salix-live-installer")
@@ -45,9 +46,9 @@ gettext.install("salix-live-installer", "/usr/share/locale", unicode=1)
 gtk.glade.bindtextdomain("salix-live-installer", "/usr/share/locale")
 gtk.glade.textdomain("salix-live-installer")
 
-# To do => Install log
-# To do => Integrate Gparted in installer?
-# To do => More Error checking process
+# TODO => Install log
+# TODO => More Error checking process
+# TODO => External function module?
 
 class SalixLiveInstaller:
 
@@ -88,6 +89,7 @@ class SalixLiveInstaller:
         self.TimeBox = builder.get_object("time_box")
         self.KeyboardBox = builder.get_object("keyboard_box")
         self.LocaleBox = builder.get_object("locale_box")
+        self.PartitioningBox = builder.get_object("partitioning_box")
         self.MainPartitionBox = builder.get_object("main_partition_box")
         self.LinuxPartitionBox = builder.get_object("linux_partition_box")
         self.WindowsPartitionBox = builder.get_object("windows_partition_box")
@@ -340,7 +342,7 @@ class SalixLiveInstaller:
                 self.KeyboardListStore.append(keyb_feedline)
             # Detect & set the status of the numlock checkbutton
             global set_numlock
-            if os.access('/etc/rc.d/rc.numlock', os.X_OK) == True :
+            if os.access('/etc/rc.d/rc.numlock', os.X_OK):
                 set_numlock = 'on'
                 self.NumLockCheckButton.set_active(True)
             else :
@@ -349,8 +351,8 @@ class SalixLiveInstaller:
             # SaLT changes (well ibus actually)
             # Detect & set the status of the Ibus checkbutton
             global set_ibus
-            if os.access('/usr/bin/ibus-daemon', os.X_OK) == True :
-                if os.access('/etc/profile.d/ibus.sh', os.X_OK) == True :
+            if os.access('/usr/bin/ibus-daemon', os.X_OK):
+                if os.access('/etc/profile.d/ibus.sh', os.X_OK):
                     set_ibus = 'on'
                     self.IBusCheckButton.set_active(True)
                 else :
@@ -413,7 +415,7 @@ class SalixLiveInstaller:
                     continent_zone_info = i.replace('/usr/share/zoneinfo/', '')
                     self.ContinentZoneListStore.append([continent_zone_info])
                     if continent_current_zone == continent_zone_info:
-                        continent_current_zone_index = continent_zone_index
+                        continent_current_zone_index = continent_zone_index + 1
                     continent_zone_index += 1
 
         global set_country_zone
@@ -429,7 +431,7 @@ class SalixLiveInstaller:
                     country_zone_info = i.replace('/usr/share/zoneinfo/' + continent_current_zone + '/', '')
                     self.CountryZoneListStore.append([country_zone_info])
                     if country_current_zone == country_zone_info:
-                        country_current_zone_index = country_zone_index
+                        country_current_zone_index = country_zone_index + 1
                     country_zone_index += 1
             except:
                 pass
@@ -557,10 +559,45 @@ class SalixLiveInstaller:
             # Set the cursor on the first row
             self.MainPartitionList.set_cursor(0)
 
+        # Detect, inform & warn about swap (or none) partition
+        global swap_detection
+        def swap_detection() :
+            """
+            Displays the swap partitions that were detected on the system which
+            will be automatically used by the installer.
+            Displays a warning message when no (swap) partition is found.
+            """
+            if part_feedline_list == [] :
+                info_dialog(_("Salix Live Installer was not able to detect a \
+valid partition on your system. You should exit Salix Live Installer now and use \
+Gparted, or any other partitioning tool of your choice, to first create valid \
+partitions on your system before resuming with Salix Live Installer process."))
+            else :
+                global Swap_Partition
+                fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
+                Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
+                SwapText = "\n<b>" + _("Detected Swap partition(s)") + ":</b> \n"
+                if commands.getoutput(fdisk_swap_output) == '' :
+                    info_dialog(_("Salix Live Installer was not able to detect a valid \
+Swap partition on your system. \nA Swap partition could improve overall performances. \
+You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
+tool of your choice, to first create a Swap partition before resuming with Salix Live \
+Installer process."))
+                else :
+                    for i in Swap_Partition:
+                        if "doesn't contain a valid partition table" not in i :
+                            SwapText += _("Salix Live Installer has detected a Swap \
+partition on " + i +" and will automatically add it to your configuration.\n")
+                        else :
+                            SwapText = _("Salix Live Installer was not able to detect \
+a valid partition on your system. You should exit Salix Live Installer now and use Gparted, \
+or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live \
+Installer process.")
+                    info_dialog(SwapText)
+
         # Initialize the contextual help box
         global context_intro
-        context_intro = _("SalixLive Installer will perform a standard installation of Salix Operating \n\
-System on your computer from the comfort of SalixLive's graphic environment.")
+        context_intro = _("Contextual help.")
         self.ContextLabel.set_text(context_intro)
 
 ### Callback signals waiting in a constant loop: ###
@@ -568,6 +605,11 @@ System on your computer from the comfort of SalixLive's graphic environment.")
 ### WINDOWS MAIN SIGNALS ###
 
     # General contextual help
+    def on_intro_eventbox_enter_notify_event(self, widget, data=None):
+	self.ContextLabel.set_text(_("General usage."))
+    def on_intro_eventbox_leave_notify_event(self, widget, data=None):
+        global context_intro
+	self.ContextLabel.set_text(context_intro)
     def on_about_link_enter_notify_event(self, widget, data=None):
 	self.ContextLabel.set_text(_("About Salix Installer."))
     def on_about_link_leave_notify_event(self, widget, data=None):
@@ -983,6 +1025,7 @@ included in your customized LiveClone will be installed."))
             set_numlock = 'on'
         else :
             set_numlock = 'off'
+
     # SaLT changes #
     # What to do when the iBus checkbutton is toggled
     def on_ibus_checkbutton_toggled(self, widget, data=None):
@@ -1507,6 +1550,27 @@ Swap partition on your system."))
         ConfigurationSet[1] = 'no'
         self.InstallButton.set_sensitive(False)
 
+    # What to do when the 'Do modify partition' button is clicked
+    def on_modify_partition_button_clicked(self, widget, data=None):
+        while gtk.events_pending():
+            gtk.main_iteration(False)
+        subprocess.call("gparted", shell=True)
+        partition_list_initialization()
+        self.PartitioningBox.hide()
+        self.MainPartitionBox.show()
+        swap_detection()
+        global switch_tab_lock
+        switch_tab_lock = 'on'
+
+    # What to do when the 'Do not modify partition' button is clicked
+    def on_do_not_modify_partition_button_clicked(self, widget, data=None):
+        partition_list_initialization()
+        self.PartitioningBox.hide()
+        self.MainPartitionBox.show()
+        swap_detection()
+        global switch_tab_lock
+        switch_tab_lock = 'on'
+        
     # What to do when the partition recap undo button is clicked
     def on_partition_recap_undo_clicked(self, widget, data=None):
         # Blank Recap box + 'Done' Check & displays the main partition configuration box
@@ -1515,7 +1579,7 @@ Swap partition on your system."))
         partition_list_initialization()
         self.PartitionCheck.hide()
         self.PartitionCheckMarker.show()
-        self.MainPartitionBox.show()
+        self.PartitioningBox.show()
         self.RecapPartitionBox.hide()
         global ConfigurationSet
         ConfigurationSet[2] = 'no'
@@ -1767,6 +1831,12 @@ Swap partition on your system."))
                     task = self.salix_install_process()
                     gobject.idle_add(task.next)
 
+    def install_modules(self, widget, mountpoint, modulelist):
+        for mod in modulelist:
+            if mod:
+                Module_MountPoint = "/mnt/salt/mnt/modules/" + mod
+                subprocess.call("cp --preserve -rf " + Module_MountPoint + "/* " + mountpoint, shell=True)
+
     # Install process
     def salix_install_process(self):
         # first we hide unecessary windows & bring on the progress bar with some info
@@ -1785,8 +1855,8 @@ Swap partition on your system."))
         if os.path.exists(Main_MountPoint) == False :
             os.mkdir(Main_MountPoint)
         subprocess.call("umount -l " + Selected_Main_Partition, shell=True)
-        self.InstallProgressBar.set_text(_("Formatting the main partition..."))
-        self.InstallProgressBar.set_fraction(0.06)
+        self.InstallProgressBar.set_text(_("Formatting and mounting the main partition..."))
+        self.InstallProgressBar.set_fraction(0.05)
         # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
         # adjust the format command to the selected formatting type
@@ -1799,8 +1869,8 @@ Swap partition on your system."))
         # format and/or remount the eventual other Linux partitions
         # (existing Windows partitions will be managed later while generating /etc/fstab)
         if LinFullSets != [] : # Here we will format -and- mount
-            self.InstallProgressBar.set_text(_("Formatting and mounting your Linux partition(s)..."))
-            self.InstallProgressBar.set_fraction(0.09)
+            self.InstallProgressBar.set_text(_("Formatting and mounting the Linux partition(s)..."))
+            self.InstallProgressBar.set_fraction(0.07)
             # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
             for i in LinFullSets :
@@ -1816,8 +1886,8 @@ Swap partition on your system."))
                 # finally we mount the device on the target
                 subprocess.call("mount -t " + i[1] + " " + i[0] + " " + Main_MountPoint + i[2], shell=True)
         if LinFormatSets != [] : # Here we will only format the partition (no mounting)
-            self.InstallProgressBar.set_text(_("Formatting your Linux partition(s)..."))
-            self.InstallProgressBar.set_fraction(0.12)
+            self.InstallProgressBar.set_text(_("Formatting the Linux partition(s)..."))
+            self.InstallProgressBar.set_fraction(0.09)
             # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
             for i in LinFormatSets :
@@ -1829,8 +1899,8 @@ Swap partition on your system."))
                 else :
                     subprocess.call("mkfs -t " + i[1] + " -f " + i[0], shell=True)
         if LinMountSets != [] : # Here we will only mount the partition (no formatting)
-            self.InstallProgressBar.set_text(_("Mounting your Linux partition(s)..."))
-            self.InstallProgressBar.set_fraction(0.15)
+            self.InstallProgressBar.set_text(_("Mounting the Linux partition(s)..."))
+            self.InstallProgressBar.set_fraction(0.11)
             # there's more work, yield True
             yield True
             for i in LinMountSets :
@@ -1838,130 +1908,72 @@ Swap partition on your system."))
                 os.makedirs(Main_MountPoint + i[2])
                 # then we mount the device on the target
                 subprocess.call("mount " + i[0] + " " + Main_MountPoint + i[2], shell=True)
+        # SaLT Change #
         # Now we are ready to copy the new OS on the adequate target partition. Normally we should
         # simply unsquashfs the live modules, but since unsquashfs can be buggy & can stall, it is safer
-        # to first mount the squashfs module to a temporary mountpoint & copy its content instead.
-        # So first we create the temporary mountpoint
-        Temp_Mount = Main_MountPoint + "/temp_mount"
-        os.makedirs(Temp_Mount)
-        # SaLT Change #
+        # to copy the unsquashed modules directly from /mnt/salt/mnt/modules
+        size_of_installation = 0
         if liveclone_install == True : # We are in a LiveClone generated LiveCD
-                self.InstallProgressBar.set_text(_("Installing your LiveClone system..."))
-                self.InstallProgressBar.set_fraction(0.50)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # we install the one & only clone module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/01-clone.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                os.rmdir(Temp_Mount)
-                # We add missing items, restore some non-live stock files, remove some specific live stuff
-                subprocess.call("cp --preserve -rf /dev " + Main_MountPoint, shell=True)
-                subprocess.call("mount -t proc proc " + Main_MountPoint + "/proc", shell=True)
-                subprocess.call("mount --bind /dev " + Main_MountPoint + "/dev", shell=True)
-                subprocess.call("spkg -d liveclone --root=" + Main_MountPoint, shell=True)
-                subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
-                subprocess.call("spkg -d salix-persistence-wizard --root=" + Main_MountPoint, shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/etc/ssh/ssh_host_*", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/home/*/Desktop/*startup-guide*desktop", shell=True)
-                subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/*startup-guide*desktop", shell=True)
-                os.remove(Main_MountPoint + "/hooks.salt")
-        # SaLT change #
-        elif liveclone_install == False : # We are in a regular Salix LiveCD
-            if Selected_Install_Mode == _('core') :
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-                self.InstallProgressBar.set_fraction(0.40)
-                # there's more work, yield True
-                yield True
-                # first we install the core module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/01-core.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                self.InstallProgressBar.set_text(_("Installing the common packages..."))
-                self.InstallProgressBar.set_fraction(0.50)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # finally we install all the packages that are common to any installation mode
-                # this would be the kernel related packages, etc...
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-            elif Selected_Install_Mode == _('basic') :
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
-                self.InstallProgressBar.set_fraction(0.25)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # first we install the core module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*core.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-                self.InstallProgressBar.set_fraction(0.50)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # then we install the basic module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*basic.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                self.InstallProgressBar.set_text(_("Installing the common packages..."))
-                self.InstallProgressBar.set_fraction(0.60)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # finally we install all the packages that are common to any installation mode
-                # this would be the kernel related packages, etc...
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-            elif Selected_Install_Mode == _('full') :
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('core')})
-                self.InstallProgressBar.set_fraction(0.20)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # first we install the core module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*core.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': _('basic')})
-                self.InstallProgressBar.set_fraction(0.35)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # then we install the basic module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*basic.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
-                self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
-                self.InstallProgressBar.set_fraction(0.50)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # then we install the full module
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*full.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-                self.InstallProgressBar.set_text(_("Installing the common packages..."))
-                self.InstallProgressBar.set_fraction(0.60)
-                # there's more work, yield True to prevent the progress bar from looking inactive
-                yield True
-                # finally we install all the packages that are common to any installation mode
-                # those are the kernel related packages, etc...
-                subprocess.call("mount -t squashfs " + LiveCdMountPoint + "/salixlive/modules/*common.salt " + Temp_Mount + " -o loop", shell=True)
-                subprocess.call("cp --preserve -rf " + Temp_Mount + "/* " + Main_MountPoint, shell=True)
-                subprocess.call("umount " + Temp_Mount, shell=True)
-            self.InstallProgressBar.set_text(_("Installing the kernel..."))
-            self.InstallProgressBar.set_fraction(0.70)
+            self.InstallProgressBar.set_text(_("Installing your LiveClone system..."))
+            self.InstallProgressBar.set_fraction(0.13)
             # there's more work, yield True to prevent the progress bar from looking inactive
             yield True
-            subprocess.call("spkg --root=" + Main_MountPoint + " " + LiveCdMountPoint + "/packages/std-kernel/*", shell=True)
-            os.rmdir(Temp_Mount)
+            # we install the one & only clone module
+            modules = ["01-clone"]            
+            for mod in modules:
+                size_of_installation += getDirectorySize("/mnt/salt/mnt/modules/" + mod)
+            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules))
+            percent=0.15
+            while percent < 0.90:
+                space_used=float(commands.getoutput("df | grep %s | tr -s ' ' | cut -d' ' -f3" % Selected_Main_Partition))
+                percent = 0.15+((space_used/size_of_installation)*0.50)
+                percent = round(percent,2)
+                if percent > self.InstallProgressBar.get_fraction():
+                    self.InstallProgressBar.set_fraction(percent)
+                yield True
+
+            # Remove some specific live stuff
+            subprocess.call("spkg -d liveclone --root=" + Main_MountPoint, shell=True)
+            subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
+            subprocess.call("spkg -d salix-persistence-wizard --root=" + Main_MountPoint, shell=True)
+            subprocess.call("rm -f " + Main_MountPoint + "/etc/ssh/ssh_host_*", shell=True)
+            subprocess.call("rm -f " + Main_MountPoint + "/home/*/Desktop/*startup-guide*desktop", shell=True)
+            subprocess.call("rm -f " + Main_MountPoint + "/user/share/applications/*startup-guide*desktop", shell=True)
+            os.remove(Main_MountPoint + "/hooks.salt")
+
+        # SaLT change #
+        elif liveclone_install == False : # We are in a regular Salix LiveCD
+            # TRANSLATORS: Simply reposition the '%(mode)s' variable as required by your grammar. The value of '%(mode)s' will be 'core', 'basic' or 'full'.
+            self.InstallProgressBar.set_text(_("Installing the %(mode)s mode packages...") % {'mode': Selected_Install_Mode})
+            if Selected_Install_Mode == _('core') :
+                modules = ["01-core", "04-common"]
+            elif Selected_Install_Mode == _('basic') :
+                modules = ["01-core", "02-basic", "04-common"]
+            elif Selected_Install_Mode == _('full') :
+                modules = ["01-core", "02-basic", "03-full", "04-common"]
+            for mod in modules:
+                size_of_installation += getDirectorySize("/mnt/salt/mnt/modules/" + mod)
+            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules))
+            percent=0.15
+            while percent < 0.80:
+                space_used=float(commands.getoutput("df | grep %s | awk '{print $3}'" % Selected_Main_Partition))
+                percent = 0.15+((space_used/size_of_installation)*0.50)
+                percent = round(percent,2)
+                if percent > self.InstallProgressBar.get_fraction():
+                    self.InstallProgressBar.set_fraction(percent)
+                yield True
+
+            pkg_path = LiveCdMountPoint + "/packages/std-kernel/"
+            pkg_list = commands.getoutput("ls " + pkg_path)
+            for pkg_to_install in pkg_list.splitlines():
+                self.InstallProgressBar.set_text(_("Installing %s ") % pkg_to_install)
+                subprocess.call("spkg --root=" + Main_MountPoint + " " + pkg_path + pkg_to_install, shell=True)
+                self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
+                yield True
 
         # Create /etc/fstab
         self.InstallProgressBar.set_text(_("Creating /etc/fstab..."))
-        self.InstallProgressBar.set_fraction(0.80)
+        self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
         # there's more work, yield True to prevent the progress bar from looking inactive
         yield True
         Fstab_File = open(Main_MountPoint + '/etc/fstab', 'w')
@@ -1998,7 +2010,7 @@ Swap partition on your system."))
 
         # Set Time, Keyboard, locale, login, etc...
         self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
-        self.InstallProgressBar.set_fraction(0.90)
+        self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
         # there's more work, yield True
         yield True
         global set_ntp, set_zone
@@ -2006,10 +2018,10 @@ Swap partition on your system."))
             subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
         if set_ntp == 'no':
             subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.ntpd', shell=True)
-        # The symlink will be ok uppon chroot or reboot
-        subprocess.call('ln -sf ' + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
+        subprocess.call('ln -sf ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
         subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
-        subprocess.call('cp ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime', shell=True)
+        subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
+
 
         # Create /etc/rc.d/rc.font
         RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
@@ -2031,17 +2043,25 @@ if [ -x /usr/bin/loadkeys ]; then\n\
 /usr/bin/loadkeys -u " + Selected_Keyboard + ".map\n\
 fi")
         RCkeymap_File.close()
-        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.cups', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.pcmcia', shell=True)
-        subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.sshd', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
-        subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.keymap'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.keymap', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.font'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.font', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.cups'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/etc/rc.d/rc.cups', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.pcmcia'):
+            subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.pcmcia', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.sshd'):
+            subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.sshd', shell=True)
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.services'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
         # Refresh the progress bar before creating the fork
         self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
-        self.InstallProgressBar.set_fraction(0.91)
+        self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
         # there's more work, yield True
         yield True
         # Create a fork to not get stuck in the chroot
@@ -2050,10 +2070,6 @@ fi")
             self.chroot_settings()
         else :
             os.waitpid(NewPid, 0) # make sure the child process gets cleaned up
-            self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
-            self.InstallProgressBar.set_fraction(0.98)
-            # there's more work, yield True
-            yield True
 
             self.InstallProgressBar.set_text(_("Installation process completed successfully ..."))
             self.InstallProgressBar.set_fraction(1.0)
@@ -2080,10 +2096,14 @@ use the application of your choice before rebooting your machine.)\n"""))
     def chroot_settings(self) :
         os.listdir(Main_MountPoint)
         os.chroot(Main_MountPoint)
-        subprocess.call('/var/log/setup/setup.07.update-desktop-database', shell=True)
-        subprocess.call('/var/log/setup/setup.htmlview', shell=True)
-        subprocess.call('/var/log/setup/setup.services', shell=True)
-        subprocess.call('/etc/cron.daily/housekeeping', shell=True)
+        if os.path.exists('/var/log/setup/setup.07.update-desktop-database'):
+            subprocess.call('/var/log/setup/setup.07.update-desktop-database', shell=True)
+        if os.path.exists('/var/log/setup/setup.htmlview'):
+            subprocess.call('/var/log/setup/setup.htmlview', shell=True)
+        if os.path.exists('/var/log/setup/setup.services'):
+            subprocess.call('/var/log/setup/setup.services', shell=True)
+        if os.path.exists('/var/log/setup/housekeeping'):
+            subprocess.call('/etc/cron.daily/housekeeping', shell=True)
         try :
             subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -i ' + set_ibus + ' -z', shell=True)
         except :
@@ -2145,7 +2165,7 @@ use the application of your choice before rebooting your machine.)\n"""))
             self.IntroBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
-            self.MainPartitionBox.hide()
+            self.PartitioningBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.hide()
             self.PackagesBox.hide()
@@ -2179,7 +2199,7 @@ use the application of your choice before rebooting your machine.)\n"""))
             self.IntroBox.hide()
             self.TimeBox.hide()
             self.LocaleBox.hide()
-            self.MainPartitionBox.hide()
+            self.PartitioningBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.hide()
             self.PackagesBox.hide()
@@ -2203,7 +2223,7 @@ use the application of your choice before rebooting your machine.)\n"""))
             self.IntroBox.hide()
             self.TimeBox.hide()
             self.KeyboardBox.hide()
-            self.MainPartitionBox.hide()
+            self.PartitioningBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.hide()
             self.PackagesBox.hide()
@@ -2219,6 +2239,7 @@ use the application of your choice before rebooting your machine.)\n"""))
             self.UsersTab.set_relief(gtk.RELIEF_NONE)
             self.PackagesTab.set_relief(gtk.RELIEF_NONE)
 
+
     # What to do when the partitions tab is clicked
     def on_partition_tab_clicked(self, widget, data=None):
         if switch_tab_lock == 'on' :
@@ -2232,40 +2253,11 @@ use the application of your choice before rebooting your machine.)\n"""))
             self.PackagesBox.hide()
             if partition_done_lock == 'on' :
                 self.RecapPartitionBox.show()
-                self.MainPartitionBox.hide()
+                self.PartitioningBox.hide()
             else :
-                partition_list_initialization()
                 self.RecapPartitionBox.hide()
-                self.MainPartitionBox.show()
-                # Detect swap & other partitions
-                if part_feedline_list == [] :
-                    info_dialog(_("Salix Live Installer was not able to detect a \
-valid partition on your system. You should exit Salix Live Installer now and use \
-Gparted, or any other partitioning tool of your choice, to first create valid \
-partitions on your system before resuming with Salix Live Installer process."))
-                else :
-                    global Swap_Partition
-                    fdisk_swap_output = 'fdisk -l | grep -i swap | cut -f1 -d " "'
-                    Swap_Partition = commands.getoutput(fdisk_swap_output).splitlines()
-                    SwapText = "\n<b>" + _("Detected Swap partition(s)") + ":</b> \n"
-                    if commands.getoutput(fdisk_swap_output) == '' :
-                        info_dialog(_("Salix Live Installer was not able to detect a valid \
-Swap partition on your system. \nA Swap partition could improve overall performances. \
-You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
-tool of your choice, to first create a Swap partition before resuming with Salix Live \
-Installer process."))
-                    else :
-                        for i in Swap_Partition:
-                            if "doesn't contain a valid partition table" not in i :
-                                SwapText += _("Salix Live Installer has detected a Swap \
-partition on " + i +" and will automatically add it to your configuration.\n")
-                            else :
-                                SwapText = _("Salix Live Installer was not able to detect \
-a valid partition on your system. You should exit Salix Live Installer now and use Gparted, \
-or any other partitioning tool of your choice, to first create valid partitions before resuming with Salix Live \
-Installer process.")
-                        info_dialog(SwapText)
-
+                self.PartitioningBox.show()
+                
             self.TimeTab.set_relief(gtk.RELIEF_NONE)
             self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
             self.LocaleTab.set_relief(gtk.RELIEF_NONE)
@@ -2282,7 +2274,7 @@ Installer process.")
             self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
-            self.MainPartitionBox.hide()
+            self.PartitioningBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.show()
             self.PackagesBox.hide()
@@ -2302,7 +2294,7 @@ Installer process.")
             self.TimeBox.hide()
             self.KeyboardBox.hide()
             self.LocaleBox.hide()
-            self.MainPartitionBox.hide()
+            self.PartitioningBox.hide()
             self.RecapPartitionBox.hide()
             self.UsersBox.hide()
             self.PackagesBox.show()
@@ -2335,6 +2327,13 @@ def error_dialog(message, parent = None):
     global result_error
     result_error = dialog.run()
     dialog.destroy()
+
+# This is needed for the progress bar:
+def getDirectorySize(directory):
+    """
+    Computes the size of a directory.
+    """
+    return int(commands.getoutput("du -s '" + directory + "' | awk '{print $1}' "))
 
 # Launch the application
 if __name__ == '__main__':	

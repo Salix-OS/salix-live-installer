@@ -1,10 +1,13 @@
 Version 0.3
- * Replaced LLS by SALT
+ * Port from LLS to SaLT
  * Replaced SCIM by IBus
  * Added demo mode info box when running out of SaLT LiveCD
  * "Select..." instead of empty entries when no timezone has been set yet
  * Generalized some contextual help to fit all Salix editions
  * Added translation strings for Arabic, Italian & Polish
+ * Gparted is now integrated in the partitions setting scheme
+ * Improved progress bar (Thanks to Ivo Georgiev)
+ * Improved removable device detection (Thanks to Cyrille Pontvieux)
 
 Version 0.2.7
  * Fixed core install keyboardsetup bug
