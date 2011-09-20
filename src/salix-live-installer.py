@@ -23,7 +23,7 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.4'
+# version = '0.3'
 
 import commands
 import glob
@@ -2098,7 +2098,7 @@ use the application of your choice before rebooting your machine.)\n"""))
             subprocess.call('/var/log/setup/setup.htmlview', shell=True)
         if os.path.exists('/var/log/setup/setup.services'):
             subprocess.call('/var/log/setup/setup.services', shell=True)
-        if os.path.exists('/var/log/setup/housekeeping'):
+        if os.path.exists('/etc/cron.daily/housekeeping'):
             subprocess.call('/etc/cron.daily/housekeeping', shell=True)
         try :
             subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -i ' + set_ibus + ' -z', shell=True)
