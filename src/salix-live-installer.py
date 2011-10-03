@@ -33,6 +33,7 @@ import os
 import subprocess
 import sys
 import thread
+import time
 
 # Internationalization
 import gettext
@@ -1827,11 +1828,17 @@ Swap partition on your system."))
                     task = self.salix_install_process()
                     gobject.idle_add(task.next)
 
-    def install_modules(self, widget, mountpoint, modulelist):
+    def install_modules(self, widget, mountpoint, modulelist,lock):
+        global target_copied
+        target_copied = False
+        lock.acquire()
+        time.sleep(2)
         for mod in modulelist:
-            if mod:
-                Module_MountPoint = "/mnt/salt/mnt/modules/" + mod
-                subprocess.call("cp --preserve -rf " + Module_MountPoint + "/* " + mountpoint, shell=True)
+            Module_MountPoint = "/mnt/salt/mnt/modules/" + mod
+            subprocess.call("cp --preserve -rf " + Module_MountPoint + "/* " + mountpoint, shell=True)
+        lock.release()
+        time.sleep(2)
+        target_copied = True
 
     # Install process
     def salix_install_process(self):
@@ -1918,7 +1925,8 @@ Swap partition on your system."))
             modules = ["01-clone"]            
             for mod in modules:
                 size_of_installation += getDirectorySize("/mnt/salt/mnt/modules/" + mod)
-            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules))
+            lock=thread.allocate_lock()
+            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules,lock))
             percent=0.15
             while percent < 0.90:
                 space_used=float(commands.getoutput("df | grep %s | tr -s ' ' | cut -d' ' -f3" % Selected_Main_Partition))
@@ -1927,7 +1935,10 @@ Swap partition on your system."))
                 if percent > self.InstallProgressBar.get_fraction():
                     self.InstallProgressBar.set_fraction(percent)
                 yield True
-
+            # Wait for the installation filesystem to be fully copied on the target
+            time.sleep(2)
+            while not target_copied :
+                time.sleep(5)
             # Remove some specific live stuff
             subprocess.call("spkg -d liveclone --root=" + Main_MountPoint, shell=True)
             subprocess.call("spkg -d salix-live-installer --root=" + Main_MountPoint, shell=True)
@@ -1949,7 +1960,8 @@ Swap partition on your system."))
                 modules = ["01-core", "02-basic", "03-full", "04-common"]
             for mod in modules:
                 size_of_installation += getDirectorySize("/mnt/salt/mnt/modules/" + mod)
-            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules))
+            lock=thread.allocate_lock()
+            thread.start_new_thread(self.install_modules, (self, Main_MountPoint, modules,lock))
             percent=0.15
             while percent < 0.80:
                 space_used=float(commands.getoutput("df | grep %s | awk '{print $3}'" % Selected_Main_Partition))
@@ -1958,7 +1970,11 @@ Swap partition on your system."))
                 if percent > self.InstallProgressBar.get_fraction():
                     self.InstallProgressBar.set_fraction(percent)
                 yield True
-
+            # Wait for the installation filesystem to be fully copied on the target
+            time.sleep(2)
+            while not target_copied :
+                time.sleep(5)
+            # Install the Kernel packages
             pkg_path = LiveCdMountPoint + "/packages/std-kernel/"
             pkg_list = commands.getoutput("ls " + pkg_path)
             for pkg_to_install in pkg_list.splitlines():
@@ -2003,7 +2019,6 @@ Swap partition on your system."))
                     Fstab_File.write('%-20s%-20s%-15s%-20s%-10s%s\n' % (i[0], i[1], 'vfat' , 'defaults,utf8,umask=0,shortname=mixed', '1', '0'))
         Fstab_File.close()
 
-
         # Set Time, Keyboard, locale, login, etc...
         self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
         self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
@@ -2017,7 +2032,6 @@ Swap partition on your system."))
         subprocess.call('ln -sf ' + Main_MountPoint + set_zone + ' ' + Main_MountPoint + '/etc/localtime-copied-from', shell=True)
         subprocess.call('rm -f ' + Main_MountPoint + '/etc/localtime', shell=True)
         subprocess.call('cp ' + Main_MountPoint + '/etc/localtime-copied-from ' + Main_MountPoint + '/etc/localtime', shell=True)
-
 
         # Create /etc/rc.d/rc.font
         RCfont_File = open(Main_MountPoint + '/etc/rc.d/rc.font', 'w')
@@ -2049,12 +2063,16 @@ fi")
             subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.pcmcia', shell=True)
         if os.path.exists(Main_MountPoint + '/etc/rc.d/rc.sshd'):
             subprocess.call('chmod -x ' + Main_MountPoint + '/etc/rc.d/rc.sshd', shell=True)
-        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database'):
-            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database', shell=True)
-        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.07.update-desktop-database'):
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.04.mkfontdir'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.04.mkfontdir', shell=True)
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
+        if os.path.exists(Main_MountPoint + '/var/log/setup/setup.htmlview'):
             subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.htmlview', shell=True)
         if os.path.exists(Main_MountPoint + '/var/log/setup/setup.services'):
             subprocess.call('chmod +x ' + Main_MountPoint + '/var/log/setup/setup.services', shell=True)
+        if os.path.exists(Main_MountPoint + '/etc/cron.daily/housekeeping'):
+            subprocess.call('chmod +x ' + Main_MountPoint + '/etc/cron.daily/housekeeping', shell=True)
         # Refresh the progress bar before creating the fork
         self.InstallProgressBar.set_text(_("Time, keyboard, locale, login and other system configuration..."))
         self.InstallProgressBar.set_fraction(self.InstallProgressBar.get_fraction() + 0.02)
@@ -2092,14 +2110,17 @@ use the application of your choice before rebooting your machine.)\n"""))
     def chroot_settings(self) :
         os.listdir(Main_MountPoint)
         os.chroot(Main_MountPoint)
-        if os.path.exists('/var/log/setup/setup.07.update-desktop-database'):
-            subprocess.call('/var/log/setup/setup.07.update-desktop-database', shell=True)
+        # Run various slackware install routines
+        if os.path.exists('/var/log/setup/setup.04.mkfontdir'):
+            subprocess.call('/var/log/setup/setup.04.mkfontdir', shell=True)
+        if os.path.exists('/var/log/setup/setup.08.gtk-update-icon-cache'):
+            subprocess.call('/var/log/setup/setup.08.gtk-update-icon-cache', shell=True)
         if os.path.exists('/var/log/setup/setup.htmlview'):
             subprocess.call('/var/log/setup/setup.htmlview', shell=True)
         if os.path.exists('/var/log/setup/setup.services'):
             subprocess.call('/var/log/setup/setup.services', shell=True)
         if os.path.exists('/etc/cron.daily/housekeeping'):
-            subprocess.call('/etc/cron.daily/housekeeping', shell=True)
+            subprocess.call('/etc/cron.daily/housekeeping && wait', shell=True)
         try :
             subprocess.check_call('/usr/sbin/keyboardsetup -k ' + Selected_Keyboard + ' -n ' + set_numlock + ' -i ' + set_ibus + ' -z', shell=True)
         except :
