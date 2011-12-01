@@ -1,20 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Cyrille Pontvieux <jrd@enialis.net>, 2011.
+# gapan <vlahavas@gmail.com>, 2011.
+# Kris Thomsen <lakristho@gmail.com>, 2011.
+# Morten Juhl-Johansen Zölde-Fejér <morten@writtenandread.net>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-01 15:01+0100\n"
-"PO-Revision-Date: 2011-01-09 12:37+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"PO-Revision-Date: 2011-12-01 17:49+0000\n"
+"Last-Translator: JRD <jrd@enialis.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/salix-live-installer.glade:358
@@ -47,24 +51,15 @@ msgstr "S_oftware"
 
 #: src/salix-live-installer.glade:922
 msgid ""
-"SalixLive Installer will perform a standard installation of Salix Operating "
-"System on your computer.\n"
+"SalixLive Installer will perform a standard installation of Salix Operating System on your computer.\n"
 "\n"
-"Simply click on one of the categories in the left section to configure the "
-"corresponding settings. A check will be displayed beside each setting once "
-"it has been configured. All the settings must be configured before the "
-"'Launch Salix installation' button becomes accessible.\n"
+"Simply click on one of the categories in the left section to configure the corresponding settings. A check will be displayed beside each setting once it has been configured. All the settings must be configured before the 'Launch Salix installation' button becomes accessible.\n"
 "\n"
-"Depending on your system, the 'Partitions' settings are composed of "
-"successive steps which must all be configured before you can go onto another "
-"setting.\n"
+"Depending on your system, the 'Partitions' settings are composed of successive steps which must all be configured before you can go onto another setting.\n"
 "\n"
-"Once set, every configuration can be undone and reset as many times as "
-"necessary. No change will take effect until you click on the 'Launch Salix "
-"installation' button.\n"
+"Once set, every configuration can be undone and reset as many times as necessary. No change will take effect until you click on the 'Launch Salix installation' button.\n"
 "\n"
-"Contextual help triggered by the mouse position is available each step of "
-"the way and will be displayed in the above section."
+"Contextual help triggered by the mouse position is available each step of the way and will be displayed in the above section."
 msgstr ""
 
 #: src/salix-live-installer.glade:953
@@ -104,9 +99,8 @@ msgid "Activate numlock"
 msgstr "Aktivér numlock"
 
 #: src/salix-live-installer.glade:1452
-#, fuzzy
 msgid "Activate IBus "
-msgstr "Aktivér SCIM"
+msgstr ""
 
 #: src/salix-live-installer.glade:1490
 msgid "<b>Selected keyboard layout: </b>"
@@ -144,25 +138,16 @@ msgstr "Vælg _sprog "
 msgid ""
 "<b>Important!</b>\n"
 "\n"
-"Salix needs, at the very minimum, one swap partition and one Linux partition "
-"to hold its main directory tree. If possible, it is recommended to also have "
-"at least another Linux partition to hold your /home directory.\n"
+"Salix needs, at the very minimum, one swap partition and one Linux partition to hold its main directory tree. If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
 "\n"
-"If you do not already have these needed partitions ready, you should now "
-"click on the button 'Modify partition scheme'  in order to create them. Be "
-"aware that partitioning a disk drive is a delicate operation which could "
-"lead to data loss if not performed cautiously. It is therefore highly "
-"advisable to backup important data before starting this procedure.\n"
+"If you do not already have these needed partitions ready, you should now click on the button 'Modify partition scheme'  in order to create them. Be aware that partitioning a disk drive is a delicate operation which could lead to data loss if not performed cautiously. It is therefore highly advisable to backup important data before starting this procedure.\n"
 "\n"
-"If you already have all the needed partitions, please click on the button "
-"'Do not modify partition scheme' to continue without altering your current "
-"partitioning scheme."
+"If you already have all the needed partitions, please click on the button 'Do not modify partition scheme' to continue without altering your current partitioning scheme."
 msgstr ""
 
 #: src/salix-live-installer.glade:1847
-#, fuzzy
 msgid "Modify partition scheme"
-msgstr "Hovedpartition"
+msgstr ""
 
 #: src/salix-live-installer.glade:1883
 msgid "Do not modify partition scheme"
@@ -178,15 +163,11 @@ msgstr "Vis tilsluttede eksterne enheder"
 
 #: src/salix-live-installer.glade:2032
 msgid ""
-"From the above partitions found on your system, please select the one where "
-"Salix' main directory tree (/) should be installed.\n"
-"<b>Warning!</b> This partition will be reformatted and its data will be "
-"permanently erased."
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
-"Udfra de ovenstående partitioner fundet på dit system skal du vælge en hvor "
-"Salix' hovedmappetræ (/) skal installeres.\n"
-"<b>Advarsel!</b> Denne partition vil blive formateret og dens data vil blive "
-"slettet for bestandigt."
+"Udfra de ovenstående partitioner fundet på dit system skal du vælge en hvor Salix' hovedmappetræ (/) skal installeres.\n"
+"<b>Advarsel!</b> Denne partition vil blive formateret og dens data vil blive slettet for bestandigt."
 
 #: src/salix-live-installer.glade:2059
 msgid "Format with: "
@@ -202,13 +183,13 @@ msgstr "<b>Konfigurér venligst dine andre Linux-partitioner:</b>"
 
 #: src/salix-live-installer.glade:2296
 msgid ""
-"It appears that you have more than one Linux partition. If you wish, you can "
-"now spread Salix directory tree on separate partitions. In fact, it is "
+"It appears that you have more than one Linux partition. If you wish, you can"
+" now spread Salix directory tree on separate partitions. In fact, it is "
 "highly recommended to have the /home directory on a separate partition."
 msgstr ""
-"Det ser ud til at du har mere end en Linux-partition. Hvis du vil, kan du nu "
-"sprede Salix-mappestrukturen ud over separate partitioner. Faktisk anbefales "
-"det, at du har /home-mappen på en separat partition."
+"Det ser ud til at du har mere end en Linux-partition. Hvis du vil, kan du nu"
+" sprede Salix-mappestrukturen ud over separate partitioner. Faktisk "
+"anbefales det, at du har /home-mappen på en separat partition."
 
 #: src/salix-live-installer.glade:2334 src/salix-live-installer.glade:2523
 msgid "Apply _settings "
@@ -254,15 +235,15 @@ msgstr "Windows-partitioner"
 
 #: src/salix-live-installer.glade:2645
 msgid "<b>Swap partitions:</b>"
-msgstr ""
+msgstr "<b>Swap-partitioner:</b>"
 
 #: src/salix-live-installer.glade:2658
 msgid "Swap partitions"
-msgstr ""
+msgstr "Swap-partitioner"
 
 #: src/salix-live-installer.glade:2732
 msgid "<b>Transfer LiveClone login accounts</b>"
-msgstr ""
+msgstr "<b>Overfør LiveClone-logindkonti</b>"
 
 #: src/salix-live-installer.glade:2820
 msgid "<b>Please create a new standard user:</b>"
@@ -321,14 +302,12 @@ msgid "Full"
 msgstr "Fuld"
 
 #: src/salix-live-installer.glade:3667
-#, fuzzy
 msgid "Launch Salix _installation "
-msgstr "Kør Salix-_installation "
+msgstr ""
 
 #: src/salix-live-installer.glade:3709
-#, fuzzy
 msgid "Copyright © 2010-2011 Pierrick Le Brun"
-msgstr "Ophavsret © 2010 Pierrick Le Brun"
+msgstr ""
 
 #: src/salix-live-installer.glade:3710
 msgid "SalixOS installation from SalixLive's graphic environment"
@@ -439,7 +418,6 @@ msgid "Mount as:"
 msgstr "Montér som:"
 
 #: src/salix-live-installer.py:237
-#, fuzzy
 msgid ""
 "<b>Info</b>\n"
 "\n"
@@ -449,12 +427,6 @@ msgid ""
 "\n"
 "The actual installation process will not be launched."
 msgstr ""
-"<b>Beklager!</b>\n"
-"\n"
-"Salix Live-installationsprogrammet er kun tænkt til at blive brugt i et "
-"LiveCD-miljø. \n"
-"\n"
-"Du kan ikke fortsætte længere! "
 
 #: src/salix-live-installer.py:409 src/salix-live-installer.py:425
 #: src/salix-live-installer.py:1083 src/salix-live-installer.py:1103
@@ -522,21 +494,17 @@ msgstr ""
 
 #: src/salix-live-installer.py:580
 msgid "Detected Swap partition(s)"
-msgstr ""
+msgstr "Fundne swap-partition(er)"
 
 #: src/salix-live-installer.py:582
 msgid ""
-"Salix Live Installer was not able to detect a valid Swap partition on your "
-"system. \n"
-"A Swap partition could improve overall performances. You may want to exit "
-"Salix Live Installer now and use Gparted, or any other partitioning tool of "
-"your choice, to first create a Swap partition before resuming with Salix "
-"Live Installer process."
+"Salix Live Installer was not able to detect a valid Swap partition on your system. \n"
+"A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
 msgstr ""
 
 #: src/salix-live-installer.py:590
 msgid "Salix Live Installer has detected a Swap partition on "
-msgstr ""
+msgstr "Installationsprogrammet Salix Live har fundet en swap-partition på "
 
 #: src/salix-live-installer.py:593
 msgid ""
@@ -564,8 +532,8 @@ msgstr "Afslut Salix-installationsprogram."
 
 #: src/salix-live-installer.py:630 src/salix-live-installer.py:636
 msgid ""
-"Launch Salix installation. This button will not be active until all settings "
-"are configured correctly."
+"Launch Salix installation. This button will not be active until all settings"
+" are configured correctly."
 msgstr ""
 "Start Salix-installationen. Denne knap vil ikke være aktiv før alle "
 "indstillingerne er konfigureret korrekt."
@@ -577,7 +545,8 @@ msgstr "Tilgå tidsindstillingerne."
 #: src/salix-live-installer.py:649
 msgid "Use Network Time Protocol daemon to synchronize time via Internet."
 msgstr ""
-"Brug Network Time Protocol-dæmonen til at synkronisere tiden via internettet."
+"Brug Network Time Protocol-dæmonen til at synkronisere tiden via "
+"internettet."
 
 #: src/salix-live-installer.py:654
 msgid "Cancel time settings."
@@ -616,13 +585,10 @@ msgstr ""
 "under opstartsprocessen."
 
 #: src/salix-live-installer.py:693
-#, fuzzy
 msgid ""
 "Check this box if you want iBus to be activated during the boot process. "
 "IBus is an input method (IM) framework for multilingual input."
 msgstr ""
-"Sæt kryds i denne boks hvis du vil have dit numeriske tastatur aktiveret "
-"under opstartsprocessen."
 
 #: src/salix-live-installer.py:699
 msgid "Cancel keyboard layout selection."
@@ -655,8 +621,8 @@ msgid ""
 "This is the system language you have selected. 'None' will be displayed "
 "until you have confirmed that selection. "
 msgstr ""
-"Dette er systemsproget, som du har valgt. \"Ingen\" vil blive vist indtil du "
-"har bekræftet valget. "
+"Dette er systemsproget, som du har valgt. \"Ingen\" vil blive vist indtil du"
+" har bekræftet valget. "
 
 #: src/salix-live-installer.py:734
 msgid "Cancel language selection."
@@ -675,7 +641,8 @@ msgid ""
 "Highlight the partition from this list before clicking on the 'Select "
 "partition' button."
 msgstr ""
-"Markér partitionerne fra listen før du klikker på \"Vælg partition\"-knappen."
+"Markér partitionerne fra listen før du klikker på \"Vælg "
+"partition\"-knappen."
 
 #: src/salix-live-installer.py:757
 msgid ""
@@ -703,8 +670,8 @@ msgid ""
 "settings' button. Any unset parameters will be ignored. "
 msgstr ""
 "Klik på den passende \"Vælg...\"-celle hvis du vil redigere filsystemet på "
-"en partition og/eller hvis du vil tildele dens monteringspunkt. Du kan enten "
-"vælge et af de følgende monteringspunkter eller indtaste dit eget. Du skal "
+"en partition og/eller hvis du vil tildele dens monteringspunkt. Du kan enten"
+" vælge et af de følgende monteringspunkter eller indtaste dit eget. Du skal "
 "konfigurere alle de ønskede partitioner før du klikker på \"Anvend "
 "indstillinger\"-knappen. Enhver parameter som ikke er angivet vil blive "
 "ignoreret. "
@@ -720,8 +687,8 @@ msgid ""
 "clicking on the 'Apply settings' button. Any unset parameters will be "
 "ignored. "
 msgstr ""
-"Klik på den passende \"Vælg...\"-celle hvis du vil tildele monteringspunktet "
-"på en partition. Du skal konfigurere alle de ønskede partitioner før du "
+"Klik på den passende \"Vælg...\"-celle hvis du vil tildele monteringspunktet"
+" på en partition. Du skal konfigurere alle de ønskede partitioner før du "
 "klikker på \"Anvend indstillinger\"-knappen. Enhver parameter som ikke er "
 "angivet vil blive ignoreret. "
 
@@ -748,20 +715,25 @@ msgid ""
 "personnal directories to the installation target or you can wipe them out & "
 "create a complete new login account instead."
 msgstr ""
+"SalixLive-installationsprogrammet har fundet en LiveClone-tilpasset version."
+" Du kan overføre dine eksisterende LiveClone-loginkonti og de tilhørende "
+"personlige mapper til installationen, eller du kan slette dem helt og "
+"oprette en helt ny loginkonto i stedet."
 
 #: src/salix-live-installer.py:825
 msgid "Transfer existing users."
-msgstr ""
+msgstr "Overfør eksisterende brugere."
 
 #: src/salix-live-installer.py:830
 msgid "Cancel users transfer."
-msgstr ""
+msgstr "Annullér brugeroverførsel."
 
 #: src/salix-live-installer.py:836
 msgid ""
-"A Linux system can manage many registered users and requires each one to log "
-"in, and to produce some form of authentication (usually a login name coupled "
-"with a password) before allowing the user access to system resources."
+"A Linux system can manage many registered users and requires each one to log"
+" in, and to produce some form of authentication (usually a login name "
+"coupled with a password) before allowing the user access to system "
+"resources."
 msgstr ""
 "Et Linux-system kan håndtere flere registrerede brugere. Hver bruger skal "
 "opnå godkendelse (typisk brugerens navn sammen med en adgangskode) før "
@@ -781,9 +753,9 @@ msgid ""
 "password or passprase should include a mix of upper and lower case letters, "
 "numbers, and even symbols (such as the @, !, and &)"
 msgstr ""
-"Vælg en adgangskode eller adgangsfrase som skal tilknyttes din brugers navn. "
-"Din adgangskode eller adgangsfrase bør inkludere en blanding af store og små "
-"bogstaver, numre og selv symboler (som f.eks. @, ! og &)"
+"Vælg en adgangskode eller adgangsfrase som skal tilknyttes din brugers navn."
+" Din adgangskode eller adgangsfrase bør inkludere en blanding af store og "
+"små bogstaver, numre og selv symboler (som f.eks. @, ! og &)"
 
 #: src/salix-live-installer.py:858
 msgid "Here you must retype your password as a confirmation of your choice."
@@ -811,16 +783,16 @@ msgid ""
 "Remember, this password or passphrase should include a mix of upper and "
 "lower case letters, numbers, and even symbols (such as the @, !, and &)"
 msgstr ""
-"På Linux-systemer er superbrugeren, eller root, en speciel brugerkonto brugt "
-"til system administration. Her kan du angive dens adgangskode eller "
+"På Linux-systemer er superbrugeren, eller root, en speciel brugerkonto brugt"
+" til system administration. Her kan du angive dens adgangskode eller "
 "adgangsfrase. Husk, denne adgangskode eller adgangsfrase bør inkludere en "
 "blanding af store og små bogstaver, numre og selv symboler (som f.eks. @, ! "
 "og &)"
 
 #: src/salix-live-installer.py:890
 msgid ""
-"Here you must retype the superuser (root) password as a confirmation of your "
-"choice."
+"Here you must retype the superuser (root) password as a confirmation of your"
+" choice."
 msgstr ""
 "Her skal du indtaste superbrugerens (root) adgangskode igen for at bekræfte "
 "dit valg."
@@ -840,47 +812,28 @@ msgstr "Tilgå pakkevalget."
 #: src/salix-live-installer.py:919
 msgid ""
 "<b>Core installation:</b>\n"
-"Only the minimum essentials for a console system to start are included. A "
-"graphical environment is not provided. This is ideal if you are an "
-"experienced user and want to customize your installation for any specific "
-"purpose, such as a web server, file server etc. "
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
 "<b>Kerneinstallation:</b>\n"
-"Kun de mest nødvendige værktøjer for at et konsolsystem kan starte er "
-"inkluderet. Et grafisk miljø er ikke udbudt. Dette er ideelt hvis du er en "
-"erfaren bruger og vil tilpasse din installation til et bestemt formål, som "
-"for eksempel webserver, filserver osv. "
+"Kun de mest nødvendige værktøjer for at et konsolsystem kan starte er inkluderet. Et grafisk miljø er ikke udbudt. Dette er ideelt hvis du er en erfaren bruger og vil tilpasse din installation til et bestemt formål, som for eksempel webserver, filserver osv. "
 
 #: src/salix-live-installer.py:929
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only a basic desktop environment, with very few extra "
-"applications installed on top, such as a web browser and the gslapt package "
-"manager. Ideal for advanced users that would like to install a lightweight "
-"system and add their own choice of applications. "
+"This installs only a basic desktop environment, with very few extra applications installed on top, such as a web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight system and add their own choice of applications. "
 msgstr ""
-"<b>Grundlæggende installation:</b>\n"
-"Denne installationstype inkluderer kun Xfce-skrivebordsmiljøet med Firefox "
-"webbrowser og gslapt-pakkehåndteringen. Ideelt for avancerede brugere som "
-"gerne vil installere en letvægts Xfce og tilføje deres eget udvalg af "
-"programmer."
 
 #: src/salix-live-installer.py:939
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes a "
-"complete desktop environment and a complete selection of matching "
-"applications, always following the \"one application per task\" rationale. "
+"Everything that is included in the iso is installed. That includes a complete desktop environment and a complete selection of matching applications, always following the \"one application per task\" rationale. "
 msgstr ""
 
 #: src/salix-live-installer.py:944
 msgid ""
 "<b>Full installation:</b>\n"
-"Salix Live Installer has detected a LiveClone customized environment. Core "
-"and Basic installation modes are therefore not available. \n"
-"You can only perform a full installation: all software included in your "
-"customized LiveClone will be installed."
+"Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
+"You can only perform a full installation: all software included in your customized LiveClone will be installed."
 msgstr ""
 
 #: src/salix-live-installer.py:954
@@ -999,13 +952,15 @@ msgstr "men vil ikke blive monteret"
 
 #: src/salix-live-installer.py:1495
 msgid "and will be mounted as swap"
-msgstr "og vil blive monteret som"
+msgstr "og vil blive monteret som swap"
 
 #: src/salix-live-installer.py:1497
 msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your "
 "system."
 msgstr ""
+"Installationsprogrammet Salix Live var ikke i stand til at finde en gyldig "
+"swap-partition på dit system."
 
 #: src/salix-live-installer.py:1500 src/salix-live-installer.py:1502
 msgid "Standard User"
@@ -1013,7 +968,7 @@ msgstr "Standardbruger"
 
 #: src/salix-live-installer.py:1500
 msgid "Using LiveClone login. "
-msgstr ""
+msgstr "Brug LiveClone-logind. "
 
 #: src/salix-live-installer.py:1503
 msgid "Packages"
@@ -1035,7 +990,6 @@ msgstr ""
 "Kunne ikke åbne LiloSetup, du må angive LILO \"manuelt\". "
 
 #: src/salix-live-installer.py:1824
-#, fuzzy
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
@@ -1043,40 +997,30 @@ msgid ""
 "\n"
 "You cannot proceed any further! "
 msgstr ""
-"<b>Beklager!</b>\n"
-"\n"
-"Salix Live-installationsprogrammet er kun tænkt til at blive brugt i et "
-"LiveCD-miljø. \n"
-"\n"
-"Du kan ikke fortsætte længere! "
 
 #: src/salix-live-installer.py:1848
 msgid "Starting installation process..."
 msgstr "Starter installationsprocessen..."
 
 #: src/salix-live-installer.py:1861
-#, fuzzy
 msgid "Formatting and mounting the main partition..."
-msgstr "Formaterer og monterer dine Linux-partitioner..."
+msgstr ""
 
 #: src/salix-live-installer.py:1875
-#, fuzzy
 msgid "Formatting and mounting the Linux partition(s)..."
-msgstr "Formaterer og monterer dine Linux-partitioner..."
+msgstr ""
 
 #: src/salix-live-installer.py:1892
-#, fuzzy
 msgid "Formatting the Linux partition(s)..."
-msgstr "Formaterer dine Linux-partitioner..."
+msgstr ""
 
 #: src/salix-live-installer.py:1905
-#, fuzzy
 msgid "Mounting the Linux partition(s)..."
-msgstr "Monterer dine Linux-partitioner..."
+msgstr ""
 
 #: src/salix-live-installer.py:1920
 msgid "Installing your LiveClone system..."
-msgstr ""
+msgstr "Installerer dit LiveClone-system..."
 
 #: src/salix-live-installer.py:1954
 #, python-format
@@ -1084,9 +1028,9 @@ msgid "Installing the %(mode)s mode packages..."
 msgstr "Installerer pakker for installationstypen %(mode)s..."
 
 #: src/salix-live-installer.py:1981
-#, fuzzy, python-format
+#, python-format
 msgid "Installing %s "
-msgstr "Installerer kernen..."
+msgstr ""
 
 #: src/salix-live-installer.py:1987
 msgid "Creating /etc/fstab..."
@@ -1104,12 +1048,15 @@ msgstr "Installationsprocessen blev gennemført uden problemer ..."
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
-"LiloSetup will now be launched to enable you to add Salix to your "
-"bootloader.\n"
-"(If you prefer to use another bootloader utility, click on the No button "
-"and\n"
+"LiloSetup will now be launched to enable you to add Salix to your bootloader.\n"
+"(If you prefer to use another bootloader utility, click on the No button and\n"
 "use the application of your choice before rebooting your machine.)\n"
 msgstr ""
+"<b>Installationen af Salix blev udført med succes!</b>\n"
+"\n"
+"LiloSetup vil nu blive startet, så du kan tilføje Salix til din opstartsindlæser.\n"
+"(Hvis du foretrækker at bruge et andet opstartsindlæserværktøj, skal du trykke på knappen Nej og\n"
+"bruge dit foretrukne program før du genstarter maskinen).\n"
 
 #: src/salix-live-installer.py:2127
 msgid ""
@@ -1163,11 +1110,9 @@ msgstr ""
 
 #: src/salix-live-installer.py:2169
 msgid ""
-"Installation process is fully completed but you have chosen not to install "
-"LILO.\n"
+"Installation process is fully completed but you have chosen not to install LILO.\n"
 "\n"
-"Before rebooting your machine, you must now use another bootloader manager "
-"to setup Salix new system or it will not be operational."
+"Before rebooting your machine, you must now use another bootloader manager to setup Salix new system or it will not be operational."
 msgstr ""
 
 #: src/salix-live-installer.py:2364
@@ -1193,61 +1138,6 @@ msgstr "SalixLive-installationsprogram"
 #: src/salix-live-installer.desktop.in.h:3
 #: src/salix-live-installer-kde.desktop.in.h:3
 msgid "Salix Live Installer"
-msgstr ""
+msgstr "Installationsprogrammet Salix Live"
 
-#~ msgid ""
-#~ "<b>Important!</b>\n"
-#~ "\n"
-#~ "Before executing SalixLive's installer, you should already have the "
-#~ "necessary partitions available on your system.\n"
-#~ "\n"
-#~ "Salix needs, at the very minimum, one swap partition and  one Linux  "
-#~ "partition to hold its main directory tree. \n"
-#~ "\n"
-#~ "If possible, it is recommended to also have at least another Linux "
-#~ "partition to hold your /home directory.\n"
-#~ "\n"
-#~ "If you do not already have these needed partitions ready, please exit "
-#~ "SalixLive's installer and use Gparted to create them first."
-#~ msgstr ""
-#~ "<b>Vigtigt!</b>\n"
-#~ "\n"
-#~ "Før du kører SalixLive's installationsprogram, bør du allerede have de "
-#~ "nødvendige partitioner tilgængelige på dit system.\n"
-#~ "\n"
-#~ "Salix har som minimum brug for en swap-partition og en Linux-partition "
-#~ "til at indeholde hovedmappestrukturen. \n"
-#~ "\n"
-#~ "Det anbefales, at man hvis muligt også har mindst én anden Linux-"
-#~ "partition til at indeholde din /home-mappe.\n"
-#~ "\n"
-#~ "Hvis du ikke allerede har disse nødvendige partitioner klar, skal du "
-#~ "afslutte SalixLives installationsprogram og bruge Gparted til at oprette "
-#~ "dem først."
 
-#~ msgid ""
-#~ "SalixLive Installer will perform a standard installation of Salix "
-#~ "Operating \n"
-#~ "System on your computer from the comfort of SalixLive's graphic "
-#~ "environment."
-#~ msgstr ""
-#~ "SalixLive-installationsprogrammet vil udføre en standardinstallation af "
-#~ "operativsystemet Salix \n"
-#~ "på din computer fra et behageligt, grafisk SalixLive-miljø."
-
-#~ msgid "Formatting the main partition..."
-#~ msgstr "Formaterer hovedpartitionen..."
-
-#~ msgid "Installing the common packages..."
-#~ msgstr "Installerer fællespakker..."
-
-#~ msgid ""
-#~ "Check this box if you want SCIM to be activated during the boot process. "
-#~ "The Smart Common Input Method platform (SCIM) is an input method platform "
-#~ "containing support for more than thirty complex languages such as "
-#~ "Chinese, Japanese, Korean and many European languages."
-#~ msgstr ""
-#~ "Sæt kryds i denne boks, hvis du ønsker at aktivere SCIM under "
-#~ "opstartsprocessen. Smart Common Input Method-platformen (SCIM) er en "
-#~ "platform, der understøtter input af over 30 komplekse sprog som kinesisk, "
-#~ "japansk, koreansk og en række europæiske sprog."

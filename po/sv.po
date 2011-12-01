@@ -1,20 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Cyrille Pontvieux <jrd@enialis.net>, 2011.
+# gapan <vlahavas@gmail.com>, 2011.
+# Ingemar Karlsson <ingemar@ingk.se>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-01 15:01+0100\n"
-"PO-Revision-Date: 2011-01-09 12:37+0000\n"
-"Last-Translator: gapan <vlahavas@gmail.com>\n"
+"PO-Revision-Date: 2011-12-01 17:47+0000\n"
+"Last-Translator: JRD <jrd@enialis.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/salix-live-installer.glade:358
@@ -47,25 +50,25 @@ msgstr "M_jukvara"
 
 #: src/salix-live-installer.glade:922
 msgid ""
-"SalixLive Installer will perform a standard installation of Salix Operating "
-"System on your computer.\n"
+"SalixLive Installer will perform a standard installation of Salix Operating System on your computer.\n"
 "\n"
-"Simply click on one of the categories in the left section to configure the "
-"corresponding settings. A check will be displayed beside each setting once "
-"it has been configured. All the settings must be configured before the "
-"'Launch Salix installation' button becomes accessible.\n"
+"Simply click on one of the categories in the left section to configure the corresponding settings. A check will be displayed beside each setting once it has been configured. All the settings must be configured before the 'Launch Salix installation' button becomes accessible.\n"
 "\n"
-"Depending on your system, the 'Partitions' settings are composed of "
-"successive steps which must all be configured before you can go onto another "
-"setting.\n"
+"Depending on your system, the 'Partitions' settings are composed of successive steps which must all be configured before you can go onto another setting.\n"
 "\n"
-"Once set, every configuration can be undone and reset as many times as "
-"necessary. No change will take effect until you click on the 'Launch Salix "
-"installation' button.\n"
+"Once set, every configuration can be undone and reset as many times as necessary. No change will take effect until you click on the 'Launch Salix installation' button.\n"
 "\n"
-"Contextual help triggered by the mouse position is available each step of "
-"the way and will be displayed in the above section."
+"Contextual help triggered by the mouse position is available each step of the way and will be displayed in the above section."
 msgstr ""
+"SalixLive Installer kommer att utföra en standardinstallation av Salix operativsystem på din dator. \n"
+"\n"
+"Klicka bara på en av kategorierna i den vänstra delen för att konfigurera motsvarande inställningar. En markering kommer att visas bredvid varje inställning när det väl har konfigurerats. Alla inställningar måste konfigureras innan \"Starta Salix installation\" knappen blir tillgänglig. \n"
+"\n"
+"Beroende på ditt system, är \"Partitioner\" Inställningar bestående av successiva steg som alla måste konfigureras innan du kan gå till en annan inställning. \n"
+"\n"
+"Efter inställningar, kan varje konfiguration ångras och återställas så många gånger som behövs. Ingen förändring kommer att börja gälla förrän du klickar på \"Starta Salix installation\" knappen. \n"
+"\n"
+"Sammanhangsberoende hjälp utlöses av musens position och är tillgänglig vid varje steg på vägen och kommer att visas i ovanstående område."
 
 #: src/salix-live-installer.glade:953
 msgid "<b>Please set the time, date and time zone:</b>"
@@ -104,9 +107,8 @@ msgid "Activate numlock"
 msgstr "Aktivera numlock"
 
 #: src/salix-live-installer.glade:1452
-#, fuzzy
 msgid "Activate IBus "
-msgstr "Aktivera SCIM"
+msgstr "Aktivera IBus"
 
 #: src/salix-live-installer.glade:1490
 msgid "<b>Selected keyboard layout: </b>"
@@ -144,29 +146,27 @@ msgstr "Välj _språk"
 msgid ""
 "<b>Important!</b>\n"
 "\n"
-"Salix needs, at the very minimum, one swap partition and one Linux partition "
-"to hold its main directory tree. If possible, it is recommended to also have "
-"at least another Linux partition to hold your /home directory.\n"
+"Salix needs, at the very minimum, one swap partition and one Linux partition to hold its main directory tree. If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
 "\n"
-"If you do not already have these needed partitions ready, you should now "
-"click on the button 'Modify partition scheme'  in order to create them. Be "
-"aware that partitioning a disk drive is a delicate operation which could "
-"lead to data loss if not performed cautiously. It is therefore highly "
-"advisable to backup important data before starting this procedure.\n"
+"If you do not already have these needed partitions ready, you should now click on the button 'Modify partition scheme'  in order to create them. Be aware that partitioning a disk drive is a delicate operation which could lead to data loss if not performed cautiously. It is therefore highly advisable to backup important data before starting this procedure.\n"
 "\n"
-"If you already have all the needed partitions, please click on the button "
-"'Do not modify partition scheme' to continue without altering your current "
-"partitioning scheme."
+"If you already have all the needed partitions, please click on the button 'Do not modify partition scheme' to continue without altering your current partitioning scheme."
 msgstr ""
+"<b>Viktigt!</b> \n"
+"\n"
+"Salix behöver, allra minst en swap-partition och en Linux-partition för att hålla sina viktigaste katalogträd. Om möjligt, rekommenderas också att ha minst en annan Linux-partition för att hålla din /home katalog.\n"
+"\n"
+"Om du inte redan har dessa nödvändiga partitioner klara, bör du nu klicka på knappen 'Ändra partitionsschemat \"för att skapa dem. Var medveten om att dela en hårddisk är en känslig operation som kan leda till dataförlust om det inte utförs försiktigt. Det är därför mycket lämpligt att säkerhetskopiera viktiga data innan detta förfarande. \n"
+"\n"
+"Om du redan har alla nödvändiga partitioner, klicka på knappen \"Ändra inte partitionsplan 'för att fortsätta utan att ändra din nuvarande partitioneringsplan."
 
 #: src/salix-live-installer.glade:1847
-#, fuzzy
 msgid "Modify partition scheme"
-msgstr "Huvud partition"
+msgstr "Ändra partitionsschemat"
 
 #: src/salix-live-installer.glade:1883
 msgid "Do not modify partition scheme"
-msgstr ""
+msgstr "Ändra inte partitionsschemat"
 
 #: src/salix-live-installer.glade:1925
 msgid "<b>Please select Salix main partition:</b>"
@@ -178,19 +178,15 @@ msgstr "Visa anslutna externa enheter"
 
 #: src/salix-live-installer.glade:2032
 msgid ""
-"From the above partitions found on your system, please select the one where "
-"Salix' main directory tree (/) should be installed.\n"
-"<b>Warning!</b> This partition will be reformatted and its data will be "
-"permanently erased."
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
 msgstr ""
-"Av ovanstående partitionerna som hittades på ditt system, välj den där Salix "
-"root katalogträdet (/) ska installeras. \n"
-"<b>Varning!</b> Den här partitionen kommer att formateras och dess data "
-"kommer att permanent raderas."
+"Av ovanstående partitionerna som hittades på ditt system, välj där Salix root katalogträdet (/) ska installeras. \n"
+"<b>Varning!</b> Den här partitionen kommer att formateras och dess data kommer att permanent raderas."
 
 #: src/salix-live-installer.glade:2059
 msgid "Format with: "
-msgstr "Format med:"
+msgstr "Formatera med:"
 
 #: src/salix-live-installer.glade:2126
 msgid "Select _partition "
@@ -202,12 +198,12 @@ msgstr "<b>Var god och konfigurera dina andra Linux-partition (er):</b>"
 
 #: src/salix-live-installer.glade:2296
 msgid ""
-"It appears that you have more than one Linux partition. If you wish, you can "
-"now spread Salix directory tree on separate partitions. In fact, it is "
+"It appears that you have more than one Linux partition. If you wish, you can"
+" now spread Salix directory tree on separate partitions. In fact, it is "
 "highly recommended to have the /home directory on a separate partition."
 msgstr ""
-"Det verkar som om du har mer än en Linux-partition. Om du vill kan du sprida "
-"ut Salix katalogträd på olika partitioner. I själva verket är det mycket "
+"Det verkar som om du har mer än en Linux-partition. Om du vill kan du sprida"
+" ut Salix katalogträd på olika partitioner. I själva verket är det mycket "
 "rekommenderat att ha katalogen /home på en separat partition."
 
 #: src/salix-live-installer.glade:2334 src/salix-live-installer.glade:2523
@@ -321,14 +317,12 @@ msgid "Full"
 msgstr "Fullständig"
 
 #: src/salix-live-installer.glade:3667
-#, fuzzy
 msgid "Launch Salix _installation "
-msgstr "Starta Salix _install"
+msgstr "Starta Salix _installation"
 
 #: src/salix-live-installer.glade:3709
-#, fuzzy
 msgid "Copyright © 2010-2011 Pierrick Le Brun"
-msgstr "Copyright © 2010 Pierrick Le Brun"
+msgstr "Copyright © 2010-2011 Pierrick Le Brun"
 
 #: src/salix-live-installer.glade:3710
 msgid "SalixOS installation from SalixLive's graphic environment"
@@ -351,8 +345,7 @@ msgid ""
 "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
 "MA 02110-1301, USA."
 msgstr ""
-"Detta program är fri programvara; du kan distribuera det och/eller "
-"modifiera \n"
+"Detta program är fri programvara; du kan distribuera det och/eller modifiera \n"
 "Det under villkoren i GNU General Public License, publicerad \n"
 " Free Software Foundation, antingen version 2 av licensen, eller \n"
 " (om du så vill) någon senare version. \n"
@@ -438,7 +431,6 @@ msgid "Mount as:"
 msgstr "Montera som:"
 
 #: src/salix-live-installer.py:237
-#, fuzzy
 msgid ""
 "<b>Info</b>\n"
 "\n"
@@ -448,11 +440,10 @@ msgid ""
 "\n"
 "The actual installation process will not be launched."
 msgstr ""
-"<b>Tyvärr!</b> \n"
-"\n"
-"Salix Live Installerare är endast avsedd att användas i en LiveCD miljö. \n"
-"\n"
-"Du kan inte fortsätta längre!"
+"<b>Info</b>\n"
+"Salix Live Installer är endast avsedd att användas i en SaLT LiveCD miljö.\n"
+"Du kan fortsätta att använda det, men i begränsad demo-läge.\n"
+"Själva installationen kommer inte att köras."
 
 #: src/salix-live-installer.py:409 src/salix-live-installer.py:425
 #: src/salix-live-installer.py:1083 src/salix-live-installer.py:1103
@@ -519,7 +510,7 @@ msgid ""
 msgstr ""
 "Salix Live Installerare kunde inte hitta en giltig partition på dit system. "
 "Du bör avsluta Salix Live Installerare och använda Gparted, eller annat "
-"pertitionerings program, för att först skapa giltiga partitioner på ditt "
+"partitionerings program, för att först skapa giltiga partitioner på ditt "
 "system före du återupptar Salix Live Installerare."
 
 #: src/salix-live-installer.py:580
@@ -528,18 +519,11 @@ msgstr "upptäckta Swap partition(er)"
 
 #: src/salix-live-installer.py:582
 msgid ""
-"Salix Live Installer was not able to detect a valid Swap partition on your "
-"system. \n"
-"A Swap partition could improve overall performances. You may want to exit "
-"Salix Live Installer now and use Gparted, or any other partitioning tool of "
-"your choice, to first create a Swap partition before resuming with Salix "
-"Live Installer process."
+"Salix Live Installer was not able to detect a valid Swap partition on your system. \n"
+"A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
 msgstr ""
-"Salix Live Installerare kunde inte hitta någon giltig Swap partition på ditt "
-"system.\n"
-"En Swap partition kan öka prestandan. Du bör avsluta Salix Live Installerare "
-"nu och använda Gparted, eller annat partitions program för att först skapa "
-"en Swap partition före du återupptar Salix Live Installerare."
+"Salix Live Installerare kunde inte hitta någon giltig Swap partition på ditt system.\n"
+"En Swap partition kan öka prestandan. Du bör avsluta Salix Live Installerare nu och använda Gparted, eller annat partitions program för att först skapa en Swap partition före du återupptar Salix Live Installerare."
 
 #: src/salix-live-installer.py:590
 msgid "Salix Live Installer has detected a Swap partition on "
@@ -552,8 +536,8 @@ msgid ""
 "other partitioning tool of your choice, to first create valid partitions "
 "before resuming with Salix Live Installer process."
 msgstr ""
-"Salix Live Installerare kunde inte hitta en giltig partition på ditt system. "
-"Du bör avsluta Salix Live Installerare och använda Gparted, eller annat "
+"Salix Live Installerare kunde inte hitta en giltig partition på ditt system."
+" Du bör avsluta Salix Live Installerare och använda Gparted, eller annat "
 "pertitionerings program, för att först skapa en giltig partitioner på ditt "
 "system före du återupptar Salix Live Installerare."
 
@@ -563,7 +547,7 @@ msgstr "Kontextuell hjälp."
 
 #: src/salix-live-installer.py:610
 msgid "General usage."
-msgstr ""
+msgstr "Allmän användning."
 
 #: src/salix-live-installer.py:615
 msgid "About Salix Installer."
@@ -575,11 +559,11 @@ msgstr "Avsluta Salix Installer."
 
 #: src/salix-live-installer.py:630 src/salix-live-installer.py:636
 msgid ""
-"Launch Salix installation. This button will not be active until all settings "
-"are configured correctly."
+"Launch Salix installation. This button will not be active until all settings"
+" are configured correctly."
 msgstr ""
-"Launch Salix installation. Den här knappen kommer inte att vara aktiv förrän "
-"alla inställningar är korrekt konfigurerade."
+"Starta Salix installation. Den här knappen kommer inte att vara aktiv förrän"
+" alla inställningar är korrekt konfigurerade."
 
 #: src/salix-live-installer.py:644
 msgid "Access the time settings."
@@ -627,13 +611,13 @@ msgstr ""
 "aktiveras under uppstartsprocessen."
 
 #: src/salix-live-installer.py:693
-#, fuzzy
 msgid ""
 "Check this box if you want iBus to be activated during the boot process. "
 "IBus is an input method (IM) framework for multilingual input."
 msgstr ""
-"Markera denna box om du vill att dina numeriska tangentbordet för att "
-"aktiveras under uppstartsprocessen."
+"Markera den här rutan om du vill att iBus skall aktiveras under "
+"startprocessen. iBus är en inmatningsmetod (IM) ramverk för flerspråkig "
+"inmatning."
 
 #: src/salix-live-installer.py:699
 msgid "Cancel keyboard layout selection."
@@ -667,8 +651,8 @@ msgid ""
 "This is the system language you have selected. 'None' will be displayed "
 "until you have confirmed that selection. "
 msgstr ""
-"Detta är det system språk som du har valt. 'Ingen' kommer att visas tills du "
-"har bekräftat valet."
+"Detta är det system språk som du har valt. 'Ingen' kommer att visas tills du"
+" har bekräftat valet."
 
 #: src/salix-live-installer.py:734
 msgid "Cancel language selection."
@@ -687,16 +671,16 @@ msgid ""
 "Highlight the partition from this list before clicking on the 'Select "
 "partition' button."
 msgstr ""
-"Markera partition från listan innan du klickar på \"Välj partitionen\"-"
-"knappen."
+"Markera partition från listan innan du klickar på \"Välj "
+"partitionen\"-knappen."
 
 #: src/salix-live-installer.py:757
 msgid ""
 "Check this box if you want your external disk drive(s) to be displayed in "
 "the list above. "
 msgstr ""
-"Markera den här rutan om du vill att dina externa hårddisk(ar) skall visas i "
-"listan ovan."
+"Markera den här rutan om du vill att dina externa hårddisk(ar) skall visas i"
+" listan ovan."
 
 #: src/salix-live-installer.py:763
 msgid "Confirm your selection after highlighting the partition."
@@ -705,7 +689,8 @@ msgstr "Bekräfta ditt val efter val partitionen."
 #: src/salix-live-installer.py:768
 msgid "The filesystem that will be used to format Salix main partition."
 msgstr ""
-"Filsystemet som kommer att användas för att formatera Salix root partitionen."
+"Filsystemet som kommer att användas för att formatera Salix root "
+"partitionen."
 
 #: src/salix-live-installer.py:773
 msgid ""
@@ -717,9 +702,10 @@ msgid ""
 msgstr ""
 "Klicka på lämplig \"Välj ...\" cell om du vill ändra filsystem på en "
 "partition och/eller om du vill tilldela dess monterings punkt. Du kan "
-"antingen välja ett av de föreslagna monteringspunkter eller ange en egen. Du "
-"måste konfigurera alla önskade partitioner innan du klickar på \"Tillämpa "
-"inställningar\"-knappen. Alla okonfigurerade parametrar kommer att ignoreras."
+"antingen välja ett av de föreslagna monteringspunkter eller ange en egen. Du"
+" måste konfigurera alla önskade partitioner innan du klickar på \"Tillämpa "
+"inställningar\"-knappen. Alla omkonfigurerade parametrar kommer att "
+"ignoreras."
 
 #: src/salix-live-installer.py:782
 msgid "Confirm the Linux partition(s) settings from the list."
@@ -735,7 +721,7 @@ msgstr ""
 "Klicka på lämplig \"Välj ...\" cell om du vill tilldela den "
 "monteringspunkten för en partition. Du måste konfigurera alla önskade "
 "partitioner innan du klickar på \"Tillämpa inställningar\"-knappen. Alla "
-"okonfigurerade parametrar kommer att ignoreras."
+"omkonfigurerade parametrar kommer att ignoreras."
 
 #: src/salix-live-installer.py:795
 msgid "Confirm the Windows partition(s) settings from the list above."
@@ -761,9 +747,9 @@ msgid ""
 "create a complete new login account instead."
 msgstr ""
 "Salix Live Installerare har hittat en LiveClone anpassad miljö. Du kan "
-"överföra din befintliga LiveClone inloggnings konton med matchande kataloger "
-"till installations målet eller så kan du radera dem och skapa ett helt nytt "
-"konto istället."
+"överföra din befintliga LiveClone inloggnings konton med matchande kataloger"
+" till installations målet eller så kan du radera dem och skapa ett helt nytt"
+" konto istället."
 
 #: src/salix-live-installer.py:825
 msgid "Transfer existing users."
@@ -775,9 +761,10 @@ msgstr "Avbryt överföring av användare."
 
 #: src/salix-live-installer.py:836
 msgid ""
-"A Linux system can manage many registered users and requires each one to log "
-"in, and to produce some form of authentication (usually a login name coupled "
-"with a password) before allowing the user access to system resources."
+"A Linux system can manage many registered users and requires each one to log"
+" in, and to produce some form of authentication (usually a login name "
+"coupled with a password) before allowing the user access to system "
+"resources."
 msgstr ""
 "Ett Linux-system kan hantera många registrerade användare och kräver att "
 "varje användare loggar in och producera någon form av autentisering "
@@ -798,9 +785,10 @@ msgid ""
 "password or passprase should include a mix of upper and lower case letters, "
 "numbers, and even symbols (such as the @, !, and &)"
 msgstr ""
-"Välj ett lösenord eller lösenfras måste förenas med ditt inloggningsnamn. "
-"Ditt lösenord eller passphrase bör innehålla en blandning av gemener och "
-"versaler, siffror och även symboler (såsom @, !, Och &)"
+"Välj ett lösenord eller lösenordsfras måste förenas med ditt "
+"inloggningsnamn. Ditt lösenord eller lösenordsfras bör innehålla en "
+"blandning av gemener och versaler, siffror och även symboler (såsom @, !, "
+"Och &)"
 
 #: src/salix-live-installer.py:858
 msgid "Here you must retype your password as a confirmation of your choice."
@@ -827,21 +815,21 @@ msgid ""
 "lower case letters, numbers, and even symbols (such as the @, !, and &)"
 msgstr ""
 "På Linux-system är superanvändaren eller root, en speciell användare för "
-"systemadministration. Här måste du ställa in lösenordet eller passphrase. "
-"Kom ihåg att detta lösenord eller lösenfras bör innehålla en blandning av "
-"gemener och versaler, siffror och även symboler (såsom @, !, Och &)"
+"systemadministration. Här måste du ställa in lösenordet eller lösenordsfras."
+" Kom ihåg att detta lösenord eller lösenordsfras bör innehålla en blandning "
+"av gemener och versaler, siffror och även symboler (såsom @, !, Och &)"
 
 #: src/salix-live-installer.py:890
 msgid ""
-"Here you must retype the superuser (root) password as a confirmation of your "
-"choice."
+"Here you must retype the superuser (root) password as a confirmation of your"
+" choice."
 msgstr ""
 "Här måste du skriva om superanvändarens (root) lösenord som bekräftelse på "
 "ditt val."
 
 #: src/salix-live-installer.py:902
 msgid "Apply new root password."
-msgstr "Tillämpa nya root-lösenord."
+msgstr "Verkställ nya root-lösenord."
 
 #: src/salix-live-installer.py:907
 msgid "Cancel new root password."
@@ -854,58 +842,36 @@ msgstr "Öppna paket valen."
 #: src/salix-live-installer.py:919
 msgid ""
 "<b>Core installation:</b>\n"
-"Only the minimum essentials for a console system to start are included. A "
-"graphical environment is not provided. This is ideal if you are an "
-"experienced user and want to customize your installation for any specific "
-"purpose, such as a web server, file server etc. "
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc. "
 msgstr ""
 "<b>Core installation:</b>\n"
-"Det minsta du behöver för ett konsol system. En grafisk miljö ingår inte. "
-"Detta är perfekt om du är en van användare och vill anpassa installationen "
-"för något speciellt ändamål, t.ex. en webbserver, filserver etc."
+"Det minsta du behöver för ett konsol system. En grafisk miljö ingår inte. Detta är perfekt om du är en van användare och vill anpassa installationen för något speciellt ändamål, t.ex. en webbserver, filserver etc."
 
 #: src/salix-live-installer.py:929
-#, fuzzy
 msgid ""
 "<b>Basic installation:</b>\n"
-"This installs only a basic desktop environment, with very few extra "
-"applications installed on top, such as a web browser and the gslapt package "
-"manager. Ideal for advanced users that would like to install a lightweight "
-"system and add their own choice of applications. "
+"This installs only a basic desktop environment, with very few extra applications installed on top, such as a web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight system and add their own choice of applications. "
 msgstr ""
 "<b>Grundläggande installation:</b>\n"
-"Detta installerar bara skrivbordsmiljön Xfce med webbläsaren Firefox och "
-"gslapt pakethanteraren. Idealisk för avancerade användare som vill "
-"installera ett lätt Xfce och lägga till sina egna val av program."
+"Detta installerar bara ett grundläggande skrivbordsmiljö, med mycket få extra program installerade, till exempel en webbläsare och gslapt pakethanterare. Idealisk för avancerade användare som vill installera ett lättviktigt system och lägga till sina egna val av applikationer."
 
 #: src/salix-live-installer.py:939
-#, fuzzy
 msgid ""
 "<b>Full installation:</b>\n"
-"Everything that is included in the iso is installed. That includes a "
-"complete desktop environment and a complete selection of matching "
-"applications, always following the \"one application per task\" rationale. "
+"Everything that is included in the iso is installed. That includes a complete desktop environment and a complete selection of matching applications, always following the \"one application per task\" rationale. "
 msgstr ""
 "<b>Fullständig installation:</b>\n"
-"Allt som ingår i iso är installerad. Detta innefattar skrivbordsmiljön Xfce, "
-"webbläsaren Firefox och claws-mail e-postklient, ett komplett OpenOffice.org "
-"kontorssvit, en Java Runtime Environment, Parole Media Player och Exaile "
-"musik hanterare, Gslapt pakethanteraren och flera andra program, alltid "
-"efter 'ett program per uppgift' grund."
+"Allt som ingår i ISO är installerad. Det innefattar en komplett skrivbordsmiljö och ett komplett utbud av matchande applikationer, alltid efter \"ett program per uppgift\" filosofin."
 
 #: src/salix-live-installer.py:944
 msgid ""
 "<b>Full installation:</b>\n"
-"Salix Live Installer has detected a LiveClone customized environment. Core "
-"and Basic installation modes are therefore not available. \n"
-"You can only perform a full installation: all software included in your "
-"customized LiveClone will be installed."
+"Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
+"You can only perform a full installation: all software included in your customized LiveClone will be installed."
 msgstr ""
 "<b<Fullständig installation:</b>\n"
-"Salix Live Installerare har hittat en LiveClone anpassad miljö. Kärna och "
-"Grundläggande installation är därför inte tillgängliga.\n"
-"Du kan endast utföra en fullständig installation: alla program i din "
-"anpassade LiveClone kommer att installeras."
+"Salix Live Installerare har hittat en LiveClone anpassad miljö. Kärna och Grundläggande installation är därför inte tillgängliga.\n"
+"Du kan endast utföra en fullständig installation: alla program i din anpassade LiveClone kommer att installeras."
 
 #: src/salix-live-installer.py:954
 msgid "Confirm your packages selection."
@@ -917,7 +883,7 @@ msgstr "Avbryt alla paket urval."
 
 #: src/salix-live-installer.py:1142 src/salix-live-installer.py:1144
 msgid "The time zone has not been set"
-msgstr "Den tidszon har inte ställts in"
+msgstr "Tidszon har inte ställts in"
 
 #: src/salix-live-installer.py:1142 src/salix-live-installer.py:1144
 #: src/salix-live-installer.py:1369 src/salix-live-installer.py:1372
@@ -971,7 +937,7 @@ msgstr "Ditt användarnamn bör inte innehålla någon bokstav"
 
 #: src/salix-live-installer.py:1380 src/salix-live-installer.py:1411
 msgid "Your password entry is empty"
-msgstr "Ditt lösenord posten är tom"
+msgstr "Ditt lösenord är tom"
 
 #: src/salix-live-installer.py:1382 src/salix-live-installer.py:1413
 msgid "Your password is too short. It should have at least 5 characters"
@@ -979,7 +945,7 @@ msgstr "Ditt lösenord är för kort. Den bör ha minst 5 tecken"
 
 #: src/salix-live-installer.py:1385 src/salix-live-installer.py:1416
 msgid "Your 2 password entries do not match"
-msgstr "Ditt två lösenord poster matchar inte"
+msgstr "Dina två lösenord matchar inte"
 
 #: src/salix-live-installer.py:1418
 msgid "Yes"
@@ -1003,7 +969,7 @@ msgstr "Du håller på att installera Salix med följande inställningar"
 
 #: src/salix-live-installer.py:1470
 msgid "Time zone"
-msgstr "Tids zon"
+msgstr "Tidszon"
 
 #: src/salix-live-installer.py:1471
 msgid "Keyboard layout"
@@ -1030,8 +996,8 @@ msgid ""
 "Salix Live Installer was not able to detect a valid Swap partition on your "
 "system."
 msgstr ""
-"Salix Live Installerare kunde inte hitta någon giltig Swap partition på ditt "
-"system."
+"Salix Live Installerare kunde inte hitta någon giltig Swap partition på ditt"
+" system."
 
 #: src/salix-live-installer.py:1500 src/salix-live-installer.py:1502
 msgid "Standard User"
@@ -1061,7 +1027,6 @@ msgstr ""
 "Kunde inte starta LiloSetup du måste ställa in LILO \"manuellt\"."
 
 #: src/salix-live-installer.py:1824
-#, fuzzy
 msgid ""
 "<b>Sorry!</b>\n"
 "\n"
@@ -1069,10 +1034,8 @@ msgid ""
 "\n"
 "You cannot proceed any further! "
 msgstr ""
-"<b>Tyvärr!</b> \n"
-"\n"
-"Salix Live Installerare är endast avsedd att användas i en LiveCD miljö. \n"
-"\n"
+"<b>Ledsen!</b>\n"
+"Salix Live Installer är endast avsedd att användas i en SaLT LiveCD miljö. \n"
 "Du kan inte fortsätta längre!"
 
 #: src/salix-live-installer.py:1848
@@ -1080,24 +1043,20 @@ msgid "Starting installation process..."
 msgstr "Starta installationen ..."
 
 #: src/salix-live-installer.py:1861
-#, fuzzy
 msgid "Formatting and mounting the main partition..."
-msgstr "Formatera och montering av din Linux-partition (s) ..."
+msgstr "Formatering och montering av huvud partitionen ..."
 
 #: src/salix-live-installer.py:1875
-#, fuzzy
 msgid "Formatting and mounting the Linux partition(s)..."
-msgstr "Formatera och montering av din Linux-partition (s) ..."
+msgstr "Formatering och montering av Linux-partition(en)..."
 
 #: src/salix-live-installer.py:1892
-#, fuzzy
 msgid "Formatting the Linux partition(s)..."
-msgstr "Formatera din Linux partition (s) ..."
+msgstr "Formaterar Linux-partition(en)..."
 
 #: src/salix-live-installer.py:1905
-#, fuzzy
 msgid "Mounting the Linux partition(s)..."
-msgstr "Montering av din Linux-partition (s) ..."
+msgstr "Montering av Linux-partition(en)..."
 
 #: src/salix-live-installer.py:1920
 msgid "Installing your LiveClone system..."
@@ -1109,9 +1068,9 @@ msgid "Installing the %(mode)s mode packages..."
 msgstr "Installerar %(mode)s paketen..."
 
 #: src/salix-live-installer.py:1981
-#, fuzzy, python-format
+#, python-format
 msgid "Installing %s "
-msgstr "Installerar kärnan..."
+msgstr "Installerar %s"
 
 #: src/salix-live-installer.py:1987
 msgid "Creating /etc/fstab..."
@@ -1119,7 +1078,7 @@ msgstr "Skapar /etc/fstab..."
 
 #: src/salix-live-installer.py:2023 src/salix-live-installer.py:2077
 msgid "Time, keyboard, locale, login and other system configuration..."
-msgstr "Tid, tangentbord, locale, inloggning och andra systemkonfiguration ..."
+msgstr "Tid, tangentbord, språk, inloggning och andra systemkonfiguration ..."
 
 #: src/salix-live-installer.py:2088
 msgid "Installation process completed successfully ..."
@@ -1129,16 +1088,13 @@ msgstr "Installationen klar..."
 msgid ""
 "<b>Salix installation was executed with success!</b>\n"
 "\n"
-"LiloSetup will now be launched to enable you to add Salix to your "
-"bootloader.\n"
-"(If you prefer to use another bootloader utility, click on the No button "
-"and\n"
+"LiloSetup will now be launched to enable you to add Salix to your bootloader.\n"
+"(If you prefer to use another bootloader utility, click on the No button and\n"
 "use the application of your choice before rebooting your machine.)\n"
 msgstr ""
 "<b>Salix installationen utfördes med framgång!</b>\n"
 "\n"
-"LiloSetup kommer nu att starta så att du kan lägga till Salix till din "
-"starthanterare. \n"
+"LiloSetup kommer nu att starta så att du kan lägga till Salix till din starthanterare. \n"
 "(Om du föredrar att använda en annan starthanterare, klicka på någon knapp \n"
 "och använda valfritt program före omstart din dator.)\n"
 
@@ -1194,16 +1150,13 @@ msgstr ""
 
 #: src/salix-live-installer.py:2169
 msgid ""
-"Installation process is fully completed but you have chosen not to install "
-"LILO.\n"
+"Installation process is fully completed but you have chosen not to install LILO.\n"
 "\n"
-"Before rebooting your machine, you must now use another bootloader manager "
-"to setup Salix new system or it will not be operational."
+"Before rebooting your machine, you must now use another bootloader manager to setup Salix new system or it will not be operational."
 msgstr ""
 "Installationen är klar, men du har valt att inte installera LILO.\n"
 "\n"
-"Innan du startar om datorn, måste du nu använda någon annan bootloader för "
-"att sätta upp det nya Salix systemet annars kan du inte starta Salix."
+"Innan du startar om datorn, måste du nu använda någon annan bootloader för att sätta upp det nya Salix systemet annars kan du inte starta Salix."
 
 #: src/salix-live-installer.py:2364
 msgid ""
@@ -1230,115 +1183,4 @@ msgstr "Salix Installerare"
 msgid "Salix Live Installer"
 msgstr "Salix Live installerare"
 
-#~ msgid ""
-#~ "<b>Important!</b>\n"
-#~ "\n"
-#~ "Before executing SalixLive's installer, you should already have the "
-#~ "necessary partitions available on your system.\n"
-#~ "\n"
-#~ "Salix needs, at the very minimum, one swap partition and  one Linux  "
-#~ "partition to hold its main directory tree. \n"
-#~ "\n"
-#~ "If possible, it is recommended to also have at least another Linux "
-#~ "partition to hold your /home directory.\n"
-#~ "\n"
-#~ "If you do not already have these needed partitions ready, please exit "
-#~ "SalixLive's installer and use Gparted to create them first."
-#~ msgstr ""
-#~ "<b>Viktigt!</b>\n"
-#~ "\n"
-#~ "Innan du startar SalixLive's installationsprogrammet bör du redan ha de "
-#~ "nödvändiga partitionerna på ditt system. \n"
-#~ "\n"
-#~ "Salix behöver, som ett absolut minimum, swap-partition och en Linux-"
-#~ "partition till en root katalogträd. \n"
-#~ "\n"
-#~ "Om möjligt, rekommenderas att även ha minst en annan Linux-partition som /"
-#~ "home katalog. \n"
-#~ "\n"
-#~ "Om du inte redan har dessa nödvändiga partitioner klar kan du avsluta "
-#~ "SalixLive's installationsprogrammet och använda gparted för att skapa dem "
-#~ "först."
 
-#~ msgid ""
-#~ "SalixLive Installer will perform a standard installation of Salix "
-#~ "Operating \n"
-#~ "System on your computer from the comfort of SalixLive's graphic "
-#~ "environment."
-#~ msgstr ""
-#~ "SalixLive Installer kommer att utföra en standardinstallation av Salix "
-#~ "Operativsystem \n"
-#~ "System på datorn från komfort av SalixLive grafiska miljön."
-
-#~ msgid "Formatting the main partition..."
-#~ msgstr "Formatera huvud partitionen ..."
-
-#~ msgid "Installing the common packages..."
-#~ msgstr "Installerar de gemensamma paketen..."
-
-#~ msgid ""
-#~ "Check this box if you want SCIM to be activated during the boot process. "
-#~ "The Smart Common Input Method platform (SCIM) is an input method platform "
-#~ "containing support for more than thirty complex languages such as "
-#~ "Chinese, Japanese, Korean and many European languages."
-#~ msgstr ""
-#~ "Markera den här rutan om du vill SCIM för att aktiveras under "
-#~ "uppstartsprocessen. Smart gemensamma Input Method plattform (SCIM) är en "
-#~ "inmatningsmetod plattform med stöd för mer än trettio komplexa språk som "
-#~ "kinesiska, japanska, koreanska och många europeiska språk."
-
-#~ msgid ""
-#~ "<b>Basic installation:</b>\n"
-#~ "This installs only the LXDE desktop environment with the Midori web "
-#~ "browser and the gslapt package manager. Ideal for advanced users that "
-#~ "would like to install a lightweight LXDE and add their own choice of "
-#~ "applications."
-#~ msgstr ""
-#~ "<b>Grundläggande installation:</b>\n"
-#~ "Detta installerar bara skrivbordsmiljön LXDE med webbläsaren Midori och "
-#~ "gslapt pakethanteraren. Idealisk för avancerade användare som vill "
-#~ "installera ett lätt LXDE och lägga till sina egna val av program."
-
-#~ msgid ""
-#~ "<b>Basic installation:</b>\n"
-#~ "This installs only the KDE desktop environment with the Konqueror web "
-#~ "browser and the gslapt package manager. Ideal for advanced users that "
-#~ "would like to install a basic KDE and add their own choice of "
-#~ "applications."
-#~ msgstr ""
-#~ "<b>Grundläggande installation:</b>\n"
-#~ "Detta installerar bara skrivbordsmiljön KDE med webbläsaren Konqueror och "
-#~ "gslapt pakethanteraren. Idealisk för avancerade användare som vill "
-#~ "installera ett lätt KDE och lägga till sina egna val av program."
-
-#~ msgid ""
-#~ "<b>Full installation:</b>\n"
-#~ "Everything that is included in the iso is installed. That includes the "
-#~ "LXDE desktop environment, the Midori web browser and Claws-mail email "
-#~ "client, Gnumeric and Abiword for office work, a Java Runtime Environment, "
-#~ "the Whaah! media player and Exaile music manager, the Gslapt package "
-#~ "manager and several other applications, always following the 'one "
-#~ "application per task' rationale."
-#~ msgstr ""
-#~ "<b>Fullständig installation:</b>\n"
-#~ "Allt som ingår i iso är installerad. Detta innefattar skrivbordsmiljön "
-#~ "LXDE, webbläsaren Midori och claws-mail e-postklient, Gnumeric och "
-#~ "Abiword för kontors arbete, en Java Runtime Environment, Whaah! Media "
-#~ "Spelare och Exaile musik hanterare, Gslapt pakethanteraren och flera "
-#~ "andra program, alltid efter 'ett program per uppgift' filosofin."
-
-#~ msgid ""
-#~ "<b>Full installation:</b>\n"
-#~ "Everything that is included in the iso is installed. That includes the "
-#~ "KDE desktop environment, the Konqueror web browser and KMail email "
-#~ "client, KSpread, KWord and the full KOffice suite, a Java Runtime "
-#~ "Environment, Kaffeine media player and Clementine music manager, the "
-#~ "Gslapt package manager and several other applications, always following "
-#~ "the 'one application per task' rationale."
-#~ msgstr ""
-#~ "<b>Fullständig installation:</b>\n"
-#~ "Allt som ingår i iso'n installeras. Detta innefattar skrivbordsmiljön "
-#~ "KDE, webbläsaren Konqueror och KMail e-postklient, KSpread, KWord och "
-#~ "kompletta KOffice kontorssvit, en Java Runtime Environment, Kaffeine "
-#~ "Media Spelare och Clementine musik hanterare, Gslapt pakethanteraren och "
-#~ "flera andra program, alltid efter 'ett program per uppgift' filosofin."

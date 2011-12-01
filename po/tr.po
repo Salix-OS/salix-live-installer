@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# cobraJoker <cobra.the.joker@gmail.com>, 2011.
+#   <erenlinux@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
@@ -15,36 +15,36 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: src/salix-live-installer.glade:358
 msgid "SalixLive Installer"
-msgstr "مثبت Salix الحي"
+msgstr "Salix Kurulum Aracı"
 
 #: src/salix-live-installer.glade:471
 msgid "_Time"
-msgstr "_الوقت "
+msgstr "_Zaman"
 
 #: src/salix-live-installer.glade:518
 msgid "Key_board"
-msgstr "Key_board"
+msgstr "Klav_ye"
 
 #: src/salix-live-installer.glade:562
 msgid "Lo_cale"
-msgstr "Lo_cale"
+msgstr ""
 
 #: src/salix-live-installer.glade:606
 msgid "_Partitions"
-msgstr "_Partitions"
+msgstr "_Bölümler"
 
 #: src/salix-live-installer.glade:651
 msgid "U_sers"
-msgstr "U_sers"
+msgstr ""
 
 #: src/salix-live-installer.glade:695
 msgid "S_oftware"
-msgstr "S_oftware"
+msgstr ""
 
 #: src/salix-live-installer.glade:922
 msgid ""
@@ -61,39 +61,39 @@ msgstr ""
 
 #: src/salix-live-installer.glade:953
 msgid "<b>Please set the time, date and time zone:</b>"
-msgstr "<b>الرجاء ضبط الوقت والتاريخ والمنطقة الزمنية :</b>"
+msgstr ""
 
 #: src/salix-live-installer.glade:1072
 msgid " hour : min : sec "
-msgstr "ساعة : دقيقة : ثانية"
+msgstr ""
 
 #: src/salix-live-installer.glade:1102
 msgid "Year:"
-msgstr "السنة :"
+msgstr "Yıl"
 
 #: src/salix-live-installer.glade:1113
 msgid "Month:"
-msgstr "الشهر :"
+msgstr "Ay"
 
 #: src/salix-live-installer.glade:1124
 msgid "Day:"
-msgstr "اليوم :"
+msgstr "Gün"
 
 #: src/salix-live-installer.glade:1236
 msgid "Time zone: "
-msgstr "المنطقة الزمنية :"
+msgstr ""
 
 #: src/salix-live-installer.glade:1286
 msgid "Use NTP service"
-msgstr "استخدام خدمة NTP"
+msgstr ""
 
 #: src/salix-live-installer.glade:1371
 msgid "<b>Please select your keyboard layout:</b>"
-msgstr "<b>الرجاء تحديد تخطيط لوحة المفاتيح الخاص بك :</b>"
+msgstr ""
 
 #: src/salix-live-installer.glade:1435
 msgid "Activate numlock"
-msgstr "تنشيط numlock"
+msgstr ""
 
 #: src/salix-live-installer.glade:1452
 msgid "Activate IBus "
@@ -101,7 +101,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:1490
 msgid "<b>Selected keyboard layout: </b>"
-msgstr "<b>تحديد تخطيط لوحة المفاتيح :</b>"
+msgstr ""
 
 #: src/salix-live-installer.glade:1503 src/salix-live-installer.glade:1702
 #: src/salix-live-installer.glade:2965 src/salix-live-installer.glade:3152
@@ -113,23 +113,23 @@ msgstr "<b>تحديد تخطيط لوحة المفاتيح :</b>"
 #: src/salix-live-installer.py:1771 src/salix-live-installer.py:1789
 #: src/salix-live-installer.py:1793 src/salix-live-installer.py:1798
 msgid "None"
-msgstr "لا شيء"
+msgstr ""
 
 #: src/salix-live-installer.glade:1578
 msgid "Select _keyboard "
-msgstr "حدد _keyboard"
+msgstr "_Klavye Seçin"
 
 #: src/salix-live-installer.glade:1617
 msgid "<b>Please select your system language:</b>"
-msgstr "<b>يرجى تحديد لغة نظامك :</b>"
+msgstr "<b>Lütfen sistem dilini seçiniz:</b>"
 
 #: src/salix-live-installer.glade:1689
 msgid "<b>Selected system language: </b>"
-msgstr "<b>لغة النظام المحددة  :</b>"
+msgstr ""
 
 #: src/salix-live-installer.glade:1777
 msgid "Select _language "
-msgstr "حدد_لغة"
+msgstr "_Dil seçin"
 
 #: src/salix-live-installer.glade:1817
 msgid ""
@@ -152,7 +152,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:1925
 msgid "<b>Please select Salix main partition:</b>"
-msgstr "<b>الرجاء اختيار partition Salix الأساسي  :</b>"
+msgstr ""
 
 #: src/salix-live-installer.glade:2012
 msgid "Display attached external devices"
@@ -170,7 +170,7 @@ msgstr ""
 
 #: src/salix-live-installer.glade:2126
 msgid "Select _partition "
-msgstr ""
+msgstr "_Bölüm seçin"
 
 #: src/salix-live-installer.glade:2164
 msgid "<b>Please configure your other Linux partition(s):</b>"
