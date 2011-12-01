@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-03 14:57+0200\n"
+"POT-Creation-Date: 2011-12-01 15:01+0100\n"
 "PO-Revision-Date: 2011-01-09 12:37+0000\n"
 "Last-Translator: gapan <vlahavas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1030,7 +1030,7 @@ msgid "but will not be mounted"
 msgstr "しかしマウントされません"
 
 #: src/salix-live-installer.py:1495
-msgid "and will mounted as swap"
+msgid "and will be mounted as swap"
 msgstr "そしてスワップとしてマウントされます"
 
 #: src/salix-live-installer.py:1497

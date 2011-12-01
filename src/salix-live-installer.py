@@ -1492,7 +1492,7 @@ included in your customized LiveClone will be installed."))
         try:
             for i in Swap_Partition:
                 LastRecapFullText += i + " " + _("will not be formatted") + \
-                " " + _("and will mounted as swap") + "\n"
+                " " + _("and will be mounted as swap") + "\n"
         except:
             info_dialog(_("Salix Live Installer was not able to detect a valid \
 Swap partition on your system."))
