@@ -238,9 +238,17 @@ class SalixLiveInstaller:
 \nSalix Live Installer is only meant to be used in a SaLT LiveCD environment.
 \nYou can continue to use it, but in restricted demo mode only.
 \nThe actual installation process will not be launched."""))
+        # Get the LiveCD SaLT root dir
+        global SaLTRootDir = 'salixlive'
+        if LiveCdMountPoint != '' :
+          with open('/mnt/salt/etc/salt.cfg') as SaLTConfig :
+            for line in SaLTConfig.read().splitlines() :
+              if line.startswith("ROOT_DIR="):
+                SaLTRootDir = line.split("ROOT_DIR=")[1]
+                  break
         # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
         global liveclone_install
-        if os.path.exists(LiveCdMountPoint + "/salixlive/modules/01-clone.salt") == True :
+        if os.path.exists(LiveCdMountPoint + "/" + SaLTRootDir + "/modules/01-clone.salt") == True :
             liveclone_install = True
             self.CloneLoginEventbox.show()
             self.CoreRadioButton.set_sensitive(False)
