@@ -24,5 +24,6 @@ EOF
 makepkg -l y -c n ../salix-live-installer-$VER-noarch-$RLZ.txz
 cd ..
 md5sum salix-live-installer-$VER-noarch-$RLZ.txz > salix-live-installer-$VER-noarch-$RLZ.md5
-echo -e "gparted,python,salixtools" > salix-live-installer-$VER-noarch-$RLZ.dep
+echo -e "coreutils,e2fsprogs,gawk,glibc,gparted,grep,hal,jfsutils,ntfsprogs,ntp,python,pygtk,reiserfsprogs,salixtools,sed,spkg,util-linux,xfsprogs" > salix-live-installer-$VER-noarch-$RLZ.dep
+echo -e "lilosetup" > salix-live-installer-$VER-noarch-$RLZ.sug
 rm -rf pkg
