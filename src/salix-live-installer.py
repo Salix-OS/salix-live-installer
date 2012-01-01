@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# vim: et sw=4 sta ts=4 ai tw=0
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #                                                                             #
@@ -34,6 +35,7 @@ import subprocess
 import sys
 import thread
 import time
+import re
 
 # Internationalization
 import gettext
@@ -238,9 +240,35 @@ class SalixLiveInstaller:
 \nSalix Live Installer is only meant to be used in a SaLT LiveCD environment.
 \nYou can continue to use it, but in restricted demo mode only.
 \nThe actual installation process will not be launched."""))
+        # Get the LiveCD SaLT root dir
+        global SaLTBaseDir
+        global SaLTRootDir
+        SaLTBaseDir = ''
+        SaLTRootDir = 'salixlive'
+        if LiveCdMountPoint != '' :
+            SaLTIdentFile = ''
+            with open('/mnt/salt/etc/salt.cfg') as SaLTConfig :
+                for line in SaLTConfig.read().splitlines() :
+                    if line.startswith("ROOT_DIR="):
+                        SaLTRootDir = line.split("ROOT_DIR=")[1]
+                    if line.startswith("IDENT_FILE="):
+                        SaLTIdentFile = line.split("IDENT_FILE=")[1]
+            # Read /proc/cmdline for identfile kernel parameter to override SalTIdentFile
+            identFileRegexp = re.compile('.* identfile=([^ ]+).*', re.I)
+            kcmdline = open('/proc/cmdline', 'r').read()
+            if identFileRegexp.match(kcmdline) :
+                SaLTIdentFile = identFileRegexp.sub('\\1', kcmldline)
+            if len(SaLTIdentFile) > 0 :
+                with open(LiveCdMountPoint + "/" + SaLTIdentFile) as SaLTIdent :
+                    for line in SaLTIdent.read().splitlines() :
+                        if line.startswith("BASEDIR="):
+                            SaLTBaseDir = line.split("BASEDIR=")[1]
+                            break
+            if len(SaLTBaseDir) > 0 and not SaLTBaseDir.endswith("/") :
+                SaLTBaseDir = SaLTBaseDir + "/"
         # Detect if the installer is running out of a LiveClone or a regular Salix LiveCD
         global liveclone_install
-        if os.path.exists(LiveCdMountPoint + "/salixlive/modules/01-clone.salt") == True :
+        if os.path.exists(LiveCdMountPoint + "/" + SaLTBaseDir + SaLTRootDir + "/modules/01-clone.salt") == True :
             liveclone_install = True
             self.CloneLoginEventbox.show()
             self.CoreRadioButton.set_sensitive(False)
@@ -1975,7 +2003,7 @@ Swap partition on your system."))
             while not target_copied :
                 time.sleep(5)
             # Install the Kernel packages
-            pkg_path = LiveCdMountPoint + "/packages/std-kernel/"
+            pkg_path = LiveCdMountPoint + "/" + SaLTBaseDir + "packages/std-kernel/"
             pkg_list = commands.getoutput("ls " + pkg_path)
             for pkg_to_install in pkg_list.splitlines():
                 self.InstallProgressBar.set_text(_("Installing %s ") % pkg_to_install)
