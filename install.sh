@@ -14,7 +14,7 @@ install -d -m 755 $DESTDIR/usr/share/icons/hicolor/scalable/apps
 install -d -m 755 $DESTDIR/usr/share/salix-live-installer
 
 install -m 755 src/salix-live-installer.py $DESTDIR/usr/sbin/salix-live-installer.py
-install -m 644 src/Goode-homolosine.jpg \
+install -m 644 src/world-timezones.png \
 $DESTDIR/usr/share/salix-live-installer
 install -m 644 src/salix-live-installer.glade \
 $DESTDIR/usr/share/salix-live-installer
