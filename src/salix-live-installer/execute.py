@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Module to execute native commands and get their output
+Module to execute native commands and get their output:
+  - exec_call
+  - exec_check
+  - exec_output
 """
 import subprocess
 import sys
@@ -13,7 +16,7 @@ def exec_call(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   return subprocess.call(cmd, shell = shell, env = env)
 
-def exec_check_call(cmd, shell = True, env = {'LANG' : 'en_US'}):
+def exec_check(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return 0 if ok or a subprocess.CalledProcessorError exception in case of error.
   The command is executed by default in a /bin/sh shell and using english locale.
@@ -47,6 +50,6 @@ if __name__ == '__main__':
   assertEquals(0, exec_call("ls -lh | grep '[.]'"))
   assertEquals(0, exec_call("ls", shell = False))
   assertEquals(127, exec_call("xyz"))
-  assertException(subprocess.CalledProcessError, lambda: exec_check_call("xyz"))
-  assertEquals(0, exec_check_call("ls"))
+  assertException(subprocess.CalledProcessError, lambda: exec_check("xyz"))
+  assertEquals(0, exec_check("ls"))
   assertEquals(os.getcwd(), exec_getoutput("pwd").strip())
