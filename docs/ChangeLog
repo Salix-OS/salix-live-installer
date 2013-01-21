@@ -1,3 +1,6 @@
+Version 0.4
+ * Add a salix live installer python library
+
 Version 0.3
  * Port from LLS to SaLT
  * Replaced SCIM by IBus
