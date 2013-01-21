@@ -8,6 +8,7 @@ from bootloader import *
 from chroot import *
 from disk import *
 from execute import *
+from freesize import *
 from fs import *
 from fstab import *
 from kernel import *
@@ -17,6 +18,5 @@ from module import *
 from mounting import *
 from package import *
 from salt import *
-from size import *
 from timezone import *
 from user import *

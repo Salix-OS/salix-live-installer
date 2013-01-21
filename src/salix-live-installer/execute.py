@@ -38,7 +38,7 @@ def exec_getoutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'
     p = subprocess.Popen(cmd, stdout = subprocess.PIPE, stderr = stdErr)
     output = p.communicate()[0]
     if p.returncode == 0:
-      return output
+      return output.splitlines()
     else:
       raise subprocess.CalledProcessError(returncode = p.returncode, cmd = cmd)
 
@@ -52,4 +52,4 @@ if __name__ == '__main__':
   assertEquals(127, exec_call("xyz"))
   assertException(subprocess.CalledProcessError, lambda: exec_check("xyz"))
   assertEquals(0, exec_check("ls"))
-  assertEquals(os.getcwd(), exec_getoutput("pwd").strip())
+  assertEquals(os.getcwd(), exec_getoutput("pwd")[0].strip())
