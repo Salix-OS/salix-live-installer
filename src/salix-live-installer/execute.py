@@ -2,28 +2,30 @@
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 Module to execute native commands and get their output:
-  - exec_call
-  - exec_check
-  - exec_output
+  - execCall
+  - execCheck
+  - execGetOutput
+  - checkRoot
 """
 import subprocess
 import sys
+import os
 
-def exec_call(cmd, shell = True, env = {'LANG' : 'en_US'}):
+def execCall(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return the exit code.
   The command is executed by default in a /bin/sh shell and using english locale.
   """
   return subprocess.call(cmd, shell = shell, env = env)
 
-def exec_check(cmd, shell = True, env = {'LANG' : 'en_US'}):
+def execCheck(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return 0 if ok or a subprocess.CalledProcessorError exception in case of error.
   The command is executed by default in a /bin/sh shell and using english locale.
   """
   return subprocess.check_call(cmd, shell = shell, env = env)
 
-def exec_getoutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}):
+def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return its output in a list, line by line.
   In case of error, it returns a subprocess.CalledProcessorError exception.
@@ -42,14 +44,21 @@ def exec_getoutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'
     else:
       raise subprocess.CalledProcessError(returncode = p.returncode, cmd = cmd)
 
+def checkRoot():
+  """
+  Raise an Exception if you run this code without root permissions
+  """
+  if os.getuid() != 0:
+    raise Exception('You need root permissions.')
+
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
-  import os
-  assertEquals(0, exec_call("ls"))
-  assertEquals(0, exec_call("ls -lh | grep '[.]'"))
-  assertEquals(0, exec_call("ls", shell = False))
-  assertEquals(127, exec_call("xyz"))
-  assertException(subprocess.CalledProcessError, lambda: exec_check("xyz"))
-  assertEquals(0, exec_check("ls"))
-  assertEquals(os.getcwd(), exec_getoutput("pwd")[0].strip())
+  assertEquals(0, execCall("ls"))
+  assertEquals(0, execCall("ls -lh | grep '[.]'"))
+  assertEquals(0, execCall("ls", shell = False))
+  assertEquals(127, execCall("xyz"))
+  assertException(subprocess.CalledProcessError, lambda: execCheck("xyz"))
+  assertEquals(0, execCheck("ls"))
+  assertEquals(os.getcwd(), execGetOutput("pwd")[0].strip())
+  assertException(Exception, lambda: checkRoot())

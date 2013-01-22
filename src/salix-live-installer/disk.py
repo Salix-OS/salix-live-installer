@@ -13,12 +13,15 @@ Functions:
 """
 from execute import *
 from fs import *
+from freesize import *
 import glob
 import re
+import os
+from stat import *
 
 def getDisks():
   "Returns the disks devices (without /dev/) connected to the computer. RAID and LVM are not supported yet."
-  return exec_getoutput(['sed', '-n', '/ sd[^0-9]\+$/ s/.*\(sd.*\)/\\1/ p', '/proc/partitions'])
+  return execGetOutput(['sed', '-n', '/ sd[^0-9]\+$/ s/.*\(sd.*\)/\\1/ p', '/proc/partitions'])
 
 def getDiskInfo(diskDevice):
   """
@@ -26,38 +29,40 @@ def getDiskInfo(diskDevice):
   diskDevice should no be prefilled with '/dev/'
   dictionary key: model, size, sizeHuman, removable
   """
-  modelName = open('/sys/block/%s/device/model' % diskDevice, 'r').read().strip()
-  blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
-  size = int(open('/sys/block/%s/size' % diskDevice, 'r').read().strip()) * blockSize
-  units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
-  unit = 0
-  sizeHuman = size
-  while sizeHuman > 1024 and unit < len(units) - 1:
-    unit += 1
-    sizeHuman = sizeHuman // 1024 # integer division to be compatible with python 3.x
-  sizeHuman = "%d%s" % (sizeHuman, units[unit])
-  try:
-    removable = int(open('/sys/block/%s/removable' % diskDevice, 'r').read().strip()) == 1
-  except:
-    removable = False
-  return {'model':modelName, 'size':size, 'sizeHuman':sizeHuman, 'removable':removable}
+  if S_ISBLK(os.stat('/dev/%s' % diskDevice).st_mode):
+    modelName = open('/sys/block/%s/device/model' % diskDevice, 'r').read().strip()
+    blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
+    size = int(open('/sys/block/%s/size' % diskDevice, 'r').read().strip()) * blockSize
+    sizeHuman = getHumanSize(size)
+    try:
+      removable = int(open('/sys/block/%s/removable' % diskDevice, 'r').read().strip()) == 1
+    except:
+      removable = False
+    return {'model':modelName, 'size':size, 'sizeHuman':sizeHuman, 'removable':removable}
+  else:
+    return None
 
 def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
   """
   Returns partitions following exclusion filters.
   """
-  parts = [p.replace('/sys/block/%s/' % diskDevice, '') for p in glob.glob('/sys/block/%s/%s*' % (diskDevice, diskDevice))]
-  fsexclude = []
-  if skipExtended:
-    fsexclude.append('Extended')
-  if skipSwap:
-    fsexclude.append('swap')
-  return [part for part in parts if getFsType(part) not in fsexclude]
+  checkRoot()
+  if S_ISBLK(os.stat('/dev/%s' % diskDevice).st_mode):
+    parts = [p.replace('/sys/block/%s/' % diskDevice, '') for p in glob.glob('/sys/block/%s/%s*' % (diskDevice, diskDevice))]
+    fsexclude = []
+    if skipExtended:
+      fsexclude.append('Extended')
+    if skipSwap:
+      fsexclude.append('swap')
+    return [part for part in parts if getFsType(part) not in fsexclude]
+  else:
+    return None
 
 def getSwapPartitions():
   """
   Returns partition devices that are of type Linux Swap.
   """
+  checkRoot()
   for diskDevice in getDisks():
     parts = [p.replace('/sys/block/%s/' % diskDevice, '') for p in glob.glob('/sys/block/%s/%s*' % (diskDevice, diskDevice))]
     return [part for part in parts if getFsType(part) == 'swap']
@@ -70,23 +75,22 @@ def getPartitionInfo(partitionDevice):
     - size
     - sizeHuman
   """
-  fstype = getFsType(partitionDevice)
-  label = getFsLabel(partitionDevice)
-  diskDevice = re.sub('[0-9]*', '', partitionDevice)
-  blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
-  size = int(open('/sys/block/%s/%s/size' % (diskDevice, partitionDevice), 'r').read().strip()) * blockSize
-  units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
-  unit = 0
-  sizeHuman = size
-  while sizeHuman > 1024 and unit < len(units) - 1:
-    unit += 1
-    sizeHuman = sizeHuman // 1024 # integer division to be compatible with python 3.x
-  sizeHuman = "%d%s" % (sizeHuman, units[unit])
-  return {'fstype':fstype, 'label':label, 'size':size, 'sizeHuman':sizeHuman}
+  checkRoot()
+  if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
+    fstype = getFsType(partitionDevice)
+    label = getFsLabel(partitionDevice)
+    diskDevice = re.sub('[0-9]*', '', partitionDevice)
+    blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
+    size = int(open('/sys/block/%s/%s/size' % (diskDevice, partitionDevice), 'r').read().strip()) * blockSize
+    sizeHuman = getHumanSize(size)
+    return {'fstype':fstype, 'label':label, 'size':size, 'sizeHuman':sizeHuman}
+  else:
+    return None
 
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
+  checkRoot()
   disks = getDisks()
   assertTrue(len(disks) > 0)
   assertEquals('sda', disks[0])

@@ -18,9 +18,10 @@ def getFsType(partitionDevice):
   partitionDevice should no be prefilled with '/dev/'.
   Returns 'Extended' if the partition is an extended partition and has no filesystem.
   """
+  checkRoot()
   if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
     try:
-      fstype = exec_getoutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'TYPE', '-o', 'value', '/dev/%s' % partitionDevice])[0]
+      fstype = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'TYPE', '-o', 'value', '/dev/%s' % partitionDevice])[0]
     except subprocess.CalledProcessError as e:
       fstype = 'Extended'
   else:
@@ -32,9 +33,10 @@ def getFsLabel(partitionDevice):
   Returns the label for that partition (if any).
   partitionDevice should no be prefilled with '/dev/'.
   """
+  checkRoot()
   if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
     try:
-      label = exec_getoutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'LABEL', '-o', 'value', '/dev/%s' % partitionDevice])[0]
+      label = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'LABEL', '-o', 'value', '/dev/%s' % partitionDevice])[0]
     except subprocess.CalledProcessError as e:
       label = ''
   else:

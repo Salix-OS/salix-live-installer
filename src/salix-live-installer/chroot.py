@@ -6,18 +6,15 @@ Chroot function
 from execute import *
 import os
 
-def exec_chroot(path, cmd):
+def execChroot(path, cmd):
   """
   Execute cmd in the chroot defined by path.
   pathes in cmd should be relative to the new root.
   """
-  if os.getuid() != 0:
-    raise Exception('You need root rights to chroot')
-  else:
-    chrootcmd = "chroot %s %s" % (path, cmd)
-    return exec_call(chrootcmd)
+  checkRoot()
+  return execCall(['chroot', path, cmd])
 
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
-  assertException(Exception, lambda: exec_chroot("/", "/bin/ls")) # we are not root
+  assertException(Exception, lambda: execChroot("/", "/bin/ls")) # we are not root
