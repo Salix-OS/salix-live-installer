@@ -1,14 +1,15 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 Launching the boot loader setup tool with some defaults:
-  - run_bootsetup
+  - runBootsetup
 """
 from execute import *
 
-def run_bootsetup(bootloader = 'lilo'):
+def runBootsetup(bootloader = 'lilo'):
   try:
-    exec_check("bootsetup %s" % bootloader, env = None)
+    execCheck(['bootsetup', bootloader], env = None)
     return True
   except:
     return False
@@ -16,4 +17,4 @@ def run_bootsetup(bootloader = 'lilo'):
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
-  assertTrue(run_bootsetup())
+  assertTrue(runBootsetup())

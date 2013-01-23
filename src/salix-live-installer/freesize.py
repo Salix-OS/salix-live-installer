@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 Calculate some size and free size of folders and mount points.
@@ -20,7 +21,7 @@ def getHumanSize(size):
   while sizeHuman > 1024 and unit < len(units) - 1:
     unit += 1
     sizeHuman = sizeHuman / 1024
-  return "%.1f%s" % (sizeHuman, units[unit])
+  return "{0:.1f}{1}".format(sizeHuman, units[unit])
 
 def getSizes(path):
   """
@@ -48,8 +49,8 @@ def getSizes(path):
       # not mounted, so only the full size could be get
       diskDevice = re.sub(r'^.*/([^/]+?)[0-9]*$', r'\1', path)
       device = re.sub(r'^.*/([^/]+)$', r'\1', path)
-      blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
-      size = int(open('/sys/class/block/%s/size' % device, 'r').read().strip()) * blockSize
+      blockSize = int(open('/sys/block/{0}/queue/logical_block_size'.format(diskDevice), 'r').read().strip())
+      size = int(open('/sys/class/block/{0}/size'.format(device), 'r').read().strip()) * blockSize
       return {
           'size':size, 'sizeHuman':getHumanSize(size),
           'free':None, 'freeHuman':None,

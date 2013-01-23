@@ -1,4 +1,5 @@
 #!/bin/evn python
+# -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 assert functions:
@@ -14,16 +15,16 @@ to pass a function, you can use lambda expression like:
 """
 def assertTrue(expression):
   "Expect the expression to be true"
-  assert expression, "'%s' was expected to be true" % expression
+  assert expression, "'{0}' was expected to be true".format(expression)
 def assertFalse(expression):
   "Expect the expression to be false"
-  assert (not expression), "'%s' was expected to be false" % expression
+  assert (not expression), "'{0}' was expected to be false".format(expression)
 def assertEquals(expected, expression):
   "Expect that the expression equals to the expected value"
-  assert expression == expected, "'%s' expected, got '%s'" % (expected, expression)
+  assert expression == expected, "'{0}' expected, got '{1}'".format(expected, expression)
 def assertNotEquals(expected, expression):
   "Expect that the expression does not equals to the expected value"
-  assert expression != expected, "'%s' not expected, got '%s'" % (expected, expression)
+  assert expression != expected, "'{0}' not expected, got '{1}'".format(expected, expression)
 def assertException(exceptionType, function):
   "Expect that the function trigger an exception of type exceptionType"
   triggered = False
@@ -32,7 +33,7 @@ def assertException(exceptionType, function):
   except BaseException as e:
     if isinstance(e, exceptionType):
       triggered = True
-  assert triggered, "Exception '%s' expected with '%s'" % (exceptionType, function.__doc__)
+  assert triggered, "Exception '{0}' expected with '{1}'".format(exceptionType, function.__doc__)
 def assertNoException(function):
   "Expect that the function does not trigger any exception"
   triggered = False
@@ -42,7 +43,7 @@ def assertNoException(function):
   except BaseException as e:
     unExpectedE = e
     triggered = True
-  assert (not triggered), "Exception '%s' was not expected with '%s'" % (unExpected, function.__doc__)
+  assert (not triggered), "Exception '{0}' was not expected with '{1}'".format(unExpected, function.__doc__)
 
 # Unit test
 if __name__ == '__main__':

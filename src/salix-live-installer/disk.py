@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 Get information of the disks and partitions in the system.
@@ -29,13 +30,13 @@ def getDiskInfo(diskDevice):
   diskDevice should no be prefilled with '/dev/'
   dictionary key: model, size, sizeHuman, removable
   """
-  if S_ISBLK(os.stat('/dev/%s' % diskDevice).st_mode):
-    modelName = open('/sys/block/%s/device/model' % diskDevice, 'r').read().strip()
-    blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
-    size = int(open('/sys/block/%s/size' % diskDevice, 'r').read().strip()) * blockSize
+  if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
+    modelName = open('/sys/block/{0}/device/model'.format(diskDevice), 'r').read().strip()
+    blockSize = int(open('/sys/block/{0}/queue/logical_block_size'.format(diskDevice), 'r').read().strip())
+    size = int(open('/sys/block/{0}/size'.format(diskDevice), 'r').read().strip()) * blockSize
     sizeHuman = getHumanSize(size)
     try:
-      removable = int(open('/sys/block/%s/removable' % diskDevice, 'r').read().strip()) == 1
+      removable = int(open('/sys/block/{0}/removable'.format(diskDevice), 'r').read().strip()) == 1
     except:
       removable = False
     return {'model':modelName, 'size':size, 'sizeHuman':sizeHuman, 'removable':removable}
@@ -47,8 +48,8 @@ def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
   Returns partitions following exclusion filters.
   """
   checkRoot()
-  if S_ISBLK(os.stat('/dev/%s' % diskDevice).st_mode):
-    parts = [p.replace('/sys/block/%s/' % diskDevice, '') for p in glob.glob('/sys/block/%s/%s*' % (diskDevice, diskDevice))]
+  if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
+    parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
     fsexclude = []
     if skipExtended:
       fsexclude.append('Extended')
@@ -64,7 +65,7 @@ def getSwapPartitions():
   """
   checkRoot()
   for diskDevice in getDisks():
-    parts = [p.replace('/sys/block/%s/' % diskDevice, '') for p in glob.glob('/sys/block/%s/%s*' % (diskDevice, diskDevice))]
+    parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
     return [part for part in parts if getFsType(part) == 'swap']
 
 def getPartitionInfo(partitionDevice):
@@ -76,12 +77,12 @@ def getPartitionInfo(partitionDevice):
     - sizeHuman
   """
   checkRoot()
-  if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
+  if S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
     fstype = getFsType(partitionDevice)
     label = getFsLabel(partitionDevice)
     diskDevice = re.sub('[0-9]*', '', partitionDevice)
-    blockSize = int(open('/sys/block/%s/queue/logical_block_size' % diskDevice, 'r').read().strip())
-    size = int(open('/sys/block/%s/%s/size' % (diskDevice, partitionDevice), 'r').read().strip()) * blockSize
+    blockSize = int(open('/sys/block/{0}/queue/logical_block_size'.format(diskDevice), 'r').read().strip())
+    size = int(open('/sys/block/{0}/{1}/size'.format(diskDevice, partitionDevice), 'r').read().strip()) * blockSize
     sizeHuman = getHumanSize(size)
     return {'fstype':fstype, 'label':label, 'size':size, 'sizeHuman':sizeHuman}
   else:

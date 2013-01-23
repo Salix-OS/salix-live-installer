@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
 Get information about filesystem, create them, ...
@@ -21,9 +22,9 @@ def getFsType(partitionDevice):
   Returns 'Extended' if the partition is an extended partition and has no filesystem.
   """
   checkRoot()
-  if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
+  if S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
     try:
-      fstype = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'TYPE', '-o', 'value', '/dev/%s' % partitionDevice])[0]
+      fstype = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'TYPE', '-o', 'value', '/dev/{0}'.format(partitionDevice)])[0]
     except subprocess.CalledProcessError as e:
       fstype = 'Extended'
   else:
@@ -36,9 +37,9 @@ def getFsLabel(partitionDevice):
   'partitionDevice' should no be prefilled with '/dev/'.
   """
   checkRoot()
-  if S_ISBLK(os.stat('/dev/%s' % partitionDevice).st_mode):
+  if S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
     try:
-      label = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'LABEL', '-o', 'value', '/dev/%s' % partitionDevice])[0]
+      label = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'LABEL', '-o', 'value', '/dev/{0}'.format(partitionDevice)])[0]
     except subprocess.CalledProcessError as e:
       label = ''
   else:
@@ -193,7 +194,7 @@ if __name__ == '__main__':
   part = 'sda1'
   fstype = getFsType(part)
   label = getFsLabel(part)
-  print '%s: %s (%s)' % (part, fstype, label)
+  print '{0}: {1} ({2})'.format(part, fstype, label)
   assertTrue(fstype)
   assertTrue(len(fstype) > 0)
   assertTrue(label)
