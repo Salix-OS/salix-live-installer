@@ -5,10 +5,12 @@ Calculate some size and free size of folders and mount points.
 Functions:
   - getHumanSize
   - getSizes
+  - getUsedSize
 """
 import re
 import os
 from stat import *
+from execute import *
 
 def getHumanSize(size):
   "Returns the human readable format of the size in bytes"
@@ -34,6 +36,8 @@ def getSizes(path):
     mountpoint = None
     for line in open('/proc/mounts').read().splitlines():
       p, mp, _ = line.split(' ', 2) # 2 splits max, _ is discarded
+      if os.path.islink(p):
+        p = os.path.realpath(p)
       if p == path:
         mountpoint = mp
         break
@@ -67,25 +71,62 @@ def getSizes(path):
       'uuUsed':uuUsed, 'uuUsedHuman':getHumanSize(uuUsed)
     }
 
+def getUsedSize(path, blocksize = None):
+  """
+  Returns the size of the space used by files and folders under 'path'.
+  If 'blocksize' is specified, mimic the space that will be used if the blocksize of the underlying filesystem where the one specified.
+  This could be useful if to be used to transfering files from one directory to another when the target filesystem use another blocksize.
+  Return a tuple with (size, sizeHuman)
+  """
+  cmd = ['du', '-c', '-s']
+  if blocksize:
+    cmd.extend(['-B', str(blocksize)])
+  else:
+    cmd.extend(['-B', '1'])
+  cmd.append(path)
+  print cmd
+  lines = execGetOutput(cmd)
+  size, _ = lines[-1].split()
+  size = int(size)
+  if blocksize:
+    size *= blocksize
+  return {'size':size, 'sizeHuman':getHumanSize(size)}
+
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
   assertEquals('7.4GB', getHumanSize(7923593216L))
+  print '/'
   stats = getSizes('/')
+  print stats
   assertTrue(stats['size'] > 0)
   assertTrue(stats['free'] > 0)
   assertTrue(stats['uuFree'] > 0)
   assertTrue(stats['used'] > 0)
   assertTrue(stats['uuUsed'] > 0)
-  stats = getSizes('/dev/sda1')
+  print '/dev/sda1'
+  stats = getSizes('/dev/sda1') # mounted
+  print stats
+  assertTrue(stats['size'] > 0)
   assertTrue(stats['size'] > 0)
   assertTrue(stats['free'] > 0)
   assertTrue(stats['uuFree'] > 0)
   assertTrue(stats['used'] > 0)
   assertTrue(stats['uuUsed'] > 0)
-  stats = getSizes('/dev/sda5') # extended partition, could never have been mounted
+  print '/dev/sda2'
+  stats = getSizes('/dev/sda2') # extended partition, could never have been mounted
+  print stats
+  assertTrue(stats['size'] > 0)
   assertTrue(stats['size'] > 0)
   assertTrue(stats['free'] == None)
   assertTrue(stats['uuFree'] == None)
   assertTrue(stats['used'] == None)
   assertTrue(stats['uuUsed'] == None)
+  print 'getUsedSize(.)'
+  stats = getUsedSize('.')
+  print stats
+  assertTrue(stats['size'] > 0)
+  print 'getUsedSize(., 16384)'
+  stats = getUsedSize('.', 16384)
+  print stats
+  assertTrue(stats['size'] > 0)
