@@ -12,6 +12,7 @@ import re
 import os
 from stat import *
 from execute import *
+import mounting
 
 def getHumanSize(size):
   "Returns the human readable format of the size in bytes"
@@ -34,14 +35,7 @@ def getSizes(path):
   + all of them with the corresponding 'Human' suffix.
   """
   if S_ISBLK(os.stat(path).st_mode):
-    mountpoint = None
-    for line in open('/proc/mounts').read().splitlines():
-      p, mp, _ = line.split(' ', 2) # 2 splits max, _ is discarded
-      if os.path.islink(p):
-        p = os.path.realpath(p)
-      if p == path:
-        mountpoint = mp
-        break
+    mountpoint = getMountPoint(path)
     if mountpoint:
       # mounted, so will use mountpoint to get information about different sizes
       path = mountpoint
