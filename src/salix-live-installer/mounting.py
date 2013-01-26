@@ -10,22 +10,25 @@ Functions:
   - umountDevice
 """
 from execute import *
+from fs import getFsType
 import os
 from stat import *
+
+_tempMountDir = '/mnt/.tempSalt'
 
 def getMountPoint(device):
   """
   Will find the mount point to this 'device' or None if not mounted.
   """
   mountpoint = None
-  if S_ISBLK(os.stat(device).st_mode):
-    for line in open('/proc/mounts').read().splitlines():
-      p, mp, _ = line.split(' ', 2) # 2 splits max, _ is discarded
-      if os.path.islink(p):
-        p = os.path.realpath(p)
-      if p == device:
-        mountpoint = mp
-        break
+  path = os.path.abspath(device)
+  for line in execGetOutput('mount', shell = False):
+    p, _, mp, _ = line.split(' ', 3) # 3 splits max, _ is discarded
+    if os.path.islink(p):
+      p = os.path.realpath(p)
+    if p == path:
+      mountpoint = mp
+      break
   return mountpoint
 
 def isMounted(device):
@@ -37,19 +40,39 @@ def isMounted(device):
   else:
     return False
 
-def mountDevice(device, fsType, mountPoint = None):
+def _deleteMountPoint(mountPoint):
+  # delete the empty directory
+  try:
+    os.rmdir(mountPoint)
+  except:
+    pass
+  # delete the temporary directory if not empty
+  if os.path.isdir(_tempMountDir):
+    try:
+      os.rmdir(_tempMountDir)
+    except:
+      pass
+
+def mountDevice(device, fsType = None, mountPoint = None):
   """
   Mount the 'device' of 'fsType' filesystem under 'mountPoint'.
-  If 'mountPoint' is not specified, '/mnt/.temp/device' will be used.
+  If 'mountPoint' is not specified, '{0}/device' will be used.
   Returns False if it fails.
-  """
+  """.format(_tempMountDir) 
+  if not fsType:
+    fsType = getFsType(device)
+  manualMP = False
   if not mountPoint:
-    mountPoint = '/mnt/.temp/{0}'.format(device)
+    mountPoint = '{0}/{1}'.format(_tempMountDir, os.path.basename(device))
     if os.path.exists(mountPoint):
       return False
+    manualMP = True
   if not os.path.exists(mountPoint):
-    os.path.makedirs(mountPoint)
-  return execCall(['mount', '-t', fsType, device, path])
+    os.makedirs(mountPoint)
+  ret = execCall(['mount', '-t', fsType, device, mountPoint], shell = False)
+  if ret != 0 and manualMP:
+    _deleteMountPoint(mountPoint)
+  return ret
 
 def umountDevice(deviceOrPath, tryLazyUmount = True, deleteMountPoint = True):
   """
@@ -58,26 +81,17 @@ def umountDevice(deviceOrPath, tryLazyUmount = True, deleteMountPoint = True):
   Will delete the mount point if 'deleteMountPoint' is True.
   Returns False if it fails.
   """
-  if S_ISBLK(os.stat(device).st_mode):
-    path = getMountPoint(device)
+  if S_ISBLK(os.stat(deviceOrPath).st_mode):
+    path = getMountPoint(deviceOrPath)
   else:
     path = deviceOrPath
-  if os.path.ismounted(path):
-    ret = execCall(['umount', path])
-    if not ret:
-      ret = execCall(['umount', '-l', path])
-    if ret and deleteMountPoint:
-      # delete the empty directory
-      try:
-        os.rmdir(path)
-      except:
-        pass
-      # delete the temporary directory if not empty
-      if os.path.isdir('/mnt/.temp'):
-        try:
-          os.rmdir('/mnt/.temp')
-        except:
-          pass
+  mountPoint = getMountPoint(path)
+  if mountPoint:
+    ret = execCall(['umount', mountPoint], shell = False)
+    if ret != 0:
+       ret = execCall(['umount', '-l', mountPoint], shell = False)
+    if ret == 0 and deleteMountPoint:
+      _deleteMountPoint(mountPoint)
     return ret
   else:
     return False
@@ -85,3 +99,14 @@ def umountDevice(deviceOrPath, tryLazyUmount = True, deleteMountPoint = True):
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
+  from fs import *
+  checkRoot() # need to be root to mount/umount
+  execCall(['dd', 'if=/dev/zero', 'of=ext4.fs', 'bs=1M', 'count=50'], shell = False)
+  makeFs('ext4.fs', 'ext4', 'test ext4', True)
+  assertFalse(isMounted('ext4.fs'))
+  assertEquals(0, mountDevice('ext4.fs'))
+  assertTrue(isMounted('ext4.fs'))
+  assertEquals('{0}/ext4.fs'.format(_tempMountDir), getMountPoint('ext4.fs'))
+  assertEquals(0, umountDevice('ext4.fs'))
+  assertFalse(isMounted('ext4.fs'))
+  os.unlink('ext4.fs')

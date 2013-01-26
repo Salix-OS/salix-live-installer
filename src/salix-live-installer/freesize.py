@@ -12,7 +12,18 @@ import re
 import os
 from stat import *
 from execute import *
-import mounting
+
+def _getMountPoint(device):
+  "Copied from 'mounting' module to break circular dependancies"
+  mountpoint = None
+  for line in execGetOutput('mount', shell = False):
+    p, _, mp, _ = line.split(' ', 3) # 3 splits max, _ is discarded
+    if os.path.islink(p):
+      p = os.path.realpath(p)
+    if p == device:
+      mountpoint = mp
+      break
+  return mountpoint
 
 def getHumanSize(size):
   "Returns the human readable format of the size in bytes"
@@ -26,6 +37,7 @@ def getHumanSize(size):
 
 def getSizes(path):
   """
+  Compute the different sizes of the fileystem denoted by path (either a device or a file in filesystem).
   Returns the following sizes (in a dictionary):
     - size (total size)
     - free (total free size)
@@ -35,7 +47,7 @@ def getSizes(path):
   + all of them with the corresponding 'Human' suffix.
   """
   if S_ISBLK(os.stat(path).st_mode):
-    mountpoint = getMountPoint(path)
+    mountpoint = _getMountPoint(path)
     if mountpoint:
       # mounted, so will use mountpoint to get information about different sizes
       path = mountpoint
@@ -118,10 +130,11 @@ if __name__ == '__main__':
   assertTrue(stats['used'] == None)
   assertTrue(stats['uuUsed'] == None)
   print 'getUsedSize(.)'
-  stats = getUsedSize('.')
-  print stats
-  assertTrue(stats['size'] > 0)
-  print 'getUsedSize(., 16384)'
-  stats = getUsedSize('.', 16384)
-  print stats
-  assertTrue(stats['size'] > 0)
+  stats1 = getUsedSize('.')
+  print stats1
+  assertTrue(stats1['size'] > 0)
+  print 'getUsedSize(., 524288)'
+  stats2 = getUsedSize('.', 524288)
+  print stats2
+  assertTrue(stats2['size'] > 0)
+  assertTrue(stats2['size'] > stats1['size'])

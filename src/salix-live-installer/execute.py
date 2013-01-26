@@ -16,6 +16,8 @@ def execCall(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return the exit code.
   The command is executed by default in a /bin/sh shell and using english locale.
+  The output of the command is not read. With some commands, it hangs if the output is not read when run in a shell.
+  For this type of command, prefer using execGetOutput even if you don't read the return value or using shell = False.
   """
   return subprocess.call(cmd, shell = shell, env = env)
 

@@ -15,7 +15,6 @@ from fstab import *
 from kernel import *
 from keyboard import *
 from language import *
-from module import *
 from mounting import *
 from package import *
 from salt import *

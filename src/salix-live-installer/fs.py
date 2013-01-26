@@ -11,6 +11,7 @@ Functions:
   - makeFs
 """
 from execute import *
+from freesize import getSizes
 import os
 from stat import *
 import re
@@ -18,46 +19,58 @@ import re
 def getFsType(partitionDevice):
   """
   Returns the file system type for that partition.
-  'partitionDevice' should no be prefilled with '/dev/'.
+  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
+  It can be a full path if the partition is contains in a file.
   Returns 'Extended' if the partition is an extended partition and has no filesystem.
   """
-  checkRoot()
-  if S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
-    try:
-      fstype = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'TYPE', '-o', 'value', '/dev/{0}'.format(partitionDevice)])[0]
-    except subprocess.CalledProcessError as e:
-      fstype = 'Extended'
+  if os.path.exists('/dev/{0}'.format(partitionDevice)) and S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
+    path = '/dev/{0}'.format(partitionDevice)
+  elif os.path.isfile(partitionDevice):
+    path = partitionDevice
   else:
     fstype = False
+  if path:
+    try:
+      fstype = execGetOutput(['/sbin/blkid', '-s', 'TYPE', '-o', 'value', path], shell = False)[0]
+    except subprocess.CalledProcessError as e:
+      fstype = False
+    if fstype == '':
+      fstype = 'Extended'
   return fstype
 
 def getFsLabel(partitionDevice):
   """
   Returns the label for that partition (if any).
-  'partitionDevice' should no be prefilled with '/dev/'.
+  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
+  It can be a full path if the partition is contains in a file.
   """
-  checkRoot()
-  if S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
-    try:
-      label = execGetOutput(['/sbin/blkid', '-c', '/dev/null', '-s', 'LABEL', '-o', 'value', '/dev/{0}'.format(partitionDevice)])[0]
-    except subprocess.CalledProcessError as e:
-      label = ''
+  if os.path.exists('/dev/{0}'.format(partitionDevice)) and S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
+    path = '/dev/{0}'.format(partitionDevice)
+  elif os.path.isfile(partitionDevice):
+    path = partitionDevice
   else:
     label = False
+  if path:
+    try:
+      label = execGetOutput(['/sbin/blkid', '-s', 'LABEL', '-o', 'value', path], shell = False)[0]
+    except subprocess.CalledProcessError as e:
+      label = False
   return label
 
-def makeFs(partitionDevice, fsType, label=None, options=None, force=False):
+def makeFs(partitionDevice, fsType, label=None, force=False, options=None):
   """
   Creates a filesystem on the device.
-  'partitionDevice' should no be prefilled with '/dev/'.
+  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
   'fsType' could be ext2, ext3, ext4, xfs, reiserfs, jfs, btrfs, ntfs, fat16, fat32, swap
-  Use 'options' to force passing these options to the creation process (use a list)
   Use 'force=True' if you want to force creating the filesystem and if 'partitionDevice' is a full path to a file (not a block device).
+  Use 'options' to force passing these options to the creation process (use a list)
   """
   if force and os.path.exists(partitionDevice):
     path = partitionDevice
   else:
     path = '/dev/{0}'.format(partitionDevice)
+    if not os.path.exists(path):
+      raise IOError('{0} does not exist'.format(path))
     if not S_ISBLK(os.stat(path).st_mode):
       raise IOError('{0} is not a block device'.format(path))
   if fsType not in ('ext2', 'ext3', 'ext4', 'xfs', 'reiserfs', 'jfs', 'btrfs', 'ntfs', 'fat16', 'fat32', 'swap'):
@@ -82,7 +95,7 @@ def makeFs(partitionDevice, fsType, label=None, options=None, force=False):
 
 def _makeExtFs(path, version, label, options, force):
   "ExtX block size: 4k per default in /etc/mke2fs.conf"
-  cmd = '/sbin/mkfs.ext{0:d}'.format(version)
+  cmd = ['/sbin/mkfs.ext{0:d}'.format(version)]
   if not options:
     options = []
   if label:
@@ -92,23 +105,33 @@ def _makeExtFs(path, version, label, options, force):
     options.append(label)
   if force:
     options.append('-F')
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeXfs(path, label, options, force):
   "http://blog.peacon.co.uk/wiki/Creating_and_Tuning_XFS_Partitions"
-  cmd = '/sbin/mkfs.xfs'
+  cmd = ['/sbin/mkfs.xfs']
   if not options:
-    options = ['-l', 'size=64m,lazy-count=1', '-f']
-    # -f is neccessary to have this or you cannot create XFS on a non-empty partition or disk
+    options = ['-f'] # -f is neccessary to have this or you cannot create XFS on a non-empty partition or disk
+    if os.path.isfile(path):
+      size = os.stat(path).st_size
+    else:
+      size = getSizes(path)['size']
+    if size > 104857600: # > 100M
+      options = ['-l', 'size=64m,lazy-count=1'] # optimizations
   if label:
     if len(label) > 12: # max 12 chars
       label = label[0:11]
     options.append('-L')
     options.append(label)
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  print 'cmd={0}'.format(cmd)
+  return execCall(cmd, shell = False)
 
 def _makeReiserfs(path, label, options, force):
-  cmd = '/sbin/mkfs.reiserfs'
+  cmd = ['/sbin/mkfs.reiserfs']
   if not options:
     options = []
   if label:
@@ -119,10 +142,12 @@ def _makeReiserfs(path, label, options, force):
   if force:
     options.append('-f')
     options.append('-f') # twice for no confirmation
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeJfs(path, label, options, force):
-  cmd = '/sbin/mkfs.jfs'
+  cmd = ['/sbin/mkfs.jfs']
   if not options:
     options = ['-f'] # if not specified, will ask to continue
   if label:
@@ -132,10 +157,12 @@ def _makeJfs(path, label, options, force):
     options.append(label)
   if force:
     pass # no need to do anything
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeBtrfs(path, label, options, force):
-  cmd = '/sbin/mkfs.btrfs'
+  cmd = ['/sbin/mkfs.btrfs']
   if not options:
     options = []
   if label:
@@ -143,10 +170,12 @@ def _makeBtrfs(path, label, options, force):
     options.append(label) # no restriction on size
   if force:
     pass # no need to do anything
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeNtfs(path, label, options, force):
-  cmd = '/sbin/mkfs.ntfs'
+  cmd = ['/sbin/mkfs.ntfs']
   if not options:
     options = ['-Q']
   if label:
@@ -156,10 +185,12 @@ def _makeNtfs(path, label, options, force):
     options.append(label)
   if force:
     options.append('-F')
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeFat(path, is32, label, options, force):
-  cmd = '/sbin/mkfs.vfat'
+  cmd = ['/sbin/mkfs.vfat']
   if is32:
     size = ['-F', '32']
   else:
@@ -175,10 +206,12 @@ def _makeFat(path, is32, label, options, force):
     options.append(label)
   if force:
     options.append('-I') # permit to use whole disk
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 def _makeSwap(path, label, options, force):
-  cmd = '/sbin/mkswap'
+  cmd = ['/sbin/mkswap']
   if not options:
     options = ['-f'] # it is neccessary to have this or you cannot create a swap on a non-empty partition or disk
   if label:
@@ -186,7 +219,9 @@ def _makeSwap(path, label, options, force):
     options.append(label)
   if force:
     pass # nothing to do, writing to a file is always ok
-  return execCall([cmd].extend(options))
+  cmd.extend(options)
+  cmd.append(path)
+  return execCall(cmd, shell = False)
 
 # Unit test
 if __name__ == '__main__':
@@ -199,4 +234,18 @@ if __name__ == '__main__':
   assertTrue(len(fstype) > 0)
   assertTrue(label)
   assertTrue(len(label) > 0)
-  # TODO : add Unit Test for making filesystems
+  for ft in ('ext2', 'ext4', 'xfs', 'reiserfs', 'jfs', 'btrfs', 'ntfs', 'fat16', 'fat32', 'swap'):
+    f = '{0}.fs'.format(ft)
+    if ft == 'btrfs':
+      size = 300 # btrfs minimum size is 256M
+    else:
+      size = 50
+    execCall(['dd', 'if=/dev/zero', 'of={0}'.format(f), 'bs=1M', 'count={0:d}'.format(size)], shell = False)
+    assertEquals(0, makeFs(f, ft, 'test_{0}'.format(ft), True))
+    if ft in ('fat16', 'fat32'):
+      expectedFt = 'vfat'
+    else:
+      expectedFt = ft
+    assertEquals(expectedFt, getFsType(f))
+    assertEquals('test_{0}'.format(ft), getFsLabel(f))
+    os.unlink(f)
