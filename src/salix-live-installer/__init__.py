@@ -16,7 +16,6 @@ from kernel import *
 from keyboard import *
 from language import *
 from mounting import *
-from package import *
 from salt import *
 from timezone import *
 from user import *
