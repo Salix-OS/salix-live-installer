@@ -7,12 +7,16 @@ Functions to handle keyboard layouts:
   - listAvailableKeymaps
   - isNumLockEnabledByDefault
   - isIbusEnabledByDefault
+  - setDefaultKeymap
+  - setNumLockDefault
+  - setIbusDefault
 """
 import os
 import re
 import glob
 from kernel import *
 from chroot import *
+from execute import checkRoot
 
 _keymapsLocation = ['/usr/share/salixtools/keymaps', '/mnt/salt/lib/keymaps', 'keymaps']
 
@@ -21,9 +25,9 @@ def findCurrentKeymap(mountPoint = None):
   Find the currently used console keymaps (as loaded by 'loadkeys') by looking in:
     - /etc/rc.d/rc.keymap, or
     - in the 'keyb=' kernel parameter
-  The detected keymap is then check against the first column of one of the files: {kml}
+  The detected keymap is then check against the first column of one of the files: {0}
   Returns None if not found
-  """.format({kml: ' '.join(_keymapsLocation)})
+  """.format(' '.join(_keymapsLocation))
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
@@ -39,7 +43,7 @@ def findCurrentKeymap(mountPoint = None):
   if kmFile:
     # first, try parsing /etc/rc.d/rc.keymap
     try:
-      for line in open('{0}/etc/rc.d/rc.keymap'.format(mountPoint), 'rb').read().decode('utf8').readlines():
+      for line in open('{0}/etc/rc.d/rc.keymap'.format(mountPoint), 'rb').read().decode('utf8').splitlines():
         if '.map' in line:
           keymap = re.sub(r'^.* ([^ ]+)\.map$', r'\1', line)
           break
@@ -52,7 +56,7 @@ def findCurrentKeymap(mountPoint = None):
         keymap = keybParam
   if keymap:
     # verify that the detected keymap actually exists
-    if not keymap in [line.split('|', 1)[0] for line in open(kmFile, 'r').read().readlines() if line and line[0] != '#']:
+    if not keymap in [line.split('|', 1)[0] for line in open(kmFile, 'r').read().splitlines() if line and line[0] != '#']:
       keymap = None
   return keymap
 
@@ -61,8 +65,8 @@ def listAvailableKeymaps(mountPoint = None):
   Returns a list of couple (keymap, keyboardType).
   'keymap' is a Console keymap as found in /usr/share/kbd/
   'keyboardType' is either 'azerty', 'qwerty', 'qwertz', etc and is there only for information
-  The keymaps are extracted from one of the files: {kml}
-  """.format({kml: ' '.join(_keymapsLocation)})
+  The keymaps are extracted from one of the files: {0}
+  """.format(' '.join(_keymapsLocation))
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
@@ -76,7 +80,7 @@ def listAvailableKeymaps(mountPoint = None):
       kmFile = kml
       break
   if kmFile:
-    if keymap in [line.split('|', 1)[0] for line in open(kmFile, 'r').read().readlines() if line and line[0] != '#']:
+    for keymap in [line.split('|', 1)[0] for line in open(kmFile, 'r').read().splitlines() if line and line[0] != '#']:
       keyboardType = '-'
       typePosition = 6 # usr/share/kbd/keymaps/i386/azerty => 6
       if mountPoint:
@@ -114,7 +118,10 @@ def isIbusEnabledByDefault(mountPoint = None):
 
 def setDefaultKeymap(keymap, mountPoint = None):
   """
+  Fix the configuration in /etc/rc.d/rc.keymap to use the specified 'keymap'.
+  This use 'keyboardsetup' Salix tool.
   """
+  checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
@@ -126,7 +133,10 @@ def setDefaultKeymap(keymap, mountPoint = None):
 
 def setNumLockDefault(enabled, mountPoint = None):
   """
+  Fix the configuration for default numlock activated on boot or not.
+  This use 'keyboardsetup' Salix tool.
   """
+  checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
@@ -141,7 +151,10 @@ def setNumLockDefault(enabled, mountPoint = None):
 
 def setIbusDefault(enabled, mountPoint = None):
   """
+  Fix the configuration for default Ibus activated on boot or not.
+  This use 'keyboardsetup' Salix tool.
   """
+  checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
@@ -157,4 +170,25 @@ def setIbusDefault(enabled, mountPoint = None):
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
-  # TODO ?
+  checkRoot()
+  keymaps = listAvailableKeymaps()
+  assertTrue(type(keymaps) == list)
+  assertTrue(len(keymaps) > 0)
+  keymaps = dict(keymaps) # change it to dictionnary
+  assertEquals('azerty', keymaps['fr-latin9'])
+  keymap = findCurrentKeymap()
+  assertTrue(keymap)
+  numlock = isNumLockEnabledByDefault()
+  assertTrue(type(numlock) == bool)
+  ibus = isIbusEnabledByDefault()
+  assertTrue(type(ibus) == bool)
+  assertEquals(0, setDefaultKeymap('fr-latin1'))
+  assertEquals('fr-latin1', findCurrentKeymap())
+  assertEquals(0, setNumLockDefault(True))
+  assertTrue(isNumLockEnabledByDefault())
+  assertEquals(0, setIbusDefault(True))
+  assertTrue(isIbusEnabledByDefault())
+  # restore actual keybaord parameters
+  setDefaultKeymap(keymap)
+  setNumLockDefault(numlock)
+  setIbusDefault(ibus)
