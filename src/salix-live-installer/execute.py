@@ -40,7 +40,17 @@ def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}
   if sys.version_info[0] > 2 or (sys.version_info[0] == 2 and sys.version_info[1] >= 7): # ver >= 2.7
     return subprocess.check_output(cmd, stderr = stdErr, shell = shell, env = env).splitlines()
   else:
-    p = subprocess.Popen(cmd, stdout = subprocess.PIPE, stderr = stdErr)
+    wrappedCmd = []
+    if shell:
+      wrappedCmd.append('sh')
+      wrappedCmd.append('-c')
+      if type(cmd) == list:
+        wrappedCmd.append(' '.join(cmd))
+      else:
+        wrappedCmd.append(cmd)
+    else:
+      wrappedCmd.append(cmd)
+    p = subprocess.Popen(wrappedCmd, stdout = subprocess.PIPE, stderr = stdErr)
     output = p.communicate()[0]
     if p.returncode == 0:
       return output.splitlines()
