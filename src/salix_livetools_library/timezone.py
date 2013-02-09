@@ -8,6 +8,8 @@ Functions to handle timezones:
   - listTZCities
   - getDefaultTimeZone
   - setDefaultTimeZone
+  - isNTPEnabledByDefault
+  - setNTPDefault
 """
 import os
 import glob
@@ -81,6 +83,31 @@ def setDefaultTimeZone(timezone, mountPoint = None):
   else:
     raise Exception('This timezone ({0}) is incorrect.'.format(timezone))
 
+def isNTPEnabledByDefault(mountPoint = None):
+  """
+  Returns True if the NTP service is enabled by default.
+  For this, the execute bit of /etc/rc.d/rc.ntpd is checked.
+  """
+  if mountPoint and not os.path.isdir(mountPoint):
+    raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
+  if mountPoint == None:
+    mountPoint = ''
+  return os.access('{0}/etc/rc.d/rc.ntpd'.format(mountPoint), os.X_OK)
+
+def setNTPDefault(enabled, mountPoint = None):
+  """
+  Fix the configuration for default NTP service activated on boot or not.
+  """
+  checkRoot()
+  if mountPoint and not os.path.isdir(mountPoint):
+    raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
+  if mountPoint == None:
+    mountPoint = '/'
+  if enabled:
+    os.chmod('{0}/etc/rc.d/rc.ntpd'.format(mountPoint), 0755)
+  else:
+    os.chmod('{0}/etc/rc.d/rc.ntpd'.format(mountPoint), 0644)
+
 # Unit test
 if __name__ == '__main__':
   from assertPlus import *
@@ -107,3 +134,10 @@ if __name__ == '__main__':
   assertEquals(2, len(tz.split('/')))
   assertEquals('Etc/Zulu', tz)
   setDefaultTimeZone(deftz)
+  ntp = isNTPEnabledByDefault()
+  assertTrue(type(ntp) == bool)
+  setNTPDefault(True)
+  assertTrue(isNTPEnabledByDefault())
+  setNTPDefault(False)
+  assertFalse(isNTPEnabledByDefault())
+  setNTPDefault(ntp)

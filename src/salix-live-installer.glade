@@ -374,7 +374,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="relief">none</property>
-                <signal name="leave_notify_event" handler="on_about_link_leave_notify_event"/>
+                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_about_link_enter_notify_event"/>
                 <signal name="clicked" handler="on_about_link_clicked"/>
                 <child>
@@ -393,7 +393,7 @@
             <child>
               <object class="GtkEventBox" id="context_eventbox">
                 <property name="visible">True</property>
-                <signal name="leave_notify_event" handler="on_context_eventbox_leave_notify_event"/>
+                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_context_eventbox_enter_notify_event"/>
                 <child>
                   <object class="GtkLabel" id="context_label">
@@ -445,7 +445,7 @@
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_time_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_time_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_time_tab_clicked"/>
                             <child>
@@ -492,7 +492,7 @@
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_keyboard_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_keyboard_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_keyboard_tab_clicked"/>
                             <child>
@@ -537,7 +537,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_locale_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_locale_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_locale_tab_clicked"/>
                             <child>
@@ -581,7 +581,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_partition_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_partition_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_partition_tab_clicked"/>
                             <child>
@@ -625,7 +625,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_users_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_users_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_users_tab_clicked"/>
                             <child>
@@ -670,7 +670,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="leave_notify_event" handler="on_packages_tab_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_packages_tab_enter_notify_event"/>
                             <signal name="clicked" handler="on_packages_tab_clicked"/>
                             <child>
@@ -913,7 +913,7 @@
                           <object class="GtkEventBox" id="intro_eventbox">
                             <property name="visible">True</property>
                             <signal name="enter_notify_event" handler="on_intro_eventbox_enter_notify_event"/>
-                            <signal name="leave_notify_event" handler="on_intro_eventbox_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <child>
                               <object class="GtkLabel" id="label38">
                                 <property name="width_request">580</property>
@@ -989,7 +989,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkEventBox" id="manual_time_eventbox">
                                 <property name="visible">True</property>
-                                <signal name="leave_notify_event" handler="on_manual_time_eventbox_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_manual_time_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkVBox" id="manual_time_box">
@@ -1224,7 +1224,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkEventBox" id="timezone_eventbox">
                                 <property name="visible">True</property>
-                                <signal name="leave_notify_event" handler="on_timezone_eventbox_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_timezone_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="time_zone_box">
@@ -1262,6 +1262,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <object class="GtkComboBox" id="country_zone_combobox">
                                         <property name="visible">True</property>
                                         <property name="model">country_zone_list_store</property>
+                                        <signal name="changed" handler="on_country_zone_combobox_changed"/>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext3"/>
                                           <attributes>
@@ -1292,7 +1293,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_ntp_checkbutton_toggled"/>
-                                <signal name="leave_notify_event" handler="on_ntp_checkbutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_ntp_checkbutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -1319,7 +1320,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_time_undo_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_time_undo_enter_notify_event"/>
                                 <signal name="clicked" handler="on_time_undo_clicked"/>
                               </object>
@@ -1336,7 +1337,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_time_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_time_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_time_apply_clicked"/>
                               </object>
@@ -1393,7 +1394,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_list_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_list_enter_notify_event"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="layout_column">
@@ -1438,7 +1439,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="receives_default">False</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_numlock_checkbutton_toggled"/>
-                                <signal name="leave_notify_event" handler="on_numlock_checkbutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_numlock_checkbutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -1456,7 +1457,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="relief">none</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_ibus_checkbutton_toggled"/>
-                                <signal name="leave_notify_event" handler="on_ibus_checkbutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_ibus_checkbutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -1478,7 +1479,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkEventBox" id="keyboard_selection_eventbox">
                                 <property name="visible">True</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_selection_eventbox_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_selection_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox39">
@@ -1542,7 +1543,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_undo_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_undo_enter_notify_event"/>
                                 <signal name="clicked" handler="on_keyboard_undo_clicked"/>
                               </object>
@@ -1557,7 +1558,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_keyboard_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_keyboard_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_keyboard_apply_clicked"/>
                                 <child>
@@ -1639,7 +1640,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
-                                <signal name="leave_notify_event" handler="on_locale_list_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_list_enter_notify_event"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="locale_column">
@@ -1677,7 +1678,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkEventBox" id="locale_selection_eventbox">
                                 <property name="visible">True</property>
-                                <signal name="leave_notify_event" handler="on_locale_selection_eventbox_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_selection_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox40">
@@ -1741,7 +1742,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_locale_undo_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_undo_enter_notify_event"/>
                                 <signal name="clicked" handler="on_locale_undo_clicked"/>
                               </object>
@@ -1756,7 +1757,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_locale_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_locale_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_locale_apply_clicked"/>
                                 <child>
@@ -1950,7 +1951,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
-                                <signal name="leave_notify_event" handler="on_main_partition_list_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_main_partition_list_enter_notify_event"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="main_disk_column">
@@ -2015,7 +2016,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="receives_default">False</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="on_external_device_checkbutton_toggled"/>
-                            <signal name="leave_notify_event" handler="on_external_device_checkbutton_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_external_device_checkbutton_enter_notify_event"/>
                           </object>
                           <packing>
@@ -2047,7 +2048,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkEventBox" id="main_format_eventbox">
                                 <property name="visible">True</property>
-                                <signal name="leave_notify_event" handler="on_main_format_eventbox_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_main_format_eventbox_enter_notify_event"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox43">
@@ -2105,7 +2106,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_main_partition_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_main_partition_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_main_partition_apply_clicked"/>
                                 <child>
@@ -2186,7 +2187,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
-                                <signal name="leave_notify_event" handler="on_linux_partition_list_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_linux_partition_list_enter_notify_event"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_disk_column">
@@ -2313,7 +2314,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_linux_partition_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_linux_partition_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_linux_partition_apply_clicked"/>
                                 <child>
@@ -2397,7 +2398,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
-                                <signal name="leave_notify_event" handler="on_win_partition_list_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_win_partition_list_enter_notify_event"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="win_disk_column">
@@ -2502,7 +2503,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <signal name="leave_notify_event" handler="on_windows_partition_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_windows_partition_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_windows_partition_apply_clicked"/>
                                 <child>
@@ -2558,7 +2559,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                         <child>
                           <object class="GtkEventBox" id="partition_recap_eventbox">
                             <property name="visible">True</property>
-                            <signal name="leave_notify_event" handler="on_partition_recap_eventbox_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_partition_recap_eventbox_enter_notify_event"/>
                             <child>
                               <object class="GtkVBox" id="vbox6">
@@ -2681,7 +2682,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_partition_recap_undo_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_partition_recap_undo_enter_notify_event"/>
                                 <signal name="clicked" handler="on_partition_recap_undo_clicked"/>
                               </object>
@@ -2708,7 +2709,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                       <object class="GtkVBox" id="users_box">
                         <child>
                           <object class="GtkEventBox" id="clone_login_eventbox">
-                            <signal name="leave_notify_event" handler="on_clone_login_eventbox_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_clone_login_eventbox_enter_notify_event"/>
                             <child>
                               <object class="GtkVBox" id="vbox7">
@@ -2724,7 +2725,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_clone_login_checkbutton_toggled"/>
-                                        <signal name="leave_notify_event" handler="on_clone_login_eventbox_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_clone_login_eventbox_enter_notify_event"/>
                                         <child>
                                           <object class="GtkLabel" id="label36">
@@ -2748,7 +2749,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_clone_login_undo_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_clone_login_undo_enter_notify_event"/>
                                             <signal name="clicked" handler="on_clone_login_undo_clicked"/>
                                           </object>
@@ -2765,7 +2766,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_clone_login_apply_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_clone_login_apply_enter_notify_event"/>
                                             <signal name="clicked" handler="on_clone_login_apply_clicked"/>
                                           </object>
@@ -2806,7 +2807,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                         <child>
                           <object class="GtkEventBox" id="users_eventbox">
                             <property name="visible">True</property>
-                            <signal name="leave_notify_event" handler="on_users_eventbox_leave_notify_event"/>
+                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                             <signal name="enter_notify_event" handler="on_users_eventbox_enter_notify_event"/>
                             <child>
                               <object class="GtkVBox" id="vbox">
@@ -2846,7 +2847,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkEntry" id="user_login_entry">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <signal name="leave_notify_event" handler="on_user_login_entry_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_user_login_entry_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -2878,7 +2879,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkEntry" id="user_pass1_entry">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <signal name="leave_notify_event" handler="on_user_pass1_entry_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_user_pass1_entry_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -2896,7 +2897,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_user_visible_checkbutton_toggled"/>
-                                        <signal name="leave_notify_event" handler="on_user_visible_checkbutton_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_user_visible_checkbutton_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -2927,7 +2928,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkEntry" id="user_pass2_entry">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <signal name="leave_notify_event" handler="on_user_pass2_entry_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_user_pass2_entry_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -2979,7 +2980,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_users_undo_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_users_undo_enter_notify_event"/>
                                             <signal name="clicked" handler="on_users_undo_clicked"/>
                                           </object>
@@ -2996,7 +2997,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_users_apply_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_users_apply_enter_notify_event"/>
                                             <signal name="clicked" handler="on_users_apply_clicked"/>
                                           </object>
@@ -3065,7 +3066,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkEntry" id="root_pass1_entry">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <signal name="leave_notify_event" handler="on_root_pass1_entry_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_root_pass1_entry_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -3083,7 +3084,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_root_visible_checkbutton_toggled"/>
-                                        <signal name="leave_notify_event" handler="on_root_visible_checkbutton_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_root_visible_checkbutton_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -3114,7 +3115,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkEntry" id="root_pass2_entry">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <signal name="leave_notify_event" handler="on_root_pass2_entry_leave_notify_event"/>
+                                        <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                         <signal name="enter_notify_event" handler="on_root_pass2_entry_enter_notify_event"/>
                                       </object>
                                       <packing>
@@ -3165,7 +3166,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_rootpass_undo_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_rootpass_undo_enter_notify_event"/>
                                             <signal name="clicked" handler="on_rootpass_undo_clicked"/>
                                           </object>
@@ -3182,7 +3183,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="leave_notify_event" handler="on_rootpass_apply_leave_notify_event"/>
+                                            <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                             <signal name="enter_notify_event" handler="on_rootpass_apply_enter_notify_event"/>
                                             <signal name="clicked" handler="on_rootpass_apply_clicked"/>
                                           </object>
@@ -3250,7 +3251,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="receives_default">False</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">full_radiobutton</property>
-                                <signal name="leave_notify_event" handler="on_core_radiobutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_core_radiobutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -3296,7 +3297,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="receives_default">False</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">full_radiobutton</property>
-                                <signal name="leave_notify_event" handler="on_basic_radiobutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_basic_radiobutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -3372,7 +3373,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="receives_default">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
-                                <signal name="leave_notify_event" handler="on_full_radiobutton_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_full_radiobutton_enter_notify_event"/>
                               </object>
                               <packing>
@@ -3556,7 +3557,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_packages_undo_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_packages_undo_enter_notify_event"/>
                                 <signal name="clicked" handler="on_packages_undo_clicked"/>
                               </object>
@@ -3573,7 +3574,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="use_stock">True</property>
-                                <signal name="leave_notify_event" handler="on_packages_apply_leave_notify_event"/>
+                                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                                 <signal name="enter_notify_event" handler="on_packages_apply_enter_notify_event"/>
                                 <signal name="clicked" handler="on_packages_apply_clicked"/>
                               </object>
@@ -3625,7 +3626,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="leave_notify_event" handler="on_button_quit_leave_notify_event"/>
+                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_button_quit_enter_notify_event"/>
                 <signal name="clicked" handler="on_button_quit_clicked"/>
               </object>
@@ -3638,7 +3639,7 @@ If you already have all the needed partitions, please click on the button 'Do no
             <child>
               <object class="GtkEventBox" id="launch_eventbox">
                 <property name="visible">True</property>
-                <signal name="leave_notify_event" handler="on_launch_eventbox_leave_notify_event"/>
+                <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                 <signal name="enter_notify_event" handler="on_launch_eventbox_enter_notify_event"/>
                 <child>
                   <object class="GtkButton" id="install_button">
@@ -3646,7 +3647,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="leave_notify_event" handler="on_install_button_leave_notify_event"/>
+                    <signal name="leave_notify_event" handler="on_leave_notify_event"/>
                     <signal name="enter_notify_event" handler="on_install_button_enter_notify_event"/>
                     <signal name="clicked" handler="on_install_button_clicked"/>
                     <child>
@@ -3705,7 +3706,7 @@ If you already have all the needed partitions, please click on the button 'Do no
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.3</property>
+    <property name="version">0.4</property>
     <property name="copyright" translatable="yes">Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
