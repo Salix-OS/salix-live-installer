@@ -4,6 +4,7 @@
 """
 SaLT functions:
   - getSaLTVersion
+  - isSaLTVersionAtLeast
   - isSaLTLiveEnv
   - isSaLTLiveCloneEnv
   - getSaLTLiveMountPoint
@@ -24,6 +25,20 @@ def getSaLTVersion():
   """
   _checkLive()
   return open('/mnt/salt/salt-version', 'r').read().strip()
+
+def isSaLTVersionAtLeast(version):
+  """
+  Returns True if the SaLT version is at least 'version'.
+  """
+  v = getSaLTVersion()
+  def vercmp(v1, v2):
+    def _makelist(v):
+      lst = [int(x) for x in re.sub(r'[a-z]', '', v.lower()).split('.')]
+      while lst[-1] == 0:
+        lst.pop()
+      return lst
+    return _makelist(v1).__ge__(_makelist(v2))
+  return vercmp(version, v)
 
 def isSaLTLiveEnv():
   """

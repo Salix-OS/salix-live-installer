@@ -18,16 +18,16 @@ from execute import *
 
 def listAvailableLocales(mountPoint = None):
   """
-  Returns a list of couples (name, title) of available locales on the system under 'mountPoint'.
+  Returns a list of couples (name, title) of available utf8 locales on the system under 'mountPoint'.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
   if mountPoint == None:
     mountPoint = ''
   locales = []
-  for path in glob.glob('{0}/usr/lib/locale/*.utf8'.format(mountPoint)):
+  for path in sorted(glob.glob('{0}/usr/lib/locale/*.utf8'.format(mountPoint))):
     locale = os.path.basename(path).rsplit('.', 1)[0]
-    title = execGetOutput("strings {0}/LC_IDENTIFICATION | grep -i 'locale for'".format(path))
+    title = execGetOutput("strings {0}/LC_IDENTIFICATION | grep -i 'locale for'".format(path))[0]
     locales.append((locale, title))
   return locales
 

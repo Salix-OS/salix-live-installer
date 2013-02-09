@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# vim: set et ai sta sw=2 st=2 tw=0:
+# -*- coding: utf-8 -*-
+# vim: set et ai sta sw=2 ts=2 tw=0:
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #                                                                             #
@@ -24,8 +25,6 @@
 #                                                                             #
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# version = '0.4'
-
 import gettext
 import gobject
 import gtk
@@ -38,20 +37,23 @@ from datetime import *
 import salix_livetools_library as sltl
 
 APP = 'salix-live-installer'
+VERSION = '0.4'
+MIN_SALT = '0.2.1'
 
 class SalixLiveInstaller:
-  def __init__(self, isTest = False):
-    self.isTest = isTest
+  def __init__(self, is_test = False):
+    self.is_test = is_test
     builder = gtk.Builder()
     for d in ('.', '/usr/share/salix-live-installer', '../share/salix-live-installer'):
       if os.path.exists(d + '/salix-live-installer.glade'):
         builder.add_from_file(d + '/salix-live-installer.glade')
         break
     # Get a handle on the glade file widgets we want to interact with
+    self.AboutDialog = builder.get_object("about_dialog")
+    self.AboutDialog.set_version(VERSION)
     self.Window = builder.get_object("main_window")
     self.ProgressWindow = builder.get_object("progress_dialog")
     self.InstallProgressBar = builder.get_object("install_progressbar")
-    self.AboutDialog = builder.get_object("about_dialog")
     self.TimeTab = builder.get_object("time_tab")
     self.KeyboardTab = builder.get_object("keyboard_tab")
     self.LocaleTab = builder.get_object("locale_tab")
@@ -186,8 +188,10 @@ class SalixLiveInstaller:
     # Initialize the lock system preventing the Install button to be activated prematurely
     self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'user':False, 'root':False, 'packages':False}
     self.get_current_config()
+    self.build_data_stores()
     self.update_install_button()
     # Connect signals
+    self.add_custom_signals()
     builder.connect_signals(self)
   
   # General contextual help
@@ -391,8 +395,27 @@ included in your customized LiveClone will be installed."))
   def on_button_quit_clicked(self, widget, data=None):
     gtk.main_quit()
 
-  ### CURRENT CONFIG ###
   def get_current_config(self):
+    print 'Gathering current configuration…'
+    if self.is_test:
+      self.is_live = True
+      self.is_liveclone = False
+      self.salt_version = MIN_SALT
+      self.is_salt_ok = True
+    else:
+      self.is_live = sltl.isSaLTLiveEnv()
+      if self.is_live:
+        self.is_liveclone = sltl.isSaLTLiveCloneEnv()
+        self.salt_version = sltl.getSaLTVersion()
+        self.is_salt_ok = sltl.isSaLTVersionAtLeast(MIN_SALT)
+      else:
+        self.is_liveclone = False
+        self.salt_version = ''
+        self.is_salt_ok = False
+    if self.is_live and not self.is_salt_ok:
+      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(MIN_SALT, self.salt_version)))
+      self.is_live = False
+      self.is_liveclone = False
     self.cur_tz = sltl.getDefaultTimeZone()
     if '/' in self.cur_tz:
       self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
@@ -402,12 +425,44 @@ included in your customized LiveClone will be installed."))
       self.cur_tz_continent = None
       self.cur_tz_city = None
     self.cur_use_ntp = sltl.isNTPEnabledByDefault()
-    # TODO rest of config
+    self.cur_km = sltl.findCurrentKeymap()
+    self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
+    self.cur_use_ibus = sltl.isIbusEnabledByDefault()
+    self.cur_locale = sltl.getCurrentLocale()
+    print '  Done'
+
+  def build_data_stores(self):
+    print 'Building choice lists…'
+    self.ContinentZoneListStore.clear()
+    self.ContinentZoneListStore.append([_("Select...")])
+    self.ContinentZoneCombobox.set_active(0)
+    for continent in sltl.listTZContinents():
+      self.ContinentZoneListStore.append([continent])
+    self.CountryZoneListStore.clear()
+    self.YearListStore.clear()
+    for y in range(2000, 2051):
+      self.YearListStore.append([y])
+    self.MonthListStore.clear()
+    for m in [_('January'), _('February'), _('March'), _('April'), _('May'), _('June'),
+        _('July'), _('August'), _('September'), _('October'), _('November'), _('December')]:
+      self.MonthListStore.append([m])
+    self.DayListStore.clear()
+    for d in range(1, 32):
+      self.DayListStore.append([d])
+    self.KeyboardListStore.clear()
+    for km in sltl.listAvailableKeymaps():
+      self.KeyboardListStore.append(km)
+    self.LocaleListStore.clear()
+    for l in sltl.listAvailableLocales():
+      self.LocaleListStore.append(l)
+    print '  Done'
+
+  def add_custom_signals(self):
+    self.KeyboardList.get_selection().connect('changed', self.on_keyboard_list_changed_event)
+    self.LocaleList.get_selection().connect('changed', self.on_locale_list_changed_event)
 
   def update_install_button(self):
-    self.InstallButton.set_sensitive(not (self.isTest or False in self.configurations.values()))
-
-  ### CONFIGURATION TABS ###
+    self.InstallButton.set_sensitive(not (self.is_test or False in self.configurations.values()))
 
   def hide_all_tabs(self):
     self.IntroBox.hide()
@@ -426,7 +481,6 @@ included in your customized LiveClone will be installed."))
     self.UsersTab.set_relief(gtk.RELIEF_NONE)
     self.PackagesTab.set_relief(gtk.RELIEF_NONE)
 
-  # What to do when the time tab is clicked
   def on_time_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
@@ -434,23 +488,26 @@ included in your customized LiveClone will be installed."))
       self.TimeTab.set_relief(gtk.RELIEF_HALF)
       self.TimeBox.show()
 
-  # What to do when the keyboard tab is clicked
   def on_keyboard_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
       self.keyboard_settings()
       self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
       self.KeyboardBox.show()
+      selection = self.KeyboardList.get_selection().get_selected_rows()[1]
+      if selection:
+        self.KeyboardList.scroll_to_cell(selection[0], None, True, 0.5)
 
-  # What to do when the language tab is clicked
   def on_locale_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
       self.locale_settings()
       self.LocaleTab.set_relief(gtk.RELIEF_HALF)
       self.LocaleBox.show()
+      selection = self.LocaleList.get_selection().get_selected_rows()[1]
+      if selection:
+        self.LocaleList.scroll_to_cell(selection[0], None, True, 0.5)
 
-  # What to do when the partitions tab is clicked
   def on_partition_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
@@ -461,7 +518,6 @@ included in your customized LiveClone will be installed."))
       else:
         self.PartitioningBox.show()
 
-  # What to do when the users tab is clicked
   def on_users_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
@@ -469,7 +525,6 @@ included in your customized LiveClone will be installed."))
       self.UsersTab.set_relief(gtk.RELIEF_HALF)
       self.UsersBox.show()
 
-  # What to do when the packages tab is clicked
   def on_packages_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
@@ -478,42 +533,25 @@ included in your customized LiveClone will be installed."))
       self.PackagesBox.show()
 
   def time_settings(self):
-    self.ContinentZoneListStore.clear()
-    self.ContinentZoneListStore.append([_("Select...")])
     self.ContinentZoneCombobox.set_active(0)
-    continents = sltl.listTZContinents()
     index = 1
-    for continent in continents:
-      self.ContinentZoneListStore.append([continent])
+    for continent in sltl.listTZContinents():
       if continent == self.cur_tz_continent:
         self.ContinentZoneCombobox.set_active(index)
+        break
       index += 1
     self.time_set_cities_list()
     self.NTPCheckButton.set_active(self.cur_use_ntp)
     self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
     year, month, day, hour, minute, second, __, __, __ = datetime.now().timetuple()
-    self.YearListStore.clear()
-    self.MonthListStore.clear()
-    self.DayListStore.clear()
     index = 0
-    for y in range(2000, 2051):
-      self.YearListStore.append([y])
-      if year == y:
+    for y in self.YearListStore:
+      if year == y[0]:
         self.YearCombobox.set_active(index)
+        break
       index += 1
-    index = 0
-    for m in [_('January'), _('February'), _('March'), _('April'), _('May'), _('June'),
-        _('July'), _('August'), _('September'), _('October'), _('November'), _('December')]:
-      self.MonthListStore.append([m])
-      if month == index + 1:
-        self.MonthCombobox.set_active(index)
-      index += 1
-    index = 0
-    for d in range(1, 32):
-      self.DayListStore.append([d])
-      if day == index + 1:
-        self.DayCombobox.set_active(index)
-      index += 1
+    self.MonthCombobox.set_active(month - 1)
+    self.DayCombobox.set_active(day - 1)
     self.HourSpinButton.set_value(hour)
     self.MinuteSpinButton.set_value(minute)
     self.SecondSpinButton.set_value(second)
@@ -544,6 +582,15 @@ included in your customized LiveClone will be installed."))
   def on_ntp_checkbutton_toggled(self, widget, data=None):
     self.cur_use_ntp = self.NTPCheckButton.get_active()
     self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
+  def on_time_apply_clicked(self, widget, data=None):
+    self.ManualTimeBox.set_sensitive(False)
+    self.NTPCheckButton.set_sensitive(False)
+    self.TimeZoneBox.set_sensitive(False)
+    self.TimeApplyButton.set_sensitive(False)
+    self.configurations['time'] = True
+    self.update_install_button()
+    self.TimeCheck.show()
+    self.TimeCheckMarker.hide()
   def on_time_undo_clicked(self, widget, data=None):
     self.TimeCheck.hide()
     self.TimeCheckMarker.show()
@@ -554,51 +601,121 @@ included in your customized LiveClone will be installed."))
     self.time_settings()
     self.configurations['time'] = False
     self.update_install_button()
-  def on_time_apply_clicked(self, widget, data=None):
-    self.ManualTimeBox.set_sensitive(False)
-    self.NTPCheckButton.set_sensitive(False)
-    self.TimeZoneBox.set_sensitive(False)
-    self.TimeApplyButton.set_sensitive(False)
-    self.configurations['time'] = True
-    self.update_install_button()
-    self.TimeCheck.show()
-    self.TimeCheckMarker.hide()
 
   def keyboard_settings(self):
-    pass
+    index = 0
+    for km in self.KeyboardListStore:
+      if km[0] == self.cur_km:
+        self.KeyboardList.get_selection().select_path(index)
+        break
+      index += 1
+    self.NumLockCheckButton.set_active(self.cur_use_numlock)
+    self.IBusCheckButton.set_active(self.cur_use_ibus)
+  def on_keyboard_list_changed_event(self, selection, data=None):
+    model, it = selection.get_selected()
+    if it:
+      self.cur_km = model.get_value(it, 0)
+    else:
+      self.cur_km = None
+  def on_numlock_checkbutton_toggled(self, widget, data=None):
+    self.cur_use_numlock = self.NumLockCheckButton.get_active()
+  def on_ibus_checkbutton_toggled(self, widget, data=None):
+    self.cur_use_ibus = self.IBusCheckButton.get_active()
+  def on_keyboard_apply_clicked(self, widget, data=None):
+    if self.cur_km:
+      self.KeyboardList.set_sensitive(False)
+      self.KeyboardApplyButton.set_sensitive(False)
+      self.NumLockCheckButton.set_sensitive(False)
+      self.IBusCheckButton.set_sensitive(False)
+      model, it = self.KeyboardList.get_selection().get_selected()
+      self.KeyboardSelection.set_text('{0} ({1})'.format(model.get_value(it, 0), model.get_value(it, 1)))
+      self.configurations['keyboard'] = True
+      self.update_install_button()
+      self.KeyboardCheck.show()
+      self.KeyboardCheckMarker.hide()
+  def on_keyboard_undo_clicked(self, widget, data=None):
+    self.KeyboardList.set_sensitive(True)
+    self.KeyboardApplyButton.set_sensitive(True)
+    self.NumLockCheckButton.set_sensitive(True)
+    self.IBusCheckButton.set_sensitive(True)
+    self.KeyboardSelection.set_text(_('None'))
+    self.configurations['keyboard'] = False
+    self.update_install_button()
+    self.KeyboardCheck.hide()
+    self.KeyboardCheckMarker.show()
 
   def locale_settings(self):
-    pass
+    index = 0
+    for l in self.LocaleListStore:
+      if l[0] + '.utf8' == self.cur_locale:
+        self.LocaleList.get_selection().select_path(index)
+        break
+      index += 1
+  def on_locale_list_changed_event(self, selection, data=None):
+    model, it = selection.get_selected()
+    if it:
+      self.cur_locale = model.get_value(it, 0)
+    else:
+      self.cur_locale = None
+  def on_locale_apply_clicked(self, widget, data=None):
+    if self.cur_locale:
+      self.LocaleList.set_sensitive(False)
+      self.LocaleApplyButton.set_sensitive(False)
+      model, it = self.LocaleList.get_selection().get_selected()
+      self.LocaleSelection.set_text('{0} ({1})'.format(model.get_value(it, 0), model.get_value(it, 1)))
+      self.configurations['locale'] = True
+      self.update_install_button()
+      self.LocaleCheck.show()
+      self.LocaleCheckMarker.hide()
+  def on_locale_undo_clicked(self, widget, data=None):
+    self.LocaleList.set_sensitive(True)
+    self.LocaleApplyButton.set_sensitive(True)
+    self.LocaleSelection.set_text(_('None'))
+    self.configurations['locale'] = False
+    self.update_install_button()
+    self.LocaleCheck.hide()
+    self.LocaleCheckMarker.show()
 
   def partitions_settings(self):
+    pass
+  def on_main_partition_apply_clicked(self, widget, data=None):
+    pass
+  def on_linux_partition_apply_clicked(self, widget, data=None):
+    pass
+  def on_windows_partition_apply_clicked(self, widget, data=None):
+    pass
+  def on_modify_partition_button_clicked(self, widget, data=None):
+    pass
+  def on_do_not_modify_partition_button_clicked(self, widget, data=None):
+    pass
+  def on_partition_recap_undo_clicked(self, widget, data=None):
     pass
 
   def users_settings(self):
     pass
+  def on_clone_login_apply_clicked(self, widget, data=None):
+    pass
+  def on_users_apply_clicked(self, widget, data=None):
+    pass
+  def on_rootpass_apply_clicked(self, widget, data=None):
+    pass
 
   def packages_settings(self):
+    pass
+  def on_packages_undo_clicked(self, widget, data=None):
+    pass
+  def on_packages_apply_clicked(self, widget, data=None):
+    pass
+  def on_clone_login_undo_clicked(self, widget, data=None):
+    pass
+  def on_users_undo_clicked(self, widget, data=None):
+    pass
+  def on_rootpass_undo_clicked(self, widget, data=None):
     pass
 
 
 
   ###################################################################
-  # LISTS ROWS ###
-
-  # What to do when a keymap list row is added
-  def on_keymap_list_store_row_inserted(self, widget, value, treeiter):
-    # Check if it is the path of the used keymap to set the cursor on it
-    if keyb_item == UsedKeyMap:
-      global UsedKeybRow
-      UsedKeybRow = value
-
-  # What to do when a locale list row is added
-  def on_locale_list_store_row_inserted(self, widget, value, treeiter):
-    # Check if it is the path of the used locale to set the cursor on it
-    if UsedLocale in locale_set:
-      global UsedLocaleRow
-      UsedLocaleRow = value
-
-  ### CHECKBUTTONS ###
 
   # What to do when the liveclone login checkbutton is toggled
   def on_clone_login_checkbutton_toggled(self, widget, data=None):
@@ -612,25 +729,6 @@ included in your customized LiveClone will be installed."))
       self.UsersEventbox.set_sensitive(True)
       self.CloneLoginUndo.set_sensitive(False)
       self.CloneLoginApply.set_sensitive(False)
-
-  # What to do when the NTP checkbutton is toggled
-
-  # What to do when the numlock checkbutton is toggled
-  def on_numlock_checkbutton_toggled(self, widget, data=None):
-    global set_numlock
-    if self.NumLockCheckButton.get_active() == True :
-      set_numlock = 'on'
-    else :
-      set_numlock = 'off'
-
-  # SaLT changes #
-  # What to do when the iBus checkbutton is toggled
-  def on_ibus_checkbutton_toggled(self, widget, data=None):
-    global set_ibus
-    if self.IBusCheckButton.get_active() == True :
-      set_ibus = 'on'
-    else :
-      set_ibus = 'off'
 
   # What to do when the user's password visible checkbutton is toggled
   def on_user_visible_checkbutton_toggled(self, widget, data=None):                
@@ -659,8 +757,6 @@ included in your customized LiveClone will be installed."))
       show_external_device = 'no'
     partition_list_initialization ()
                       
-  ### COMBOBOX LINES ###
-
   # What to do when a combo line is edited in the Linux New system column
   def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
     # Retrieve the selected Linux partition row iter
@@ -721,89 +817,8 @@ included in your customized LiveClone will be installed."))
 
   # CONFIGURATION APPLY BUTTONS ###
 
-  # What to do when the time selection button is clicked
-
-  # What to do when the keyboard selection button is clicked
-  def on_keyboard_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the language selection button is clicked
-  def on_locale_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the main partition selection button is clicked
-  def on_main_partition_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the Linux partition Apply settings button is clicked
-  def on_linux_partition_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the Windows partition Apply settings button is clicked
-  def on_windows_partition_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the clone login apply button is clicked
-  def on_clone_login_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the user's settings apply button is clicked
-  def on_users_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the root password settings apply button is clicked
-  def on_rootpass_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the package selection apply button is clicked
-  def on_packages_apply_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the Install Salix button is clicked
   def on_install_button_clicked(self, widget, data=None):
     pass
-
-  ### CONFIGURATION UNDO BUTTONS ###
-
-  # What to do when the time undo button is clicked
-
-  # What to do when the keyboard undo button is clicked
-  def on_keyboard_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the language undo button is clicked
-  def on_locale_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the 'Do modify partition' button is clicked
-  def on_modify_partition_button_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the 'Do not modify partition' button is clicked
-  def on_do_not_modify_partition_button_clicked(self, widget, data=None):
-    pass
-      
-  # What to do when the partition recap undo button is clicked
-  def on_partition_recap_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the clone login undo button is clicked
-  def on_clone_login_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the user's settings undo button is clicked
-  def on_users_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the root password settings undo button is clicked
-  def on_rootpass_undo_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the package selection undo button is clicked
-  def on_packages_undo_clicked(self, widget, data=None):
-    pass
-
-  ### YESNO CONFIRMATION NEEDED DIALOG ###
 
   # What to do when the yes button of the YesNo Confirmation Needed dialog is clicked
   def on_confirm_button_clicked(self, widget, data=None):
@@ -816,7 +831,6 @@ included in your customized LiveClone will be installed."))
   # What to do when the no button of the YesNo dialog is clicked
   def on_do_not_confirm_button_clicked(self, widget, data=None):
     pass
-
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
@@ -843,9 +857,9 @@ def error_dialog(message, parent = None):
 
 # Launch the application
 if __name__ == '__main__':        
-  # If no root privilege, displays error message & exit
-  isTest = (len(sys.argv) > 1 and sys.argv[1] == '--test')
-  if isTest:
+  # If no root privilege, displays error message and exit
+  is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
+  if is_test:
     gettext.install(APP, './locale', True)
     gtk.glade.bindtextdomain(APP, './locale')
   else:
@@ -853,9 +867,9 @@ if __name__ == '__main__':
     gtk.glade.bindtextdomain(APP, '/usr/share/locale')
   gtk.glade.textdomain(APP)
 
-  if not isTest and os.getuid() != 0:
+  if not is_test and os.getuid() != 0:
     error_dialog(_("<b>Sorry!</b> \n\nRoot privileges are required to run this program. "))
     sys.exit(1)
   # show the gui and wait for signals
-  SalixLiveInstaller(isTest)
+  SalixLiveInstaller(is_test)
   gtk.main()

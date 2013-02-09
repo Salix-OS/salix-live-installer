@@ -20,7 +20,6 @@
         <col id="1" translatable="yes">qwerty</col>
       </row>
     </data>
-    <signal name="row_inserted" handler="on_keymap_list_store_row_inserted"/>
   </object>
   <object class="GtkListStore" id="locale_list_store">
     <columns>
@@ -35,7 +34,6 @@
         <col id="1" translatable="yes">French locale for France</col>
       </row>
     </data>
-    <signal name="row_inserted" handler="on_locale_list_store_row_inserted"/>
   </object>
   <object class="GtkListStore" id="main_partition_list_store">
     <columns>
@@ -3706,8 +3704,8 @@ If you already have all the needed partitions, please click on the button 'Do no
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">SalixLive Installer</property>
-    <property name="version">0.4</property>
-    <property name="copyright" translatable="yes">Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
+    <property name="version">Version</property>
+    <property name="copyright">Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>
     <property name="website">http://www.salixos.org</property>
     <property name="website_label">salixos.org</property>

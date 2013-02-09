@@ -80,7 +80,7 @@ def listAvailableKeymaps(mountPoint = None):
       kmFile = kml
       break
   if kmFile:
-    for keymap in [line.split('|', 1)[0] for line in open(kmFile, 'r').read().splitlines() if line and line[0] != '#']:
+    for keymap in sorted([line.split('|', 1)[0] for line in open(kmFile, 'r').read().splitlines() if line and line[0] != '#']):
       keyboardType = '-'
       typePosition = 6 # usr/share/kbd/keymaps/i386/azerty => 6
       if mountPoint:
