@@ -353,7 +353,7 @@
   <object class="GtkWindow" id="main_window">
     <property name="width_request">800</property>
     <property name="visible">True</property>
-    <property name="title" translatable="yes">SalixLive Installer</property>
+    <property name="title" translatable="yes">Salix Live Installer</property>
     <property name="window_position">center-always</property>
     <property name="icon">salix-live-installer.png</property>
     <signal name="destroy" handler="gtk_main_quit"/>
@@ -455,7 +455,7 @@
                                 <child>
                                   <object class="GtkImage" id="image13">
                                     <property name="visible">True</property>
-                                    <property name="icon_name">user-away</property>
+                                    <property name="icon_name">gtkclocksetup</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -468,7 +468,7 @@
                                     <property name="visible">True</property>
                                     <property name="label" translatable="yes">_Time</property>
                                     <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">keyboard_tab</property>
+                                    <property name="mnemonic_widget">time_tab</property>
                                   </object>
                                   <packing>
                                     <property name="pack_type">end</property>
@@ -634,7 +634,7 @@
                                 <child>
                                   <object class="GtkImage" id="image5">
                                     <property name="visible">True</property>
-                                    <property name="icon_name">preferences-desktop-accessibility</property>
+                                    <property name="icon_name">system-config-users</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -917,7 +917,7 @@
                                 <property name="width_request">580</property>
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">SalixLive Installer will perform a standard installation of Salix Operating System on your computer.
+                                <property name="label" translatable="yes">Salix Live Installer will perform a standard installation of Salix Operating System on your computer.
 
 Simply click on one of the categories in the left section to configure the corresponding settings. A check will be displayed beside each setting once it has been configured. All the settings must be configured before the 'Launch Salix installation' button becomes accessible.
 
@@ -3703,7 +3703,7 @@ If you already have all the needed partitions, please click on the button 'Do no
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
-    <property name="program_name">SalixLive Installer</property>
+    <property name="program_name">Salix Live Installer</property>
     <property name="version">Version</property>
     <property name="copyright">Copyright &#xA9; 2010-2011 Pierrick Le Brun</property>
     <property name="comments" translatable="yes">SalixOS installation from SalixLive's graphic environment</property>

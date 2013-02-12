@@ -41,8 +41,9 @@ VERSION = '0.4'
 MIN_SALT = '0.2.1'
 
 class SalixLiveInstaller:
-  def __init__(self, is_test = False):
+  def __init__(self, is_test = False, is_test_clone = False):
     self.is_test = is_test
+    self.is_test_clone = is_test_clone
     builder = gtk.Builder()
     for d in ('.', '/usr/share/salix-live-installer', '../share/salix-live-installer'):
       if os.path.exists(d + '/salix-live-installer.glade'):
@@ -362,17 +363,17 @@ installed on top, such as a web browser and the gslapt package manager. Ideal \
 for advanced users that would like to install a lightweight system and \
 add their own choice of applications. "))
   def on_full_radiobutton_enter_notify_event(self, widget, data=None):
-    if liveclone_install == False :
-      self.ContextLabel.set_markup(_('<b>Full installation:</b>\n\
-Everything that is included in the iso is installed. That includes a complete \
-desktop environment and a complete selection of matching applications, \
-always following the "one application per task" rationale. '))
-    elif liveclone_install == True :
+    if self.is_liveclone:
       self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Salix Live Installer has detected a LiveClone customized environment. \
 Core and Basic installation modes are therefore not available. \n\
 You can only perform a full installation: all software \
 included in your customized LiveClone will be installed."))
+    else:
+      self.ContextLabel.set_markup(_('<b>Full installation:</b>\n\
+Everything that is included in the iso is installed. That includes a complete \
+desktop environment and a complete selection of matching applications, \
+always following the "one application per task" rationale. '))
   def on_packages_apply_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Confirm your packages selection."))
   def on_packages_undo_enter_notify_event(self, widget, data=None):
@@ -396,10 +397,10 @@ included in your customized LiveClone will be installed."))
     gtk.main_quit()
 
   def get_current_config(self):
-    print 'Gathering current configuration…'
+    print 'Gathering current configuration…',
     if self.is_test:
       self.is_live = True
-      self.is_liveclone = False
+      self.is_liveclone = self.is_test_clone
       self.salt_version = MIN_SALT
       self.is_salt_ok = True
     else:
@@ -429,10 +430,11 @@ included in your customized LiveClone will be installed."))
     self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
     self.cur_use_ibus = sltl.isIbusEnabledByDefault()
     self.cur_locale = sltl.getCurrentLocale()
-    print '  Done'
+    self.install_mode = None
+    print ' Done'
 
   def build_data_stores(self):
-    print 'Building choice lists…'
+    print 'Building choice lists…',
     self.ContinentZoneListStore.clear()
     self.ContinentZoneListStore.append([_("Select...")])
     self.ContinentZoneCombobox.set_active(0)
@@ -455,7 +457,7 @@ included in your customized LiveClone will be installed."))
     self.LocaleListStore.clear()
     for l in sltl.listAvailableLocales():
       self.LocaleListStore.append(l)
-    print '  Done'
+    print ' Done'
 
   def add_custom_signals(self):
     self.KeyboardList.get_selection().connect('changed', self.on_keyboard_list_changed_event)
@@ -695,23 +697,47 @@ included in your customized LiveClone will be installed."))
     pass
   def on_clone_login_apply_clicked(self, widget, data=None):
     pass
-  def on_users_apply_clicked(self, widget, data=None):
-    pass
-  def on_rootpass_apply_clicked(self, widget, data=None):
-    pass
-
-  def packages_settings(self):
-    pass
-  def on_packages_undo_clicked(self, widget, data=None):
-    pass
-  def on_packages_apply_clicked(self, widget, data=None):
-    pass
   def on_clone_login_undo_clicked(self, widget, data=None):
+    pass
+  def on_users_apply_clicked(self, widget, data=None):
     pass
   def on_users_undo_clicked(self, widget, data=None):
     pass
+  def on_rootpass_apply_clicked(self, widget, data=None):
+    pass
   def on_rootpass_undo_clicked(self, widget, data=None):
     pass
+
+  def packages_settings(self):
+    if not self.install_mode:
+      self.CoreRadioButton.set_sensitive(not self.is_liveclone)
+      self.CoreHBox.set_sensitive(not self.is_liveclone)
+      self.BasicRadioButton.set_sensitive(not self.is_liveclone)
+      self.BasicHBox.set_sensitive(not self.is_liveclone)
+  def on_packages_apply_clicked(self, widget, data=None):
+    self.CoreRadioButton.set_sensitive(False)
+    self.BasicRadioButton.set_sensitive(False)
+    self.FullRadioButton.set_sensitive(False)
+    self.PackagesApplyButton.set_sensitive(False)
+    if self.CoreRadioButton.get_active():
+      self.install_mode = 'core'
+    elif self.BasicRadioButton.get_active():
+      self.install_mode = 'basic'
+    elif self.FullRadioButton.get_active():
+      self.install_mode = 'full'
+    self.configurations['packages'] = True
+    self.update_install_button()
+    self.PackagesCheck.show()
+    self.PackagesCheckMarker.hide()
+  def on_packages_undo_clicked(self, widget, data=None):
+    self.install_mode = None
+    self.packages_settings()
+    self.FullRadioButton.set_sensitive(True)
+    self.PackagesApplyButton.set_sensitive(True)
+    self.configurations['packages'] = False
+    self.update_install_button()
+    self.PackagesCheck.hide()
+    self.PackagesCheckMarker.show()
 
 
 
@@ -860,9 +886,11 @@ if __name__ == '__main__':
   # If no root privilege, displays error message and exit
   is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
   if is_test:
+    is_clone = (len(sys.argv) > 2 and sys.argv[2] == '--clone')
     gettext.install(APP, './locale', True)
     gtk.glade.bindtextdomain(APP, './locale')
   else:
+    is_clone = False
     gettext.install(APP, '/usr/share/locale', True)
     gtk.glade.bindtextdomain(APP, '/usr/share/locale')
   gtk.glade.textdomain(APP)
@@ -870,6 +898,7 @@ if __name__ == '__main__':
   if not is_test and os.getuid() != 0:
     error_dialog(_("<b>Sorry!</b> \n\nRoot privileges are required to run this program. "))
     sys.exit(1)
+  print 'Salix Live Installer v' + VERSION
   # show the gui and wait for signals
-  SalixLiveInstaller(is_test)
+  SalixLiveInstaller(is_test, is_clone)
   gtk.main()
