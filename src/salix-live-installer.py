@@ -33,6 +33,7 @@ import os
 import sys
 import glob
 import re
+import math
 from datetime import *
 import salix_livetools_library as sltl
 
@@ -121,20 +122,30 @@ class SalixLiveInstaller:
     self.BasicRadioButton = builder.get_object("basic_radiobutton")
     self.BasicHBox = builder.get_object("basic_hbox")
     self.FullRadioButton = builder.get_object("full_radiobutton")
+    self.PackagesUndoButton = builder.get_object("packages_undo")
     self.PackagesApplyButton = builder.get_object("packages_apply")
+    self.TimeUndoButton = builder.get_object("time_undo")
     self.TimeApplyButton = builder.get_object("time_apply")
+    self.KeyboardUndoButton = builder.get_object("keyboard_undo")
     self.KeyboardApplyButton = builder.get_object("keyboard_apply")
+    self.LocaleUndoButton = builder.get_object("locale_undo")
     self.LocaleApplyButton = builder.get_object("locale_apply")
     self.CloneLoginEventbox = builder.get_object("clone_login_eventbox")
     self.UsersEventbox = builder.get_object("users_eventbox")
     self.CloneLoginCheckbutton = builder.get_object("clone_login_checkbutton")
     self.CloneLoginUndo = builder.get_object("clone_login_undo")
     self.CloneLoginApply = builder.get_object("clone_login_apply")
-    self.RootPass1Entry = builder.get_object("root_pass1_entry")
-    self.RootPass2Entry = builder.get_object("root_pass2_entry")
-    self.UserPass1Entry = builder.get_object("user_pass1_entry")
-    self.UserPass2Entry = builder.get_object("user_pass2_entry")
     self.UserLoginEntry = builder.get_object("user_login_entry")
+    self.UserPass1Entry = builder.get_object("user_pass1_entry")
+    self.UserPass1Entry.set_visibility(False)
+    self.UserPass2Entry = builder.get_object("user_pass2_entry")
+    self.UserPass2Entry.set_visibility(False)
+    self.UserPassStrength = builder.get_object("user_pass_strength")
+    self.RootPass1Entry = builder.get_object("root_pass1_entry")
+    self.RootPass1Entry.set_visibility(False)
+    self.RootPass2Entry = builder.get_object("root_pass2_entry")
+    self.RootPass2Entry.set_visibility(False)
+    self.RootPassStrength = builder.get_object("root_pass_strength")
     self.UserVisibleCheckButton = builder.get_object("user_visible_checkbutton")
     self.RootVisibleCheckButton = builder.get_object("root_visible_checkbutton")
     self.ExternalDeviceCheckButton = builder.get_object("external_device_checkbutton")
@@ -142,7 +153,9 @@ class SalixLiveInstaller:
     self.IBusCheckButton = builder.get_object("ibus_checkbutton")
     self.RootPassCreated = builder.get_object("root_pass_created")
     self.NewUserLogin = builder.get_object("new_user_login")
+    self.UsersUndoButton = builder.get_object("users_undo")
     self.UsersApplyButton = builder.get_object("users_apply")
+    self.RootPassUndoButton = builder.get_object("rootpass_undo")
     self.RootPassApplyButton = builder.get_object("rootpass_apply")
     self.InstallButton = builder.get_object("install_button")
     self.YearCombobox = builder.get_object("year_combobox")
@@ -187,7 +200,7 @@ class SalixLiveInstaller:
     # Indicate if the partition wizard is done or not
     self.partition_done = False
     # Initialize the lock system preventing the Install button to be activated prematurely
-    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'user':False, 'root':False, 'packages':False}
+    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False}
     self.get_current_config()
     self.build_data_stores()
     self.update_install_button()
@@ -398,6 +411,7 @@ always following the "one application per task" rationale. '))
 
   def get_current_config(self):
     print 'Gathering current configuration…',
+    sys.stdout.flush()
     if self.is_test:
       self.is_live = True
       self.is_liveclone = self.is_test_clone
@@ -430,11 +444,17 @@ always following the "one application per task" rationale. '))
     self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
     self.cur_use_ibus = sltl.isIbusEnabledByDefault()
     self.cur_locale = sltl.getCurrentLocale()
+    self.keep_live_logins = self.is_liveclone
+    self.new_login = '' # None cannot be used in a GtkEntry
+    self.new_password = ''
+    self.new_root_password = ''
     self.install_mode = None
     print ' Done'
+    sys.stdout.flush()
 
   def build_data_stores(self):
     print 'Building choice lists…',
+    sys.stdout.flush()
     self.ContinentZoneListStore.clear()
     self.ContinentZoneListStore.append([_("Select...")])
     self.ContinentZoneCombobox.set_active(0)
@@ -458,6 +478,7 @@ always following the "one application per task" rationale. '))
     for l in sltl.listAvailableLocales():
       self.LocaleListStore.append(l)
     print ' Done'
+    sys.stdout.flush()
 
   def add_custom_signals(self):
     self.KeyboardList.get_selection().connect('changed', self.on_keyboard_list_changed_event)
@@ -544,7 +565,6 @@ always following the "one application per task" rationale. '))
       index += 1
     self.time_set_cities_list()
     self.NTPCheckButton.set_active(self.cur_use_ntp)
-    self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
     year, month, day, hour, minute, second, __, __, __ = datetime.now().timetuple()
     index = 0
     for y in self.YearListStore:
@@ -557,6 +577,18 @@ always following the "one application per task" rationale. '))
     self.HourSpinButton.set_value(hour)
     self.MinuteSpinButton.set_value(minute)
     self.SecondSpinButton.set_value(second)
+    self.ManualTimeBox.set_sensitive(not self.configurations['time'] and not self.cur_use_ntp)
+    self.NTPCheckButton.set_sensitive(not self.configurations['time'])
+    self.TimeZoneBox.set_sensitive(not self.configurations['time'])
+    self.TimeUndoButton.set_sensitive(self.configurations['time'])
+    self.TimeApplyButton.set_sensitive(not self.configurations['time'])
+    if self.configurations['time']:
+      self.TimeCheck.show()
+      self.TimeCheckMarker.hide()
+    else:
+      self.TimeCheck.hide()
+      self.TimeCheckMarker.show()
+    self.update_install_button()
   def time_set_cities_list(self):
     self.CountryZoneListStore.clear()
     self.CountryZoneListStore.append([_("Select...")])
@@ -585,34 +617,37 @@ always following the "one application per task" rationale. '))
     self.cur_use_ntp = self.NTPCheckButton.get_active()
     self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
   def on_time_apply_clicked(self, widget, data=None):
-    self.ManualTimeBox.set_sensitive(False)
-    self.NTPCheckButton.set_sensitive(False)
-    self.TimeZoneBox.set_sensitive(False)
-    self.TimeApplyButton.set_sensitive(False)
     self.configurations['time'] = True
-    self.update_install_button()
-    self.TimeCheck.show()
-    self.TimeCheckMarker.hide()
-  def on_time_undo_clicked(self, widget, data=None):
-    self.TimeCheck.hide()
-    self.TimeCheckMarker.show()
-    self.ManualTimeBox.set_sensitive(True)
-    self.NTPCheckButton.set_sensitive(True)
-    self.TimeZoneBox.set_sensitive(True)
-    self.TimeApplyButton.set_sensitive(True)
     self.time_settings()
+  def on_time_undo_clicked(self, widget, data=None):
     self.configurations['time'] = False
-    self.update_install_button()
+    self.time_settings()
 
   def keyboard_settings(self):
-    index = 0
-    for km in self.KeyboardListStore:
-      if km[0] == self.cur_km:
-        self.KeyboardList.get_selection().select_path(index)
-        break
-      index += 1
+    self.KeyboardSelection.set_text(_('None'))
+    if self.cur_km:
+      index = 0
+      for km in self.KeyboardListStore:
+        if km[0] == self.cur_km:
+          self.KeyboardList.get_selection().select_path(index)
+          if self.configurations['keyboard']:
+            self.KeyboardSelection.set_text('{0} ({1})'.format(km[0], km[1]))
+          break
+        index += 1
     self.NumLockCheckButton.set_active(self.cur_use_numlock)
     self.IBusCheckButton.set_active(self.cur_use_ibus)
+    self.KeyboardList.set_sensitive(not self.configurations['keyboard'])
+    self.NumLockCheckButton.set_sensitive(not self.configurations['keyboard'])
+    self.IBusCheckButton.set_sensitive(not self.configurations['keyboard'])
+    self.KeyboardUndoButton.set_sensitive(self.configurations['keyboard'])
+    self.KeyboardApplyButton.set_sensitive(not self.configurations['keyboard'])
+    if self.configurations['keyboard']:
+      self.KeyboardCheck.show()
+      self.KeyboardCheckMarker.hide()
+    else:
+      self.KeyboardCheck.hide()
+      self.KeyboardCheckMarker.show()
+    self.update_install_button()
   def on_keyboard_list_changed_event(self, selection, data=None):
     model, it = selection.get_selected()
     if it:
@@ -625,58 +660,46 @@ always following the "one application per task" rationale. '))
     self.cur_use_ibus = self.IBusCheckButton.get_active()
   def on_keyboard_apply_clicked(self, widget, data=None):
     if self.cur_km:
-      self.KeyboardList.set_sensitive(False)
-      self.KeyboardApplyButton.set_sensitive(False)
-      self.NumLockCheckButton.set_sensitive(False)
-      self.IBusCheckButton.set_sensitive(False)
-      model, it = self.KeyboardList.get_selection().get_selected()
-      self.KeyboardSelection.set_text('{0} ({1})'.format(model.get_value(it, 0), model.get_value(it, 1)))
       self.configurations['keyboard'] = True
-      self.update_install_button()
-      self.KeyboardCheck.show()
-      self.KeyboardCheckMarker.hide()
+      self.keyboard_settings()
   def on_keyboard_undo_clicked(self, widget, data=None):
-    self.KeyboardList.set_sensitive(True)
-    self.KeyboardApplyButton.set_sensitive(True)
-    self.NumLockCheckButton.set_sensitive(True)
-    self.IBusCheckButton.set_sensitive(True)
-    self.KeyboardSelection.set_text(_('None'))
     self.configurations['keyboard'] = False
-    self.update_install_button()
-    self.KeyboardCheck.hide()
-    self.KeyboardCheckMarker.show()
+    self.keyboard_settings()
 
   def locale_settings(self):
-    index = 0
-    for l in self.LocaleListStore:
-      if l[0] + '.utf8' == self.cur_locale:
-        self.LocaleList.get_selection().select_path(index)
-        break
-      index += 1
+    self.LocaleSelection.set_text(_('None'))
+    if self.cur_locale:
+      index = 0
+      for l in self.LocaleListStore:
+        if l[0] + '.utf8' == self.cur_locale:
+          self.LocaleList.get_selection().select_path(index)
+          if self.configurations['locale']:
+            self.LocaleSelection.set_text('{0} ({1})'.format(l[0], l[1]))
+          break
+        index += 1
+    self.LocaleList.set_sensitive(not self.configurations['locale'])
+    self.LocaleUndoButton.set_sensitive(self.configurations['locale'])
+    self.LocaleApplyButton.set_sensitive(not self.configurations['locale'])
+    if self.configurations['locale']:
+      self.LocaleCheck.show()
+      self.LocaleCheckMarker.hide()
+    else:
+      self.LocaleCheck.hide()
+      self.LocaleCheckMarker.show()
+    self.update_install_button()
   def on_locale_list_changed_event(self, selection, data=None):
     model, it = selection.get_selected()
     if it:
-      self.cur_locale = model.get_value(it, 0)
+      self.cur_locale = model.get_value(it, 0) + '.utf8'
     else:
       self.cur_locale = None
   def on_locale_apply_clicked(self, widget, data=None):
     if self.cur_locale:
-      self.LocaleList.set_sensitive(False)
-      self.LocaleApplyButton.set_sensitive(False)
-      model, it = self.LocaleList.get_selection().get_selected()
-      self.LocaleSelection.set_text('{0} ({1})'.format(model.get_value(it, 0), model.get_value(it, 1)))
       self.configurations['locale'] = True
-      self.update_install_button()
-      self.LocaleCheck.show()
-      self.LocaleCheckMarker.hide()
+      self.locale_settings()
   def on_locale_undo_clicked(self, widget, data=None):
-    self.LocaleList.set_sensitive(True)
-    self.LocaleApplyButton.set_sensitive(True)
-    self.LocaleSelection.set_text(_('None'))
     self.configurations['locale'] = False
-    self.update_install_button()
-    self.LocaleCheck.hide()
-    self.LocaleCheckMarker.show()
+    self.locale_settings()
 
   def partitions_settings(self):
     pass
@@ -694,31 +717,184 @@ always following the "one application per task" rationale. '))
     pass
 
   def users_settings(self):
-    pass
+    if self.is_liveclone:
+      self.CloneLoginEventbox.show()
+      self.users_settings_liveclone()
+      self.CloneLoginCheckbutton.set_active(self.keep_live_logins) # raise toggled event
+    else:
+      self.CloneLoginEventbox.hide()
+      self.configurations['clonelogins'] = True
+      self.users_settings_live()
+  def users_settings_liveclone(self):
+    self.CloneLoginCheckbutton.set_sensitive(not self.keep_live_logins or not self.configurations['clonelogins'])
+    self.CloneLoginUndo.set_sensitive(self.keep_live_logins and self.configurations['clonelogins'])
+    self.CloneLoginApply.set_sensitive(self.keep_live_logins and not self.configurations['clonelogins'])
+    self.update_users_check()
+  def users_settings_live(self):
+    self.UsersEventbox.set_sensitive(True)
+    self.UserLoginEntry.set_text(self.new_login)
+    self.UserLoginEntry.set_sensitive(not self.configurations['user'])
+    self.UserPass1Entry.set_text(self.new_password)
+    self.UserPass1Entry.set_sensitive(not self.configurations['user'])
+    self.UserPass2Entry.set_text(self.new_password)
+    self.UserPass2Entry.set_sensitive(not self.configurations['user'])
+    self.UserVisibleCheckButton.set_sensitive(not self.configurations['user'])
+    self.UsersUndoButton.set_sensitive(self.configurations['user'])
+    self.UsersApplyButton.set_sensitive(not self.configurations['user'])
+    if self.configurations['user']:
+      self.NewUserLogin.set_text(self.new_login)
+    else:
+      self.NewUserLogin.set_text(_("None"))
+    self.RootPass1Entry.set_text(self.new_root_password)
+    self.RootPass1Entry.set_sensitive(not self.configurations['root'])
+    self.RootPass2Entry.set_text(self.new_root_password)
+    self.RootPass2Entry.set_sensitive(not self.configurations['root'])
+    self.RootVisibleCheckButton.set_sensitive(not self.configurations['root'])
+    self.RootPassUndoButton.set_sensitive(self.configurations['root'])
+    self.RootPassApplyButton.set_sensitive(not self.configurations['root'])
+    if self.configurations['root']:
+      self.RootPassCreated.set_text(_("Yes"))
+    else:
+      self.RootPassCreated.set_text(_("None"))
+    self.update_users_check()
+  def update_users_check(self):
+    if self.configurations['clonelogins'] and self.configurations['user'] and self.configurations['root']:
+      self.UsersCheck.show()
+      self.UsersCheckMarker.hide()
+    else:
+      self.UsersCheck.hide()
+      self.UsersCheckMarker.show()
+    self.update_install_button()
+  def on_clone_login_checkbutton_toggled(self, widget, data=None):
+    if self.CloneLoginCheckbutton.get_sensitive():
+      self.keep_live_logins = self.CloneLoginCheckbutton.get_active()
+      self.on_clone_login_undo_clicked(None)
+      self.on_users_undo_clicked(None)
+      self.on_rootpass_undo_clicked(None)
+      if self.keep_live_logins:
+        self.configurations['user'] = True
+        self.configurations['root'] = True
+        self.UsersEventbox.set_sensitive(False)
+      else:
+        self.configurations['clonelogins'] = True
+        self.UsersEventbox.set_sensitive(True)
   def on_clone_login_apply_clicked(self, widget, data=None):
-    pass
+    self.configurations['clonelogins'] = True
+    self.users_settings_liveclone()
   def on_clone_login_undo_clicked(self, widget, data=None):
-    pass
+    self.configurations['clonelogins'] = False
+    self.users_settings_liveclone()
+  def get_password_strength(self, pwd):
+    """
+    Returns a number from 0 to 4 indicates the strength of the password.
+    """
+    if not pwd:
+      score = 0
+    else:
+      score = 1
+      if len(pwd) >= 5:
+        score += 1
+        if re.search(r'[A-Z]', pwd):
+          score += 0.5
+        if re.search(r'[1-9]', pwd):
+          score += 0.5
+        if re.search(r'[-_.,;:!?"\']', pwd):
+          score += 0.5
+        if re.search(r'[][(){}/\<>$%*#@^]', pwd):
+          score += 0.5
+        score = int(math.floor(score))
+    return score
+  def set_progressbar_strength(self, pwd, draw_widget):
+    strength = self.get_password_strength(pwd)
+    gc = draw_widget.window.new_gc()
+    bg_color = draw_widget.get_colormap().alloc_color("#FFFFFF")
+    border_color = draw_widget.get_colormap().alloc_color("#000000")
+    if strength <= 1:
+      progress_color = draw_widget.get_colormap().alloc_color("#FF0000")
+    elif strength == 2:
+      progress_color = draw_widget.get_colormap().alloc_color("#FF8800")
+    elif strength == 3:
+      progress_color = draw_widget.get_colormap().alloc_color("#CCCC00")
+    elif strength == 4:
+      progress_color = draw_widget.get_colormap().alloc_color("#00FF00")
+    gc.set_foreground(bg_color)
+    draw_widget.window.draw_rectangle(gc, True, 0, 0, 80, 25)
+    gc.set_foreground(progress_color)
+    draw_widget.window.draw_rectangle(gc, True, 0, 0, 20 * strength, 25)
+    gc.set_foreground(border_color)
+    draw_widget.window.draw_rectangle(gc, False, 0, 0, 80, 25)
+  def on_user_pass1_entry_changed(self, widget, data=None):
+    self.set_progressbar_strength(widget.get_text().strip(), self.UserPassStrength)
+  def on_user_visible_checkbutton_toggled(self, widget, data=None):                
+    self.UserPass1Entry.set_visibility(self.UserVisibleCheckButton.get_active())
+    self.UserPass2Entry.set_visibility(self.UserVisibleCheckButton.get_active())
+  def check_login(self, login):
+    if not login:
+      error_dialog(_("Your login name is empty.") + "\n" + _("Please verify and correct!"))
+      return False
+    elif not re.match(r'^[a-z][-_a-z1-9]*$', login):
+      error_dialog(_("Your login name should only contain alphanumeric lowercase characters with no space and should start with a letter.") + "\n" + _("Please verify and correct!"))
+      return False
+    else:
+      return True
+  def check_password(self, pwd1, pwd2):
+    if not pwd1:
+      error_dialog(_("Your password entry is empty.") + "\n" + _("Please verify and correct!"))
+      return False
+    elif pwd1 != pwd2:
+      error_dialog(_("Your two password entries do not match.") + "\n" + _("Please verify and correct!"))
+      return False
+    else:
+      return True
   def on_users_apply_clicked(self, widget, data=None):
-    pass
+    ok = self.check_login(self.UserLoginEntry.get_text().strip())
+    if ok:
+      ok = self.check_password(self.UserPass1Entry.get_text().strip(), self.UserPass2Entry.get_text().strip())
+    if ok:
+      self.configurations['user'] = True
+      self.new_login = self.UserLoginEntry.get_text().strip()
+      self.new_password = self.UserPass1Entry.get_text().strip()
+      self.users_settings_live()
   def on_users_undo_clicked(self, widget, data=None):
-    pass
+    self.configurations['user'] = False
+    self.new_login = ''
+    self.new_password = ''
+    self.users_settings_live()
+  def on_root_pass1_entry_changed(self, widget, data=None):
+    self.set_progressbar_strength(widget.get_text().strip(), self.RootPassStrength)
+  def on_root_visible_checkbutton_toggled(self, widget, data=None):
+    self.RootPass1Entry.set_visibility(self.RootVisibleCheckButton.get_active())
+    self.RootPass2Entry.set_visibility(self.RootVisibleCheckButton.get_active())
   def on_rootpass_apply_clicked(self, widget, data=None):
-    pass
+    ok = self.check_password(self.RootPass1Entry.get_text().strip(), self.RootPass2Entry.get_text().strip())
+    if ok:
+      self.configurations['root'] = True
+      self.new_root_password = self.RootPass1Entry.get_text().strip()
+      self.users_settings_live()
   def on_rootpass_undo_clicked(self, widget, data=None):
-    pass
+    self.configurations['root'] = False
+    self.new_root_password = ''
+    self.users_settings_live()
 
   def packages_settings(self):
-    if not self.install_mode:
-      self.CoreRadioButton.set_sensitive(not self.is_liveclone)
-      self.CoreHBox.set_sensitive(not self.is_liveclone)
-      self.BasicRadioButton.set_sensitive(not self.is_liveclone)
-      self.BasicHBox.set_sensitive(not self.is_liveclone)
+    self.CoreRadioButton.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
+    self.CoreHBox.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
+    self.CoreRadioButton.set_active(self.install_mode == 'core')
+    self.BasicRadioButton.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
+    self.BasicHBox.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
+    self.BasicRadioButton.set_active(self.install_mode == 'basic')
+    self.FullRadioButton.set_sensitive(not self.configurations['packages'])
+    self.FullRadioButton.set_active(self.install_mode == 'full')
+    self.PackagesUndoButton.set_sensitive(self.configurations['packages'])
+    self.PackagesApplyButton.set_sensitive(not self.configurations['packages'])
+    if self.configurations['packages']:
+      self.PackagesCheck.show()
+      self.PackagesCheckMarker.hide()
+    else:
+      self.PackagesCheck.hide()
+      self.PackagesCheckMarker.show()
+    self.update_install_button()
   def on_packages_apply_clicked(self, widget, data=None):
-    self.CoreRadioButton.set_sensitive(False)
-    self.BasicRadioButton.set_sensitive(False)
-    self.FullRadioButton.set_sensitive(False)
-    self.PackagesApplyButton.set_sensitive(False)
     if self.CoreRadioButton.get_active():
       self.install_mode = 'core'
     elif self.BasicRadioButton.get_active():
@@ -726,54 +902,16 @@ always following the "one application per task" rationale. '))
     elif self.FullRadioButton.get_active():
       self.install_mode = 'full'
     self.configurations['packages'] = True
-    self.update_install_button()
-    self.PackagesCheck.show()
-    self.PackagesCheckMarker.hide()
+    self.packages_settings()
   def on_packages_undo_clicked(self, widget, data=None):
     self.install_mode = None
-    self.packages_settings()
-    self.FullRadioButton.set_sensitive(True)
-    self.PackagesApplyButton.set_sensitive(True)
     self.configurations['packages'] = False
-    self.update_install_button()
-    self.PackagesCheck.hide()
-    self.PackagesCheckMarker.show()
+    self.packages_settings()
 
 
 
   ###################################################################
 
-  # What to do when the liveclone login checkbutton is toggled
-  def on_clone_login_checkbutton_toggled(self, widget, data=None):
-    if self.CloneLoginCheckbutton.get_active() == True:
-      users_undo(self)
-      rootpass_undo(self)
-      self.UsersEventbox.set_sensitive(False)
-      self.CloneLoginUndo.set_sensitive(True)
-      self.CloneLoginApply.set_sensitive(True)
-    else:
-      self.UsersEventbox.set_sensitive(True)
-      self.CloneLoginUndo.set_sensitive(False)
-      self.CloneLoginApply.set_sensitive(False)
-
-  # What to do when the user's password visible checkbutton is toggled
-  def on_user_visible_checkbutton_toggled(self, widget, data=None):                
-    if self.UserVisibleCheckButton.get_active() == True :
-      self.UserPass1Entry.set_visibility(True)
-      self.UserPass2Entry.set_visibility(True)
-    if self.UserVisibleCheckButton.get_active() == False :
-      self.UserPass1Entry.set_visibility(False)
-      self.UserPass2Entry.set_visibility(False)
-              
-  # What to do when the root's password visible checkbutton is toggled
-  def on_root_visible_checkbutton_toggled(self, widget, data=None):
-    if self.RootVisibleCheckButton.get_active() == True :
-      self.RootPass1Entry.set_visibility(True)
-      self.RootPass2Entry.set_visibility(True)
-    if self.RootVisibleCheckButton.get_active() == False :
-      self.RootPass1Entry.set_visibility(False)
-      self.RootPass2Entry.set_visibility(False)
-                      
   # What to do when the external device checkbutton is toggled
   def on_external_device_checkbutton_toggled (self, widget, data=None):
     global show_external_device
@@ -850,10 +988,6 @@ always following the "one application per task" rationale. '))
   def on_confirm_button_clicked(self, widget, data=None):
     pass
 
-  # What to do when the yes button of the YesNo Confirmation Needed dialog is 'released'
-  def on_confirm_button_released(self, widget, data=None):
-    pass
-
   # What to do when the no button of the YesNo dialog is clicked
   def on_do_not_confirm_button_clicked(self, widget, data=None):
     pass
@@ -896,7 +1030,7 @@ if __name__ == '__main__':
   gtk.glade.textdomain(APP)
 
   if not is_test and os.getuid() != 0:
-    error_dialog(_("<b>Sorry!</b> \n\nRoot privileges are required to run this program. "))
+    error_dialog(_("<b>Sorry!</b>\n\nRoot privileges are required to run this program."))
     sys.exit(1)
   print 'Salix Live Installer v' + VERSION
   # show the gui and wait for signals
