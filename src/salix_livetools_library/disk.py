@@ -22,7 +22,11 @@ from stat import *
 
 def getDisks():
   "Returns the disks devices (without /dev/) connected to the computer. RAID and LVM are not supported yet."
-  return execGetOutput(['sed', '-n', '/ sd[^0-9]\+$/ s/.*\(sd.*\)/\\1/ p', '/proc/partitions'])
+  ret = []
+  for l in open('/proc/partitions', 'r').read().splitlines():
+    if re.search(r' sd[^0-9]+$', l):
+      ret.append(re.sub(r'.*(sd.*)', r'\1', l))
+  return ret
 
 def getDiskInfo(diskDevice):
   """
@@ -47,7 +51,6 @@ def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
   """
   Returns partitions following exclusion filters.
   """
-  checkRoot()
   if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
     parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
     fsexclude = []
@@ -63,10 +66,11 @@ def getSwapPartitions():
   """
   Returns partition devices that are of type Linux Swap.
   """
-  checkRoot()
+  ret = []
   for diskDevice in getDisks():
     parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
-    return [part for part in parts if getFsType(part) == 'swap']
+    ret.extend([part for part in parts if getFsType(part) == 'swap'])
+  return ret
 
 def getPartitionInfo(partitionDevice):
   """

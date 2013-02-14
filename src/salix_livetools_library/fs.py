@@ -29,9 +29,14 @@ def getFsType(partitionDevice):
     path = partitionDevice
   else:
     fstype = False
+    path = False
   if path:
     try:
-      fstype = execGetOutput(['/sbin/blkid', '-s', 'TYPE', '-o', 'value', path], shell = False)[0]
+      fstype = execGetOutput(['/sbin/blkid', '-s', 'TYPE', '-o', 'value', path], shell = False)
+      if fstype:
+        fstype = fstype[0]
+      else:
+        fstype = 'Extended'
     except subprocess.CalledProcessError as e:
       fstype = False
     if fstype == '':
@@ -50,9 +55,14 @@ def getFsLabel(partitionDevice):
     path = partitionDevice
   else:
     label = False
+    path = False
   if path:
     try:
-      label = execGetOutput(['/sbin/blkid', '-s', 'LABEL', '-o', 'value', path], shell = False)[0]
+      label = execGetOutput(['/sbin/blkid', '-s', 'LABEL', '-o', 'value', path], shell = False)
+      if label:
+        label = label[0]
+      else:
+        label = ''
     except subprocess.CalledProcessError as e:
       label = False
   return label

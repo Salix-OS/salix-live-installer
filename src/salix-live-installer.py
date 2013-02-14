@@ -34,6 +34,7 @@ import sys
 import glob
 import re
 import math
+import subprocess
 from datetime import *
 import salix_livetools_library as sltl
 
@@ -444,6 +445,9 @@ always following the "one application per task" rationale. '))
     self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
     self.cur_use_ibus = sltl.isIbusEnabledByDefault()
     self.cur_locale = sltl.getCurrentLocale()
+    self.partitions = []
+    self.swap_partitions = []
+    self.show_external_drives = False
     self.keep_live_logins = self.is_liveclone
     self.new_login = '' # None cannot be used in a GtkEntry
     self.new_password = ''
@@ -534,7 +538,6 @@ always following the "one application per task" rationale. '))
   def on_partition_tab_clicked(self, widget, data=None):
     if not self.switch_tab_lock:
       self.hide_all_tabs()
-      self.partitions_settings()
       self.PartitionTab.set_relief(gtk.RELIEF_HALF)
       if self.partition_done:
         self.RecapPartitionBox.show()
@@ -554,6 +557,8 @@ always following the "one application per task" rationale. '))
       self.packages_settings()
       self.PackagesTab.set_relief(gtk.RELIEF_HALF)
       self.PackagesBox.show()
+
+
 
   def time_settings(self):
     self.ContinentZoneCombobox.set_active(0)
@@ -623,6 +628,8 @@ always following the "one application per task" rationale. '))
     self.configurations['time'] = False
     self.time_settings()
 
+
+
   def keyboard_settings(self):
     self.KeyboardSelection.set_text(_('None'))
     if self.cur_km:
@@ -666,6 +673,8 @@ always following the "one application per task" rationale. '))
     self.configurations['keyboard'] = False
     self.keyboard_settings()
 
+
+
   def locale_settings(self):
     self.LocaleSelection.set_text(_('None'))
     if self.cur_locale:
@@ -701,20 +710,80 @@ always following the "one application per task" rationale. '))
     self.configurations['locale'] = False
     self.locale_settings()
 
+
+
+  def on_modify_partition_button_clicked(self, widget, data=None):
+    self.Window.set_sensitive(False)
+    self.Window.set_accept_focus(False)
+    self.Window.iconify()
+    # be sure to treat any pending GUI events before running gparted
+    gtk.main_iteration()
+    if self.is_test:
+      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
+    else:
+      sltl.execCheck("/usr/sbin/gparted", shell=False, env=None)
+    self.Window.set_sensitive(True)
+    self.Window.set_accept_focus(True)
+    self.Window.deiconify()
+    self.on_do_not_modify_partition_button_clicked(widget)
+  def on_do_not_modify_partition_button_clicked(self, widget, data=None):
+    self.partitions_settings()
+    self.swap_detection()
   def partitions_settings(self):
-    pass
+    self.PartitioningBox.hide()
+    self.partitions = []
+    self.MainPartitionListStore.clear()
+    for disk_device in sltl.getDisks():
+      disk_info = sltl.getDiskInfo(disk_device)
+      if self.show_external_drives or not disk_info['removable']:
+        disk_name = "{0} ({1})".format(disk_info['model'], disk_info['sizeHuman'])
+        for p in sltl.getPartitions(disk_device):
+          self.partitions.append(p)
+          part_name = p
+          part_label = sltl.getFsLabel(p)
+          if part_label:
+            part_name += " (" + part_label + ")"
+          self.MainPartitionListStore.append([disk_name, part_name, sltl.getSizes("/dev/" + p)['sizeHuman'], sltl.getFsType(p), p])
+    self.MainPartitionList.set_cursor(0)
+    self.MainPartitionBox.show()
+  def swap_detection(self):
+    """
+    Displays the swap partitions that were detected on the system which
+    will be automatically used by the installer.
+    Displays a warning message when no (swap) partition is found.
+    """
+    try:
+      self.swap_partitions = sltl.getSwapPartitions()
+      if self.swap_partitions:
+        swap_info_msg = "\n<b>" + _("Detected Swap partition(s):") + "</b>"
+        for d in self.swap_partitions:
+          swap_info_msg += "\n" + _("Salix Live Installer has detected a Swap partition on <b>{device}</b> and will automatically add it to your configuration.").format(device = d)
+        info_dialog(swap_info_msg)
+      else:
+        info_dialog(_("Salix Live Installer was not able to detect a valid \
+Swap partition on your system. \nA Swap partition could improve overall performances. \
+You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
+tool of your choice, to first create a Swap partition before resuming with Salix Live \
+Installer process."))
+    except subprocess.CalledProcessError as e:
+      self.swap_partitions = []
+      info_dialog(_("Salix Live Installer was not able to detect a \
+valid partition on your system. You should exit Salix Live Installer now and use \
+Gparted, or any other partitioning tool of your choice, to first create valid \
+partitions on your system before resuming with Salix Live Installer process."))
+  def on_external_device_checkbutton_toggled (self, widget, data=None):
+    self.show_external_drives = self.ExternalDeviceCheckButton.get_active()
+    self.partitions_settings()
   def on_main_partition_apply_clicked(self, widget, data=None):
     pass
   def on_linux_partition_apply_clicked(self, widget, data=None):
     pass
   def on_windows_partition_apply_clicked(self, widget, data=None):
     pass
-  def on_modify_partition_button_clicked(self, widget, data=None):
-    pass
-  def on_do_not_modify_partition_button_clicked(self, widget, data=None):
-    pass
   def on_partition_recap_undo_clicked(self, widget, data=None):
     pass
+
+
 
   def users_settings(self):
     if self.is_liveclone:
@@ -854,6 +923,8 @@ always following the "one application per task" rationale. '))
       self.configurations['user'] = True
       self.new_login = self.UserLoginEntry.get_text().strip()
       self.new_password = self.UserPass1Entry.get_text().strip()
+      # got this too for not loosing it while validating the user login and password
+      self.new_root_password = self.RootPass1Entry.get_text().strip()
       self.users_settings_live()
   def on_users_undo_clicked(self, widget, data=None):
     self.configurations['user'] = False
@@ -870,11 +941,16 @@ always following the "one application per task" rationale. '))
     if ok:
       self.configurations['root'] = True
       self.new_root_password = self.RootPass1Entry.get_text().strip()
+      # got this too for not loosing it while validating the root password
+      self.new_login = self.UserLoginEntry.get_text().strip()
+      self.new_password = self.UserPass1Entry.get_text().strip()
       self.users_settings_live()
   def on_rootpass_undo_clicked(self, widget, data=None):
     self.configurations['root'] = False
     self.new_root_password = ''
     self.users_settings_live()
+
+
 
   def packages_settings(self):
     self.CoreRadioButton.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
@@ -911,15 +987,6 @@ always following the "one application per task" rationale. '))
 
 
   ###################################################################
-
-  # What to do when the external device checkbutton is toggled
-  def on_external_device_checkbutton_toggled (self, widget, data=None):
-    global show_external_device
-    if self.ExternalDeviceCheckButton.get_active() == True :
-      show_external_device = 'yes'
-    else :
-      show_external_device = 'no'
-    partition_list_initialization ()
                       
   # What to do when a combo line is edited in the Linux New system column
   def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
