@@ -335,7 +335,7 @@ and lower case letters, numbers, and even symbols (such as the \
 @, !, and &)"))
   def on_user_pass2_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Here you must retype your password as a confirmation \
-of your choice."))
+of your choice.")) 
   def on_user_visible_checkbutton_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \
 are typing."))
@@ -748,7 +748,7 @@ always following the "one application per task" rationale. '))
     self.MainPartitionBox.show()
   def swap_detection(self):
     """
-    Displays the swap partitions that were detected on the system which
+    Display the swap partitions that were detected on the system which
     will be automatically used by the installer.
     Displays a warning message when no (swap) partition is found.
     """
@@ -855,23 +855,39 @@ partitions on your system before resuming with Salix Live Installer process."))
     self.users_settings_liveclone()
   def get_password_strength(self, pwd):
     """
-    Returns a number from 0 to 4 indicates the strength of the password.
+    Return a number from 0 to 4 to indicate the strength of the password.
     """
     if not pwd:
       score = 0
     else:
       score = 1
+      self.ContextLabel.set_markup(_("<b>Password strength:</b>\nLess than 5 characters"))
       if len(pwd) >= 5:
         score += 1
+        contextLabelText = _("<b>Password strength:</b>\n")
+        if re.search(r'\ ', pwd):
+          score += 0.4
+        else:
+          contextLabelText += _("No space...\n")
         if re.search(r'[A-Z]', pwd):
-          score += 0.5
+          score += 0.4
+        else:
+          contextLabelText += _("No upper case letter...\n")
         if re.search(r'[1-9]', pwd):
-          score += 0.5
+          score += 0.4
+        else:
+          contextLabelText += _("No number...\n")
         if re.search(r'[-_.,;:!?"\']', pwd):
-          score += 0.5
+          score += 0.4
+        else:
+          contextLabelText += _("No punctuation...\n")
         if re.search(r'[][(){}/\<>$%*#@^]', pwd):
           score += 0.5
+        else:
+          contextLabelText += _("No symbol...\n")
         score = int(math.floor(score))
+        self.ContextLabel.set_markup(_(contextLabelText))
+    
     return score
   def set_progressbar_strength(self, pwd, draw_widget):
     strength = self.get_password_strength(pwd)
@@ -886,12 +902,14 @@ partitions on your system before resuming with Salix Live Installer process."))
       progress_color = draw_widget.get_colormap().alloc_color("#CCCC00")
     elif strength == 4:
       progress_color = draw_widget.get_colormap().alloc_color("#00FF00")
+      self.ContextLabel.set_markup(_("<b>Password strength:</b>\n\nSatisfactory!"))
     gc.set_foreground(bg_color)
-    draw_widget.window.draw_rectangle(gc, True, 0, 0, 80, 25)
+    draw_widget.window.draw_rectangle(gc, True, 0, 1, 80, 20)
     gc.set_foreground(progress_color)
-    draw_widget.window.draw_rectangle(gc, True, 0, 0, 20 * strength, 25)
+    draw_widget.window.draw_rectangle(gc, True, 0, 1, 20 *  strength, 20)
     gc.set_foreground(border_color)
-    draw_widget.window.draw_rectangle(gc, False, 0, 0, 80, 25)
+    draw_widget.window.draw_rectangle(gc, False, 0, 1, 80, 20)
+
   def on_user_pass1_entry_changed(self, widget, data=None):
     self.set_progressbar_strength(widget.get_text().strip(), self.UserPassStrength)
   def on_user_visible_checkbutton_toggled(self, widget, data=None):                
@@ -1074,7 +1092,7 @@ def info_dialog(message, parent = None):
 # Error window skeleton:
 def error_dialog(message, parent = None):
   """
-  Displays an error message.
+  Display an error message.
   """
   dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
   dialog.set_markup(message)

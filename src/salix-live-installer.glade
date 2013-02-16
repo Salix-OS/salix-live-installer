@@ -252,6 +252,32 @@ MA 02110-1301, USA.</property>
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="main_format_list_store">
+    <columns>
+      <!-- column-name type -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">ext2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">ext3</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">ext4</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">reiserfs</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">xfs</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">jfs</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkListStore" id="main_partition_list_store">
     <columns>
       <!-- column-name disk -->
@@ -289,32 +315,6 @@ MA 02110-1301, USA.</property>
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="main_format_list_store">
-    <columns>
-      <!-- column-name type -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">ext2</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">ext3</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">ext4</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">reiserfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">xfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">jfs</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="month_list_store">
     <columns>
       <!-- column-name month -->
@@ -340,67 +340,6 @@ MA 02110-1301, USA.</property>
         <col id="0" translatable="yes">June</col>
       </row>
     </data>
-  </object>
-  <object class="GtkDialog" id="progress_dialog">
-    <property name="can_focus">True</property>
-    <property name="has_focus">True</property>
-    <property name="is_focus">True</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Salix installation</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-always</property>
-    <property name="icon">salix-live-installer.png</property>
-    <property name="type_hint">normal</property>
-    <property name="deletable">False</property>
-    <property name="transient_for">main_window</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox3">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="install_progress_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Please be patient, Salix installation is in progress... </property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkProgressBar" id="install_progressbar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="activity_mode">True</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="width_request">800</property>
@@ -3371,8 +3310,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
                                     <property name="fill">True</property>
+                                    <property name="padding">3</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -3416,6 +3356,8 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="width_request">100</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <signal name="enter-notify-event" handler="on_user_pass_strength_enter_notify_event" swapped="no"/>
+                                        <signal name="leave-notify-event" handler="on_user_pass_strength_leave_notify_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3426,8 +3368,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
                                     <property name="fill">True</property>
+                                    <property name="padding">3</property>
                                     <property name="position">2</property>
                                   </packing>
                                 </child>
@@ -3486,8 +3429,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
                                     <property name="fill">True</property>
+                                    <property name="padding">3</property>
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
@@ -3647,6 +3591,8 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="width_request">100</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <signal name="enter-notify-event" handler="on_root_pass_strength_enter_notify_event" swapped="no"/>
+                                        <signal name="leave-notify-event" handler="on_root_pass_strength_leave_notify_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3657,8 +3603,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
                                     <property name="fill">True</property>
+                                    <property name="padding">3</property>
                                     <property name="position">7</property>
                                   </packing>
                                 </child>
@@ -3717,8 +3664,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
                                     <property name="fill">True</property>
+                                    <property name="padding">3</property>
                                     <property name="position">8</property>
                                   </packing>
                                 </child>
@@ -4298,6 +4246,67 @@ If you already have all the needed partitions, please click on the button 'Do no
             <child type="label_item">
               <placeholder/>
             </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="progress_dialog">
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Salix installation</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-always</property>
+    <property name="icon">salix-live-installer.png</property>
+    <property name="type_hint">normal</property>
+    <property name="deletable">False</property>
+    <property name="transient_for">main_window</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox3">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="install_progress_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Please be patient, Salix installation is in progress... </property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="install_progressbar">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="activity_mode">True</property>
           </object>
           <packing>
             <property name="expand">True</property>
