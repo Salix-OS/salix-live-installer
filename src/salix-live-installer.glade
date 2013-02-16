@@ -3367,8 +3367,6 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="visible">True</property>
                                         <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
-                                        <signal name="enter-notify-event" handler="on_user_pass_strength_enter_notify_event" swapped="no"/>
-                                        <signal name="leave-notify-event" handler="on_user_pass_strength_leave_notify_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3603,8 +3601,6 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="visible">True</property>
                                         <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
-                                        <signal name="enter-notify-event" handler="on_root_pass_strength_enter_notify_event" swapped="no"/>
-                                        <signal name="leave-notify-event" handler="on_root_pass_strength_leave_notify_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>

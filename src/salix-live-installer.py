@@ -193,7 +193,7 @@ class SalixLiveInstaller:
     self.LinuxNewMountColumn = builder.get_object("linux_newmount_column")
     self.WinPartColumn = builder.get_object("win_part_column")
     self.WinSizeColumn = builder.get_object("win_size_column")
-    self.WinOldSysColumn = builder.get_object("win_oldsys_column")    
+    self.WinOldSysColumn = builder.get_object("win_oldsys_column")
     self.WinNewMountColumn = builder.get_object("win_newmount_column")
     # Initialize the contextual help box
     self.context_intro = _("Contextual help.")
@@ -204,7 +204,7 @@ class SalixLiveInstaller:
     # Connect signals
     self.add_custom_signals()
     builder.connect_signals(self)
-  
+
   # General contextual help
   def on_leave_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(self.context_intro)
@@ -222,7 +222,7 @@ all settings are configured correctly."))
   def on_launch_eventbox_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Launch Salix installation. This button will not be active until \
 all settings are configured correctly."))
-  
+
   # Time contextual help
   def on_time_tab_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Access the time settings."))
@@ -1125,37 +1125,42 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.users_settings_liveclone()
   def get_password_strength(self, pwd):
     """
-    Return a number from 0 to 4 to indicate the strength of the password.
+    Returns tuple containing:
+      - a number from 0 to 4 to indicate the strength of the password.
+      - a contextual message.
     """
     if not pwd:
       score = 0
+      context_msg = ''
     else:
       score = 1
-      self.ContextLabel.set_markup(_("<b>Password strength:</b>\nLess than 5 characters"))
-      if len(pwd) >= 5:
+      min_chars = 5
+      context_msg = _("Less than {min} characters").format(min = min_chars)
+      if len(pwd) >= min_chars:
         score += 1
-        contextLabelText = _("<b>Password strength:</b>\n")
+        context_msg = ''
         if re.search(r'[A-Z]', pwd):
           score += 0.5
         else:
-          contextLabelText += _("No upper case letter...\n")
+          context_msg += "\n" + _("No upper case letter...")
         if re.search(r'[1-9]', pwd):
           score += 0.5
         else:
-          contextLabelText += _("No number...\n")
+          context_msg += "\n" + _("No number...")
         if re.search(r'[-_.,;:!?"\']', pwd):
           score += 0.5
         else:
-          contextLabelText += _("No punctuation...\n")
+          context_msg += "\n" + _("No punctuation...")
         if re.search(r'[][(){}/\<>$%*#@^]', pwd):
           score += 0.5
         else:
-          contextLabelText += _("No symbol...\n")
+          context_msg += "\n" + _("No symbol...")
         score = int(math.floor(score))
-        self.ContextLabel.set_markup(_(contextLabelText))
-    return score
+      if score == 4:
+        context_msg = _("Satisfactory!")
+    return (score, context_msg)
   def set_progressbar_strength(self, pwd, draw_widget):
-    strength = self.get_password_strength(pwd)
+    strength, context_msg = self.get_password_strength(pwd)
     gc = draw_widget.window.new_gc()
     bg_color = draw_widget.get_colormap().alloc_color("#FFFFFF")
     border_color = draw_widget.get_colormap().alloc_color("#000000")
@@ -1167,17 +1172,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       progress_color = draw_widget.get_colormap().alloc_color("#CCCC00")
     elif strength == 4:
       progress_color = draw_widget.get_colormap().alloc_color("#00FF00")
-      self.ContextLabel.set_markup(_("<b>Password strength:</b>\n\nSatisfactory!"))
     gc.set_foreground(bg_color)
     draw_widget.window.draw_rectangle(gc, True, 0, 1, 80, 20)
     gc.set_foreground(progress_color)
     draw_widget.window.draw_rectangle(gc, True, 0, 1, 20 * strength, 20)
     gc.set_foreground(border_color)
     draw_widget.window.draw_rectangle(gc, False, 0, 1, 80, 20)
+    context_label_text = "<b>" + _("Password strength:") + "</b>\n"
+    self.ContextLabel.set_markup(context_label_text + context_msg)
 
   def on_user_pass1_entry_changed(self, widget, data=None):
     self.set_progressbar_strength(widget.get_text().strip(), self.UserPassStrength)
-  def on_user_visible_checkbutton_toggled(self, widget, data=None):                
+  def on_user_visible_checkbutton_toggled(self, widget, data=None):
     self.UserPass1Entry.set_visibility(self.UserVisibleCheckButton.get_active())
     self.UserPass2Entry.set_visibility(self.UserVisibleCheckButton.get_active())
   def check_login(self, login):
@@ -1293,7 +1299,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
 # Info window skeleton:
 def info_dialog(message, parent = None):
   """
-  Display an information message.
+  Displays an information message.
 
   """
   dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
@@ -1305,7 +1311,7 @@ def info_dialog(message, parent = None):
 # Error window skeleton:
 def error_dialog(message, parent = None):
   """
-  Display an error message.
+  Displays an error message.
   """
   dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
   dialog.set_markup(message)
@@ -1314,7 +1320,7 @@ def error_dialog(message, parent = None):
   dialog.destroy()
 
 # Launch the application
-if __name__ == '__main__':        
+if __name__ == '__main__':
   # If no root privilege, displays error message and exit
   is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
   if is_test:

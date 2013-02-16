@@ -26,7 +26,7 @@ def findCurrentKeymap(mountPoint = None):
     - /etc/rc.d/rc.keymap, or
     - in the 'keyb=' kernel parameter
   The detected keymap is then checked against the first column of one of the files: {0}
-  Return None if not found
+  Returns None if not found
   """.format(' '.join(_keymapsLocation))
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -62,7 +62,7 @@ def findCurrentKeymap(mountPoint = None):
 
 def listAvailableKeymaps(mountPoint = None):
   """
-  Return a list of couple (keymap, keyboardType).
+  Returns a list of couple (keymap, keyboardType).
   'keymap' is a Console keymap as found in /usr/share/kbd/
   'keyboardType' is either 'azerty', 'qwerty', 'qwertz', etc and is there only for information
   The keymaps are extracted from one of the files: {0}
@@ -96,7 +96,7 @@ def listAvailableKeymaps(mountPoint = None):
 
 def isNumLockEnabledByDefault(mountPoint = None):
   """
-  Return True if the num lock is enabled by default.
+  Returns True if the num lock is enabled by default.
   To do this, the execute bit of /etc/rc.d/rc.numlock is checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):
@@ -107,7 +107,7 @@ def isNumLockEnabledByDefault(mountPoint = None):
 
 def isIbusEnabledByDefault(mountPoint = None):
   """
-  Return True if the IBus is enabled by default.
+  Returns True if the IBus is enabled by default.
   To do this, the execute bit of /usr/bin/ibus-daemon and /etc/profile.d/ibus.sh are checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):

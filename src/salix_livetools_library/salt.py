@@ -21,14 +21,14 @@ from execute import execCall
 
 def getSaLTVersion():
   """
-  Return the SaLT version if run in a SaLT Live environment
+  Returns the SaLT version if run in a SaLT Live environment
   """
   _checkLive()
   return open('/mnt/salt/salt-version', 'r').read().strip()
 
 def isSaLTVersionAtLeast(version):
   """
-  Return True if the SaLT version is at least 'version'.
+  Returns True if the SaLT version is at least 'version'.
   """
   v = getSaLTVersion()
   def vercmp(v1, v2):
@@ -42,7 +42,7 @@ def isSaLTVersionAtLeast(version):
 
 def isSaLTLiveEnv():
   """
-  Return True if it is executed in a SaLT Live environment, False otherwise
+  Returns True if it is executed in a SaLT Live environment, False otherwise
   """
   return os.path.isfile('/mnt/salt/salt-version') and os.path.isfile('/mnt/salt/tmp/distro_infos')
 
@@ -52,7 +52,7 @@ def _checkLive():
 
 def isSaLTLiveCloneEnv():
   """
-  Return True if it is executed in a SaLT LiveClone environment, False otherwise
+  Returns True if it is executed in a SaLT LiveClone environment, False otherwise
   """
   if not isSaLTLiveEnv():
     return False
@@ -62,7 +62,7 @@ def isSaLTLiveCloneEnv():
 
 def getSaLTLiveMountPoint():
   """
-  Return the SaLT source mount point path. It could be the mount point of the optical drive or the USB stick for example.
+  Returns the SaLT source mount point path. It could be the mount point of the optical drive or the USB stick for example.
   """
   _checkLive()
   try:
@@ -75,7 +75,7 @@ def getSaLTLiveMountPoint():
 
 def getSaLTRootDir():
   """
-  Return the SaLT ROOT_DIR, which is the directory containing SaLT modules.
+  Returns the SaLT ROOT_DIR, which is the directory containing SaLT modules.
   This is not the full path but a relative path to BASEDIR.
   """
   _checkLive()
@@ -88,7 +88,7 @@ def getSaLTRootDir():
 
 def getSaLTIdentFile():
   """
-  Return the SaLT IDENT_FILE, which is the file located at the root of a filesystem containing some SaLT information for this Live session.
+  Returns the SaLT IDENT_FILE, which is the file located at the root of a filesystem containing some SaLT information for this Live session.
   This is not the full path but a relative path to the mount point.
   """
   _checkLive()
@@ -101,7 +101,7 @@ def getSaLTIdentFile():
 
 def getSaLTBaseDir():
   """
-  Return the SaLT BASEDIR, which is the directory containing all files for this Live session.
+  Returns the SaLT BASEDIR, which is the directory containing all files for this Live session.
   This is not a full path but a relative path to the mount point.
   """
   _checkLive()
@@ -119,7 +119,7 @@ def getSaLTBaseDir():
 
 def listSaLTModules():
   """
-  Return the list of SaLT modules for this Live session.
+  Returns the list of SaLT modules for this Live session.
   """
   _checkLive()
   moduledir = '{0}/{1}/{2}/modules'.format(getSaLTLiveMountPoint(), getSaLTBaseDir(), getSaLTRootDir())

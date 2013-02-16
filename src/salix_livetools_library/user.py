@@ -20,7 +20,7 @@ _minUIDForRegularUser = 1000
 
 def listRegularSystemUsers(mountPoint = None):
   """
-  Return a sorted list of regular users, i.e. users with id ≥ 1000.
+  Returns a sorted list of regular users, i.e. users with id ≥ 1000.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -46,7 +46,7 @@ def createSystemUser(user, group = '', groups = [
   'scanner',
   'video' ], password = None, shell = '/bin/bash', mountPoint = None):
   """
-  Create a user 'user' in the system under the 'mountPoint'.
+  Creates a user 'user' in the system under the 'mountPoint'.
   If the 'group' is specified, and is different than __default__, it will be used.
   If the 'group' is '' then the default group will be used.
   If the 'group' is None then a group of the same name of the user will be created for the new user to be part of.
@@ -115,7 +115,7 @@ def checkPasswordSystemUser(user, password, mountPoint = None):
 
 def deleteSystemUser(user, mountPoint = None):
   """
-  Remove the specified 'user' from the system under the 'mountPoint'.
+  Removes the specified 'user' from the system under the 'mountPoint'.
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):

@@ -15,7 +15,7 @@ from execute import *
 
 def _getMountPoint(device):
   """
-  Find the mount point of 'device' or None if not mounted
+  Finds the mount point of 'device' or None if not mounted
   Copied from 'mounting' module to break circular dependencies
   """
   mountpoint = None
@@ -29,7 +29,9 @@ def _getMountPoint(device):
   return mountpoint
 
 def getHumanSize(size):
-  """Return the human readable format of the size in bytes"""
+  """
+  Returns the human readable format of the size in bytes
+  """
   units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
   unit = 0
   sizeHuman = float(size)
@@ -40,7 +42,7 @@ def getHumanSize(size):
 
 def getSizes(path):
   """
-  Compute the different sizes of the fileystem denoted by path (either a device or a file in filesystem).
+  Computes the different sizes of the fileystem denoted by path (either a device or a file in filesystem).
   Return the following sizes (in a dictionary):
     - size (total size)
     - free (total free size)
@@ -83,10 +85,10 @@ def getSizes(path):
 
 def getUsedSize(path, blocksize = None):
   """
-  Return the size of the space used by files and folders under 'path'.
+  Returns the size of the space used by files and folders under 'path'.
   If 'blocksize' is specified, mimic the space that will be used if the blocksize of the underlying filesystem where the one specified.
   This could be useful if used to transfer files from one directory to another when the target filesystem use another blocksize.
-  Return a tuple with (size, sizeHuman)
+  Returns a tuple with (size, sizeHuman)
   """
   cmd = ['du', '-c', '-s']
   if blocksize:

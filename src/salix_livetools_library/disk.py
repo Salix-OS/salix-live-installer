@@ -22,7 +22,7 @@ from stat import *
 
 def getDisks():
   """
-  Return the disks devices (without /dev/) connected to the computer. 
+  Returns the disks devices (without /dev/) connected to the computer. 
   RAID and LVM are not supported yet.
   """
   ret = []
@@ -33,10 +33,12 @@ def getDisks():
 
 def getDiskInfo(diskDevice):
   """
-  Return a dictionary with the following disk device's info:
-    model name, size in bytes, human readable size and whether it is removable or not.
+  Returns a dictionary with the following disk device's info:
+    - model: model name
+    - size: size in bytes
+    - sizeHuman: human readable size
+    - removable: whether it is removable or not
   diskDevice should no be prefixed with '/dev/'
-  dictionary key: model, size, sizeHuman, removable
   """
   if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
     modelName = open('/sys/block/{0}/device/model'.format(diskDevice), 'r').read().strip()
@@ -53,7 +55,7 @@ def getDiskInfo(diskDevice):
 
 def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
   """
-  Return partitions matching exclusion filters.
+  Returns partitions matching exclusion filters.
   """
   if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
     parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
@@ -68,7 +70,7 @@ def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
 
 def getSwapPartitions():
   """
-  Return partition devices with Linux Swap type.
+  Returns partition devices with Linux Swap type.
   """
   ret = []
   for diskDevice in getDisks():
@@ -78,7 +80,7 @@ def getSwapPartitions():
 
 def getPartitionInfo(partitionDevice):
   """
-  Return a dictionary with the partition information:
+  Returns a dictionary with the partition information:
     - fstype
     - label
     - size

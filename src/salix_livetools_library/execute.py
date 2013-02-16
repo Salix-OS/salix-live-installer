@@ -14,23 +14,23 @@ import os
 
 def execCall(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
-  Execute a command and return the exit code.
+  Executes a command and return the exit code.
   The command is executed by default in a /bin/sh shell with en_US locale.
   The output of the command is not read. With some commands, it may hang if the output is not read when run in a shell.
-  For this type of command, it is preferable to use execGetOutput even the return value is not read or to use shell = False.
+  For this type of command, it is preferable to use execGetOutput even the return value is not read, or to use shell = False.
   """
   return subprocess.call(cmd, shell = shell, env = env)
 
 def execCheck(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
-  Execute a command and return 0 if OK or a subprocess.CalledProcessorError exception in case of error.
+  Executes a command and return 0 if Ok or a subprocess.CalledProcessorError exception in case of error.
   The command is executed by default in a /bin/sh shell with en_US locale.
   """
   return subprocess.check_call(cmd, shell = shell, env = env)
 
 def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}):
   """
-  Execute a command and return its output in a list, line by line.
+  Executes a command and return its output in a list, line by line.
   In case of error, it returns a subprocess.CalledProcessorError exception.
   The command is executed by default in a /bin/sh shell with en_US locale.
   """
@@ -62,7 +62,7 @@ def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}
 
 def checkRoot():
   """
-  Raise an Exception if you run this code without root permissions
+  Raises an Exception if you run this code without root permissions
   """
   if os.getuid() != 0:
     raise Exception('You need root permissions.')

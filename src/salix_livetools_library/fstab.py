@@ -11,7 +11,7 @@ import os
 
 def createFsTab(fstabMountPoint):
   """
-  Generate an empty /etc/fstab file
+  Generates an empty /etc/fstab file
   """
   try:
     os.mkdir('{0}/etc'.format(fstabMountPoint))

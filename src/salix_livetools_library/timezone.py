@@ -19,7 +19,7 @@ from execute import checkRoot
 
 def listTimeZones(mountPoint = None):
   """
-  Return a dictionary of time zones, by continent.
+  Returns a dictionary of time zones, by continent.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -32,7 +32,7 @@ def listTimeZones(mountPoint = None):
 
 def listTZContinents(mountPoint = None):
   """
-  Return a sorted list of continents for time zones.
+  Returns a sorted list of continents for time zones.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -42,7 +42,7 @@ def listTZContinents(mountPoint = None):
 
 def listTZCities(continent, mountPoint = None):
   """
-  Return a sorted list of cities for a specific continent's time zone.
+  Returns a sorted list of cities for a specific continent's time zone.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -55,7 +55,7 @@ def listTZCities(continent, mountPoint = None):
 
 def getDefaultTimeZone(mountPoint = None):
   """
-  Return the default time zone, by reading the /etc/localtime-copied-from symlink.
+  Returns the default time zone, by reading the /etc/localtime-copied-from symlink.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -85,7 +85,7 @@ def setDefaultTimeZone(timezone, mountPoint = None):
 
 def isNTPEnabledByDefault(mountPoint = None):
   """
-  Return True if the NTP service is enabled by default.
+  ReturnsTrue if the NTP service is enabled by default.
   To do this, the execute bit of /etc/rc.d/rc.ntpd is checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):

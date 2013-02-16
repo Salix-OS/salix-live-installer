@@ -18,7 +18,7 @@ from execute import *
 
 def listAvailableLocales(mountPoint = None):
   """
-  Return a list of couples (name, title) for available utf8 locales on the system under 'mountPoint'.
+  Returns a list of couples (name, title) for available utf8 locales on the system under 'mountPoint'.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -33,14 +33,14 @@ def listAvailableLocales(mountPoint = None):
 
 def getCurrentLocale():
   """
-  Return the current used locale in the current environment.
+  Returns the current used locale in the current environment.
   """
   lang, enc = locale.getdefaultlocale()
   return "{0}.{1}".format(lang, enc.lower())
 
 def getDefaultLocale(mountPoint = None):
   """
-  Return the default locale as defined in /etc/profile.d/lang.c?sh
+  Returns the default locale as defined in /etc/profile.d/lang.c?sh
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -60,7 +60,7 @@ def getDefaultLocale(mountPoint = None):
 
 def setDefaultLocale(locale, mountPoint = None):
   """
-    Set the default locale in the /etc/profile.d/lang.c?sh file
+  Set the default locale in the /etc/profile.d/lang.c?sh file
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
