@@ -87,7 +87,7 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Paris</col>
+        <col id="0">Paris</col>
       </row>
     </data>
   </object>
@@ -98,7 +98,7 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Paris</col>
+        <col id="0">Paris</col>
       </row>
     </data>
   </object>
@@ -122,12 +122,12 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">fr-latin9</col>
-        <col id="1" translatable="yes">azerty</col>
+        <col id="0">fr-latin9</col>
+        <col id="1">azerty</col>
       </row>
       <row>
-        <col id="0" translatable="yes">us</col>
-        <col id="1" translatable="yes">qwerty</col>
+        <col id="0">us</col>
+        <col id="1">qwerty</col>
       </row>
     </data>
   </object>
@@ -135,28 +135,25 @@ MA 02110-1301, USA.</property>
     <columns>
       <!-- column-name type -->
       <column type="gchararray"/>
+      <!-- column-name label -->
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">ext2</col>
+        <col id="0">none</col>
+        <col id="1">Do not format</col>
       </row>
       <row>
-        <col id="0" translatable="yes">ext3</col>
+        <col id="0">ext2</col>
+        <col id="1">ext2</col>
       </row>
       <row>
-        <col id="0" translatable="yes">ext4</col>
+        <col id="0">ext3</col>
+        <col id="1">ext3</col>
       </row>
       <row>
-        <col id="0" translatable="yes">reiserfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">xfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">jfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Select...</col>
+        <col id="0">ext4</col>
+        <col id="1">ext4</col>
       </row>
     </data>
   </object>
@@ -167,22 +164,22 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">/home</col>
+        <col id="0">/home</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/tmp</col>
+        <col id="0">/tmp</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/usr</col>
+        <col id="0">/usr</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/var</col>
+        <col id="0">/var</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/mnt/custom</col>
+        <col id="0">/mnt/custom</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Select...</col>
+        <col id="0">Select...</col>
       </row>
     </data>
   </object>
@@ -196,7 +193,9 @@ MA 02110-1301, USA.</property>
       <column type="gchararray"/>
       <!-- column-name old_format -->
       <column type="gchararray"/>
-      <!-- column-name new_format -->
+      <!-- column-name new_format_code -->
+      <column type="gchararray"/>
+      <!-- column-name new_format_label -->
       <column type="gchararray"/>
       <!-- column-name new_mountpoint -->
       <column type="gchararray"/>
@@ -204,37 +203,45 @@ MA 02110-1301, USA.</property>
       <column type="gchararray"/>
       <!-- column-name visual_mountpoint -->
       <column type="gchararray"/>
+      <!-- column-name rawpart -->
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">/dev/sda1</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">ntfs</col>
-        <col id="4" translatable="yes">Do not format!</col>
-        <col id="5" translatable="yes">Do not mount!</col>
-        <col id="6" translatable="yes">gtk-add</col>
-        <col id="7" translatable="yes">gtk-yes</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda1 (Salix)</col>
+        <col id="2">160GB</col>
+        <col id="3">ntfs</col>
+        <col id="4">ext4</col>
+        <col id="5">ext4</col>
+        <col id="6">Do not mount</col>
+        <col id="7">gtk-yes</col>
+        <col id="8">gtk-edit</col>
+        <col id="9">sda1</col>
       </row>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">/dev/sda2</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">xfs</col>
-        <col id="4" translatable="yes">Do not format!</col>
-        <col id="5" translatable="yes">Do not mount!</col>
-        <col id="6" translatable="yes">gtk-add</col>
-        <col id="7" translatable="yes">gtk-yes</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda2 (Homes)</col>
+        <col id="2">160GB</col>
+        <col id="3">xfs</col>
+        <col id="4">none</col>
+        <col id="5">Do not format</col>
+        <col id="6">/home</col>
+        <col id="7">gtk-no</col>
+        <col id="8">gtk-yes</col>
+        <col id="9">sda2</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Sandisk (8GB)</col>
-        <col id="1" translatable="yes">/dev/sdb1</col>
-        <col id="2" translatable="yes">8GB</col>
-        <col id="3" translatable="yes">fat32</col>
-        <col id="4" translatable="yes">Do not format!</col>
-        <col id="5" translatable="yes">Do not mount!</col>
-        <col id="6" translatable="yes">gtk-add</col>
-        <col id="7" translatable="yes">gtk-yes</col>
+        <col id="0">Sandisk (8GB)</col>
+        <col id="1">sdb1 (Data)</col>
+        <col id="2">8GB</col>
+        <col id="3">fat32</col>
+        <col id="4">none</col>
+        <col id="5">Do not format</col>
+        <col id="6">Do not mount</col>
+        <col id="7">gtk-no</col>
+        <col id="8">gtk-edit</col>
+        <col id="9">sdb1</col>
       </row>
     </data>
   </object>
@@ -247,8 +254,8 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">fr_FR.utf8</col>
-        <col id="1" translatable="yes">French locale for France</col>
+        <col id="0">fr_FR.utf8</col>
+        <col id="1">French locale for France</col>
       </row>
     </data>
   </object>
@@ -256,25 +263,25 @@ MA 02110-1301, USA.</property>
     <columns>
       <!-- column-name type -->
       <column type="gchararray"/>
+      <!-- column-name label -->
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">ext2</col>
+        <col id="0">none</col>
+        <col id="1">Do not format</col>
       </row>
       <row>
-        <col id="0" translatable="yes">ext3</col>
+        <col id="0">ext2</col>
+        <col id="1">ext2</col>
       </row>
       <row>
-        <col id="0" translatable="yes">ext4</col>
+        <col id="0">ext3</col>
+        <col id="1">ext3</col>
       </row>
       <row>
-        <col id="0" translatable="yes">reiserfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">xfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">jfs</col>
+        <col id="0">ext4</col>
+        <col id="1">ext4</col>
       </row>
     </data>
   </object>
@@ -293,51 +300,25 @@ MA 02110-1301, USA.</property>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">sda1 (Salix)</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">ntfs</col>
-        <col id="4" translatable="yes">sda1</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda1 (Salix)</col>
+        <col id="2">160GB</col>
+        <col id="3">ntfs</col>
+        <col id="4">sda1</col>
       </row>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">sda2 (Homes)</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">xfs</col>
-        <col id="4" translatable="yes">sda2</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda2 (Homes)</col>
+        <col id="2">160GB</col>
+        <col id="3">xfs</col>
+        <col id="4">sda2</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Sandisk (8GB)</col>
-        <col id="1" translatable="yes">sdb1 (Data)</col>
-        <col id="2" translatable="yes">8GB</col>
-        <col id="3" translatable="yes">fat32</col>
-        <col id="4" translatable="yes">sdb1</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="month_list_store">
-    <columns>
-      <!-- column-name month -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">January</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">February</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">March</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">April</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">May</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">June</col>
+        <col id="0">Sandisk (8GB)</col>
+        <col id="1">sdb1 (Data)</col>
+        <col id="2">8GB</col>
+        <col id="3">fat32</col>
+        <col id="4">sdb1</col>
       </row>
     </data>
   </object>
@@ -361,10 +342,10 @@ MA 02110-1301, USA.</property>
             <child>
               <object class="GtkButton" id="button_quit">
                 <property name="label">gtk-quit</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                 <signal name="enter-notify-event" handler="on_button_quit_enter_notify_event" swapped="no"/>
@@ -384,11 +365,11 @@ MA 02110-1301, USA.</property>
                 <signal name="enter-notify-event" handler="on_launch_eventbox_enter_notify_event" swapped="no"/>
                 <child>
                   <object class="GtkButton" id="install_button">
-                    <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
                     <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                     <signal name="enter-notify-event" handler="on_install_button_enter_notify_event" swapped="no"/>
                     <signal name="clicked" handler="on_install_button_clicked" swapped="no"/>
@@ -448,11 +429,11 @@ MA 02110-1301, USA.</property>
             <property name="spacing">5</property>
             <child>
               <object class="GtkButton" id="about_link">
-                <property name="use_action_appearance">False</property>
                 <property name="width_request">200</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="relief">none</property>
                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                 <signal name="enter-notify-event" handler="on_about_link_enter_notify_event" swapped="no"/>
@@ -526,12 +507,12 @@ MA 02110-1301, USA.</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkButton" id="time_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_time_tab_enter_notify_event" swapped="no"/>
@@ -581,12 +562,12 @@ MA 02110-1301, USA.</property>
                         </child>
                         <child>
                           <object class="GtkButton" id="keyboard_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
                             <property name="has_default">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_keyboard_tab_enter_notify_event" swapped="no"/>
@@ -636,10 +617,10 @@ MA 02110-1301, USA.</property>
                         </child>
                         <child>
                           <object class="GtkButton" id="locale_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_locale_tab_enter_notify_event" swapped="no"/>
@@ -688,10 +669,10 @@ MA 02110-1301, USA.</property>
                         </child>
                         <child>
                           <object class="GtkButton" id="partition_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_partition_tab_enter_notify_event" swapped="no"/>
@@ -740,10 +721,10 @@ MA 02110-1301, USA.</property>
                         </child>
                         <child>
                           <object class="GtkButton" id="users_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_users_tab_enter_notify_event" swapped="no"/>
@@ -793,10 +774,10 @@ MA 02110-1301, USA.</property>
                         </child>
                         <child>
                           <object class="GtkButton" id="packages_tab">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                             <signal name="enter-notify-event" handler="on_packages_tab_enter_notify_event" swapped="no"/>
@@ -1553,10 +1534,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkCheckButton" id="ntp_checkbutton">
                                 <property name="label" translatable="yes">Use NTP service</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="image_position">right</property>
                                 <property name="active">True</property>
@@ -1587,10 +1568,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkButton" id="time_undo">
                                 <property name="label">gtk-undo</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_time_undo_enter_notify_event" swapped="no"/>
@@ -1605,10 +1586,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkButton" id="time_apply">
                                 <property name="label">gtk-apply</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_time_apply_enter_notify_event" swapped="no"/>
@@ -1665,10 +1646,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkButton" id="keyboard_undo">
                                 <property name="label">gtk-undo</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_keyboard_undo_enter_notify_event" swapped="no"/>
@@ -1682,10 +1663,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             </child>
                             <child>
                               <object class="GtkButton" id="keyboard_apply">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_keyboard_apply_enter_notify_event" swapped="no"/>
                                 <signal name="clicked" handler="on_keyboard_apply_clicked" swapped="no"/>
@@ -1794,10 +1775,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkCheckButton" id="numlock_checkbutton">
                                 <property name="label" translatable="yes">Activate numlock</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_numlock_checkbutton_toggled" swapped="no"/>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -1812,10 +1793,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkCheckButton" id="ibus_checkbutton">
                                 <property name="label" translatable="yes">Activate IBus </property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="relief">none</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_ibus_checkbutton_toggled" swapped="no"/>
@@ -1940,10 +1921,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             <child>
                               <object class="GtkButton" id="locale_undo">
                                 <property name="label">gtk-undo</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_locale_undo_enter_notify_event" swapped="no"/>
@@ -1957,10 +1938,10 @@ Contextual help triggered by the mouse position is available each step of the wa
                             </child>
                             <child>
                               <object class="GtkButton" id="locale_apply">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_locale_apply_enter_notify_event" swapped="no"/>
                                 <signal name="clicked" handler="on_locale_apply_clicked" swapped="no"/>
@@ -2169,10 +2150,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="can_focus">False</property>
                             <child>
                               <object class="GtkButton" id="modify_partition_button">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="clicked" handler="on_modify_partition_button_clicked" swapped="no"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox44">
@@ -2213,10 +2194,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             </child>
                             <child>
                               <object class="GtkButton" id="do_not_modify_partition_button">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="clicked" handler="on_do_not_modify_partition_button_clicked" swapped="no"/>
                                 <child>
                                   <object class="GtkHBox" id="hbox46">
@@ -2311,7 +2292,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 <signal name="enter-notify-event" handler="on_main_partition_list_enter_notify_event" swapped="no"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="main_disk_column">
-                                    <property name="title">Disk</property>
+                                    <property name="title" translatable="yes">Disk</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="main_disk_renderer_text"/>
@@ -2323,7 +2304,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="main_part_column">
-                                    <property name="title">Partition</property>
+                                    <property name="title" translatable="yes">Partition</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="main_part_renderer_text"/>
@@ -2335,7 +2316,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="main_size_column">
-                                    <property name="title">Size</property>
+                                    <property name="title" translatable="yes">Size</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="main-size_renderer_text"/>
@@ -2347,7 +2328,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="main_format_column">
-                                    <property name="title">File System</property>
+                                    <property name="title" translatable="yes">File System</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="main_format_renderer_text"/>
@@ -2369,10 +2350,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                         <child>
                           <object class="GtkCheckButton" id="external_device_checkbutton">
                             <property name="label" translatable="yes">Display attached external devices</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="on_external_device_checkbutton_toggled" swapped="no"/>
                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -2434,12 +2415,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="model">main_format_list_store</property>
-                                        <property name="active">2</property>
                                         <property name="has_frame">False</property>
                                         <child>
                                           <object class="GtkCellRendererText" id="format_list"/>
                                           <attributes>
-                                            <attribute name="text">0</attribute>
+                                            <attribute name="text">1</attribute>
                                           </attributes>
                                         </child>
                                       </object>
@@ -2470,11 +2450,27 @@ If you already have all the needed partitions, please click on the button 'Do no
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="main_partition_apply">
-                                <property name="use_action_appearance">False</property>
+                              <object class="GtkButton" id="main_partition_undo">
+                                <property name="label">gtk-undo</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_stock">True</property>
+                                <signal name="clicked" handler="on_main_partition_undo_clicked" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="main_partition_apply">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_main_partition_apply_enter_notify_event" swapped="no"/>
                                 <signal name="clicked" handler="on_main_partition_apply_clicked" swapped="no"/>
@@ -2514,7 +2510,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
-                                <property name="position">2</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                           </object>
@@ -2563,17 +2559,18 @@ If you already have all the needed partitions, please click on the button 'Do no
                               <object class="GtkTreeView" id="linux_partition_list">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="model">linux_partition_list_store</property>
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
-                                <property name="search_column">0</property>
+                                <property name="search_column">1</property>
+                                <property name="tooltip_column">0</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_linux_partition_list_enter_notify_event" swapped="no"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_disk_column">
                                     <property name="visible">False</property>
-                                    <property name="title">Disk</property>
-                                    <property name="expand">True</property>
+                                    <property name="title" translatable="yes">Disk</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="linux_renderer_text"/>
                                       <attributes>
@@ -2584,7 +2581,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_part_column">
-                                    <property name="title">Partition</property>
+                                    <property name="title" translatable="yes">Partition</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="linux_part_renderer_text"/>
@@ -2596,7 +2593,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_size_column">
-                                    <property name="title">Size</property>
+                                    <property name="title" translatable="yes">Size</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="linux_size_renderer_text"/>
@@ -2608,7 +2605,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_oldsys_column">
-                                    <property name="title">Current FS</property>
+                                    <property name="title" translatable="yes">Current FS</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="linux_oldsys_renderer_text"/>
@@ -2620,44 +2617,46 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_newsys_column">
-                                    <property name="title">Format as:</property>
+                                    <property name="title" translatable="yes">Format as:</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererPixbuf" id="linux_newsys_cellrenderer_pixbuf"/>
                                       <attributes>
-                                        <attribute name="stock-id">6</attribute>
+                                        <attribute name="stock-id">7</attribute>
                                       </attributes>
                                     </child>
                                     <child>
                                       <object class="GtkCellRendererCombo" id="linux_newsys_renderer_combo">
+                                        <signal name="changed" handler="on_linux_newsys_renderer_combo_changed" swapped="no"/>
                                         <signal name="editing-canceled" handler="on_linux_newsys_renderer_combo_editing_canceled" swapped="no"/>
                                         <signal name="editing-started" handler="on_linux_newsys_renderer_combo_editing_started" swapped="no"/>
                                         <signal name="edited" handler="on_linux_newsys_renderer_combo_edited" swapped="no"/>
                                       </object>
                                       <attributes>
-                                        <attribute name="text">4</attribute>
+                                        <attribute name="text">5</attribute>
                                       </attributes>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="linux_newmount_column">
-                                    <property name="title">Mount as:</property>
+                                    <property name="title" translatable="yes">Mount as:</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererPixbuf" id="linux_newmount_cellrenderer_pixbuf"/>
                                       <attributes>
-                                        <attribute name="stock-id">7</attribute>
+                                        <attribute name="stock-id">8</attribute>
                                       </attributes>
                                     </child>
                                     <child>
                                       <object class="GtkCellRendererCombo" id="linux_newmount_renderer_combo">
+                                        <signal name="changed" handler="on_linux_newmount_renderer_combo_changed" swapped="no"/>
                                         <signal name="editing-canceled" handler="on_linux_newmount_renderer_combo_editing_canceled" swapped="no"/>
                                         <signal name="editing-started" handler="on_linux_newmount_renderer_combo_editing_started" swapped="no"/>
                                         <signal name="edited" handler="on_linux_newmount_renderer_combo_edited" swapped="no"/>
                                       </object>
                                       <attributes>
-                                        <attribute name="text">5</attribute>
+                                        <attribute name="text">6</attribute>
                                       </attributes>
                                     </child>
                                   </object>
@@ -2695,10 +2694,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="layout_style">end</property>
                             <child>
                               <object class="GtkButton" id="linux_partition_apply">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_linux_partition_apply_enter_notify_event" swapped="no"/>
                                 <signal name="clicked" handler="on_linux_partition_apply_clicked" swapped="no"/>
@@ -2790,17 +2789,18 @@ If you already have all the needed partitions, please click on the button 'Do no
                               <object class="GtkTreeView" id="win_partition_list">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="has_tooltip">True</property>
                                 <property name="model">win_partition_list_store</property>
                                 <property name="headers_clickable">False</property>
                                 <property name="rules_hint">True</property>
                                 <property name="search_column">0</property>
+                                <property name="tooltip_column">0</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_win_partition_list_enter_notify_event" swapped="no"/>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="win_disk_column">
                                     <property name="visible">False</property>
-                                    <property name="title">Disk</property>
-                                    <property name="expand">True</property>
+                                    <property name="title" translatable="yes">Disk</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="win_disk_renderer_text"/>
                                       <attributes>
@@ -2811,7 +2811,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="win_part_column">
-                                    <property name="title">Partition</property>
+                                    <property name="title" translatable="yes">Partition</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="win_part_renderer_text"/>
@@ -2823,7 +2823,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="win_size_column">
-                                    <property name="title">Size</property>
+                                    <property name="title" translatable="yes">Size</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererText" id="win_size_renderer_text"/>
@@ -2834,11 +2834,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkTreeViewColumn" id="win_oldsys_column">
-                                    <property name="title">File System</property>
+                                  <object class="GtkTreeViewColumn" id="win_format_column">
+                                    <property name="title" translatable="yes">File System</property>
                                     <property name="expand">True</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="win_oldsys_renderer_text"/>
+                                      <object class="GtkCellRendererText" id="win_format_renderer_text"/>
                                       <attributes>
                                         <attribute name="text">3</attribute>
                                       </attributes>
@@ -2847,7 +2847,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                 </child>
                                 <child>
                                   <object class="GtkTreeViewColumn" id="win_newmount_column">
-                                    <property name="title">Mount as:</property>
+                                    <property name="title" translatable="yes">Mount as:</property>
                                     <property name="expand">True</property>
                                     <child>
                                       <object class="GtkCellRendererPixbuf" id="win_newmount_cellrenderer_pixbuf"/>
@@ -2857,6 +2857,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                     <child>
                                       <object class="GtkCellRendererCombo" id="win_newmount_renderer_combo">
+                                        <signal name="changed" handler="on_win_newmount_renderer_combo_changed" swapped="no"/>
                                         <signal name="editing-canceled" handler="on_win_newmount_renderer_combo_editing_canceled" swapped="no"/>
                                         <signal name="editing-started" handler="on_win_newmount_renderer_combo_editing_started" swapped="no"/>
                                         <signal name="edited" handler="on_win_newmount_renderer_combo_edited" swapped="no"/>
@@ -2900,10 +2901,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="layout_style">end</property>
                             <child>
                               <object class="GtkButton" id="windows_partition_apply">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_windows_partition_apply_enter_notify_event" swapped="no"/>
                                 <signal name="clicked" handler="on_windows_partition_apply_clicked" swapped="no"/>
@@ -2996,7 +2997,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Main partition</property>
+                                    <property name="label">Main partition</property>
+                                    <property name="use_markup">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="ellipsize">end</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3023,7 +3027,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Home partition</property>
+                                    <property name="label">Home partition</property>
+                                    <property name="use_markup">True</property>
+                                    <property name="wrap">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3050,7 +3056,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Windows partitions</property>
+                                    <property name="label">Windows partitions</property>
+                                    <property name="use_markup">True</property>
+                                    <property name="wrap">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3077,7 +3085,9 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">Swap partitions</property>
+                                    <property name="label">Swap partitions</property>
+                                    <property name="use_markup">True</property>
+                                    <property name="wrap">True</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3102,10 +3112,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkButton" id="partition_recap_undo">
                                 <property name="label">gtk-undo</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_partition_recap_undo_enter_notify_event" swapped="no"/>
@@ -3150,10 +3160,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkCheckButton" id="clone_login_checkbutton">
-                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_clone_login_checkbutton_toggled" swapped="no"/>
                                         <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -3180,10 +3190,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="clone_login_undo">
                                             <property name="label">gtk-undo</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_clone_login_undo_enter_notify_event" swapped="no"/>
@@ -3198,10 +3208,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="clone_login_apply">
                                             <property name="label">gtk-apply</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_clone_login_apply_enter_notify_event" swapped="no"/>
@@ -3355,6 +3365,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkDrawingArea" id="user_pass_strength">
                                         <property name="width_request">100</property>
                                         <property name="visible">True</property>
+                                        <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
                                         <signal name="enter-notify-event" handler="on_user_pass_strength_enter_notify_event" swapped="no"/>
                                         <signal name="leave-notify-event" handler="on_user_pass_strength_leave_notify_event" swapped="no"/>
@@ -3411,10 +3422,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <child>
                                       <object class="GtkCheckButton" id="user_visible_checkbutton">
                                         <property name="label" translatable="yes">Do not hide</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_user_visible_checkbutton_toggled" swapped="no"/>
                                         <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -3474,10 +3485,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="users_undo">
                                             <property name="label">gtk-undo</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_users_undo_enter_notify_event" swapped="no"/>
@@ -3492,10 +3503,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="users_apply">
                                             <property name="label">gtk-apply</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_users_apply_enter_notify_event" swapped="no"/>
@@ -3590,6 +3601,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkDrawingArea" id="root_pass_strength">
                                         <property name="width_request">100</property>
                                         <property name="visible">True</property>
+                                        <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
                                         <signal name="enter-notify-event" handler="on_root_pass_strength_enter_notify_event" swapped="no"/>
                                         <signal name="leave-notify-event" handler="on_root_pass_strength_leave_notify_event" swapped="no"/>
@@ -3646,10 +3658,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     <child>
                                       <object class="GtkCheckButton" id="root_visible_checkbutton">
                                         <property name="label" translatable="yes">Do not hide</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="use_action_appearance">False</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_root_visible_checkbutton_toggled" swapped="no"/>
                                         <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -3708,10 +3720,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="rootpass_undo">
                                             <property name="label">gtk-undo</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_rootpass_undo_enter_notify_event" swapped="no"/>
@@ -3726,10 +3738,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <child>
                                           <object class="GtkButton" id="rootpass_apply">
                                             <property name="label">gtk-apply</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="use_action_appearance">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                             <signal name="enter-notify-event" handler="on_rootpass_apply_enter_notify_event" swapped="no"/>
@@ -3801,10 +3813,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkButton" id="packages_undo">
                                 <property name="label">gtk-undo</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_packages_undo_enter_notify_event" swapped="no"/>
@@ -3819,10 +3831,10 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkButton" id="packages_apply">
                                 <property name="label">gtk-apply</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="use_stock">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
                                 <signal name="enter-notify-event" handler="on_packages_apply_enter_notify_event" swapped="no"/>
@@ -3851,11 +3863,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkRadioButton" id="core_radiobutton">
                                 <property name="label" translatable="yes">Core</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">full_radiobutton</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -3905,11 +3917,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkRadioButton" id="basic_radiobutton">
                                 <property name="label" translatable="yes">Basic</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">full_radiobutton</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -3998,11 +4010,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <child>
                               <object class="GtkRadioButton" id="full_radiobutton">
                                 <property name="label" translatable="yes">Full</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="width_request">120</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="leave-notify-event" handler="on_leave_notify_event" swapped="no"/>
@@ -4256,6 +4268,32 @@ If you already have all the needed partitions, please click on the button 'Do no
       </object>
     </child>
   </object>
+  <object class="GtkListStore" id="month_list_store">
+    <columns>
+      <!-- column-name month -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">January</col>
+      </row>
+      <row>
+        <col id="0">February</col>
+      </row>
+      <row>
+        <col id="0">March</col>
+      </row>
+      <row>
+        <col id="0">April</col>
+      </row>
+      <row>
+        <col id="0">May</col>
+      </row>
+      <row>
+        <col id="0">June</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkDialog" id="progress_dialog">
     <property name="can_focus">True</property>
     <property name="has_focus">True</property>
@@ -4324,19 +4362,19 @@ If you already have all the needed partitions, please click on the button 'Do no
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">/mnt/windows</col>
+        <col id="0">/mnt/windows</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/mnt/xp</col>
+        <col id="0">/mnt/xp</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/mnt/vista</col>
+        <col id="0">/mnt/vista</col>
       </row>
       <row>
-        <col id="0" translatable="yes">/mnt/custom</col>
+        <col id="0">/mnt/custom</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Select...</col>
+        <col id="0">Select...</col>
       </row>
     </data>
   </object>
@@ -4348,37 +4386,42 @@ If you already have all the needed partitions, please click on the button 'Do no
       <column type="gchararray"/>
       <!-- column-name size -->
       <column type="gchararray"/>
-      <!-- column-name old_format -->
+      <!-- column-name format -->
       <column type="gchararray"/>
       <!-- column-name new_mountpoint -->
       <column type="gchararray"/>
       <!-- column-name visual -->
       <column type="gchararray"/>
+      <!-- column-name rawpart -->
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">/dev/sda1</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">ntfs</col>
-        <col id="4" translatable="yes">Do not mount!</col>
-        <col id="5" translatable="yes">gtk-edit</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda1 (Salix)</col>
+        <col id="2">160GB</col>
+        <col id="3">ntfs</col>
+        <col id="4">Do not mount</col>
+        <col id="5">gtk-edit</col>
+        <col id="6">sda1</col>
       </row>
       <row>
-        <col id="0" translatable="yes">WDC (320GB)</col>
-        <col id="1" translatable="yes">/dev/sda2</col>
-        <col id="2" translatable="yes">160GB</col>
-        <col id="3" translatable="yes">xfs</col>
-        <col id="4" translatable="yes">Do not mount!</col>
-        <col id="5" translatable="yes">gtk-edit</col>
+        <col id="0">WDC (320GB)</col>
+        <col id="1">sda2 (Homes)</col>
+        <col id="2">160GB</col>
+        <col id="3">xfs</col>
+        <col id="4">Do not mount</col>
+        <col id="5">gtk-edit</col>
+        <col id="6">sda2</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Sandisk (8GB)</col>
-        <col id="1" translatable="yes">/dev/sdb1</col>
-        <col id="2" translatable="yes">8GB</col>
-        <col id="3" translatable="yes">fat32</col>
-        <col id="4" translatable="yes">Do not mount!</col>
-        <col id="5" translatable="yes">gtk-edit</col>
+        <col id="0">Sandisk (8GB)</col>
+        <col id="1">sdb1 (Data)</col>
+        <col id="2">8GB</col>
+        <col id="3">fat32</col>
+        <col id="4">/mnt/data</col>
+        <col id="5">gtk-yes</col>
+        <col id="6">sdb1</col>
       </row>
     </data>
   </object>
@@ -4408,112 +4451,53 @@ If you already have all the needed partitions, please click on the button 'Do no
       </row>
     </data>
   </object>
-  <object class="GtkDialog" id="yes_no_dialog">
-    <property name="can_focus">True</property>
-    <property name="has_focus">True</property>
-    <property name="is_focus">True</property>
+  <object class="GtkMessageDialog" id="yes_no_dialog">
+    <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Confirmation needed</property>
     <property name="modal">True</property>
-    <property name="icon_name">dialog-warning</property>
-    <property name="type_hint">normal</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="icon_name">dialog-question</property>
+    <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="deletable">False</property>
     <property name="transient_for">main_window</property>
+    <property name="message_type">question</property>
+    <property name="buttons">yes-no</property>
+    <property name="text">&lt;b&gt;Message about the particular choice:&lt;/b&gt;</property>
+    <property name="use_markup">True</property>
+    <property name="secondary_text" translatable="yes">&lt;b&gt;Do you want to proceed with this?&lt;/b&gt;</property>
+    <property name="secondary_use_markup">True</property>
+    <signal name="response" handler="on_yesno_response" swapped="no"/>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkVBox" id="dialog-vbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkHButtonBox" id="dialog-action_area">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="do_not_confirm_button">
-                <property name="label">gtk-no</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_do_not_confirm_button_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
-              <object class="GtkButton" id="confirm_button">
-                <property name="label">gtk-yes</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_confirm_button_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
+              <placeholder/>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
             <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox5">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkLabel" id="yes_no_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">&lt;b&gt;Message about the particular choice: &lt;/b&gt;</property>
-                <property name="use_markup">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label26">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">&lt;b&gt;Do you want to proceed with this?&lt;/b&gt;</property>
-                <property name="use_markup">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
+          <placeholder/>
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">do_not_confirm_button</action-widget>
-      <action-widget response="0">confirm_button</action-widget>
-    </action-widgets>
   </object>
 </interface>

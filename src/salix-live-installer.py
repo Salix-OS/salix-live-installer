@@ -95,6 +95,7 @@ class SalixLiveInstaller:
     self.MainPartitionList = builder.get_object("main_partition_list")
     self.MainPartitionListStore = builder.get_object("main_partition_list_store")
     self.MainFormatCombobox = builder.get_object("main_format_combobox")
+    self.MainFormatListStore = builder.get_object("main_format_list_store")
     self.LinuxPartitionList = builder.get_object("linux_partition_list")
     self.LinuxPartitionListStore = builder.get_object("linux_partition_list_store")
     self.WindowsPartitionList = builder.get_object("win_partition_list")
@@ -102,14 +103,15 @@ class SalixLiveInstaller:
     self.RecapPartitionList = builder.get_object("recap_partition_list")
     self.RecapPartitionListStore = builder.get_object("recap_partition_list_store")
     self.YesNoDialog = builder.get_object("yes_no_dialog")
-    self.YesNoLabel = builder.get_object("yes_no_label")
     self.LinuxNewSysComboCell = builder.get_object("linux_newsys_renderer_combo")
     self.LinuxNewSysColumn = builder.get_object("linux_newsys_column")
     self.LinuxFormatListStore = builder.get_object("linux_format_list_store")
+    self.LinuxMountPointListStore = builder.get_object("linux_mountpoint_list_store")
     self.LinuxNewMountComboCell = builder.get_object("linux_newmount_renderer_combo")
     self.LinuxNewMountColumn = builder.get_object("linux_newmount_column")
     self.LinuxMountListStore = builder.get_object("linux_mountpoint_list_store")
     self.LinuxPartitionApply = builder.get_object("linux_partition_apply")
+    self.WinMountPointListStore = builder.get_object("win_mountpoint_list_store")
     self.WindowsPartitionApply = builder.get_object("windows_partition_apply")
     self.WinMountComboCell = builder.get_object("win_newmount_renderer_combo")
     self.WinMountColumn = builder.get_object("win_newmount_column")
@@ -196,12 +198,6 @@ class SalixLiveInstaller:
     # Initialize the contextual help box
     self.context_intro = _("Contextual help.")
     self.on_leave_notify_event(None)
-    # Prevent tab switching
-    self.switch_tab_lock = False
-    # Indicate if the partition wizard is done or not
-    self.partition_done = False
-    # Initialize the lock system preventing the Install button to be activated prematurely
-    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False}
     self.get_current_config()
     self.build_data_stores()
     self.update_install_button()
@@ -411,6 +407,8 @@ always following the "one application per task" rationale. '))
   def get_current_config(self):
     print 'Gathering current configuration…',
     sys.stdout.flush()
+    # Initialize the lock system preventing the Install button to be activated prematurely
+    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False}
     if self.is_test:
       self.is_live = True
       self.is_liveclone = self.is_test_clone
@@ -443,9 +441,15 @@ always following the "one application per task" rationale. '))
     self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
     self.cur_use_ibus = sltl.isIbusEnabledByDefault()
     self.cur_locale = sltl.getCurrentLocale()
+    self.partitions_step = 'none' # could be none, main, linux, win or recap
     self.partitions = []
     self.swap_partitions = []
     self.show_external_drives = False
+    self.default_format = 'ext4'
+    self.main_partition = None
+    self.main_format = None
+    self.linux_partitions = None # list of tuple as (device, format, mountpoint)
+    self.win_partitions = None # list of tuple as (device, format, mountpoint)
     self.keep_live_logins = self.is_liveclone
     self.new_login = '' # None cannot be used in a GtkEntry
     self.new_password = ''
@@ -479,6 +483,33 @@ always following the "one application per task" rationale. '))
     self.LocaleListStore.clear()
     for l in sltl.listAvailableLocales():
       self.LocaleListStore.append(l)
+    self.MainFormatListStore.clear()
+    self.LinuxFormatListStore.clear()
+    for f in (('none', _("Do not format")), 'ext2', 'ext3', 'ext4', 'jfs', 'reiserfs', 'xfs'):
+      if type(f) is tuple:
+        self.MainFormatListStore.append(f)
+        self.LinuxFormatListStore.append(f)
+      else:
+        self.MainFormatListStore.append([f, f])
+        self.LinuxFormatListStore.append([f, f])
+    self.LinuxMountPointListStore.clear()
+    for mp in ('/home', '/tmp', '/usr', '/var', '/mnt/custom', _("Do not mount")):
+      self.LinuxMountPointListStore.append([mp])
+    self.LinuxNewSysComboCell.set_property("model", self.LinuxFormatListStore)
+    self.LinuxNewSysComboCell.set_property('text-column', 1)
+    self.LinuxNewSysComboCell.set_property('editable', True)
+    self.LinuxNewSysComboCell.set_property('cell-background', '#CCCCCC')
+    self.LinuxNewMountComboCell.set_property("model", self.LinuxMountPointListStore)
+    self.LinuxNewMountComboCell.set_property('text-column', 0)
+    self.LinuxNewMountComboCell.set_property('editable', True)
+    self.LinuxNewMountComboCell.set_property('cell-background', '#CCCCCC')
+    self.WinMountPointListStore.clear()
+    for mp in ('/mnt/windows', '/mnt/xp', '/mnt/vista', '/mnt/seven', '/mnt/win8', '/mnt/data', '/mnt/custom', _("Do not mount")):
+      self.WinMountPointListStore.append([mp])
+    self.WinMountComboCell.set_property("model", self.WinMountPointListStore)
+    self.WinMountComboCell.set_property('text-column', 0)
+    self.WinMountComboCell.set_property('editable', True)
+    self.WinMountComboCell.set_property('cell-background', '#CCCCCC')
     print ' Done'
     sys.stdout.flush()
 
@@ -505,56 +536,48 @@ always following the "one application per task" rationale. '))
     self.PartitionTab.set_relief(gtk.RELIEF_NONE)
     self.UsersTab.set_relief(gtk.RELIEF_NONE)
     self.PackagesTab.set_relief(gtk.RELIEF_NONE)
-
+  def set_tabs_sensitive(self, sensitive):
+    self.TimeTab.set_sensitive(sensitive)
+    self.KeyboardTab.set_sensitive(sensitive)
+    self.LocaleTab.set_sensitive(sensitive)
+    self.PartitionTab.set_sensitive(sensitive)
+    self.UsersTab.set_sensitive(sensitive)
+    self.PackagesTab.set_sensitive(sensitive)
   def on_time_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.time_settings()
-      self.TimeTab.set_relief(gtk.RELIEF_HALF)
-      self.TimeBox.show()
-
+    self.hide_all_tabs()
+    self.TimeTab.set_relief(gtk.RELIEF_HALF)
+    self.TimeBox.show()
+    self.time_settings()
   def on_keyboard_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.keyboard_settings()
-      self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
-      self.KeyboardBox.show()
-      selection = self.KeyboardList.get_selection().get_selected_rows()[1]
-      if selection:
-        self.KeyboardList.scroll_to_cell(selection[0], None, True, 0.5)
-
+    self.hide_all_tabs()
+    self.KeyboardTab.set_relief(gtk.RELIEF_HALF)
+    self.KeyboardBox.show()
+    self.keyboard_settings()
+    selection = self.KeyboardList.get_selection().get_selected_rows()[1]
+    if selection:
+      self.KeyboardList.scroll_to_cell(selection[0], None, True, 0.5)
   def on_locale_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.locale_settings()
-      self.LocaleTab.set_relief(gtk.RELIEF_HALF)
-      self.LocaleBox.show()
-      selection = self.LocaleList.get_selection().get_selected_rows()[1]
-      if selection:
-        self.LocaleList.scroll_to_cell(selection[0], None, True, 0.5)
-
+    self.hide_all_tabs()
+    self.LocaleTab.set_relief(gtk.RELIEF_HALF)
+    self.LocaleBox.show()
+    self.locale_settings()
+    selection = self.LocaleList.get_selection().get_selected_rows()[1]
+    if selection:
+      self.LocaleList.scroll_to_cell(selection[0], None, True, 0.5)
   def on_partition_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.PartitionTab.set_relief(gtk.RELIEF_HALF)
-      if self.partition_done:
-        self.RecapPartitionBox.show()
-      else:
-        self.PartitioningBox.show()
-
+    self.hide_all_tabs()
+    self.PartitionTab.set_relief(gtk.RELIEF_HALF)
+    self.partitions_settings()
   def on_users_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.users_settings()
-      self.UsersTab.set_relief(gtk.RELIEF_HALF)
-      self.UsersBox.show()
-
+    self.hide_all_tabs()
+    self.UsersTab.set_relief(gtk.RELIEF_HALF)
+    self.UsersBox.show()
+    self.users_settings()
   def on_packages_tab_clicked(self, widget, data=None):
-    if not self.switch_tab_lock:
-      self.hide_all_tabs()
-      self.packages_settings()
-      self.PackagesTab.set_relief(gtk.RELIEF_HALF)
-      self.PackagesBox.show()
+    self.hide_all_tabs()
+    self.PackagesTab.set_relief(gtk.RELIEF_HALF)
+    self.PackagesBox.show()
+    self.packages_settings()
 
 
 
@@ -710,6 +733,27 @@ always following the "one application per task" rationale. '))
 
 
 
+  def partitions_settings(self):
+    self.PartitioningBox.hide()
+    self.MainPartitionBox.hide()
+    self.LinuxPartitionBox.hide()
+    self.WindowsPartitionBox.hide()
+    self.RecapPartitionBox.hide()
+    self.set_tabs_sensitive(self.partitions_step in ('none', 'recap'))
+    if self.partitions_step == 'none':
+      self.PartitioningBox.show()
+    elif self.partitions_step == 'main':
+      self.MainPartitionBox.show()
+      self.swap_detection()
+    elif self.partitions_step == 'linux':
+      self.LinuxPartitionBox.show()
+      self.linux_partition_settings()
+    elif self.partitions_step == 'win':
+      self.WindowsPartitionBox.show()
+      self.windows_partition_settings()
+    elif self.partitions_step == 'recap':
+      self.RecapPartitionBox.show()
+      self.recap_partition_settings()
   def on_modify_partition_button_clicked(self, widget, data=None):
     self.Window.set_sensitive(False)
     self.Window.set_accept_focus(False)
@@ -725,10 +769,45 @@ always following the "one application per task" rationale. '))
     self.Window.deiconify()
     self.on_do_not_modify_partition_button_clicked(widget)
   def on_do_not_modify_partition_button_clicked(self, widget, data=None):
+    self.partitions_step = 'main'
+    self.main_partition = None
+    self.main_format = None
+    self.linux_partitions = None
+    self.win_partitions = None
     self.partitions_settings()
-    self.swap_detection()
-  def partitions_settings(self):
-    self.PartitioningBox.hide()
+  def swap_detection(self):
+    """
+    Displays the swap partitions that were detected on the system which
+    will be automatically used by the installer.
+    Displays a warning message when no (swap) partition is found.
+    """
+    try:
+      self.swap_partitions = sltl.getSwapPartitions()
+    except subprocess.CalledProcessError as e:
+      self.swap_partitions = []
+    swap_info_msg = self.get_swap_partitions_message(True, _("Detected Swap partition(s):"),
+      _("Salix Live Installer was not able to detect a valid Swap partition on your system.\nA Swap partition could improve overall performances. \
+You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, \
+to first create a Swap partition before resuming with Salix Live Installer process."))
+    info_dialog(swap_info_msg)
+    self.main_partition_settings()
+  def get_swap_partitions_message(self, full_text, msg_if_found = None, msg_if_not_found = None):
+    msg = ''
+    if self.swap_partitions:
+      if msg_if_found:
+        msg = msg_if_found + "\n"
+      for d in self.swap_partitions:
+        if full_text:
+          msg += _("<b>{device}</b> will be automatically used as swap.").format(device = d) + "\n"
+        else:
+          msg += '<span foreground="orange" font_family="monospace" weight="bold">- {0}</span>\n'.format(d)
+    elif msg_if_not_found:
+      msg = msg_if_not_found
+    return msg
+  def on_external_device_checkbutton_toggled (self, widget, data=None):
+    self.show_external_drives = self.ExternalDeviceCheckButton.get_active()
+    self.main_partition_settings()
+  def main_partition_settings(self):
     self.partitions = []
     self.MainPartitionListStore.clear()
     for disk_device in sltl.getDisks():
@@ -741,45 +820,238 @@ always following the "one application per task" rationale. '))
           part_label = sltl.getFsLabel(p)
           if part_label:
             part_name += " (" + part_label + ")"
-          self.MainPartitionListStore.append([disk_name, part_name, sltl.getSizes("/dev/" + p)['sizeHuman'], sltl.getFsType(p), p])
-    self.MainPartitionList.set_cursor(0)
-    self.MainPartitionBox.show()
-  def swap_detection(self):
-    """
-    Display the swap partitions that were detected on the system which
-    will be automatically used by the installer.
-    Displays a warning message when no (swap) partition is found.
-    """
-    try:
-      self.swap_partitions = sltl.getSwapPartitions()
-      if self.swap_partitions:
-        swap_info_msg = "\n<b>" + _("Detected Swap partition(s):") + "</b>"
-        for d in self.swap_partitions:
-          swap_info_msg += "\n" + _("Salix Live Installer has detected a Swap partition on <b>{device}</b> and will automatically add it to your configuration.").format(device = d)
-        info_dialog(swap_info_msg)
-      else:
-        info_dialog(_("Salix Live Installer was not able to detect a valid \
-Swap partition on your system. \nA Swap partition could improve overall performances. \
-You may want to exit Salix Live Installer now and use Gparted, or any other partitioning \
-tool of your choice, to first create a Swap partition before resuming with Salix Live \
-Installer process."))
-    except subprocess.CalledProcessError as e:
-      self.swap_partitions = []
-      info_dialog(_("Salix Live Installer was not able to detect a \
-valid partition on your system. You should exit Salix Live Installer now and use \
-Gparted, or any other partitioning tool of your choice, to first create valid \
-partitions on your system before resuming with Salix Live Installer process."))
-  def on_external_device_checkbutton_toggled (self, widget, data=None):
-    self.show_external_drives = self.ExternalDeviceCheckButton.get_active()
-    self.partitions_settings()
+          part_size = sltl.getSizes("/dev/" + p)['sizeHuman']
+          part_fs = sltl.getFsType(p)
+          self.MainPartitionListStore.append([disk_name, part_name, part_size, part_fs, p])
+    if self.main_partition:
+      index = 0
+      for l in self.MainPartitionListStore:
+        if self.main_partition == l[4]:
+          self.MainPartitionList.set_cursor(index)
+          break
+        index += 1
+    index = 0
+    for f in self.MainFormatListStore:
+      if (self.main_format and f[0] == self.main_format) or (not self.main_format and f[0] == self.default_format):
+        self.MainFormatCombobox.set_active(index)
+        break
+      index += 1
   def on_main_partition_apply_clicked(self, widget, data=None):
+    model_part, it_part = self.MainPartitionList.get_selection().get_selected()
+    idx_format = self.MainFormatCombobox.get_active()
+    if it_part and idx_format:
+      self.main_partition = model_part.get_value(it_part, 4)
+      self.main_format = self.MainFormatListStore[idx_format][0]
+      self.linux_partitions = []
+      self.win_partitions = []
+      self.show_yesno_dialog(self.get_main_partition_message(True), self.on_main_partition_continue, self.on_main_partition_cancel)
+  def get_main_partition_message(self, full_text):
+    part_name = self.main_partition
+    part_label = sltl.getFsLabel(self.main_partition)
+    if part_label:
+      part_name += " (" + part_label + ")"
+    if self.main_format == 'none':
+      if full_text:
+        msg = _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = '/')
+      else:
+        msg = '<span foreground="black" font_family="monospace" weight="bold">- {0} => /</span>'.format(part_name)
+    else:
+      if full_text:
+        msg = _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = self.main_format, mountpoint = '/')
+      else:
+        msg = '<span foreground="black" font_family="monospace" weight="bold">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.main_format)
+    return msg
+  def on_main_partition_undo_clicked(self, widget, data=None):
+    self.on_main_partition_cancel()
+  def on_main_partition_continue(self):
+    self.LinuxPartitionListStore.clear()
+    self.WindowsPartitionListStore.clear()
+    for line in self.MainPartitionListStore:
+      p = line[4]
+      if p != self.main_partition:
+        disk_name = line[0]
+        part_name = line[1]
+        part_size = line[2]
+        part_fs = line[3]
+        if part_fs in ('btrfs', 'ext2', 'ext3', 'ext4', 'reiserfs', 'xfs', 'jfs'):
+          self.LinuxPartitionListStore.append([disk_name, part_name, part_size, part_fs, 'none', _("Do not format"), _("Do not mount"), 'gtk-no', 'gtk-edit', p])
+        if part_fs in ('ntfs',  'vfat'):
+          self.WindowsPartitionListStore.append([disk_name, part_name, part_size, part_fs, _("Do not mount"), 'gtk-edit', p])
+    if len(self.LinuxPartitionListStore) > 0:
+      self.partitions_step = 'linux'
+    elif len(self.WindowsPartitionListStore) > 0:
+      self.partitions_step = 'win'
+    else:
+      self.partitions_step = 'recap'
+    self.linux_partitions = None
+    self.win_partitions = None
+    self.partitions_settings()
+  def on_main_partition_cancel(self):
+    self.partitions_step = 'none'
+    self.main_partition = None
+    self.main_format = None
+    self.linux_partitions = None
+    self.win_partitions = None
+    self.partitions_settings()
+  def linux_partition_settings(self):
     pass
+  def on_linux_newsys_renderer_combo_editing_started(self, widget, editable, path):
+    self.LinuxPartitionApply.set_sensitive(False)
+    self.editable_combo = editable # keep it for later
+  def on_linux_newsys_renderer_combo_changed(self, widget, path, new_iter):
+    e = gtk.gdk.Event(gtk.gdk.FOCUS_CHANGE)
+    e.window = self.LinuxPartitionList.window
+    e.send_event = True
+    e.in_ = False
+    self.editable_combo.emit('focus-out-event', e)
+  def on_linux_newsys_renderer_combo_edited(self, widget, path, new_text, data=None):
+    model = self.LinuxPartitionListStore
+    it = model.get_iter(path)
+    if new_text == _("Do not format"):
+      new_value = 'none'
+    else:
+      new_value = new_text
+    if new_value == 'none':
+      model.set_value(it, 7, 'gtk-no')
+    else:
+      model.set_value(it, 7, 'gtk-yes')
+    model.set_value(it, 4, new_value)
+    model.set_value(it, 5, new_text)
+    self.LinuxPartitionApply.set_sensitive(True)
+  def on_linux_newsys_renderer_combo_editing_canceled(self, data=None):
+    self.LinuxPartitionApply.set_sensitive(True)
+  def on_linux_newmount_renderer_combo_editing_started(self, widget, editable, path):
+    self.LinuxPartitionApply.set_sensitive(False)
+    self.editable_combo = editable # keep it for later
+  def on_linux_newmount_renderer_combo_changed(self, widget, path, new_iter):
+    e = gtk.gdk.Event(gtk.gdk.FOCUS_CHANGE)
+    e.window = self.LinuxPartitionList.window
+    e.send_event = True
+    e.in_ = False
+    self.editable_combo.emit('focus-out-event', e)
+  def on_linux_newmount_renderer_combo_edited(self, widget, path, new_text, data=None):
+    model = self.LinuxPartitionListStore
+    it = model.get_iter(path)
+    if new_text and new_text.startswith('/'):
+      model.set_value(it, 8, 'gtk-yes')
+    else:
+      model.set_value(it, 8, 'gtk-edit')
+    model.set_value(it, 6, new_text)
+    self.LinuxPartitionApply.set_sensitive(True)
+  def on_linux_newmount_renderer_combo_editing_canceled(self, data):
+    self.LinuxPartitionApply.set_sensitive(True)
   def on_linux_partition_apply_clicked(self, widget, data=None):
+    store = self.LinuxPartitionListStore
+    self.linux_partitions = []
+    for l in store:
+      p = l[9]
+      fs = l[4]
+      mp = l[6]
+      if mp.startswith('/'): # keep only mounted partitions
+        self.linux_partitions.append([p, fs, mp])
+    self.show_yesno_dialog(self.get_linux_partitions_message(True, _("No partition to mount")), self.on_linux_partition_continue, self.on_linux_partition_cancel)
+  def get_linux_partitions_message(self, full_text, msg_if_not_found = None):
+    msg = ''
+    if self.linux_partitions:
+      for part in self.linux_partitions:
+        part_name = part[0]
+        part_label = sltl.getFsLabel(part[0])
+        if part_label:
+          part_name += " (" + part_label + ")"
+        if part[1] == 'none':
+          if full_text:
+            msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
+          else:
+            msg = '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2])
+        else:
+          if full_text:
+            msg += _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = part[1], mountpoint = part[2]) + "\n"
+          else:
+            msg = '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {2} (<u>{1}</u>)</span>'.format(part_name, part[1], part[2])
+    elif msg_if_not_found:
+      msg = msg_if_not_found
+    return msg
+  def on_linux_partition_continue(self):
+    if len(self.WindowsPartitionListStore) > 0:
+      self.partitions_step = 'win'
+    else:
+      self.partitions_step = 'recap'
+    self.partitions_settings()
+  def on_linux_partition_cancel(self):
+    self.partitions_step = 'main'
+    self.linux_partitions = None
+    self.win_partitions = None
+    self.partitions_settings()
+  def windows_partition_settings(self):
     pass
+  def on_win_newmount_renderer_combo_editing_started(self, widget, editable, path):
+    self.WindowsPartitionApply.set_sensitive(False)
+    self.editable_combo = editable # keep it for later
+  def on_win_newmount_renderer_combo_changed(self, widget, path, new_iter):
+    e = gtk.gdk.Event(gtk.gdk.FOCUS_CHANGE)
+    e.window = self.WindowsPartitionList.window
+    e.send_event = True
+    e.in_ = False
+    self.editable_combo.emit('focus-out-event', e)
+  def on_win_newmount_renderer_combo_edited(self, widget, path, new_text, data=None):
+    model = self.WindowsPartitionListStore
+    it = model.get_iter(path)
+    if new_text and new_text.startswith('/'):
+      model.set_value(it, 5, 'gtk-yes')
+    else:
+      model.set_value(it, 5, 'gtk-edit')
+    model.set_value(it, 4, new_text)
+    self.WindowsPartitionApply.set_sensitive(True)
+  def on_win_newmount_renderer_combo_editing_canceled(self, data=None):
+    self.WindowsPartitionApply.set_sensitive(True)
   def on_windows_partition_apply_clicked(self, widget, data=None):
-    pass
+    store = self.WindowsPartitionListStore
+    self.win_partitions = []
+    for l in store:
+      p = l[6]
+      fs = l[3]
+      mp = l[4]
+      if mp.startswith('/'): # keep only mounted partitions
+        self.win_partitions.append([p, fs, mp])
+    self.show_yesno_dialog(self.get_windows_partitions_message(True, _("No partition to mount")), self.on_windows_partition_continue, self.on_windows_partition_cancel)
+  def get_windows_partitions_message(self, full_text, msg_if_not_found = None):
+    msg = ''
+    if self.win_partitions:
+      for part in self.win_partitions:
+        part_name = part[0]
+        part_label = sltl.getFsLabel(part[0])
+        if part_label:
+          part_name += " (" + part_label + ")"
+        if full_text:
+          msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
+        else:
+          msg = '<span foreground="green" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2])
+    elif msg_if_not_found:
+      msg = msg_if_not_found
+    return msg
+  def on_windows_partition_continue(self):
+    self.partitions_step = 'recap'
+    self.partitions_settings()
+  def on_windows_partition_cancel(self):
+    self.partitions_step = 'main'
+    self.linux_partitions = None
+    self.win_partitions = None
+    self.partitions_settings()
+  def recap_partition_settings(self):
+    self.MainPartRecapLabel.set_markup(self.get_main_partition_message(False))
+    self.LinPartRecapLabel.set_markup(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>"))
+    self.WinPartRecapLabel.set_markup(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>"))
+    self.SwapPartRecapLabel.set_markup(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>"))
+    self.configurations['partitions'] = True
+    self.PartitionCheck.show()
+    self.PartitionCheckMarker.hide()
+    self.update_install_button()
   def on_partition_recap_undo_clicked(self, widget, data=None):
-    pass
+    self.configurations['partitions'] = False
+    self.PartitionCheck.hide()
+    self.PartitionCheckMarker.show()
+    self.update_install_button()
+    self.on_main_partition_cancel()
 
 
 
@@ -997,78 +1269,26 @@ partitions on your system before resuming with Salix Live Installer process."))
 
 
 
+  def show_yesno_dialog(self, msg, yes_callback, no_callback):
+    self.YesNoDialog.yes_callback = yes_callback
+    self.YesNoDialog.no_callback = no_callback
+    self.YesNoDialog.set_markup(msg)
+    self.YesNoDialog.show()
+    self.YesNoDialog.resize(1, 1) # ensure a correct size, by asking a recomputation
+  def on_yesno_response(self, dialog, response_id, data=None):
+    dialog.hide()
+    callback = None
+    if response_id == gtk.RESPONSE_YES:
+      callback = dialog.yes_callback
+    elif response_id == gtk.RESPONSE_NO:
+      callback = dialog.no_callback
+    if callback:
+      callback()
+
   ###################################################################
-                      
-  # What to do when a combo line is edited in the Linux New system column
-  def on_linux_newsys_renderer_combo_edited(self, widget, row_number, new_text):
-    # Retrieve the selected Linux partition row iter
-    linuxnewsyschoice = self.LinuxPartitionList.get_selection()
-    self.LinuxPartitionListStore, iter = linuxnewsyschoice.get_selected()
-    # Set the new partition row value on the fifth column (4)
-    if new_text in ('ext2', 'ext3', 'ext4', 'reiserfs', 'xfs', 'jfs', 'Select...' ):
-      self.LinuxPartitionListStore.set_value(iter, 4, new_text)
-      if new_text != _("Select..."):
-        self.LinuxPartitionListStore.set_value(iter, 6, 'gtk-yes')
-      else:
-        self.LinuxPartitionListStore.set_value(iter, 6, 'gtk-edit')
-    self.LinuxPartitionApply.set_sensitive(True)
-
-  def on_linux_newsys_renderer_combo_editing_started(self, widget, path, data):
-    self.LinuxPartitionApply.set_sensitive(False)
-
-  def on_linux_newsys_renderer_combo_editing_canceled(self, data):
-    self.LinuxPartitionApply.set_sensitive(True)
-
-  # What to do when a combo line is edited in the Linux mountpoint column
-  def on_linux_newmount_renderer_combo_edited(self, widget, row_number, new_text):
-    # Retrieve the selected Linux partition row iter
-    linuxnewmountchoice = self.LinuxPartitionList.get_selection()
-    self.LinuxPartitionListStore, iter = linuxnewmountchoice.get_selected()
-    # Set the new partition row value on the sixth column (5)
-    self.LinuxPartitionListStore.set_value(iter, 5, new_text)
-    if new_text != _("Select..."):
-      self.LinuxPartitionListStore.set_value(iter, 7, 'gtk-yes')
-    else:
-      self.LinuxPartitionListStore.set_value(iter, 7, 'gtk-edit')
-    self.LinuxPartitionApply.set_sensitive(True)
-
-  def on_linux_newmount_renderer_combo_editing_started(self, widget, path, data):
-    self.LinuxPartitionApply.set_sensitive(False)
-
-  def on_linux_newmount_renderer_combo_editing_canceled(self, data):
-    self.LinuxPartitionApply.set_sensitive(True)
-
-  # What to do when a combo line is edited in the Windows mountpoint column
-  def on_win_newmount_renderer_combo_edited(self, widget, row_number, new_text,):
-    # Retrieve the selected Windows partition row iter
-    windowsnewmountchoice = self.WindowsPartitionList.get_selection()
-    self.WindowsPartitionListStore, iter = windowsnewmountchoice.get_selected()
-    # Set the new mountpoint row value on the fifth column (4)
-    self.WindowsPartitionListStore.set_value(iter, 4, new_text)
-    if new_text != _("Select..."):
-      self.WindowsPartitionListStore.set_value(iter, 5, 'gtk-yes')
-    else:
-      self.WindowsPartitionListStore.set_value(iter, 5, 'gtk-edit')
-    self.WindowsPartitionApply.set_sensitive(True)
-
-  def on_win_newmount_renderer_combo_editing_started(self, widget, path, data):
-    self.WindowsPartitionApply.set_sensitive(False)
-
-  def on_win_newmount_renderer_combo_editing_canceled(self, data):
-    self.WindowsPartitionApply.set_sensitive(True)
-
-  # CONFIGURATION APPLY BUTTONS ###
 
   def on_install_button_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the yes button of the YesNo Confirmation Needed dialog is clicked
-  def on_confirm_button_clicked(self, widget, data=None):
-    pass
-
-  # What to do when the no button of the YesNo dialog is clicked
-  def on_do_not_confirm_button_clicked(self, widget, data=None):
-    pass
+    info_dialog("installation...")
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
