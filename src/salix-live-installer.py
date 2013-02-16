@@ -314,7 +314,7 @@ Any unset parameters will be ignored. "))
   def on_clone_login_eventbox_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Salix Live Installer has detected a \
 LiveClone customized environment. You can transfer your existing LiveClone \
-login accounts along with matching personnal directories to the installation \
+login accounts along with matching personal directories to the installation \
 target or you can wipe them out & create a complete new login account instead."))
   def on_clone_login_apply_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Transfer existing users."))
@@ -327,15 +327,14 @@ login name coupled with a password) before allowing the user access \
 to system resources."))
   def on_user_login_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Here you must define your login name which should only include \
-alphanumerical characters with no space or upper case letters. "))
+alphanumeric characters with no space or upper case letters. "))
   def on_user_pass1_entry_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Choose a password or passphrase to be coupled with your login \
-name. Your password or passprase should include a mix of upper \
-and lower case letters, numbers, and even symbols (such as the \
-@, !, and &)"))
+    self.ContextLabel.set_text(_("Choose a password to be coupled with your login \
+name. Your password should include a mix of upper and lower case letters, numbers, \
+and even symbols (such as @, !, and &)"))
   def on_user_pass2_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Here you must retype your password as a confirmation \
-of your choice.")) 
+of your choice."))
   def on_user_visible_checkbutton_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Check this box if you want to be able to see the password you \
 are typing."))
@@ -345,10 +344,9 @@ are typing."))
     self.ContextLabel.set_text(_("Cancel new user creation."))
   def on_root_pass1_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("On Linux systems, the superuser, or root, is a special user account\
-used for system administration. Here you must set its password or\
-passphrase. Remember, this password or passphrase should include \
-a mix of upper and lower case letters, numbers, and even symbols \
-(such as the @, !, and &)"))
+reserved for system administration. Here you must set its password. Remember, \
+password should include a mix of upper and lower case letters, numbers, \
+and even symbols (such as @, !, and &)"))
   def on_root_pass2_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Here you must retype the superuser (root) password as a \
 confirmation of your choice."))
@@ -865,20 +863,16 @@ partitions on your system before resuming with Salix Live Installer process."))
       if len(pwd) >= 5:
         score += 1
         contextLabelText = _("<b>Password strength:</b>\n")
-        if re.search(r'\ ', pwd):
-          score += 0.4
-        else:
-          contextLabelText += _("No space...\n")
         if re.search(r'[A-Z]', pwd):
-          score += 0.4
+          score += 0.5
         else:
           contextLabelText += _("No upper case letter...\n")
         if re.search(r'[1-9]', pwd):
-          score += 0.4
+          score += 0.5
         else:
           contextLabelText += _("No number...\n")
         if re.search(r'[-_.,;:!?"\']', pwd):
-          score += 0.4
+          score += 0.5
         else:
           contextLabelText += _("No punctuation...\n")
         if re.search(r'[][(){}/\<>$%*#@^]', pwd):
@@ -887,7 +881,6 @@ partitions on your system before resuming with Salix Live Installer process."))
           contextLabelText += _("No symbol...\n")
         score = int(math.floor(score))
         self.ContextLabel.set_markup(_(contextLabelText))
-    
     return score
   def set_progressbar_strength(self, pwd, draw_widget):
     strength = self.get_password_strength(pwd)
@@ -906,7 +899,7 @@ partitions on your system before resuming with Salix Live Installer process."))
     gc.set_foreground(bg_color)
     draw_widget.window.draw_rectangle(gc, True, 0, 1, 80, 20)
     gc.set_foreground(progress_color)
-    draw_widget.window.draw_rectangle(gc, True, 0, 1, 20 *  strength, 20)
+    draw_widget.window.draw_rectangle(gc, True, 0, 1, 20 * strength, 20)
     gc.set_foreground(border_color)
     draw_widget.window.draw_rectangle(gc, False, 0, 1, 80, 20)
 
