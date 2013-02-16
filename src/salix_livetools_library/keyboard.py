@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Functions to handle keyboard layouts:
+Functions to handle keyboard layout:
   - findCurrentKeymap
   - listAvailableKeymaps
   - isNumLockEnabledByDefault
@@ -25,8 +25,8 @@ def findCurrentKeymap(mountPoint = None):
   Find the currently used console keymaps (as loaded by 'loadkeys') by looking in:
     - /etc/rc.d/rc.keymap, or
     - in the 'keyb=' kernel parameter
-  The detected keymap is then check against the first column of one of the files: {0}
-  Returns None if not found
+  The detected keymap is then checked against the first column of one of the files: {0}
+  Return None if not found
   """.format(' '.join(_keymapsLocation))
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -62,7 +62,7 @@ def findCurrentKeymap(mountPoint = None):
 
 def listAvailableKeymaps(mountPoint = None):
   """
-  Returns a list of couple (keymap, keyboardType).
+  Return a list of couple (keymap, keyboardType).
   'keymap' is a Console keymap as found in /usr/share/kbd/
   'keyboardType' is either 'azerty', 'qwerty', 'qwertz', etc and is there only for information
   The keymaps are extracted from one of the files: {0}
@@ -96,8 +96,8 @@ def listAvailableKeymaps(mountPoint = None):
 
 def isNumLockEnabledByDefault(mountPoint = None):
   """
-  Returns True if the num lock is enabled by default.
-  For this, the execute bit of /etc/rc.d/rc.numlock is checked.
+  Return True if the num lock is enabled by default.
+  To do this, the execute bit of /etc/rc.d/rc.numlock is checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -107,8 +107,8 @@ def isNumLockEnabledByDefault(mountPoint = None):
 
 def isIbusEnabledByDefault(mountPoint = None):
   """
-  Returns True if the IBus is enabled by default.
-  For this, the execute bit of /usr/bin/ibus-daemon and /etc/profile.d/ibus.sh are checked.
+  Return True if the IBus is enabled by default.
+  To do this, the execute bit of /usr/bin/ibus-daemon and /etc/profile.d/ibus.sh are checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -119,7 +119,7 @@ def isIbusEnabledByDefault(mountPoint = None):
 def setDefaultKeymap(keymap, mountPoint = None):
   """
   Fix the configuration in /etc/rc.d/rc.keymap to use the specified 'keymap'.
-  This use 'keyboardsetup' Salix tool.
+  This uses 'keyboardsetup' Salix tool.
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
@@ -133,8 +133,8 @@ def setDefaultKeymap(keymap, mountPoint = None):
 
 def setNumLockDefault(enabled, mountPoint = None):
   """
-  Fix the configuration for default numlock activated on boot or not.
-  This use 'keyboardsetup' Salix tool.
+  Fix the configuration for default numlock to be activated or not on boot.
+  This uses 'keyboardsetup' Salix tool.
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
@@ -152,7 +152,7 @@ def setNumLockDefault(enabled, mountPoint = None):
 def setIbusDefault(enabled, mountPoint = None):
   """
   Fix the configuration for default Ibus activated on boot or not.
-  This use 'keyboardsetup' Salix tool.
+  This uses 'keyboardsetup' Salix tool.
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):
@@ -188,7 +188,7 @@ if __name__ == '__main__':
   assertTrue(isNumLockEnabledByDefault())
   assertEquals(0, setIbusDefault(True))
   assertTrue(isIbusEnabledByDefault())
-  # restore actual keybaord parameters
+  # restore actual keyboard parameters
   setDefaultKeymap(keymap)
   setNumLockDefault(numlock)
   setIbusDefault(ibus)

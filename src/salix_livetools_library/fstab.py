@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Used to create fstab entries:
+Functions to generate fstab entries:
   - createFsTab
   - addFsTabEntry
 """
@@ -11,7 +11,7 @@ import os
 
 def createFsTab(fstabMountPoint):
   """
-  Creates a etc/fstab empty file
+  Generate an empty /etc/fstab file
   """
   try:
     os.mkdir('{0}/etc'.format(fstabMountPoint))
@@ -21,8 +21,8 @@ def createFsTab(fstabMountPoint):
 
 def addFsTabEntry(fstabMountPoint, device, mountPoint, fsType = None, options = None, dumpFlag = 0, fsckOrder = 0):
   """
-  Add a line to etc/fstab
-  If fsType is None, then it will be guessed from the device and the by using blkid
+  Add a line to /etc/fstab
+  If fsType is None, then it will be guessed from the device by using blkid
   If options is None, then it will be guessed from the fsType like this:
     - 'proc', 'sysfs', 'devpts', 'tmpfs', 'swap' |=> 'defaults'
     - 'ext2', 'ext3', 'ext4', 'xfs', 'reiserfs', 'btrfs', 'jfs' |=> 'defaults,noatime'

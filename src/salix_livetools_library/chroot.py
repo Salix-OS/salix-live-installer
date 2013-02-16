@@ -10,11 +10,11 @@ import os
 def execChroot(path, cmd, shell = False):
   """
   Execute cmd in the chroot defined by path.
-  pathes in cmd should be relative to the new root.
+  Paths in cmd should be relative to the new root directory.
   """
   checkRoot()
   if not path:
-    raise IOError("You should provide a path to change root.")
+    raise IOError("You should provide a path to change the root directory.")
   elif not os.path.isdir(path):
     raise IOError("'{0}' does not exist or is not a directory.".format(path))
   chrootCmd = ['chroot', path]

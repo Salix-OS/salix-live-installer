@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Salix Live Installer library for using with either the graphical or ncurses dialogs
-in order to help installing Salix.
+Salix Live Installer library used by both the GUI and the Ncurses installers.
 """
 from bootloader import *
 from chroot import *

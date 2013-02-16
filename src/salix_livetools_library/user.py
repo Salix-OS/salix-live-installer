@@ -20,7 +20,7 @@ _minUIDForRegularUser = 1000
 
 def listRegularSystemUsers(mountPoint = None):
   """
-  Returns a sorted list of regular users, i.e. users with id ≥ 1000.
+  Return a sorted list of regular users, i.e. users with id ≥ 1000.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))

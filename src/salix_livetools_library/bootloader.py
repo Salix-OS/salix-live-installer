@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Launching the boot loader setup tool with some defaults:
+Function to launch the boot loader setup tool with some defaults:
   - runBootsetup
 """
 from execute import *

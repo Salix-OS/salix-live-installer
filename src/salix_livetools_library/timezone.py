@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Functions to handle timezones:
+Functions to handle time zones:
   - listTimeZones
   - listTZContinents
   - listTZCities
@@ -19,7 +19,7 @@ from execute import checkRoot
 
 def listTimeZones(mountPoint = None):
   """
-  Returns a dictionnary of time zones, by continent.
+  Return a dictionary of time zones, by continent.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -32,7 +32,7 @@ def listTimeZones(mountPoint = None):
 
 def listTZContinents(mountPoint = None):
   """
-  Returns a sorted list for continents for time zones.
+  Return a sorted list of continents for time zones.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -42,7 +42,7 @@ def listTZContinents(mountPoint = None):
 
 def listTZCities(continent, mountPoint = None):
   """
-  Returns a sorted list of cities for a specific continent time zone.
+  Return a sorted list of cities for a specific continent's time zone.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -55,7 +55,7 @@ def listTZCities(continent, mountPoint = None):
 
 def getDefaultTimeZone(mountPoint = None):
   """
-  Returns the default time zone, by reading the /etc/localtime-copied-from symlink.
+  Return the default time zone, by reading the /etc/localtime-copied-from symlink.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -68,7 +68,7 @@ def getDefaultTimeZone(mountPoint = None):
 
 def setDefaultTimeZone(timezone, mountPoint = None):
   """
-  Sets the default time zone, by copying the correct time zone to /etc/localtime and by setting the /etc/localtime-copied-from symlink.
+  Set the default time zone, by copying the correct time zone to /etc/localtime and by setting the /etc/localtime-copied-from symlink.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -81,12 +81,12 @@ def setDefaultTimeZone(timezone, mountPoint = None):
       os.unlink('{0}/etc/localtime-copied-from'.format(mountPoint))
     os.symlink('/usr/share/zoneinfo/{0}'.format(timezone), '{0}/etc/localtime-copied-from'.format(mountPoint))
   else:
-    raise Exception('This timezone ({0}) is incorrect.'.format(timezone))
+    raise Exception('This time zone: ({0}), is incorrect.'.format(timezone))
 
 def isNTPEnabledByDefault(mountPoint = None):
   """
-  Returns True if the NTP service is enabled by default.
-  For this, the execute bit of /etc/rc.d/rc.ntpd is checked.
+  Return True if the NTP service is enabled by default.
+  To do this, the execute bit of /etc/rc.d/rc.ntpd is checked.
   """
   if mountPoint and not os.path.isdir(mountPoint):
     raise IOError("'{0}' does not exist or is not a directory.".format(mountPoint))
@@ -96,7 +96,7 @@ def isNTPEnabledByDefault(mountPoint = None):
 
 def setNTPDefault(enabled, mountPoint = None):
   """
-  Fix the configuration for default NTP service activated on boot or not.
+  Fix the configuration for the default NTP service to be activated on boot or not.
   """
   checkRoot()
   if mountPoint and not os.path.isdir(mountPoint):

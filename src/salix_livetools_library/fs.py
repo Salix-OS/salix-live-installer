@@ -18,10 +18,10 @@ import re
 
 def getFsType(partitionDevice):
   """
-  Returns the file system type for that partition.
-  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
-  It can be a full path if the partition is contains in a file.
-  Returns 'Extended' if the partition is an extended partition and has no filesystem.
+  Return the file system type for that partition.
+  'partitionDevice' should no be prefixed with '/dev/' if it's a block device.
+  It can be a full path if the partition is contained in a file.
+  Return 'Extended' if the partition is an extended partition and has no filesystem.
   """
   if os.path.exists('/dev/{0}'.format(partitionDevice)) and S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
     path = '/dev/{0}'.format(partitionDevice)
@@ -45,9 +45,9 @@ def getFsType(partitionDevice):
 
 def getFsLabel(partitionDevice):
   """
-  Returns the label for that partition (if any).
-  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
-  It can be a full path if the partition is contains in a file.
+  Return the label for that partition (if any).
+  'partitionDevice' should no be prefixed with '/dev/' if it is a block device.
+  It can be a full path if the partition is contained in a file.
   """
   if os.path.exists('/dev/{0}'.format(partitionDevice)) and S_ISBLK(os.stat('/dev/{0}'.format(partitionDevice)).st_mode):
     path = '/dev/{0}'.format(partitionDevice)
@@ -69,11 +69,11 @@ def getFsLabel(partitionDevice):
 
 def makeFs(partitionDevice, fsType, label=None, force=False, options=None):
   """
-  Creates a filesystem on the device.
-  'partitionDevice' should no be prefilled with '/dev/' if it's a block device.
+  Create a filesystem on the device.
+  'partitionDevice' should no be prefixed with '/dev/' if it is a block device.
   'fsType' could be ext2, ext3, ext4, xfs, reiserfs, jfs, btrfs, ntfs, fat16, fat32, swap
-  Use 'force=True' if you want to force creating the filesystem and if 'partitionDevice' is a full path to a file (not a block device).
-  Use 'options' to force passing these options to the creation process (use a list)
+  Use 'force=True' if you want to force the creation of the filesystem and if 'partitionDevice' is a full path to a file (not a block device).
+  Use 'options' to force options on the creation process (use a list)
   """
   if force and os.path.exists(partitionDevice):
     path = partitionDevice
@@ -104,7 +104,7 @@ def makeFs(partitionDevice, fsType, label=None, force=False, options=None):
   return None # should not append
 
 def _makeExtFs(path, version, label, options, force):
-  "ExtX block size: 4k per default in /etc/mke2fs.conf"
+  """ExtX block size: 4k per default in /etc/mke2fs.conf"""
   cmd = ['/sbin/mkfs.ext{0:d}'.format(version)]
   if not options:
     options = []
@@ -120,7 +120,7 @@ def _makeExtFs(path, version, label, options, force):
   return execCall(cmd, shell = False)
 
 def _makeXfs(path, label, options, force):
-  "http://blog.peacon.co.uk/wiki/Creating_and_Tuning_XFS_Partitions"
+  """http://blog.peacon.co.uk/wiki/Creating_and_Tuning_XFS_Partitions"""
   cmd = ['/sbin/mkfs.xfs']
   if not options:
     options = ['-f'] # -f is neccessary to have this or you cannot create XFS on a non-empty partition or disk

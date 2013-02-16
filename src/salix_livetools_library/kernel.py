@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Functions for getting kernel parameters:
+Functions to retrieve kernel parameters:
   - hasKernelParam
   - getKernelParamValue
 """
@@ -10,7 +10,7 @@ import os
 
 def hasKernelParam(param):
   """
-  Defines if the kernel parameter param has been defined on the kernel command line or not
+  Define if the kernel parameter param has been defined on the kernel command line or not
   """
   if os.path.exists('/proc/cmdline'):
     cmdline = open('/proc/cmdline', 'r').read().split()
@@ -21,7 +21,7 @@ def hasKernelParam(param):
 
 def getKernelParamValue(param):
   """
-  Return the value of the kernel parameter, None if this param has no value and False if this param does not exist
+  Return the value of the kernel parameter, None if this param has no value and False if this param does not exist.
   """
   if os.path.exists('/proc/cmdline'):
     cmdline = open('/proc/cmdline', 'r').read().split()

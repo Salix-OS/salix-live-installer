@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Module to execute native commands and get their output:
+Functions to execute native commands and get their output:
   - execCall
   - execCheck
   - execGetOutput
@@ -15,16 +15,16 @@ import os
 def execCall(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
   Execute a command and return the exit code.
-  The command is executed by default in a /bin/sh shell and using english locale.
-  The output of the command is not read. With some commands, it hangs if the output is not read when run in a shell.
-  For this type of command, prefer using execGetOutput even if you don't read the return value or using shell = False.
+  The command is executed by default in a /bin/sh shell with en_US locale.
+  The output of the command is not read. With some commands, it may hang if the output is not read when run in a shell.
+  For this type of command, it is preferable to use execGetOutput even the return value is not read or to use shell = False.
   """
   return subprocess.call(cmd, shell = shell, env = env)
 
 def execCheck(cmd, shell = True, env = {'LANG' : 'en_US'}):
   """
-  Execute a command and return 0 if ok or a subprocess.CalledProcessorError exception in case of error.
-  The command is executed by default in a /bin/sh shell and using english locale.
+  Execute a command and return 0 if OK or a subprocess.CalledProcessorError exception in case of error.
+  The command is executed by default in a /bin/sh shell with en_US locale.
   """
   return subprocess.check_call(cmd, shell = shell, env = env)
 
@@ -32,7 +32,7 @@ def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}
   """
   Execute a command and return its output in a list, line by line.
   In case of error, it returns a subprocess.CalledProcessorError exception.
-  The command is executed by default in a /bin/sh shell and using english locale.
+  The command is executed by default in a /bin/sh shell with en_US locale.
   """
   stdErr = None
   if withError:

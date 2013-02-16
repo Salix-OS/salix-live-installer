@@ -18,7 +18,7 @@ _tempMountDir = '/mnt/.tempSalt'
 
 def getMountPoint(device):
   """
-  Will find the mount point to this 'device' or None if not mounted.
+  Find the mount point to this 'device' or None if not mounted.
   """
   mountpoint = None
   path = os.path.abspath(device)
@@ -76,8 +76,8 @@ def mountDevice(device, fsType = None, mountPoint = None):
 
 def umountDevice(deviceOrPath, tryLazyUmount = True, deleteMountPoint = True):
   """
-  Umount the 'deviceOrPath' which could be a device or a mount point.
-  If the umount failed, try again with a lazyUmount if 'tryLazyUmount' is True.
+  Unmount the 'deviceOrPath' which could be a device or a mount point.
+  If umount failed, try again with a lazyUmount if 'tryLazyUmount' is True.
   Will delete the mount point if 'deleteMountPoint' is True.
   Returns False if it fails.
   """

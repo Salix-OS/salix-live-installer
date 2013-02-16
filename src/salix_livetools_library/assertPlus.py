@@ -1,4 +1,4 @@
-#!/bin/evn python
+#!/bin/env python
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
@@ -10,23 +10,23 @@ assert functions:
  - assertException(exceptionType, function)
  - assertNoException(function)
 
-to pass a function, you can use lambda expression like:
+To pass a function, you can use lambda expression like:
   assertException(lambda: myfunction())
 """
 def assertTrue(expression):
-  "Expect the expression to be true"
+  """Expect the expression to be true"""
   assert expression, "'{0}' was expected to be true".format(expression)
 def assertFalse(expression):
-  "Expect the expression to be false"
+  """Expect the expression to be false"""
   assert (not expression), "'{0}' was expected to be false".format(expression)
 def assertEquals(expected, expression):
-  "Expect that the expression equals to the expected value"
+  """Expect the expression to be equal to the expected value"""
   assert expression == expected, "'{0}' expected, got '{1}'".format(expected, expression)
 def assertNotEquals(expected, expression):
-  "Expect that the expression does not equals to the expected value"
+  """Expect the expression not to be equal to the expected value"""
   assert expression != expected, "'{0}' not expected, got '{1}'".format(expected, expression)
 def assertException(exceptionType, function):
-  "Expect that the function trigger an exception of type exceptionType"
+  """Expect the function to trigger an exception with exceptionType type"""
   triggered = False
   try:
     function()
@@ -35,7 +35,7 @@ def assertException(exceptionType, function):
       triggered = True
   assert triggered, "Exception '{0}' expected with '{1}'".format(exceptionType, function.__doc__)
 def assertNoException(function):
-  "Expect that the function does not trigger any exception"
+  """Expect the function not to trigger any exception"""
   triggered = False
   unExpectedE = None
   try:
