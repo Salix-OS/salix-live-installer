@@ -437,6 +437,7 @@ always following the "one application per task" rationale. '))
       self.cur_tz_continent = None
       self.cur_tz_city = None
     self.cur_use_ntp = sltl.isNTPEnabledByDefault()
+    self.cur_time_delta = timedelta() # used when NTP is not used
     self.cur_km = sltl.findCurrentKeymap()
     self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
     self.cur_use_ibus = sltl.isIbusEnabledByDefault()
@@ -518,7 +519,7 @@ always following the "one application per task" rationale. '))
     self.LocaleList.get_selection().connect('changed', self.on_locale_list_changed_event)
 
   def update_install_button(self):
-    self.InstallButton.set_sensitive(not (self.is_test or False in self.configurations.values()))
+    self.InstallButton.set_sensitive(not False in self.configurations.values())
 
   def hide_all_tabs(self):
     self.IntroBox.hide()
@@ -591,18 +592,7 @@ always following the "one application per task" rationale. '))
       index += 1
     self.time_set_cities_list()
     self.NTPCheckButton.set_active(self.cur_use_ntp)
-    year, month, day, hour, minute, second, __, __, __ = datetime.now().timetuple()
-    index = 0
-    for y in self.YearListStore:
-      if year == y[0]:
-        self.YearCombobox.set_active(index)
-        break
-      index += 1
-    self.MonthCombobox.set_active(month - 1)
-    self.DayCombobox.set_active(day - 1)
-    self.HourSpinButton.set_value(hour)
-    self.MinuteSpinButton.set_value(minute)
-    self.SecondSpinButton.set_value(second)
+    self.set_datetime_settings()
     self.ManualTimeBox.set_sensitive(not self.configurations['time'] and not self.cur_use_ntp)
     self.NTPCheckButton.set_sensitive(not self.configurations['time'])
     self.TimeZoneBox.set_sensitive(not self.configurations['time'])
@@ -615,6 +605,20 @@ always following the "one application per task" rationale. '))
       self.TimeCheck.hide()
       self.TimeCheckMarker.show()
     self.update_install_button()
+  def set_datetime_settings(self):
+    corrected_datetime = datetime.now() + self.cur_time_delta
+    year, month, day, hour, minute, second, __, __, __ = corrected_datetime.timetuple()
+    index = 0
+    for y in self.YearListStore:
+      if year == y[0]:
+        self.YearCombobox.set_active(index)
+        break
+      index += 1
+    self.MonthCombobox.set_active(month - 1)
+    self.DayCombobox.set_active(day - 1)
+    self.HourSpinButton.set_value(hour)
+    self.MinuteSpinButton.set_value(minute)
+    self.SecondSpinButton.set_value(second)
   def time_set_cities_list(self):
     self.CountryZoneListStore.clear()
     self.CountryZoneListStore.append([_("Select...")])
@@ -641,8 +645,21 @@ always following the "one application per task" rationale. '))
       self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
   def on_ntp_checkbutton_toggled(self, widget, data=None):
     self.cur_use_ntp = self.NTPCheckButton.get_active()
+    self.set_datetime_settings()
     self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
   def on_time_apply_clicked(self, widget, data=None):
+    if not self.cur_use_ntp:
+      year = self.YearCombobox.get_active()
+      month = self.MonthCombobox.get_active()
+      day = self.DayCombobox.get_active()
+      hour = int(self.HourSpinButton.get_value())
+      minute = int(self.MinuteSpinButton.get_value())
+      second = int(self.SecondSpinButton.get_value())
+      new_date = datetime(year, month + 1, day + 1, hour, minute, second)
+      now = datetime.now()
+      self.cur_time_delta = new_date - now
+    else:
+      self.cur_time_delta = timedelta()
     self.configurations['time'] = True
     self.time_settings()
   def on_time_undo_clicked(self, widget, data=None):
@@ -1142,19 +1159,19 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         if re.search(r'[A-Z]', pwd):
           score += 0.5
         else:
-          context_msg += "\n" + _("No upper case letter...")
+          context_msg += _("No upper case letter...") + "\n"
         if re.search(r'[1-9]', pwd):
           score += 0.5
         else:
-          context_msg += "\n" + _("No number...")
+          context_msg += _("No number...") + "\n"
         if re.search(r'[-_.,;:!?"\']', pwd):
           score += 0.5
         else:
-          context_msg += "\n" + _("No punctuation...")
+          context_msg += _("No punctuation...") + "\n"
         if re.search(r'[][(){}/\<>$%*#@^]', pwd):
           score += 0.5
         else:
-          context_msg += "\n" + _("No symbol...")
+          context_msg += _("No symbol...") + "\n"
         score = int(math.floor(score))
       if score == 4:
         context_msg = _("Satisfactory!")
@@ -1180,9 +1197,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     draw_widget.window.draw_rectangle(gc, False, 0, 1, 80, 20)
     context_label_text = "<b>" + _("Password strength:") + "</b>\n"
     self.ContextLabel.set_markup(context_label_text + context_msg)
-
+  def on_user_pass_strength_expose_event(self, widget, event, data=None):
+    self.set_progressbar_strength(self.UserPass1Entry.get_text().strip(), self.UserPassStrength)
   def on_user_pass1_entry_changed(self, widget, data=None):
-    self.set_progressbar_strength(widget.get_text().strip(), self.UserPassStrength)
+    self.on_user_pass_strength_expose_event(self, None, None)
   def on_user_visible_checkbutton_toggled(self, widget, data=None):
     self.UserPass1Entry.set_visibility(self.UserVisibleCheckButton.get_active())
     self.UserPass2Entry.set_visibility(self.UserVisibleCheckButton.get_active())
@@ -1220,8 +1238,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.new_login = ''
     self.new_password = ''
     self.users_settings_live()
+  def on_root_pass_strength_expose_event(self, widget, event, data=None):
+    self.set_progressbar_strength(self.RootPass1Entry.get_text().strip(), self.RootPassStrength)
   def on_root_pass1_entry_changed(self, widget, data=None):
-    self.set_progressbar_strength(widget.get_text().strip(), self.RootPassStrength)
+    self.on_root_pass_strength_expose_event(self, None, None)
   def on_root_visible_checkbutton_toggled(self, widget, data=None):
     self.RootPass1Entry.set_visibility(self.RootVisibleCheckButton.get_active())
     self.RootPass2Entry.set_visibility(self.RootVisibleCheckButton.get_active())

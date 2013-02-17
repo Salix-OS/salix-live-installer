@@ -3363,10 +3363,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                     <child>
                                       <object class="GtkDrawingArea" id="user_pass_strength">
-                                        <property name="width_request">100</property>
+                                        <property name="width_request">85</property>
                                         <property name="visible">True</property>
                                         <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
+                                        <signal name="expose-event" handler="on_user_pass_strength_expose_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3597,10 +3598,11 @@ If you already have all the needed partitions, please click on the button 'Do no
                                     </child>
                                     <child>
                                       <object class="GtkDrawingArea" id="root_pass_strength">
-                                        <property name="width_request">100</property>
+                                        <property name="width_request">85</property>
                                         <property name="visible">True</property>
                                         <property name="app_paintable">True</property>
                                         <property name="can_focus">False</property>
+                                        <signal name="expose-event" handler="on_root_pass_strength_expose_event" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
