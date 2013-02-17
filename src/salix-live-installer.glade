@@ -259,6 +259,32 @@ MA 02110-1301, USA.</property>
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="month_list_store">
+    <columns>
+      <!-- column-name month -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">January</col>
+      </row>
+      <row>
+        <col id="0">February</col>
+      </row>
+      <row>
+        <col id="0">March</col>
+      </row>
+      <row>
+        <col id="0">April</col>
+      </row>
+      <row>
+        <col id="0">May</col>
+      </row>
+      <row>
+        <col id="0">June</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkListStore" id="main_format_list_store">
     <columns>
       <!-- column-name type -->
@@ -298,29 +324,6 @@ MA 02110-1301, USA.</property>
       <!-- column-name rawpart -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0">WDC (320GB)</col>
-        <col id="1">sda1 (Salix)</col>
-        <col id="2">160GB</col>
-        <col id="3">ntfs</col>
-        <col id="4">sda1</col>
-      </row>
-      <row>
-        <col id="0">WDC (320GB)</col>
-        <col id="1">sda2 (Homes)</col>
-        <col id="2">160GB</col>
-        <col id="3">xfs</col>
-        <col id="4">sda2</col>
-      </row>
-      <row>
-        <col id="0">Sandisk (8GB)</col>
-        <col id="1">sdb1 (Data)</col>
-        <col id="2">8GB</col>
-        <col id="3">fat32</col>
-        <col id="4">sdb1</col>
-      </row>
-    </data>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="width_request">800</property>
@@ -4266,32 +4269,6 @@ If you already have all the needed partitions, please click on the button 'Do no
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="month_list_store">
-    <columns>
-      <!-- column-name month -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">January</col>
-      </row>
-      <row>
-        <col id="0">February</col>
-      </row>
-      <row>
-        <col id="0">March</col>
-      </row>
-      <row>
-        <col id="0">April</col>
-      </row>
-      <row>
-        <col id="0">May</col>
-      </row>
-      <row>
-        <col id="0">June</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkDialog" id="progress_dialog">
     <property name="can_focus">True</property>
     <property name="has_focus">True</property>
@@ -4454,7 +4431,7 @@ If you already have all the needed partitions, please click on the button 'Do no
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Confirmation needed</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
+    <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">dialog-question</property>
     <property name="type_hint">dialog</property>

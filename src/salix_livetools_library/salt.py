@@ -130,9 +130,9 @@ def installSaLTModule(moduleName, targetMountPoint):
   Install the module 'moduleName' from this Live session into the targetMountPoint.
   """
   _checkLive()
-  if not os.path.isdir('/mnt/salt/mnt/{1}'.format(moduleName)):
+  if not os.path.isdir('/mnt/salt/mnt/{0}'.format(moduleName)):
     raise IOError("The module '{0}' does not exists".format(moduleName))
   if not os.path.isdir(targetMountPoint):
     raise IOError("The target mount point '{0}' does not exists".format(targetMountPoint))
   # TODO Pythonic way ??
-  execCall(['cp', '--preserve', '-r', '-f', '/mnt/salt/mnt/{1}/*'.format(moduleName), targetMountPoint], shell = False)
+  execCall(['cp', '--preserve', '-r', '-f', '/mnt/salt/mnt/{0}/*'.format(moduleName), targetMountPoint], shell = False)

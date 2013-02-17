@@ -26,7 +26,7 @@ def listAvailableLocales(mountPoint = None):
     mountPoint = ''
   locales = []
   libdir = 'lib'
-  if path.isdir('{0}/usr/lib64/locale'.format(mountPoint)):
+  if os.path.isdir('{0}/usr/lib64/locale'.format(mountPoint)):
     libdir = 'lib64'
   for path in sorted(glob.glob('{0}/usr/{1}/locale/*.utf8'.format(mountPoint, libdir))):
     locale = os.path.basename(path).rsplit('.', 1)[0]

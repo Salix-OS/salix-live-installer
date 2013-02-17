@@ -52,6 +52,8 @@ def addFsTabEntry(fstabMountPoint, device, mountPoint, fsType = None, options = 
       options = defaultOptions[defaultOptionsPerFs[fsType]]
     else:
       options = defaultOptions['def']
+  if fsType == 'ntfs':
+    fsType = 'ntfs-3g'
   fp = open('{0}/etc/fstab'.format(fstabMountPoint), 'a')
   fp.write('{device:20}{mountPoint:20}{fsType:15}{options:20}{dumpFlag:10}{fsckOrder:2}\n'.format(device = device, mountPoint = mountPoint, fsType = fsType, options = options, dumpFlag = dumpFlag, fsckOrder = fsckOrder))
   fp.close()
