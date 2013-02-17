@@ -871,12 +871,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       if full_text:
         msg = _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = '/')
       else:
-        msg = '<span foreground="black" font_family="monospace" weight="bold">- {0} => /</span>'.format(part_name)
+        msg = '<span foreground="black" font_family="monospace">- {0} => /</span>'.format(part_name)
     else:
       if full_text:
         msg = _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = self.main_format, mountpoint = '/')
       else:
-        msg = '<span foreground="black" font_family="monospace" weight="bold">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.main_format)
+        msg = '<span foreground="black" font_family="monospace">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.main_format)
     return msg
   def on_main_partition_undo_clicked(self, widget, data=None):
     self.on_main_partition_cancel()
@@ -1055,10 +1055,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.win_partitions = None
     self.partitions_settings()
   def recap_partition_settings(self):
-    self.MainPartRecapLabel.set_markup(self.get_main_partition_message(False))
-    self.LinPartRecapLabel.set_markup(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>"))
-    self.WinPartRecapLabel.set_markup(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>"))
-    self.SwapPartRecapLabel.set_markup(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>"))
+    self.MainPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_main_partition_message(False)))
+    self.LinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>")))
+    self.WinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>")))
+    self.SwapPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>")))
     self.configurations['partitions'] = True
     self.PartitionCheck.show()
     self.PartitionCheckMarker.hide()
@@ -1281,10 +1281,13 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.update_install_button()
   def on_packages_apply_clicked(self, widget, data=None):
     if self.CoreRadioButton.get_active():
+      _("core") # to be catched by the translations generator
       self.install_mode = 'core'
     elif self.BasicRadioButton.get_active():
+      _("basic") # to be catched by the translations generator
       self.install_mode = 'basic'
     elif self.FullRadioButton.get_active():
+      _("full") # to be catched by the translations generator
       self.install_mode = 'full'
     self.configurations['packages'] = True
     self.packages_settings()
@@ -1314,6 +1317,41 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   ###################################################################
 
   def on_install_button_clicked(self, widget, data=None):
+    full_recap_msg = ''
+    full_recap_msg += "\n<b>" + _("You are about to install Salix with the following settings:") + "</b>\n"
+    full_recap_msg += "\n<b>" + _("Date and Time:") + "</b>\n"
+    full_recap_msg += _("- Time zone: {tz}").format(tz = self.cur_tz_continent + "/" + self.cur_tz_city) + "\n"
+    if self.cur_use_ntp:
+      dt = "NTP"
+    else:
+      dt = (datetime.now() + self.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
+    full_recap_msg += "- Date and time: {dt}\n".format(dt = dt)
+    full_recap_msg += "\n<b>" + _("Keyboard:") + "</b>\n"
+    full_recap_msg += _("- Layout: {layout}").format(layout = self.KeyboardSelection.get_text()) + "\n"
+    if self.cur_use_numlock:
+      nl = '<span style="italic" foreground="green">{0}</span>'.format(_("activated"))
+    else:
+      nl = '<span style="italic" foreground="maroon">{0}</span>'.format(_("deactivated"))
+    if self.cur_use_ibus:
+      ibus = '<span style="italic" foreground="green">{0}</span>'.format(_("activated"))
+    else:
+      ibus = '<span style="italic" foreground="maroon">{0}</span>'.format(_("deactivated"))
+    full_recap_msg += _("- Numlock: {nl}, Ibus: {ibus}").format(nl = nl, ibus = ibus) + "\n"
+    full_recap_msg += "\n<b>" + _("System language:") + "</b>\n"
+    full_recap_msg += "- {lang}".format(lang = self.LocaleSelection.get_text()) + "\n"
+    full_recap_msg += "\n<b>" + _("Partitions:") + "</b>\n"
+    full_recap_msg += self.get_main_partition_message(False) + "\n"
+    full_recap_msg += self.get_linux_partitions_message(False) + "\n"
+    full_recap_msg += self.get_windows_partitions_message(False) + "\n"
+    full_recap_msg += self.get_swap_partitions_message(False) + "\n"
+    if self.keep_live_logins:
+      full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + _("Using LiveClone login.") + "\n"
+    else:
+      full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + self.new_login + "\n"
+    full_recap_msg += "\n<b>" + _("Packages:") + "</b>\n"
+    full_recap_msg += _("You have chosen the {mode} installation mode.").format(mode = _(self.install_mode))
+    self.show_yesno_dialog(full_recap_msg, self.install_salixlive, None)
+  def install_salixlive(self):
     info_dialog("installation...")
 
 # Info window skeleton:
