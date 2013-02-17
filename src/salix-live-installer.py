@@ -29,6 +29,11 @@ import gettext
 import gobject
 import gtk
 import gtk.glade
+from threading import Thread
+import thread
+from time import sleep
+gtk.gdk.threads_init()
+
 import os
 import sys
 import glob
@@ -43,9 +48,10 @@ VERSION = '0.4'
 MIN_SALT = '0.2.1'
 
 class SalixLiveInstaller:
-  def __init__(self, is_test = False, is_test_clone = False):
+  def __init__(self, is_test = False, is_test_clone = False, use_test_data = False):
     self.is_test = is_test
     self.is_test_clone = is_test_clone
+    self.use_test_data = use_test_data
     builder = gtk.Builder()
     for d in ('.', '/usr/share/salix-live-installer', '../share/salix-live-installer'):
       if os.path.exists(d + '/salix-live-installer.glade'):
@@ -55,6 +61,7 @@ class SalixLiveInstaller:
     self.AboutDialog = builder.get_object("about_dialog")
     self.AboutDialog.set_version(VERSION)
     self.Window = builder.get_object("main_window")
+    self.Window.connect("destroy", lambda _: gtk.main_quit())
     self.ProgressWindow = builder.get_object("progress_dialog")
     self.InstallProgressBar = builder.get_object("install_progressbar")
     self.TimeTab = builder.get_object("time_tab")
@@ -428,34 +435,72 @@ always following the "one application per task" rationale. '))
       error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(MIN_SALT, self.salt_version)))
       self.is_live = False
       self.is_liveclone = False
-    self.cur_tz = sltl.getDefaultTimeZone()
-    if '/' in self.cur_tz:
-      self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
-      self.cur_tz_city = self.cur_tz.split('/', 1)[1]
-    else:
-      self.cur_tz = None
-      self.cur_tz_continent = None
-      self.cur_tz_city = None
-    self.cur_use_ntp = sltl.isNTPEnabledByDefault()
-    self.cur_time_delta = timedelta() # used when NTP is not used
-    self.cur_km = sltl.findCurrentKeymap()
-    self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
-    self.cur_use_ibus = sltl.isIbusEnabledByDefault()
-    self.cur_locale = sltl.getCurrentLocale()
-    self.partitions_step = 'none' # could be none, main, linux, win or recap
-    self.partitions = []
-    self.swap_partitions = []
-    self.show_external_drives = False
     self.default_format = 'ext4'
-    self.main_partition = None
-    self.main_format = None
-    self.linux_partitions = None # list of tuple as (device, format, mountpoint)
-    self.win_partitions = None # list of tuple as (device, format, mountpoint)
-    self.keep_live_logins = self.is_liveclone
-    self.new_login = '' # None cannot be used in a GtkEntry
-    self.new_password = ''
-    self.new_root_password = ''
-    self.install_mode = None
+    if self.use_test_data:
+      self.cur_tz_continent = 'Europe'
+      self.cur_tz_city = 'Paris'
+      self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
+      self.cur_use_ntp = True
+      self.cur_time_delta = timedelta()
+      self.cur_km = 'fr-latin9'
+      self.cur_use_numlock = False
+      self.cur_use_ibus = True
+      self.cur_locale = 'fr_FR'
+      self.partitions_step = 'recap'
+      self.show_external_drives = False
+      self.main_partition = 'sda7'
+      self.main_format = 'ext4'
+      self.main_partition_settings() # fill self.partitions
+      self.swap_partitions = sltl.getSwapPartitions()
+      self.linux_partitions = []
+      self.win_partitions = []
+      self.keep_live_logins = self.is_liveclone
+      if self.keep_live_logins:
+        self.new_login = ''
+        self.new_password = ''
+        self.new_root_password = ''
+      else:
+        self.new_login = 'test'
+        self.new_password = 'salix'
+        self.new_root_password = 'SaliX'
+      self.install_mode = 'full'
+      for c in self.configurations:
+        self.configurations[c] = True
+      self.time_settings()
+      self.keyboard_settings()
+      self.locale_settings()
+      self.partitions_settings()
+      self.users_settings()
+      self.packages_settings()
+      self.on_packages_tab_clicked(None)
+    else:
+      self.cur_tz = sltl.getDefaultTimeZone()
+      if '/' in self.cur_tz:
+        self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
+        self.cur_tz_city = self.cur_tz.split('/', 1)[1]
+      else:
+        self.cur_tz = None
+        self.cur_tz_continent = None
+        self.cur_tz_city = None
+      self.cur_use_ntp = sltl.isNTPEnabledByDefault()
+      self.cur_time_delta = timedelta() # used when NTP is not used
+      self.cur_km = sltl.findCurrentKeymap()
+      self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
+      self.cur_use_ibus = sltl.isIbusEnabledByDefault()
+      self.cur_locale = sltl.getCurrentLocale()
+      self.partitions_step = 'none' # could be none, main, linux, win or recap
+      self.partitions = []
+      self.swap_partitions = []
+      self.show_external_drives = False
+      self.main_partition = None
+      self.main_format = None
+      self.linux_partitions = None # list of tuple as (device, format, mountpoint)
+      self.win_partitions = None # list of tuple as (device, format, mountpoint)
+      self.keep_live_logins = self.is_liveclone
+      self.new_login = '' # None cannot be used in a GtkEntry
+      self.new_password = ''
+      self.new_root_password = ''
+      self.install_mode = None
     print ' Done'
     sys.stdout.flush()
 
@@ -774,16 +819,17 @@ always following the "one application per task" rationale. '))
   def on_modify_partition_button_clicked(self, widget, data=None):
     self.Window.set_sensitive(False)
     self.Window.set_accept_focus(False)
-    self.Window.iconify()
+    self.Window.hide()
     # be sure to treat any pending GUI events before running gparted
-    gtk.main_iteration()
+    while gtk.events_pending():
+      gtk.main_iteration()
     if self.is_test:
       sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
     else:
       sltl.execCheck("/usr/sbin/gparted", shell=False, env=None)
     self.Window.set_sensitive(True)
     self.Window.set_accept_focus(True)
-    self.Window.deiconify()
+    self.Window.show()
     self.on_do_not_modify_partition_button_clicked(widget)
   def on_do_not_modify_partition_button_clicked(self, widget, data=None):
     self.partitions_step = 'main'
@@ -1198,7 +1244,8 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     context_label_text = "<b>" + _("Password strength:") + "</b>\n"
     self.ContextLabel.set_markup(context_label_text + context_msg)
   def on_user_pass_strength_expose_event(self, widget, event, data=None):
-    self.set_progressbar_strength(self.UserPass1Entry.get_text().strip(), self.UserPassStrength)
+    if not self.keep_live_logins:
+      self.set_progressbar_strength(self.UserPass1Entry.get_text().strip(), self.UserPassStrength)
   def on_user_pass1_entry_changed(self, widget, data=None):
     self.on_user_pass_strength_expose_event(self, None, None)
   def on_user_visible_checkbutton_toggled(self, widget, data=None):
@@ -1239,7 +1286,8 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.new_password = ''
     self.users_settings_live()
   def on_root_pass_strength_expose_event(self, widget, event, data=None):
-    self.set_progressbar_strength(self.RootPass1Entry.get_text().strip(), self.RootPassStrength)
+    if not self.keep_live_logins:
+      self.set_progressbar_strength(self.RootPass1Entry.get_text().strip(), self.RootPassStrength)
   def on_root_pass1_entry_changed(self, widget, data=None):
     self.on_root_pass_strength_expose_event(self, None, None)
   def on_root_visible_checkbutton_toggled(self, widget, data=None):
@@ -1340,10 +1388,13 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     full_recap_msg += "\n<b>" + _("System language:") + "</b>\n"
     full_recap_msg += "- {lang}".format(lang = self.LocaleSelection.get_text()) + "\n"
     full_recap_msg += "\n<b>" + _("Partitions:") + "</b>\n"
-    full_recap_msg += self.get_main_partition_message(False) + "\n"
-    full_recap_msg += self.get_linux_partitions_message(False) + "\n"
-    full_recap_msg += self.get_windows_partitions_message(False) + "\n"
-    full_recap_msg += self.get_swap_partitions_message(False) + "\n"
+    part_main = self.get_main_partition_message(False)
+    part_linux = self.get_linux_partitions_message(False)
+    part_windows =  self.get_windows_partitions_message(False)
+    part_swap = self.get_swap_partitions_message(False)
+    for p in (part_main, part_linux, part_windows, part_swap):
+      if p:
+        full_recap_msg += p + "\n"
     if self.keep_live_logins:
       full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + _("Using LiveClone login.") + "\n"
     else:
@@ -1352,7 +1403,90 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     full_recap_msg += _("You have chosen the {mode} installation mode.").format(mode = _(self.install_mode))
     self.show_yesno_dialog(full_recap_msg, self.install_salixlive, None)
   def install_salixlive(self):
-    info_dialog("installation...")
+    self.Window.set_sensitive(False)
+    self.Window.set_accept_focus(False)
+    self.Window.hide()
+    self.InstallProgressBar.set_text(_("Starting installation process..."))
+    self.InstallProgressBar.set_fraction(0)
+    self.ProgressWindow.show()
+    self.ProgressWindow.set_keep_above(True)
+    while gtk.events_pending():
+      gtk.main_iteration()
+    GeneratorTask(self.thread_install_salix, self.thread_update_gui, self.thread_install_completed).start()
+  def thread_install_salix(self):
+    """
+    Thread to install Salix.
+    This works like a generator.
+    It should yield fraction of the completion
+    """
+    print "Installing…"
+    self.installing = False
+    # format main partition (and mount it)
+    # format linux partitions (and mount them)
+    # copying modules (one step per module, so we need to count them before starting the installation)
+    # create fstab
+    # set date and time
+    # set keyboard
+    # set locale
+    # set users
+    # set services
+    # update system things:
+    # - pango, gtk, fonts, …
+    # - adjusting configuration for liveclone
+    if self.is_test:
+      if self.is_test_clone:
+        modules = ('01-clone')
+      else:
+        modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
+    else:
+      modules = sltl.listSaLTModules()
+    steps = 9 + len(modules)
+    step = 0
+    while step < steps:
+      sleep(1)
+      step += 1
+      yield float(step) / steps
+    return
+  def thread_update_gui(self, fraction):
+    self.InstallProgressBar.set_fraction(fraction)
+  def thread_install_completed(self):
+    self.InstallProgressBar.set_fraction(1)
+    print "Installaion Done.\nHappy Salix."
+    gtk.main_quit()
+
+
+
+class GeneratorTask:
+  """
+  Handles starting a thread that will call a generator.
+  For each result of the generator, a callback is called.
+  At the end, a different callback may be called on completion.
+  """
+  def __init__(self, generator, loop_callback, complete_callback=None):
+    self.generator = generator
+    self.loop_callback = loop_callback
+    self.complete_callback = complete_callback
+  def _start(self, *args, **kwargs):
+    self._stopped = False
+    for ret in self.generator(*args, **kwargs):
+      if self._stopped:
+        thread.exit()
+      if self.loop_callback:
+        gobject.idle_add(self._loop, ret)
+    if self.complete_callback:
+      gobject.idle_add(self.complete_callback)
+  def _loop(self, ret):
+    if ret is None:
+      ret = ()
+    if not isinstance(ret, tuple):
+      ret = (ret,)
+    self.loop_callback(*ret)
+  def start(self, *args, **kwargs):
+    Thread(target=self._start, args=args, kwargs=kwargs).start()
+  def stop(self):
+    self._stopped = True
+
+
 
 # Info window skeleton:
 def info_dialog(message, parent = None):
@@ -1379,22 +1513,29 @@ def error_dialog(message, parent = None):
 
 # Launch the application
 if __name__ == '__main__':
-  # If no root privilege, displays error message and exit
+  print 'Salix Live Installer v' + VERSION
   is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
+  is_clone = False
+  use_test_data = False
   if is_test:
-    is_clone = (len(sys.argv) > 2 and sys.argv[2] == '--clone')
+    print "*** Testing mode ***"
+    if len(sys.argv) > 2:
+      for a in sys.argv[2:]:
+        if a == '--clone':
+          print "*** Clone mode ***"
+          is_clone = True
+        if a == '--data':
+          print "*** Test data mode ***"
+          use_test_data = True
     gettext.install(APP, './locale', True)
     gtk.glade.bindtextdomain(APP, './locale')
   else:
-    is_clone = False
     gettext.install(APP, '/usr/share/locale', True)
     gtk.glade.bindtextdomain(APP, '/usr/share/locale')
   gtk.glade.textdomain(APP)
-
+  # If no root privilege, displays error message and exit
   if not is_test and os.getuid() != 0:
     error_dialog(_("<b>Sorry!</b>\n\nRoot privileges are required to run this program."))
     sys.exit(1)
-  print 'Salix Live Installer v' + VERSION
-  # show the gui and wait for signals
-  SalixLiveInstaller(is_test, is_clone)
+  SalixLiveInstaller(is_test, is_clone, use_test_data)
   gtk.main()
