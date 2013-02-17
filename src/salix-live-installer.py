@@ -1440,16 +1440,91 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
     else:
       modules = sltl.listSaLTModules()
-    steps = 9 + len(modules)
+    if self.is_liveclone:
+      install_modules = modules
+    else:
+      install_modules = []
+      for m in modules:
+        if 'core' in m:
+          install_modules.append(m)
+        elif 'basic' in m:
+          if self.install_mode in ('basic', 'full'):
+            install_modules.append(m)
+        elif 'full' in m:
+          if self.install_mode == 'full':
+            install_modules.append(m)
+        elif not 'live' in m:
+          install_modules.append(m)
+    steps = 9 + len(install_modules)
     step = 0
-    while step < steps:
-      sleep(1)
+    msg = self.install_main_partition()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_linux_partitions()
+    step += 1
+    yield (msg, float(step) / steps)
+    for module in install_modules:
+      msg = self.install_module(module)
       step += 1
-      yield float(step) / steps
+      yield (msg, float(step) / steps)
+    msg = self.install_fstab()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_datetime()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_keyboard()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_locale()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_users()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_services()
+    step += 1
+    yield (msg, float(step) / steps)
+    msg = self.install_config()
+    step += 1
+    yield (msg, float(step) / steps)
     return
-  def thread_update_gui(self, fraction):
+  def install_main_partition(self):
+    sleep(1)
+    return _("Formatting and mounting the main partition...")
+  def install_linux_partitions(self):
+    sleep(1)
+    return _("Formatting and mounting the Linux partition(s)...")
+  def install_module(self, module):
+    sleep(1)
+    return _("Installing the {mode} mode packages...").format(mode = self.install_mode) + "\n - " + _("Installing the {module} module...").format(module = module)
+  def install_fstab(self):
+    sleep(1)
+    return _("Creating /etc/fstab...")
+  def install_datetime(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Date and time")
+  def install_keyboard(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Keyboard")
+  def install_locale(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Locale")
+  def install_users(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Users")
+  def install_services(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Services")
+  def install_config(self):
+    sleep(1)
+    return _("Time, keyboard, locale, login and other system configuration...") + "\n - " + _("Configuration")
+  def thread_update_gui(self, msg, fraction):
+    print "{1:3.0%} {0}".format(msg, fraction)
+    self.InstallProgressBar.set_text(msg)
     self.InstallProgressBar.set_fraction(fraction)
   def thread_install_completed(self):
+    self.InstallProgressBar.set_text(_("Installation process completed successfully..."))
     self.InstallProgressBar.set_fraction(1)
     print "Installaion Done.\nHappy Salix."
     gtk.main_quit()
