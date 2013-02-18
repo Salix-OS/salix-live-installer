@@ -5,6 +5,7 @@
 Calculate some size and free size of folders and mount points.
 Functions:
   - getHumanSize
+  - getBlockSize
   - getSizes
   - getUsedSize
 """
@@ -40,7 +41,19 @@ def getHumanSize(size):
     sizeHuman = sizeHuman / 1024
   return "{0:.1f}{1}".format(sizeHuman, units[unit])
 
-def getSizes(path):
+def getBlockSize(path):
+  """
+  Returns the block size of the underlying filesystem denoted by 'path'.
+  """
+  if S_ISBLK(os.stat(path).st_mode):
+    diskDevice = re.sub(r'^.*/([^/]+?)[0-9]*$', r'\1', path)
+    blockSize = int(open('/sys/block/{0}/queue/logical_block_size'.format(diskDevice), 'r').read().strip())
+  else:
+    st = os.statvfs(path)
+    blockSize = st.f_frsize
+  return blockSize
+
+def getSizes(path, withHuman = True):
   """
   Computes the different sizes of the fileystem denoted by path (either a device or a file in filesystem).
   Return the following sizes (in a dictionary):
@@ -75,15 +88,24 @@ def getSizes(path):
   uuFree = st.f_bavail * st.f_frsize # free size for unpriviliedge users
   used = size - free
   uuUsed = size - uuFree # used size appear differently for commun users than from root user
-  return {
-      'size':size, 'sizeHuman':getHumanSize(size),
-      'free':free, 'freeHuman':getHumanSize(free),
-      'uuFree':uuFree, 'uuFreeHuman':getHumanSize(uuFree),
-      'used':used, 'usedHuman':getHumanSize(used),
-      'uuUsed':uuUsed, 'uuUsedHuman':getHumanSize(uuUsed)
-    }
+  if withHuman:
+    return {
+        'size':size, 'sizeHuman':getHumanSize(size),
+        'free':free, 'freeHuman':getHumanSize(free),
+        'uuFree':uuFree, 'uuFreeHuman':getHumanSize(uuFree),
+        'used':used, 'usedHuman':getHumanSize(used),
+        'uuUsed':uuUsed, 'uuUsedHuman':getHumanSize(uuUsed)
+      }
+  else:
+    return {
+        'size':size, 'sizeHuman':None,
+        'free':free, 'freeHuman':None,
+        'uuFree':uuFree, 'uuFreeHuman':None,
+        'used':used, 'usedHuman':None,
+        'uuUsed':uuUsed, 'uuUsedHuman':None
+      }
 
-def getUsedSize(path, blocksize = None):
+def getUsedSize(path, blocksize = None, withHuman = True):
   """
   Returns the size of the space used by files and folders under 'path'.
   If 'blocksize' is specified, mimic the space that will be used if the blocksize of the underlying filesystem where the one specified.
@@ -102,7 +124,10 @@ def getUsedSize(path, blocksize = None):
   size = int(size)
   if blocksize:
     size *= blocksize
-  return {'size':size, 'sizeHuman':getHumanSize(size)}
+  if withHuman:
+    return {'size':size, 'sizeHuman':getHumanSize(size)}
+  else:
+    return {'size':size, 'sizeHuman':None}
 
 # Unit test
 if __name__ == '__main__':

@@ -18,6 +18,9 @@ import os
 import glob
 import re
 from execute import execCall
+from freesize import *
+from threading import Thread
+from time import sleep
 
 def getSaLTVersion():
   """
@@ -125,14 +128,49 @@ def listSaLTModules():
   moduledir = '{0}/{1}/{2}/modules'.format(getSaLTLiveMountPoint(), getSaLTBaseDir(), getSaLTRootDir())
   return sorted(map(lambda(x): re.sub(r'.*/([^/]+).salt$', r'\1', x), glob.glob('{0}/*.salt'.format(moduledir))))
 
-def installSaLTModule(moduleName, targetMountPoint):
+def getSaLTModulePath(moduleName):
+  """
+  Get the module full path.
+  """
+  return '/mnt/salt/mnt/{0}'.format(moduleName)
+
+def installSaLTModule(moduleName, targetMountPoint, callback, interval = 10, completeCallback = None):
   """
   Install the module 'moduleName' from this Live session into the targetMountPoint.
+  The 'callback' function will be called each 'interval' seconds with the pourcentage (0 ≤ x ≤ 1) of progression (based on used size of target partition) as argument.
+  The 'completeCallback' function will be called after the completion of installation.
   """
   _checkLive()
-  if not os.path.isdir('/mnt/salt/mnt/{0}'.format(moduleName)):
+  src = getSaLTModulePath(moduleName)
+  if not os.path.isdir(src):
     raise IOError("The module '{0}' does not exists".format(moduleName))
   if not os.path.isdir(targetMountPoint):
     raise IOError("The target mount point '{0}' does not exists".format(targetMountPoint))
-  # TODO Pythonic way ??
-  execCall(['cp', '--preserve', '-r', '-f', '/mnt/salt/mnt/{0}/*'.format(moduleName), targetMountPoint], shell = False)
+  def get_used_size(p):
+    return getSizes(p, False)['used']
+  class ExecCopyTask:
+    def _start(self, cmd):
+      self._stopped = False
+      execCall(cmd)
+      self.stop()
+    def start(self, cmd):
+      Thread(target=self._start, args=(cmd)).start()
+    def is_running(self):
+      return not self._stopped
+    def stop(self):
+      self._stopped = True
+  copy_size = getUsedSize(src, getBlockSize(targetMountPoint), False)['size'] # the source can use a different blocksize than the destination
+  init_size = get_used_size(targetMountPoint)
+  final_size = init_size + copy_size
+  actual_size = init_size
+  t = ExecCopyTask(callback, interval, completeCallback)
+  t.start(['cp', '--preserve', '-r', '-f', '{0}/*'.format(src), targetMountPoint])
+  while t.is_running():
+    sleep(interval)
+    actual_size = get_used_size(targetMountPoint)
+    p = float(actual_size) / final_size
+    if p > 1:
+      p = 1
+    callback(p)
+  if completeCallback:
+    completeCallback()

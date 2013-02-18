@@ -1464,11 +1464,13 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if not self.is_test:
       main_sizes = sltl.getSizes("/dev/{0}".format(self.main_partition))
       main_size = main_sizes['size']
+      main_block_size = getBlockSize("/dev/{0}".format(self.main_partition))
       module_size = 0
       for m in install_modules:
-        module_size += sltl.getUsedSize("/mnt/salt/mnt/{0}".format(m), blocksize = '4K')['size']
+        module_size += sltl.getUsedSize("/mnt/salt/mnt/{0}".format(m), main_block_size, False)['size']
       minimum_free_size = 50 * 1024 * 1024 # 50 M
       if module_size + minimum_free_size > main_size:
+        self.ProgressWindow.set_keep_above(False)
         error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = getHumanSize(module_size + minimum_free_size)))
         self.installation = 'error'
         return
@@ -1653,6 +1655,7 @@ unicode_start ter-v16n""")
     if self.installation == 'installing':
       self.InstallProgressBar.set_text(_("Installation process completed successfully..."))
       self.InstallProgressBar.set_fraction(1)
+      self.ProgressWindow.set_keep_above(False)
       if not self.is_test:
         if self.linux_partitions:
           rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
