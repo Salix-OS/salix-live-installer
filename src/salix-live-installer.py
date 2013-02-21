@@ -1488,17 +1488,23 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     step = 0
     self.installation = 'installing'
     # sanity checks
-    if not self.is_test:
+    modules_size = {}
+    if self.is_test:
+      for m in install_modules:
+        modules_size[m] = 1
+    else:
       main_sizes = sltl.getSizes("/dev/{0}".format(self.main_partition))
       main_size = main_sizes['size']
       main_block_size = sltl.getBlockSize("/dev/{0}".format(self.main_partition))
-      module_size = 0
+      module_total_size = 0
       for m in install_modules:
-        module_size += sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
+        size = sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
+        modules_size[m] = size
+        module_total_size += size
       minimum_free_size = 50 * 1024 * 1024 # 50 M
-      if module_size + minimum_free_size > main_size:
+      if module_total_size + minimum_free_size > main_size:
         self.ProgressWindow.set_keep_above(False)
-        error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = getHumanSize(module_size + minimum_free_size)))
+        error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = sltl.getHumanSize(module_total_size + minimum_free_size)))
         self.installation = 'error'
         return
       sltl.execCall(['rm', '-r', sltl.getTempMountDir()])
@@ -1512,7 +1518,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     step = self.install_linux_partitions(msg, step, steps, weights['linux_partitions'])
     msg = _("Installing the {mode} mode packages...").format(mode = _(self.install_mode))
     self.update_progressbar(msg, step, steps)
-    step = self.install_modules(install_modules, msg, step, steps, weights['modules'])
+    step = self.install_modules(install_modules, modules_size, msg, step, steps, weights['modules'])
     msg = _("Creating /etc/fstab...")
     self.update_progressbar(msg, step, steps)
     self.install_fstab()
@@ -1581,7 +1587,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         sltl.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
         step += weights[d]
       return step
-  def install_modules(self, modules, msg, step, steps, weight):
+  def install_modules(self, modules, modules_size, msg, step, steps, weight):
     if self.is_test:
       for m in modules:
         self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
@@ -1592,13 +1598,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       for m in modules:
         self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
-        sltl.installSaLTModule(m, rootmp, self.install_module_callback, (step, steps, weight[m]))
+        size = modules_size[m]
+        sltl.installSaLTModule(m, size, rootmp, self.install_module_callback, (step, steps, weight[m]))
         step += weight[m]
       return step
   def install_module_callback(self, pourcent, step, steps, weight):
-    print "pourcent={0}, step={1}, steps={2}, weight={3}".format(pourcent, step, steps, weight)
     new_step = step + float(pourcent) * weight
-    print "new_step={0}".format(new_step)
     gobject.idle_add(self.update_progressbar, None, new_step, steps)
   def install_fstab(self):
     if self.is_test:
@@ -1617,6 +1622,8 @@ to first create a Swap partition before resuming with Salix Live Installer proce
           for p in l:
             d = p[0]
             fs = p[1]
+            if fs == 'none': # tell to not format, so...
+              fs = None # ...come back to autodetection
             mp = p[2]
             try:
               os.makedirs(rootmp + mp)

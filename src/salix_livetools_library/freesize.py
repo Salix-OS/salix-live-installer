@@ -115,24 +115,15 @@ def getUsedSize(path, blocksize = None, withHuman = True):
   This could be useful if used to transfer files from one directory to another when the target filesystem use another blocksize.
   Returns a tuple with (size, sizeHuman)
   """
-  cmd = ['/bin/du', '-c', '-s']
   if blocksize:
-    cmd.extend(['-B', str(blocksize)])
+    cmd = """(echo -n '('; find '{0}' -type f -print0 | du -l -B {1} --files0-from=- | cut -f1 | tr "\\n" "+"; echo '0)*{1}') | bc""".format(path, blocksize)
+    lines = execGetOutput(cmd, shell = True)
+    size = lines[-1]
   else:
-    cmd.extend(['-B', '1'])
-  cmd.append(path)
-  print cmd
-  lines = execGetOutput(cmd, shell = False)
-  print "lines =", lines
-  size, _ = lines[-1].split()
-  print "line[-1] =", lines[-1]
-  print "size =", size
+    cmd = ['/bin/du', '-c', '-s', '-B', '1', path]
+    lines = execGetOutput(cmd, shell = False)
+    size, _ = lines[-1].split()
   size = int(size)
-  print "size =", size
-  if blocksize:
-    size *= int(blocksize)
-  print "blocksize =", blocksize
-  print "size =", size
   if withHuman:
     return {'size':size, 'sizeHuman':getHumanSize(size)}
   else:

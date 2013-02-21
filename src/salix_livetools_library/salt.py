@@ -134,9 +134,10 @@ def getSaLTModulePath(moduleName):
   """
   return '/mnt/salt/mnt/modules/{0}'.format(moduleName)
 
-def installSaLTModule(moduleName, targetMountPoint, callback, callback_args = (), interval = 10, completeCallback = None):
+def installSaLTModule(moduleName, moduleSize, targetMountPoint, callback, callback_args = (), interval = 10, completeCallback = None):
   """
   Install the module 'moduleName' from this Live session into the targetMountPoint.
+  'moduleSize' is the uncompressed size of the module expressed in bytes.
   The 'callback' function will be called each 'interval' seconds with the pourcentage (0 ≤ x ≤ 1) of progression (based on used size of target partition) as first argument and all value of callback_args as next arguments
   The 'completeCallback' function will be called after the completion of installation.
   """
@@ -157,10 +158,7 @@ def installSaLTModule(moduleName, targetMountPoint, callback, callback_args = ()
       self.t.start()
     def is_running(self):
       return self.t and self.t.is_alive()
-  copy_size = getUsedSize(src, getBlockSize(targetMountPoint), False)['size'] # the source can use a different blocksize than the destination
   init_size = get_used_size(targetMountPoint)
-  print "init_size =", init_size
-  print "copy_size =", copy_size
   actual_size = init_size
   t = ExecCopyTask()
   t.start(['cp', '--preserve', '-r', '-f', '--remove-destination', '{0}/*'.format(src), targetMountPoint])
@@ -171,12 +169,10 @@ def installSaLTModule(moduleName, targetMountPoint, callback, callback_args = ()
         break
     if t.is_running():
       actual_size = get_used_size(targetMountPoint)
-      print "actual_size =", actual_size
       diff_size = float(actual_size - init_size)
       if diff_size < 0: # is this possible?
         diff_size = 0
-      p = diff_size / copy_size
-      print "% =", p
+      p = diff_size / moduleSize
       if p > 1:
         p = 1
       callback(p, *callback_args)

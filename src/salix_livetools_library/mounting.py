@@ -26,12 +26,10 @@ def getMountPoint(device):
   """
   mountpoint = None
   path = os.path.abspath(device)
-  print "path =", path
   for line in execGetOutput(['/bin/mount'], shell = False):
     p, _, mp, _ = line.split(' ', 3) # 3 splits max, _ is discarded
     if os.path.islink(p):
       p = os.path.realpath(p)
-    print "p =", p
     if p == path:
       mountpoint = mp
       break
@@ -70,7 +68,6 @@ def mountDevice(device, fsType = None, mountPoint = None):
   autoMP = False
   if not mountPoint:
     mountPoint = '{0}/{1}'.format(_tempMountDir, os.path.basename(device))
-    print "auto mountpoint =", mountPoint
     if os.path.exists(mountPoint):
       return False
     autoMP = True
@@ -79,11 +76,7 @@ def mountDevice(device, fsType = None, mountPoint = None):
       os.makedirs(mountPoint)
     except os.error:
       pass
-  print "fsType =", fsType
-  print "device =", device
-  print "mountPoint =", mountPoint
   ret = execCall(['mount', '-t', fsType, device, mountPoint], shell = False)
-  print "mount ret =", ret
   if ret != 0 and autoMP:
     _deleteMountPoint(mountPoint)
   return ret
