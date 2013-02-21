@@ -38,7 +38,6 @@ def createSystemUser(user, group = '', groups = [
   'cdrom',
   'games',
   'floppy',
-  'fuse',
   'lp',
   'netdev',
   'plugdev',

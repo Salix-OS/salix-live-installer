@@ -46,8 +46,11 @@ def getBlockSize(path):
   Returns the block size of the underlying filesystem denoted by 'path'.
   """
   if S_ISBLK(os.stat(path).st_mode):
-    diskDevice = re.sub(r'^.*/([^/]+?)[0-9]*$', r'\1', path)
-    blockSize = int(open('/sys/block/{0}/queue/logical_block_size'.format(diskDevice), 'r').read().strip())
+    lines = execGetOutput(['/sbin/blockdev', '--getbsz', path], shell = False)
+    if lines:
+      blockSize = int(lines[0])
+    else:
+      blockSize = None
   else:
     st = os.statvfs(path)
     blockSize = st.f_frsize
@@ -112,18 +115,24 @@ def getUsedSize(path, blocksize = None, withHuman = True):
   This could be useful if used to transfer files from one directory to another when the target filesystem use another blocksize.
   Returns a tuple with (size, sizeHuman)
   """
-  cmd = ['du', '-c', '-s']
+  cmd = ['/bin/du', '-c', '-s']
   if blocksize:
     cmd.extend(['-B', str(blocksize)])
   else:
     cmd.extend(['-B', '1'])
   cmd.append(path)
   print cmd
-  lines = execGetOutput(cmd)
+  lines = execGetOutput(cmd, shell = False)
+  print "lines =", lines
   size, _ = lines[-1].split()
+  print "line[-1] =", lines[-1]
+  print "size =", size
   size = int(size)
+  print "size =", size
   if blocksize:
-    size *= blocksize
+    size *= int(blocksize)
+  print "blocksize =", blocksize
+  print "size =", size
   if withHuman:
     return {'size':size, 'sizeHuman':getHumanSize(size)}
   else:

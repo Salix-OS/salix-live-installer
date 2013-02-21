@@ -74,7 +74,7 @@ def getSaLTLiveMountPoint():
     ret = open('/mnt/salt/tmp/distro_infos', 'r').read().splitlines()[0].split(':', 1)[0]
   except:
     ret = None
-  return ret
+  return "/mnt/salt{0}".format(ret)
 
 def getSaLTRootDir():
   """
@@ -113,7 +113,7 @@ def getSaLTBaseDir():
   ret = None
   if mountpoint and identfile:
     for line in open('{0}/{1}'.format(mountpoint, identfile), 'r').read().splitlines():
-      if line.startswith('BASEDIR='):
+      if line.startswith('basedir='):
         ret = line.split('=', 1)[1]
         break
   if ret != None and len(ret) == 0:
@@ -132,12 +132,12 @@ def getSaLTModulePath(moduleName):
   """
   Get the module full path.
   """
-  return '/mnt/salt/mnt/{0}'.format(moduleName)
+  return '/mnt/salt/mnt/modules/{0}'.format(moduleName)
 
-def installSaLTModule(moduleName, targetMountPoint, callback, interval = 10, completeCallback = None):
+def installSaLTModule(moduleName, targetMountPoint, callback, callback_args = (), interval = 10, completeCallback = None):
   """
   Install the module 'moduleName' from this Live session into the targetMountPoint.
-  The 'callback' function will be called each 'interval' seconds with the pourcentage (0 ≤ x ≤ 1) of progression (based on used size of target partition) as argument.
+  The 'callback' function will be called each 'interval' seconds with the pourcentage (0 ≤ x ≤ 1) of progression (based on used size of target partition) as first argument and all value of callback_args as next arguments
   The 'completeCallback' function will be called after the completion of installation.
   """
   _checkLive()
@@ -149,28 +149,36 @@ def installSaLTModule(moduleName, targetMountPoint, callback, interval = 10, com
   def get_used_size(p):
     return getSizes(p, False)['used']
   class ExecCopyTask:
-    def _start(self, cmd):
-      self._stopped = False
+    def _run(self, *args, **kwargs):
+      cmd = args[0]
       execCall(cmd)
-      self.stop()
     def start(self, cmd):
-      Thread(target=self._start, args=(cmd)).start()
+      self.t = Thread(target=self._run, args=(cmd,))
+      self.t.start()
     def is_running(self):
-      return not self._stopped
-    def stop(self):
-      self._stopped = True
+      return self.t and self.t.is_alive()
   copy_size = getUsedSize(src, getBlockSize(targetMountPoint), False)['size'] # the source can use a different blocksize than the destination
   init_size = get_used_size(targetMountPoint)
-  final_size = init_size + copy_size
+  print "init_size =", init_size
+  print "copy_size =", copy_size
   actual_size = init_size
-  t = ExecCopyTask(callback, interval, completeCallback)
-  t.start(['cp', '--preserve', '-r', '-f', '{0}/*'.format(src), targetMountPoint])
+  t = ExecCopyTask()
+  t.start(['cp', '--preserve', '-r', '-f', '--remove-destination', '{0}/*'.format(src), targetMountPoint])
   while t.is_running():
-    sleep(interval)
-    actual_size = get_used_size(targetMountPoint)
-    p = float(actual_size) / final_size
-    if p > 1:
-      p = 1
-    callback(p)
+    for x in range(interval):
+      sleep(1)
+      if not t.is_running():
+        break
+    if t.is_running():
+      actual_size = get_used_size(targetMountPoint)
+      print "actual_size =", actual_size
+      diff_size = float(actual_size - init_size)
+      if diff_size < 0: # is this possible?
+        diff_size = 0
+      p = diff_size / copy_size
+      print "% =", p
+      if p > 1:
+        p = 1
+      callback(p, *callback_args)
   if completeCallback:
     completeCallback()

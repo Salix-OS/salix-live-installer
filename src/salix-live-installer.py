@@ -445,7 +445,7 @@ always following the "one application per task" rationale. '))
       self.cur_km = 'fr-latin9'
       self.cur_use_numlock = False
       self.cur_use_ibus = True
-      self.cur_locale = 'fr_FR'
+      self.cur_locale = 'fr_FR.utf8'
       self.partitions_step = 'recap'
       self.show_external_drives = False
       self.main_partition = 'sda7'
@@ -1025,12 +1025,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
           if full_text:
             msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
           else:
-            msg = '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2])
+            msg += '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2]) + "\n"
         else:
           if full_text:
             msg += _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = part[1], mountpoint = part[2]) + "\n"
           else:
-            msg = '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {2} (<u>{1}</u>)</span>'.format(part_name, part[1], part[2])
+            msg += '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {2} (<u>{1}</u>)</span>'.format(part_name, part[1], part[2]) + "\n"
     elif msg_if_not_found:
       msg = msg_if_not_found
     return msg
@@ -1088,7 +1088,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         if full_text:
           msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
         else:
-          msg = '<span foreground="green" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2])
+          msg += '<span foreground="green" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2]) + "\n"
     elif msg_if_not_found:
       msg = msg_if_not_found
     return msg
@@ -1414,7 +1414,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.ProgressWindow.set_keep_above(True)
     while gtk.events_pending():
       gtk.main_iteration()
-    GeneratorTask(self.thread_install_salix, self.thread_update_gui, self.thread_install_completed).start()
+    ThreadTask(self.thread_install_salix, self.thread_install_completed).start()
   def thread_install_salix(self):
     """
     Thread to install Salix.
@@ -1456,102 +1456,155 @@ to first create a Swap partition before resuming with Salix Live Installer proce
             install_modules.append(m)
         elif not 'live' in m:
           install_modules.append(m)
-    steps = 10 + len(install_modules)
+    if self.linux_partitions == None:
+      self.linux_partitions = []
+    if self.win_partitions == None:
+      self.win_partitions = []
+    weight_partition = 3
+    if self.is_liveclone:
+      weight_module = 15
+    else:
+      weight_module = 5
+    weights = {
+        'checks': 1,
+        'main_partition': weight_partition,
+        'linux_partitions': dict([(p[0], weight_partition) for p in self.linux_partitions]),
+        'modules': dict([(m, weight_module) for m in install_modules]),
+        'fstab': 1,
+        'datetime': 1,
+        'keyboard': 1,
+        'locale': 1,
+        'users': 1,
+        'services': 1,
+        'system_config': 1
+        }
+    steps = 0
+    for w in weights.values():
+      if isinstance(w, dict):
+        for w2 in w.values():
+          steps += w2
+      else:
+        steps += w
     step = 0
     self.installation = 'installing'
-    yield (None, step)
     # sanity checks
     if not self.is_test:
       main_sizes = sltl.getSizes("/dev/{0}".format(self.main_partition))
       main_size = main_sizes['size']
-      main_block_size = getBlockSize("/dev/{0}".format(self.main_partition))
+      main_block_size = sltl.getBlockSize("/dev/{0}".format(self.main_partition))
       module_size = 0
       for m in install_modules:
-        module_size += sltl.getUsedSize("/mnt/salt/mnt/{0}".format(m), main_block_size, False)['size']
+        module_size += sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
       minimum_free_size = 50 * 1024 * 1024 # 50 M
       if module_size + minimum_free_size > main_size:
         self.ProgressWindow.set_keep_above(False)
         error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = getHumanSize(module_size + minimum_free_size)))
         self.installation = 'error'
         return
+      sltl.execCall(['rm', '-r', sltl.getTempMountDir()])
+    step += weights['checks']
     msg = _("Formatting and mounting the main partition...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_main_partition()
+    step += weights['main_partition']
     msg = _("Formatting and mounting the Linux partition(s)...")
-    step += 1
-    yield (msg, float(step) / steps)
-    self.install_linux_partitions()
-    for module in install_modules:
-      msg = _("Installing the {mode} mode packages...").format(mode = self.install_mode) + "\n - " + _("Installing the {module} module...").format(module = module)
-      step += 1
-      yield (msg, float(step) / steps)
-      self.install_module(module)
+    self.update_progressbar(msg, step, steps)
+    step = self.install_linux_partitions(msg, step, steps, weights['linux_partitions'])
+    msg = _("Installing the {mode} mode packages...").format(mode = _(self.install_mode))
+    self.update_progressbar(msg, step, steps)
+    step = self.install_modules(install_modules, msg, step, steps, weights['modules'])
     msg = _("Creating /etc/fstab...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_fstab()
+    step += weights['fstab']
     msg = _("Date and time configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_datetime()
+    step += weights['datetime']
     msg = _("Keyboard configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_keyboard()
+    step += weights['keyboard']
     msg = _("Locale configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_locale()
+    step += weights['locale']
     msg = _("Users configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_users()
+    step += weights['users']
     msg = _("Services configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_services()
+    step += weights['services']
     msg = _("System configuration...")
-    step += 1
-    yield (msg, float(step) / steps)
+    self.update_progressbar(msg, step, steps)
     self.install_config()
-    return
+    step += weights['system_config']
+    self.update_progressbar(None, step, steps)
   def install_main_partition(self):
     if self.is_test:
       sleep(1)
     else:
-      sltl.umountDevice("/dev/{0}".format(self.main_partition), deleteMountPoint = False)
+      d = "/dev/{0}".format(self.main_partition)
+      sltl.umountDevice(d, deleteMountPoint = False)
       if self.main_format != 'none':
-        sltl.makeFs(self.main_partition, self.main_format, label='Salix')
-      sltl.mountDevice("/dev/{0}".format(self.main_partition), fsType = self.main_format)
-  def install_linux_partitions(self):
+        label = sltl.getFsLabel(d)
+        if not label:
+          label = 'Salix'
+        sltl.makeFs(self.main_partition, self.main_format, label = label)
+      sltl.mountDevice(d, fsType = self.main_format)
+  def install_linux_partitions(self, msg, step, steps, weights):
     if self.is_test:
-      sleep(1)
+      for p in self.linux_partitions:
+        d = p[0]
+        self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
+        sleep(1)
+        step += weights[d]
+      return step
     else:
-      if self.linux_partitions:
-        rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
-        for p in self.linux_partitions:
-          d = p[0]
-          fs = p[1]
-          mp = p[2]
-          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
-          if fs != 'none':
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      for p in self.linux_partitions:
+        d = p[0]
+        self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
+        full_dev = "/dev/{0}".format(d)
+        fs = p[1]
+        mp = p[2]
+        sltl.umountDevice(full_dev, deleteMountPoint = False)
+        if fs != 'none':
+          label = sltl.getFsLabel(full_dev)
+          if not label:
             label = os.path.basename(p[2])
             if len(label) > 12:
               label = None # for not having problems
-            sltl.makeFs(d, fs, label)
-          sltl.mountDevice("/dev/{0}".format(d), fsType = fs, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
-  def install_module(self, module):
+          sltl.makeFs(d, fs, label)
+        sltl.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
+        step += weights[d]
+      return step
+  def install_modules(self, modules, msg, step, steps, weight):
     if self.is_test:
-      sleep(1)
+      for m in modules:
+        self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
+        sleep(1)
+        step += weight[m]
+      return step
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
-      sltl.installSaLTModule(module, rootmp)
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      for m in modules:
+        self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
+        sltl.installSaLTModule(m, rootmp, self.install_module_callback, (step, steps, weight[m]))
+        step += weight[m]
+      return step
+  def install_module_callback(self, pourcent, step, steps, weight):
+    print "pourcent={0}, step={1}, steps={2}, weight={3}".format(pourcent, step, steps, weight)
+    new_step = step + float(pourcent) * weight
+    print "new_step={0}".format(new_step)
+    gobject.idle_add(self.update_progressbar, None, new_step, steps)
   def install_fstab(self):
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       sltl.createFsTab(rootmp)
       sltl.addFsTabEntry(rootmp, 'proc', '/proc', 'proc')
       sltl.addFsTabEntry(rootmp, 'devpts', '/dev/pts', 'devpts')
@@ -1565,13 +1618,16 @@ to first create a Swap partition before resuming with Salix Live Installer proce
             d = p[0]
             fs = p[1]
             mp = p[2]
-            os.makedirs(rootmp + mp)
+            try:
+              os.makedirs(rootmp + mp)
+            except os.error:
+              pass # directory exists
             sltl.addFsTabEntry(rootmp, "/dev/" + d, mp, fs)
   def install_datetime(self):
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       tz = self.cur_tz_continent + '/' + self.cur_tz_city
       sltl.setDefaultTimeZone(tz, rootmp)
       sltl.setNTPDefault(self.cur_use_ntp, rootmp)
@@ -1584,7 +1640,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       sltl.setDefaultKeymap(self.cur_km, rootmp)
       sltl.setNumLockDefault(self.cur_use_numlock, rootmp)
       sltl.setIbusDefault(self.cur_use_ibus, rootmp)
@@ -1592,31 +1648,31 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       sltl.setDefaultLocale(self.cur_locale, rootmp)
   def install_users(self):
     if self.is_test:
       sleep(1)
     else:
       if not self.keep_live_logins:
-        rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
         sltl.createSystemUser(self.new_login, password = self.new_password, mountPoint = rootmp)
         sltl.changePasswordSystemUser('root', password = self.new_root_password, mountPoint = rootmp)
   def install_services(self):
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       f = 'var/log/setup/setup.services'
       p = "{0}/{1}".format(rootmp, f)
       if os.path.exists(p):
         os.chmod(p, 0755)
-        execCall("{0}/{1} {0}".format(rootmp, f))
+        sltl.execCall("{0}/{1} {0}".format(rootmp, f))
   def install_config(self):
     if self.is_test:
       sleep(1)
     else:
-      rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       rcfont_file = open('{0}/etc/rc.d/rc.font'.format(rootmp), 'w')
       rcfont_file.write("""
 #!/bin/sh
@@ -1632,51 +1688,63 @@ unicode_start ter-v16n""")
         p = "{0}/{1}".format(rootmp, f)
         if os.path.exists(p):
           os.chmod(p, 0755)
-          execCall("cd {0}; ./{1}".format(rootmp, f))
+          sltl.execCall("cd {0}; ./{1}".format(rootmp, f))
       for f in ('/usr/bin/update-gtk-immodules', '/usr/bin/update-gdk-pixbuf-loaders', '/usr/bin/update-pango-querymodules'):
         p = "{0}/{1}".format(rootmp, f)
         if os.path.exists(p):
-          execChroot(rootmp, f)
+          sltl.execChroot(rootmp, f)
       if self.is_liveclone:
         # Remove some specific live stuff
-        execCall("spkg -d liveclone --root={0}".format(rootmp))
-        execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
-        execCall("spkg -d salix-persistence-wizard --root={0}".format(rootmp))
-        execCall("rm -f {0}/etc/ssh/ssh_host_*".format(rootmp))
-        execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
-        execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
+        sltl.execCall("spkg -d liveclone --root={0}".format(rootmp))
+        sltl.execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
+        sltl.execCall("spkg -d salix-persistence-wizard --root={0}".format(rootmp))
+        sltl.execCall("rm -f {0}/etc/ssh/ssh_host_*".format(rootmp))
+        sltl.execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
+        sltl.execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
         os.remove("{0}/hooks.salt".format(rootmp))
-  def thread_update_gui(self, msg, fraction):
+  def update_gui(self, fct, *args, **kwargs):
+    gobject.idle_add(fct, *args, **kwargs)
+  def update_progressbar(self, msg, step, steps):
+    fraction = float(step) / steps
     if msg:
-      print "{1:3.0%} {0}".format(msg, fraction)
+      print "\n{1:3.0%} {0}".format(msg, fraction)
+    else:
+      print "\n{0:3.0%}".format(fraction)
+    self.update_gui(self.gui_update_progressbar, msg, fraction)
+  def gui_update_progressbar(self, msg, fraction):
+    if msg:
       self.InstallProgressBar.set_text(msg)
-      self.InstallProgressBar.set_fraction(fraction)
+    self.InstallProgressBar.set_fraction(fraction)
   def thread_install_completed(self):
     if self.installation == 'installing':
-      self.InstallProgressBar.set_text(_("Installation process completed successfully..."))
-      self.InstallProgressBar.set_fraction(1)
-      self.ProgressWindow.set_keep_above(False)
-      if not self.is_test:
-        if self.linux_partitions:
-          rootmp = getMountPoint("/dev/{0}".format(self.main_partition))
-          for p in self.linux_partitions:
-            d = p[0]
-            sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
-        sltl.umountDevice("/dev/{0}".format(self.main_partition))
-      self.installation = 'done'
-      print "Installation Done.\nHappy Salix."
-      self.ProgressWindow.hide()
-      msg = """<b>Salix installation was executed with success!</b>
+      self.update_gui(self.gui_install_completed)
+    else:
+      self.update_gui(self.gui_install_failed)
+  def gui_install_failed(self):
+    print "Installation in error."
+    self.ProgressWindow.hide()
+    self.Window.set_sensitive(True)
+    self.Window.set_accept_focus(True)
+    self.Window.show()
+  def gui_install_completed(self):
+    self.InstallProgressBar.set_text(_("Installation process completed successfully..."))
+    self.InstallProgressBar.set_fraction(1)
+    self.ProgressWindow.set_keep_above(False)
+    if not self.is_test:
+      if self.linux_partitions:
+        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+        for p in self.linux_partitions:
+          d = p[0]
+          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
+      sltl.umountDevice("/dev/{0}".format(self.main_partition))
+    self.installation = 'done'
+    print "Installation Done.\nHappy Salix."
+    self.ProgressWindow.hide()
+    msg = """<b>Salix installation was executed with success!</b>
 
 LiloSetup will now be launched to enable you to add Salix to your bootloader.
 (If you prefer to use another bootloader utility, click on the No button and use the application of your choice before rebooting your machine.)"""
-      self.show_yesno_dialog(msg, self.run_bootsetup, self.installation_done)
-    else:
-      print "Installation in error."
-      self.ProgressWindow.hide()
-      self.Window.set_sensitive(True)
-      self.Window.set_accept_focus(True)
-      self.Window.show()
+    self.show_yesno_dialog(msg, self.run_bootsetup, self.installation_done)
 
   def run_bootsetup(self):
     if self.is_test:
@@ -1689,31 +1757,21 @@ LiloSetup will now be launched to enable you to add Salix to your bootloader.
 
 
 
-class GeneratorTask:
+class ThreadTask:
   """
-  Handles starting a thread that will call a generator.
-  For each result of the generator, a callback is called.
-  At the end, a different callback may be called on completion.
+  Handles starting a thread that will call a function.
+  At the end, a callback may be called on completion.
   """
-  def __init__(self, generator, loop_callback, complete_callback=None):
-    self.generator = generator
-    self.loop_callback = loop_callback
+  def __init__(self, fct, complete_callback=None):
+    self.fct = fct
     self.complete_callback = complete_callback
   def _start(self, *args, **kwargs):
     self._stopped = False
-    for ret in self.generator(*args, **kwargs):
-      if self._stopped:
-        thread.exit()
-      if self.loop_callback:
-        gobject.idle_add(self._loop, ret)
+    self.fct(*args, **kwargs)
+    if self._stopped:
+      thread.exit()
     if self.complete_callback:
-      gobject.idle_add(self.complete_callback)
-  def _loop(self, ret):
-    if ret is None:
-      ret = ()
-    if not isinstance(ret, tuple):
-      ret = (ret,)
-    self.loop_callback(*ret)
+      self.complete_callback()
   def start(self, *args, **kwargs):
     Thread(target=self._start, args=args, kwargs=kwargs).start()
   def stop(self):

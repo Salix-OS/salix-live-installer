@@ -13,8 +13,12 @@ from execute import *
 from fs import getFsType
 import os
 from stat import *
+import re
 
 _tempMountDir = '/mnt/.tempSalt'
+
+def getTempMountDir():
+  return _tempMountDir
 
 def getMountPoint(device):
   """
@@ -22,10 +26,12 @@ def getMountPoint(device):
   """
   mountpoint = None
   path = os.path.abspath(device)
-  for line in execGetOutput('mount', shell = False):
+  print "path =", path
+  for line in execGetOutput(['/bin/mount'], shell = False):
     p, _, mp, _ = line.split(' ', 3) # 3 splits max, _ is discarded
     if os.path.islink(p):
       p = os.path.realpath(p)
+    print "p =", p
     if p == path:
       mountpoint = mp
       break
@@ -60,17 +66,25 @@ def mountDevice(device, fsType = None, mountPoint = None):
   Returns False if it fails.
   """.format(_tempMountDir) 
   if not fsType:
-    fsType = getFsType(device)
-  manualMP = False
+    fsType = getFsType(re.sub(r'/dev/', '', device))
+  autoMP = False
   if not mountPoint:
     mountPoint = '{0}/{1}'.format(_tempMountDir, os.path.basename(device))
+    print "auto mountpoint =", mountPoint
     if os.path.exists(mountPoint):
       return False
-    manualMP = True
+    autoMP = True
   if not os.path.exists(mountPoint):
-    os.makedirs(mountPoint)
+    try:
+      os.makedirs(mountPoint)
+    except os.error:
+      pass
+  print "fsType =", fsType
+  print "device =", device
+  print "mountPoint =", mountPoint
   ret = execCall(['mount', '-t', fsType, device, mountPoint], shell = False)
-  if ret != 0 and manualMP:
+  print "mount ret =", ret
+  if ret != 0 and autoMP:
     _deleteMountPoint(mountPoint)
   return ret
 
@@ -82,10 +96,9 @@ def umountDevice(deviceOrPath, tryLazyUmount = True, deleteMountPoint = True):
   Returns False if it fails.
   """
   if S_ISBLK(os.stat(deviceOrPath).st_mode):
-    path = getMountPoint(deviceOrPath)
+    mountPoint = getMountPoint(deviceOrPath)
   else:
-    path = deviceOrPath
-  mountPoint = getMountPoint(path)
+    mountPoint = deviceOrPath
   if mountPoint:
     ret = execCall(['umount', mountPoint], shell = False)
     if ret != 0:

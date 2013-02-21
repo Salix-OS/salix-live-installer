@@ -39,7 +39,7 @@ def getCurrentLocale():
   Returns the current used locale in the current environment.
   """
   lang, enc = locale.getdefaultlocale()
-  return "{0}.{1}".format(lang, enc.lower())
+  return "{0}.{1}".format(lang, re.sub(r'utf-8', r'utf8', enc.lower()))
 
 def getDefaultLocale(mountPoint = None):
   """

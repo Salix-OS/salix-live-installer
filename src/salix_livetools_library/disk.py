@@ -59,7 +59,7 @@ def getPartitions(diskDevice, skipExtended = True, skipSwap = True):
   """
   if S_ISBLK(os.stat('/dev/{0}'.format(diskDevice)).st_mode):
     parts = [p.replace('/sys/block/{0}/'.format(diskDevice), '') for p in glob.glob('/sys/block/{0}/{0}*'.format(diskDevice))]
-    fsexclude = []
+    fsexclude = [False]
     if skipExtended:
       fsexclude.append('Extended')
     if skipSwap:

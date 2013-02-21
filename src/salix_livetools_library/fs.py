@@ -36,11 +36,17 @@ def getFsType(partitionDevice):
       if fstype:
         fstype = fstype[0]
       else:
-        fstype = 'Extended'
+        fstype = False
     except subprocess.CalledProcessError as e:
       fstype = False
-    if fstype == '':
-      fstype = 'Extended'
+    if not fstype:
+      # is it a real error or is it an extended partition?
+      try:
+        filetype = execGetOutput(['/usr/bin/file', '-s', path], shell = False)
+        if 'extended partition table' in filetype:
+          fstype = 'Extended'
+      except subprocess.CalledProcessError:
+        pass
   return fstype
 
 def getFsLabel(partitionDevice):

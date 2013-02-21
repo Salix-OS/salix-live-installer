@@ -19,6 +19,8 @@ def execCall(cmd, shell = True, env = {'LANG' : 'en_US'}):
   The output of the command is not read. With some commands, it may hang if the output is not read when run in a shell.
   For this type of command, it is preferable to use execGetOutput even the return value is not read, or to use shell = False.
   """
+  if shell and isinstance(cmd, list):
+    cmd = ' '.join(cmd)
   return subprocess.call(cmd, shell = shell, env = env)
 
 def execCheck(cmd, shell = True, env = {'LANG' : 'en_US'}):
@@ -26,6 +28,8 @@ def execCheck(cmd, shell = True, env = {'LANG' : 'en_US'}):
   Executes a command and return 0 if Ok or a subprocess.CalledProcessorError exception in case of error.
   The command is executed by default in a /bin/sh shell with en_US locale.
   """
+  if shell and isinstance(cmd, list):
+    cmd = ' '.join(cmd)
   return subprocess.check_call(cmd, shell = shell, env = env)
 
 def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}):
@@ -44,12 +48,12 @@ def execGetOutput(cmd, withError = False, shell = True, env = {'LANG' : 'en_US'}
     if shell:
       wrappedCmd.append('sh')
       wrappedCmd.append('-c')
-      if type(cmd) == list:
+      if isinstance(cmd, list):
         wrappedCmd.append(' '.join(cmd))
       else:
         wrappedCmd.append(cmd)
     else:
-      if type(cmd) == list:
+      if isinstance(cmd, list):
         wrappedCmd = cmd
       else:
         wrappedCmd.append(cmd)
