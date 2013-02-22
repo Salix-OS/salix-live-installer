@@ -12,7 +12,11 @@ def runBootsetup(bootloader = 'lilo'):
     execCheck(['bootsetup', bootloader], env = None)
     return True
   except:
-    return False
+    try:
+      execCheck(['lilosetup'], env = None)
+      return True
+    except:
+      return False
 
 # Unit test
 if __name__ == '__main__':

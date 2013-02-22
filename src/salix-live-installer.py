@@ -70,18 +70,21 @@ class SalixLiveInstaller:
     self.PartitionTab = builder.get_object("partition_tab")
     self.UsersTab = builder.get_object("users_tab")
     self.PackagesTab = builder.get_object("packages_tab")
+    self.BootloaderTab = builder.get_object("bootloader_tab")
     self.TimeCheck = builder.get_object("time_check")
     self.KeyboardCheck = builder.get_object("keyboard_check")
     self.LocaleCheck = builder.get_object("locale_check")
     self.PartitionCheck = builder.get_object("partition_check")
     self.UsersCheck = builder.get_object("users_check")
     self.PackagesCheck = builder.get_object("packages_check")
+    self.BootloaderCheck = builder.get_object("bootloader_check")
     self.TimeCheckMarker = builder.get_object("time_check_marker")
     self.KeyboardCheckMarker = builder.get_object("keyboard_check_marker")
     self.LocaleCheckMarker = builder.get_object("locale_check_marker")
     self.PartitionCheckMarker = builder.get_object("partition_check_marker")
     self.UsersCheckMarker = builder.get_object("users_check_marker")
     self.PackagesCheckMarker = builder.get_object("packages_check_marker")
+    self.BootloaderCheckMarker = builder.get_object("bootloader_check_marker")
     self.IntroBox = builder.get_object("intro_box")
     self.TimeBox = builder.get_object("time_box")
     self.KeyboardBox = builder.get_object("keyboard_box")
@@ -93,6 +96,7 @@ class SalixLiveInstaller:
     self.RecapPartitionBox = builder.get_object("recap_partition_box")
     self.UsersBox = builder.get_object("users_box")
     self.PackagesBox = builder.get_object("packages_box")
+    self.BootloaderBox = builder.get_object("bootloader_box")
     self.KeyboardList = builder.get_object("keyboard_list")
     self.KeyboardListStore = builder.get_object("keymap_list_store")
     self.KeyboardSelection = builder.get_object("keyboard_selection")
@@ -134,6 +138,11 @@ class SalixLiveInstaller:
     self.FullRadioButton = builder.get_object("full_radiobutton")
     self.PackagesUndoButton = builder.get_object("packages_undo")
     self.PackagesApplyButton = builder.get_object("packages_apply")
+    self.NobootloaderRadioButton = builder.get_object("nobootloader_radiobutton")
+    self.LiloRadioButton = builder.get_object("lilo_radiobutton")
+    self.Grub2RadioButton = builder.get_object("grub2_radiobutton")
+    self.BootloaderUndoButton = builder.get_object("bootloader_undo")
+    self.BootloaderApplyButton = builder.get_object("bootloader_apply")
     self.TimeUndoButton = builder.get_object("time_undo")
     self.TimeApplyButton = builder.get_object("time_apply")
     self.KeyboardUndoButton = builder.get_object("keyboard_undo")
@@ -394,6 +403,24 @@ always following the "one application per task" rationale. '))
   def on_packages_undo_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Cancel all packages selection."))
 
+  # Bootloader contextual help
+  def on_bootloader_tab_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_text(_("Access the bootloader selection."))
+  def on_nobootloader_radiobutton_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_markup(_("<b>No bootloader:</b>\n\
+This is not recommended unless you already have another bootloader \
+and know how to add Salix to it. Salix will not boot without a bootloader."))
+  def on_lilo_radiobutton_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_markup(_("<b>LiLo:</b>\n\
+Basic Linux bootloader that simply do the job with a nice graphical menu."))
+  def on_grub2_radiobutton_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_markup(_('<b>Grub2:</b>\n\
+Full featured bootloader with editable graphical menu.'))
+  def on_bootloader_apply_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_text(_("Confirm your bootloader selection."))
+  def on_bootloader_undo_enter_notify_event(self, widget, data=None):
+    self.ContextLabel.set_text(_("Cancel all bootloader selection."))
+
   # What to do when Salix Installer logo is clicked
   def on_about_link_clicked(self, widget, data=None):
     self.AboutDialog.show()
@@ -415,7 +442,7 @@ always following the "one application per task" rationale. '))
     print 'Gathering current configuration…',
     sys.stdout.flush()
     # Initialize the lock system preventing the Install button to be activated prematurely
-    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False}
+    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False, 'bootloader':False}
     if self.is_test:
       self.is_live = True
       self.is_liveclone = self.is_test_clone
@@ -464,6 +491,7 @@ always following the "one application per task" rationale. '))
         self.new_password = 'salix'
         self.new_root_password = 'SaliX'
       self.install_mode = 'full'
+      self.bootloader = 'lilo'
       for c in self.configurations:
         self.configurations[c] = True
       self.time_settings()
@@ -472,7 +500,8 @@ always following the "one application per task" rationale. '))
       self.partitions_settings()
       self.users_settings()
       self.packages_settings()
-      self.on_packages_tab_clicked(None)
+      self.bootloader_settings()
+      self.on_bootloader_tab_clicked(None)
     else:
       self.cur_tz = sltl.getDefaultTimeZone()
       if '/' in self.cur_tz:
@@ -501,6 +530,7 @@ always following the "one application per task" rationale. '))
       self.new_password = ''
       self.new_root_password = ''
       self.install_mode = None
+      self.bootloader = None
     print ' Done'
     sys.stdout.flush()
 
@@ -576,12 +606,14 @@ always following the "one application per task" rationale. '))
     self.RecapPartitionBox.hide()
     self.UsersBox.hide()
     self.PackagesBox.hide()
+    self.BootloaderBox.hide()
     self.TimeTab.set_relief(gtk.RELIEF_NONE)
     self.KeyboardTab.set_relief(gtk.RELIEF_NONE)
     self.LocaleTab.set_relief(gtk.RELIEF_NONE)
     self.PartitionTab.set_relief(gtk.RELIEF_NONE)
     self.UsersTab.set_relief(gtk.RELIEF_NONE)
     self.PackagesTab.set_relief(gtk.RELIEF_NONE)
+    self.BootloaderTab.set_relief(gtk.RELIEF_NONE)
   def set_tabs_sensitive(self, sensitive):
     self.TimeTab.set_sensitive(sensitive)
     self.KeyboardTab.set_sensitive(sensitive)
@@ -589,6 +621,7 @@ always following the "one application per task" rationale. '))
     self.PartitionTab.set_sensitive(sensitive)
     self.UsersTab.set_sensitive(sensitive)
     self.PackagesTab.set_sensitive(sensitive)
+    self.BootloaderTab.set_sensitive(sensitive)
   def on_time_tab_clicked(self, widget, data=None):
     self.hide_all_tabs()
     self.TimeTab.set_relief(gtk.RELIEF_HALF)
@@ -624,6 +657,11 @@ always following the "one application per task" rationale. '))
     self.PackagesTab.set_relief(gtk.RELIEF_HALF)
     self.PackagesBox.show()
     self.packages_settings()
+  def on_bootloader_tab_clicked(self, widget, data=None):
+    self.hide_all_tabs()
+    self.BootloaderTab.set_relief(gtk.RELIEF_HALF)
+    self.BootloaderBox.show()
+    self.bootloader_settings()
 
 
 
@@ -1346,6 +1384,38 @@ to first create a Swap partition before resuming with Salix Live Installer proce
 
 
 
+  def bootloader_settings(self):
+    self.NobootloaderRadioButton.set_sensitive(not self.configurations['bootloader'])
+    self.NobootloaderRadioButton.set_active(self.bootloader == 'none')
+    self.LiloRadioButton.set_sensitive(not self.configurations['bootloader'])
+    self.LiloRadioButton.set_active(self.bootloader == 'lilo')
+    self.Grub2RadioButton.set_sensitive(not self.configurations['bootloader'])
+    self.Grub2RadioButton.set_active(self.bootloader == 'grub2')
+    self.BootloaderUndoButton.set_sensitive(self.configurations['bootloader'])
+    self.BootloaderApplyButton.set_sensitive(not self.configurations['bootloader'])
+    if self.configurations['bootloader']:
+      self.BootloaderCheck.show()
+      self.BootloaderCheckMarker.hide()
+    else:
+      self.BootloaderCheck.hide()
+      self.BootloaderCheckMarker.show()
+    self.update_install_button()
+  def on_bootloader_apply_clicked(self, widget, data=None):
+    if self.NobootloaderRadioButton.get_active():
+      self.bootloader = 'none'
+    elif self.LiloRadioButton.get_active():
+      self.bootloader = 'lilo'
+    elif self.Grub2RadioButton.get_active():
+      self.bootloader = 'grub2'
+    self.configurations['bootloader'] = True
+    self.bootloader_settings()
+  def on_bootloader_undo_clicked(self, widget, data=None):
+    self.bootloader = None
+    self.configurations['bootloader'] = False
+    self.bootloader_settings()
+
+
+
   def show_yesno_dialog(self, msg, yes_callback, no_callback):
     self.YesNoDialog.yes_callback = yes_callback
     self.YesNoDialog.no_callback = no_callback
@@ -1403,6 +1473,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + self.new_login + "\n"
     full_recap_msg += "\n<b>" + _("Packages:") + "</b>\n"
     full_recap_msg += _("You have chosen the {mode} installation mode.").format(mode = _(self.install_mode))
+    bootloader = self.bootloader
+    if bootloader == 'none':
+      bootloader = _("No bootloader")
+    full_recap_msg += _("Bootloader choosen: {bootloader}").format(bootloader = bootloader)
     self.show_yesno_dialog(full_recap_msg, self.install_salixlive, None)
   def install_salixlive(self):
     self.Window.set_sensitive(False)
@@ -1487,6 +1561,8 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         steps += w
     step = 0
     self.installation = 'installing'
+    def installion_cancelled():
+      return self.installation == 'cancelled'
     # sanity checks
     modules_size = {}
     if self.is_test:
@@ -1508,44 +1584,55 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         self.installation = 'error'
         return
       sltl.execCall(['rm', '-r', sltl.getTempMountDir()])
+    if installion_cancelled(): return
     step += weights['checks']
     msg = _("Formatting and mounting the main partition...")
     self.update_progressbar(msg, step, steps)
     self.install_main_partition()
+    if installion_cancelled(): return
     step += weights['main_partition']
     msg = _("Formatting and mounting the Linux partition(s)...")
     self.update_progressbar(msg, step, steps)
     step = self.install_linux_partitions(msg, step, steps, weights['linux_partitions'])
+    if installion_cancelled(): return
     msg = _("Installing the {mode} mode packages...").format(mode = _(self.install_mode))
     self.update_progressbar(msg, step, steps)
     step = self.install_modules(install_modules, modules_size, msg, step, steps, weights['modules'])
+    if installion_cancelled(): return
     msg = _("Creating /etc/fstab...")
     self.update_progressbar(msg, step, steps)
     self.install_fstab()
+    if installion_cancelled(): return
     step += weights['fstab']
     msg = _("Date and time configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_datetime()
+    if installion_cancelled(): return
     step += weights['datetime']
     msg = _("Keyboard configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_keyboard()
+    if installion_cancelled(): return
     step += weights['keyboard']
     msg = _("Locale configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_locale()
+    if installion_cancelled(): return
     step += weights['locale']
     msg = _("Users configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_users()
+    if installion_cancelled(): return
     step += weights['users']
     msg = _("Services configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_services()
+    if installion_cancelled(): return
     step += weights['services']
     msg = _("System configuration...")
     self.update_progressbar(msg, step, steps)
     self.install_config()
+    if installion_cancelled(): return
     step += weights['system_config']
     self.update_progressbar(None, step, steps)
   def install_main_partition(self):
@@ -1563,14 +1650,17 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def install_linux_partitions(self, msg, step, steps, weights):
     if self.is_test:
       for p in self.linux_partitions:
+        if self.installation == 'cancelled': return step
         d = p[0]
         self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
-        sleep(1)
-        step += weights[d]
+        w = weights[d]
+        sleep(w)
+        step += w
       return step
     else:
       rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       for p in self.linux_partitions:
+        if self.installation == 'cancelled': return step
         d = p[0]
         self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
         full_dev = "/dev/{0}".format(d)
@@ -1590,17 +1680,21 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def install_modules(self, modules, modules_size, msg, step, steps, weight):
     if self.is_test:
       for m in modules:
+        if self.installation == 'cancelled': return step
         self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
-        sleep(1)
-        step += weight[m]
+        w = weight[m]
+        sleep(w)
+        step += w
       return step
     else:
       rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
       for m in modules:
+        if self.installation == 'cancelled': return step
         self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
         size = modules_size[m]
-        sltl.installSaLTModule(m, size, rootmp, self.install_module_callback, (step, steps, weight[m]))
-        step += weight[m]
+        w = weight[m]
+        sltl.installSaLTModule(m, size, rootmp, self.install_module_callback, (step, steps, w))
+        step += w
       return step
   def install_module_callback(self, pourcent, step, steps, weight):
     new_step = step + float(pourcent) * weight
@@ -1722,11 +1816,17 @@ unicode_start ter-v16n""")
     if msg:
       self.InstallProgressBar.set_text(msg)
     self.InstallProgressBar.set_fraction(fraction)
+  def on_progress_undo_clicked(self, widget, data=None):
+    self.installation = 'cancelled'
+    self.gui_update_progressbar(_("Cancelling installation"), 1.0)
   def thread_install_completed(self):
     if self.installation == 'installing':
       self.update_gui(self.gui_install_completed)
     else:
       self.update_gui(self.gui_install_failed)
+  def on_progress_undo_clicked(self, widget, data=None):
+    pass
+
   def gui_install_failed(self):
     print "Installation in error."
     self.ProgressWindow.hide()
@@ -1747,19 +1847,18 @@ unicode_start ter-v16n""")
     self.installation = 'done'
     print "Installation Done.\nHappy Salix."
     self.ProgressWindow.hide()
-    msg = """<b>Salix installation was executed with success!</b>
-
-LiloSetup will now be launched to enable you to add Salix to your bootloader.
-(If you prefer to use another bootloader utility, click on the No button and use the application of your choice before rebooting your machine.)"""
-    self.show_yesno_dialog(msg, self.run_bootsetup, self.installation_done)
+    if self.bootloader != 'No bootloader':
+      self.run_bootsetup()
+    self.installation_done()
 
   def run_bootsetup(self):
     if self.is_test:
-      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
+      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.bootloader)], shell=False, env=None)
     else:
-      sltl.runBootsetup()
-    self.installation_done()
+      sltl.runBootsetup(self.bootloader)
   def installation_done(self):
+    msg = "<b>{0}</b>".format(_("Salix installation was executed with success!"))
+    info_dialog(msg)
     gtk.main_quit()
 
 
