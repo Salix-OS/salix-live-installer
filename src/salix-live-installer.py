@@ -1,36 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
+"""
+Salix Live Installer helps installing Salix on you computer from the comfort of SalixLive's graphic environment.
+"""
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-#                                                                             #
-# Salix installer will install Salix on your computer from the comfort of     #
-# SalixLive's graphic environment.                                            #
-#                                                                             #
-# Copyright Pierrick Le Brun <akuna~at~salixos~dot~org>.                      #
-#                                                                             #
-# This program is free software; you can redistribute it and/or               #
-# modify it under the terms of the GNU General Public License                 #
-# as published by the Free Software Foundation; either version 2              #
-# of the License, or (at your option) any later version.                      #
-#                                                                             #
-# This program is distributed in the hope that it will be useful,             #
-# but WITHOUT ANY WARRANTY; without even the implied warranty of              #
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               #
-# GNU General Public License for more details.                                #
-#                                                                             #
-# You should have received a copy of the GNU General Public License           #
-# along with this program; if not, write to the Free Software                 #
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. #
-#                                                                             #
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+__app__ = 'salix-live-installer'
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__author__ = 'Pierrick Le Brun <akuna~at~salixos~dot~org> and Cyrille Pontvieux <jrd~at~enialis~dot~net>'
+__credits__ = ['Pierrick Le Brun', 'Cyrille Pontvieux']
+__maintainer__ = 'Cyrille Pontvieux'
+__email__ = 'jrd~at~enialis~dot~net'
+__license__ = 'GPL2+'
+__version__ = '0.4'
+__status__ = 'Development' # Could be Prototype, Development or Production
+__min_salt_version__ = '0.2.1'
 
 import gettext
 import gobject
 import gtk
 import gtk.glade
-from threading import Thread
-import thread
+import threading
 from time import sleep
 gtk.gdk.threads_init()
 
@@ -41,11 +31,8 @@ import re
 import math
 import subprocess
 from datetime import *
-import salix_livetools_library as sltl
 
-APP = 'salix-live-installer'
-VERSION = '0.4'
-MIN_SALT = '0.2.1'
+import salix_livetools_library as sltl
 
 class SalixLiveInstaller:
   def __init__(self, is_test = False, is_test_clone = False, use_test_data = False):
@@ -59,11 +46,11 @@ class SalixLiveInstaller:
         break
     # Get a handle on the glade file widgets we want to interact with
     self.AboutDialog = builder.get_object("about_dialog")
-    self.AboutDialog.set_version(VERSION)
+    self.AboutDialog.set_version(__version__)
     self.Window = builder.get_object("main_window")
-    self.Window.connect("destroy", lambda _: gtk.main_quit())
     self.ProgressWindow = builder.get_object("progress_dialog")
     self.InstallProgressBar = builder.get_object("install_progressbar")
+    self.CancelProgressButton = builder.get_object("progress_undo")
     self.TimeTab = builder.get_object("time_tab")
     self.KeyboardTab = builder.get_object("keyboard_tab")
     self.LocaleTab = builder.get_object("locale_tab")
@@ -432,11 +419,12 @@ Full featured bootloader with editable graphical menu.'))
 
   # What to do when the exit X on the main window upper right is clicked
   def gtk_main_quit(self, widget, data=None):
-    self.on_button_quit_clicked(widget, data)
+    print "Bye _o/"
+    gtk.main_quit()
 
   # What to do when the Salix Installer quit button is clicked
   def on_button_quit_clicked(self, widget, data=None):
-    gtk.main_quit()
+    self.gtk_main_quit(widget)
 
   def get_current_config(self):
     print 'Gathering current configuration…',
@@ -446,20 +434,20 @@ Full featured bootloader with editable graphical menu.'))
     if self.is_test:
       self.is_live = True
       self.is_liveclone = self.is_test_clone
-      self.salt_version = MIN_SALT
+      self.salt_version = __min_salt_version__
       self.is_salt_ok = True
     else:
       self.is_live = sltl.isSaLTLiveEnv()
       if self.is_live:
         self.is_liveclone = sltl.isSaLTLiveCloneEnv()
         self.salt_version = sltl.getSaLTVersion()
-        self.is_salt_ok = sltl.isSaLTVersionAtLeast(MIN_SALT)
+        self.is_salt_ok = sltl.isSaLTVersionAtLeast(__min_salt_version__)
       else:
         self.is_liveclone = False
         self.salt_version = ''
         self.is_salt_ok = False
     if self.is_live and not self.is_salt_ok:
-      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(MIN_SALT, self.salt_version)))
+      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(__min_salt_version__, self.salt_version)))
       self.is_live = False
       self.is_liveclone = False
     self.default_format = 'ext4'
@@ -531,6 +519,7 @@ Full featured bootloader with editable graphical menu.'))
       self.new_root_password = ''
       self.install_mode = None
       self.bootloader = None
+    self.installation = None
     print ' Done'
     sys.stdout.flush()
 
@@ -1484,11 +1473,40 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.Window.hide()
     self.InstallProgressBar.set_text(_("Starting installation process..."))
     self.InstallProgressBar.set_fraction(0)
+    self.CancelProgressButton.set_sensitive(True)
     self.ProgressWindow.show()
     self.ProgressWindow.set_keep_above(True)
     while gtk.events_pending():
       gtk.main_iteration()
-    ThreadTask(self.thread_install_salix, self.thread_install_completed).start()
+    t = ThreadTask(self.thread_install_salix, self.thread_install_completed).start()
+    while t.is_alive():
+      while gtk.events_pending():
+        gtk.main_iteration()
+    while gtk.events_pending():
+      gtk.main_iteration()
+    if self.installation == 'done':
+      self.installation_postinstall()
+  def installation_postinstall(self):
+    if not self.is_test:
+      if self.linux_partitions:
+        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+        for p in self.linux_partitions:
+          d = p[0]
+          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
+      sltl.umountDevice("/dev/{0}".format(self.main_partition))
+    if self.bootloader != 'none':
+      self.run_bootsetup()
+    self.installation_done()
+  def run_bootsetup(self):
+    if self.is_test:
+      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.bootloader)], shell=False, env=None)
+    else:
+      sltl.runBootsetup(self.bootloader)
+  def installation_done(self):
+    print "Installation Done.\nHappy Salix."
+    msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
+    info_dialog(msg)
+    self.gtk_main_quit(self.Window)
   def thread_install_salix(self):
     """
     Thread to install Salix.
@@ -1510,7 +1528,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     # - adjusting configuration for liveclone
     if self.is_test:
       if self.is_test_clone:
-        modules = ('01-clone')
+        modules = ('01-clone',)
       else:
         modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
     else:
@@ -1817,49 +1835,31 @@ unicode_start ter-v16n""")
       self.InstallProgressBar.set_text(msg)
     self.InstallProgressBar.set_fraction(fraction)
   def on_progress_undo_clicked(self, widget, data=None):
+    print "Installation cancelled."
     self.installation = 'cancelled'
+    self.CancelProgressButton.set_sensitive(False)
     self.gui_update_progressbar(_("Cancelling installation"), 1.0)
   def thread_install_completed(self):
     if self.installation == 'installing':
+      self.installation = 'done'
       self.update_gui(self.gui_install_completed)
     else:
       self.update_gui(self.gui_install_failed)
-  def on_progress_undo_clicked(self, widget, data=None):
-    pass
-
+    print "End of installation thread"
   def gui_install_failed(self):
-    print "Installation in error."
+    if self.installation == 'error':
+      print "Installation in error."
+    elif self.installation == 'cancelled':
+      print "Installation cancelled."
+    self.ProgressWindow.set_keep_above(False)
     self.ProgressWindow.hide()
     self.Window.set_sensitive(True)
     self.Window.set_accept_focus(True)
     self.Window.show()
   def gui_install_completed(self):
-    self.InstallProgressBar.set_text(_("Installation process completed successfully..."))
-    self.InstallProgressBar.set_fraction(1)
+    print "Installation completed."
     self.ProgressWindow.set_keep_above(False)
-    if not self.is_test:
-      if self.linux_partitions:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-        for p in self.linux_partitions:
-          d = p[0]
-          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
-      sltl.umountDevice("/dev/{0}".format(self.main_partition))
-    self.installation = 'done'
-    print "Installation Done.\nHappy Salix."
     self.ProgressWindow.hide()
-    if self.bootloader != 'No bootloader':
-      self.run_bootsetup()
-    self.installation_done()
-
-  def run_bootsetup(self):
-    if self.is_test:
-      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.bootloader)], shell=False, env=None)
-    else:
-      sltl.runBootsetup(self.bootloader)
-  def installation_done(self):
-    msg = "<b>{0}</b>".format(_("Salix installation was executed with success!"))
-    info_dialog(msg)
-    gtk.main_quit()
 
 
 
@@ -1874,12 +1874,13 @@ class ThreadTask:
   def _start(self, *args, **kwargs):
     self._stopped = False
     self.fct(*args, **kwargs)
-    if self._stopped:
-      thread.exit()
-    if self.complete_callback:
-      self.complete_callback()
+    if not self._stopped:
+      if self.complete_callback:
+        self.complete_callback()
   def start(self, *args, **kwargs):
-    Thread(target=self._start, args=args, kwargs=kwargs).start()
+    t = threading.Thread(target=self._start, args=args, kwargs=kwargs)
+    t.start()
+    return t
   def stop(self):
     self._stopped = True
 
@@ -1893,9 +1894,9 @@ def info_dialog(message, parent = None):
   """
   dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
   dialog.set_markup(message)
-  global result_info
   result_info = dialog.run()
   dialog.destroy()
+  return result_info
 
 # Error window skeleton:
 def error_dialog(message, parent = None):
@@ -1904,13 +1905,13 @@ def error_dialog(message, parent = None):
   """
   dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
   dialog.set_markup(message)
-  global result_error
   result_error = dialog.run()
   dialog.destroy()
+  return result_error
 
 # Launch the application
 if __name__ == '__main__':
-  print 'Salix Live Installer v' + VERSION
+  print 'Salix Live Installer v' + __version__
   is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
   is_clone = False
   use_test_data = False
@@ -1924,12 +1925,12 @@ if __name__ == '__main__':
         if a == '--data':
           print "*** Test data mode ***"
           use_test_data = True
-    gettext.install(APP, './locale', True)
-    gtk.glade.bindtextdomain(APP, './locale')
+    gettext.install(__app__, './locale', True)
+    gtk.glade.bindtextdomain(__app__, './locale')
   else:
-    gettext.install(APP, '/usr/share/locale', True)
-    gtk.glade.bindtextdomain(APP, '/usr/share/locale')
-  gtk.glade.textdomain(APP)
+    gettext.install(__app__, '/usr/share/locale', True)
+    gtk.glade.bindtextdomain(__app__, '/usr/share/locale')
+  gtk.glade.textdomain(__app__)
   # If no root privilege, displays error message and exit
   if not is_test and os.getuid() != 0:
     error_dialog(_("<b>Sorry!</b>\n\nRoot privileges are required to run this program."))
