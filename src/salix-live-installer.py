@@ -34,11 +34,9 @@ from datetime import *
 
 import salix_livetools_library as sltl
 
-class SalixLiveInstaller:
+class GatherGui:
   def __init__(self, is_test = False, is_test_clone = False, use_test_data = False):
-    self.is_test = is_test
-    self.is_test_clone = is_test_clone
-    self.use_test_data = use_test_data
+    self.cfg = Config(__min_salt_version__, is_test, is_test_clone, use_test_data)
     builder = gtk.Builder()
     for d in ('.', '/usr/share/salix-live-installer', '../share/salix-live-installer'):
       if os.path.exists(d + '/salix-live-installer.glade'):
@@ -201,8 +199,16 @@ class SalixLiveInstaller:
     # Initialize the contextual help box
     self.context_intro = _("Contextual help.")
     self.on_leave_notify_event(None)
-    self.get_current_config()
     self.build_data_stores()
+    if self.cfg.use_test_data:
+      self.time_settings()
+      self.keyboard_settings()
+      self.locale_settings()
+      self.partitions_settings()
+      self.users_settings()
+      self.packages_settings()
+      self.bootloader_settings()
+      self.on_bootloader_tab_clicked(None)
     self.update_install_button()
     # Connect signals
     self.add_custom_signals()
@@ -374,7 +380,7 @@ installed on top, such as a web browser and the gslapt package manager. Ideal \
 for advanced users that would like to install a lightweight system and \
 add their own choice of applications. "))
   def on_full_radiobutton_enter_notify_event(self, widget, data=None):
-    if self.is_liveclone:
+    if self.cfg.is_liveclone:
       self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
 Salix Live Installer has detected a LiveClone customized environment. \
 Core and Basic installation modes are therefore not available. \n\
@@ -425,103 +431,6 @@ Full featured bootloader with editable graphical menu.'))
   # What to do when the Salix Installer quit button is clicked
   def on_button_quit_clicked(self, widget, data=None):
     self.gtk_main_quit(widget)
-
-  def get_current_config(self):
-    print 'Gathering current configuration…',
-    sys.stdout.flush()
-    # Initialize the lock system preventing the Install button to be activated prematurely
-    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False, 'bootloader':False}
-    if self.is_test:
-      self.is_live = True
-      self.is_liveclone = self.is_test_clone
-      self.salt_version = __min_salt_version__
-      self.is_salt_ok = True
-    else:
-      self.is_live = sltl.isSaLTLiveEnv()
-      if self.is_live:
-        self.is_liveclone = sltl.isSaLTLiveCloneEnv()
-        self.salt_version = sltl.getSaLTVersion()
-        self.is_salt_ok = sltl.isSaLTVersionAtLeast(__min_salt_version__)
-      else:
-        self.is_liveclone = False
-        self.salt_version = ''
-        self.is_salt_ok = False
-    if self.is_live and not self.is_salt_ok:
-      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(__min_salt_version__, self.salt_version)))
-      self.is_live = False
-      self.is_liveclone = False
-    self.default_format = 'ext4'
-    if self.use_test_data:
-      self.cur_tz_continent = 'Europe'
-      self.cur_tz_city = 'Paris'
-      self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
-      self.cur_use_ntp = True
-      self.cur_time_delta = timedelta()
-      self.cur_km = 'fr-latin9'
-      self.cur_use_numlock = False
-      self.cur_use_ibus = True
-      self.cur_locale = 'fr_FR.utf8'
-      self.partitions_step = 'recap'
-      self.show_external_drives = False
-      self.main_partition = 'sda7'
-      self.main_format = 'ext4'
-      self.main_partition_settings() # fill self.partitions
-      self.swap_partitions = sltl.getSwapPartitions()
-      self.linux_partitions = []
-      self.win_partitions = []
-      self.keep_live_logins = self.is_liveclone
-      if self.keep_live_logins:
-        self.new_login = ''
-        self.new_password = ''
-        self.new_root_password = ''
-      else:
-        self.new_login = 'test'
-        self.new_password = 'salix'
-        self.new_root_password = 'SaliX'
-      self.install_mode = 'full'
-      self.bootloader = 'lilo'
-      for c in self.configurations:
-        self.configurations[c] = True
-      self.time_settings()
-      self.keyboard_settings()
-      self.locale_settings()
-      self.partitions_settings()
-      self.users_settings()
-      self.packages_settings()
-      self.bootloader_settings()
-      self.on_bootloader_tab_clicked(None)
-    else:
-      self.cur_tz = sltl.getDefaultTimeZone()
-      if '/' in self.cur_tz:
-        self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
-        self.cur_tz_city = self.cur_tz.split('/', 1)[1]
-      else:
-        self.cur_tz = None
-        self.cur_tz_continent = None
-        self.cur_tz_city = None
-      self.cur_use_ntp = sltl.isNTPEnabledByDefault()
-      self.cur_time_delta = timedelta() # used when NTP is not used
-      self.cur_km = sltl.findCurrentKeymap()
-      self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
-      self.cur_use_ibus = sltl.isIbusEnabledByDefault()
-      self.cur_locale = sltl.getCurrentLocale()
-      self.partitions_step = 'none' # could be none, main, linux, win or recap
-      self.partitions = []
-      self.swap_partitions = []
-      self.show_external_drives = False
-      self.main_partition = None
-      self.main_format = None
-      self.linux_partitions = None # list of tuple as (device, format, mountpoint)
-      self.win_partitions = None # list of tuple as (device, format, mountpoint)
-      self.keep_live_logins = self.is_liveclone
-      self.new_login = '' # None cannot be used in a GtkEntry
-      self.new_password = ''
-      self.new_root_password = ''
-      self.install_mode = None
-      self.bootloader = None
-    self.installation = None
-    print ' Done'
-    sys.stdout.flush()
 
   def build_data_stores(self):
     print 'Building choice lists…',
@@ -583,7 +492,7 @@ Full featured bootloader with editable graphical menu.'))
     self.LocaleList.get_selection().connect('changed', self.on_locale_list_changed_event)
 
   def update_install_button(self):
-    self.InstallButton.set_sensitive(not False in self.configurations.values())
+    self.InstallButton.set_sensitive(not False in self.cfg.configurations.values())
 
   def hide_all_tabs(self):
     self.IntroBox.hide()
@@ -658,19 +567,19 @@ Full featured bootloader with editable graphical menu.'))
     self.ContinentZoneCombobox.set_active(0)
     index = 1
     for continent in sltl.listTZContinents():
-      if continent == self.cur_tz_continent:
+      if continent == self.cfg.cur_tz_continent:
         self.ContinentZoneCombobox.set_active(index)
         break
       index += 1
     self.time_set_cities_list()
-    self.NTPCheckButton.set_active(self.cur_use_ntp)
+    self.NTPCheckButton.set_active(self.cfg.cur_use_ntp)
     self.set_datetime_settings()
-    self.ManualTimeBox.set_sensitive(not self.configurations['time'] and not self.cur_use_ntp)
-    self.NTPCheckButton.set_sensitive(not self.configurations['time'])
-    self.TimeZoneBox.set_sensitive(not self.configurations['time'])
-    self.TimeUndoButton.set_sensitive(self.configurations['time'])
-    self.TimeApplyButton.set_sensitive(not self.configurations['time'])
-    if self.configurations['time']:
+    self.ManualTimeBox.set_sensitive(not self.cfg.configurations['time'] and not self.cfg.cur_use_ntp)
+    self.NTPCheckButton.set_sensitive(not self.cfg.configurations['time'])
+    self.TimeZoneBox.set_sensitive(not self.cfg.configurations['time'])
+    self.TimeUndoButton.set_sensitive(self.cfg.configurations['time'])
+    self.TimeApplyButton.set_sensitive(not self.cfg.configurations['time'])
+    if self.cfg.configurations['time']:
       self.TimeCheck.show()
       self.TimeCheckMarker.hide()
     else:
@@ -678,7 +587,7 @@ Full featured bootloader with editable graphical menu.'))
       self.TimeCheckMarker.show()
     self.update_install_button()
   def set_datetime_settings(self):
-    corrected_datetime = datetime.now() + self.cur_time_delta
+    corrected_datetime = datetime.now() + self.cfg.cur_time_delta
     year, month, day, hour, minute, second, __, __, __ = corrected_datetime.timetuple()
     index = 0
     for y in self.YearListStore:
@@ -695,32 +604,32 @@ Full featured bootloader with editable graphical menu.'))
     self.CountryZoneListStore.clear()
     self.CountryZoneListStore.append([_("Select...")])
     self.CountryZoneCombobox.set_active(0)
-    if self.cur_tz_continent:
-      cities = sltl.listTZCities(self.cur_tz_continent)
+    if self.cfg.cur_tz_continent:
+      cities = sltl.listTZCities(self.cfg.cur_tz_continent)
       if cities:
         index = 1
         for city in cities:
           self.CountryZoneListStore.append([city])
-          if city == self.cur_tz_city:
+          if city == self.cfg.cur_tz_city:
             self.CountryZoneCombobox.set_active(index)
           index += 1
   def on_continent_zone_combobox_changed(self, widget, data=None):
     if self.ContinentZoneCombobox.get_active() > 0:
       continent = self.ContinentZoneCombobox.get_active_text()
-      if continent != self.cur_tz_continent:
-        self.cur_tz_continent = continent
-        self.cur_tz_city = None
+      if continent != self.cfg.cur_tz_continent:
+        self.cfg.cur_tz_continent = continent
+        self.cfg.cur_tz_city = None
     self.time_set_cities_list()
   def on_country_zone_combobox_changed(self, widget, data=None):
     if self.CountryZoneCombobox.get_active() > 0:
-      self.cur_tz_city = self.CountryZoneCombobox.get_active_text()
-      self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
+      self.cfg.cur_tz_city = self.CountryZoneCombobox.get_active_text()
+      self.cfg.cur_tz = self.cfg.cur_tz_continent + '/' + self.cfg.cur_tz_city
   def on_ntp_checkbutton_toggled(self, widget, data=None):
-    self.cur_use_ntp = self.NTPCheckButton.get_active()
+    self.cfg.cur_use_ntp = self.NTPCheckButton.get_active()
     self.set_datetime_settings()
-    self.ManualTimeBox.set_sensitive(not self.cur_use_ntp)
+    self.ManualTimeBox.set_sensitive(not self.cfg.cur_use_ntp)
   def on_time_apply_clicked(self, widget, data=None):
-    if not self.cur_use_ntp:
+    if not self.cfg.cur_use_ntp:
       year = self.YearCombobox.get_active()
       month = self.MonthCombobox.get_active()
       day = self.DayCombobox.get_active()
@@ -729,36 +638,36 @@ Full featured bootloader with editable graphical menu.'))
       second = int(self.SecondSpinButton.get_value())
       new_date = datetime(year, month + 1, day + 1, hour, minute, second)
       now = datetime.now()
-      self.cur_time_delta = new_date - now
+      self.cfg.cur_time_delta = new_date - now
     else:
-      self.cur_time_delta = timedelta()
-    self.configurations['time'] = True
+      self.cfg.cur_time_delta = timedelta()
+    self.cfg.configurations['time'] = True
     self.time_settings()
   def on_time_undo_clicked(self, widget, data=None):
-    self.configurations['time'] = False
+    self.cfg.configurations['time'] = False
     self.time_settings()
 
 
 
   def keyboard_settings(self):
     self.KeyboardSelection.set_text(_('None'))
-    if self.cur_km:
+    if self.cfg.cur_km:
       index = 0
       for km in self.KeyboardListStore:
-        if km[0] == self.cur_km:
+        if km[0] == self.cfg.cur_km:
           self.KeyboardList.get_selection().select_path(index)
-          if self.configurations['keyboard']:
+          if self.cfg.configurations['keyboard']:
             self.KeyboardSelection.set_text('{0} ({1})'.format(km[0], km[1]))
           break
         index += 1
-    self.NumLockCheckButton.set_active(self.cur_use_numlock)
-    self.IBusCheckButton.set_active(self.cur_use_ibus)
-    self.KeyboardList.set_sensitive(not self.configurations['keyboard'])
-    self.NumLockCheckButton.set_sensitive(not self.configurations['keyboard'])
-    self.IBusCheckButton.set_sensitive(not self.configurations['keyboard'])
-    self.KeyboardUndoButton.set_sensitive(self.configurations['keyboard'])
-    self.KeyboardApplyButton.set_sensitive(not self.configurations['keyboard'])
-    if self.configurations['keyboard']:
+    self.NumLockCheckButton.set_active(self.cfg.cur_use_numlock)
+    self.IBusCheckButton.set_active(self.cfg.cur_use_ibus)
+    self.KeyboardList.set_sensitive(not self.cfg.configurations['keyboard'])
+    self.NumLockCheckButton.set_sensitive(not self.cfg.configurations['keyboard'])
+    self.IBusCheckButton.set_sensitive(not self.cfg.configurations['keyboard'])
+    self.KeyboardUndoButton.set_sensitive(self.cfg.configurations['keyboard'])
+    self.KeyboardApplyButton.set_sensitive(not self.cfg.configurations['keyboard'])
+    if self.cfg.configurations['keyboard']:
       self.KeyboardCheck.show()
       self.KeyboardCheckMarker.hide()
     else:
@@ -768,38 +677,38 @@ Full featured bootloader with editable graphical menu.'))
   def on_keyboard_list_changed_event(self, selection, data=None):
     model, it = selection.get_selected()
     if it:
-      self.cur_km = model.get_value(it, 0)
+      self.cfg.cur_km = model.get_value(it, 0)
     else:
-      self.cur_km = None
+      self.cfg.cur_km = None
   def on_numlock_checkbutton_toggled(self, widget, data=None):
-    self.cur_use_numlock = self.NumLockCheckButton.get_active()
+    self.cfg.cur_use_numlock = self.NumLockCheckButton.get_active()
   def on_ibus_checkbutton_toggled(self, widget, data=None):
-    self.cur_use_ibus = self.IBusCheckButton.get_active()
+    self.cfg.cur_use_ibus = self.IBusCheckButton.get_active()
   def on_keyboard_apply_clicked(self, widget, data=None):
-    if self.cur_km:
-      self.configurations['keyboard'] = True
+    if self.cfg.cur_km:
+      self.cfg.configurations['keyboard'] = True
       self.keyboard_settings()
   def on_keyboard_undo_clicked(self, widget, data=None):
-    self.configurations['keyboard'] = False
+    self.cfg.configurations['keyboard'] = False
     self.keyboard_settings()
 
 
 
   def locale_settings(self):
     self.LocaleSelection.set_text(_('None'))
-    if self.cur_locale:
+    if self.cfg.cur_locale:
       index = 0
       for l in self.LocaleListStore:
-        if l[0] + '.utf8' == self.cur_locale:
+        if l[0] + '.utf8' == self.cfg.cur_locale:
           self.LocaleList.get_selection().select_path(index)
-          if self.configurations['locale']:
+          if self.cfg.configurations['locale']:
             self.LocaleSelection.set_text('{0} ({1})'.format(l[0], l[1]))
           break
         index += 1
-    self.LocaleList.set_sensitive(not self.configurations['locale'])
-    self.LocaleUndoButton.set_sensitive(self.configurations['locale'])
-    self.LocaleApplyButton.set_sensitive(not self.configurations['locale'])
-    if self.configurations['locale']:
+    self.LocaleList.set_sensitive(not self.cfg.configurations['locale'])
+    self.LocaleUndoButton.set_sensitive(self.cfg.configurations['locale'])
+    self.LocaleApplyButton.set_sensitive(not self.cfg.configurations['locale'])
+    if self.cfg.configurations['locale']:
       self.LocaleCheck.show()
       self.LocaleCheckMarker.hide()
     else:
@@ -809,15 +718,15 @@ Full featured bootloader with editable graphical menu.'))
   def on_locale_list_changed_event(self, selection, data=None):
     model, it = selection.get_selected()
     if it:
-      self.cur_locale = model.get_value(it, 0) + '.utf8'
+      self.cfg.cur_locale = model.get_value(it, 0) + '.utf8'
     else:
-      self.cur_locale = None
+      self.cfg.cur_locale = None
   def on_locale_apply_clicked(self, widget, data=None):
-    if self.cur_locale:
-      self.configurations['locale'] = True
+    if self.cfg.cur_locale:
+      self.cfg.configurations['locale'] = True
       self.locale_settings()
   def on_locale_undo_clicked(self, widget, data=None):
-    self.configurations['locale'] = False
+    self.cfg.configurations['locale'] = False
     self.locale_settings()
 
 
@@ -828,19 +737,19 @@ Full featured bootloader with editable graphical menu.'))
     self.LinuxPartitionBox.hide()
     self.WindowsPartitionBox.hide()
     self.RecapPartitionBox.hide()
-    self.set_tabs_sensitive(self.partitions_step in ('none', 'recap'))
-    if self.partitions_step == 'none':
+    self.set_tabs_sensitive(self.cfg.partitions_step in ('none', 'recap'))
+    if self.cfg.partitions_step == 'none':
       self.PartitioningBox.show()
-    elif self.partitions_step == 'main':
+    elif self.cfg.partitions_step == 'main':
       self.MainPartitionBox.show()
       self.swap_detection()
-    elif self.partitions_step == 'linux':
+    elif self.cfg.partitions_step == 'linux':
       self.LinuxPartitionBox.show()
       self.linux_partition_settings()
-    elif self.partitions_step == 'win':
+    elif self.cfg.partitions_step == 'win':
       self.WindowsPartitionBox.show()
       self.windows_partition_settings()
-    elif self.partitions_step == 'recap':
+    elif self.cfg.partitions_step == 'recap':
       self.RecapPartitionBox.show()
       self.recap_partition_settings()
   def on_modify_partition_button_clicked(self, widget, data=None):
@@ -850,7 +759,7 @@ Full featured bootloader with editable graphical menu.'))
     # be sure to treat any pending GUI events before running gparted
     while gtk.events_pending():
       gtk.main_iteration()
-    if self.is_test:
+    if self.cfg.is_test:
       sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
     else:
       sltl.execCheck("/usr/sbin/gparted", shell=False, env=None)
@@ -859,11 +768,11 @@ Full featured bootloader with editable graphical menu.'))
     self.Window.show()
     self.on_do_not_modify_partition_button_clicked(widget)
   def on_do_not_modify_partition_button_clicked(self, widget, data=None):
-    self.partitions_step = 'main'
-    self.main_partition = None
-    self.main_format = None
-    self.linux_partitions = None
-    self.win_partitions = None
+    self.cfg.partitions_step = 'main'
+    self.cfg.main_partition = None
+    self.cfg.main_format = None
+    self.cfg.linux_partitions = None
+    self.cfg.win_partitions = None
     self.partitions_settings()
   def swap_detection(self):
     """
@@ -872,9 +781,9 @@ Full featured bootloader with editable graphical menu.'))
     Displays a warning message when no (swap) partition is found.
     """
     try:
-      self.swap_partitions = sltl.getSwapPartitions()
+      self.cfg.swap_partitions = sltl.getSwapPartitions()
     except subprocess.CalledProcessError as e:
-      self.swap_partitions = []
+      self.cfg.swap_partitions = []
     swap_info_msg = self.get_swap_partitions_message(True, _("Detected Swap partition(s):"),
       _("Salix Live Installer was not able to detect a valid Swap partition on your system.\nA Swap partition could improve overall performances. \
 You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, \
@@ -883,10 +792,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.main_partition_settings()
   def get_swap_partitions_message(self, full_text, msg_if_found = None, msg_if_not_found = None):
     msg = ''
-    if self.swap_partitions:
+    if self.cfg.swap_partitions:
       if msg_if_found:
         msg = msg_if_found + "\n"
-      for d in self.swap_partitions:
+      for d in self.cfg.swap_partitions:
         if full_text:
           msg += _("<b>{device}</b> will be automatically used as swap.").format(device = d) + "\n"
         else:
@@ -895,17 +804,17 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       msg = msg_if_not_found
     return msg
   def on_external_device_checkbutton_toggled (self, widget, data=None):
-    self.show_external_drives = self.ExternalDeviceCheckButton.get_active()
+    self.cfg.show_external_drives = self.ExternalDeviceCheckButton.get_active()
     self.main_partition_settings()
   def main_partition_settings(self):
-    self.partitions = []
+    self.cfg.partitions = []
     self.MainPartitionListStore.clear()
     for disk_device in sltl.getDisks():
       disk_info = sltl.getDiskInfo(disk_device)
-      if self.show_external_drives or not disk_info['removable']:
+      if self.cfg.show_external_drives or not disk_info['removable']:
         disk_name = "{0} ({1})".format(disk_info['model'], disk_info['sizeHuman'])
         for p in sltl.getPartitions(disk_device):
-          self.partitions.append(p)
+          self.cfg.partitions.append(p)
           part_name = p
           part_label = sltl.getFsLabel(p)
           if part_label:
@@ -913,16 +822,16 @@ to first create a Swap partition before resuming with Salix Live Installer proce
           part_size = sltl.getSizes("/dev/" + p)['sizeHuman']
           part_fs = sltl.getFsType(p)
           self.MainPartitionListStore.append([disk_name, part_name, part_size, part_fs, p])
-    if self.main_partition:
+    if self.cfg.main_partition:
       index = 0
       for l in self.MainPartitionListStore:
-        if self.main_partition == l[4]:
+        if self.cfg.main_partition == l[4]:
           self.MainPartitionList.set_cursor(index)
           break
         index += 1
     index = 0
     for f in self.MainFormatListStore:
-      if (self.main_format and f[0] == self.main_format) or (not self.main_format and f[0] == self.default_format):
+      if (self.cfg.main_format and f[0] == self.cfg.main_format) or (not self.cfg.main_format and f[0] == self.cfg.default_format):
         self.MainFormatCombobox.set_active(index)
         break
       index += 1
@@ -930,26 +839,26 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     model_part, it_part = self.MainPartitionList.get_selection().get_selected()
     idx_format = self.MainFormatCombobox.get_active()
     if it_part and idx_format:
-      self.main_partition = model_part.get_value(it_part, 4)
-      self.main_format = self.MainFormatListStore[idx_format][0]
-      self.linux_partitions = []
-      self.win_partitions = []
+      self.cfg.main_partition = model_part.get_value(it_part, 4)
+      self.cfg.main_format = self.MainFormatListStore[idx_format][0]
+      self.cfg.linux_partitions = []
+      self.cfg.win_partitions = []
       self.show_yesno_dialog(self.get_main_partition_message(True), self.on_main_partition_continue, self.on_main_partition_cancel)
   def get_main_partition_message(self, full_text):
-    part_name = self.main_partition
-    part_label = sltl.getFsLabel(self.main_partition)
+    part_name = self.cfg.main_partition
+    part_label = sltl.getFsLabel(self.cfg.main_partition)
     if part_label:
       part_name += " (" + part_label + ")"
-    if self.main_format == 'none':
+    if self.cfg.main_format == 'none':
       if full_text:
         msg = _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = '/')
       else:
         msg = '<span foreground="black" font_family="monospace">- {0} => /</span>'.format(part_name)
     else:
       if full_text:
-        msg = _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = self.main_format, mountpoint = '/')
+        msg = _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = self.cfg.main_format, mountpoint = '/')
       else:
-        msg = '<span foreground="black" font_family="monospace">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.main_format)
+        msg = '<span foreground="black" font_family="monospace">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.cfg.main_format)
     return msg
   def on_main_partition_undo_clicked(self, widget, data=None):
     self.on_main_partition_cancel()
@@ -958,7 +867,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.WindowsPartitionListStore.clear()
     for line in self.MainPartitionListStore:
       p = line[4]
-      if p != self.main_partition:
+      if p != self.cfg.main_partition:
         disk_name = line[0]
         part_name = line[1]
         part_size = line[2]
@@ -968,20 +877,20 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         if part_fs in ('ntfs',  'vfat'):
           self.WindowsPartitionListStore.append([disk_name, part_name, part_size, part_fs, _("Do not mount"), 'gtk-edit', p])
     if len(self.LinuxPartitionListStore) > 0:
-      self.partitions_step = 'linux'
+      self.cfg.partitions_step = 'linux'
     elif len(self.WindowsPartitionListStore) > 0:
-      self.partitions_step = 'win'
+      self.cfg.partitions_step = 'win'
     else:
-      self.partitions_step = 'recap'
-    self.linux_partitions = None
-    self.win_partitions = None
+      self.cfg.partitions_step = 'recap'
+    self.cfg.linux_partitions = None
+    self.cfg.win_partitions = None
     self.partitions_settings()
   def on_main_partition_cancel(self):
-    self.partitions_step = 'none'
-    self.main_partition = None
-    self.main_format = None
-    self.linux_partitions = None
-    self.win_partitions = None
+    self.cfg.partitions_step = 'none'
+    self.cfg.main_partition = None
+    self.cfg.main_format = None
+    self.cfg.linux_partitions = None
+    self.cfg.win_partitions = None
     self.partitions_settings()
   def linux_partition_settings(self):
     pass
@@ -1032,18 +941,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.LinuxPartitionApply.set_sensitive(True)
   def on_linux_partition_apply_clicked(self, widget, data=None):
     store = self.LinuxPartitionListStore
-    self.linux_partitions = []
+    self.cfg.linux_partitions = []
     for l in store:
       p = l[9]
       fs = l[4]
       mp = l[6]
       if mp.startswith('/'): # keep only mounted partitions
-        self.linux_partitions.append([p, fs, mp])
+        self.cfg.linux_partitions.append([p, fs, mp])
     self.show_yesno_dialog(self.get_linux_partitions_message(True, _("No partition to mount")), self.on_linux_partition_continue, self.on_linux_partition_cancel)
   def get_linux_partitions_message(self, full_text, msg_if_not_found = None):
     msg = ''
-    if self.linux_partitions:
-      for part in self.linux_partitions:
+    if self.cfg.linux_partitions:
+      for part in self.cfg.linux_partitions:
         part_name = part[0]
         part_label = sltl.getFsLabel(part[0])
         if part_label:
@@ -1063,14 +972,14 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     return msg
   def on_linux_partition_continue(self):
     if len(self.WindowsPartitionListStore) > 0:
-      self.partitions_step = 'win'
+      self.cfg.partitions_step = 'win'
     else:
-      self.partitions_step = 'recap'
+      self.cfg.partitions_step = 'recap'
     self.partitions_settings()
   def on_linux_partition_cancel(self):
-    self.partitions_step = 'main'
-    self.linux_partitions = None
-    self.win_partitions = None
+    self.cfg.partitions_step = 'main'
+    self.cfg.linux_partitions = None
+    self.cfg.win_partitions = None
     self.partitions_settings()
   def windows_partition_settings(self):
     pass
@@ -1096,18 +1005,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.WindowsPartitionApply.set_sensitive(True)
   def on_windows_partition_apply_clicked(self, widget, data=None):
     store = self.WindowsPartitionListStore
-    self.win_partitions = []
+    self.cfg.win_partitions = []
     for l in store:
       p = l[6]
       fs = l[3]
       mp = l[4]
       if mp.startswith('/'): # keep only mounted partitions
-        self.win_partitions.append([p, fs, mp])
+        self.cfg.win_partitions.append([p, fs, mp])
     self.show_yesno_dialog(self.get_windows_partitions_message(True, _("No partition to mount")), self.on_windows_partition_continue, self.on_windows_partition_cancel)
   def get_windows_partitions_message(self, full_text, msg_if_not_found = None):
     msg = ''
-    if self.win_partitions:
-      for part in self.win_partitions:
+    if self.cfg.win_partitions:
+      for part in self.cfg.win_partitions:
         part_name = part[0]
         part_label = sltl.getFsLabel(part[0])
         if part_label:
@@ -1120,24 +1029,24 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       msg = msg_if_not_found
     return msg
   def on_windows_partition_continue(self):
-    self.partitions_step = 'recap'
+    self.cfg.partitions_step = 'recap'
     self.partitions_settings()
   def on_windows_partition_cancel(self):
-    self.partitions_step = 'main'
-    self.linux_partitions = None
-    self.win_partitions = None
+    self.cfg.partitions_step = 'main'
+    self.cfg.linux_partitions = None
+    self.cfg.win_partitions = None
     self.partitions_settings()
   def recap_partition_settings(self):
     self.MainPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_main_partition_message(False)))
     self.LinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>")))
     self.WinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>")))
     self.SwapPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>")))
-    self.configurations['partitions'] = True
+    self.cfg.configurations['partitions'] = True
     self.PartitionCheck.show()
     self.PartitionCheckMarker.hide()
     self.update_install_button()
   def on_partition_recap_undo_clicked(self, widget, data=None):
-    self.configurations['partitions'] = False
+    self.cfg.configurations['partitions'] = False
     self.PartitionCheck.hide()
     self.PartitionCheckMarker.show()
     self.update_install_button()
@@ -1146,48 +1055,48 @@ to first create a Swap partition before resuming with Salix Live Installer proce
 
 
   def users_settings(self):
-    if self.is_liveclone:
+    if self.cfg.is_liveclone:
       self.CloneLoginEventbox.show()
       self.users_settings_liveclone()
-      self.CloneLoginCheckbutton.set_active(self.keep_live_logins) # raise toggled event
+      self.CloneLoginCheckbutton.set_active(self.cfg.keep_live_logins) # raise toggled event
     else:
       self.CloneLoginEventbox.hide()
-      self.configurations['clonelogins'] = True
+      self.cfg.configurations['clonelogins'] = True
       self.users_settings_live()
   def users_settings_liveclone(self):
-    self.CloneLoginCheckbutton.set_sensitive(not self.keep_live_logins or not self.configurations['clonelogins'])
-    self.CloneLoginUndo.set_sensitive(self.keep_live_logins and self.configurations['clonelogins'])
-    self.CloneLoginApply.set_sensitive(self.keep_live_logins and not self.configurations['clonelogins'])
+    self.CloneLoginCheckbutton.set_sensitive(not self.cfg.keep_live_logins or not self.cfg.configurations['clonelogins'])
+    self.CloneLoginUndo.set_sensitive(self.cfg.keep_live_logins and self.cfg.configurations['clonelogins'])
+    self.CloneLoginApply.set_sensitive(self.cfg.keep_live_logins and not self.cfg.configurations['clonelogins'])
     self.update_users_check()
   def users_settings_live(self):
     self.UsersEventbox.set_sensitive(True)
-    self.UserLoginEntry.set_text(self.new_login)
-    self.UserLoginEntry.set_sensitive(not self.configurations['user'])
-    self.UserPass1Entry.set_text(self.new_password)
-    self.UserPass1Entry.set_sensitive(not self.configurations['user'])
-    self.UserPass2Entry.set_text(self.new_password)
-    self.UserPass2Entry.set_sensitive(not self.configurations['user'])
-    self.UserVisibleCheckButton.set_sensitive(not self.configurations['user'])
-    self.UsersUndoButton.set_sensitive(self.configurations['user'])
-    self.UsersApplyButton.set_sensitive(not self.configurations['user'])
-    if self.configurations['user']:
-      self.NewUserLogin.set_text(self.new_login)
+    self.UserLoginEntry.set_text(self.cfg.new_login)
+    self.UserLoginEntry.set_sensitive(not self.cfg.configurations['user'])
+    self.UserPass1Entry.set_text(self.cfg.new_password)
+    self.UserPass1Entry.set_sensitive(not self.cfg.configurations['user'])
+    self.UserPass2Entry.set_text(self.cfg.new_password)
+    self.UserPass2Entry.set_sensitive(not self.cfg.configurations['user'])
+    self.UserVisibleCheckButton.set_sensitive(not self.cfg.configurations['user'])
+    self.UsersUndoButton.set_sensitive(self.cfg.configurations['user'])
+    self.UsersApplyButton.set_sensitive(not self.cfg.configurations['user'])
+    if self.cfg.configurations['user']:
+      self.NewUserLogin.set_text(self.cfg.new_login)
     else:
       self.NewUserLogin.set_text(_("None"))
-    self.RootPass1Entry.set_text(self.new_root_password)
-    self.RootPass1Entry.set_sensitive(not self.configurations['root'])
-    self.RootPass2Entry.set_text(self.new_root_password)
-    self.RootPass2Entry.set_sensitive(not self.configurations['root'])
-    self.RootVisibleCheckButton.set_sensitive(not self.configurations['root'])
-    self.RootPassUndoButton.set_sensitive(self.configurations['root'])
-    self.RootPassApplyButton.set_sensitive(not self.configurations['root'])
-    if self.configurations['root']:
+    self.RootPass1Entry.set_text(self.cfg.new_root_password)
+    self.RootPass1Entry.set_sensitive(not self.cfg.configurations['root'])
+    self.RootPass2Entry.set_text(self.cfg.new_root_password)
+    self.RootPass2Entry.set_sensitive(not self.cfg.configurations['root'])
+    self.RootVisibleCheckButton.set_sensitive(not self.cfg.configurations['root'])
+    self.RootPassUndoButton.set_sensitive(self.cfg.configurations['root'])
+    self.RootPassApplyButton.set_sensitive(not self.cfg.configurations['root'])
+    if self.cfg.configurations['root']:
       self.RootPassCreated.set_text(_("Yes"))
     else:
       self.RootPassCreated.set_text(_("None"))
     self.update_users_check()
   def update_users_check(self):
-    if self.configurations['clonelogins'] and self.configurations['user'] and self.configurations['root']:
+    if self.cfg.configurations['clonelogins'] and self.cfg.configurations['user'] and self.cfg.configurations['root']:
       self.UsersCheck.show()
       self.UsersCheckMarker.hide()
     else:
@@ -1196,22 +1105,22 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.update_install_button()
   def on_clone_login_checkbutton_toggled(self, widget, data=None):
     if self.CloneLoginCheckbutton.get_sensitive():
-      self.keep_live_logins = self.CloneLoginCheckbutton.get_active()
+      self.cfg.keep_live_logins = self.CloneLoginCheckbutton.get_active()
       self.on_clone_login_undo_clicked(None)
       self.on_users_undo_clicked(None)
       self.on_rootpass_undo_clicked(None)
-      if self.keep_live_logins:
-        self.configurations['user'] = True
-        self.configurations['root'] = True
+      if self.cfg.keep_live_logins:
+        self.cfg.configurations['user'] = True
+        self.cfg.configurations['root'] = True
         self.UsersEventbox.set_sensitive(False)
       else:
-        self.configurations['clonelogins'] = True
+        self.cfg.configurations['clonelogins'] = True
         self.UsersEventbox.set_sensitive(True)
   def on_clone_login_apply_clicked(self, widget, data=None):
-    self.configurations['clonelogins'] = True
+    self.cfg.configurations['clonelogins'] = True
     self.users_settings_liveclone()
   def on_clone_login_undo_clicked(self, widget, data=None):
-    self.configurations['clonelogins'] = False
+    self.cfg.configurations['clonelogins'] = False
     self.users_settings_liveclone()
   def get_password_strength(self, pwd):
     """
@@ -1271,7 +1180,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     context_label_text = "<b>" + _("Password strength:") + "</b>\n"
     self.ContextLabel.set_markup(context_label_text + context_msg)
   def on_user_pass_strength_expose_event(self, widget, event, data=None):
-    if not self.keep_live_logins:
+    if not self.cfg.keep_live_logins:
       self.set_progressbar_strength(self.UserPass1Entry.get_text().strip(), self.UserPassStrength)
   def on_user_pass1_entry_changed(self, widget, data=None):
     self.on_user_pass_strength_expose_event(self, None, None)
@@ -1301,19 +1210,19 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if ok:
       ok = self.check_password(self.UserPass1Entry.get_text().strip(), self.UserPass2Entry.get_text().strip())
     if ok:
-      self.configurations['user'] = True
-      self.new_login = self.UserLoginEntry.get_text().strip()
-      self.new_password = self.UserPass1Entry.get_text().strip()
+      self.cfg.configurations['user'] = True
+      self.cfg.new_login = self.UserLoginEntry.get_text().strip()
+      self.cfg.new_password = self.UserPass1Entry.get_text().strip()
       # got this too for not loosing it while validating the user login and password
-      self.new_root_password = self.RootPass1Entry.get_text().strip()
+      self.cfg.new_root_password = self.RootPass1Entry.get_text().strip()
       self.users_settings_live()
   def on_users_undo_clicked(self, widget, data=None):
-    self.configurations['user'] = False
-    self.new_login = ''
-    self.new_password = ''
+    self.cfg.configurations['user'] = False
+    self.cfg.new_login = ''
+    self.cfg.new_password = ''
     self.users_settings_live()
   def on_root_pass_strength_expose_event(self, widget, event, data=None):
-    if not self.keep_live_logins:
+    if not self.cfg.keep_live_logins:
       self.set_progressbar_strength(self.RootPass1Entry.get_text().strip(), self.RootPassStrength)
   def on_root_pass1_entry_changed(self, widget, data=None):
     self.on_root_pass_strength_expose_event(self, None, None)
@@ -1323,31 +1232,31 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def on_rootpass_apply_clicked(self, widget, data=None):
     ok = self.check_password(self.RootPass1Entry.get_text().strip(), self.RootPass2Entry.get_text().strip())
     if ok:
-      self.configurations['root'] = True
-      self.new_root_password = self.RootPass1Entry.get_text().strip()
+      self.cfg.configurations['root'] = True
+      self.cfg.new_root_password = self.RootPass1Entry.get_text().strip()
       # got this too for not loosing it while validating the root password
-      self.new_login = self.UserLoginEntry.get_text().strip()
-      self.new_password = self.UserPass1Entry.get_text().strip()
+      self.cfg.new_login = self.UserLoginEntry.get_text().strip()
+      self.cfg.new_password = self.UserPass1Entry.get_text().strip()
       self.users_settings_live()
   def on_rootpass_undo_clicked(self, widget, data=None):
-    self.configurations['root'] = False
-    self.new_root_password = ''
+    self.cfg.configurations['root'] = False
+    self.cfg.new_root_password = ''
     self.users_settings_live()
 
 
 
   def packages_settings(self):
-    self.CoreRadioButton.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
-    self.CoreHBox.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
-    self.CoreRadioButton.set_active(self.install_mode == 'core')
-    self.BasicRadioButton.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
-    self.BasicHBox.set_sensitive(not self.configurations['packages'] and not self.is_liveclone)
-    self.BasicRadioButton.set_active(self.install_mode == 'basic')
-    self.FullRadioButton.set_sensitive(not self.configurations['packages'])
-    self.FullRadioButton.set_active(self.install_mode == 'full')
-    self.PackagesUndoButton.set_sensitive(self.configurations['packages'])
-    self.PackagesApplyButton.set_sensitive(not self.configurations['packages'])
-    if self.configurations['packages']:
+    self.CoreRadioButton.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
+    self.CoreHBox.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
+    self.CoreRadioButton.set_active(self.cfg.install_mode == 'core')
+    self.BasicRadioButton.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
+    self.BasicHBox.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
+    self.BasicRadioButton.set_active(self.cfg.install_mode == 'basic')
+    self.FullRadioButton.set_sensitive(not self.cfg.configurations['packages'])
+    self.FullRadioButton.set_active(self.cfg.install_mode == 'full')
+    self.PackagesUndoButton.set_sensitive(self.cfg.configurations['packages'])
+    self.PackagesApplyButton.set_sensitive(not self.cfg.configurations['packages'])
+    if self.cfg.configurations['packages']:
       self.PackagesCheck.show()
       self.PackagesCheckMarker.hide()
     else:
@@ -1357,32 +1266,32 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def on_packages_apply_clicked(self, widget, data=None):
     if self.CoreRadioButton.get_active():
       _("core") # to be catched by the translations generator
-      self.install_mode = 'core'
+      self.cfg.install_mode = 'core'
     elif self.BasicRadioButton.get_active():
       _("basic") # to be catched by the translations generator
-      self.install_mode = 'basic'
+      self.cfg.install_mode = 'basic'
     elif self.FullRadioButton.get_active():
       _("full") # to be catched by the translations generator
-      self.install_mode = 'full'
-    self.configurations['packages'] = True
+      self.cfg.install_mode = 'full'
+    self.cfg.configurations['packages'] = True
     self.packages_settings()
   def on_packages_undo_clicked(self, widget, data=None):
-    self.install_mode = None
-    self.configurations['packages'] = False
+    self.cfg.install_mode = None
+    self.cfg.configurations['packages'] = False
     self.packages_settings()
 
 
 
   def bootloader_settings(self):
-    self.NobootloaderRadioButton.set_sensitive(not self.configurations['bootloader'])
-    self.NobootloaderRadioButton.set_active(self.bootloader == 'none')
-    self.LiloRadioButton.set_sensitive(not self.configurations['bootloader'])
-    self.LiloRadioButton.set_active(self.bootloader == 'lilo')
-    self.Grub2RadioButton.set_sensitive(not self.configurations['bootloader'])
-    self.Grub2RadioButton.set_active(self.bootloader == 'grub2')
-    self.BootloaderUndoButton.set_sensitive(self.configurations['bootloader'])
-    self.BootloaderApplyButton.set_sensitive(not self.configurations['bootloader'])
-    if self.configurations['bootloader']:
+    self.NobootloaderRadioButton.set_sensitive(not self.cfg.configurations['bootloader'])
+    self.NobootloaderRadioButton.set_active(self.cfg.bootloader == 'none')
+    self.LiloRadioButton.set_sensitive(not self.cfg.configurations['bootloader'])
+    self.LiloRadioButton.set_active(self.cfg.bootloader == 'lilo')
+    self.Grub2RadioButton.set_sensitive(not self.cfg.configurations['bootloader'])
+    self.Grub2RadioButton.set_active(self.cfg.bootloader == 'grub2')
+    self.BootloaderUndoButton.set_sensitive(self.cfg.configurations['bootloader'])
+    self.BootloaderApplyButton.set_sensitive(not self.cfg.configurations['bootloader'])
+    if self.cfg.configurations['bootloader']:
       self.BootloaderCheck.show()
       self.BootloaderCheckMarker.hide()
     else:
@@ -1391,16 +1300,16 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.update_install_button()
   def on_bootloader_apply_clicked(self, widget, data=None):
     if self.NobootloaderRadioButton.get_active():
-      self.bootloader = 'none'
+      self.cfg.bootloader = 'none'
     elif self.LiloRadioButton.get_active():
-      self.bootloader = 'lilo'
+      self.cfg.bootloader = 'lilo'
     elif self.Grub2RadioButton.get_active():
-      self.bootloader = 'grub2'
-    self.configurations['bootloader'] = True
+      self.cfg.bootloader = 'grub2'
+    self.cfg.configurations['bootloader'] = True
     self.bootloader_settings()
   def on_bootloader_undo_clicked(self, widget, data=None):
-    self.bootloader = None
-    self.configurations['bootloader'] = False
+    self.cfg.bootloader = None
+    self.cfg.configurations['bootloader'] = False
     self.bootloader_settings()
 
 
@@ -1423,25 +1332,25 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if callback:
       callback()
 
-  ###################################################################
+
 
   def on_install_button_clicked(self, widget, data=None):
     full_recap_msg = ''
     full_recap_msg += "\n<b>" + _("You are about to install Salix with the following settings:") + "</b>\n"
     full_recap_msg += "\n<b>" + _("Date and Time:") + "</b>\n"
-    full_recap_msg += _("- Time zone: {tz}").format(tz = self.cur_tz_continent + "/" + self.cur_tz_city) + "\n"
-    if self.cur_use_ntp:
+    full_recap_msg += _("- Time zone: {tz}").format(tz = self.cfg.cur_tz) + "\n"
+    if self.cfg.cur_use_ntp:
       dt = "NTP"
     else:
-      dt = (datetime.now() + self.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
+      dt = (datetime.now() + self.cfg.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
     full_recap_msg += "- Date and time: {dt}\n".format(dt = dt)
     full_recap_msg += "\n<b>" + _("Keyboard:") + "</b>\n"
     full_recap_msg += _("- Layout: {layout}").format(layout = self.KeyboardSelection.get_text()) + "\n"
-    if self.cur_use_numlock:
+    if self.cfg.cur_use_numlock:
       nl = '<span style="italic" foreground="green">{0}</span>'.format(_("activated"))
     else:
       nl = '<span style="italic" foreground="maroon">{0}</span>'.format(_("deactivated"))
-    if self.cur_use_ibus:
+    if self.cfg.cur_use_ibus:
       ibus = '<span style="italic" foreground="green">{0}</span>'.format(_("activated"))
     else:
       ibus = '<span style="italic" foreground="maroon">{0}</span>'.format(_("deactivated"))
@@ -1456,13 +1365,13 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     for p in (part_main, part_linux, part_windows, part_swap):
       if p:
         full_recap_msg += p + "\n"
-    if self.keep_live_logins:
+    if self.cfg.keep_live_logins:
       full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + _("Using LiveClone login.") + "\n"
     else:
-      full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + self.new_login + "\n"
+      full_recap_msg += "<b>" + _("Standard User:") + "</b>\n" + self.cfg.new_login + "\n"
     full_recap_msg += "\n<b>" + _("Packages:") + "</b>\n"
-    full_recap_msg += _("You have chosen the {mode} installation mode.").format(mode = _(self.install_mode))
-    bootloader = self.bootloader
+    full_recap_msg += _("You have chosen the {mode} installation mode.").format(mode = _(self.cfg.install_mode))
+    bootloader = self.cfg.bootloader
     if bootloader == 'none':
       bootloader = _("No bootloader")
     full_recap_msg += _("Bootloader choosen: {bootloader}").format(bootloader = bootloader)
@@ -1478,35 +1387,182 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.ProgressWindow.set_keep_above(True)
     while gtk.events_pending():
       gtk.main_iteration()
+    self.thread_installer = ThreadInstaller(self, self.cfg)
+    installation = self.thread_installer.install()
+    self.thread_installer = None
+    if installation == 'done':
+      self.installation_postinstall()
+  def on_progress_undo_clicked(self, widget, data=None):
+    if self.thread_installer:
+      self.thread_installer.on_progress_undo_clicked(widget, data)
+  def installation_postinstall(self):
+    if not self.cfg.is_test:
+      if self.cfg.linux_partitions:
+        rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+        for p in self.cfg.linux_partitions:
+          d = p[0]
+          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
+      sltl.umountDevice("/dev/{0}".format(self.cfg.main_partition))
+    if self.cfg.bootloader != 'none':
+      self.run_bootsetup()
+    self.installation_done()
+  def run_bootsetup(self):
+    if self.cfg.is_test:
+      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.cfg.bootloader)], shell=False, env=None)
+    else:
+      sltl.runBootsetup(self.cfg.bootloader)
+  def installation_done(self):
+    print "Installation Done.\nHappy Salix."
+    msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
+    info_dialog(msg)
+    self.gtk_main_quit(self.Window)
+
+
+
+class Config:
+  """
+  Configuration for the installation of Salix
+  """
+  def __init__(self, min_salt_version, is_test, is_test_clone, use_test_data):
+    self.min_salt_version = min_salt_version
+    self.is_test = is_test
+    self.is_test_clone = is_test_clone
+    self.use_test_data = use_test_data
+    self.default_format = 'ext4'
+    self._get_current_config()
+  def _get_current_config(self):
+    print 'Gathering current configuration…',
+    sys.stdout.flush()
+    # Initialize the lock system preventing the Install button to be activated prematurely
+    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False, 'bootloader':False}
+    if self.is_test:
+      self.is_live = True
+      self.is_liveclone = self.is_test_clone
+      self.salt_version = self.min_salt_version
+      self.is_salt_ok = True
+    else:
+      self.is_live = sltl.isSaLTLiveEnv()
+      if self.is_live:
+        self.is_liveclone = sltl.isSaLTLiveCloneEnv()
+        self.salt_version = sltl.getSaLTVersion()
+        self.is_salt_ok = sltl.isSaLTVersionAtLeast(self.min_salt_version)
+      else:
+        self.is_liveclone = False
+        self.salt_version = ''
+        self.is_salt_ok = False
+    if self.is_live and not self.is_salt_ok:
+      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(self.min_salt_version, self.salt_version)))
+      self.is_live = False
+      self.is_liveclone = False
+    if self.use_test_data:
+      self.cur_tz_continent = 'Europe'
+      self.cur_tz_city = 'Paris'
+      self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
+      self.cur_use_ntp = True
+      self.cur_time_delta = timedelta()
+      self.cur_km = 'fr-latin9'
+      self.cur_use_numlock = False
+      self.cur_use_ibus = True
+      self.cur_locale = 'fr_FR.utf8'
+      self.partitions_step = 'recap'
+      self.show_external_drives = False
+      self.main_partition = 'sda7'
+      self.main_format = 'ext4'
+      self.partitions = []
+      for disk_device in sltl.getDisks():
+        disk_info = sltl.getDiskInfo(disk_device)
+        if self.show_external_drives or not disk_info['removable']:
+          for p in sltl.getPartitions(disk_device):
+            self.partitions.append(p)
+      self.swap_partitions = sltl.getSwapPartitions()
+      self.linux_partitions = []
+      self.win_partitions = []
+      self.keep_live_logins = self.is_liveclone
+      if self.keep_live_logins:
+        self.new_login = ''
+        self.new_password = ''
+        self.new_root_password = ''
+      else:
+        self.new_login = 'test'
+        self.new_password = 'salix'
+        self.new_root_password = 'SaliX'
+      self.install_mode = 'full'
+      self.bootloader = 'lilo'
+      for c in self.configurations:
+        self.configurations[c] = True
+    else:
+      self.cur_tz = sltl.getDefaultTimeZone()
+      if '/' in self.cur_tz:
+        self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
+        self.cur_tz_city = self.cur_tz.split('/', 1)[1]
+      else:
+        self.cur_tz = None
+        self.cur_tz_continent = None
+        self.cur_tz_city = None
+      self.cur_use_ntp = sltl.isNTPEnabledByDefault()
+      self.cur_time_delta = timedelta() # used when NTP is not used
+      self.cur_km = sltl.findCurrentKeymap()
+      self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
+      self.cur_use_ibus = sltl.isIbusEnabledByDefault()
+      self.cur_locale = sltl.getCurrentLocale()
+      self.partitions_step = 'none' # could be none, main, linux, win or recap
+      self.partitions = []
+      self.swap_partitions = []
+      self.show_external_drives = False
+      self.main_partition = None
+      self.main_format = None
+      self.linux_partitions = None # list of tuple as (device, format, mountpoint)
+      self.win_partitions = None # list of tuple as (device, format, mountpoint)
+      self.keep_live_logins = self.is_liveclone
+      self.new_login = '' # None cannot be used in a GtkEntry
+      self.new_password = ''
+      self.new_root_password = ''
+      self.install_mode = None
+      self.bootloader = None
+    print ' Done'
+    sys.stdout.flush()
+
+
+
+class ThreadTask:
+  """
+  Handles starting a thread that will call a function.
+  At the end, a callback may be called on completion.
+  """
+  def __init__(self, fct, complete_callback=None):
+    self.fct = fct
+    self.complete_callback = complete_callback
+  def _start(self, *args, **kwargs):
+    self._stopped = False
+    self.fct(*args, **kwargs)
+    if not self._stopped:
+      if self.complete_callback:
+        self.complete_callback()
+  def start(self, *args, **kwargs):
+    t = threading.Thread(target=self._start, args=args, kwargs=kwargs)
+    t.start()
+    return t
+  def stop(self):
+    self._stopped = True
+
+
+
+class ThreadInstaller:
+  """
+  Starts a thread to install Salix from SalixLive.
+  """
+  def __init__(self, gather_gui, config):
+    self.gui = gather_gui
+    self.cfg = config
+  def install(self):
+    self.installation = None
     t = ThreadTask(self.thread_install_salix, self.thread_install_completed).start()
     while t.is_alive():
       while gtk.events_pending():
         gtk.main_iteration()
     while gtk.events_pending():
       gtk.main_iteration()
-    if self.installation == 'done':
-      self.installation_postinstall()
-  def installation_postinstall(self):
-    if not self.is_test:
-      if self.linux_partitions:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-        for p in self.linux_partitions:
-          d = p[0]
-          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
-      sltl.umountDevice("/dev/{0}".format(self.main_partition))
-    if self.bootloader != 'none':
-      self.run_bootsetup()
-    self.installation_done()
-  def run_bootsetup(self):
-    if self.is_test:
-      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.bootloader)], shell=False, env=None)
-    else:
-      sltl.runBootsetup(self.bootloader)
-  def installation_done(self):
-    print "Installation Done.\nHappy Salix."
-    msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
-    info_dialog(msg)
-    self.gtk_main_quit(self.Window)
+    return self.installation
   def thread_install_salix(self):
     """
     Thread to install Salix.
@@ -1526,14 +1582,14 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     # update system things:
     # - pango, gtk, fonts, …
     # - adjusting configuration for liveclone
-    if self.is_test:
-      if self.is_test_clone:
+    if self.cfg.is_test:
+      if self.cfg.is_test_clone:
         modules = ('01-clone',)
       else:
         modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
     else:
       modules = sltl.listSaLTModules()
-    if self.is_liveclone:
+    if self.cfg.is_liveclone:
       install_modules = modules
     else:
       install_modules = []
@@ -1548,19 +1604,19 @@ to first create a Swap partition before resuming with Salix Live Installer proce
             install_modules.append(m)
         elif not 'live' in m:
           install_modules.append(m)
-    if self.linux_partitions == None:
-      self.linux_partitions = []
-    if self.win_partitions == None:
-      self.win_partitions = []
+    if self.cfg.linux_partitions == None:
+      self.cfg.linux_partitions = []
+    if self.cfg.win_partitions == None:
+      self.cfg.win_partitions = []
     weight_partition = 3
-    if self.is_liveclone:
+    if self.cfg.is_liveclone:
       weight_module = 15
     else:
       weight_module = 5
     weights = {
         'checks': 1,
         'main_partition': weight_partition,
-        'linux_partitions': dict([(p[0], weight_partition) for p in self.linux_partitions]),
+        'linux_partitions': dict([(p[0], weight_partition) for p in self.cfg.linux_partitions]),
         'modules': dict([(m, weight_module) for m in install_modules]),
         'fstab': 1,
         'datetime': 1,
@@ -1583,13 +1639,13 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       return self.installation == 'cancelled'
     # sanity checks
     modules_size = {}
-    if self.is_test:
+    if self.cfg.is_test:
       for m in install_modules:
         modules_size[m] = 1
     else:
-      main_sizes = sltl.getSizes("/dev/{0}".format(self.main_partition))
+      main_sizes = sltl.getSizes("/dev/{0}".format(self.cfg.main_partition))
       main_size = main_sizes['size']
-      main_block_size = sltl.getBlockSize("/dev/{0}".format(self.main_partition))
+      main_block_size = sltl.getBlockSize("/dev/{0}".format(self.cfg.main_partition))
       module_total_size = 0
       for m in install_modules:
         size = sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
@@ -1597,7 +1653,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         module_total_size += size
       minimum_free_size = 50 * 1024 * 1024 # 50 M
       if module_total_size + minimum_free_size > main_size:
-        self.ProgressWindow.set_keep_above(False)
+        self.gui.ProgressWindow.set_keep_above(False)
         error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = sltl.getHumanSize(module_total_size + minimum_free_size)))
         self.installation = 'error'
         return
@@ -1613,7 +1669,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.update_progressbar(msg, step, steps)
     step = self.install_linux_partitions(msg, step, steps, weights['linux_partitions'])
     if installion_cancelled(): return
-    msg = _("Installing the {mode} mode packages...").format(mode = _(self.install_mode))
+    msg = _("Installing the {mode} mode packages...").format(mode = _(self.cfg.install_mode))
     self.update_progressbar(msg, step, steps)
     step = self.install_modules(install_modules, modules_size, msg, step, steps, weights['modules'])
     if installion_cancelled(): return
@@ -1653,21 +1709,34 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if installion_cancelled(): return
     step += weights['system_config']
     self.update_progressbar(None, step, steps)
+  def update_gui(self, fct, *args, **kwargs):
+    gobject.idle_add(fct, *args, **kwargs)
+  def update_progressbar(self, msg, step, steps):
+    fraction = float(step) / steps
+    if msg:
+      print "\n{1:3.0%} {0}".format(msg, fraction)
+    else:
+      print "\n{0:3.0%}".format(fraction)
+    self.update_gui(self.gui_update_progressbar, msg, fraction)
+  def gui_update_progressbar(self, msg, fraction):
+    if msg:
+      self.gui.InstallProgressBar.set_text(msg)
+    self.gui.InstallProgressBar.set_fraction(fraction)
   def install_main_partition(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      d = "/dev/{0}".format(self.main_partition)
+      d = "/dev/{0}".format(self.cfg.main_partition)
       sltl.umountDevice(d, deleteMountPoint = False)
-      if self.main_format != 'none':
+      if self.cfg.main_format != 'none':
         label = sltl.getFsLabel(d)
         if not label:
           label = 'Salix'
-        sltl.makeFs(self.main_partition, self.main_format, label = label)
-      sltl.mountDevice(d, fsType = self.main_format)
+        sltl.makeFs(self.cfg.main_partition, self.cfg.main_format, label = label)
+      sltl.mountDevice(d, fsType = self.cfg.main_format)
   def install_linux_partitions(self, msg, step, steps, weights):
-    if self.is_test:
-      for p in self.linux_partitions:
+    if self.cfg.is_test:
+      for p in self.cfg.linux_partitions:
         if self.installation == 'cancelled': return step
         d = p[0]
         self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
@@ -1676,8 +1745,8 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         step += w
       return step
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-      for p in self.linux_partitions:
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+      for p in self.cfg.linux_partitions:
         if self.installation == 'cancelled': return step
         d = p[0]
         self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
@@ -1696,7 +1765,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         step += weights[d]
       return step
   def install_modules(self, modules, modules_size, msg, step, steps, weight):
-    if self.is_test:
+    if self.cfg.is_test:
       for m in modules:
         if self.installation == 'cancelled': return step
         self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
@@ -1718,18 +1787,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     new_step = step + float(pourcent) * weight
     gobject.idle_add(self.update_progressbar, None, new_step, steps)
   def install_fstab(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
       sltl.createFsTab(rootmp)
       sltl.addFsTabEntry(rootmp, 'proc', '/proc', 'proc')
       sltl.addFsTabEntry(rootmp, 'devpts', '/dev/pts', 'devpts')
       sltl.addFsTabEntry(rootmp, 'tmpfs', '/dev/shm', 'tmpfs')
-      for d in self.swap_partitions:
+      for d in self.cfg.swap_partitions:
         sltl.addFsTabEntry(rootmp, "/dev/" + d, 'none', 'swap')
-      sltl.addFsTabEntry(rootmp, "/dev/" + self.main_partition, '/', self.main_format, dumpFlag = 1, fsckOrder = 1)
-      for l in (self.linux_partitions, self.win_partitions):
+      sltl.addFsTabEntry(rootmp, "/dev/" + self.cfg.main_partition, '/', self.cfg.main_format, dumpFlag = 1, fsckOrder = 1)
+      for l in (self.cfg.linux_partitions, self.cfg.win_partitions):
         if l:
           for p in l:
             d = p[0]
@@ -1743,55 +1812,55 @@ to first create a Swap partition before resuming with Salix Live Installer proce
               pass # directory exists
             sltl.addFsTabEntry(rootmp, "/dev/" + d, mp, fs)
   def install_datetime(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-      tz = self.cur_tz_continent + '/' + self.cur_tz_city
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+      tz = self.cfg.cur_tz_continent + '/' + self.cfg.cur_tz_city
       sltl.setDefaultTimeZone(tz, rootmp)
-      sltl.setNTPDefault(self.cur_use_ntp, rootmp)
-      if not self.cur_use_ntp:
+      sltl.setNTPDefault(self.cfg.cur_use_ntp, rootmp)
+      if not self.cfg.cur_use_ntp:
         # we need to update the locale date and time.
-        dt = (datetime.now() + self.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
+        dt = (datetime.now() + self.cfg.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
         execCall(['/usr/bin/date', '-s', dt], shell=False)
         execCall(['/sbin/hwclock', '--systohc'], shell=False)
   def install_keyboard(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-      sltl.setDefaultKeymap(self.cur_km, rootmp)
-      sltl.setNumLockDefault(self.cur_use_numlock, rootmp)
-      sltl.setIbusDefault(self.cur_use_ibus, rootmp)
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+      sltl.setDefaultKeymap(self.cfg.cur_km, rootmp)
+      sltl.setNumLockDefault(self.cfg.cur_use_numlock, rootmp)
+      sltl.setIbusDefault(self.cfg.cur_use_ibus, rootmp)
   def install_locale(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-      sltl.setDefaultLocale(self.cur_locale, rootmp)
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+      sltl.setDefaultLocale(self.cfg.cur_locale, rootmp)
   def install_users(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      if not self.keep_live_logins:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-        sltl.createSystemUser(self.new_login, password = self.new_password, mountPoint = rootmp)
-        sltl.changePasswordSystemUser('root', password = self.new_root_password, mountPoint = rootmp)
+      if not self.cfg.keep_live_logins:
+        rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
+        sltl.createSystemUser(self.cfg.new_login, password = self.cfg.new_password, mountPoint = rootmp)
+        sltl.changePasswordSystemUser('root', password = self.cfg.new_root_password, mountPoint = rootmp)
   def install_services(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
       f = 'var/log/setup/setup.services'
       p = "{0}/{1}".format(rootmp, f)
       if os.path.exists(p):
         os.chmod(p, 0755)
         sltl.execCall("{0}/{1} {0}".format(rootmp, f))
   def install_config(self):
-    if self.is_test:
+    if self.cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
       rcfont_file = open('{0}/etc/rc.d/rc.font'.format(rootmp), 'w')
       rcfont_file.write("""
 #!/bin/sh
@@ -1812,7 +1881,7 @@ unicode_start ter-v16n""")
         p = "{0}/{1}".format(rootmp, f)
         if os.path.exists(p):
           sltl.execChroot(rootmp, f)
-      if self.is_liveclone:
+      if self.cfg.is_liveclone:
         # Remove some specific live stuff
         sltl.execCall("spkg -d liveclone --root={0}".format(rootmp))
         sltl.execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
@@ -1821,23 +1890,10 @@ unicode_start ter-v16n""")
         sltl.execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
         sltl.execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
         os.remove("{0}/hooks.salt".format(rootmp))
-  def update_gui(self, fct, *args, **kwargs):
-    gobject.idle_add(fct, *args, **kwargs)
-  def update_progressbar(self, msg, step, steps):
-    fraction = float(step) / steps
-    if msg:
-      print "\n{1:3.0%} {0}".format(msg, fraction)
-    else:
-      print "\n{0:3.0%}".format(fraction)
-    self.update_gui(self.gui_update_progressbar, msg, fraction)
-  def gui_update_progressbar(self, msg, fraction):
-    if msg:
-      self.InstallProgressBar.set_text(msg)
-    self.InstallProgressBar.set_fraction(fraction)
   def on_progress_undo_clicked(self, widget, data=None):
     print "Installation cancelled."
     self.installation = 'cancelled'
-    self.CancelProgressButton.set_sensitive(False)
+    self.gui.CancelProgressButton.set_sensitive(False)
     self.gui_update_progressbar(_("Cancelling installation"), 1.0)
   def thread_install_completed(self):
     if self.installation == 'installing':
@@ -1851,38 +1907,15 @@ unicode_start ter-v16n""")
       print "Installation in error."
     elif self.installation == 'cancelled':
       print "Installation cancelled."
-    self.ProgressWindow.set_keep_above(False)
-    self.ProgressWindow.hide()
-    self.Window.set_sensitive(True)
-    self.Window.set_accept_focus(True)
-    self.Window.show()
+    self.gui.ProgressWindow.set_keep_above(False)
+    self.gui.ProgressWindow.hide()
+    self.gui.Window.set_sensitive(True)
+    self.gui.Window.set_accept_focus(True)
+    self.gui.Window.show()
   def gui_install_completed(self):
     print "Installation completed."
-    self.ProgressWindow.set_keep_above(False)
-    self.ProgressWindow.hide()
-
-
-
-class ThreadTask:
-  """
-  Handles starting a thread that will call a function.
-  At the end, a callback may be called on completion.
-  """
-  def __init__(self, fct, complete_callback=None):
-    self.fct = fct
-    self.complete_callback = complete_callback
-  def _start(self, *args, **kwargs):
-    self._stopped = False
-    self.fct(*args, **kwargs)
-    if not self._stopped:
-      if self.complete_callback:
-        self.complete_callback()
-  def start(self, *args, **kwargs):
-    t = threading.Thread(target=self._start, args=args, kwargs=kwargs)
-    t.start()
-    return t
-  def stop(self):
-    self._stopped = True
+    self.gui.ProgressWindow.set_keep_above(False)
+    self.gui.ProgressWindow.hide()
 
 
 
@@ -1935,5 +1968,5 @@ if __name__ == '__main__':
   if not is_test and os.getuid() != 0:
     error_dialog(_("<b>Sorry!</b>\n\nRoot privileges are required to run this program."))
     sys.exit(1)
-  SalixLiveInstaller(is_test, is_clone, use_test_data)
+  GatherGui(is_test, is_clone, use_test_data)
   gtk.main()
