@@ -14,6 +14,8 @@ SaLT functions:
   - listSaLTModules
   - installSaLTModule
 """
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__license__ = 'GPL2+'
 import os
 import glob
 import re

@@ -1,5 +1,8 @@
 Version 0.4
+ * Rewritten to use classes and libraries
  * Add a salix live installer python library
+ * Bootloader choice (none, lilo or grub2). Grub2 is disabled for now
+ * Possibility to add a curses version (not developped yet)
 
 Version 0.3
  * Port from LLS to SaLT

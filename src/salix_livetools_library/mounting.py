@@ -9,6 +9,8 @@ Functions:
   - mountDevice
   - umountDevice
 """
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__license__ = 'GPL2+'
 from execute import *
 from fs import getFsType
 import os

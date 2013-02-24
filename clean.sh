@@ -1,3 +1,6 @@
 #!/bin/sh
 cd $(dirname "$0")
-rm -rf src/*.desktop src/*.pyc po/*.mo salix-live-installer-*.* 
+find . -type f -name '*.pyc' -delete
+find . -type f -name '*.mo' -delete
+[ -d data/locale ] && rm -r data/locale
+[ -d build ] && rm -r build

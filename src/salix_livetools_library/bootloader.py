@@ -5,6 +5,8 @@
 Function to launch the boot loader setup tool with some defaults:
   - runBootsetup
 """
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__license__ = 'GPL2+'
 from execute import *
 
 def runBootsetup(bootloader = 'lilo'):

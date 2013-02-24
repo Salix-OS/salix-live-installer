@@ -1,0 +1,1480 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Cyrille Pontvieux <jrd@enialis.net>, 2011.
+# gapan <vlahavas@gmail.com>, 2011.
+# Laszlo Dvornik <rezuri@zoho.com>, 2011.
+# Peter Polonkai <polesz@nedudu.hu>, 2011.
+# Péter Polonkai <polesz@nedudu.hu>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: Salix\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-24 17:07+0100\n"
+"PO-Revision-Date: 2011-12-01 18:00+0000\n"
+"Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: src/resources/salix-live-installer.glade:20
+msgid "SalixOS installation from SalixLive's graphic environment"
+msgstr "SalixOS telepítése a SalixLive grafikus környezetből"
+
+#: src/resources/salix-live-installer.glade:38
+msgid "translator-credits"
+msgstr ""
+"Dvornik László <rezuri@zoho.com>\n"
+"Polonkai Péter <polesz@nedudu.hu>"
+
+#: src/resources/salix-live-installer.glade:337
+msgid "Salix Live Installer"
+msgstr "Salix Live telepítő"
+
+#: src/resources/salix-live-installer.glade:404
+#, fuzzy
+msgid "Launch Salix _installation"
+msgstr "Salix telepítés _indítása "
+
+#: src/resources/salix-live-installer.glade:551
+msgid "_Time"
+msgstr "_Idő"
+
+#: src/resources/salix-live-installer.glade:606
+msgid "Key_board"
+msgstr "_Billentyűzet"
+
+#: src/resources/salix-live-installer.glade:658
+msgid "Lo_cale"
+msgstr "_Nyelvi beállítás"
+
+#: src/resources/salix-live-installer.glade:710
+msgid "_Partitions"
+msgstr "_Partíciók"
+
+#: src/resources/salix-live-installer.glade:763
+msgid "U_sers"
+msgstr "Felha_sználók"
+
+#: src/resources/salix-live-installer.glade:815
+msgid "S_oftware"
+msgstr "Sz_oftver"
+
+#: src/resources/salix-live-installer.glade:868
+msgid "Boot_loader"
+msgstr ""
+
+#: src/resources/salix-live-installer.glade:1187
+#, fuzzy
+msgid ""
+"Salix Live Installer will perform a standard installation of Salix Operating "
+"System on your computer.\n"
+"\n"
+"Simply click on one of the categories in the left section to configure the "
+"corresponding settings. A check will be displayed beside each setting once "
+"it has been configured. All the settings must be configured before the "
+"'Launch Salix installation' button becomes accessible.\n"
+"\n"
+"Depending on your system, the 'Partitions' settings are composed of "
+"successive steps which must all be configured before you can go onto another "
+"setting.\n"
+"\n"
+"Once set, every configuration can be undone and reset as many times as "
+"necessary. No change will take effect until you click on the 'Launch Salix "
+"installation' button.\n"
+"\n"
+"Contextual help triggered by the mouse position is available each step of "
+"the way and will be displayed in the above section."
+msgstr ""
+"A SalixLive telepítő elvégzi a Salix operációs rendszer telepítését\n"
+"a számítógépére.\n"
+"\n"
+"Kattintson a kategóriák egyikére a bal oldalon a megfelelő beállítások "
+"elvégzéséhez. A beállított kategóriákat a bejelölt jelölőnégyzet jelzi. "
+"Mindet be kell állítania ahhoz, hogy a 'Salix telepítés indítása' gomb "
+"elérhető legyen.\n"
+"\n"
+"A rendszerétől függően a partícióbeállítások egymást követő lépésekből "
+"állnak, amiket be kell állítania, mielőtt másik beállításra lépne.\n"
+"\n"
+"Minden egyes beállítás visszavonható és visszaállítható ahányszor szükséges. "
+"A változtatások nem lépnek életbe, amíg nem kattint a 'Salix telepítés "
+"indítása' gombra.\n"
+"\n"
+"Minden egyes lépésnél helyzetérzékeny súgó érhető el az egérrel, amely az "
+"elem felett jelenik meg."
+
+#: src/resources/salix-live-installer.glade:1224
+msgid "<b>Please set the time, date and time zone:</b>"
+msgstr "<b>Állítsa be az időt, a dátumot és az időzónát:</b>"
+
+#: src/resources/salix-live-installer.glade:1379
+#, fuzzy
+msgid "hour : min : sec"
+msgstr "óra : perc : mp"
+
+#: src/resources/salix-live-installer.glade:1416
+msgid "Year:"
+msgstr "Év:"
+
+#: src/resources/salix-live-installer.glade:1430
+msgid "Month:"
+msgstr "Hónap:"
+
+#: src/resources/salix-live-installer.glade:1444
+msgid "Day:"
+msgstr "Nap:"
+
+#: src/resources/salix-live-installer.glade:1579
+#, fuzzy
+msgid "Time zone:"
+msgstr "Időzóna: "
+
+#: src/resources/salix-live-installer.glade:1637
+msgid "Use NTP service"
+msgstr "NTP szolgáltatás használata"
+
+#: src/resources/salix-live-installer.glade:1731
+msgid "<b>Please select your keyboard layout:</b>"
+msgstr "<b>Válassza ki a billentyűzetkiosztást:</b>"
+
+#: src/resources/salix-live-installer.glade:1794
+#: src/resources/salix-live-installer.glade:2071
+#: src/resources/salix-live-installer.glade:2828
+#: src/resources/salix-live-installer.glade:3035
+#, fuzzy
+msgid "Apply _settings"
+msgstr "Beállítá_sok alkalmazása"
+
+#: src/resources/salix-live-installer.glade:1878
+msgid "Activate numlock"
+msgstr "Numlock aktiválása"
+
+#: src/resources/salix-live-installer.glade:1896
+#, fuzzy
+msgid "Activate IBus"
+msgstr "IBus aktiválása "
+
+#: src/resources/salix-live-installer.glade:1940
+#, fuzzy
+msgid "<b>Selected keyboard layout:</b>"
+msgstr "<b>Kiválasztott billentyűzetkiosztás: </b>"
+
+#: src/resources/salix-live-installer.glade:1954
+#: src/resources/salix-live-installer.glade:2180
+#: src/resources/salix-live-installer.glade:3576
+#: src/resources/salix-live-installer.glade:3811
+#: src/salix_live_installer/gathergui.py:652
+#: src/salix_live_installer/gathergui.py:697
+#: src/salix_live_installer/gathergui.py:1082
+#: src/salix_live_installer/gathergui.py:1093
+msgid "None"
+msgstr "Nincs"
+
+#: src/resources/salix-live-installer.glade:2008
+msgid "<b>Please select your system language:</b>"
+msgstr "<b>Válassza ki a rendszernyelvet:</b>"
+
+#: src/resources/salix-live-installer.glade:2166
+#, fuzzy
+msgid "<b>Selected system language:</b>"
+msgstr "<b>Kiválasztott rendszernyelv: </b>"
+
+#: src/resources/salix-live-installer.glade:2234
+msgid ""
+"<b>Important!</b>\n"
+"\n"
+"Salix needs, at the very minimum, one swap partition and one Linux partition "
+"to hold its main directory tree. If possible, it is recommended to also have "
+"at least another Linux partition to hold your /home directory.\n"
+"\n"
+"If you do not already have these needed partitions ready, you should now "
+"click on the button 'Modify partition scheme'  in order to create them. Be "
+"aware that partitioning a disk drive is a delicate operation which could "
+"lead to data loss if not performed cautiously. It is therefore highly "
+"advisable to backup important data before starting this procedure.\n"
+"\n"
+"If you already have all the needed partitions, please click on the button "
+"'Do not modify partition scheme' to continue without altering your current "
+"partitioning scheme."
+msgstr ""
+"<b>Fontos!</b>\n"
+"\n"
+"A Salixhoz minimálisan szükséges egy swap partíció és egy Linux partíció, "
+"amely a rendszer fő könyvtárstruktúráját tárolja. Ha lehetséges, akkor "
+"ajánlott még legalább egy Linux partíció a /home könyvtár számára.\n"
+"Ha még nincsenek meg a szükséges partíciók, kattintson a 'Partícióséma "
+"módosítása' gombra, hogy létrehozza őket. Ne feledje, hogy a lemezmeghajtó "
+"particionálása kényes művelet, amely adatvesztést okozhat, ha nem "
+"megfelelően végzi el. Erősen ajánlott, hogy a fontos adatokról biztonsági "
+"mentést készítsen a folyamat megkezdése előtt.\n"
+"\n"
+"Ha már megvannak a szükséges partíciók, kattintson a 'Ne módosítsa a "
+"partíciósémát' gombra partícióséma módosítása nélküli folytatáshoz."
+
+#: src/resources/salix-live-installer.glade:2270
+msgid "Modify partition scheme"
+msgstr "Partícióséma módosítása"
+
+#: src/resources/salix-live-installer.glade:2314
+msgid "Do not modify partition scheme"
+msgstr "Ne módosítsa a partíciósémát"
+
+#: src/resources/salix-live-installer.glade:2367
+msgid "<b>Please select Salix main partition:</b>"
+msgstr "<b>Válasszon fő partíciót a Salixnak:</b>"
+
+#: src/resources/salix-live-installer.glade:2399
+#: src/resources/salix-live-installer.glade:2677
+#: src/resources/salix-live-installer.glade:2907
+msgid "Disk"
+msgstr "Lemez"
+
+#: src/resources/salix-live-installer.glade:2411
+#: src/resources/salix-live-installer.glade:2688
+#: src/resources/salix-live-installer.glade:2918
+msgid "Partition"
+msgstr "Partíció"
+
+#: src/resources/salix-live-installer.glade:2423
+#: src/resources/salix-live-installer.glade:2700
+#: src/resources/salix-live-installer.glade:2930
+msgid "Size"
+msgstr "Méret"
+
+#: src/resources/salix-live-installer.glade:2435
+#: src/resources/salix-live-installer.glade:2942
+msgid "File System"
+msgstr "Fájlrendszer"
+
+#: src/resources/salix-live-installer.glade:2456
+msgid "Display attached external devices"
+msgstr "Külső csatlakoztatott eszközök megjelenítése"
+
+#: src/resources/salix-live-installer.glade:2478
+msgid ""
+"From the above partitions found on your system, please select the one where "
+"Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be "
+"permanently erased."
+msgstr ""
+"A fenti partíciók találhatóak a rendszerben, válassza ki azt, ahova a Salix "
+"fő könyvtárstruktúra (/) legyen telepítve.\n"
+"<b>Figyelmeztetés!</b> Ez a partíció formázva lesz és a rajta lévő adatok "
+"véglegesen törlődni fognak."
+
+#: src/resources/salix-live-installer.glade:2508
+#, fuzzy
+msgid "Format with:"
+msgstr "Formázás ezzel: "
+
+#: src/resources/salix-live-installer.glade:2601
+#, fuzzy
+msgid "Select _partition"
+msgstr "_Partíció kiválasztása "
+
+#: src/resources/salix-live-installer.glade:2645
+#, fuzzy
+msgid "<b>Please configure your other Linux partitions:</b>"
+msgstr "<b>Állítsa be az egyéb Linux partíciókat:</b>"
+
+#: src/resources/salix-live-installer.glade:2712
+msgid "Current FS"
+msgstr "Aktuális fájlrendszer"
+
+#: src/resources/salix-live-installer.glade:2724
+msgid "Format as:"
+msgstr "Formázás:"
+
+#: src/resources/salix-live-installer.glade:2747
+#: src/resources/salix-live-installer.glade:2954
+msgid "Mount as:"
+msgstr "Csatolás:"
+
+#: src/resources/salix-live-installer.glade:2783
+msgid ""
+"It appears that you have more than one Linux partition. If you wish, you can "
+"now spread Salix directory tree on separate partitions. In fact, it is "
+"highly recommended to have the /home directory on a separate partition."
+msgstr ""
+"Úgy tűnik, hogy egynél több Linux partíció van. Ha szeretné, a Salix "
+"könyvtárstruktúrát most külön partíciókra helyezheti. Különösen ajánlott, "
+"hogy a /home könyvtár külön partíción legyen."
+
+#: src/resources/salix-live-installer.glade:2874
+#, fuzzy
+msgid "<b>Please configure your Windows partitions:</b>"
+msgstr "<b>Állítsa be a Windows partíció(ka)t:</b>"
+
+#: src/resources/salix-live-installer.glade:2990
+msgid ""
+"It appears that some of your partitions have a Windows formatting. Here you "
+"can set a mount point for each one if you wish them to be accessible in "
+"Salix system."
+msgstr ""
+"Úgy tűnik, hogy néhány partíció Windows alatt lett formázva. Csatolási "
+"pontot állíthat be hozzájuk, ha el szeretné érni őket a Salix rendszerben."
+
+#: src/resources/salix-live-installer.glade:3090
+msgid "<b>Salix main partition:</b>"
+msgstr "<b>Salix fő partíció:</b>"
+
+#: src/resources/salix-live-installer.glade:3120
+msgid "<b>Other Linux partitions:</b>"
+msgstr "<b>Egyéb Linux partíciók:</b>"
+
+#: src/resources/salix-live-installer.glade:3149
+msgid "<b>Windows partitions:</b>"
+msgstr "<b>Windows partíciók:</b>"
+
+#: src/resources/salix-live-installer.glade:3178
+msgid "<b>Swap partitions:</b>"
+msgstr "<b>Swap partíciók:</b>"
+
+#: src/resources/salix-live-installer.glade:3279
+msgid "<b>Transfer LiveClone login accounts</b>"
+msgstr "<b>LiveClone felhasználói fiókok átvitele</b>"
+
+#: src/resources/salix-live-installer.glade:3381
+msgid "<b>Please create a new standard user:</b>"
+msgstr "<b>Hozzon létre egy új szabványos felhasználót:</b>"
+
+#: src/resources/salix-live-installer.glade:3400
+#, fuzzy
+msgid "Enter login:"
+msgstr "Adja meg a bejelentkezési nevet: "
+
+#: src/resources/salix-live-installer.glade:3442
+#, fuzzy
+msgid "Enter password:"
+msgstr "Adja meg a jelszót: "
+
+#: src/resources/salix-live-installer.glade:3500
+#, fuzzy
+msgid "Re-enter password:"
+msgstr "Új jelszó ismét: "
+
+#: src/resources/salix-live-installer.glade:3528
+#: src/resources/salix-live-installer.glade:3763
+msgid "Do not hide"
+msgstr "Ne legyen rejtett"
+
+#: src/resources/salix-live-installer.glade:3562
+#, fuzzy
+msgid "<b>User created:</b>"
+msgstr "<b>Felhasználó létrehozva: </b>"
+
+#: src/resources/salix-live-installer.glade:3658
+msgid "<b>Please create a new administrator's password:</b>"
+msgstr "<b>Hozzon létre új rendszergazdai jelszót:</b>"
+
+#: src/resources/salix-live-installer.glade:3677
+#, fuzzy
+msgid "Enter root password:"
+msgstr "Adja meg a root jelszót: "
+
+#: src/resources/salix-live-installer.glade:3735
+#, fuzzy
+msgid "Re-enter root password:"
+msgstr "Új root jelszó ismét: "
+
+#: src/resources/salix-live-installer.glade:3797
+msgid "<b>Password created: </b>"
+msgstr "<b>Jelszó létrehozva: </b>"
+
+#: src/resources/salix-live-installer.glade:3901
+msgid "<b>Please select your installation mode:</b>"
+msgstr "<b>Válasszon telepítési módot:</b>"
+
+#: src/resources/salix-live-installer.glade:3969
+msgid "Core"
+msgstr "Minimális"
+
+#: src/resources/salix-live-installer.glade:4023
+msgid "Basic"
+msgstr "Alap"
+
+#: src/resources/salix-live-installer.glade:4116
+msgid "Full"
+msgstr "Teljes"
+
+#: src/resources/salix-live-installer.glade:4361
+#, fuzzy
+msgid "<b>Please select your bootloader:</b>"
+msgstr "<b>Válasszon telepítési módot:</b>"
+
+#: src/resources/salix-live-installer.glade:4374
+msgid "No bootloader. I already have one"
+msgstr ""
+
+#: src/resources/salix-live-installer.glade:4520
+msgid "Salix installation"
+msgstr "Salix telepítés"
+
+#: src/resources/salix-live-installer.glade:4568
+#, fuzzy
+msgid "Please be patient, Salix installation is in progress..."
+msgstr "Legyen türelemmel, a Salix telepítése folyamatban van..."
+
+#: src/resources/salix-live-installer.glade:4693
+msgid "Confirmation needed"
+msgstr "Megerősítés szükséges"
+
+#: src/resources/salix-live-installer.glade:4706
+msgid "<b>Do you want to proceed with this?</b>"
+msgstr "<b>Szeretné folytatni?</b>"
+
+#: src/salix_live_installer/config.py:46
+msgid ""
+"You need at least version {0} of SaLT installed to continue.\n"
+"You have version {1}.\n"
+"\n"
+"Installation will not be possible"
+msgstr ""
+
+#: src/salix_live_installer/config.py:46
+#: src/salix_live_installer/installer_gtk.py:22
+#: src/salix_live_installer/installer_curses.py:17
+msgid "Sorry!"
+msgstr ""
+
+#: src/salix_live_installer/installer.py:58
+msgid "Starting installation process..."
+msgstr "Telepítési folyamat indítása..."
+
+#: src/salix_live_installer/installer.py:72
+#, fuzzy
+msgid "Cancelling installation..."
+msgstr "Salix telepítés"
+
+#: src/salix_live_installer/installer.py:166
+msgid ""
+"Cannot install!\n"
+"Not enougth space on main partition ({size} needed)"
+msgstr ""
+
+#: src/salix_live_installer/installer.py:172
+msgid "Formatting and mounting the main partition..."
+msgstr "A fő partíció formázása és csatolása..."
+
+#: src/salix_live_installer/installer.py:177
+#, fuzzy
+msgid "Formatting and mounting the Linux partitions..."
+msgstr "A Linux partíció(k) formázása és csatolása..."
+
+#: src/salix_live_installer/installer.py:181
+#, fuzzy
+msgid "Installing the {mode} mode packages..."
+msgstr "A(z) %(mode)s mód csomagjainak telepítése..."
+
+#: src/salix_live_installer/installer.py:185
+msgid "Creating /etc/fstab..."
+msgstr "Az /etc/fstab létrehozása..."
+
+#: src/salix_live_installer/installer.py:190
+msgid "Date and time configuration..."
+msgstr ""
+
+#: src/salix_live_installer/installer.py:195
+#, fuzzy
+msgid "Keyboard configuration..."
+msgstr "Billentyűzetkiosztás"
+
+#: src/salix_live_installer/installer.py:200
+msgid "Locale configuration..."
+msgstr ""
+
+#: src/salix_live_installer/installer.py:205
+msgid "Users configuration..."
+msgstr ""
+
+#: src/salix_live_installer/installer.py:210
+msgid "Services configuration..."
+msgstr ""
+
+#: src/salix_live_installer/installer.py:215
+msgid "System configuration..."
+msgstr ""
+
+#: src/salix_live_installer/installer.py:278
+#: src/salix_live_installer/installer.py:287
+#, fuzzy
+msgid "Installing the {module} module..."
+msgstr "A(z) %(mode)s mód csomagjainak telepítése..."
+
+#: src/salix_live_installer/installer_gtk.py:22
+#: src/salix_live_installer/installer_curses.py:17
+#, fuzzy
+msgid "Root privileges are required to run this program."
+msgstr ""
+"<b>Sajnálom!</b>\n"
+"\n"
+"Rendszergazda jogosultság szükséges a program futtatásához."
+
+#: src/salix_live_installer/gathergui.py:189
+#: src/salix_live_installer/gathergui.py:214
+msgid "Contextual help."
+msgstr "Helyzetérzékeny súgó."
+
+#: src/salix_live_installer/gathergui.py:210
+msgid "General usage."
+msgstr "Általános használat."
+
+#: src/salix_live_installer/gathergui.py:212
+msgid "About Salix Installer."
+msgstr "Salix telepítő névjegye."
+
+#: src/salix_live_installer/gathergui.py:216
+msgid "Exit Salix Installer."
+msgstr "Kilépés a Salix telepítőből."
+
+#: src/salix_live_installer/gathergui.py:218
+#: src/salix_live_installer/gathergui.py:221
+msgid ""
+"Launch Salix installation. This button will not be active until all settings "
+"are configured correctly."
+msgstr ""
+"Salix telepítés indítása. A gomb addig nem válik aktívvá, amíg minden "
+"beállítás nincs rendesen konfigurálva."
+
+#: src/salix_live_installer/gathergui.py:226
+msgid "Access the time settings."
+msgstr "Időbeállítások."
+
+#: src/salix_live_installer/gathergui.py:228
+msgid "Use Network Time Protocol daemon to synchronize time via Internet."
+msgstr "NTP szolgáltatás használata az internetes időszinkronizációhoz."
+
+#: src/salix_live_installer/gathergui.py:230
+msgid "Cancel time settings."
+msgstr "Időbeállítások megszakítása."
+
+#: src/salix_live_installer/gathergui.py:232
+msgid "Activate the time settings after options have been defined."
+msgstr "Az időbeállítások aktiválása a paraméterek megadása után."
+
+#: src/salix_live_installer/gathergui.py:234
+msgid "Set the date & time manually if you do not use NTP service."
+msgstr "Dátum és idő kézi beállítása, ha nem használ NTP szolgáltatást."
+
+#: src/salix_live_installer/gathergui.py:236
+msgid "Set the time zone."
+msgstr "Időzóna beállítása."
+
+#: src/salix_live_installer/gathergui.py:240
+msgid "Access the keyboard settings."
+msgstr "Billentyűzet beállítások."
+
+#: src/salix_live_installer/gathergui.py:242
+#, fuzzy
+msgid ""
+"Highlight your favorite keyboard layout from this list before clicking on "
+"the 'Select keyboard' button."
+msgstr ""
+"Jelölje ki az Ön által használt billentyűzetkiosztást\n"
+"a listából, mielőtt a 'Billentyűzet kiválasztása' gombra kattintana."
+
+#: src/salix_live_installer/gathergui.py:245
+msgid ""
+"Check this box if you want your numeric keypad to be activated during the "
+"boot process."
+msgstr ""
+"Jelölje be ezt az opciót, ha szeretné, hogy a numerikus billentyűzet "
+"aktiválva legyen a rendszerindítás folyamán."
+
+#: src/salix_live_installer/gathergui.py:248
+msgid ""
+"Check this box if you want iBus to be activated during the boot process. "
+"IBus is an input method (IM) framework for multilingual input."
+msgstr ""
+"Jelölje be ezt az opciót, ha szeretné, hogy az iBus aktiválva legyen a "
+"rendszerindítás folyamán. Az IBus egy beviteli eljárás (IM) keretrendszer a "
+"többnyelvű bevitelhez."
+
+#: src/salix_live_installer/gathergui.py:251
+msgid "Cancel keyboard layout selection."
+msgstr "Billentyűzet beállítások megszakítása."
+
+#: src/salix_live_installer/gathergui.py:253
+msgid "Confirm your selection after highlighting the keyboard layout."
+msgstr "Erősítse meg a választását a billentyűzetkiosztás kijelölése után."
+
+#: src/salix_live_installer/gathergui.py:255
+msgid ""
+"This is the keyboard layout you have selected. 'None' will be displayed "
+"until you have confirmed that selection."
+msgstr ""
+"Ez a billentyűzetkiosztás lesz a kiválasztott. Amíg nincs kiválasztva, addig "
+"a 'Nincs' jelenik meg a választás helyett."
+
+#: src/salix_live_installer/gathergui.py:260
+msgid "Access the language settings."
+msgstr "Nyelvi beállítások."
+
+#: src/salix_live_installer/gathergui.py:262
+msgid ""
+"Highlight your language from this list before clicking on the 'Select "
+"language' button."
+msgstr ""
+"Válasszon nyelvet a listából, mielőtt a 'Nyelv kiválasztása' gombra "
+"kattintana."
+
+#: src/salix_live_installer/gathergui.py:265
+#, fuzzy
+msgid ""
+"This is the system language you have selected. 'None' will be displayed "
+"until you have confirmed that selection."
+msgstr ""
+"Ez a kiválasztott nyelv lesz a rendszer alapértelmezett nyelve. Amíg nincs "
+"kiválasztva addig a 'Nincs' jelenik meg a választás helyett."
+
+#: src/salix_live_installer/gathergui.py:268
+msgid "Cancel language selection."
+msgstr "Nyelvi beállítások megszakítása."
+
+#: src/salix_live_installer/gathergui.py:270
+msgid "Confirm your selection after highlighting the system language."
+msgstr "Erősítse meg a választását a rendszernyelv kijelölése után."
+
+#: src/salix_live_installer/gathergui.py:274
+msgid "Access the partitions settings."
+msgstr "Partícióbeállítások."
+
+#: src/salix_live_installer/gathergui.py:276
+msgid ""
+"Highlight the partition from this list before clicking on the 'Select "
+"partition' button."
+msgstr ""
+"Jelölje ki a partíciót a listából, mielőtt a 'Partíció kiválasztása' gombra "
+"kattintana."
+
+#: src/salix_live_installer/gathergui.py:279
+#, fuzzy
+msgid ""
+"Check this box if you want your external disk drives to be displayed in the "
+"list above."
+msgstr ""
+"Jelölje be ezt az opciót, ha látni szeretné a külső lemezmeghajtókat a "
+"listában."
+
+#: src/salix_live_installer/gathergui.py:282
+msgid "Confirm your selection after highlighting the partition."
+msgstr "Erősítse meg a választását a partíció kijelölése után."
+
+#: src/salix_live_installer/gathergui.py:284
+msgid "The filesystem that will be used to format Salix main partition."
+msgstr ""
+"A fájlrendszer, ami a Salix fő partíciójának formázásakor lesz használva."
+
+#: src/salix_live_installer/gathergui.py:286
+#, fuzzy
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to modify the "
+"filesystem of a partition and/or if you wish to assign its mount point.You "
+"can either choose one of the suggested mount points or enter your own. You "
+"must configure all the desired partitions before clicking on the 'Apply "
+"settings' button. Any unset parameters will be ignored."
+msgstr ""
+"Kattintson a megfelelő kiválasztás opcióra, ha szeretné módosítani a "
+"fájlrendszer egy partícióját és/vagy szeretne hozzárendelni csatolási "
+"pontot. Választhat a javasolt csatolási pontok közül, vagy megadhat sajátot "
+"is. Be kell állítania az összes használni kívánt partíciót, mielőtt a "
+"'Beállítások alkalmazása' gombra kattintana. A nem beállított paraméterek "
+"figyelmen kívül lesznek hagyva. "
+
+#: src/salix_live_installer/gathergui.py:292
+#, fuzzy
+msgid "Confirm the Linux partitions settings from the list."
+msgstr "Erősítse meg a Linux partíció(k) beállításait a listából."
+
+#: src/salix_live_installer/gathergui.py:294
+#, fuzzy
+msgid ""
+"Click on the appropriate 'Select...' cell if you wish to assign the mount "
+"point of a partition. You must configure all the desired partitions before "
+"clicking on the 'Apply settings' button. Any unset parameters will be "
+"ignored."
+msgstr ""
+"Kattintson a megfelelő kiválasztás opcióra, ha csatolási pontot szeretne "
+"rendelni a partícióhoz. Be kell állítania az összes használni kívánt "
+"partíciót, mielőtt a 'Beállítások alkalmazása' gombra kattintana. A nem "
+"beállított paraméterek figyelmen kívül lesznek hagyva. "
+
+#: src/salix_live_installer/gathergui.py:299
+#, fuzzy
+msgid "Confirm the Windows partitions settings from the list above."
+msgstr "Erősítse meg a Windows partíció(k) beállításait a listából."
+
+#: src/salix_live_installer/gathergui.py:301
+#, fuzzy
+msgid "Summary of your partitions settings."
+msgstr "Összegzés a partícióbeállításokról."
+
+#: src/salix_live_installer/gathergui.py:303
+#, fuzzy
+msgid "Cancel all partitions settings."
+msgstr "Partícióbeállítások megszakítása."
+
+#: src/salix_live_installer/gathergui.py:307
+msgid "Access the users and passwords settings."
+msgstr "Felhasználó és jelszó beállítások."
+
+#: src/salix_live_installer/gathergui.py:309
+#, fuzzy
+msgid ""
+"Salix Live Installer has detected a LiveClone customized environment. You "
+"can transfer your existing LiveClone login accounts along with matching "
+"personal directories to the installation target or you can wipe them out and "
+"create a complete new login account instead."
+msgstr ""
+"A Salix Live telepítő testre szabott LiveClone környeztet észlelt. Átviheti "
+"a létező LiveClone felhasználói fiókjait a saját könyvtáraikkal együtt a "
+"telepítendő helyre vagy törölheti őket és létrehozhat teljesen új "
+"felhasználói fiókot."
+
+#: src/salix_live_installer/gathergui.py:314
+msgid "Transfer existing users."
+msgstr "Létező felhasználók átvitele."
+
+#: src/salix_live_installer/gathergui.py:316
+msgid "Cancel users transfer."
+msgstr "Felhasználók átvitelének megszakítása."
+
+#: src/salix_live_installer/gathergui.py:318
+msgid ""
+"A Linux system can manage many registered users and requires each one to log "
+"in, and to produce some form of authentication (usually a login name coupled "
+"with a password) before allowing the user access to system resources."
+msgstr ""
+"A Linux rendszer sok regisztrált felhasználót kezel és előírja, hogy minden "
+"egyes bejelentkezéskor valamilyen formában legyen hitelesítés (általában "
+"bejelentkezési név és jelszó párossal), mielőtt lehetővé teszi a felhasználó "
+"hozzáférését a rendszer erőforrásaihoz."
+
+#: src/salix_live_installer/gathergui.py:323
+#, fuzzy
+msgid ""
+"Here you must define your login name which should only include alphanumeric "
+"characters with no space or upper case letters."
+msgstr ""
+"Itt kell megadnia a bejelentkezési nevet, ami csak alfanumerikus "
+"karaktereket tartalmazhat szóköz és nagybetűk nélkül."
+
+#: src/salix_live_installer/gathergui.py:326
+#, fuzzy
+msgid ""
+"Choose a password to be coupled with your login name. Your password should "
+"include a mix of upper and lower case letters, numbers, and even symbols "
+"(such as @, !, and &)"
+msgstr ""
+"Válasszon jelszót vagy jelmondatot a saját felhasználói nevéhez. A jelszónak "
+"vagy jelmondatnak tartalmaznia kell keverve nagy- és kisbetűket, számokat, "
+"és szimbólumokat is (például @, ! és &)"
+
+#: src/salix_live_installer/gathergui.py:330
+msgid "Here you must retype your password as a confirmation of your choice."
+msgstr "Újra meg kell adnia a jelszavát, hogy megerősítse a választását."
+
+#: src/salix_live_installer/gathergui.py:333
+#: src/salix_live_installer/gathergui.py:348
+msgid ""
+"Check this box if you want to be able to see the password you are typing."
+msgstr "Jelölje be ezt az opciót, ha látni szeretné a jelszót gépelés közben."
+
+#: src/salix_live_installer/gathergui.py:336
+msgid "Create new user."
+msgstr "Új felhasználó létrehozása."
+
+#: src/salix_live_installer/gathergui.py:338
+msgid "Cancel new user creation."
+msgstr "Új felhasználó létrehozásának megszakítása."
+
+#: src/salix_live_installer/gathergui.py:340
+#, fuzzy
+msgid ""
+"On Linux systems, the superuser, or root, is a special user accountreserved "
+"for system administration. Here you must set its password. Remember, "
+"password should include a mix of upper and lower case letters, numbers, and "
+"even symbols (such as @, !, and &)"
+msgstr ""
+"A Linux rendszereken a rendszergazda vagy a root egy speciális felhasználó a "
+"rendszer adminisztrációjához. Itt kell beállítania a jelszót vagy a "
+"jelmondatot. Ne feledje, ennek a jelszónak vagy jelmondatnak tartalmaznia "
+"kell keverve kis- és nagybetűket, számokat és szimbólumokat is (például "
+"@, !, és &)"
+
+#: src/salix_live_installer/gathergui.py:345
+msgid ""
+"Here you must retype the superuser (root) password as a confirmation of your "
+"choice."
+msgstr ""
+"Újra meg kell adnia a rendszergazda (root) jelszavát, hogy megerősítse a "
+"választását."
+
+#: src/salix_live_installer/gathergui.py:351
+msgid "Apply new root password."
+msgstr "Új root jelszó alkalmazása."
+
+#: src/salix_live_installer/gathergui.py:353
+msgid "Cancel new root password."
+msgstr "Új root jelszó megszakítása."
+
+#: src/salix_live_installer/gathergui.py:357
+msgid "Access the packages selection."
+msgstr "Csomagválasztás."
+
+#: src/salix_live_installer/gathergui.py:359
+#, fuzzy
+msgid ""
+"<b>Core installation:</b>\n"
+"Only the minimum essentials for a console system to start are included. A "
+"graphical environment is not provided. This is ideal if you are an "
+"experienced user and want to customize your installation for any specific "
+"purpose, such as a web server, file server etc."
+msgstr ""
+"<b>Minimális telepítés:</b>\n"
+"Csak a minimális és a rendszer működése szempontjából létszükséges "
+"csomagokat telepíti fel, amely konzolos bejelentkezést tesz lehetővé. "
+"Grafikus felületet ez esetben nem kapunk. Azon tapasztalt felhasználók "
+"számára ideális, akik saját maguk szeretnék speciális célokra felépíteni a "
+"rendszert, például webkiszolgálónak, fájlkiszolgálónak stb."
+
+#: src/salix_live_installer/gathergui.py:366
+#, fuzzy
+msgid ""
+"<b>Basic installation:</b>\n"
+"This installs only a basic desktop environment, with very few extra "
+"applications installed on top, such as a web browser and the gslapt package "
+"manager. Ideal for advanced users that would like to install a lightweight "
+"system and add their own choice of applications."
+msgstr ""
+"<b>Alap telepítés:</b>\n"
+"Alap asztali környezetet telepít fel és néhány további alkalmazást, például "
+"webböngészőt és a gslapt csomagkezelőt. Azon haladó felhasználók számára "
+"ideális, akik pehelysúlyú rendszert szeretnének és saját maguk kívánnak "
+"további alkalmazásokat hozzáadni. "
+
+#: src/salix_live_installer/gathergui.py:373
+msgid ""
+"<b>Full installation:</b>\n"
+"Salix Live Installer has detected a LiveClone customized environment. Core "
+"and Basic installation modes are therefore not available. \n"
+"You can only perform a full installation: all software included in your "
+"customized LiveClone will be installed."
+msgstr ""
+"<b>Teljes telepítés:</b>\n"
+"A Salix Live telepítő testre szabott LiveClone környeztet észlelt. A "
+"minimális és az alap telepítési mód emiatt nem érhető el. \n"
+"Csak teljes telepítést végezhet: a testre szabott LiveClone minden programja "
+"telepítve lesz."
+
+#: src/salix_live_installer/gathergui.py:379
+#, fuzzy
+msgid ""
+"<b>Full installation:</b>\n"
+"Everything that is included in the iso is installed. That includes a "
+"complete desktop environment and a complete selection of matching "
+"applications, always following the \"one application per task\" rationale."
+msgstr ""
+"<b>Teljes telepítés:</b>\n"
+"Mindent feltelepít, ami a telepítőmédián található. Ez egy teljes asztali "
+"környezetet és a hozzá tartozó összes alkalmazást jelenti, betartva az \"egy "
+"alkalmazást egy feladatra\" elvet. "
+
+#: src/salix_live_installer/gathergui.py:384
+msgid "Confirm your packages selection."
+msgstr "Erősítse meg a csomagválasztását."
+
+#: src/salix_live_installer/gathergui.py:386
+msgid "Cancel all packages selection."
+msgstr "Minden csomagkiválasztás megszakítása."
+
+#: src/salix_live_installer/gathergui.py:390
+#, fuzzy
+msgid "Access the bootloader selection."
+msgstr "Csomagválasztás."
+
+#: src/salix_live_installer/gathergui.py:392
+msgid ""
+"<b>No bootloader:</b>\n"
+"This is not recommended unless you already have another bootloader and know "
+"how to add Salix to it. Salix will not boot without a bootloader."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:396
+msgid ""
+"<b>LiLo:</b>\n"
+"Basic Linux bootloader that simply do the job with a nice graphical menu."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:399
+msgid ""
+"<b>Grub2:</b>\n"
+"Full featured bootloader with editable graphical menu."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:402
+#, fuzzy
+msgid "Confirm your bootloader selection."
+msgstr "Erősítse meg a csomagválasztását."
+
+#: src/salix_live_installer/gathergui.py:404
+#, fuzzy
+msgid "Cancel all bootloader selection."
+msgstr "Minden csomagkiválasztás megszakítása."
+
+#: src/salix_live_installer/gathergui.py:428
+#: src/salix_live_installer/gathergui.py:604
+msgid "Select..."
+msgstr "Kiválasztás..."
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "January"
+msgstr "Január"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "February"
+msgstr "Február"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "March"
+msgstr "Március"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "April"
+msgstr "Április"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "May"
+msgstr "Május"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "June"
+msgstr "Június"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "July"
+msgstr "Július"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "August"
+msgstr "Augusztus"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "September"
+msgstr "Szeptember"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "October"
+msgstr "Október"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "November"
+msgstr "November"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "December"
+msgstr "December"
+
+#: src/salix_live_installer/gathergui.py:451
+#: src/salix_live_installer/gathergui.py:873
+#: src/salix_live_installer/gathergui.py:906
+#, fuzzy
+msgid "Do not format"
+msgstr "nem lesz formázva"
+
+#: src/salix_live_installer/gathergui.py:459
+#: src/salix_live_installer/gathergui.py:470
+#: src/salix_live_installer/gathergui.py:873
+#: src/salix_live_installer/gathergui.py:875
+#, fuzzy
+msgid "Do not mount"
+msgstr "Ne legyen rejtett"
+
+#: src/salix_live_installer/gathergui.py:784
+#, fuzzy
+msgid "Detected Swap partitions:"
+msgstr "Swap partíció(k) felismerve"
+
+#: src/salix_live_installer/gathergui.py:785
+#, fuzzy
+msgid ""
+"Salix Live Installer was not able to detect a valid Swap partition on your "
+"system.\n"
+"A Swap partition could improve overall performances. You may want to exit "
+"Salix Live Installer now and use Gparted, or any other partitioning tool of "
+"your choice, to first create a Swap partition before resuming with Salix "
+"Live Installer process."
+msgstr ""
+"A Salix Live telepítő nem érzékelt érvényes swap partíciót a rendszerén.\n"
+"A swap partíció megnöveli az általános teljesítményt. Lépjen ki a Salix Live "
+"telepítőből és használja a Gparted programot vagy bármilyen más particionáló "
+"segédprogramot, hogy létrehozzon egy swap partíciót a rendszeren, mielőtt "
+"folytatná a Salix Live telepítő futtatását."
+
+#: src/salix_live_installer/gathergui.py:797
+#, fuzzy
+msgid "{device} will be automatically used as swap."
+msgstr "és csatolva lesz swapként"
+
+#: src/salix_live_installer/gathergui.py:851
+#: src/salix_live_installer/gathergui.py:959
+#: src/salix_live_installer/gathergui.py:1022
+msgid "{device} will be mounted as {mountpoint} without formatting."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:856
+#: src/salix_live_installer/gathergui.py:964
+msgid ""
+"{device} will be formatted with {fs} and will be mounted as {mountpoint}."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:948
+#: src/salix_live_installer/gathergui.py:1012
+#, fuzzy
+msgid "No partition to mount"
+msgstr "Home partíció"
+
+#: src/salix_live_installer/gathergui.py:1038
+#: src/salix_live_installer/gathergui.py:1039
+#: src/salix_live_installer/gathergui.py:1040
+#, fuzzy
+msgid "No partition"
+msgstr "Home partíció"
+
+#: src/salix_live_installer/gathergui.py:1091
+msgid "Yes"
+msgstr "Igen"
+
+#: src/salix_live_installer/gathergui.py:1134
+msgid "Less than {min} characters"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1141
+msgid "No upper case letter..."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1145
+#, fuzzy
+msgid "No number..."
+msgstr "November"
+
+#: src/salix_live_installer/gathergui.py:1149
+msgid "No punctuation..."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1153
+msgid "No symbol..."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1156
+msgid "Satisfactory!"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1177
+#, fuzzy
+msgid "Password strength:"
+msgstr "<b>Jelszó létrehozva: </b>"
+
+#: src/salix_live_installer/gathergui.py:1189
+#, fuzzy
+msgid "Your login name is empty."
+msgstr "A felhasználóneve üres"
+
+#: src/salix_live_installer/gathergui.py:1189
+#: src/salix_live_installer/gathergui.py:1192
+#: src/salix_live_installer/gathergui.py:1198
+#: src/salix_live_installer/gathergui.py:1201
+#, fuzzy
+msgid "Please verify and correct!"
+msgstr "Ellenőrizze és javítsa"
+
+#: src/salix_live_installer/gathergui.py:1192
+#, fuzzy
+msgid ""
+"Your login name should only contain alphanumeric lowercase characters with "
+"no space and should start with a letter."
+msgstr ""
+"Itt kell megadnia a bejelentkezési nevet, ami csak alfanumerikus "
+"karaktereket tartalmazhat szóköz és nagybetűk nélkül."
+
+#: src/salix_live_installer/gathergui.py:1198
+#, fuzzy
+msgid "Your password entry is empty."
+msgstr "A jelszó mező üres"
+
+#: src/salix_live_installer/gathergui.py:1201
+#, fuzzy
+msgid "Your two password entries do not match."
+msgstr "A 2 megadott jelszó nem egyezik"
+
+#: src/salix_live_installer/gathergui.py:1332
+#, fuzzy
+msgid "You are about to install Salix with the following settings:"
+msgstr "Telepíteni készül a Salixot a következő beállításokkal"
+
+#: src/salix_live_installer/gathergui.py:1333
+msgid "Date and Time:"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1334
+#, fuzzy
+msgid "- Time zone: {tz}"
+msgstr "Időzóna: "
+
+#: src/salix_live_installer/gathergui.py:1340
+#, fuzzy
+msgid "Keyboard:"
+msgstr "_Billentyűzet"
+
+#: src/salix_live_installer/gathergui.py:1341
+msgid "- Layout: {layout}"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1343
+#: src/salix_live_installer/gathergui.py:1347
+#, fuzzy
+msgid "activated"
+msgstr "IBus aktiválása "
+
+#: src/salix_live_installer/gathergui.py:1345
+#: src/salix_live_installer/gathergui.py:1349
+msgid "deactivated"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1350
+msgid "- Numlock: {nl}, Ibus: {ibus}"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1351
+#, fuzzy
+msgid "System language:"
+msgstr "Rendszernyelv"
+
+#: src/salix_live_installer/gathergui.py:1353
+#, fuzzy
+msgid "Partitions:"
+msgstr "Partíciók"
+
+#: src/salix_live_installer/gathergui.py:1362
+#: src/salix_live_installer/gathergui.py:1364
+#, fuzzy
+msgid "Standard User:"
+msgstr "Szabványos felhasználó"
+
+#: src/salix_live_installer/gathergui.py:1362
+#, fuzzy
+msgid "Using LiveClone login."
+msgstr "LiveClone belépés használata."
+
+#: src/salix_live_installer/gathergui.py:1365
+#, fuzzy
+msgid "Packages:"
+msgstr "Csomagok"
+
+#: src/salix_live_installer/gathergui.py:1366
+#, fuzzy
+msgid "You have chosen the {mode} installation mode."
+msgstr "A(z) %(mode)s telepítési módot választotta.\n"
+
+#: src/salix_live_installer/gathergui.py:1369
+msgid "No bootloader"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1370
+msgid "Bootloader choosen: {bootloader}"
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1421
+#, fuzzy
+msgid "Installation process completed successfully..."
+msgstr "A telepítési folyamat sikeresen befejeződött ..."
+
+#: data/salix-live-installer.desktop.in.h:1
+msgid "Install Salix on your computer from a SalixLive session"
+msgstr "A Salix telepítése a számítógépére a SalixLive munkafolyamatból"
+
+#: data/salix-live-installer.desktop.in.h:2
+msgid "Salix Installer"
+msgstr "Salix telepítő"
+
+#, fuzzy
+#~ msgid "Select _keyboard"
+#~ msgstr "_Billentyűzet kiválasztása"
+
+#, fuzzy
+#~ msgid "Select _language"
+#~ msgstr "_Nyelv kiválasztása "
+
+#~ msgid "core"
+#~ msgstr "minimális"
+
+#~ msgid "basic"
+#~ msgstr "alap"
+
+#~ msgid "full"
+#~ msgstr "teljes"
+
+#~ msgid "Apply _settings "
+#~ msgstr "Beállítá_sok alkalmazása"
+
+#~ msgid "SalixLive Installer"
+#~ msgstr "SalixLive Telepítő"
+
+#~ msgid "Main partition"
+#~ msgstr "Fő partíció"
+
+#~ msgid "Windows partitions"
+#~ msgstr "Windows partíciók"
+
+#~ msgid "Swap partitions"
+#~ msgstr "Swap partíciók"
+
+#~ msgid "Copyright © 2010-2011 Pierrick Le Brun"
+#~ msgstr "Copyright © 2010-2011 Pierrick Le Brun"
+
+#~ msgid ""
+#~ "This program is free software; you can redistribute it and/or modify\n"
+#~ "it under the terms of the GNU General Public License as published by\n"
+#~ "the Free Software Foundation; either version 2 of the License, or\n"
+#~ "(at your option) any later version.\n"
+#~ "      \n"
+#~ "This program is distributed in the hope that it will be useful,\n"
+#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+#~ "GNU General Public License for more details.\n"
+#~ "      \n"
+#~ "You should have received a copy of the GNU General Public License\n"
+#~ "along with this program; if not, write to the Free Software\n"
+#~ "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,\n"
+#~ "MA 02110-1301, USA."
+#~ msgstr ""
+#~ "Ez a program szabad szoftver; terjeszthető illetve módosítható a Free\n"
+#~ "Software Foundation által kiadott GNU General Public License "
+#~ "dokumentumában\n"
+#~ "leírtak; akár a licenc 2-es, akár (tetszőleges) későbbi változata "
+#~ "szerint.\n"
+#~ "\n"
+#~ "Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de\n"
+#~ "minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA VALÓ\n"
+#~ "ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve. További\n"
+#~ "részleteket a GNU General Public License tartalmaz.\n"
+#~ "\n"
+#~ "A felhasználónak a programmal együtt meg kell kapnia a GNU General Public "
+#~ "License egy példányát; ha mégsem kapta meg, akkor ezt a Free Software\n"
+#~ "Foundationnek küldött levélben jelezze. Cím: Free Software Foundation "
+#~ "Inc.,\n"
+#~ "51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+
+#~ msgid "<b>Message about the particular choice: </b>"
+#~ msgstr "<b>Üzenet az adott választáshoz: </b>"
+
+#~ msgid "Layout"
+#~ msgstr "Elrendezés"
+
+#~ msgid "Type"
+#~ msgstr "Típus"
+
+#~ msgid "Locale"
+#~ msgstr "Területi beállítás"
+
+#~ msgid "Description"
+#~ msgstr "Leírás"
+
+#~ msgid ""
+#~ "<b>Info</b>\n"
+#~ "\n"
+#~ "Salix Live Installer is only meant to be used in a SaLT LiveCD "
+#~ "environment.\n"
+#~ "\n"
+#~ "You can continue to use it, but in restricted demo mode only.\n"
+#~ "\n"
+#~ "The actual installation process will not be launched."
+#~ msgstr ""
+#~ "<b>Információ</b>\n"
+#~ "\n"
+#~ "A Salix Live telepítő csak SaLT LiveCD környezetből használható.\n"
+#~ "\n"
+#~ "Folytathatja a használatát, de csak korlátozott demó módban.\n"
+#~ "\n"
+#~ "A jelenlegi telepítési folyamat nem lesz elindítva."
+
+#~ msgid ""
+#~ "Salix Live Installer was not able to detect a valid partition on your "
+#~ "system. You should exit Salix Live Installer now and use Gparted, or any "
+#~ "other partitioning tool of your choice, to first create valid partitions "
+#~ "on your system before resuming with Salix Live Installer process."
+#~ msgstr ""
+#~ "A Salix Live telepítő nem érzékelt érvényes partíciókat a rendszerén. "
+#~ "Lépjen ki a Salix Live telepítőből és használja a Gparted programot vagy "
+#~ "bármilyen más particionáló segédprogramot, hogy létrehozzon érvényes "
+#~ "partíciókat a rendszeren, mielőtt folytatná a Salix Live telepítő "
+#~ "futtatását."
+
+#~ msgid "Salix Live Installer has detected a Swap partition on "
+#~ msgstr "A Salix Live telepítő swap partíciót talált itt: "
+
+#~ msgid ""
+#~ "Salix Live Installer was not able to detect a valid partition on your "
+#~ "system. You should exit Salix Live Installer now and use Gparted, or any "
+#~ "other partitioning tool of your choice, to first create valid partitions "
+#~ "before resuming with Salix Live Installer process."
+#~ msgstr ""
+#~ "A Salix Live telepítő nem érzékelt érvényes partíciókat a rendszerén. "
+#~ "Lépjen ki a Salix Live telepítőből és használja a Gparted programot vagy "
+#~ "bármilyen más particionáló segédprogramot, hogy létrehozzon érvényes "
+#~ "partíciókat a rendszeren, mielőtt folytatná a Salix Live telepítő "
+#~ "futtatását."
+
+#~ msgid "The time zone has not been set"
+#~ msgstr "Az időzóna nincs beállítva"
+
+#~ msgid "will be formatted with"
+#~ msgstr "formázva lesz erre"
+
+#~ msgid "and will be mounted as"
+#~ msgstr "és csatolva lesz mint"
+
+#~ msgid "and will not be mounted"
+#~ msgstr "és nem lesz csatolva"
+
+#~ msgid "Your login name should only contain alphanumeric characters"
+#~ msgstr "A felhasználóneve csak alfanumerikus karaktereket tartalmazhat"
+
+#~ msgid "Your login name should not contain any space"
+#~ msgstr "A felhasználóneve nem tartalmazhat szóköz karaktert"
+
+#~ msgid "Your login name should not contain any upper case letter"
+#~ msgstr "A felhasználóneve nem tartalmazhat nagybetűket"
+
+#~ msgid "Your password is too short. It should have at least 5 characters"
+#~ msgstr "A jelszó túl rövid. Legalább 5 karakter hosszúnak kell lennie"
+
+#~ msgid "Time zone"
+#~ msgstr "Időzóna"
+
+#~ msgid "but will not be mounted"
+#~ msgstr "de a kötet nem lesz csatolva"
+
+#~ msgid ""
+#~ "Salix Live Installer was not able to detect a valid Swap partition on "
+#~ "your system."
+#~ msgstr ""
+#~ "A Salix Live telepítő nem talált érvényes swap partíciót a rendszerben."
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to launch LiloSetup, you must set LILO 'manually'. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet elindítani a LiloSetup-ot, 'kézzel' kell beállítania a LILO-t."
+
+#~ msgid ""
+#~ "<b>Sorry!</b>\n"
+#~ "\n"
+#~ "Salix Live Installer is only meant to be used in a SaLT LiveCD "
+#~ "environment.\n"
+#~ "\n"
+#~ "You cannot proceed any further! "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "A Salix Live telepítő csak SaLT LiveCD környezetből használható.\n"
+#~ "\n"
+#~ "Nem folytathatja a folyamatot!"
+
+#~ msgid "Formatting the Linux partition(s)..."
+#~ msgstr "A Linux partíció(k) formázása..."
+
+#~ msgid "Mounting the Linux partition(s)..."
+#~ msgstr "A Linux partíció(k) csatolása..."
+
+#~ msgid "Installing your LiveClone system..."
+#~ msgstr "A LiveClone rendszer telepítése..."
+
+#~ msgid "Installing %s "
+#~ msgstr "%s telepítése "
+
+#~ msgid "Time, keyboard, locale, login and other system configuration..."
+#~ msgstr "Idő, billentyűzet, nyelv, belépés és egyéb rendszerbeállítások..."
+
+#~ msgid ""
+#~ "<b>Salix installation was executed with success!</b>\n"
+#~ "\n"
+#~ "LiloSetup will now be launched to enable you to add Salix to your "
+#~ "bootloader.\n"
+#~ "(If you prefer to use another bootloader utility, click on the No button "
+#~ "and\n"
+#~ "use the application of your choice before rebooting your machine.)\n"
+#~ msgstr ""
+#~ "<b>A Salix telepítése sikeresen befejeződött!</b>\n"
+#~ "\n"
+#~ "A LiloSetup most elindul, hogy hozzáadja a Salix rendszert a "
+#~ "rendszerbetöltőhöz.\n"
+#~ "(Ha másik rendszerbetöltő programot használ, kattintson a Nem gombra és\n"
+#~ "használja a programját a számítógép újraindítása előtt.)\n"
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to set the new keyboard selection on the installation target. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet beállítani az új billentyűzetkiosztást a célmeghajtón."
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to set the new language selection on the installation target. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet beállítani az új nyelvet a célmeghajtón."
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to create the new user on the installation target. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet létrehozni az új felhasználót a célmeghajtón."
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to set the new user's password on the installation target. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet beállítani az új felhasználó jelszavát a célmeghajtón."
+
+#~ msgid ""
+#~ "<b>Sorry!</b> \n"
+#~ "\n"
+#~ "Unable to set root's password on the installation target. "
+#~ msgstr ""
+#~ "<b>Sajnálom!</b>\n"
+#~ "\n"
+#~ "Nem lehet beállítani a rendszergazda jelszavát a célmeghajtón."
+
+#~ msgid ""
+#~ "Installation process is fully completed but you have chosen not to "
+#~ "install LILO.\n"
+#~ "\n"
+#~ "Before rebooting your machine, you must now use another bootloader "
+#~ "manager to setup Salix new system or it will not be operational."
+#~ msgstr ""
+#~ "A telepítési folyamat sikeresen befejeződött, de nem lett telepítve a "
+#~ "LILO.\n"
+#~ "\n"
+#~ "A számítógép újraindítása előtt használjon egy rendszerbetöltő programot "
+#~ "a Salix rendszer beállításához, ellenkező esetben nem lesz működőképes."

@@ -2,49 +2,38 @@
 # -*- coding: utf-8 -*-
 # vim: set et ai sta sw=2 ts=2 tw=0:
 """
-Salix Live Installer helps installing Salix on you computer from the comfort of SalixLive's graphic environment.
+Graphical Salix Live Installer configuration gathering.
 """
-
-__app__ = 'salix-live-installer'
 __copyright__ = 'Copyright 2011-2013, Salix OS'
-__author__ = 'Pierrick Le Brun <akuna~at~salixos~dot~org> and Cyrille Pontvieux <jrd~at~enialis~dot~net>'
-__credits__ = ['Pierrick Le Brun', 'Cyrille Pontvieux']
-__maintainer__ = 'Cyrille Pontvieux'
-__email__ = 'jrd~at~enialis~dot~net'
 __license__ = 'GPL2+'
-__version__ = '0.4'
-__status__ = 'Development' # Could be Prototype, Development or Production
-__min_salt_version__ = '0.2.1'
 
 import gettext
 import gobject
 import gtk
 import gtk.glade
-import threading
-from time import sleep
-gtk.gdk.threads_init()
-
-import os
-import sys
-import glob
 import re
 import math
 import subprocess
 from datetime import *
-
+from common import *
+from config import *
+from installer import *
 import salix_livetools_library as sltl
 
 class GatherGui:
-  def __init__(self, is_test = False, is_test_clone = False, use_test_data = False):
-    self.cfg = Config(__min_salt_version__, is_test, is_test_clone, use_test_data)
+  """
+  GUI to gather information about the configuration to install.
+  """
+  def __init__(self, version, min_salt_version, is_test = False, is_test_clone = False, use_test_data = False):
+    self.cfg = Config(min_salt_version, is_test, is_test_clone, use_test_data)
     builder = gtk.Builder()
-    for d in ('.', '/usr/share/salix-live-installer', '../share/salix-live-installer'):
+    for d in ('./resources', '../resources'):
       if os.path.exists(d + '/salix-live-installer.glade'):
         builder.add_from_file(d + '/salix-live-installer.glade')
         break
     # Get a handle on the glade file widgets we want to interact with
     self.AboutDialog = builder.get_object("about_dialog")
-    self.AboutDialog.set_version(__version__)
+    self.AboutDialog.set_version(version)
     self.Window = builder.get_object("main_window")
     self.ProgressWindow = builder.get_object("progress_dialog")
     self.InstallProgressBar = builder.get_object("install_progressbar")
@@ -251,7 +240,7 @@ all settings are configured correctly."))
     self.ContextLabel.set_text(_("Access the keyboard settings."))
   def on_keyboard_list_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Highlight your favorite keyboard layout \
-from this \nlist before clicking on the 'Select keyboard' button."))
+from this list before clicking on the 'Select keyboard' button."))
   def on_numlock_checkbutton_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Check this box if you want your numeric keypad \
 to be activated during the boot process."))
@@ -274,7 +263,7 @@ activated during the boot process. IBus is an input method (IM) framework for mu
 clicking on the 'Select language' button."))
   def on_locale_selection_eventbox_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("This is the system language you have selected. \
-'None' will be displayed until you have confirmed that selection. "))
+'None' will be displayed until you have confirmed that selection."))
   def on_locale_undo_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Cancel language selection."))
   def on_locale_apply_enter_notify_event(self, widget, data=None):
@@ -287,8 +276,8 @@ clicking on the 'Select language' button."))
     self.ContextLabel.set_text(_("Highlight the partition from this list before \
 clicking on the 'Select partition' button."))
   def on_external_device_checkbutton_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Check this box if you want your external disk drive(s) \
-to be displayed in the list above. "))
+    self.ContextLabel.set_text(_("Check this box if you want your external disk drives \
+to be displayed in the list above."))
   def on_main_partition_apply_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Confirm your selection after highlighting the partition."))
   def on_main_format_eventbox_enter_notify_event(self, widget, data=None):
@@ -298,20 +287,20 @@ to be displayed in the list above. "))
 filesystem of a partition and/or if you wish to assign its mount point.\
 You can either choose one of the suggested mount points or enter \
 your own. You must configure all the desired partitions before clicking \
-on the 'Apply settings' button. Any unset parameters will be ignored. "))
+on the 'Apply settings' button. Any unset parameters will be ignored."))
   def on_linux_partition_apply_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Confirm the Linux partition(s) settings from the list."))
+    self.ContextLabel.set_text(_("Confirm the Linux partitions settings from the list."))
   def on_win_partition_list_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Click on the appropriate 'Select...' cell if you wish to assign \
 the mount point of a partition. You must configure all the \
 desired partitions before clicking on the 'Apply settings' button. \
-Any unset parameters will be ignored. "))
+Any unset parameters will be ignored."))
   def on_windows_partition_apply_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Confirm the Windows partition(s) settings from the list above."))
+    self.ContextLabel.set_text(_("Confirm the Windows partitions settings from the list above."))
   def on_partition_recap_eventbox_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Summary of your partition(s) settings."))
+    self.ContextLabel.set_text(_("Summary of your partitions settings."))
   def on_partition_recap_undo_enter_notify_event(self, widget, data=None):
-    self.ContextLabel.set_text(_("Cancel all partition(s) settings."))
+    self.ContextLabel.set_text(_("Cancel all partitions settings."))
 
   # Users contextual help
   def on_users_tab_enter_notify_event(self, widget, data=None):
@@ -320,7 +309,7 @@ Any unset parameters will be ignored. "))
     self.ContextLabel.set_text(_("Salix Live Installer has detected a \
 LiveClone customized environment. You can transfer your existing LiveClone \
 login accounts along with matching personal directories to the installation \
-target or you can wipe them out & create a complete new login account instead."))
+target or you can wipe them out and create a complete new login account instead."))
   def on_clone_login_apply_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Transfer existing users."))
   def on_clone_login_undo_enter_notify_event(self, widget, data=None):
@@ -332,7 +321,7 @@ login name coupled with a password) before allowing the user access \
 to system resources."))
   def on_user_login_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Here you must define your login name which should only include \
-alphanumeric characters with no space or upper case letters. "))
+alphanumeric characters with no space or upper case letters."))
   def on_user_pass1_entry_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Choose a password to be coupled with your login \
 name. Your password should include a mix of upper and lower case letters, numbers, \
@@ -372,13 +361,13 @@ Only the minimum essentials for a console system to start are \
 included. A graphical environment is not provided. This is ideal \
 if you are an experienced user and want to customize your \
 installation for any specific purpose, such as a web server, \
-file server etc. "))
+file server etc."))
   def on_basic_radiobutton_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_markup(_("<b>Basic installation:</b>\n\
 This installs only a basic desktop environment, with very few extra applications \
 installed on top, such as a web browser and the gslapt package manager. Ideal \
 for advanced users that would like to install a lightweight system and \
-add their own choice of applications. "))
+add their own choice of applications."))
   def on_full_radiobutton_enter_notify_event(self, widget, data=None):
     if self.cfg.is_liveclone:
       self.ContextLabel.set_markup(_("<b>Full installation:</b>\n\
@@ -390,7 +379,7 @@ included in your customized LiveClone will be installed."))
       self.ContextLabel.set_markup(_('<b>Full installation:</b>\n\
 Everything that is included in the iso is installed. That includes a complete \
 desktop environment and a complete selection of matching applications, \
-always following the "one application per task" rationale. '))
+always following the "one application per task" rationale.'))
   def on_packages_apply_enter_notify_event(self, widget, data=None):
     self.ContextLabel.set_text(_("Confirm your packages selection."))
   def on_packages_undo_enter_notify_event(self, widget, data=None):
@@ -493,6 +482,16 @@ Full featured bootloader with editable graphical menu.'))
 
   def update_install_button(self):
     self.InstallButton.set_sensitive(not False in self.cfg.configurations.values())
+  
+  def process_gui_events(self):
+    """
+    be sure to treat any pending GUI events before continue
+    """
+    while gtk.events_pending():
+      gtk.main_iteration()
+  
+  def update_gui_async(self, fct, *args, **kwargs):
+    gobject.idle_add(fct, *args, **kwargs)
 
   def hide_all_tabs(self):
     self.IntroBox.hide()
@@ -756,9 +755,7 @@ Full featured bootloader with editable graphical menu.'))
     self.Window.set_sensitive(False)
     self.Window.set_accept_focus(False)
     self.Window.hide()
-    # be sure to treat any pending GUI events before running gparted
-    while gtk.events_pending():
-      gtk.main_iteration()
+    self.process_gui_events()
     if self.cfg.is_test:
       sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
     else:
@@ -784,7 +781,7 @@ Full featured bootloader with editable graphical menu.'))
       self.cfg.swap_partitions = sltl.getSwapPartitions()
     except subprocess.CalledProcessError as e:
       self.cfg.swap_partitions = []
-    swap_info_msg = self.get_swap_partitions_message(True, _("Detected Swap partition(s):"),
+    swap_info_msg = self.get_swap_partitions_message(True, _("Detected Swap partitions:"),
       _("Salix Live Installer was not able to detect a valid Swap partition on your system.\nA Swap partition could improve overall performances. \
 You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, \
 to first create a Swap partition before resuming with Salix Live Installer process."))
@@ -797,7 +794,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         msg = msg_if_found + "\n"
       for d in self.cfg.swap_partitions:
         if full_text:
-          msg += _("<b>{device}</b> will be automatically used as swap.").format(device = d) + "\n"
+          msg += _("{device} will be automatically used as swap.").format(device = "<b>{0}</b>".format(d)) + "\n"
         else:
           msg += '<span foreground="orange" font_family="monospace" weight="bold">- {0}</span>\n'.format(d)
     elif msg_if_not_found:
@@ -851,12 +848,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       part_name += " (" + part_label + ")"
     if self.cfg.main_format == 'none':
       if full_text:
-        msg = _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = '/')
+        msg = _("{device} will be mounted as {mountpoint} without formatting.").format(device = "<b>{0}</b>".format(part_name), mountpoint = "<b>{0}</b>".format('/'))
       else:
         msg = '<span foreground="black" font_family="monospace">- {0} => /</span>'.format(part_name)
     else:
       if full_text:
-        msg = _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = self.cfg.main_format, mountpoint = '/')
+        msg = _("{device} will be formatted with {fs} and will be mounted as {mountpoint}.").format(device = "<b>{0}</b>".format(part_name), fs = "<b>{0}</b>".format(self.cfg.main_format), "<b>{0}</b>".format('/'))
       else:
         msg = '<span foreground="black" font_family="monospace">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.cfg.main_format)
     return msg
@@ -959,12 +956,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
           part_name += " (" + part_label + ")"
         if part[1] == 'none':
           if full_text:
-            msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
+            msg += _("{device} will be mounted as {mountpoint} without formatting.").format(device = "<b>{0}</b>".format(part_name), mountpoint = "<b>{0}</b>".format(part[2])) + "\n"
           else:
             msg += '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2]) + "\n"
         else:
           if full_text:
-            msg += _("<b>{device}</b> will be formatted with <b>{fs}</b> and will be mounted as <b>{mountpoint}</b>.").format(device = part_name, fs = part[1], mountpoint = part[2]) + "\n"
+            msg += _("{device} will be formatted with {fs} and will be mounted as {mountpoint}.").format(device = "<b>{0}</b>".format(part_name), fs = "<b>{0}</b>".format(part[1]), mountpoint = "<b>{0}</b>".format(part[2])) + "\n"
           else:
             msg += '<span foreground="blue" font_family="monospace" weight="bold">- {0} => {2} (<u>{1}</u>)</span>'.format(part_name, part[1], part[2]) + "\n"
     elif msg_if_not_found:
@@ -1022,7 +1019,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         if part_label:
           part_name += " (" + part_label + ")"
         if full_text:
-          msg += _("<b>{device}</b> will be mounted as <b>{mountpoint}</b> without formatting.").format(device = part_name, mountpoint = part[2]) + "\n"
+          msg += _("{device} will be mounted as {mountpoint} without formatting.").format(device = "<b>{0}</b>".format(part_name), mountpoint = "<b>{0}</b>".format(part[2])) + "\n"
         else:
           msg += '<span foreground="green" font_family="monospace" weight="bold">- {0} => {1}</span>'.format(part_name, part[2]) + "\n"
     elif msg_if_not_found:
@@ -1248,12 +1245,12 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def packages_settings(self):
     self.CoreRadioButton.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
     self.CoreHBox.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
-    self.CoreRadioButton.set_active(self.cfg.install_mode == 'core')
+    self.CoreRadioButton.set_active(self.cfg.install_mode == 'Core')
     self.BasicRadioButton.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
     self.BasicHBox.set_sensitive(not self.cfg.configurations['packages'] and not self.cfg.is_liveclone)
-    self.BasicRadioButton.set_active(self.cfg.install_mode == 'basic')
+    self.BasicRadioButton.set_active(self.cfg.install_mode == 'Basic')
     self.FullRadioButton.set_sensitive(not self.cfg.configurations['packages'])
-    self.FullRadioButton.set_active(self.cfg.install_mode == 'full')
+    self.FullRadioButton.set_active(self.cfg.install_mode == 'Full')
     self.PackagesUndoButton.set_sensitive(self.cfg.configurations['packages'])
     self.PackagesApplyButton.set_sensitive(not self.cfg.configurations['packages'])
     if self.cfg.configurations['packages']:
@@ -1265,14 +1262,11 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.update_install_button()
   def on_packages_apply_clicked(self, widget, data=None):
     if self.CoreRadioButton.get_active():
-      _("core") # to be catched by the translations generator
-      self.cfg.install_mode = 'core'
+      self.cfg.install_mode = 'Core'
     elif self.BasicRadioButton.get_active():
-      _("basic") # to be catched by the translations generator
-      self.cfg.install_mode = 'basic'
+      self.cfg.install_mode = 'Basic'
     elif self.FullRadioButton.get_active():
-      _("full") # to be catched by the translations generator
-      self.cfg.install_mode = 'full'
+      self.cfg.install_mode = 'Full'
     self.cfg.configurations['packages'] = True
     self.packages_settings()
   def on_packages_undo_clicked(self, widget, data=None):
@@ -1322,8 +1316,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.YesNoDialog.resize(1, 1) # ensure a correct size, by asking a recomputation
   def on_yesno_response(self, dialog, response_id, data=None):
     dialog.hide()
-    while gtk.events_pending():
-      gtk.main_iteration()
+    self.process_gui_events()
     callback = None
     if response_id == gtk.RESPONSE_YES:
       callback = dialog.yes_callback
@@ -1377,24 +1370,36 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     full_recap_msg += _("Bootloader choosen: {bootloader}").format(bootloader = bootloader)
     self.show_yesno_dialog(full_recap_msg, self.install_salixlive, None)
   def install_salixlive(self):
-    self.Window.set_sensitive(False)
-    self.Window.set_accept_focus(False)
-    self.Window.hide()
-    self.InstallProgressBar.set_text(_("Starting installation process..."))
-    self.InstallProgressBar.set_fraction(0)
-    self.CancelProgressButton.set_sensitive(True)
-    self.ProgressWindow.show()
-    self.ProgressWindow.set_keep_above(True)
-    while gtk.events_pending():
-      gtk.main_iteration()
-    self.thread_installer = ThreadInstaller(self, self.cfg)
+    self.thread_installer = ThreadInstaller(self.cfg, self)
     installation = self.thread_installer.install()
     self.thread_installer = None
     if installation == 'done':
       self.installation_postinstall()
+  def install_set_main_window_visibility(self, is_shown):
+    if is_shown:
+      self.Window.set_sensitive(True)
+      self.Window.set_accept_focus(True)
+      self.Window.show()
+    else:
+      self.Window.set_sensitive(False)
+      self.Window.set_accept_focus(False)
+      self.Window.hide()
+  def install_set_progress_window_above(self, is_above):
+    self.ProgressWindow.set_keep_above(is_above)
+  def install_set_progress_window_visibility(self, is_shown):
+    if is_shown:
+      self.ProgressWindow.show()
+    else:
+      self.ProgressWindow.hide()
+  def install_set_progress_bar_text(self, text):
+    self.InstallProgressBar.set_text(text)
+  def install_set_progress_bar_fraction(self, fraction):
+    self.InstallProgressBar.set_fraction(fraction)
+  def install_set_cancel_button_sensitive(self, is_sensitive):
+    self.CancelProgressButton.set_sensitive(is_sensitive)
   def on_progress_undo_clicked(self, widget, data=None):
     if self.thread_installer:
-      self.thread_installer.on_progress_undo_clicked(widget, data)
+      self.thread_installer.cancel()
   def installation_postinstall(self):
     if not self.cfg.is_test:
       if self.cfg.linux_partitions:
@@ -1416,557 +1421,3 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
     info_dialog(msg)
     self.gtk_main_quit(self.Window)
-
-
-
-class Config:
-  """
-  Configuration for the installation of Salix
-  """
-  def __init__(self, min_salt_version, is_test, is_test_clone, use_test_data):
-    self.min_salt_version = min_salt_version
-    self.is_test = is_test
-    self.is_test_clone = is_test_clone
-    self.use_test_data = use_test_data
-    self.default_format = 'ext4'
-    self._get_current_config()
-  def _get_current_config(self):
-    print 'Gathering current configuration…',
-    sys.stdout.flush()
-    # Initialize the lock system preventing the Install button to be activated prematurely
-    self.configurations = {'time':False, 'keyboard':False, 'locale':False, 'partitions':False, 'clonelogins':False, 'user':False, 'root':False, 'packages':False, 'bootloader':False}
-    if self.is_test:
-      self.is_live = True
-      self.is_liveclone = self.is_test_clone
-      self.salt_version = self.min_salt_version
-      self.is_salt_ok = True
-    else:
-      self.is_live = sltl.isSaLTLiveEnv()
-      if self.is_live:
-        self.is_liveclone = sltl.isSaLTLiveCloneEnv()
-        self.salt_version = sltl.getSaLTVersion()
-        self.is_salt_ok = sltl.isSaLTVersionAtLeast(self.min_salt_version)
-      else:
-        self.is_liveclone = False
-        self.salt_version = ''
-        self.is_salt_ok = False
-    if self.is_live and not self.is_salt_ok:
-      error_dialog(_("<b>Sorry!</b>\n\nYou need at least version {0} of SaLT installed to continue.\nYou have version {1}.\n\nInstallation will not be possible".format(self.min_salt_version, self.salt_version)))
-      self.is_live = False
-      self.is_liveclone = False
-    if self.use_test_data:
-      self.cur_tz_continent = 'Europe'
-      self.cur_tz_city = 'Paris'
-      self.cur_tz = self.cur_tz_continent + '/' + self.cur_tz_city
-      self.cur_use_ntp = True
-      self.cur_time_delta = timedelta()
-      self.cur_km = 'fr-latin9'
-      self.cur_use_numlock = False
-      self.cur_use_ibus = True
-      self.cur_locale = 'fr_FR.utf8'
-      self.partitions_step = 'recap'
-      self.show_external_drives = False
-      self.main_partition = 'sda7'
-      self.main_format = 'ext4'
-      self.partitions = []
-      for disk_device in sltl.getDisks():
-        disk_info = sltl.getDiskInfo(disk_device)
-        if self.show_external_drives or not disk_info['removable']:
-          for p in sltl.getPartitions(disk_device):
-            self.partitions.append(p)
-      self.swap_partitions = sltl.getSwapPartitions()
-      self.linux_partitions = []
-      self.win_partitions = []
-      self.keep_live_logins = self.is_liveclone
-      if self.keep_live_logins:
-        self.new_login = ''
-        self.new_password = ''
-        self.new_root_password = ''
-      else:
-        self.new_login = 'test'
-        self.new_password = 'salix'
-        self.new_root_password = 'SaliX'
-      self.install_mode = 'full'
-      self.bootloader = 'lilo'
-      for c in self.configurations:
-        self.configurations[c] = True
-    else:
-      self.cur_tz = sltl.getDefaultTimeZone()
-      if '/' in self.cur_tz:
-        self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
-        self.cur_tz_city = self.cur_tz.split('/', 1)[1]
-      else:
-        self.cur_tz = None
-        self.cur_tz_continent = None
-        self.cur_tz_city = None
-      self.cur_use_ntp = sltl.isNTPEnabledByDefault()
-      self.cur_time_delta = timedelta() # used when NTP is not used
-      self.cur_km = sltl.findCurrentKeymap()
-      self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
-      self.cur_use_ibus = sltl.isIbusEnabledByDefault()
-      self.cur_locale = sltl.getCurrentLocale()
-      self.partitions_step = 'none' # could be none, main, linux, win or recap
-      self.partitions = []
-      self.swap_partitions = []
-      self.show_external_drives = False
-      self.main_partition = None
-      self.main_format = None
-      self.linux_partitions = None # list of tuple as (device, format, mountpoint)
-      self.win_partitions = None # list of tuple as (device, format, mountpoint)
-      self.keep_live_logins = self.is_liveclone
-      self.new_login = '' # None cannot be used in a GtkEntry
-      self.new_password = ''
-      self.new_root_password = ''
-      self.install_mode = None
-      self.bootloader = None
-    print ' Done'
-    sys.stdout.flush()
-
-
-
-class ThreadTask:
-  """
-  Handles starting a thread that will call a function.
-  At the end, a callback may be called on completion.
-  """
-  def __init__(self, fct, complete_callback=None):
-    self.fct = fct
-    self.complete_callback = complete_callback
-  def _start(self, *args, **kwargs):
-    self._stopped = False
-    self.fct(*args, **kwargs)
-    if not self._stopped:
-      if self.complete_callback:
-        self.complete_callback()
-  def start(self, *args, **kwargs):
-    t = threading.Thread(target=self._start, args=args, kwargs=kwargs)
-    t.start()
-    return t
-  def stop(self):
-    self._stopped = True
-
-
-
-class ThreadInstaller:
-  """
-  Starts a thread to install Salix from SalixLive.
-  """
-  def __init__(self, gather_gui, config):
-    self.gui = gather_gui
-    self.cfg = config
-  def install(self):
-    self.installation = None
-    t = ThreadTask(self.thread_install_salix, self.thread_install_completed).start()
-    while t.is_alive():
-      while gtk.events_pending():
-        gtk.main_iteration()
-    while gtk.events_pending():
-      gtk.main_iteration()
-    return self.installation
-  def thread_install_salix(self):
-    """
-    Thread to install Salix.
-    This works like a generator.
-    It should yield fraction of the completion
-    """
-    print "Installing…"
-    # format main partition (and mount it)
-    # format linux partitions (and mount them)
-    # copying modules (one step per module, so we need to count them before starting the installation)
-    # create fstab
-    # set date and time
-    # set keyboard
-    # set locale
-    # set users
-    # set services
-    # update system things:
-    # - pango, gtk, fonts, …
-    # - adjusting configuration for liveclone
-    if self.cfg.is_test:
-      if self.cfg.is_test_clone:
-        modules = ('01-clone',)
-      else:
-        modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
-    else:
-      modules = sltl.listSaLTModules()
-    if self.cfg.is_liveclone:
-      install_modules = modules
-    else:
-      install_modules = []
-      for m in modules:
-        if 'core' in m:
-          install_modules.append(m)
-        elif 'basic' in m:
-          if self.install_mode in ('basic', 'full'):
-            install_modules.append(m)
-        elif 'full' in m:
-          if self.install_mode == 'full':
-            install_modules.append(m)
-        elif not 'live' in m:
-          install_modules.append(m)
-    if self.cfg.linux_partitions == None:
-      self.cfg.linux_partitions = []
-    if self.cfg.win_partitions == None:
-      self.cfg.win_partitions = []
-    weight_partition = 3
-    if self.cfg.is_liveclone:
-      weight_module = 15
-    else:
-      weight_module = 5
-    weights = {
-        'checks': 1,
-        'main_partition': weight_partition,
-        'linux_partitions': dict([(p[0], weight_partition) for p in self.cfg.linux_partitions]),
-        'modules': dict([(m, weight_module) for m in install_modules]),
-        'fstab': 1,
-        'datetime': 1,
-        'keyboard': 1,
-        'locale': 1,
-        'users': 1,
-        'services': 1,
-        'system_config': 1
-        }
-    steps = 0
-    for w in weights.values():
-      if isinstance(w, dict):
-        for w2 in w.values():
-          steps += w2
-      else:
-        steps += w
-    step = 0
-    self.installation = 'installing'
-    def installion_cancelled():
-      return self.installation == 'cancelled'
-    # sanity checks
-    modules_size = {}
-    if self.cfg.is_test:
-      for m in install_modules:
-        modules_size[m] = 1
-    else:
-      main_sizes = sltl.getSizes("/dev/{0}".format(self.cfg.main_partition))
-      main_size = main_sizes['size']
-      main_block_size = sltl.getBlockSize("/dev/{0}".format(self.cfg.main_partition))
-      module_total_size = 0
-      for m in install_modules:
-        size = sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
-        modules_size[m] = size
-        module_total_size += size
-      minimum_free_size = 50 * 1024 * 1024 # 50 M
-      if module_total_size + minimum_free_size > main_size:
-        self.gui.ProgressWindow.set_keep_above(False)
-        error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = sltl.getHumanSize(module_total_size + minimum_free_size)))
-        self.installation = 'error'
-        return
-      sltl.execCall(['rm', '-r', sltl.getTempMountDir()])
-    if installion_cancelled(): return
-    step += weights['checks']
-    msg = _("Formatting and mounting the main partition...")
-    self.update_progressbar(msg, step, steps)
-    self.install_main_partition()
-    if installion_cancelled(): return
-    step += weights['main_partition']
-    msg = _("Formatting and mounting the Linux partition(s)...")
-    self.update_progressbar(msg, step, steps)
-    step = self.install_linux_partitions(msg, step, steps, weights['linux_partitions'])
-    if installion_cancelled(): return
-    msg = _("Installing the {mode} mode packages...").format(mode = _(self.cfg.install_mode))
-    self.update_progressbar(msg, step, steps)
-    step = self.install_modules(install_modules, modules_size, msg, step, steps, weights['modules'])
-    if installion_cancelled(): return
-    msg = _("Creating /etc/fstab...")
-    self.update_progressbar(msg, step, steps)
-    self.install_fstab()
-    if installion_cancelled(): return
-    step += weights['fstab']
-    msg = _("Date and time configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_datetime()
-    if installion_cancelled(): return
-    step += weights['datetime']
-    msg = _("Keyboard configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_keyboard()
-    if installion_cancelled(): return
-    step += weights['keyboard']
-    msg = _("Locale configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_locale()
-    if installion_cancelled(): return
-    step += weights['locale']
-    msg = _("Users configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_users()
-    if installion_cancelled(): return
-    step += weights['users']
-    msg = _("Services configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_services()
-    if installion_cancelled(): return
-    step += weights['services']
-    msg = _("System configuration...")
-    self.update_progressbar(msg, step, steps)
-    self.install_config()
-    if installion_cancelled(): return
-    step += weights['system_config']
-    self.update_progressbar(None, step, steps)
-  def update_gui(self, fct, *args, **kwargs):
-    gobject.idle_add(fct, *args, **kwargs)
-  def update_progressbar(self, msg, step, steps):
-    fraction = float(step) / steps
-    if msg:
-      print "\n{1:3.0%} {0}".format(msg, fraction)
-    else:
-      print "\n{0:3.0%}".format(fraction)
-    self.update_gui(self.gui_update_progressbar, msg, fraction)
-  def gui_update_progressbar(self, msg, fraction):
-    if msg:
-      self.gui.InstallProgressBar.set_text(msg)
-    self.gui.InstallProgressBar.set_fraction(fraction)
-  def install_main_partition(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      d = "/dev/{0}".format(self.cfg.main_partition)
-      sltl.umountDevice(d, deleteMountPoint = False)
-      if self.cfg.main_format != 'none':
-        label = sltl.getFsLabel(d)
-        if not label:
-          label = 'Salix'
-        sltl.makeFs(self.cfg.main_partition, self.cfg.main_format, label = label)
-      sltl.mountDevice(d, fsType = self.cfg.main_format)
-  def install_linux_partitions(self, msg, step, steps, weights):
-    if self.cfg.is_test:
-      for p in self.cfg.linux_partitions:
-        if self.installation == 'cancelled': return step
-        d = p[0]
-        self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
-        w = weights[d]
-        sleep(w)
-        step += w
-      return step
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      for p in self.cfg.linux_partitions:
-        if self.installation == 'cancelled': return step
-        d = p[0]
-        self.update_progressbar(msg + "\n - {0}".format(d), step, steps)
-        full_dev = "/dev/{0}".format(d)
-        fs = p[1]
-        mp = p[2]
-        sltl.umountDevice(full_dev, deleteMountPoint = False)
-        if fs != 'none':
-          label = sltl.getFsLabel(full_dev)
-          if not label:
-            label = os.path.basename(p[2])
-            if len(label) > 12:
-              label = None # for not having problems
-          sltl.makeFs(d, fs, label)
-        sltl.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
-        step += weights[d]
-      return step
-  def install_modules(self, modules, modules_size, msg, step, steps, weight):
-    if self.cfg.is_test:
-      for m in modules:
-        if self.installation == 'cancelled': return step
-        self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
-        w = weight[m]
-        sleep(w)
-        step += w
-      return step
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
-      for m in modules:
-        if self.installation == 'cancelled': return step
-        self.update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
-        size = modules_size[m]
-        w = weight[m]
-        sltl.installSaLTModule(m, size, rootmp, self.install_module_callback, (step, steps, w))
-        step += w
-      return step
-  def install_module_callback(self, pourcent, step, steps, weight):
-    new_step = step + float(pourcent) * weight
-    gobject.idle_add(self.update_progressbar, None, new_step, steps)
-  def install_fstab(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      sltl.createFsTab(rootmp)
-      sltl.addFsTabEntry(rootmp, 'proc', '/proc', 'proc')
-      sltl.addFsTabEntry(rootmp, 'devpts', '/dev/pts', 'devpts')
-      sltl.addFsTabEntry(rootmp, 'tmpfs', '/dev/shm', 'tmpfs')
-      for d in self.cfg.swap_partitions:
-        sltl.addFsTabEntry(rootmp, "/dev/" + d, 'none', 'swap')
-      sltl.addFsTabEntry(rootmp, "/dev/" + self.cfg.main_partition, '/', self.cfg.main_format, dumpFlag = 1, fsckOrder = 1)
-      for l in (self.cfg.linux_partitions, self.cfg.win_partitions):
-        if l:
-          for p in l:
-            d = p[0]
-            fs = p[1]
-            if fs == 'none': # tell to not format, so...
-              fs = None # ...come back to autodetection
-            mp = p[2]
-            try:
-              os.makedirs(rootmp + mp)
-            except os.error:
-              pass # directory exists
-            sltl.addFsTabEntry(rootmp, "/dev/" + d, mp, fs)
-  def install_datetime(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      tz = self.cfg.cur_tz_continent + '/' + self.cfg.cur_tz_city
-      sltl.setDefaultTimeZone(tz, rootmp)
-      sltl.setNTPDefault(self.cfg.cur_use_ntp, rootmp)
-      if not self.cfg.cur_use_ntp:
-        # we need to update the locale date and time.
-        dt = (datetime.now() + self.cfg.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
-        execCall(['/usr/bin/date', '-s', dt], shell=False)
-        execCall(['/sbin/hwclock', '--systohc'], shell=False)
-  def install_keyboard(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      sltl.setDefaultKeymap(self.cfg.cur_km, rootmp)
-      sltl.setNumLockDefault(self.cfg.cur_use_numlock, rootmp)
-      sltl.setIbusDefault(self.cfg.cur_use_ibus, rootmp)
-  def install_locale(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      sltl.setDefaultLocale(self.cfg.cur_locale, rootmp)
-  def install_users(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      if not self.cfg.keep_live_logins:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-        sltl.createSystemUser(self.cfg.new_login, password = self.cfg.new_password, mountPoint = rootmp)
-        sltl.changePasswordSystemUser('root', password = self.cfg.new_root_password, mountPoint = rootmp)
-  def install_services(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      f = 'var/log/setup/setup.services'
-      p = "{0}/{1}".format(rootmp, f)
-      if os.path.exists(p):
-        os.chmod(p, 0755)
-        sltl.execCall("{0}/{1} {0}".format(rootmp, f))
-  def install_config(self):
-    if self.cfg.is_test:
-      sleep(1)
-    else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
-      rcfont_file = open('{0}/etc/rc.d/rc.font'.format(rootmp), 'w')
-      rcfont_file.write("""
-#!/bin/sh
-#
-#This selects your default screen font from among the ones in
-# /usr/share/kbd/consolefonts.
-#
-#setfont -v ter-v16n
-unicode_start ter-v16n""")
-      rcfont_file.close()
-      os.chmod('{0}/etc/rc.d/rc.font'.format(rootmp), 0755)
-      for f in ('var/log/setup/setup.04.mkfontdir', 'var/log/setup/setup.07.update-desktop-database', 'var/log/setup/setup.07.update-mime-database', 'var/log/setup/setup.08.gtk-update-icon-cache', 'var/log/setup/setup.htmlview'):
-        p = "{0}/{1}".format(rootmp, f)
-        if os.path.exists(p):
-          os.chmod(p, 0755)
-          sltl.execCall("cd {0}; ./{1}".format(rootmp, f))
-      for f in ('/usr/bin/update-gtk-immodules', '/usr/bin/update-gdk-pixbuf-loaders', '/usr/bin/update-pango-querymodules'):
-        p = "{0}/{1}".format(rootmp, f)
-        if os.path.exists(p):
-          sltl.execChroot(rootmp, f)
-      if self.cfg.is_liveclone:
-        # Remove some specific live stuff
-        sltl.execCall("spkg -d liveclone --root={0}".format(rootmp))
-        sltl.execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
-        sltl.execCall("spkg -d salix-persistence-wizard --root={0}".format(rootmp))
-        sltl.execCall("rm -f {0}/etc/ssh/ssh_host_*".format(rootmp))
-        sltl.execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
-        sltl.execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
-        os.remove("{0}/hooks.salt".format(rootmp))
-  def on_progress_undo_clicked(self, widget, data=None):
-    print "Installation cancelled."
-    self.installation = 'cancelled'
-    self.gui.CancelProgressButton.set_sensitive(False)
-    self.gui_update_progressbar(_("Cancelling installation"), 1.0)
-  def thread_install_completed(self):
-    if self.installation == 'installing':
-      self.installation = 'done'
-      self.update_gui(self.gui_install_completed)
-    else:
-      self.update_gui(self.gui_install_failed)
-    print "End of installation thread"
-  def gui_install_failed(self):
-    if self.installation == 'error':
-      print "Installation in error."
-    elif self.installation == 'cancelled':
-      print "Installation cancelled."
-    self.gui.ProgressWindow.set_keep_above(False)
-    self.gui.ProgressWindow.hide()
-    self.gui.Window.set_sensitive(True)
-    self.gui.Window.set_accept_focus(True)
-    self.gui.Window.show()
-  def gui_install_completed(self):
-    print "Installation completed."
-    self.gui.ProgressWindow.set_keep_above(False)
-    self.gui.ProgressWindow.hide()
-
-
-
-# Info window skeleton:
-def info_dialog(message, parent = None):
-  """
-  Displays an information message.
-
-  """
-  dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_INFO, buttons = gtk.BUTTONS_OK, flags = gtk.DIALOG_MODAL)
-  dialog.set_markup(message)
-  result_info = dialog.run()
-  dialog.destroy()
-  return result_info
-
-# Error window skeleton:
-def error_dialog(message, parent = None):
-  """
-  Displays an error message.
-  """
-  dialog = gtk.MessageDialog(parent = parent, type = gtk.MESSAGE_ERROR, buttons = gtk.BUTTONS_CLOSE, flags = gtk.DIALOG_MODAL)
-  dialog.set_markup(message)
-  result_error = dialog.run()
-  dialog.destroy()
-  return result_error
-
-# Launch the application
-if __name__ == '__main__':
-  print 'Salix Live Installer v' + __version__
-  is_test = (len(sys.argv) > 1 and sys.argv[1] == '--test')
-  is_clone = False
-  use_test_data = False
-  if is_test:
-    print "*** Testing mode ***"
-    if len(sys.argv) > 2:
-      for a in sys.argv[2:]:
-        if a == '--clone':
-          print "*** Clone mode ***"
-          is_clone = True
-        if a == '--data':
-          print "*** Test data mode ***"
-          use_test_data = True
-    gettext.install(__app__, './locale', True)
-    gtk.glade.bindtextdomain(__app__, './locale')
-  else:
-    gettext.install(__app__, '/usr/share/locale', True)
-    gtk.glade.bindtextdomain(__app__, '/usr/share/locale')
-  gtk.glade.textdomain(__app__)
-  # If no root privilege, displays error message and exit
-  if not is_test and os.getuid() != 0:
-    error_dialog(_("<b>Sorry!</b>\n\nRoot privileges are required to run this program."))
-    sys.exit(1)
-  GatherGui(is_test, is_clone, use_test_data)
-  gtk.main()

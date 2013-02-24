@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+GenericName=Salix Live Installer
+_Name=Salix Installer
+_Comment=Install Salix on your computer from a SalixLive session
+Exec=xsu /usr/sbin/salix-live-installer.py
+Icon=salix-live-installer
+Terminal=false
+StartupNotify=true
+NoDisplay=false
+Categories=Application;System;

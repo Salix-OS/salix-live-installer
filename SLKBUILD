@@ -1,0 +1,28 @@
+# vim: set syn=sh et ai sta sw=2 ts=2 tw=0:
+#Packager: JRD <jrd@enialis.net>
+#dep: btrfs-progs,coreutils,dosfstools,e2fsprogs,file,findutils,glibc,grep,jfsutils,ntfsprogs|ntfs-3g,python,reiserfsprogs,salixtools,shadow,spkg,util-linux,xfsprogs
+#sug: bootsetup|lilosetup,gparted,grub2,lilo,pygtk
+
+pkgname=salix-live-installer
+pkgver=0.4
+pkgrel=1cp
+arch=noarch
+source=(https://github.com/jrd/$pkgname/archive/$pkgver.tar.gz)
+sourcetemplate=http://people.salixos.org/jrd/salix/$pkgname-\$arch-$pkgver/
+url=http://salixos.org
+options=('noextract')
+
+slackdesc=\
+(
+#|-----handy-ruler------------------------------------------------------|
+"$pkgname (Install Salix Standard from a Live environment)"
+"Salix Live Installer helps installing Salix on you computer from the"
+"comfort of SalixLive's graphic environment."
+"A ncurses version is also in development."
+)
+
+build() {
+  cd $SRC/$pkgname-$pkgver
+  ./compile.sh
+  DESTDIR=$PKG ./install.sh
+}

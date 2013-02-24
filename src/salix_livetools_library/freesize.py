@@ -9,6 +9,8 @@ Functions:
   - getSizes
   - getUsedSize
 """
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__license__ = 'GPL2+'
 import re
 import os
 from stat import *

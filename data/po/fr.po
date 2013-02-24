@@ -1,0 +1,968 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+#   <akuna@free.fr>, 2011.
+# Cyrille Pontvieux <jrd@enialis.net>, 2011.
+# gapan <vlahavas@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: Salix\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-24 17:07+0100\n"
+"PO-Revision-Date: 2013-02-24 17:24+0100\n"
+"Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
+"Language-Team: French (http://www.transifex.net/projects/p/salix/team/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: src/resources/salix-live-installer.glade:20
+msgid "SalixOS installation from SalixLive's graphic environment"
+msgstr "Installation de SalixOS à partir de l'environnement graphique de SalixLive"
+
+#: src/resources/salix-live-installer.glade:38
+msgid "translator-credits"
+msgstr ""
+"Pierrick Le Brun <akuna~at~salixos~dot~org>\n"
+"Cyrille Pontvieux <jrd~at~enialis~dot~net>"
+
+#: src/resources/salix-live-installer.glade:337
+msgid "Salix Live Installer"
+msgstr "Installeur Salix Live"
+
+#: src/resources/salix-live-installer.glade:404
+msgid "Launch Salix _installation"
+msgstr "Lancer l'_installation de Salix"
+
+#: src/resources/salix-live-installer.glade:551
+msgid "_Time"
+msgstr "_Heure"
+
+#: src/resources/salix-live-installer.glade:606
+msgid "Key_board"
+msgstr "Cla_vier"
+
+#: src/resources/salix-live-installer.glade:658
+msgid "Lo_cale"
+msgstr "Lan_gage"
+
+#: src/resources/salix-live-installer.glade:710
+msgid "_Partitions"
+msgstr "_Partitions"
+
+#: src/resources/salix-live-installer.glade:763
+msgid "U_sers"
+msgstr "U_tilisateurs"
+
+#: src/resources/salix-live-installer.glade:815
+msgid "S_oftware"
+msgstr "L_ogiciels"
+
+#: src/resources/salix-live-installer.glade:868
+msgid "Boot_loader"
+msgstr ""
+"Chargeur de\n"
+"_démarrage"
+
+#: src/resources/salix-live-installer.glade:1187
+msgid ""
+"Salix Live Installer will perform a standard installation of Salix Operating System on your computer.\n"
+"\n"
+"Simply click on one of the categories in the left section to configure the corresponding settings. A check will be displayed beside each setting once it has been configured. All the settings must be configured before the 'Launch Salix installation' button becomes accessible.\n"
+"\n"
+"Depending on your system, the 'Partitions' settings are composed of successive steps which must all be configured before you can go onto another setting.\n"
+"\n"
+"Once set, every configuration can be undone and reset as many times as necessary. No change will take effect until you click on the 'Launch Salix installation' button.\n"
+"\n"
+"Contextual help triggered by the mouse position is available each step of the way and will be displayed in the above section."
+msgstr ""
+"L'installeur Salix Live va effectuer une installation standard du système d'exploitation Salix sur votre ordinateur.\n"
+"\n"
+"Il suffit de cliquer sur l'une des catégories de la partie gauche pour configurer les paramètres correspondants. Une coche de confirmation s'affichera à côté de chaque paramètre une fois qu'il a été configuré. Tous les paramètres doivent être configurés avant que le bouton « Lancer l'installation de Salix » ne devienne accessible.\n"
+"\n"
+"Selon votre système, le paramétrages des « partitions » est composé d'étapes successives qui doivent tous être configurées avant que vous ne puissiez vous déplacer sur une autre section de configuration.\n"
+"\n"
+"Une fois paramétré, chaque configuration peut être annulée et remise à zéro autant de fois que nécessaire. Aucune modification ne prendra effet jusqu'à ce que vous cliquiez sur le bouton « Lancer l'installation de Salix ».\n"
+"\n"
+"Une aide contextuelle déclenchée par la position de la souris est disponible à chaque étape de configuration et sera affichée dans la partie supérieure de l'installeur."
+
+#: src/resources/salix-live-installer.glade:1224
+msgid "<b>Please set the time, date and time zone:</b>"
+msgstr "<b>Veuillez définir l'heure, la date et le fuseau horaire :</b>"
+
+#: src/resources/salix-live-installer.glade:1379
+msgid "hour : min : sec"
+msgstr "heure : min : sec"
+
+#: src/resources/salix-live-installer.glade:1416
+msgid "Year:"
+msgstr "Année :"
+
+#: src/resources/salix-live-installer.glade:1430
+msgid "Month:"
+msgstr "Mois :"
+
+#: src/resources/salix-live-installer.glade:1444
+msgid "Day:"
+msgstr "Jour :"
+
+#: src/resources/salix-live-installer.glade:1579
+msgid "Time zone:"
+msgstr "Fuseau horaire :"
+
+#: src/resources/salix-live-installer.glade:1637
+msgid "Use NTP service"
+msgstr "Utiliser le service NTP"
+
+#: src/resources/salix-live-installer.glade:1731
+msgid "<b>Please select your keyboard layout:</b>"
+msgstr "<b>Veuillez sélectionner la disposition de votre clavier :</b>"
+
+#: src/resources/salix-live-installer.glade:1794
+#: src/resources/salix-live-installer.glade:2071
+#: src/resources/salix-live-installer.glade:2828
+#: src/resources/salix-live-installer.glade:3035
+msgid "Apply _settings"
+msgstr "A_ppliquer les paramètres"
+
+#: src/resources/salix-live-installer.glade:1878
+msgid "Activate numlock"
+msgstr "Activer le bloc numérique"
+
+#: src/resources/salix-live-installer.glade:1896
+msgid "Activate IBus"
+msgstr "Activer IBus"
+
+#: src/resources/salix-live-installer.glade:1940
+msgid "<b>Selected keyboard layout:</b>"
+msgstr "<b>Clavier sélectionné :</b>"
+
+#: src/resources/salix-live-installer.glade:1954
+#: src/resources/salix-live-installer.glade:2180
+#: src/resources/salix-live-installer.glade:3576
+#: src/resources/salix-live-installer.glade:3811
+#: src/salix_live_installer/gathergui.py:652
+#: src/salix_live_installer/gathergui.py:697
+#: src/salix_live_installer/gathergui.py:1082
+#: src/salix_live_installer/gathergui.py:1093
+msgid "None"
+msgstr "Aucun"
+
+#: src/resources/salix-live-installer.glade:2008
+msgid "<b>Please select your system language:</b>"
+msgstr "<b>Veuillez sélectionner la langue du système :</b>"
+
+#: src/resources/salix-live-installer.glade:2166
+msgid "<b>Selected system language:</b>"
+msgstr "<b>Langage sélectionné :</b>"
+
+#: src/resources/salix-live-installer.glade:2234
+msgid ""
+"<b>Important!</b>\n"
+"\n"
+"Salix needs, at the very minimum, one swap partition and one Linux partition to hold its main directory tree. If possible, it is recommended to also have at least another Linux partition to hold your /home directory.\n"
+"\n"
+"If you do not already have these needed partitions ready, you should now click on the button 'Modify partition scheme'  in order to create them. Be aware that partitioning a disk drive is a delicate operation which could lead to data loss if not performed cautiously. It is therefore highly advisable to backup important data before starting this procedure.\n"
+"\n"
+"If you already have all the needed partitions, please click on the button 'Do not modify partition scheme' to continue without altering your current partitioning scheme."
+msgstr ""
+"<b>Important!</b> \n"
+"\n"
+"Salix nécessite, au minimum, une partition swap et une partition Linux pour son arborescence principale. Si possible, il est également recommandé d'avoir au moins une autre partition Linux pour le répertoire /home.\n"
+"\n"
+"Si ces partitions nécessaires ne sont pas déjà prêtes, vous devriez maintenant cliquer sur le bouton « Modifier le schéma de partition » afin de les créer. Sachez que le partitionnement d'un disque est une opération délicate qui pourrait conduire à la perte de vos données si cette opération n'est pas effectuée avec prudence. Il est donc fortement conseillé de sauvegarder vos données importantes avant de commencer cette procédure.\n"
+"\n"
+"Si toutes les partitions nécessaires sont déjà prêtes, veuillez alors cliquer sur le bouton « Ne pas modifier le schéma de partition » afin de continuer sans modifier votre schéma de partitionnement actuel."
+
+#: src/resources/salix-live-installer.glade:2270
+msgid "Modify partition scheme"
+msgstr "Modifier le schéma de partition"
+
+#: src/resources/salix-live-installer.glade:2314
+msgid "Do not modify partition scheme"
+msgstr "Ne pas modifier le schéma de partition"
+
+#: src/resources/salix-live-installer.glade:2367
+msgid "<b>Please select Salix main partition:</b>"
+msgstr "<b>Veuillez sélectionner la partition principale de Salix :</b>"
+
+#: src/resources/salix-live-installer.glade:2399
+#: src/resources/salix-live-installer.glade:2677
+#: src/resources/salix-live-installer.glade:2907
+msgid "Disk"
+msgstr "Disque"
+
+#: src/resources/salix-live-installer.glade:2411
+#: src/resources/salix-live-installer.glade:2688
+#: src/resources/salix-live-installer.glade:2918
+msgid "Partition"
+msgstr "Partition"
+
+#: src/resources/salix-live-installer.glade:2423
+#: src/resources/salix-live-installer.glade:2700
+#: src/resources/salix-live-installer.glade:2930
+msgid "Size"
+msgstr "Taille"
+
+#: src/resources/salix-live-installer.glade:2435
+#: src/resources/salix-live-installer.glade:2942
+msgid "File System"
+msgstr "Système de fichiers"
+
+#: src/resources/salix-live-installer.glade:2456
+msgid "Display attached external devices"
+msgstr "Afficher les périphériques externes"
+
+#: src/resources/salix-live-installer.glade:2478
+msgid ""
+"From the above partitions found on your system, please select the one where Salix' main directory tree (/) should be installed.\n"
+"<b>Warning!</b> This partition will be reformatted and its data will be permanently erased."
+msgstr ""
+"À partir des partitions détectées ci-dessus, veuillez sélectionner celle sur laquelle l'arborescence principale (/) de Salix devra être installée.\n"
+"<b>Avertissement !</b> Cette partition sera formatée et toutes ses données seront irrémédiablement supprimées."
+
+#: src/resources/salix-live-installer.glade:2508
+msgid "Format with:"
+msgstr "Formater en :"
+
+#: src/resources/salix-live-installer.glade:2601
+msgid "Select _partition"
+msgstr "Sélection de la partition"
+
+#: src/resources/salix-live-installer.glade:2645
+msgid "<b>Please configure your other Linux partitions:</b>"
+msgstr "<b>Veuillez configurer vos autres partitions Linux :</b>"
+
+#: src/resources/salix-live-installer.glade:2712
+msgid "Current FS"
+msgstr "Sys.Fich. actuel"
+
+#: src/resources/salix-live-installer.glade:2724
+msgid "Format as:"
+msgstr "Formater en :"
+
+#: src/resources/salix-live-installer.glade:2747
+#: src/resources/salix-live-installer.glade:2954
+msgid "Mount as:"
+msgstr "Monter sur :"
+
+#: src/resources/salix-live-installer.glade:2783
+msgid "It appears that you have more than one Linux partition. If you wish, you can now spread Salix directory tree on separate partitions. In fact, it is highly recommended to have the /home directory on a separate partition."
+msgstr "Il semble que vous disposez de plus d'une partition Linux. Si vous le désirez, vous pouvez étendre l'arborescence des répertoires de Salix sur plusieurs partitions. D'ailleurs il est fortement recommandé d'avoir au moins le répertoire /home sur une partition séparée."
+
+#: src/resources/salix-live-installer.glade:2874
+msgid "<b>Please configure your Windows partitions:</b>"
+msgstr "<b>Veuillez configurer vos partitions Windows :</b>"
+
+#: src/resources/salix-live-installer.glade:2990
+msgid "It appears that some of your partitions have a Windows formatting. Here you can set a mount point for each one if you wish them to be accessible in Salix system."
+msgstr "Il semble que certaines de vos partitions possèdent un système de fichier Windows. Si vous le désirez, vous pouvez leur définir un point de montage afin d'y avoir accès à partir du système Salix."
+
+#: src/resources/salix-live-installer.glade:3090
+msgid "<b>Salix main partition:</b>"
+msgstr "<b>Partition principale de Salix :</b>"
+
+#: src/resources/salix-live-installer.glade:3120
+msgid "<b>Other Linux partitions:</b>"
+msgstr "<b>Autres partitions Linux :</b>"
+
+#: src/resources/salix-live-installer.glade:3149
+msgid "<b>Windows partitions:</b>"
+msgstr "<b>Partitions Windows :</b>"
+
+#: src/resources/salix-live-installer.glade:3178
+msgid "<b>Swap partitions:</b>"
+msgstr "<b>Partitions Swap :</b>"
+
+#: src/resources/salix-live-installer.glade:3279
+msgid "<b>Transfer LiveClone login accounts</b>"
+msgstr "<b>Transférer les identifiants de LiveClone</b>"
+
+#: src/resources/salix-live-installer.glade:3381
+msgid "<b>Please create a new standard user:</b>"
+msgstr "<b>Veuillez créer un nouvel utilisateur ordinaire :</b>"
+
+#: src/resources/salix-live-installer.glade:3400
+msgid "Enter login:"
+msgstr "Saisir l'identifiant :"
+
+#: src/resources/salix-live-installer.glade:3442
+msgid "Enter password:"
+msgstr "Saisir le mot de passe :"
+
+#: src/resources/salix-live-installer.glade:3500
+msgid "Re-enter password:"
+msgstr "Saisir à nouveau le mot de passe :"
+
+#: src/resources/salix-live-installer.glade:3528
+#: src/resources/salix-live-installer.glade:3763
+msgid "Do not hide"
+msgstr "Ne pas cacher"
+
+#: src/resources/salix-live-installer.glade:3562
+msgid "<b>User created:</b>"
+msgstr "<b>Utilisateur créé :</b>"
+
+#: src/resources/salix-live-installer.glade:3658
+msgid "<b>Please create a new administrator's password:</b>"
+msgstr "<b>Veuillez créer un nouveau mot de passe administrateur :</b>"
+
+#: src/resources/salix-live-installer.glade:3677
+msgid "Enter root password:"
+msgstr "Saisir le mot de passe 'root' :"
+
+#: src/resources/salix-live-installer.glade:3735
+msgid "Re-enter root password:"
+msgstr "Saisir à nouveau le mot de passe :"
+
+#: src/resources/salix-live-installer.glade:3797
+msgid "<b>Password created: </b>"
+msgstr "<b>Mot de passe créé : </b>"
+
+#: src/resources/salix-live-installer.glade:3901
+msgid "<b>Please select your installation mode:</b>"
+msgstr "<b>Veuillez sélectionner votre mode d'installation :</b>"
+
+#: src/resources/salix-live-installer.glade:3969
+msgid "Core"
+msgstr "Essentiel"
+
+#: src/resources/salix-live-installer.glade:4023
+msgid "Basic"
+msgstr "De base"
+
+#: src/resources/salix-live-installer.glade:4116
+msgid "Full"
+msgstr "Complet"
+
+#: src/resources/salix-live-installer.glade:4361
+msgid "<b>Please select your bootloader:</b>"
+msgstr "<b>Veuillez sélectionner votre chargeur de démarrage :</b>"
+
+#: src/resources/salix-live-installer.glade:4374
+msgid "No bootloader. I already have one"
+msgstr "Aucun chargeur de démarrage. J'en ai déjà un."
+
+#: src/resources/salix-live-installer.glade:4520
+msgid "Salix installation"
+msgstr "Installation de Salix"
+
+#: src/resources/salix-live-installer.glade:4568
+msgid "Please be patient, Salix installation is in progress..."
+msgstr "Veuillez patienter, l'installation de Salix est en cours…"
+
+#: src/resources/salix-live-installer.glade:4693
+msgid "Confirmation needed"
+msgstr "Confirmation nécessaire"
+
+#: src/resources/salix-live-installer.glade:4706
+msgid "<b>Do you want to proceed with this?</b>"
+msgstr "<b>Voulez vous vraiment continuer ?</b>"
+
+#: src/salix_live_installer/config.py:46
+msgid ""
+"You need at least version {0} of SaLT installed to continue.\n"
+"You have version {1}.\n"
+"\n"
+"Installation will not be possible"
+msgstr ""
+"SaLT version minimum {0} doit être installée pour continuer.\n"
+"Vous avez la version {1}.\n"
+"\n"
+"L'installation ne sera pas possible."
+
+#: src/salix_live_installer/config.py:46
+#: src/salix_live_installer/installer_gtk.py:22
+#: src/salix_live_installer/installer_curses.py:17
+msgid "Sorry!"
+msgstr "Désolé !"
+
+#: src/salix_live_installer/installer.py:58
+msgid "Starting installation process..."
+msgstr "Démarrage de d'installation…"
+
+#: src/salix_live_installer/installer.py:72
+msgid "Cancelling installation..."
+msgstr "Annulation de l'Installation…"
+
+#: src/salix_live_installer/installer.py:166
+msgid ""
+"Cannot install!\n"
+"Not enougth space on main partition ({size} needed)"
+msgstr ""
+"Impossible d'installer !\n"
+"Il n'y a pas assez d'espace libre sur la partition principale ({size} nécessaire)"
+
+#: src/salix_live_installer/installer.py:172
+msgid "Formatting and mounting the main partition..."
+msgstr "Formatage et montage de la partition principale..."
+
+#: src/salix_live_installer/installer.py:177
+msgid "Formatting and mounting the Linux partitions..."
+msgstr "Formatage et montage des partitions Linux..."
+
+#: src/salix_live_installer/installer.py:181
+msgid "Installing the {mode} mode packages..."
+msgstr "Installation des logiciels du mode {mode}…"
+
+#: src/salix_live_installer/installer.py:185
+msgid "Creating /etc/fstab..."
+msgstr "Création du fichier /etc/fstab…"
+
+#: src/salix_live_installer/installer.py:190
+msgid "Date and time configuration..."
+msgstr "Paramétrage de la date et l'heure…"
+
+#: src/salix_live_installer/installer.py:195
+msgid "Keyboard configuration..."
+msgstr "Paramétrage du clavier…"
+
+#: src/salix_live_installer/installer.py:200
+msgid "Locale configuration..."
+msgstr "Paramétrage de la langue…"
+
+#: src/salix_live_installer/installer.py:205
+msgid "Users configuration..."
+msgstr "Paramétrage des utilisateurs…"
+
+#: src/salix_live_installer/installer.py:210
+msgid "Services configuration..."
+msgstr "Paramétrage des services…"
+
+#: src/salix_live_installer/installer.py:215
+msgid "System configuration..."
+msgstr "Paramétrage du système…"
+
+#: src/salix_live_installer/installer.py:278
+#: src/salix_live_installer/installer.py:287
+msgid "Installing the {module} module..."
+msgstr "Installation des logiciels du module {module}…"
+
+#: src/salix_live_installer/installer_gtk.py:22
+#: src/salix_live_installer/installer_curses.py:17
+msgid "Root privileges are required to run this program."
+msgstr "Les droits administrateur (Root) sont requis pour exécuter ce programme."
+
+#: src/salix_live_installer/gathergui.py:189
+#: src/salix_live_installer/gathergui.py:214
+msgid "Contextual help."
+msgstr "Aide contextuelle."
+
+#: src/salix_live_installer/gathergui.py:210
+msgid "General usage."
+msgstr "Utilisation."
+
+#: src/salix_live_installer/gathergui.py:212
+msgid "About Salix Installer."
+msgstr "À propos de l'installeur Salix."
+
+#: src/salix_live_installer/gathergui.py:216
+msgid "Exit Salix Installer."
+msgstr "Quitter l'installeur Salix."
+
+#: src/salix_live_installer/gathergui.py:218
+#: src/salix_live_installer/gathergui.py:221
+msgid "Launch Salix installation. This button will not be active until all settings are configured correctly."
+msgstr "Lancer l'installation de Salix. Ce bouton ne sera pas accessible tant que tous les paramétrages nécessaires n'auront pas été effectués."
+
+#: src/salix_live_installer/gathergui.py:226
+msgid "Access the time settings."
+msgstr "Accéder au paramétrage de l'heure."
+
+#: src/salix_live_installer/gathergui.py:228
+msgid "Use Network Time Protocol daemon to synchronize time via Internet."
+msgstr "Utiliser le Protocole d'Heure Réseau (Network Time Protocol) pour synchroniser l'heure via Internet."
+
+#: src/salix_live_installer/gathergui.py:230
+msgid "Cancel time settings."
+msgstr "Annuler les paramètres."
+
+#: src/salix_live_installer/gathergui.py:232
+msgid "Activate the time settings after options have been defined."
+msgstr "Activer les paramétrages de date, heure et fuseau horaire après les avoir définis ci-dessus."
+
+#: src/salix_live_installer/gathergui.py:234
+msgid "Set the date & time manually if you do not use NTP service."
+msgstr "Configurer la date et le temps manuellement si vous n'utilisez pas le service NTP."
+
+#: src/salix_live_installer/gathergui.py:236
+msgid "Set the time zone."
+msgstr "Configurer le fuseau horaire."
+
+#: src/salix_live_installer/gathergui.py:240
+msgid "Access the keyboard settings."
+msgstr "Accéder au paramétrage de la disposition du clavier."
+
+#: src/salix_live_installer/gathergui.py:242
+msgid "Highlight your favorite keyboard layout from this list before clicking on the 'Select keyboard' button."
+msgstr "À partir de cette liste, veuillez mettre la disposition de votre clavier en surbrillance avant de cliquer sur le bouton « Appliquer les paramètres »."
+
+#: src/salix_live_installer/gathergui.py:245
+msgid "Check this box if you want your numeric keypad to be activated during the boot process."
+msgstr "Cocher cette case si vous désirez que le bloc numérique soit activé au démarrage de l'ordinateur."
+
+#: src/salix_live_installer/gathergui.py:248
+msgid "Check this box if you want iBus to be activated during the boot process. IBus is an input method (IM) framework for multilingual input."
+msgstr "Cochez cette case si vous souhaitez que IBus soit activé au démarrage de votre système. IBus est un gestionnaire de méthode d'entrée (IM) pour saisie multilingue d'écritures complexes."
+
+#: src/salix_live_installer/gathergui.py:251
+msgid "Cancel keyboard layout selection."
+msgstr "Annuler le choix de disposition du clavier."
+
+#: src/salix_live_installer/gathergui.py:253
+msgid "Confirm your selection after highlighting the keyboard layout."
+msgstr "Confirmation du choix après avoir mis la disposition de clavier en surbrillance."
+
+#: src/salix_live_installer/gathergui.py:255
+msgid "This is the keyboard layout you have selected. 'None' will be displayed until you have confirmed that selection."
+msgstr "Voici la disposition du clavier que vous avez choisie. « Aucun » sera affiché jusqu'à la confirmation de votre sélection. "
+
+#: src/salix_live_installer/gathergui.py:260
+msgid "Access the language settings."
+msgstr "Accéder au paramétrage de la langue du système."
+
+#: src/salix_live_installer/gathergui.py:262
+msgid "Highlight your language from this list before clicking on the 'Select language' button."
+msgstr "À partir de cette liste, veuillez mettre votre choix de langue en surbrillance avant de cliquer sur le bouton « Appliquer les paramètres  »."
+
+#: src/salix_live_installer/gathergui.py:265
+msgid "This is the system language you have selected. 'None' will be displayed until you have confirmed that selection."
+msgstr "Voici la langue choisie. « Aucun » sera affiché jusqu'à la confirmation de votre sélection."
+
+#: src/salix_live_installer/gathergui.py:268
+msgid "Cancel language selection."
+msgstr "Annuler le choix de la langue."
+
+#: src/salix_live_installer/gathergui.py:270
+msgid "Confirm your selection after highlighting the system language."
+msgstr "Confirmation du choix après avoir mis une langue en surbrillance."
+
+#: src/salix_live_installer/gathergui.py:274
+msgid "Access the partitions settings."
+msgstr "Accéder au paramétrage des partitions."
+
+#: src/salix_live_installer/gathergui.py:276
+msgid "Highlight the partition from this list before clicking on the 'Select partition' button."
+msgstr "À partir de cette liste, veuillez mettre la partition en surbrillance avant de cliquer sur le bouton « Sélection de la partition »."
+
+#: src/salix_live_installer/gathergui.py:279
+msgid "Check this box if you want your external disk drives to be displayed in the list above."
+msgstr "Cocher cette case si vous désirez que vos disques durs externes apparaissent dans la liste ci-dessus."
+
+#: src/salix_live_installer/gathergui.py:282
+msgid "Confirm your selection after highlighting the partition."
+msgstr "Confirmer la sélection après avoir mis la partition désirée en surbrillance."
+
+#: src/salix_live_installer/gathergui.py:284
+msgid "The filesystem that will be used to format Salix main partition."
+msgstr "Le système de fichiers qui sera utilisé pour formater la partition principale de Salix."
+
+#: src/salix_live_installer/gathergui.py:286
+msgid "Click on the appropriate 'Select...' cell if you wish to modify the filesystem of a partition and/or if you wish to assign its mount point.You can either choose one of the suggested mount points or enter your own. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored."
+msgstr "Veuillez cliquer sur la cellule « Sélectionner… » adéquate pour modifier le formatage de la partition ou pour lui assigner un point de montage. Vous pouvez choisir l'un des points de montage suggérés ou en créer un de votre choix. Vous devez configurer toutes les partitions désirées avant de cliquer sur le bouton « Appliquer les paramètres ». Tout paramètre non-défini sera ignoré."
+
+#: src/salix_live_installer/gathergui.py:292
+msgid "Confirm the Linux partitions settings from the list."
+msgstr "Confirmer le paramétrage des partitions Linux effectué dans la liste ci-dessus."
+
+#: src/salix_live_installer/gathergui.py:294
+msgid "Click on the appropriate 'Select...' cell if you wish to assign the mount point of a partition. You must configure all the desired partitions before clicking on the 'Apply settings' button. Any unset parameters will be ignored."
+msgstr "Cliquer sur la cellule « Sélectionner… » adéquate pour assigner un point de montage à une partition. Vous devez paramétrer toutes les partitions désirées avant de cliquer sur le bouton « Appliquer les paramètres ». Tout paramètre non-défini sera ignoré."
+
+#: src/salix_live_installer/gathergui.py:299
+msgid "Confirm the Windows partitions settings from the list above."
+msgstr "Confirmer le paramétrage des partitions Windows effectué ci-dessus."
+
+#: src/salix_live_installer/gathergui.py:301
+msgid "Summary of your partitions settings."
+msgstr "Récapitulatif du paramétrage de vos partitions."
+
+#: src/salix_live_installer/gathergui.py:303
+msgid "Cancel all partitions settings."
+msgstr "Annuler le paramétrage de toutes les partitions."
+
+#: src/salix_live_installer/gathergui.py:307
+msgid "Access the users and passwords settings."
+msgstr "Accéder au paramétrage des identifiants et des mots de passe."
+
+#: src/salix_live_installer/gathergui.py:309
+msgid "Salix Live Installer has detected a LiveClone customized environment. You can transfer your existing LiveClone login accounts along with matching personal directories to the installation target or you can wipe them out and create a complete new login account instead."
+msgstr "L'installeur Salix Live a détecté un environnement LiveClone personnalisé. Si vous le désirez, vous pouvez transférer les comptes utilisateurs existants dans votre CD Live personnalisé ainsi que leurs répertoires personnels vers la nouvelle installation, ou bien vous pouvez les supprimer et les remplacer par des nouveaux comptes."
+
+#: src/salix_live_installer/gathergui.py:314
+msgid "Transfer existing users."
+msgstr "Transférer les utilisateurs existants."
+
+#: src/salix_live_installer/gathergui.py:316
+msgid "Cancel users transfer."
+msgstr "Annuler le transfert des utilisateurs."
+
+#: src/salix_live_installer/gathergui.py:318
+msgid "A Linux system can manage many registered users and requires each one to log in, and to produce some form of authentication (usually a login name coupled with a password) before allowing the user access to system resources."
+msgstr "Un système Linux peut gérer de nombreux utilisateurs différents et impose à chacun de s'identifier en produisant une authentification (généralement un identifiant couplé à un mot de passe) avant de leur permettre d'accéder aux ressources du système."
+
+#: src/salix_live_installer/gathergui.py:323
+msgid "Here you must define your login name which should only include alphanumeric characters with no space or upper case letters."
+msgstr "Ici, vous devez définir votre identifiant qui doit contenir uniquement des caractères alphanumériques sans espace ni majuscules."
+
+#: src/salix_live_installer/gathergui.py:326
+msgid "Choose a password to be coupled with your login name. Your password should include a mix of upper and lower case letters, numbers, and even symbols (such as @, !, and &)"
+msgstr "Veuillez choisir une phrase ou un mot de passe qui sera couplé à votre identifiant. Cette phrase ou mot de passe devrait inclure une combinaison de chiffres, de lettres minuscules et majuscules et même de symboles (tels que @, !, and &)"
+
+#: src/salix_live_installer/gathergui.py:330
+msgid "Here you must retype your password as a confirmation of your choice."
+msgstr "Ici vous devez saisir à nouveau le mot de passe afin de confirmer votre choix."
+
+#: src/salix_live_installer/gathergui.py:333
+#: src/salix_live_installer/gathergui.py:348
+msgid "Check this box if you want to be able to see the password you are typing."
+msgstr "Cocher cette case pour afficher le mot de passe lors de sa saisie."
+
+#: src/salix_live_installer/gathergui.py:336
+msgid "Create new user."
+msgstr "Créer le nouvel utilisateur."
+
+#: src/salix_live_installer/gathergui.py:338
+msgid "Cancel new user creation."
+msgstr "Annuler la création du nouvel utilisateur."
+
+#: src/salix_live_installer/gathergui.py:340
+msgid "On Linux systems, the superuser, or root, is a special user accountreserved for system administration. Here you must set its password. Remember, password should include a mix of upper and lower case letters, numbers, and even symbols (such as @, !, and &)"
+msgstr "Dans un système Linux, le Super Utilisateur, dit « root », est un compte spécial utilisé pour l'administration du système. Ici vous devez définir son mot de passe. Rappel : cette phrase ou mot de passe devrait inclure une combinaison de chiffres, de lettres minuscules et majuscules et même de symboles (tels que @, !, and &)"
+
+#: src/salix_live_installer/gathergui.py:345
+msgid "Here you must retype the superuser (root) password as a confirmation of your choice."
+msgstr "Ici vous devez saisir à nouveau le mot de passe du Super Utilisateur (root) pour confirmer votre choix."
+
+#: src/salix_live_installer/gathergui.py:351
+msgid "Apply new root password."
+msgstr "Confirmer le nouveau mot de passe administrateur (root)."
+
+#: src/salix_live_installer/gathergui.py:353
+msgid "Cancel new root password."
+msgstr "Annuler le nouveau mot de passe administrateur (root)."
+
+#: src/salix_live_installer/gathergui.py:357
+msgid "Access the packages selection."
+msgstr "Accéder à la sélection des logiciels."
+
+#: src/salix_live_installer/gathergui.py:359
+msgid ""
+"<b>Core installation:</b>\n"
+"Only the minimum essentials for a console system to start are included. A graphical environment is not provided. This is ideal if you are an experienced user and want to customize your installation for any specific purpose, such as a web server, file server etc."
+msgstr ""
+"<b>Installation en mode essentiel :</b>\n"
+"Seul le minimum vital pour obtenir un système démarrant en console est installé. Il n'y a aucun environnement graphique. Idéal si vous êtes un utilisateur expérimenté et que vous souhaitez personnaliser votre installation pour un usage spécifique tel qu'un serveur Web, un serveur de fichiers, etc."
+
+#: src/salix_live_installer/gathergui.py:366
+msgid ""
+"<b>Basic installation:</b>\n"
+"This installs only a basic desktop environment, with very few extra applications installed on top, such as a web browser and the gslapt package manager. Ideal for advanced users that would like to install a lightweight system and add their own choice of applications."
+msgstr ""
+"<b>Installation de base :</b>\n"
+"Seul un environnement de bureau de base sera installé, avec très peu d'applications supplémentaires, comme un navigateur Web et le gestionnaire d'installation de logiciel Gslapt. Idéal pour les utilisateurs avancés qui souhaitent installer un système léger et ajouter leur propre choix d'applications."
+
+#: src/salix_live_installer/gathergui.py:373
+msgid ""
+"<b>Full installation:</b>\n"
+"Salix Live Installer has detected a LiveClone customized environment. Core and Basic installation modes are therefore not available. \n"
+"You can only perform a full installation: all software included in your customized LiveClone will be installed."
+msgstr ""
+"<b>Installation complète :</b>\n"
+"L'installeur Salix Live a détecté un environnement LiveClone personnalisé. Par conséquent, les installations en mode essentiel ou en mode de base ne seront pas disponibles. \n"
+"Vous pouvez uniquement effectuer une installation complète : tous les logiciels qui sont inclus dans votre LiveClone personnalisé seront installés."
+
+#: src/salix_live_installer/gathergui.py:379
+msgid ""
+"<b>Full installation:</b>\n"
+"Everything that is included in the iso is installed. That includes a complete desktop environment and a complete selection of matching applications, always following the \"one application per task\" rationale."
+msgstr ""
+"<b>Installation complète :</b>\n"
+"Tout ce qui est inclus dans l'iso sera installé. Cela inclut un environnement de bureau complet et une sélection complète d'applications correspondantes, tout en respectant la philosophie « d'une application par tâche »."
+
+#: src/salix_live_installer/gathergui.py:384
+msgid "Confirm your packages selection."
+msgstr "Confirmer votre choix de paquets logiciels."
+
+#: src/salix_live_installer/gathergui.py:386
+msgid "Cancel all packages selection."
+msgstr "Annuler toute sélection de paquets logiciels."
+
+#: src/salix_live_installer/gathergui.py:390
+msgid "Access the bootloader selection."
+msgstr "Accéder à la sélection du chargeur de démarrage."
+
+#: src/salix_live_installer/gathergui.py:392
+msgid ""
+"<b>No bootloader:</b>\n"
+"This is not recommended unless you already have another bootloader and know how to add Salix to it. Salix will not boot without a bootloader."
+msgstr ""
+"<b>Aucun chargeur de démarrage :</b>\n"
+"Ce n'est pas recommandé à moins que vous ayez déjà un autre chargeur de démarrage et sachiez comment y ajouter Salix. Salix ne démarrera pas sans un chargeur de démarrage."
+
+#: src/salix_live_installer/gathergui.py:396
+msgid ""
+"<b>LiLo:</b>\n"
+"Basic Linux bootloader that simply do the job with a nice graphical menu."
+msgstr ""
+"<b>LiLo :</b>\n"
+"Chargeur de démarrage basic pour Linux qui fait simplement le travail qu'on lui demande avec un joli menu graphique."
+
+#: src/salix_live_installer/gathergui.py:399
+msgid ""
+"<b>Grub2:</b>\n"
+"Full featured bootloader with editable graphical menu."
+msgstr ""
+"<b>Grub2 :</b>\n"
+"La Rolls Royes des chargeurs de démarrage avec un tas de fonctionnalités dont la possibilité d'éditer le menu graphique."
+
+#: src/salix_live_installer/gathergui.py:402
+msgid "Confirm your bootloader selection."
+msgstr "Confirmer votre choix du chargeur de démarrage."
+
+#: src/salix_live_installer/gathergui.py:404
+msgid "Cancel all bootloader selection."
+msgstr "Annuler la sélection du chargeur de démarrage."
+
+#: src/salix_live_installer/gathergui.py:428
+#: src/salix_live_installer/gathergui.py:604
+msgid "Select..."
+msgstr "Sélectionner..."
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "January"
+msgstr "janvier"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "February"
+msgstr "février"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "March"
+msgstr "mars"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "April"
+msgstr "avril"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "May"
+msgstr "mai"
+
+#: src/salix_live_installer/gathergui.py:437
+msgid "June"
+msgstr "juin"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "July"
+msgstr "juillet"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "August"
+msgstr "août"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "September"
+msgstr "septembre"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "October"
+msgstr "octobre"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "November"
+msgstr "novembre"
+
+#: src/salix_live_installer/gathergui.py:438
+msgid "December"
+msgstr "décembre"
+
+#: src/salix_live_installer/gathergui.py:451
+#: src/salix_live_installer/gathergui.py:873
+#: src/salix_live_installer/gathergui.py:906
+msgid "Do not format"
+msgstr "Ne pas formater"
+
+#: src/salix_live_installer/gathergui.py:459
+#: src/salix_live_installer/gathergui.py:470
+#: src/salix_live_installer/gathergui.py:873
+#: src/salix_live_installer/gathergui.py:875
+msgid "Do not mount"
+msgstr "Ne pas monter"
+
+#: src/salix_live_installer/gathergui.py:784
+msgid "Detected Swap partitions:"
+msgstr "Partitionss d'échange détectées :"
+
+#: src/salix_live_installer/gathergui.py:785
+msgid ""
+"Salix Live Installer was not able to detect a valid Swap partition on your system.\n"
+"A Swap partition could improve overall performances. You may want to exit Salix Live Installer now and use Gparted, or any other partitioning tool of your choice, to first create a Swap partition before resuming with Salix Live Installer process."
+msgstr ""
+"L'installeur Salix Live n'a détecté aucune partition d'échange (swap) valide dans votre système.\n"
+"Une partition d'échange pourrait fortement améliorer les performances de votre système. Vous devriez maintenant quitter l'installeur Salix Live et utiliser Gparted ou tout autre utilitaire de partitionnement de votre choix afin de créer une partition d'échange avant de reprendre le processus d'installation de Salix."
+
+#: src/salix_live_installer/gathergui.py:797
+msgid "{device} will be automatically used as swap."
+msgstr "{device} sera activé comme partition d'échange."
+
+#: src/salix_live_installer/gathergui.py:851
+#: src/salix_live_installer/gathergui.py:959
+#: src/salix_live_installer/gathergui.py:1022
+msgid "{device} will be mounted as {mountpoint} without formatting."
+msgstr "{device} sera monté sur {mountpoint} sans formattage."
+
+#: src/salix_live_installer/gathergui.py:856
+#: src/salix_live_installer/gathergui.py:964
+msgid "{device} will be formatted with {fs} and will be mounted as {mountpoint}."
+msgstr "{device} sera formaté en {fs} et sera montré sur {mountpoint}."
+
+#: src/salix_live_installer/gathergui.py:948
+#: src/salix_live_installer/gathergui.py:1012
+msgid "No partition to mount"
+msgstr "Aucune partition à monter"
+
+#: src/salix_live_installer/gathergui.py:1038
+#: src/salix_live_installer/gathergui.py:1039
+#: src/salix_live_installer/gathergui.py:1040
+msgid "No partition"
+msgstr "Aucune partition"
+
+#: src/salix_live_installer/gathergui.py:1091
+msgid "Yes"
+msgstr "Oui"
+
+#: src/salix_live_installer/gathergui.py:1134
+msgid "Less than {min} characters"
+msgstr "Moins de {min} caractères"
+
+#: src/salix_live_installer/gathergui.py:1141
+msgid "No upper case letter..."
+msgstr "Pas de majuscule…"
+
+#: src/salix_live_installer/gathergui.py:1145
+msgid "No number..."
+msgstr "Pas de nombre…"
+
+#: src/salix_live_installer/gathergui.py:1149
+msgid "No punctuation..."
+msgstr "Pas de ponctuation…"
+
+#: src/salix_live_installer/gathergui.py:1153
+msgid "No symbol..."
+msgstr "Pas de symbole…"
+
+#: src/salix_live_installer/gathergui.py:1156
+msgid "Satisfactory!"
+msgstr "Satisfaisant !"
+
+#: src/salix_live_installer/gathergui.py:1177
+msgid "Password strength:"
+msgstr "Force du mot de passe :"
+
+#: src/salix_live_installer/gathergui.py:1189
+msgid "Your login name is empty."
+msgstr "Votre saisie d'identifiant est vide."
+
+#: src/salix_live_installer/gathergui.py:1189
+#: src/salix_live_installer/gathergui.py:1192
+#: src/salix_live_installer/gathergui.py:1198
+#: src/salix_live_installer/gathergui.py:1201
+msgid "Please verify and correct!"
+msgstr "Veuillez vérifier et corriger !"
+
+#: src/salix_live_installer/gathergui.py:1192
+msgid "Your login name should only contain alphanumeric lowercase characters with no space and should start with a letter."
+msgstr "Votre identifiant doit contenir uniquement des caractères alphanumériques sans espace ni majuscules et commencer par une lettre. "
+
+#: src/salix_live_installer/gathergui.py:1198
+msgid "Your password entry is empty."
+msgstr "Votre saisie de mot de passe est vide."
+
+#: src/salix_live_installer/gathergui.py:1201
+msgid "Your two password entries do not match."
+msgstr "Vos deux saisies de mot de passe ne sont pas identiques."
+
+#: src/salix_live_installer/gathergui.py:1332
+msgid "You are about to install Salix with the following settings:"
+msgstr "Vous vous apprêtez à installer Salix avec les paramètres suivants :"
+
+#: src/salix_live_installer/gathergui.py:1333
+msgid "Date and Time:"
+msgstr "Date et heure :"
+
+#: src/salix_live_installer/gathergui.py:1334
+msgid "- Time zone: {tz}"
+msgstr "- Fuseau horaire : {tz}"
+
+#: src/salix_live_installer/gathergui.py:1340
+msgid "Keyboard:"
+msgstr "Clavier :"
+
+#: src/salix_live_installer/gathergui.py:1341
+msgid "- Layout: {layout}"
+msgstr "- Disposition clavier : {layout}"
+
+#: src/salix_live_installer/gathergui.py:1343
+#: src/salix_live_installer/gathergui.py:1347
+msgid "activated"
+msgstr "activé"
+
+#: src/salix_live_installer/gathergui.py:1345
+#: src/salix_live_installer/gathergui.py:1349
+msgid "deactivated"
+msgstr "désactivé"
+
+#: src/salix_live_installer/gathergui.py:1350
+msgid "- Numlock: {nl}, Ibus: {ibus}"
+msgstr "- Pavé numérique : {nl}, Ibus : {ibus}"
+
+#: src/salix_live_installer/gathergui.py:1351
+msgid "System language:"
+msgstr "Langue du système :"
+
+#: src/salix_live_installer/gathergui.py:1353
+msgid "Partitions:"
+msgstr "Partitions :"
+
+#: src/salix_live_installer/gathergui.py:1362
+#: src/salix_live_installer/gathergui.py:1364
+msgid "Standard User:"
+msgstr "Utilisateur :"
+
+#: src/salix_live_installer/gathergui.py:1362
+msgid "Using LiveClone login."
+msgstr "Utilisation des identifiants de LiveClone."
+
+#: src/salix_live_installer/gathergui.py:1365
+msgid "Packages:"
+msgstr "Paquets logiciels :"
+
+#: src/salix_live_installer/gathergui.py:1366
+msgid "You have chosen the {mode} installation mode."
+msgstr "Vous avez sélectionné le mode d'installation {mode}."
+
+#: src/salix_live_installer/gathergui.py:1369
+msgid "No bootloader"
+msgstr "Aucun chargeur de démarrage"
+
+#: src/salix_live_installer/gathergui.py:1370
+msgid "Bootloader choosen: {bootloader}"
+msgstr "Chargeur de démarrage choisi : {bootloader}"
+
+#: src/salix_live_installer/gathergui.py:1421
+msgid "Installation process completed successfully..."
+msgstr "L'installation s'est déroulée avec succès..."
+
+#: data/salix-live-installer.desktop.in.h:1
+msgid "Install Salix on your computer from a SalixLive session"
+msgstr "Installer Salix sur son ordinateur à partir d'une session SalixLive"
+
+#: data/salix-live-installer.desktop.in.h:2
+msgid "Salix Installer"
+msgstr "Installeur Salix"
+

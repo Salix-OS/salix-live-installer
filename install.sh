@@ -1,45 +1,32 @@
 #!/bin/sh
-
-VER=$(grep 'version =' src/salix-live-installer.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
-
 cd $(dirname $0)
-install -d -m 755 $DESTDIR/usr/doc/salix-live-installer-$VER
-install -d -m 755 $DESTDIR/install
-install -d -m 755 $DESTDIR/usr/sbin
-install -d -m 755 $DESTDIR/usr/share/applications
-install -d -m 755 $DESTDIR/usr/share/icons/hicolor/24x24/apps
-install -d -m 755 $DESTDIR/usr/share/icons/hicolor/64x64/apps
-install -d -m 755 $DESTDIR/usr/share/icons/hicolor/128x128/apps
-install -d -m 755 $DESTDIR/usr/share/icons/hicolor/scalable/apps
-install -d -m 755 $DESTDIR/usr/share/salix-live-installer
-
-install -m 755 src/salix-live-installer.py $DESTDIR/usr/sbin/salix-live-installer.py
-install -m 644 src/world-timezones.png \
-$DESTDIR/usr/share/salix-live-installer
-install -m 644 src/salix-live-installer.glade \
-$DESTDIR/usr/share/salix-live-installer
-install -m 644 src/salix-live-installer.desktop \
-$DESTDIR/usr/share/applications/
-install -m 644 src/salix-live-installer-kde.desktop \
-$DESTDIR/usr/share/applications/
-install -m 644 icons/salix-live-installer-24.png \
-$DESTDIR/usr/share/icons/hicolor/24x24/apps/salix-live-installer.png
-install -m 644 icons/salix-live-installer-64.png \
-$DESTDIR/usr/share/icons/hicolor/64x64/apps/salix-live-installer.png
-install -m 644 icons/salix-live-installer-128.png \
-$DESTDIR/usr/share/icons/hicolor/128x128/apps/salix-live-installer.png
-install -m 644 icons/salix-live-installer.svg \
-$DESTDIR/usr/share/icons/hicolor/scalable/apps/
-install -m 644 src/salix-live-installer.png \
-$DESTDIR/usr/share/salix-live-installer/
-
-for i in `ls po/*.mo|sed "s|po/\(.*\).mo|\1|"`; do
-	install -d -m 755 $DESTDIR/usr/share/locale/${i}/LC_MESSAGES
-	install -m 644 po/${i}.mo \
-	$DESTDIR/usr/share/locale/${i}/LC_MESSAGES/salix-live-installer.mo
+if [ ! -d build ]; then
+  echo "Run compile.sh first" >&2
+  exit 1
+fi
+if [ -z "$DESTDIR" ] || [ ! -d "$DESTDIR" ]; then
+  echo "DESTDIR variable not set or directory does not exist" >&2
+  exit 2
+fi
+VER=$(python -c "
+  import os
+  os.chdir('src')
+  import launcher as l
+  print l.__version__,
+  ")
+install -D -m 755 xsu $DESTDIR/usr/bin/
+install -D -m 755 build/salix-live-installer $DESTDIR/usr/sbin/
+install -D -m 644 build/salix-live-installer.desktop $DESTDIR/usr/share/applications/
+for size in 24 64 128; do
+  install -D -m 644 icons/salix-live-installer-${size}.png $DESTDIR/usr/share/icons/hicolor/${size}x${size}/apps/salix-live-installer.png
+install -D -m 644 icons/salix-live-installer.svg $DESTDIR/usr/share/icons/hicolor/scalable/apps/
+for d in resources salix_live_installer salix_livetools_library
+  install -D -m 644 src/$d/*.py $DESTDIR/usr/share/salix-live-installer/$d/
+install -D -m 755 src/launcher.py $DESTDIR/usr/share/salix-live-installer/
+for m in build/*.mo; do
+  l=$(basename $m .mo)
+	install -D -m 644 $m $DESTDIR/usr/share/locale/$l/LC_MESSAGES/salix-live-installer.mo
 done
-
-for i in `ls docs`; do
-	install -m 644 docs/${i} \
-	$DESTDIR/usr/doc/salix-live-installer-$VER/
+for f in docs/*; do
+	install -D -m 644 $f $DESTDIR/usr/doc/salix-live-installer-$VER/
 done

@@ -401,7 +401,7 @@ MA 02110-1301, USA.</property>
                           <object class="GtkLabel" id="label17">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Launch Salix _installation </property>
+                            <property name="label" translatable="yes">Launch Salix _installation</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -864,6 +864,7 @@ MA 02110-1301, USA.</property>
                                   <object class="GtkLabel" id="label26">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="ypad">1</property>
                                     <property name="label" translatable="yes">Boot_loader</property>
                                     <property name="use_underline">True</property>
                                     <property name="mnemonic_widget">packages_tab</property>
@@ -1374,7 +1375,8 @@ Contextual help triggered by the mouse position is available each step of the wa
                                           <object class="GtkLabel" id="label42">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="label" translatable="yes"> hour : min : sec </property>
+                                            <property name="xpad">10</property>
+                                            <property name="label" translatable="yes">hour : min : sec</property>
                                             <property name="use_markup">True</property>
                                           </object>
                                         </child>
@@ -1410,6 +1412,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="xalign">1</property>
+                                                <property name="xpad">5</property>
                                                 <property name="label" translatable="yes">Year:</property>
                                               </object>
                                               <packing>
@@ -1423,6 +1426,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="xalign">1</property>
+                                                <property name="xpad">5</property>
                                                 <property name="label" translatable="yes">Month:</property>
                                               </object>
                                               <packing>
@@ -1436,6 +1440,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="xalign">1</property>
+                                                <property name="xpad">5</property>
                                                 <property name="label" translatable="yes">Day:</property>
                                               </object>
                                               <packing>
@@ -1571,7 +1576,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <object class="GtkLabel" id="label41">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Time zone: </property>
+                                        <property name="label" translatable="yes">Time zone:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1595,6 +1600,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">True</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -1785,7 +1791,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <object class="GtkLabel" id="label18">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Select _keyboard </property>
+                                        <property name="label" translatable="yes">Apply _settings</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">keyboard_apply</property>
                                       </object>
@@ -1887,7 +1893,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="ibus_checkbutton">
-                                <property name="label" translatable="yes">Activate IBus </property>
+                                <property name="label" translatable="yes">Activate IBus</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -1930,7 +1936,8 @@ Contextual help triggered by the mouse position is available each step of the wa
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Selected keyboard layout: &lt;/b&gt;</property>
+                                        <property name="xpad">10</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;Selected keyboard layout:&lt;/b&gt;</property>
                                         <property name="use_markup">True</property>
                                       </object>
                                       <packing>
@@ -1949,6 +1956,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <packing>
                                         <property name="expand">True</property>
                                         <property name="fill">True</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -2060,7 +2068,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <object class="GtkLabel" id="label12">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Select _language </property>
+                                        <property name="label" translatable="yes">Apply _settings</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">locale_apply</property>
                                       </object>
@@ -2155,7 +2163,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Selected system language: &lt;/b&gt;</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;Selected system language:&lt;/b&gt;</property>
                                         <property name="use_markup">True</property>
                                       </object>
                                       <packing>
@@ -2174,6 +2182,7 @@ Contextual help triggered by the mouse position is available each step of the wa
                                       <packing>
                                         <property name="expand">True</property>
                                         <property name="fill">True</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -2496,8 +2505,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="main_format_label">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="xalign">1</property>
-                                        <property name="label" translatable="yes">Format with: </property>
+                                        <property name="label" translatable="yes">Format with:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2521,6 +2529,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -2589,7 +2598,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label21">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Select _partition </property>
+                                        <property name="label" translatable="yes">Select _partition</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">main_partition_apply</property>
                                       </object>
@@ -2633,7 +2642,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Please configure your other Linux partition(s):&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">&lt;b&gt;Please configure your other Linux partitions:&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="wrap">True</property>
                           </object>
@@ -2816,7 +2825,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label24">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Apply _settings </property>
+                                        <property name="label" translatable="yes">Apply _settings</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">linux_partition_apply</property>
                                       </object>
@@ -2862,7 +2871,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Please configure your Windows partition(s):&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">&lt;b&gt;Please configure your Windows partitions:&lt;/b&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="wrap">True</property>
                             <property name="width_chars">54</property>
@@ -3023,7 +3032,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label19">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Apply _settings </property>
+                                        <property name="label" translatable="yes">Apply _settings</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">windows_partition_apply</property>
                                       </object>
@@ -3388,7 +3397,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label29">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Enter login: </property>
+                                        <property name="label" translatable="yes">Enter login:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3410,6 +3419,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3429,7 +3439,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label30">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Enter password: </property>
+                                        <property name="label" translatable="yes">Enter password:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3452,7 +3462,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
-                                        <property name="padding">2</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3487,7 +3497,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label31">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Re-enter password: </property>
+                                        <property name="label" translatable="yes">Re-enter password:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3509,7 +3519,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
-                                        <property name="padding">2</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3549,7 +3559,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;User created: &lt;/b&gt;</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;User created:&lt;/b&gt;</property>
                                         <property name="use_markup">True</property>
                                       </object>
                                       <packing>
@@ -3568,7 +3578,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">True</property>
                                         <property name="fill">True</property>
-                                        <property name="padding">2</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3664,7 +3674,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label33">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Enter root password: </property>
+                                        <property name="label" translatable="yes">Enter root password:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3687,7 +3697,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
-                                        <property name="padding">2</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3722,7 +3732,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <object class="GtkLabel" id="label34">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Re-enter root password: </property>
+                                        <property name="label" translatable="yes">Re-enter root password:</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3744,7 +3754,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">False</property>
                                         <property name="fill">False</property>
-                                        <property name="padding">2</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -3803,6 +3813,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                                       <packing>
                                         <property name="expand">True</property>
                                         <property name="fill">True</property>
+                                        <property name="padding">5</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -4360,7 +4371,7 @@ If you already have all the needed partitions, please click on the button 'Do no
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="nobootloader_radiobutton">
-                            <property name="label" translatable="yes">None. I already have one</property>
+                            <property name="label" translatable="yes">No bootloader. I already have one</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -4554,7 +4565,7 @@ If you already have all the needed partitions, please click on the button 'Do no
           <object class="GtkLabel" id="install_progress_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Please be patient, Salix installation is in progress... </property>
+            <property name="label" translatable="yes">Please be patient, Salix installation is in progress...</property>
           </object>
           <packing>
             <property name="expand">True</property>

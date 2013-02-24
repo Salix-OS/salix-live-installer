@@ -6,6 +6,8 @@ Functions to retrieve kernel parameters:
   - hasKernelParam
   - getKernelParamValue
 """
+__copyright__ = 'Copyright 2011-2013, Salix OS'
+__license__ = 'GPL2+'
 import os
 
 def hasKernelParam(param):
