@@ -118,7 +118,7 @@ def getUsedSize(path, blocksize = None, withHuman = True):
   Returns a tuple with (size, sizeHuman)
   """
   if blocksize:
-    cmd = """(echo -n '('; find '{0}' -type f -print0 | du -l -B {1} --files0-from=- | cut -f1 | tr "\\n" "+"; echo '0)*{1}') | bc""".format(path, blocksize)
+    cmd = """$((($(find '{0}' -type f -print0 | du -l -B {1} --files0-from=- | cut -f1 | tr "\\n" "+")0)*{1}))""".format(path, blocksize)
     lines = execGetOutput(cmd, shell = True)
     size = lines[-1]
   else:
