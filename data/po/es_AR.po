@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 17:07+0100\n"
+"POT-Creation-Date: 2013-02-24 19:12+0100\n"
 "PO-Revision-Date: 2011-12-01 18:00+0000\n"
 "Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,32 +141,24 @@ msgstr "Usar servicio NTP"
 msgid "<b>Please select your keyboard layout:</b>"
 msgstr "<b>Por favor, seleccione su distribución de teclado:</b>"
 
-#: src/resources/salix-live-installer.glade:1794
-#: src/resources/salix-live-installer.glade:2071
-#: src/resources/salix-live-installer.glade:2828
-#: src/resources/salix-live-installer.glade:3035
-#, fuzzy
-msgid "Apply _settings"
-msgstr "Aplicar _valores"
-
-#: src/resources/salix-live-installer.glade:1878
+#: src/resources/salix-live-installer.glade:1848
 msgid "Activate numlock"
 msgstr "Activar numlock"
 
-#: src/resources/salix-live-installer.glade:1896
+#: src/resources/salix-live-installer.glade:1866
 #, fuzzy
 msgid "Activate IBus"
 msgstr "Activar IBus"
 
-#: src/resources/salix-live-installer.glade:1940
+#: src/resources/salix-live-installer.glade:1910
 #, fuzzy
 msgid "<b>Selected keyboard layout:</b>"
 msgstr "<b>Distribución de teclado seleccionada: </b>"
 
-#: src/resources/salix-live-installer.glade:1954
-#: src/resources/salix-live-installer.glade:2180
-#: src/resources/salix-live-installer.glade:3576
-#: src/resources/salix-live-installer.glade:3811
+#: src/resources/salix-live-installer.glade:1924
+#: src/resources/salix-live-installer.glade:2120
+#: src/resources/salix-live-installer.glade:3516
+#: src/resources/salix-live-installer.glade:3751
 #: src/salix_live_installer/gathergui.py:652
 #: src/salix_live_installer/gathergui.py:697
 #: src/salix_live_installer/gathergui.py:1082
@@ -174,16 +166,16 @@ msgstr "<b>Distribución de teclado seleccionada: </b>"
 msgid "None"
 msgstr "Ninguno"
 
-#: src/resources/salix-live-installer.glade:2008
+#: src/resources/salix-live-installer.glade:1978
 msgid "<b>Please select your system language:</b>"
 msgstr "<b>Por favor, seleccione el idioma del sistema:</b>"
 
-#: src/resources/salix-live-installer.glade:2166
+#: src/resources/salix-live-installer.glade:2106
 #, fuzzy
 msgid "<b>Selected system language:</b>"
 msgstr "<b>Idioma del sistema seleccionado: </b>"
 
-#: src/resources/salix-live-installer.glade:2234
+#: src/resources/salix-live-installer.glade:2174
 msgid ""
 "<b>Important!</b>\n"
 "\n"
@@ -219,46 +211,46 @@ msgstr ""
 "botón 'No modificar el esquema de particiones' para continuar sin alterar el "
 "esquema de aprticiones actual."
 
-#: src/resources/salix-live-installer.glade:2270
+#: src/resources/salix-live-installer.glade:2210
 msgid "Modify partition scheme"
 msgstr "Modificar el esquema de particiones"
 
-#: src/resources/salix-live-installer.glade:2314
+#: src/resources/salix-live-installer.glade:2254
 msgid "Do not modify partition scheme"
 msgstr "No modificar el esquema de particiones"
 
-#: src/resources/salix-live-installer.glade:2367
+#: src/resources/salix-live-installer.glade:2307
 msgid "<b>Please select Salix main partition:</b>"
 msgstr "<b>Por favor, seleccione la partición principal de Salix:</b>"
 
-#: src/resources/salix-live-installer.glade:2399
-#: src/resources/salix-live-installer.glade:2677
-#: src/resources/salix-live-installer.glade:2907
+#: src/resources/salix-live-installer.glade:2339
+#: src/resources/salix-live-installer.glade:2617
+#: src/resources/salix-live-installer.glade:2847
 msgid "Disk"
 msgstr "Disco"
 
-#: src/resources/salix-live-installer.glade:2411
-#: src/resources/salix-live-installer.glade:2688
-#: src/resources/salix-live-installer.glade:2918
+#: src/resources/salix-live-installer.glade:2351
+#: src/resources/salix-live-installer.glade:2628
+#: src/resources/salix-live-installer.glade:2858
 msgid "Partition"
 msgstr "Partición"
 
-#: src/resources/salix-live-installer.glade:2423
-#: src/resources/salix-live-installer.glade:2700
-#: src/resources/salix-live-installer.glade:2930
+#: src/resources/salix-live-installer.glade:2363
+#: src/resources/salix-live-installer.glade:2640
+#: src/resources/salix-live-installer.glade:2870
 msgid "Size"
 msgstr "Tamaño"
 
-#: src/resources/salix-live-installer.glade:2435
-#: src/resources/salix-live-installer.glade:2942
+#: src/resources/salix-live-installer.glade:2375
+#: src/resources/salix-live-installer.glade:2882
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: src/resources/salix-live-installer.glade:2456
+#: src/resources/salix-live-installer.glade:2396
 msgid "Display attached external devices"
 msgstr "Mostrar los dispositivos externos conectados"
 
-#: src/resources/salix-live-installer.glade:2478
+#: src/resources/salix-live-installer.glade:2418
 msgid ""
 "From the above partitions found on your system, please select the one where "
 "Salix' main directory tree (/) should be installed.\n"
@@ -270,35 +262,35 @@ msgstr ""
 "<b>¡Advertencia!</b> Esta partición será reformateada y su contenido borrado "
 "permanentemente."
 
-#: src/resources/salix-live-installer.glade:2508
+#: src/resources/salix-live-installer.glade:2448
 #, fuzzy
 msgid "Format with:"
 msgstr "Dar formato con:"
 
-#: src/resources/salix-live-installer.glade:2601
+#: src/resources/salix-live-installer.glade:2541
 #, fuzzy
 msgid "Select _partition"
 msgstr "Seleccionar _partición"
 
-#: src/resources/salix-live-installer.glade:2645
+#: src/resources/salix-live-installer.glade:2585
 #, fuzzy
 msgid "<b>Please configure your other Linux partitions:</b>"
 msgstr "<b>Por favor, configure su(s) otra(s) particion(es) Linux:</b>"
 
-#: src/resources/salix-live-installer.glade:2712
+#: src/resources/salix-live-installer.glade:2652
 msgid "Current FS"
 msgstr "Sistema de archivo actual"
 
-#: src/resources/salix-live-installer.glade:2724
+#: src/resources/salix-live-installer.glade:2664
 msgid "Format as:"
 msgstr "Dar formato como:"
 
-#: src/resources/salix-live-installer.glade:2747
-#: src/resources/salix-live-installer.glade:2954
+#: src/resources/salix-live-installer.glade:2687
+#: src/resources/salix-live-installer.glade:2894
 msgid "Mount as:"
 msgstr "Montar como:"
 
-#: src/resources/salix-live-installer.glade:2783
+#: src/resources/salix-live-installer.glade:2723
 msgid ""
 "It appears that you have more than one Linux partition. If you wish, you can "
 "now spread Salix directory tree on separate partitions. In fact, it is "
@@ -308,12 +300,18 @@ msgstr ""
 "árbol de directorios de Salix en particiones separadas. De hecho, es "
 "altamente recomendable tener el directorio /home en una partición separada"
 
-#: src/resources/salix-live-installer.glade:2874
+#: src/resources/salix-live-installer.glade:2768
+#: src/resources/salix-live-installer.glade:2975
+#, fuzzy
+msgid "Apply _settings"
+msgstr "Aplicar _valores"
+
+#: src/resources/salix-live-installer.glade:2814
 #, fuzzy
 msgid "<b>Please configure your Windows partitions:</b>"
 msgstr "<b>Por favor, configure su(s) particion(es) Windows:</b>"
 
-#: src/resources/salix-live-installer.glade:2990
+#: src/resources/salix-live-installer.glade:2930
 msgid ""
 "It appears that some of your partitions have a Windows formatting. Here you "
 "can set a mount point for each one if you wish them to be accessible in "
@@ -323,112 +321,112 @@ msgstr ""
 "establecer un punto de montaje para cada una, si desea que sean accesibles "
 "en el sistema Salix."
 
-#: src/resources/salix-live-installer.glade:3090
+#: src/resources/salix-live-installer.glade:3030
 msgid "<b>Salix main partition:</b>"
 msgstr "<b>Partición principal de Salix:</b>"
 
-#: src/resources/salix-live-installer.glade:3120
+#: src/resources/salix-live-installer.glade:3060
 msgid "<b>Other Linux partitions:</b>"
 msgstr "<b>Otras particiones Linux:</b>"
 
-#: src/resources/salix-live-installer.glade:3149
+#: src/resources/salix-live-installer.glade:3089
 msgid "<b>Windows partitions:</b>"
 msgstr "<b>Particiones Windows:</b>"
 
-#: src/resources/salix-live-installer.glade:3178
+#: src/resources/salix-live-installer.glade:3118
 msgid "<b>Swap partitions:</b>"
 msgstr "<b>Particiones de intercambio:</b>"
 
-#: src/resources/salix-live-installer.glade:3279
+#: src/resources/salix-live-installer.glade:3219
 msgid "<b>Transfer LiveClone login accounts</b>"
 msgstr "<b>Transferir cuentas de inicio de sesión de LiveClone</b>"
 
-#: src/resources/salix-live-installer.glade:3381
+#: src/resources/salix-live-installer.glade:3321
 msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Por favor, crear un nuevo usuario estándar:</b>"
 
-#: src/resources/salix-live-installer.glade:3400
+#: src/resources/salix-live-installer.glade:3340
 #, fuzzy
 msgid "Enter login:"
 msgstr "Ingresar usuario:"
 
-#: src/resources/salix-live-installer.glade:3442
+#: src/resources/salix-live-installer.glade:3382
 #, fuzzy
 msgid "Enter password:"
 msgstr "Ingresar contraseña:"
 
-#: src/resources/salix-live-installer.glade:3500
+#: src/resources/salix-live-installer.glade:3440
 #, fuzzy
 msgid "Re-enter password:"
 msgstr "Re-ingresar contraseña:"
 
-#: src/resources/salix-live-installer.glade:3528
-#: src/resources/salix-live-installer.glade:3763
+#: src/resources/salix-live-installer.glade:3468
+#: src/resources/salix-live-installer.glade:3703
 msgid "Do not hide"
 msgstr "No ocultar"
 
-#: src/resources/salix-live-installer.glade:3562
+#: src/resources/salix-live-installer.glade:3502
 #, fuzzy
 msgid "<b>User created:</b>"
 msgstr "<b>Usuario creado: </b>"
 
-#: src/resources/salix-live-installer.glade:3658
+#: src/resources/salix-live-installer.glade:3598
 msgid "<b>Please create a new administrator's password:</b>"
 msgstr "<b>Por favor, crear una nueva contraseña del administrador:</b>"
 
-#: src/resources/salix-live-installer.glade:3677
+#: src/resources/salix-live-installer.glade:3617
 #, fuzzy
 msgid "Enter root password:"
 msgstr "Ingresar la contraseña de root: "
 
-#: src/resources/salix-live-installer.glade:3735
+#: src/resources/salix-live-installer.glade:3675
 #, fuzzy
 msgid "Re-enter root password:"
 msgstr "Re-ingresar la contraseña de root: "
 
-#: src/resources/salix-live-installer.glade:3797
+#: src/resources/salix-live-installer.glade:3737
 msgid "<b>Password created: </b>"
 msgstr "<b>Contraseña creada: </b>"
 
-#: src/resources/salix-live-installer.glade:3901
+#: src/resources/salix-live-installer.glade:3841
 msgid "<b>Please select your installation mode:</b>"
 msgstr "<b>Por favor, seleccione el modo de instalación:</b>"
 
-#: src/resources/salix-live-installer.glade:3969
+#: src/resources/salix-live-installer.glade:3909
 msgid "Core"
 msgstr "Núcleo"
 
-#: src/resources/salix-live-installer.glade:4023
+#: src/resources/salix-live-installer.glade:3963
 msgid "Basic"
 msgstr "Básico"
 
-#: src/resources/salix-live-installer.glade:4116
+#: src/resources/salix-live-installer.glade:4056
 msgid "Full"
 msgstr "Completo"
 
-#: src/resources/salix-live-installer.glade:4361
+#: src/resources/salix-live-installer.glade:4301
 #, fuzzy
 msgid "<b>Please select your bootloader:</b>"
 msgstr "<b>Por favor, seleccione el modo de instalación:</b>"
 
-#: src/resources/salix-live-installer.glade:4374
+#: src/resources/salix-live-installer.glade:4314
 msgid "No bootloader. I already have one"
 msgstr ""
 
-#: src/resources/salix-live-installer.glade:4520
+#: src/resources/salix-live-installer.glade:4462
 msgid "Salix installation"
 msgstr "Instalación de Salix"
 
-#: src/resources/salix-live-installer.glade:4568
+#: src/resources/salix-live-installer.glade:4510
 #, fuzzy
 msgid "Please be patient, Salix installation is in progress..."
 msgstr "Por favor, sea paciente. La instalación de Salix se está realizando..."
 
-#: src/resources/salix-live-installer.glade:4693
+#: src/resources/salix-live-installer.glade:4635
 msgid "Confirmation needed"
 msgstr "Se necesita confirmación"
 
-#: src/resources/salix-live-installer.glade:4706
+#: src/resources/salix-live-installer.glade:4648
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>¿Quiere continuar con esto?</b>"
 

@@ -1034,10 +1034,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.cfg.win_partitions = None
     self.partitions_settings()
   def recap_partition_settings(self):
-    self.MainPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_main_partition_message(False)))
-    self.LinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>")))
-    self.WinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>")))
-    self.SwapPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>")))
+    self.MainPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_main_partition_message(False).strip()))
+    self.LinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_linux_partitions_message(False, "<i>" + _("No partition") + "</i>").strip()))
+    self.WinPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_windows_partitions_message(False, "<i>" + _("No partition") + "</i>").strip()))
+    self.SwapPartRecapLabel.set_markup("<b>{0}</b>".format(self.get_swap_partitions_message(False, None ,"<i>" +  _("No partition") + "</i>").strip()))
     self.cfg.configurations['partitions'] = True
     self.PartitionCheck.show()
     self.PartitionCheckMarker.hide()
@@ -1281,7 +1281,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.NobootloaderRadioButton.set_active(self.cfg.bootloader == 'none')
     self.LiloRadioButton.set_sensitive(not self.cfg.configurations['bootloader'])
     self.LiloRadioButton.set_active(self.cfg.bootloader == 'lilo')
-    self.Grub2RadioButton.set_sensitive(not self.cfg.configurations['bootloader'])
+    self.Grub2RadioButton.set_sensitive(not self.cfg.configurations['bootloader'] and self.cfg.bootsetup_available)
     self.Grub2RadioButton.set_active(self.cfg.bootloader == 'grub2')
     self.BootloaderUndoButton.set_sensitive(self.cfg.configurations['bootloader'])
     self.BootloaderApplyButton.set_sensitive(not self.cfg.configurations['bootloader'])
@@ -1351,10 +1351,10 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     full_recap_msg += "\n<b>" + _("System language:") + "</b>\n"
     full_recap_msg += "- {lang}".format(lang = self.LocaleSelection.get_text()) + "\n"
     full_recap_msg += "\n<b>" + _("Partitions:") + "</b>\n"
-    part_main = self.get_main_partition_message(False)
-    part_linux = self.get_linux_partitions_message(False)
-    part_windows =  self.get_windows_partitions_message(False)
-    part_swap = self.get_swap_partitions_message(False)
+    part_main = self.get_main_partition_message(False).strip()
+    part_linux = self.get_linux_partitions_message(False).strip()
+    part_windows =  self.get_windows_partitions_message(False).strip()
+    part_swap = self.get_swap_partitions_message(False).strip()
     for p in (part_main, part_linux, part_windows, part_swap):
       if p:
         full_recap_msg += p + "\n"

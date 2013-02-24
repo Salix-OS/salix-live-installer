@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 17:07+0100\n"
+"POT-Creation-Date: 2013-02-24 19:12+0100\n"
 "PO-Revision-Date: 2011-12-01 18:00+0000\n"
 "Last-Translator: Cyrille Pontvieux <jrd@enialis.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,32 +138,24 @@ msgstr "Використовувати NTP сервіс"
 msgid "<b>Please select your keyboard layout:</b>"
 msgstr "<b>Будь ласка, виберіть Вашу розкладку клавіатури:</b>"
 
-#: src/resources/salix-live-installer.glade:1794
-#: src/resources/salix-live-installer.glade:2071
-#: src/resources/salix-live-installer.glade:2828
-#: src/resources/salix-live-installer.glade:3035
-#, fuzzy
-msgid "Apply _settings"
-msgstr "Застосувати _налаштування"
-
-#: src/resources/salix-live-installer.glade:1878
+#: src/resources/salix-live-installer.glade:1848
 msgid "Activate numlock"
 msgstr "Активувати numlock"
 
-#: src/resources/salix-live-installer.glade:1896
+#: src/resources/salix-live-installer.glade:1866
 #, fuzzy
 msgid "Activate IBus"
 msgstr "Включити IBus"
 
-#: src/resources/salix-live-installer.glade:1940
+#: src/resources/salix-live-installer.glade:1910
 #, fuzzy
 msgid "<b>Selected keyboard layout:</b>"
 msgstr "<b>Вибрана розкладка клавіатури: </b>"
 
-#: src/resources/salix-live-installer.glade:1954
-#: src/resources/salix-live-installer.glade:2180
-#: src/resources/salix-live-installer.glade:3576
-#: src/resources/salix-live-installer.glade:3811
+#: src/resources/salix-live-installer.glade:1924
+#: src/resources/salix-live-installer.glade:2120
+#: src/resources/salix-live-installer.glade:3516
+#: src/resources/salix-live-installer.glade:3751
 #: src/salix_live_installer/gathergui.py:652
 #: src/salix_live_installer/gathergui.py:697
 #: src/salix_live_installer/gathergui.py:1082
@@ -171,16 +163,16 @@ msgstr "<b>Вибрана розкладка клавіатури: </b>"
 msgid "None"
 msgstr "Нема"
 
-#: src/resources/salix-live-installer.glade:2008
+#: src/resources/salix-live-installer.glade:1978
 msgid "<b>Please select your system language:</b>"
 msgstr "<b>Будь ласка, виберіть мову Вашої системи:</b>"
 
-#: src/resources/salix-live-installer.glade:2166
+#: src/resources/salix-live-installer.glade:2106
 #, fuzzy
 msgid "<b>Selected system language:</b>"
 msgstr "<b>Вибрана мова системи: </b>"
 
-#: src/resources/salix-live-installer.glade:2234
+#: src/resources/salix-live-installer.glade:2174
 msgid ""
 "<b>Important!</b>\n"
 "\n"
@@ -215,46 +207,46 @@ msgstr ""
 "'Не змінювати схему розділів \", щоб продовжити без зміни поточної схеми "
 "розділів."
 
-#: src/resources/salix-live-installer.glade:2270
+#: src/resources/salix-live-installer.glade:2210
 msgid "Modify partition scheme"
 msgstr "Змінити конфігурацію розділів"
 
-#: src/resources/salix-live-installer.glade:2314
+#: src/resources/salix-live-installer.glade:2254
 msgid "Do not modify partition scheme"
 msgstr "Не змінювати конфігурацію розділів"
 
-#: src/resources/salix-live-installer.glade:2367
+#: src/resources/salix-live-installer.glade:2307
 msgid "<b>Please select Salix main partition:</b>"
 msgstr "<b>Будь ласка, виберіть основний розділ Salix:</b>"
 
-#: src/resources/salix-live-installer.glade:2399
-#: src/resources/salix-live-installer.glade:2677
-#: src/resources/salix-live-installer.glade:2907
+#: src/resources/salix-live-installer.glade:2339
+#: src/resources/salix-live-installer.glade:2617
+#: src/resources/salix-live-installer.glade:2847
 msgid "Disk"
 msgstr "Диск"
 
-#: src/resources/salix-live-installer.glade:2411
-#: src/resources/salix-live-installer.glade:2688
-#: src/resources/salix-live-installer.glade:2918
+#: src/resources/salix-live-installer.glade:2351
+#: src/resources/salix-live-installer.glade:2628
+#: src/resources/salix-live-installer.glade:2858
 msgid "Partition"
 msgstr "Розділ"
 
-#: src/resources/salix-live-installer.glade:2423
-#: src/resources/salix-live-installer.glade:2700
-#: src/resources/salix-live-installer.glade:2930
+#: src/resources/salix-live-installer.glade:2363
+#: src/resources/salix-live-installer.glade:2640
+#: src/resources/salix-live-installer.glade:2870
 msgid "Size"
 msgstr "Розмір"
 
-#: src/resources/salix-live-installer.glade:2435
-#: src/resources/salix-live-installer.glade:2942
+#: src/resources/salix-live-installer.glade:2375
+#: src/resources/salix-live-installer.glade:2882
 msgid "File System"
 msgstr "Файлова система"
 
-#: src/resources/salix-live-installer.glade:2456
+#: src/resources/salix-live-installer.glade:2396
 msgid "Display attached external devices"
 msgstr "Показати приєднані зовнішні пристрої"
 
-#: src/resources/salix-live-installer.glade:2478
+#: src/resources/salix-live-installer.glade:2418
 msgid ""
 "From the above partitions found on your system, please select the one where "
 "Salix' main directory tree (/) should be installed.\n"
@@ -266,35 +258,35 @@ msgstr ""
 "<b>Warning!</b> This partition will be reformatted and its data will be "
 "permanently erased."
 
-#: src/resources/salix-live-installer.glade:2508
+#: src/resources/salix-live-installer.glade:2448
 #, fuzzy
 msgid "Format with:"
 msgstr "Форматувати як:"
 
-#: src/resources/salix-live-installer.glade:2601
+#: src/resources/salix-live-installer.glade:2541
 #, fuzzy
 msgid "Select _partition"
 msgstr "Вибрати _розділ"
 
-#: src/resources/salix-live-installer.glade:2645
+#: src/resources/salix-live-installer.glade:2585
 #, fuzzy
 msgid "<b>Please configure your other Linux partitions:</b>"
 msgstr "<b>Будь ласка, налаштуйте Ваші інші розділи Linux:</b>"
 
-#: src/resources/salix-live-installer.glade:2712
+#: src/resources/salix-live-installer.glade:2652
 msgid "Current FS"
 msgstr "Поточна файлова с-ма"
 
-#: src/resources/salix-live-installer.glade:2724
+#: src/resources/salix-live-installer.glade:2664
 msgid "Format as:"
 msgstr "Форматувати як:"
 
-#: src/resources/salix-live-installer.glade:2747
-#: src/resources/salix-live-installer.glade:2954
+#: src/resources/salix-live-installer.glade:2687
+#: src/resources/salix-live-installer.glade:2894
 msgid "Mount as:"
 msgstr "Монтувати як:"
 
-#: src/resources/salix-live-installer.glade:2783
+#: src/resources/salix-live-installer.glade:2723
 msgid ""
 "It appears that you have more than one Linux partition. If you wish, you can "
 "now spread Salix directory tree on separate partitions. In fact, it is "
@@ -304,12 +296,18 @@ msgstr ""
 "розширити дерево тек Salix на окремі розділи. Справді, дуже рекомендується "
 "мати /home теку на окремому розділі."
 
-#: src/resources/salix-live-installer.glade:2874
+#: src/resources/salix-live-installer.glade:2768
+#: src/resources/salix-live-installer.glade:2975
+#, fuzzy
+msgid "Apply _settings"
+msgstr "Застосувати _налаштування"
+
+#: src/resources/salix-live-installer.glade:2814
 #, fuzzy
 msgid "<b>Please configure your Windows partitions:</b>"
 msgstr "<b>Будь ласка, налаштуйте Ваші розділи Windows:</b>"
 
-#: src/resources/salix-live-installer.glade:2990
+#: src/resources/salix-live-installer.glade:2930
 msgid ""
 "It appears that some of your partitions have a Windows formatting. Here you "
 "can set a mount point for each one if you wish them to be accessible in "
@@ -319,112 +317,112 @@ msgstr ""
 "встановити точки монтування для кожного з них, якщо Ви бажаєте, щоб вони "
 "були доступні в системі Salix."
 
-#: src/resources/salix-live-installer.glade:3090
+#: src/resources/salix-live-installer.glade:3030
 msgid "<b>Salix main partition:</b>"
 msgstr "<b>Основний розділ Salix:</b>"
 
-#: src/resources/salix-live-installer.glade:3120
+#: src/resources/salix-live-installer.glade:3060
 msgid "<b>Other Linux partitions:</b>"
 msgstr "<b>Інші розділи Linux:</b>"
 
-#: src/resources/salix-live-installer.glade:3149
+#: src/resources/salix-live-installer.glade:3089
 msgid "<b>Windows partitions:</b>"
 msgstr "<b>Розділи Windows:</b>"
 
-#: src/resources/salix-live-installer.glade:3178
+#: src/resources/salix-live-installer.glade:3118
 msgid "<b>Swap partitions:</b>"
 msgstr "<b>Розділи підкачки:</b>"
 
-#: src/resources/salix-live-installer.glade:3279
+#: src/resources/salix-live-installer.glade:3219
 msgid "<b>Transfer LiveClone login accounts</b>"
 msgstr "<b>Перенести рахунки користувачів LiveClone</b>"
 
-#: src/resources/salix-live-installer.glade:3381
+#: src/resources/salix-live-installer.glade:3321
 msgid "<b>Please create a new standard user:</b>"
 msgstr "<b>Будь ласка, створіть нового стандартного користувача:</b>"
 
-#: src/resources/salix-live-installer.glade:3400
+#: src/resources/salix-live-installer.glade:3340
 #, fuzzy
 msgid "Enter login:"
 msgstr "Введіть логін:"
 
-#: src/resources/salix-live-installer.glade:3442
+#: src/resources/salix-live-installer.glade:3382
 #, fuzzy
 msgid "Enter password:"
 msgstr "Введіть пароль:"
 
-#: src/resources/salix-live-installer.glade:3500
+#: src/resources/salix-live-installer.glade:3440
 #, fuzzy
 msgid "Re-enter password:"
 msgstr "Введіть пароль ще раз:"
 
-#: src/resources/salix-live-installer.glade:3528
-#: src/resources/salix-live-installer.glade:3763
+#: src/resources/salix-live-installer.glade:3468
+#: src/resources/salix-live-installer.glade:3703
 msgid "Do not hide"
 msgstr "Не приховувати"
 
-#: src/resources/salix-live-installer.glade:3562
+#: src/resources/salix-live-installer.glade:3502
 #, fuzzy
 msgid "<b>User created:</b>"
 msgstr "<b>Користувач створений: </b>"
 
-#: src/resources/salix-live-installer.glade:3658
+#: src/resources/salix-live-installer.glade:3598
 msgid "<b>Please create a new administrator's password:</b>"
 msgstr "<b>Будь ласка, створіть новий пароль адміністратора:</b>"
 
-#: src/resources/salix-live-installer.glade:3677
+#: src/resources/salix-live-installer.glade:3617
 #, fuzzy
 msgid "Enter root password:"
 msgstr "Введіть пароль root'а:"
 
-#: src/resources/salix-live-installer.glade:3735
+#: src/resources/salix-live-installer.glade:3675
 #, fuzzy
 msgid "Re-enter root password:"
 msgstr "Ще раз введіть пароль root'а:"
 
-#: src/resources/salix-live-installer.glade:3797
+#: src/resources/salix-live-installer.glade:3737
 msgid "<b>Password created: </b>"
 msgstr "<b>Пароль створений: </b>"
 
-#: src/resources/salix-live-installer.glade:3901
+#: src/resources/salix-live-installer.glade:3841
 msgid "<b>Please select your installation mode:</b>"
 msgstr "<b>Будь ласка, виберіть Ваш режим встановлення:</b>"
 
-#: src/resources/salix-live-installer.glade:3969
+#: src/resources/salix-live-installer.glade:3909
 msgid "Core"
 msgstr "Основний"
 
-#: src/resources/salix-live-installer.glade:4023
+#: src/resources/salix-live-installer.glade:3963
 msgid "Basic"
 msgstr "Базовий"
 
-#: src/resources/salix-live-installer.glade:4116
+#: src/resources/salix-live-installer.glade:4056
 msgid "Full"
 msgstr "Повний"
 
-#: src/resources/salix-live-installer.glade:4361
+#: src/resources/salix-live-installer.glade:4301
 #, fuzzy
 msgid "<b>Please select your bootloader:</b>"
 msgstr "<b>Будь ласка, виберіть Ваш режим встановлення:</b>"
 
-#: src/resources/salix-live-installer.glade:4374
+#: src/resources/salix-live-installer.glade:4314
 msgid "No bootloader. I already have one"
 msgstr ""
 
-#: src/resources/salix-live-installer.glade:4520
+#: src/resources/salix-live-installer.glade:4462
 msgid "Salix installation"
 msgstr "Встановлення Salix"
 
-#: src/resources/salix-live-installer.glade:4568
+#: src/resources/salix-live-installer.glade:4510
 #, fuzzy
 msgid "Please be patient, Salix installation is in progress..."
 msgstr "Будьте терплячі, встановлення Salix в процесі... "
 
-#: src/resources/salix-live-installer.glade:4693
+#: src/resources/salix-live-installer.glade:4635
 msgid "Confirmation needed"
 msgstr "Потрібне підтвердження"
 
-#: src/resources/salix-live-installer.glade:4706
+#: src/resources/salix-live-installer.glade:4648
 msgid "<b>Do you want to proceed with this?</b>"
 msgstr "<b>Ви бажаєте продовжити?</b>"
 

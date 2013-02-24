@@ -80,6 +80,7 @@ class Config:
         self.new_root_password = 'SaliX'
       self.install_mode = 'full'
       self.bootloader = 'lilo'
+      self.bootsetup_available = True
       for c in self.configurations:
         self.configurations[c] = True
     else:
@@ -111,5 +112,6 @@ class Config:
       self.new_root_password = ''
       self.install_mode = None
       self.bootloader = None
+      self.bootsetup_available = sltl.isBootsetupAvailable()
     print ' Done'
     sys.stdout.flush()
