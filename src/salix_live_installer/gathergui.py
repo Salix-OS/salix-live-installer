@@ -853,7 +853,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         msg = '<span foreground="black" font_family="monospace">- {0} => /</span>'.format(part_name)
     else:
       if full_text:
-        msg = _("{device} will be formatted with {fs} and will be mounted as {mountpoint}.").format(device = "<b>{0}</b>".format(part_name), fs = "<b>{0}</b>".format(self.cfg.main_format), "<b>{0}</b>".format('/'))
+        msg = _("{device} will be formatted with {fs} and will be mounted as {mountpoint}.").format(device = "<b>{0}</b>".format(part_name), fs = "<b>{0}</b>".format(self.cfg.main_format), mountpoint = "<b>{0}</b>".format('/'))
       else:
         msg = '<span foreground="black" font_family="monospace">- {0} => / (<u>{1}</u>)</span>'.format(part_name, self.cfg.main_format)
     return msg

@@ -5,9 +5,9 @@ mkdir build
 for p in data/po/*.po; do
   l=$(basename $p .po)
 	echo "Compiling $l language"
-	msgfmt $p -o build/$l.mo
+	msgfmt $p -o build/$l.mo || exit 1
 done
-intltool-merge po/ -d -u src/salix-live-installer.desktop.in build/salix-live-installer.desktop
+intltool-merge data/po/ -d -u data/salix-live-installer.desktop.in build/salix-live-installer.desktop || exit 1
 cat <<'EOF' > build/salix-live-installer
 #!/bin/sh
 python /usr/share/salix-live-installer/launcher.py "$@"
