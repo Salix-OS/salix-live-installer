@@ -4,13 +4,12 @@
 #sug: bootsetup|lilosetup,gparted,grub2,lilo,pygtk
 
 pkgname=salix-live-installer
-pkgver=0.4
+pkgver=0.4dev
 pkgrel=1cp
 arch=noarch
 source=(https://github.com/jrd/$pkgname/archive/$pkgver.tar.gz)
 sourcetemplate=http://people.salixos.org/jrd/salix/$pkgname-\$arch-$pkgver/
 url=http://salixos.org
-options=('noextract')
 
 slackdesc=\
 (
