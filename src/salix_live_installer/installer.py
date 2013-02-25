@@ -10,6 +10,9 @@ __license__ = 'GPL2+'
 import gettext
 import threading
 from time import sleep
+from datetime import *
+import os
+import salix_livetools_library as sltl
 
 class ThreadTask:
   """
@@ -106,10 +109,10 @@ class ThreadInstaller:
         if 'core' in m:
           install_modules.append(m)
         elif 'basic' in m:
-          if self._cfg.install_mode in ('basic', 'full'):
+          if self._cfg.install_mode in ('Basic', 'Full'):
             install_modules.append(m)
         elif 'full' in m:
-          if self._cfg.install_mode == 'full':
+          if self._cfg.install_mode == 'Full':
             install_modules.append(m)
         elif not 'live' in m:
           install_modules.append(m)
@@ -166,7 +169,7 @@ class ThreadInstaller:
         error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = sltl.getHumanSize(module_total_size + minimum_free_size)))
         self._installation = 'error'
         return
-      sltl.execCall(['rm', '-r', sltl.getTempMountDir()])
+      sltl.execCall(['rm', '-rf', sltl.getTempMountDir()])
     if installion_cancelled(): return
     step += weights['checks']
     msg = _("Formatting and mounting the main partition...")
@@ -221,9 +224,9 @@ class ThreadInstaller:
   def _update_progressbar(self, msg, step, steps):
     fraction = float(step) / steps
     if msg:
-      print "\n{1:3.0%} {0}".format(msg, fraction)
+      print "{1:3.0%} {0}".format(msg, fraction)
     else:
-      print "\n{0:3.0%}".format(fraction)
+      print "{0:3.0%}".format(fraction)
     self._update_gui(self._gui_update_progressbar, msg, fraction)
   def _gui_update_progressbar(self, msg, fraction):
     if msg:
@@ -239,7 +242,7 @@ class ThreadInstaller:
         label = sltl.getFsLabel(d)
         if not label:
           label = 'Salix'
-        sltl.makeFs(self._cfg.main_partition, self._cfg.main_format, label = label)
+        sltl.makeFs(self._cfg.main_partition, self._cfg.main_format, label = label, force = True)
       sltl.mountDevice(d, fsType = self._cfg.main_format)
   def _install_linux_partitions(self, msg, step, steps, weights):
     if self._cfg.is_test:
@@ -262,12 +265,12 @@ class ThreadInstaller:
         mp = p[2]
         sltl.umountDevice(full_dev, deleteMountPoint = False)
         if fs != 'none':
-          label = sltl.getFsLabel(full_dev)
+          label = sltl.getFsLabel(d)
           if not label:
             label = os.path.basename(p[2])
             if len(label) > 12:
               label = None # for not having problems
-          sltl.makeFs(d, fs, label)
+          sltl.makeFs(d, fs, label = label, force = True)
         sltl.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
         step += weights[d]
       return step
@@ -281,7 +284,7 @@ class ThreadInstaller:
         step += w
       return step
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self.main_partition))
+      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       for m in modules:
         if self._installation == 'cancelled': return step
         self._update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
@@ -291,8 +294,13 @@ class ThreadInstaller:
         step += w
       return step
   def _install_module_callback(self, pourcent, step, steps, weight):
-    new_step = step + float(pourcent) * weight
-    self._update_gui(self._update_progressbar, None, new_step, steps)
+    if self._installation == 'cancelled':
+      return False
+    else:
+      new_step = step + float(pourcent) * weight
+      print "  * module install: {0:3.0%}".format(pourcent)
+      self._update_gui(self._update_progressbar, None, new_step, steps)
+      return True
   def _install_fstab(self):
     if self._cfg.is_test:
       sleep(1)
@@ -336,6 +344,10 @@ class ThreadInstaller:
       sleep(1)
     else:
       rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      try:
+        os.makedirs(rootmp + '/etc/X11/xorg.conf.d')
+      except OSError:
+        pass
       sltl.setDefaultKeymap(self._cfg.cur_km, rootmp)
       sltl.setNumLockDefault(self._cfg.cur_use_numlock, rootmp)
       sltl.setIbusDefault(self._cfg.cur_use_ibus, rootmp)

@@ -1373,6 +1373,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     self.thread_installer = ThreadInstaller(self.cfg, self)
     installation = self.thread_installer.install()
     self.thread_installer = None
+    self.installation_umountall()
     if installation == 'done':
       self.installation_postinstall()
   def install_set_main_window_visibility(self, is_shown):
@@ -1400,14 +1401,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def on_progress_undo_clicked(self, widget, data=None):
     if self.thread_installer:
       self.thread_installer.cancel()
-  def installation_postinstall(self):
+  def installation_umountall(self):
     if not self.cfg.is_test:
       if self.cfg.linux_partitions:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self.cfg.main_partition))
         for p in self.cfg.linux_partitions:
           d = p[0]
-          sltl.umountDevice("/dev/{0}".format(d), deleteMountPoint = False)
-      sltl.umountDevice("/dev/{0}".format(self.cfg.main_partition))
+          fulld = "/dev/{0}".format(d)
+          if sltl.isMounted(fulld):
+            sltl.umountDevice(fulld, deleteMountPoint = False)
+      fulld = "/dev/{0}".format(self.cfg.main_partition)
+      if sltl.isMounted(fulld):
+        sltl.umountDevice(fulld)
+  def installation_postinstall(self):
     if self.cfg.bootloader != 'none':
       self.run_bootsetup()
     self.installation_done()

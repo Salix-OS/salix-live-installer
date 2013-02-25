@@ -19,7 +19,7 @@ __license__ = 'GPL2+'
 import os
 import glob
 import re
-from execute import execCall
+import subprocess
 from freesize import *
 from threading import Thread
 from time import sleep
@@ -154,16 +154,21 @@ def installSaLTModule(moduleName, moduleSize, targetMountPoint, callback, callba
   class ExecCopyTask:
     def _run(self, *args, **kwargs):
       cmd = args[0]
-      execCall(cmd)
+      self._p = subprocess.Popen(cmd)
+      self._p.wait()
     def start(self, cmd):
-      self.t = Thread(target=self._run, args=(cmd,))
-      self.t.start()
+      self._t = Thread(target=self._run, args=(cmd,))
+      self._t.start()
     def is_running(self):
-      return self.t and self.t.is_alive()
+      return self._t and self._t.is_alive()
+    def stop(self):
+      if self._p:
+        self._p.kill()
+        self._p = None
   init_size = get_used_size(targetMountPoint)
   actual_size = init_size
   t = ExecCopyTask()
-  t.start(['cp', '--preserve', '-r', '-f', '--remove-destination', '{0}/*'.format(src), targetMountPoint])
+  t.start(['cp', '--preserve', '-r', '-f', '--remove-destination', '{0}/.'.format(src), targetMountPoint + '/'])
   while t.is_running():
     for x in range(interval):
       sleep(1)
@@ -177,6 +182,7 @@ def installSaLTModule(moduleName, moduleSize, targetMountPoint, callback, callba
       p = diff_size / moduleSize
       if p > 1:
         p = 1
-      callback(p, *callback_args)
+      if not callback(p, *callback_args):
+        t.stop()
   if completeCallback:
     completeCallback()

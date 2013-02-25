@@ -26,7 +26,7 @@ def runBootsetup(bootloader = 'lilo'):
       return False
   else:
     try:
-      execCheck(['lilosetup'], env = None)
+      execCheck(['lilosetup.py'], env = None)
       return True
     except:
       return False

@@ -141,7 +141,7 @@ def _makeXfs(path, label, options, force):
     else:
       size = getSizes(path)['size']
     if size > 104857600: # > 100M
-      options = ['-l', 'size=64m,lazy-count=1'] # optimizations
+      options.extend(['-l', 'size=64m,lazy-count=1']) # optimizations
   if label:
     if len(label) > 12: # max 12 chars
       label = label[0:11]
