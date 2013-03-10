@@ -7,7 +7,7 @@ pkgname=salix-live-installer
 pkgver=0.4dev
 pkgrel=1cp
 arch=noarch
-source=(https://github.com/jrd/$pkgname/archive/$pkgver.tar.gz)
+source=(https://github.com/Salix-OS/$pkgname/archive/$pkgver.tar.gz)
 sourcetemplate=http://people.salixos.org/jrd/salix/$pkgname-\$arch-$pkgver/
 url=http://salixos.org
 
