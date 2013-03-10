@@ -835,7 +835,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def on_main_partition_apply_clicked(self, widget, data=None):
     model_part, it_part = self.MainPartitionList.get_selection().get_selected()
     idx_format = self.MainFormatCombobox.get_active()
-    if it_part and idx_format:
+    if it_part:
       self.cfg.main_partition = model_part.get_value(it_part, 4)
       self.cfg.main_format = self.MainFormatListStore[idx_format][0]
       self.cfg.linux_partitions = []
