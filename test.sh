@@ -8,4 +8,4 @@ for p in data/po/*.po; do
     msgfmt $p -o data/locale/$d/LC_MESSAGES/salix-live-installer.mo
   fi
 done
-./src/launcher.py --test "$@"
+./src/salix-live-installer.py --test "$@"

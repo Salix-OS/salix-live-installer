@@ -10,5 +10,5 @@ done
 intltool-merge data/po/ -d -u data/salix-live-installer.desktop.in build/salix-live-installer.desktop || exit 1
 cat <<'EOF' > build/salix-live-installer
 #!/bin/sh
-python /usr/share/salix-live-installer/launcher.py "$@"
+exec python /usr/share/salix-live-installer/salix-live-installer.py "$@"
 EOF

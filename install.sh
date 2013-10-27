@@ -11,8 +11,8 @@ fi
 VER=$(python -c "
 import os
 os.chdir('src')
-import launcher as l
-print l.__version__,
+from salix-live-installer import __version__
+print __version__,
 ")
 install -D -m 755 xsu $DESTDIR/usr/bin/xsu
 install -D -m 755 build/salix-live-installer $DESTDIR/usr/sbin/salix-live-installer
@@ -29,7 +29,7 @@ done
 for f in src/resources/*; do
   install -D -m 644 $f $DESTDIR/usr/share/salix-live-installer/resources/$(basename $f)
 done
-install -D -m 755 src/launcher.py $DESTDIR/usr/share/salix-live-installer/launcher.py
+install -D -m 755 src/salix-live-installer.py $DESTDIR/usr/share/salix-live-installer/salix-live-installer.py
 (
   cd $DESTDIR/usr/share/salix-live-installer
   echo "
