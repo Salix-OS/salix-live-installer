@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Salix\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-24 19:12+0100\n"
+"POT-Creation-Date: 2013-10-27 02:22+0100\n"
 "PO-Revision-Date: 2011-12-29 15:56+0000\n"
 "Last-Translator: shador <futur.andy@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/salix/team/de/)\n"
@@ -446,66 +446,66 @@ msgstr ""
 msgid "Sorry!"
 msgstr ""
 
-#: src/salix_live_installer/installer.py:58
+#: src/salix_live_installer/installer.py:61
 msgid "Starting installation process..."
 msgstr "Installation wird gestartet..."
 
-#: src/salix_live_installer/installer.py:72
+#: src/salix_live_installer/installer.py:75
 #, fuzzy
 msgid "Cancelling installation..."
 msgstr "Salix Installation"
 
-#: src/salix_live_installer/installer.py:166
+#: src/salix_live_installer/installer.py:169
 msgid ""
 "Cannot install!\n"
 "Not enougth space on main partition ({size} needed)"
 msgstr ""
 
-#: src/salix_live_installer/installer.py:172
+#: src/salix_live_installer/installer.py:175
 msgid "Formatting and mounting the main partition..."
 msgstr "Formatiere und mounte die Hauptpartition..."
 
-#: src/salix_live_installer/installer.py:177
+#: src/salix_live_installer/installer.py:180
 #, fuzzy
 msgid "Formatting and mounting the Linux partitions..."
 msgstr "Formatiere und mounte die Linux-Partition(en)..."
 
-#: src/salix_live_installer/installer.py:181
+#: src/salix_live_installer/installer.py:184
 #, fuzzy
 msgid "Installing the {mode} mode packages..."
 msgstr "Pakete aus dem %(mode)s Paketset werden installiert..."
 
-#: src/salix_live_installer/installer.py:185
+#: src/salix_live_installer/installer.py:188
 msgid "Creating /etc/fstab..."
 msgstr "Erzeuge /etc/fstab..."
 
-#: src/salix_live_installer/installer.py:190
+#: src/salix_live_installer/installer.py:193
 msgid "Date and time configuration..."
 msgstr ""
 
-#: src/salix_live_installer/installer.py:195
+#: src/salix_live_installer/installer.py:198
 #, fuzzy
 msgid "Keyboard configuration..."
 msgstr "Tastaturlayout"
 
-#: src/salix_live_installer/installer.py:200
+#: src/salix_live_installer/installer.py:203
 msgid "Locale configuration..."
 msgstr ""
 
-#: src/salix_live_installer/installer.py:205
+#: src/salix_live_installer/installer.py:208
 msgid "Users configuration..."
 msgstr ""
 
-#: src/salix_live_installer/installer.py:210
+#: src/salix_live_installer/installer.py:213
 msgid "Services configuration..."
 msgstr ""
 
-#: src/salix_live_installer/installer.py:215
+#: src/salix_live_installer/installer.py:218
 msgid "System configuration..."
 msgstr ""
 
-#: src/salix_live_installer/installer.py:278
-#: src/salix_live_installer/installer.py:287
+#: src/salix_live_installer/installer.py:281
+#: src/salix_live_installer/installer.py:290
 #, fuzzy
 msgid "Installing the {module} module..."
 msgstr "Pakete aus dem %(mode)s Paketset werden installiert..."
@@ -1195,6 +1195,10 @@ msgid "Bootloader choosen: {bootloader}"
 msgstr ""
 
 #: src/salix_live_installer/gathergui.py:1421
+msgid "The boot setup software needs to be run to complete the installation."
+msgstr ""
+
+#: src/salix_live_installer/gathergui.py:1429
 #, fuzzy
 msgid "Installation process completed successfully..."
 msgstr "Installation erfolgreich abgeschlossen..."

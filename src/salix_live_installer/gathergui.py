@@ -1417,6 +1417,9 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       self.run_bootsetup()
     self.installation_done()
   def run_bootsetup(self):
+    print "Running the boot setup software."
+    msg = "<b>{0}</b>".format(_("The boot setup software needs to be run to complete the installation."))
+    info_dialog(msg)
     if self.cfg.is_test:
       sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.cfg.bootloader)], shell=False, env=None)
     else:

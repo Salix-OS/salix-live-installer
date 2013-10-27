@@ -24,14 +24,14 @@ def usage():
 {license}
 {author}
 
-  launcher.py [--help] [--version] [--test [--clone] [--data]]
+  salix-live-installer.py [--help] [--version] [--test [--clone] [--data]]
 
 Parameters:
   --help: Show this help message
   --version: Show the Salix Live Installer version
   --test: Run it in test mode
     --clone: Run it simulating a LiveClone environment
-    --data: Run itwith some pre-filled data
+    --data: Run it with some pre-filled data
 """.format(ver = __version__, copyright = __copyright__, license = __license__, author = __author__)
 
 if __name__ == '__main__':
