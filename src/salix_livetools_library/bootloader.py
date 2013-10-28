@@ -17,10 +17,10 @@ def isBootsetupAvailable():
   except:
     return False
 
-def runBootsetup(bootloader = 'lilo'):
+def runBootsetup(bootloader = 'lilo', targetPartition = ''):
   if isBootsetupAvailable():
     try:
-      execCheck(['bootsetup', bootloader], env = None)
+      execCheck(['bootsetup', bootloader, targetPartition], env = None)
       return True
     except:
       return False

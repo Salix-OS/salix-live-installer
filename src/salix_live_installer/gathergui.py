@@ -1423,7 +1423,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if self.cfg.is_test:
       sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.cfg.bootloader)], shell=False, env=None)
     else:
-      sltl.runBootsetup(self.cfg.bootloader)
+      sltl.runBootsetup(self.cfg.bootloader, self._cfg.main_partition)
   def installation_done(self):
     print "Installation Done.\nHappy Salix."
     msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
