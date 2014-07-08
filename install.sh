@@ -14,7 +14,6 @@ os.chdir('src')
 from salix-live-installer import __version__
 print __version__,
 ")
-install -D -m 755 xsu $DESTDIR/usr/bin/xsu
 install -D -m 755 build/salix-live-installer $DESTDIR/usr/sbin/salix-live-installer
 install -D -m 644 build/salix-live-installer.desktop $DESTDIR/usr/share/applications/salix-live-installer.desktop
 for size in 24 64 128; do

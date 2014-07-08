@@ -12,7 +12,7 @@ import threading
 from time import sleep
 from datetime import *
 import os
-import salix_livetools_library as sltl
+import libsalt as slt
 
 class ThreadTask:
   """
@@ -100,7 +100,7 @@ class ThreadInstaller:
       else:
         modules = ('01-core', '02-basic', '03-full', '04-common', '05-kernel', '06-live')
     else:
-      modules = sltl.listSaLTModules()
+      modules = slt.listSaLTModules()
     if self._cfg.is_liveclone:
       install_modules = modules
     else:
@@ -155,21 +155,21 @@ class ThreadInstaller:
       for m in install_modules:
         modules_size[m] = 1
     else:
-      main_sizes = sltl.getSizes("/dev/{0}".format(self._cfg.main_partition))
+      main_sizes = slt.getSizes("/dev/{0}".format(self._cfg.main_partition))
       main_size = main_sizes['size']
-      main_block_size = sltl.getBlockSize("/dev/{0}".format(self._cfg.main_partition))
+      main_block_size = slt.getBlockSize("/dev/{0}".format(self._cfg.main_partition))
       module_total_size = 0
       for m in install_modules:
-        size = sltl.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
+        size = slt.getUsedSize("/mnt/salt/mnt/modules/{0}".format(m), main_block_size, False)['size']
         modules_size[m] = size
         module_total_size += size
       minimum_free_size = 50 * 1024 * 1024 # 50 M
       if module_total_size + minimum_free_size > main_size:
         self._gui.install_set_progress_window_above(False)
-        error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = sltl.getHumanSize(module_total_size + minimum_free_size)))
+        error_dialog(_("Cannot install!\nNot enougth space on main partition ({size} needed)").format(size = slt.getHumanSize(module_total_size + minimum_free_size)))
         self._installation = 'error'
         return
-      sltl.execCall(['rm', '-rf', sltl.getTempMountDir()])
+      slt.execCall(['rm', '-rf', slt.getTempMountDir()])
     if installion_cancelled(): return
     step += weights['checks']
     msg = _("Formatting and mounting the main partition...")
@@ -237,13 +237,13 @@ class ThreadInstaller:
       sleep(1)
     else:
       d = "/dev/{0}".format(self._cfg.main_partition)
-      sltl.umountDevice(d, deleteMountPoint = False)
+      slt.umountDevice(d, deleteMountPoint = False)
       if self._cfg.main_format != 'none':
-        label = sltl.getFsLabel(d)
+        label = slt.getFsLabel(d)
         if not label:
           label = 'Salix'
-        sltl.makeFs(self._cfg.main_partition, self._cfg.main_format, label = label, force = True)
-      sltl.mountDevice(d, fsType = self._cfg.main_format)
+        slt.makeFs(self._cfg.main_partition, self._cfg.main_format, label = label, force = True)
+      slt.mountDevice(d, fsType = self._cfg.main_format)
   def _install_linux_partitions(self, msg, step, steps, weights):
     if self._cfg.is_test:
       for p in self._cfg.linux_partitions:
@@ -255,7 +255,7 @@ class ThreadInstaller:
         step += w
       return step
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       for p in self._cfg.linux_partitions:
         if self._installation == 'cancelled': return step
         d = p[0]
@@ -263,15 +263,15 @@ class ThreadInstaller:
         full_dev = "/dev/{0}".format(d)
         fs = p[1]
         mp = p[2]
-        sltl.umountDevice(full_dev, deleteMountPoint = False)
+        slt.umountDevice(full_dev, deleteMountPoint = False)
         if fs != 'none':
-          label = sltl.getFsLabel(d)
+          label = slt.getFsLabel(d)
           if not label:
             label = os.path.basename(p[2])
             if len(label) > 12:
               label = None # for not having problems
-          sltl.makeFs(d, fs, label = label, force = True)
-        sltl.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
+          slt.makeFs(d, fs, label = label, force = True)
+        slt.mountDevice(full_dev, mountPoint = "{root}/{mp}".format(root = rootmp, mp = mp))
         step += weights[d]
       return step
   def _install_modules(self, modules, modules_size, msg, step, steps, weight):
@@ -284,13 +284,13 @@ class ThreadInstaller:
         step += w
       return step
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       for m in modules:
         if self._installation == 'cancelled': return step
         self._update_progressbar(msg + "\n - " + _("Installing the {module} module...").format(module = m), step, steps)
         size = modules_size[m]
         w = weight[m]
-        sltl.installSaLTModule(m, size, rootmp, self._install_module_callback, (step, steps, w))
+        slt.installSaLTModule(m, size, rootmp, self._install_module_callback, (step, steps, w))
         step += w
       return step
   def _install_module_callback(self, pourcent, step, steps, weight):
@@ -305,14 +305,14 @@ class ThreadInstaller:
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
-      sltl.createFsTab(rootmp)
-      sltl.addFsTabEntry(rootmp, 'proc', '/proc', 'proc')
-      sltl.addFsTabEntry(rootmp, 'devpts', '/dev/pts', 'devpts')
-      sltl.addFsTabEntry(rootmp, 'tmpfs', '/dev/shm', 'tmpfs')
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      slt.createFsTab(rootmp)
+      slt.addFsTabEntry(rootmp, 'proc', '/proc', 'proc')
+      slt.addFsTabEntry(rootmp, 'devpts', '/dev/pts', 'devpts')
+      slt.addFsTabEntry(rootmp, 'tmpfs', '/dev/shm', 'tmpfs')
       for d in self._cfg.swap_partitions:
-        sltl.addFsTabEntry(rootmp, "/dev/" + d, 'none', 'swap')
-      sltl.addFsTabEntry(rootmp, "/dev/" + self._cfg.main_partition, '/', self._cfg.main_format, dumpFlag = 1, fsckOrder = 1)
+        slt.addFsTabEntry(rootmp, "/dev/" + d, 'none', 'swap')
+      slt.addFsTabEntry(rootmp, "/dev/" + self._cfg.main_partition, '/', self._cfg.main_format, dumpFlag = 1, fsckOrder = 1)
       for l in (self._cfg.linux_partitions, self._cfg.win_partitions):
         if l:
           for p in l:
@@ -325,15 +325,15 @@ class ThreadInstaller:
               os.makedirs(rootmp + mp)
             except os.error:
               pass # directory exists
-            sltl.addFsTabEntry(rootmp, "/dev/" + d, mp, fs)
+            slt.addFsTabEntry(rootmp, "/dev/" + d, mp, fs)
   def _install_datetime(self):
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       tz = self._cfg.cur_tz_continent + '/' + self._cfg.cur_tz_city
-      sltl.setDefaultTimeZone(tz, rootmp)
-      sltl.setNTPDefault(self._cfg.cur_use_ntp, rootmp)
+      slt.setDefaultTimeZone(tz, rootmp)
+      slt.setNTPDefault(self._cfg.cur_use_ntp, rootmp)
       if not self._cfg.cur_use_ntp:
         # we need to update the locale date and time.
         dt = (datetime.now() + self._cfg.cur_time_delta).strftime("%Y-%m-%d %H:%M:%S")
@@ -343,43 +343,43 @@ class ThreadInstaller:
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       try:
         os.makedirs(rootmp + '/etc/X11/xorg.conf.d')
       except OSError:
         pass
-      sltl.setDefaultKeymap(self._cfg.cur_km, rootmp)
-      sltl.setNumLockDefault(self._cfg.cur_use_numlock, rootmp)
-      sltl.setIbusDefault(self._cfg.cur_use_ibus, rootmp)
+      slt.setDefaultKeymap(self._cfg.cur_km, rootmp)
+      slt.setNumLockDefault(self._cfg.cur_use_numlock, rootmp)
+      slt.setIbusDefault(self._cfg.cur_use_ibus, rootmp)
   def _install_locale(self):
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
-      sltl.setDefaultLocale(self._cfg.cur_locale, rootmp)
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      slt.setDefaultLocale(self._cfg.cur_locale, rootmp)
   def _install_users(self):
     if self._cfg.is_test:
       sleep(1)
     else:
       if not self._cfg.keep_live_logins:
-        rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
-        sltl.createSystemUser(self._cfg.new_login, password = self._cfg.new_password, mountPoint = rootmp)
-        sltl.changePasswordSystemUser('root', password = self._cfg.new_root_password, mountPoint = rootmp)
+        rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+        slt.createSystemUser(self._cfg.new_login, password = self._cfg.new_password, mountPoint = rootmp)
+        slt.changePasswordSystemUser('root', password = self._cfg.new_root_password, mountPoint = rootmp)
   def _install_services(self):
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       f = 'var/log/setup/setup.services'
       p = "{0}/{1}".format(rootmp, f)
       if os.path.exists(p):
         os.chmod(p, 0755)
-        sltl.execCall("{0}/{1} {0}".format(rootmp, f))
+        slt.execCall("{0}/{1} {0}".format(rootmp, f))
   def _install_config(self):
     if self._cfg.is_test:
       sleep(1)
     else:
-      rootmp = sltl.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
+      rootmp = slt.getMountPoint("/dev/{0}".format(self._cfg.main_partition))
       rcfont_file = open('{0}/etc/rc.d/rc.font'.format(rootmp), 'w')
       rcfont_file.write("""
 #!/bin/sh
@@ -395,19 +395,19 @@ unicode_start ter-v16n""")
         p = "{0}/{1}".format(rootmp, f)
         if os.path.exists(p):
           os.chmod(p, 0755)
-          sltl.execCall("cd {0}; ./{1}".format(rootmp, f))
+          slt.execCall("cd {0}; ./{1}".format(rootmp, f))
       for f in ('/usr/bin/update-gtk-immodules', '/usr/bin/update-gdk-pixbuf-loaders', '/usr/bin/update-pango-querymodules'):
         p = "{0}/{1}".format(rootmp, f)
         if os.path.exists(p):
-          sltl.execChroot(rootmp, f)
+          slt.execChroot(rootmp, f)
       if self._cfg.is_liveclone:
         # Remove some specific live stuff
-        sltl.execCall("spkg -d liveclone --root={0}".format(rootmp))
-        sltl.execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
-        sltl.execCall("spkg -d salix-persistence-wizard --root={0}".format(rootmp))
-        sltl.execCall("rm -f {0}/etc/ssh/ssh_host_*".format(rootmp))
-        sltl.execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
-        sltl.execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
+        slt.execCall("spkg -d liveclone --root={0}".format(rootmp))
+        slt.execCall("spkg -d salix-live-installer --root={0}".format(rootmp))
+        slt.execCall("spkg -d salix-persistence-wizard --root={0}".format(rootmp))
+        slt.execCall("rm -f {0}/etc/ssh/ssh_host_*".format(rootmp))
+        slt.execCall("rm -f {0}/home/*/Desktop/*startup-guide*desktop".format(rootmp))
+        slt.execCall("rm -f {0}/user/share/applications/*startup-guide*desktop".format(rootmp))
         os.remove("{0}/hooks.salt".format(rootmp))
   def _thread_install_completed(self):
     if self._installation == 'installing':

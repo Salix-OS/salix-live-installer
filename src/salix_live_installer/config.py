@@ -9,7 +9,7 @@ __license__ = 'GPL2+'
 
 import sys
 from datetime import *
-import salix_livetools_library as sltl
+import libsalt as slt
 
 class Config:
   """
@@ -33,11 +33,11 @@ class Config:
       self.salt_version = self.min_salt_version
       self.is_salt_ok = True
     else:
-      self.is_live = sltl.isSaLTLiveEnv()
+      self.is_live = slt.isSaLTLiveEnv()
       if self.is_live:
-        self.is_liveclone = sltl.isSaLTLiveCloneEnv()
-        self.salt_version = sltl.getSaLTVersion()
-        self.is_salt_ok = sltl.isSaLTVersionAtLeast(self.min_salt_version)
+        self.is_liveclone = slt.isSaLTLiveCloneEnv()
+        self.salt_version = slt.getSaLTVersion()
+        self.is_salt_ok = slt.isSaLTVersionAtLeast(self.min_salt_version)
       else:
         self.is_liveclone = False
         self.salt_version = ''
@@ -61,12 +61,12 @@ class Config:
       self.main_partition = 'sda7'
       self.main_format = 'ext4'
       self.partitions = []
-      for disk_device in sltl.getDisks():
-        disk_info = sltl.getDiskInfo(disk_device)
+      for disk_device in slt.getDisks():
+        disk_info = slt.getDiskInfo(disk_device)
         if self.show_external_drives or not disk_info['removable']:
-          for p in sltl.getPartitions(disk_device):
+          for p in slt.getPartitions(disk_device):
             self.partitions.append(p)
-      self.swap_partitions = sltl.getSwapPartitions()
+      self.swap_partitions = slt.getSwapPartitions()
       self.linux_partitions = []
       self.win_partitions = []
       self.keep_live_logins = self.is_liveclone
@@ -84,7 +84,7 @@ class Config:
       for c in self.configurations:
         self.configurations[c] = True
     else:
-      self.cur_tz = sltl.getDefaultTimeZone()
+      self.cur_tz = slt.getDefaultTimeZone()
       if '/' in self.cur_tz:
         self.cur_tz_continent = self.cur_tz.split('/', 1)[0]
         self.cur_tz_city = self.cur_tz.split('/', 1)[1]
@@ -92,12 +92,12 @@ class Config:
         self.cur_tz = None
         self.cur_tz_continent = None
         self.cur_tz_city = None
-      self.cur_use_ntp = sltl.isNTPEnabledByDefault()
+      self.cur_use_ntp = slt.isNTPEnabledByDefault()
       self.cur_time_delta = timedelta() # used when NTP is not used
-      self.cur_km = sltl.findCurrentKeymap()
-      self.cur_use_numlock = sltl.isNumLockEnabledByDefault()
-      self.cur_use_ibus = sltl.isIbusEnabledByDefault()
-      self.cur_locale = sltl.getCurrentLocale()
+      self.cur_km = slt.findCurrentKeymap()
+      self.cur_use_numlock = slt.isNumLockEnabledByDefault()
+      self.cur_use_ibus = slt.isIbusEnabledByDefault()
+      self.cur_locale = slt.getCurrentLocale()
       self.partitions_step = 'none' # could be none, main, linux, win or recap
       self.partitions = []
       self.swap_partitions = []
@@ -112,6 +112,27 @@ class Config:
       self.new_root_password = ''
       self.install_mode = None
       self.bootloader = None
-      self.bootsetup_available = sltl.isBootsetupAvailable()
+      self.bootsetup_available = self.isBootsetupAvailable()
     print ' Done'
     sys.stdout.flush()
+
+  def isBootsetupAvailable():
+    try:
+      slt.execGetOutput(['bootsetup', '--version'], withError=True)
+      return True
+    except:
+      return False
+
+  def runBootsetup():
+    if self.isBootsetupAvailable():
+      try:
+        slt.execCheck(['bootsetup', self.main_partition], env=None)
+        return True
+      except:
+        return False
+    else:
+      try:
+        slt.execCheck(['lilosetup.py'], env=None)
+        return True
+      except:
+        return False

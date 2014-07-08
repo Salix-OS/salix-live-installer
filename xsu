@@ -1,6 +1,0 @@
-#!/bin/sh
-if echo "$DESKTOP_SESSION" | grep -q kde && which kdesu >/dev/null 2>&1; then
-  kdesu "$@"
-else
-  gksu "$@"
-fi

@@ -18,7 +18,7 @@ from datetime import *
 from common import *
 from config import *
 from installer import *
-import salix_livetools_library as sltl
+import libsalt as slt
 
 class GatherGui:
   """
@@ -427,7 +427,7 @@ Full featured bootloader with editable graphical menu.'))
     self.ContinentZoneListStore.clear()
     self.ContinentZoneListStore.append([_("Select...")])
     self.ContinentZoneCombobox.set_active(0)
-    for continent in sltl.listTZContinents():
+    for continent in slt.listTZContinents():
       self.ContinentZoneListStore.append([continent])
     self.CountryZoneListStore.clear()
     self.YearListStore.clear()
@@ -441,10 +441,10 @@ Full featured bootloader with editable graphical menu.'))
     for d in range(1, 32):
       self.DayListStore.append([d])
     self.KeyboardListStore.clear()
-    for km in sltl.listAvailableKeymaps():
+    for km in slt.listAvailableKeymaps():
       self.KeyboardListStore.append(km)
     self.LocaleListStore.clear()
-    for l in sltl.listAvailableLocales():
+    for l in slt.listAvailableLocales():
       self.LocaleListStore.append(l)
     self.MainFormatListStore.clear()
     self.LinuxFormatListStore.clear()
@@ -565,7 +565,7 @@ Full featured bootloader with editable graphical menu.'))
   def time_settings(self):
     self.ContinentZoneCombobox.set_active(0)
     index = 1
-    for continent in sltl.listTZContinents():
+    for continent in slt.listTZContinents():
       if continent == self.cfg.cur_tz_continent:
         self.ContinentZoneCombobox.set_active(index)
         break
@@ -604,7 +604,7 @@ Full featured bootloader with editable graphical menu.'))
     self.CountryZoneListStore.append([_("Select...")])
     self.CountryZoneCombobox.set_active(0)
     if self.cfg.cur_tz_continent:
-      cities = sltl.listTZCities(self.cfg.cur_tz_continent)
+      cities = slt.listTZCities(self.cfg.cur_tz_continent)
       if cities:
         index = 1
         for city in cities:
@@ -757,9 +757,9 @@ Full featured bootloader with editable graphical menu.'))
     self.Window.hide()
     self.process_gui_events()
     if self.cfg.is_test:
-      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
+      slt.execCheck(["/usr/bin/xterm", "-e", 'echo "Gparted simulation run. Please hit enter to continue."; read junk'], shell=False, env=None)
     else:
-      sltl.execCheck("/usr/sbin/gparted", shell=False, env=None)
+      slt.execCheck("/usr/sbin/gparted", shell=False, env=None)
     self.Window.set_sensitive(True)
     self.Window.set_accept_focus(True)
     self.Window.show()
@@ -778,7 +778,7 @@ Full featured bootloader with editable graphical menu.'))
     Displays a warning message when no (swap) partition is found.
     """
     try:
-      self.cfg.swap_partitions = sltl.getSwapPartitions()
+      self.cfg.swap_partitions = slt.getSwapPartitions()
     except subprocess.CalledProcessError as e:
       self.cfg.swap_partitions = []
     swap_info_msg = self.get_swap_partitions_message(True, _("Detected Swap partitions:"),
@@ -806,18 +806,18 @@ to first create a Swap partition before resuming with Salix Live Installer proce
   def main_partition_settings(self):
     self.cfg.partitions = []
     self.MainPartitionListStore.clear()
-    for disk_device in sltl.getDisks():
-      disk_info = sltl.getDiskInfo(disk_device)
+    for disk_device in slt.getDisks():
+      disk_info = slt.getDiskInfo(disk_device)
       if self.cfg.show_external_drives or not disk_info['removable']:
         disk_name = "{0} ({1})".format(disk_info['model'], disk_info['sizeHuman'])
-        for p in sltl.getPartitions(disk_device):
+        for p in slt.getPartitions(disk_device):
           self.cfg.partitions.append(p)
           part_name = p
-          part_label = sltl.getFsLabel(p)
+          part_label = slt.getFsLabel(p)
           if part_label:
             part_name += " (" + part_label + ")"
-          part_size = sltl.getSizes("/dev/" + p)['sizeHuman']
-          part_fs = sltl.getFsType(p)
+          part_size = slt.getSizes("/dev/" + p)['sizeHuman']
+          part_fs = slt.getFsType(p)
           self.MainPartitionListStore.append([disk_name, part_name, part_size, part_fs, p])
     if self.cfg.main_partition:
       index = 0
@@ -843,7 +843,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
       self.show_yesno_dialog(self.get_main_partition_message(True), self.on_main_partition_continue, self.on_main_partition_cancel)
   def get_main_partition_message(self, full_text):
     part_name = self.cfg.main_partition
-    part_label = sltl.getFsLabel(self.cfg.main_partition)
+    part_label = slt.getFsLabel(self.cfg.main_partition)
     if part_label:
       part_name += " (" + part_label + ")"
     if self.cfg.main_format == 'none':
@@ -951,7 +951,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if self.cfg.linux_partitions:
       for part in self.cfg.linux_partitions:
         part_name = part[0]
-        part_label = sltl.getFsLabel(part[0])
+        part_label = slt.getFsLabel(part[0])
         if part_label:
           part_name += " (" + part_label + ")"
         if part[1] == 'none':
@@ -1015,7 +1015,7 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     if self.cfg.win_partitions:
       for part in self.cfg.win_partitions:
         part_name = part[0]
-        part_label = sltl.getFsLabel(part[0])
+        part_label = slt.getFsLabel(part[0])
         if part_label:
           part_name += " (" + part_label + ")"
         if full_text:
@@ -1407,11 +1407,11 @@ to first create a Swap partition before resuming with Salix Live Installer proce
         for p in self.cfg.linux_partitions:
           d = p[0]
           fulld = "/dev/{0}".format(d)
-          if sltl.isMounted(fulld):
-            sltl.umountDevice(fulld, deleteMountPoint = False)
+          if slt.isMounted(fulld):
+            slt.umountDevice(fulld, deleteMountPoint = False)
       fulld = "/dev/{0}".format(self.cfg.main_partition)
-      if sltl.isMounted(fulld):
-        sltl.umountDevice(fulld)
+      if slt.isMounted(fulld):
+        slt.umountDevice(fulld)
   def installation_postinstall(self):
     if self.cfg.bootloader != 'none':
       self.run_bootsetup()
@@ -1421,9 +1421,9 @@ to first create a Swap partition before resuming with Salix Live Installer proce
     msg = "<b>{0}</b>".format(_("The boot setup software needs to be run to complete the installation."))
     info_dialog(msg)
     if self.cfg.is_test:
-      sltl.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.cfg.bootloader)], shell=False, env=None)
+      slt.execCheck(["/usr/bin/xterm", "-e", 'echo "Bootsetup simulation run ({0}). Please hit enter to continue."; read junk'.format(self.cfg.bootloader)], shell=False, env=None)
     else:
-      sltl.runBootsetup(self.cfg.bootloader, self._cfg.main_partition)
+      self.cfg.runBootsetup()
   def installation_done(self):
     print "Installation Done.\nHappy Salix."
     msg = "<b>{0}</b>".format(_("Installation process completed successfully..."))
